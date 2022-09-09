@@ -12,7 +12,6 @@ import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { Error404Component } from './errors/404.component';
-import { UnitModelComponent } from './unit-model/unit-model.component';
 import { ModelComponent } from './model/model.component';
 import { ModelModule } from './model/model.module';
 import { NavbarModule } from './navbar/navbar.module';
@@ -40,7 +39,6 @@ import { FooterModule } from './footer/footer.module';
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'model', component:ModelComponent},
-      { path: 'unit-model', component:UnitModelComponent},
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component: Error404Component }
     ]),
