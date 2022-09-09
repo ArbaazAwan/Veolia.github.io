@@ -1,0 +1,165 @@
+  <button type="button" class="btn btn-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
+    data-bs-target="#modal-form">Create Model</button>
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h5 class="">Model</h5>
+              <p class="mb-0">Enter Model Details</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate role="form text-left">
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">UnitDesc</label>
+                  <input type="text" formControlName="UnitDesc" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">AppDesc</label>
+                  <input type="text" formControlName="AppDesc" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">UnitMeas</label>
+                  <input type="text" formControlName="UnitMeas" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Rev</label>
+                  <input type="text" formControlName="Rev" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">UnitCode</label>
+                  <input type="text" formControlName="UnitCode" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">AppCode</label>
+                  <input type="text" formControlName="AppCode" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">ReplCost</label>
+                  <input type="text" formControlName="ReplCost" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Lifemos</label>
+                  <input type="text" formControlName="Lifemos" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">OHLife</label>
+                  <input type="text" formControlName="OHLife" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Ev1title</label>
+                  <input type="text" formControlName="Ev1title" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Ev1Every</label>
+                  <input type="text" formControlName="Ev1Every" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Ev1Strch</label>
+                  <input type="text" formControlName="Ev1Strch" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Ev1M1</label>
+                  <input type="text" formControlName="Ev1M1" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Ev1M1Cst</label>
+                  <input type="text" formControlName="Ev1M1Cst" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Create</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitDesc</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">AppDesc</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitMeas</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rev</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitCode</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">AppCode</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ReplCost</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lifemos</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">OHLife</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1title</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1Every</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1Strch</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1M1</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1M1Cst</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let model of modelArray">
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.UnitDesc}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.AppDesc}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.UnitMeas}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Rev}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.UnitCode}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.AppCode}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.ReplCost}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Lifemos}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.OHLife}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Ev1title}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Ev1Every}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Ev1Strch}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Ev1M1}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.Ev1M1Cst}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

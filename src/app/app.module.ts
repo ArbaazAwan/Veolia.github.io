@@ -7,14 +7,17 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormsModule } from '@angular/forms';
 
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { Error404Component } from './errors/404.component';
-import { ModelTableComponent } from './model-table/model-table.component';
-import { ModelTableModule } from './model-table/model-table.module';
+import { UnitModelComponent } from './unit-model/unit-model.component';
+import { ModelComponent } from './model/model.component';
+import { ModelModule } from './model/model.module';
+import { NavbarModule } from './navbar/navbar.module';
+import { SidenavModule } from './sidenav/sidenav.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -24,19 +27,24 @@ import { ModelTableModule } from './model-table/model-table.module';
   imports: [
     AuthModule,
     DashboardModule,
-    ModelTableModule,
+    ModelModule,
+    NavbarModule,
+    SidenavModule,
+    FooterModule,
+
+
 
     BrowserModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
-      { path: 'modeltable', component: ModelTableComponent },
+      { path: 'model', component:ModelComponent},
+      { path: 'unit-model', component:UnitModelComponent},
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component: Error404Component }
     ]),
     NgbModule,
-    FormsModule
   ],
 
   providers: [],
