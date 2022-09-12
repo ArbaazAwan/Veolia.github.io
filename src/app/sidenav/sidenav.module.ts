@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SettingPluginComponent } from './setting-plugin/setting-plugin.component';
 import { SideNavbarComponent } from './side-navbar/side-navbar.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +12,8 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
     SideNavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports:[
     SettingPluginComponent,
