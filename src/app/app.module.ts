@@ -48,7 +48,7 @@ import { UnitComponent } from './unit/unit.component';
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
-      { path: '**', component: Error404Component }
+      { path: '**', redirectTo:'login', pathMatch: 'full' }
     ]),
     NgbModule,
   ],
