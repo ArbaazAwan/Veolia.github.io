@@ -19,6 +19,8 @@ import { SidenavModule } from './sidenav/sidenav.module';
 import { FooterModule } from './footer/footer.module';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { DropdownModule } from './dropdown/dropdown.module';
+import { UnitModule } from './unit/unit.module';
+import { UnitComponent } from './unit/unit.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { DropdownModule } from './dropdown/dropdown.module';
     SidenavModule,
     FooterModule,
     DropdownModule,
+    UnitModule,
 
 
 
@@ -43,6 +46,7 @@ import { DropdownModule } from './dropdown/dropdown.module';
       { path: 'dashboard', component:DashboardComponent },
       { path: 'model', component:ModelComponent},
       { path:'dropdown',component:DropdownComponent },
+      { path: 'unit', component:UnitComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component: Error404Component }
     ]),

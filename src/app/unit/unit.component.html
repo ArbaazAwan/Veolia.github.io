@@ -1,0 +1,206 @@
+<app-navbar></app-navbar>
+<aside
+ class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+ id="sidenav-main">
+ <app-side-navbar></app-side-navbar>
+</aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+ <div class="container-fluid py-4">
+
+  <button type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
+    data-bs-target="#modal-form">Create Unit</button>
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h5 class="">Unit</h5>
+              <p class="mb-0">Enter Unit Details</p>
+            </div>
+
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Maintenance Item</label>
+                  <input type="text" formControlName="maintenanceItem" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Description</label>
+                  <input type="text" formControlName="description" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Perform every (mo's)</label>
+                  <input type="text" formControlName="performEveryMOs" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Stretch for partial loading (Yes/No)</label>
+                  <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+
+                <p>
+                  <label for="name">Material</label>
+                  <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
+                </p>
+
+                <table class="table table-bordered" formArrayName="items">
+                  <tr>
+                    <th colspan="2">Add Multiple Items:</th>
+                    <th width="150px">
+                      <a type="button" (click)="addItem()" class="btn bg-gradient-info">Add More</a>
+                    </th>
+                  </tr>
+                  <tr *ngFor="let item of items().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        Item:
+                        <input type="text" formControlName="item" class="form-control">
+                    </td>
+                    <td>
+                        Cost:
+                        <input type="text" formControlName="cost" class="form-control">
+                    </td>
+                    <td>
+                        <button (click)="removeItem(i)" class="btn bg-gradient-danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+
+                <p>
+                  <label for="name">Labor</label>
+                  <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
+                </p>
+
+                <table class="table table-bordered" formArrayName="labors">
+                  <tr>
+                    <th colspan="2">Add Multiple Labors:</th>
+                    <th width="150px">
+                      <a type="button" (click)="addLabor()" class="btn bg-gradient-info">Add More</a>
+                    </th>
+                  </tr>
+                  <tr *ngFor="let item of labors().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        Level:
+                        <input type="text" formControlName="level" class="form-control">
+                    </td>
+                    <td>
+                        Hrs:
+                        <input type="text" formControlName="hrs" class="form-control">
+                    </td>
+                    <td>
+                        <button (click)="removeLabor(i)" class="btn bg-gradient-danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+
+                <p>
+                  <label for="name">Shop/Contractor</label>
+                  <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
+                </p>
+
+                <table class="table table-bordered" formArrayName="shop_Contractors">
+                  <tr>
+                    <th colspan="2">Add Multiple Shops/Contractors</th>
+                    <th width="150px">
+                      <a type="button" (click)="addShop_Contractor()" class="btn bg-gradient-info">Add More</a>
+                    </th>
+                  </tr>
+                  <tr *ngFor="let item of shop_Contractors().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        Desc
+                        <input type="text" formControlName="desc" class="form-control">
+                    </td>
+                    <td>
+                        Cost
+                        <input type="text" formControlName="cost" class="form-control">
+                    </td>
+                    <td>
+                        <button (click)="removeShop_Contractor(i)" class="btn bg-gradient-danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+
+                <div class="text-center">
+                  <button type="submit" data-bs-dismiss="modal" class="btn btn-round bg-gradient-primary btn-lg w-25 mt-4 mb-0">Create</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn  btn-round bg-gradient-secondary btn-lg w-25 mt-4 mb-0">Cancel</button>
+                </div>
+
+              </form>
+            </div>
+
+            <!-- <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate role="form text-left">
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Maintenance Item</label>
+                  <input type="text" formControlName="maintenanceItem" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Description</label>
+                  <input type="text" formControlName="description" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Perform every (mo's)</label>
+                  <input type="text" formControlName="performEveryMOs" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Stretch for partial loading (Yes/No)</label>
+                  <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="text-center">
+                  <button type="submit" data-bs-dismiss="modal" class="btn btn-round bg-gradient-primary btn-lg w-25 mt-4 mb-0">Create</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn  btn-round bg-gradient-secondary btn-lg w-25 mt-4 mb-0">Cancel</button>
+                </div>
+              </form>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card">
+  <div class="table-responsive content-center">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asset Type</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Size</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duty/Application</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let model of unitArray">
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.assetType}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.size}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.duty_Application}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.quality}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+   <app-footer></app-footer>
+ </div>
+</main>
+<app-setting-plugin></app-setting-plugin>
+

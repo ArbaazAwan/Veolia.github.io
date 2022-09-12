@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModelComponent } from './model.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { UnitComponent } from './unit.component';
 import { NavbarModule } from '../navbar/navbar.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FooterModule } from '../footer/footer.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    ModelComponent
+    UnitComponent
   ],
   imports: [
     CommonModule,
@@ -18,11 +18,12 @@ import { FooterModule } from '../footer/footer.module';
     SidenavModule,
     FooterModule,
     ReactiveFormsModule,
+    FormsModule
+
+
   ],
   exports:[
-    ModelComponent,
-
-
+    UnitComponent
   ]
 })
-export class ModelModule { }
+export class UnitModule { }
