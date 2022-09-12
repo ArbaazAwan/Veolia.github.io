@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+<aside
+ class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+ id="sidenav-main">
+ <app-side-navbar></app-side-navbar>
+</aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+ <div class="container-fluid py-4">
+
+  <button type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
+    data-bs-target="#modal-form">Create DropDown</button>
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h5 class="">DropDown</h5>
+              <p class="mb-0">Enter DropDown Details</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate role="form text-left">
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Asset Type</label>
+                  <input type="text" formControlName="assetType" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Size</label>
+                  <input type="text" formControlName="size" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Duty/Application</label>
+                  <input type="text" formControlName="duty_Application" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="input-group input-group-outline my-3">
+                  <label class="form-label">Quality</label>
+                  <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)">
+                </div>
+                <div class="text-center">
+                  <button type="submit" data-bs-dismiss="modal" class="btn btn-round bg-gradient-primary btn-lg w-25 mt-4 mb-0">Create</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn  btn-round bg-gradient-secondary btn-lg w-25 mt-4 mb-0">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card">
+  <div class="table-responsive content-center">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asset Type</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Size</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duty/Application</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let model of dropDownArray">
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.assetType}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.size}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.duty_Application}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.quality}}</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+   <app-footer></app-footer>
+ </div>
+</main>
+<app-setting-plugin></app-setting-plugin>
+

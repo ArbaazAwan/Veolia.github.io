@@ -17,6 +17,8 @@ import { ModelModule } from './model/model.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { FooterModule } from './footer/footer.module';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { DropdownModule } from './dropdown/dropdown.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { FooterModule } from './footer/footer.module';
     NavbarModule,
     SidenavModule,
     FooterModule,
+    DropdownModule,
 
 
 
@@ -39,6 +42,7 @@ import { FooterModule } from './footer/footer.module';
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'model', component:ModelComponent},
+      { path:'dropdown',component:DropdownComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component: Error404Component }
     ]),
