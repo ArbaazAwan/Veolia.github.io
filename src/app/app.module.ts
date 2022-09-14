@@ -21,6 +21,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { DropdownModule } from './dropdown/dropdown.module';
 import { UnitModule } from './unit/unit.module';
 import { UnitComponent } from './unit/unit.component';
+import { PermissionModule } from './permission/permission.module';
+import { PermissionsTableComponent } from './permission/permissions-table.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { UnitComponent } from './unit/unit.component';
     FooterModule,
     DropdownModule,
     UnitModule,
+    PermissionModule,
 
 
 
@@ -47,8 +50,9 @@ import { UnitComponent } from './unit/unit.component';
       { path: 'model', component:ModelComponent},
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
+      { path: 'permission',component:PermissionsTableComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
-      { path: '**', redirectTo:'login', pathMatch: 'full' }
+      { path: '**', component:Error404Component }
     ]),
     NgbModule,
   ],

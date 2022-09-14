@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<aside
+  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+  id="sidenav-main">
+  <app-side-navbar></app-side-navbar>
+</aside>
+
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+  <div class="container-fluid py-4">
+    <div class="card">
+      <div class="table-responsive table-strapped">
+        <table class="table align-items-center mb-0">
+          <thead>
+            <caption class="">
+              <h3>Permissions Table</h3>
+            </caption>
+            <tr>
+              <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Users</th>
+              <th class="text-left text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Admins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users let i= index">
+              <td>
+                <p class="text-xs text-center font-weight-bold mb-0">{{user.name}}</p>
+              </td>
+              <td>
+                <p class="text-xs text-center font-weight-bold mb-0" *ngIf="admins[i]">{{admins[i].name}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <app-footer></app-footer>
+  </div>
+</main>
+<app-setting-plugin></app-setting-plugin>

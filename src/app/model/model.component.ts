@@ -29,12 +29,12 @@ export class ModelComponent implements OnInit {
       Ev1Every:[''],
       Ev1Strch:[''],
       Ev1M1:[''],
-      Ev1M1Cst:[''],
+      Ev1M1Cst:['']
     })
   }
   submitForm(){
     this.modelArray.push(this.form.value);
-    
+
   }
 
 

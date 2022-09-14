@@ -19,148 +19,111 @@
               <h5 class="">Unit</h5>
               <p class="mb-0">Enter Unit Details</p>
             </div>
-
             <div class="card-body">
               <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-                <div class="input-group input-group-outline my-3">
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Maintenance Item</label>
-                  <input type="text" formControlName="maintenanceItem" class="form-control" onfocus="focused(this)"
+                  <input type="text" formControlName="maintanance" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)">
                 </div>
-                <div class="input-group input-group-outline my-3">
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Description</label>
                   <input type="text" formControlName="description" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)">
                 </div>
-                <div class="input-group input-group-outline my-3">
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Perform every (mo's)</label>
                   <input type="text" formControlName="performEveryMOs" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)">
                 </div>
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Stretch for partial loading (Yes/No)</label>
-                  <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)">
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Stretch for partial loading</label>
+                  <select formControlName="strechForPartialLoading" class="form-control" name="strechForPartialLoading">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
                 </div>
 
-                <p>
-                  <label for="name">Material</label>
+                  <label  class="text-bold col-md-3" >Material</label><span class="col-md-2"><a type="button" (click)="addItem()" class="btn mt-4 "><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg></a></span>
                   <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
-                </p>
 
-                <table class="table table-bordered" formArrayName="items">
+                <table class="table table-responsive" formArrayName="items">
                   <tr>
+                    <th></th>
+                  </tr>
+                  <!-- <tr>
                     <th colspan="2">Add Multiple Items:</th>
                     <th width="150px">
-                      <a type="button" (click)="addItem()" class="btn bg-gradient-info">Add More</a>
+
                     </th>
-                  </tr>
-                  <tr *ngFor="let item of items().controls; let i=index" [formGroupName]="i">
+                  </tr> -->
+                  <tr class="mt-0" *ngFor="let item of items().controls; let i=index" [formGroupName]="i">
                     <td>
-                        Item:
+                        <label for="item" class="form-label">Item</label>
                         <input type="text" formControlName="item" class="form-control">
                     </td>
                     <td>
-                        Cost:
+                        <label for="cost" class="form-label">Cost</label>
                         <input type="text" formControlName="cost" class="form-control">
                     </td>
                     <td>
-                        <button (click)="removeItem(i)" class="btn bg-gradient-danger">Remove</button>
+                        <button (click)="removeItem(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-6">Remove</button>
                     </td>
                   </tr>
                 </table>
 
-                <p>
-                  <label for="name">Labor</label>
-                  <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
-                </p>
+                <label  class="text-bold col-md-3" >Labor</label><span class="col-md-2"><a type="button" (click)="addLabor()" class="btn mt-4 "><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg></a></span>
+                <table class="table table-responsive" formArrayName="labors">
 
-                <table class="table table-bordered" formArrayName="labors">
-                  <tr>
-                    <th colspan="2">Add Multiple Labors:</th>
-                    <th width="150px">
-                      <a type="button" (click)="addLabor()" class="btn bg-gradient-info">Add More</a>
-                    </th>
-                  </tr>
                   <tr *ngFor="let item of labors().controls; let i=index" [formGroupName]="i">
                     <td>
-                        Level:
+                        <label for="level" class="form-label">Level</label>
                         <input type="text" formControlName="level" class="form-control">
                     </td>
                     <td>
-                        Hrs:
+                        <label for="hrs">Hrs</label>
                         <input type="text" formControlName="hrs" class="form-control">
                     </td>
                     <td>
-                        <button (click)="removeLabor(i)" class="btn bg-gradient-danger">Remove</button>
+                        <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger  mx-2 mt-6">Remove</button>
                     </td>
                   </tr>
                 </table>
 
-                <p>
-                  <label for="name">Shop/Contractor</label>
-                  <!-- <input type="text" id="name" name="name" formControlName="name" class="form-control"> -->
-                </p>
+                <label  class="text-bold col-md-3" >Shop/Contractor</label><span class="col-md-2"><a type="button" (click)="addShop_Contractor()" class="btn mt-4 "><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg></a></span>
 
-                <table class="table table-bordered" formArrayName="shop_Contractors">
-                  <tr>
-                    <th colspan="2">Add Multiple Shops/Contractors</th>
-                    <th width="150px">
-                      <a type="button" (click)="addShop_Contractor()" class="btn bg-gradient-info">Add More</a>
-                    </th>
-                  </tr>
+                <table class="table table-responsive" formArrayName="shop_Contractors">
+
                   <tr *ngFor="let item of shop_Contractors().controls; let i=index" [formGroupName]="i">
                     <td>
-                        Desc
+                        <label for="desc" class="form-label">Desc</label>
                         <input type="text" formControlName="desc" class="form-control">
                     </td>
                     <td>
-                        Cost
+
+                        <label for="cost" class="form-label">Cost</label>
                         <input type="text" formControlName="cost" class="form-control">
                     </td>
                     <td>
-                        <button (click)="removeShop_Contractor(i)" class="btn bg-gradient-danger">Remove</button>
+                        <button (click)="removeShop_Contractor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-6">Remove</button>
                     </td>
                   </tr>
                 </table>
-
                 <div class="text-center">
-                  <button type="submit" data-bs-dismiss="modal" class="btn btn-round bg-gradient-primary btn-lg w-25 mt-4 mb-0">Create</button>
-                  <button type="button" data-bs-dismiss="modal" class="btn  btn-round bg-gradient-secondary btn-lg w-25 mt-4 mb-0">Cancel</button>
+                  <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2 ">Create</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">Cancel</button>
                 </div>
-
               </form>
             </div>
-
-            <!-- <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate role="form text-left">
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Maintenance Item</label>
-                  <input type="text" formControlName="maintenanceItem" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)">
-                </div>
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Description</label>
-                  <input type="text" formControlName="description" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)">
-                </div>
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Perform every (mo's)</label>
-                  <input type="text" formControlName="performEveryMOs" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)">
-                </div>
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Stretch for partial loading (Yes/No)</label>
-                  <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)">
-                </div>
-                <div class="text-center">
-                  <button type="submit" data-bs-dismiss="modal" class="btn btn-round bg-gradient-primary btn-lg w-25 mt-4 mb-0">Create</button>
-                  <button type="button" data-bs-dismiss="modal" class="btn  btn-round bg-gradient-secondary btn-lg w-25 mt-4 mb-0">Cancel</button>
-                </div>
-              </form>
-            </div> -->
           </div>
         </div>
       </div>
@@ -172,25 +135,37 @@
     <table class="table align-items-center mb-0">
       <thead>
         <tr>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asset Type</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Size</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duty/Application</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quality</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maintanance Item</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Perform Every MOs</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Strech for Partial Loading</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Material</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Labor</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Shope/Contractor</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let model of unitArray">
           <td>
-            <p class="text-xs text-center font-weight-bold mb-0">{{model.assetType}}</p>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.maintanance}}</p>
           </td>
           <td>
-            <p class="text-xs text-center font-weight-bold mb-0">{{model.size}}</p>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.description}}</p>
           </td>
           <td>
-            <p class="text-xs text-center font-weight-bold mb-0">{{model.duty_Application}}</p>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.performEveryMOs}}</p>
           </td>
           <td>
-            <p class="text-xs text-center font-weight-bold mb-0">{{model.quality}}</p>
+            <p class="text-xs text-center font-weight-bold mb-0">{{model.strechForPartialLoading}}</p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0" *ngFor="let item in model.items">{{item.item}}<span> {{item.cost}}</span></p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0" *ngFor="let labor in model.labors">{{labor.level}}<span> {{labor.hrs}}</span></p>
+          </td>
+          <td>
+            <p class="text-xs text-center font-weight-bold mb-0" *ngFor="let shop in model.shop_Contractors">{{shop.desc}}<span> {{shop.cost}}</span></p>
           </td>
         </tr>
       </tbody>

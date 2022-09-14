@@ -8,83 +8,90 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class UnitComponent implements OnInit {
 
-
-  constructor(private fb:FormBuilder) {
-    this.form = this.fb.group({
-      items: this.fb.array([]),
-      labors:this.fb.array([]),
-      shop_Contractors:this.fb.array([])
-    });
-
-   }
+  constructor(private fb:FormBuilder) {}
 
   form!:FormGroup;
   unitArray:any[] = [];
 
   ngOnInit(): void {
-    //   this.form = this.fb.group({
-    //   assetType:['',Validators.required],
-    //   size:['',Validators.required],
-    //   duty_Application:['',Validators.required],
-    //   quality:['',Validators.required],
-
-    // })
+    this.form = this.fb.group({
+      maintanance:['',Validators.required],
+      description:['', Validators.required],
+      performEveryMOs:['',Validators.required],
+      strechForPartialLoading:['',Validators.required],
+      items: this.fb.array([]),
+      labors:this.fb.array([]),
+      shop_Contractors:this.fb.array([])
+    });
   }
 
-
-
-  items() : FormArray {
+  items() : FormArray
+  {
     return this.form.get("items") as FormArray
   }
-  labors() : FormArray {
+
+  labors() : FormArray
+  {
     return this.form.get("labors") as FormArray
   }
-  shop_Contractors() : FormArray {
+
+  shop_Contractors() : FormArray
+  {
     return this.form.get("shop_Contractors") as FormArray
   }
 
-  newItem(): FormGroup {
+  newItem(): FormGroup
+  {
     return this.fb.group({
       item: '',
       cost: '',
     })
   }
-  newLabor(): FormGroup {
+  newLabor(): FormGroup
+  {
     return this.fb.group({
       level: '',
       hrs: '',
     })
   }
-  newShop_Contractor(): FormGroup {
+
+  newShop_Contractor(): FormGroup
+  {
     return this.fb.group({
       desc: '',
       cost: '',
     })
   }
 
-  addItem() {
+  addItem()
+  {
     this.items().push(this.newItem());
   }
-  addLabor() {
+  addLabor()
+  {
     this.labors().push(this.newLabor());
   }
-  addShop_Contractor() {
+  addShop_Contractor()
+  {
     this.shop_Contractors().push(this.newShop_Contractor());
   }
 
-  removeItem(i:number) {
+  removeItem(i:number)
+  {
     this.items().removeAt(i);
   }
-  removeLabor(i:number) {
+  removeLabor(i:number)
+  {
     this.labors().removeAt(i);
   }
-  removeShop_Contractor(i:number) {
+  removeShop_Contractor(i:number)
+  {
     this.shop_Contractors().removeAt(i);
   }
 
 
-  onSubmit(){
+  onSubmit()
+  {
     this.unitArray.push(this.form.value);
-
   }
 }
