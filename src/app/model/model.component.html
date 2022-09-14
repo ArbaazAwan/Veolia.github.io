@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+
 <aside
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
   id="sidenav-main">
@@ -6,6 +6,7 @@
 </aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+  <app-navbar></app-navbar>
   <div class="container-fluid py-4">
     <button type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
       data-bs-target="#modal-form">
@@ -109,134 +110,145 @@
         </div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="table-responsive">
-        <table class="table align-items-center mb-0">
-          <thead>
-            <tr>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                UnitDesc
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                AppDesc
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                UnitMeas
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Rev
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                UnitCode
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                AppCode
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                ReplCost
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Lifemos
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                OHLife
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Ev1title
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Ev1Every
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Ev1Strch
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Ev1M1
-              </th>
-              <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                Ev1M1Cst
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let model of modelArray">
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.UnitDesc }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.AppDesc }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.UnitMeas }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Rev }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.UnitCode }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.AppCode }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.ReplCost }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Lifemos }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.OHLife }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Ev1title }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Ev1Every }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Ev1Strch }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Ev1M1 }}
-                </p>
-              </td>
-              <td>
-                <p class="text-xs text-center font-weight-bold mb-0">
-                  {{ model.Ev1M1Cst }}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row">
+      <div class="col-12">
+        <div class="card my-4">
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h6 class="text-white text-capitalize ps-3">Model Table</h6>
+            </div>
+          </div>
+          <div class="card-body px-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitDesc</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">AppDesc</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitMeas</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rev</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">UnitCode</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">AppCode</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ReplCost</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lifemos</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">OHLife</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1title</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1Every</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1Strch</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1M1</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ev1M1Cst</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let model of modelArray">
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.UnitDesc }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.AppDesc }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.UnitMeas }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Rev }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.UnitCode }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.AppCode }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.ReplCost }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Lifemos }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                       <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.OHLife }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Ev1title }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Ev1Every }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Ev1Strch }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Ev1M1 }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-xs">{{ model.Ev1M1Cst }}</h6>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <app-footer></app-footer>
+
   </div>
+  <app-footer></app-footer>
 </main>
 <app-setting-plugin></app-setting-plugin>
