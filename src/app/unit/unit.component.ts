@@ -21,7 +21,7 @@ export class UnitComponent implements OnInit {
       strechForPartialLoading:['',Validators.required],
       items: this.fb.array([]),
       labors:this.fb.array([]),
-      shop_Contractors:this.fb.array([])
+      shop_Contractors:this.fb.array([]),
     });
   }
 
@@ -88,7 +88,6 @@ export class UnitComponent implements OnInit {
   {
     this.shop_Contractors().removeAt(i);
   }
-
 
   onSubmit()
   {
