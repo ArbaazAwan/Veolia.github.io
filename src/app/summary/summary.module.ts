@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SummaryComponent } from './summary.component';
 import { FooterModule } from '../footer/footer.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from '../navbar/navbar.module';
 
 
@@ -17,6 +17,7 @@ import { NavbarModule } from '../navbar/navbar.module';
     FooterModule,
     SidenavModule,
     FormsModule,
+    ReactiveFormsModule,
     NavbarModule
   ]
 })

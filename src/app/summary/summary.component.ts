@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-summary',
@@ -6,16 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  constructor() {}
+  constructor(private fb:FormBuilder) {
+    this.form =fb.group({
+      unitName:'',
+      assetType:'',
+      size:'',
+      app:'',
+      subApp:'',
+      quality:'',
+      quantity:'',
+      load:'',
+      life:'',
+    })
+  }
+  form!:FormGroup;
 
   db!: any[];
   assetTypes!: any[];
   sizes!: any[];
   apps!: any[];
   subApps!: any[];
-  selectedAssetType: any = {
-    id: 0,
-    name: '',
+  selectedAssetType: any ={
+    id:0,
+    name:''
   };
   qualities!: any[];
   selectedSizes!: any[];
@@ -38,7 +52,11 @@ export class SummaryComponent implements OnInit {
   }
 
   selectedQualities!:any[];
-  selectedQuality:any;
+  selectedQuality:any={
+    id:0
+  }
+
+  summaryArray:any[]=[];
 
   ngOnInit(): void {
     this.db = [
@@ -212,7 +230,14 @@ export class SummaryComponent implements OnInit {
   onAppSelect(selectedApp:any){
     this.selectedSubApps = this.subApps.filter((subApp)=>subApp.app_id == selectedApp.id);
   }
+
   onSubAppSelect(selectedSubApp:any){
     this.selectedQualities = this.qualities.filter((q)=>q.id == selectedSubApp.quality_id);
+  }
+
+  onSubmit(){
+    this.summaryArray.push(this.form.value);
+    console.log('summary array value', this.selectedAssetType);
+
   }
 }
