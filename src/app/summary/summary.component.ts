@@ -215,7 +215,6 @@ export class SummaryComponent implements OnInit {
     this.onSizeSelect(this.selectedSize);
     this.onAppSelect(this.selectedApp);
     this.onSubAppSelect(this.selectedSubApp)
-    console.log('these are assetTypes', this.assetTypes);
   }
 
   onAssetTypeSelect(selectedAssetType: any) {
@@ -239,7 +238,5 @@ export class SummaryComponent implements OnInit {
 
   onSubmit(){
     this.summaryArray.push(this.form.value);
-    console.log('summary array value', this.selectedAssetType);
-
   }
 }
