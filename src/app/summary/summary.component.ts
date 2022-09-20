@@ -48,12 +48,14 @@ export class SummaryComponent implements OnInit {
   selectedSubApps!:any[];
   selectedSubApp:any={
     id:0,
-    quality_id:0
+    quality_id:0,
+    desc:''
   }
 
   selectedQualities!:any[];
   selectedQuality:any={
-    id:0
+    id:0,
+    desc:''
   }
 
   summaryArray:any[]=[];

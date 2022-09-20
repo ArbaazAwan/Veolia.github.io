@@ -31,9 +31,9 @@
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                     <label class="form-label">Asset Type</label>
                     <select formControlName="assetType" class="form-control" name="assetType"
-                      [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
+                      [(ngModel)]="selectedAssetType" (change)="onAssetTypeSelect(selectedAssetType)">
                       <option value="0">--Select asset type</option>
-                      <option *ngFor="let assetType of assetTypes" [value]="assetType.id">
+                      <option *ngFor="let assetType of assetTypes" [ngValue]="assetType">
                         {{ assetType.name }}
                       </option>
                     </select>
@@ -45,17 +45,17 @@
                     <select formControlName="size" class="form-control" name="app" [(ngModel)]="selectedSize.app_id"
                       (change)="onSizeSelect(selectedSize)">
                       <option value="0">--Select size</option>
-                      <option *ngFor="let size of selectedSizes" [value]="size.id">
+                      <option *ngFor="let size of selectedSizes" [ngValue]="size.id">
                         {{ size.desc }}
                       </option>
                     </select>
                   </div>
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                     <label class="form-label">Duty or Application</label>
-                    <select formControlName="app" class="form-control" name="app" [(ngModel)]="selectedApp.id"
+                    <select formControlName="app" class="form-control" name="app" [(ngModel)]="selectedApp"
                       (change)="onAppSelect(selectedApp)">
                       <option value="0">--Select Application/Duty</option>
-                      <option *ngFor="let app of selectedApps" [value]="app.id">
+                      <option *ngFor="let app of selectedApps" [ngValue]="app">
                         {{ app.desc }}
                       </option>
                     </select>
@@ -63,9 +63,9 @@
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                     <label class="form-label">Sub Duty or Application</label>
                     <select formControlName="subApp" class="form-control" name="subApp"
-                      [(ngModel)]="selectedSubApp.quality_id" (change)="onSubAppSelect(selectedSubApp)">
+                      [(ngModel)]="selectedSubApp" (change)="onSubAppSelect(selectedSubApp)">
                       <option value="0">--Select Sub Application/Duty</option>
-                      <option *ngFor="let subApp of selectedSubApps" [value]="subApp.id">
+                      <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp">
                         {{ subApp.desc }}
                       </option>
                       >
@@ -74,9 +74,9 @@
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                     <label class="form-label">Quality</label>
                     <select formControlName="quality" class="form-control" name="quality"
-                      [ngModel]="selectedQuality.id">
+                      [ngModel]="selectedQuality">
                       <option value="0">--Select Quality</option>
-                      <option *ngFor="let quality of selectedQualities" [value]="quality.id">
+                      <option *ngFor="let quality of selectedQualities" [ngValue]="quality">
                         {{ quality.desc }}
                       </option>
                     </select>
@@ -166,35 +166,35 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.assetType }}</h6>
+                          <h6 class="mb-0 text-xxs">{{ model.assetType.name }}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.size }}</h6>
+                          <h6 class="mb-0 text-xxs">{{ model.size.desc }}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.app }}</h6>
+                          <h6 class="mb-0 text-xxs">{{ model.app.desc }}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.subApp }}</h6>
+                          <h6 class="mb-0 text-xxs">{{ model.subApp.desc }}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.quality }}</h6>
+                          <h6 class="mb-0 text-xxs">{{ model.quality.desc }}</h6>
                         </div>
                       </div>
                     </td>
