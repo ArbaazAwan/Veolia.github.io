@@ -23,6 +23,8 @@ import { UnitModule } from './unit/unit.module';
 import { UnitComponent } from './unit/unit.component';
 import { PermissionModule } from './permission/permission.module';
 import { PermissionsTableComponent } from './permission/permissions-table.component';
+import { SummaryModule } from './summary/summary.module';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -39,17 +41,18 @@ import { PermissionsTableComponent } from './permission/permissions-table.compon
     DropdownModule,
     UnitModule,
     PermissionModule,
-
-
+    SummaryModule,
+    
 
     BrowserModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
-      { path: 'model', component:ModelComponent},
+      { path: 'model', component:ModelComponent },
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
+      { path: 'summary', component:SummaryComponent },
       { path: 'permission',component:PermissionsTableComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
