@@ -5,12 +5,14 @@ import { FooterModule } from '../footer/footer.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from '../navbar/navbar.module';
+import { SummarytableComponent } from './summarytable/summarytable.component';
 
 
 
 @NgModule({
   declarations: [
-    SummaryComponent
+    SummaryComponent,
+    SummarytableComponent
   ],
   imports: [
     CommonModule,

@@ -6,12 +6,14 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { FooterModule } from '../footer/footer.module';
+import { DropdownTableComponent } from './dropdowntable/dropdown-table.component';
 
 
 
 @NgModule({
   declarations: [
-    DropdownComponent
+    DropdownComponent,
+    DropdownTableComponent
   ],
   imports: [
     CommonModule,
