@@ -23,8 +23,15 @@ import { UnitModule } from './unit/unit.module';
 import { UnitComponent } from './unit/unit.component';
 import { PermissionModule } from './permission/permission.module';
 import { PermissionsTableComponent } from './permission/permissions-table.component';
+<<<<<<< HEAD
 import { MasterModule } from './master/master.module';
 import { MasterComponent } from './master/master.component';
+import { SummaryModule } from './summary/summary.module';
+import { SummaryComponent } from './summary/summary.component';
+=======
+import { SummaryModule } from './summary/summary.module';
+import { SummaryComponent } from './summary/summary.component';
+>>>>>>> d4e3835c8c06af9b8dee879c4d76438b884ce0d6
 
 @NgModule({
   declarations: [
@@ -42,7 +49,7 @@ import { MasterComponent } from './master/master.component';
     UnitModule,
     PermissionModule,
     MasterModule,
-
+    SummaryModule,
 
 
     BrowserModule,
@@ -50,9 +57,10 @@ import { MasterComponent } from './master/master.component';
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
-      { path: 'model', component:ModelComponent},
+      { path: 'model', component:ModelComponent },
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
+      { path: 'summary', component:SummaryComponent },
       { path: 'permission',component:PermissionsTableComponent },
       { path: 'master',component:MasterComponent },
 
