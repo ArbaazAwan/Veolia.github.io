@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DailySalesCardComponent } from './sales-stats-card.component';
+import { DropdownTableComponent } from './dropdown-table.component';
 
-describe('DailySalesCardComponent', () => {
-  let component: DailySalesCardComponent;
-  let fixture: ComponentFixture<DailySalesCardComponent>;
+describe('DropdownTableComponent', () => {
+  let component: DropdownTableComponent;
+  let fixture: ComponentFixture<DropdownTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DailySalesCardComponent ]
+      declarations: [ DropdownTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DailySalesCardComponent);
+    fixture = TestBed.createComponent(DropdownTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

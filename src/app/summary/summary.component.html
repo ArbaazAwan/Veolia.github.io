@@ -21,89 +21,97 @@
                 <p class="mb-0">Enter Equipment Details</p>
               </div>
               <div class="card-body">
+
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
                   <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                     <label class="form-label">Unit or Equipment Functional Description</label>
                     <input type="text" formControlName="unitName" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
 
-                  <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Asset Type</label>
-                    <select formControlName="assetType" class="form-control" name="assetType"
-                      [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
-                      <option value="0">--Select asset type</option>
-                      <option *ngFor="let assetType of assetTypes" [value]="assetType.id">
+                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                    <label class="form-label" for="asssetType">Asset Type</label>
+                    <select formControlName="assetType"  class="form-select" name="assetType"
+                      [(ngModel)]="selectedAssetType" (change)="onAssetTypeSelect(selectedAssetType)">
+                      <!-- <option value="0">--Select asset type</option> -->
+                      <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType">
                         {{ assetType.name }}
                       </option>
                     </select>
                   </div>
 
-
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Size</label>
-                    <select formControlName="size" class="form-control" name="app" [(ngModel)]="selectedSize.app_id"
+                    <label class="form-label" for="size">Size</label>
+                    <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize"
                       (change)="onSizeSelect(selectedSize)">
-                      <option value="0">--Select size</option>
-                      <option *ngFor="let size of selectedSizes" [value]="size.id">
+                      <!-- <option value="0">--Select size</option> -->
+                      <option *ngFor="let size of selectedSizes" [ngValue]="size">
                         {{ size.desc }}
                       </option>
                     </select>
                   </div>
+
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Duty or Application</label>
-                    <select formControlName="app" class="form-control" name="app" [(ngModel)]="selectedApp.id"
+                    <label class="form-label" for="app">Duty or Application</label>
+                    <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp"
                       (change)="onAppSelect(selectedApp)">
-                      <option value="0">--Select Application/Duty</option>
-                      <option *ngFor="let app of selectedApps" [value]="app.id">
+                      <!-- <option value="0">--Select Application/Duty</option> -->
+                      <option *ngFor="let app of selectedApps" [ngValue]="app">
                         {{ app.desc }}
                       </option>
                     </select>
                   </div>
+
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Sub Duty or Application</label>
-                    <select formControlName="subApp" class="form-control" name="subApp"
-                      [(ngModel)]="selectedSubApp.quality_id" (change)="onSubAppSelect(selectedSubApp)">
-                      <option value="0">--Select Sub Application/Duty</option>
-                      <option *ngFor="let subApp of selectedSubApps" [value]="subApp.id">
+                    <label class="form-label" for="subApp">Sub Duty or Application</label>
+                    <select formControlName="subApp" class="form-select" name="subApp"
+                      [(ngModel)]="selectedSubApp" (change)="onSubAppSelect(selectedSubApp)">
+                      <!-- <option value="0">--Select Sub Application/Duty</option> -->
+                      <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp">
                         {{ subApp.desc }}
                       </option>
-                      >
                     </select>
                   </div>
+
                   <div class="input-gro;up input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Quality</label>
-                    <select formControlName="quality" class="form-control" name="quality"
-                      [ngModel]="selectedQuality.id">
-                      <option value="0">--Select Quality</option>
-                      <option *ngFor="let quality of selectedQualities" [value]="quality.id">
+                    <label class="form-label" for="quality">Quality</label>
+                    <select formControlName="quality" class="form-select" name="quality"
+                      [ngModel]="selectedQuality">
+                      <!-- <option value="0">--Select Quality</option> -->
+                      <option *ngFor="let quality of selectedQualities" [ngValue]="quality">
                         {{ quality.desc }}
                       </option>
                     </select>
                   </div>
+
                   <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Quantity</label>
-                    <input type="text" formControlName="quantity" class="form-control" onfocus="focused(this)"
+                    <label class="form-label" for="quantity">Quantity</label>
+                    <input type="text" formControlName="quantity" name="quantity" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
+
                   <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Load %</label>
-                    <input type="text" formControlName="load" class="form-control" onfocus="focused(this)"
+                    <label class="form-label" for="load">Load %</label>
+                    <input type="text" formControlName="load" name="load" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
+
                   <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Life %</label>
-                    <input type="text" formControlName="life" class="form-control" onfocus="focused(this)"
+                    <label class="form-label" for="life">Life %</label>
+                    <input type="text" formControlName="life" name="life" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
+
                   <div class="text-center">
                     <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                       Create
                     </button>
-                    <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                    <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2" (click)="onCancel()">
                       Cancel
                     </button>
                   </div>
+
                 </form>
               </div>
             </div>
@@ -112,121 +120,8 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12">
-        <div class="card my-4">
-          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h6 class="text-white text-capitalize ps-3">Summary Table</h6>
-            </div>
-          </div>
-          <div class="card-body px-0 pb-2">
-            <div class="table-responsive p-0">
-              <table class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Unit Name
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
-                      Asset Type
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Size
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Application/Duty
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Sub Application/Duty
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Quality
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Quantity
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Load
-                    </th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                      Life
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let model of summaryArray">
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.unitName }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.assetType }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.size }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.app }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.subApp }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.quality }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.quantity }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.load }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-xxs">{{ model.life }}</h6>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
+
   </div>
   <app-footer></app-footer>
 </main>

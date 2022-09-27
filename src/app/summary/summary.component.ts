@@ -10,7 +10,7 @@ export class SummaryComponent implements OnInit {
   constructor(private fb:FormBuilder) {
     this.form =fb.group({
       unitName:'',
-      assetType:'',
+      assetType:'--Select asset type',
       size:'',
       app:'',
       subApp:'',
@@ -48,12 +48,14 @@ export class SummaryComponent implements OnInit {
   selectedSubApps!:any[];
   selectedSubApp:any={
     id:0,
-    quality_id:0
+    quality_id:0,
+    desc:''
   }
 
   selectedQualities!:any[];
   selectedQuality:any={
-    id:0
+    id:0,
+    desc:''
   }
 
   summaryArray:any[]=[];
@@ -213,7 +215,6 @@ export class SummaryComponent implements OnInit {
     this.onSizeSelect(this.selectedSize);
     this.onAppSelect(this.selectedApp);
     this.onSubAppSelect(this.selectedSubApp)
-    console.log('these are assetTypes', this.assetTypes);
   }
 
   onAssetTypeSelect(selectedAssetType: any) {
@@ -237,7 +238,10 @@ export class SummaryComponent implements OnInit {
 
   onSubmit(){
     this.summaryArray.push(this.form.value);
-    console.log('summary array value', this.selectedAssetType);
+    this.form.reset();
+  }
 
+  onCancel(){
+    this.form.reset();
   }
 }
