@@ -13,6 +13,7 @@ export class ModelComponent implements OnInit {
 
   form!:FormGroup;
   modelArray:any[] = [];
+  showSideNav:boolean = true;
 
   ngOnInit(): void {
       this.form = this.formBuilder.group({
@@ -32,6 +33,11 @@ export class ModelComponent implements OnInit {
       Ev1M1Cst:['']
     })
   }
+
+  toggleSideNavShow(){
+    this.showSideNav = !this.showSideNav;
+  }
+
   submitForm(){
     this.modelArray.push(this.form.value);
 

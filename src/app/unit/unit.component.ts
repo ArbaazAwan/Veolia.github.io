@@ -12,6 +12,7 @@ export class UnitComponent implements OnInit {
 
   form!:FormGroup;
   unitArray:any[] = [];
+  showSideNav:boolean= true;
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -87,6 +88,10 @@ export class UnitComponent implements OnInit {
   removeShop_Contractor(i:number)
   {
     this.shop_Contractors().removeAt(i);
+  }
+
+  toggleSideNavShow(){
+    this.showSideNav = !this.showSideNav;
   }
 
   onSubmit()

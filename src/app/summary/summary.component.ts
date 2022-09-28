@@ -21,6 +21,7 @@ export class SummaryComponent implements OnInit {
     })
   }
   form!:FormGroup;
+  showSideNav:boolean = true;
 
   db!: any[];
   assetTypes!: any[];
@@ -239,6 +240,10 @@ export class SummaryComponent implements OnInit {
   onSubmit(){
     this.summaryArray.push(this.form.value);
     this.form.reset();
+  }
+
+  toggleSideNavShow(){
+    this.showSideNav = !this.showSideNav;
   }
 
   onCancel(){

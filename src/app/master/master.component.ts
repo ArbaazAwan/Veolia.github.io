@@ -10,6 +10,7 @@ import { FormArray, FormArrayName, FormBuilder, FormGroup } from '@angular/forms
 export class MasterComponent implements OnInit {
 
   form!:FormGroup
+  showSideNav:boolean = true;
 
   constructor(private fb:FormBuilder) {
 
@@ -102,6 +103,9 @@ export class MasterComponent implements OnInit {
     this.costs().removeAt(i);
   }
 
+  toggleShowSideNav(){
+    this.showSideNav = !this.showSideNav;
+  }
 
   onSubmit(){
 
