@@ -23,20 +23,20 @@ import { UnitModule } from './unit/unit.module';
 import { UnitComponent } from './unit/unit.component';
 import { PermissionModule } from './permission/permission.module';
 import { PermissionsTableComponent } from './permission/permissions-table.component';
-<<<<<<< HEAD
+
 import { MasterModule } from './master/master.module';
 import { MasterComponent } from './master/master.component';
 import { SummaryModule } from './summary/summary.module';
 import { SummaryComponent } from './summary/summary.component';
-=======
-import { SummaryModule } from './summary/summary.module';
-import { SummaryComponent } from './summary/summary.component';
->>>>>>> d4e3835c8c06af9b8dee879c4d76438b884ce0d6
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
+    
   ],
   imports: [
     AuthModule,
@@ -50,7 +50,8 @@ import { SummaryComponent } from './summary/summary.component';
     PermissionModule,
     MasterModule,
     SummaryModule,
-
+    
+ 
 
     BrowserModule,
     RouterModule.forRoot([
@@ -68,7 +69,9 @@ import { SummaryComponent } from './summary/summary.component';
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
+    BrowserAnimationsModule,
   ],
+
 
   providers: [],
   bootstrap: [AppComponent]

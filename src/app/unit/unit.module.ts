@@ -5,12 +5,13 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FooterModule } from '../footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UnitTableComponent } from './unit-table/unit-table.component';
+import { FilterPipe } from '../search/search-filter.pipe.ts.pipe';
 
 @NgModule({
   declarations: [
     UnitComponent,
-    UnitTableComponent,
+    FilterPipe,
+    
   ],
   imports: [
     CommonModule,
@@ -18,7 +19,9 @@ import { UnitTableComponent } from './unit-table/unit-table.component';
     SidenavModule,
     FooterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+
   ],
   exports:[
     UnitComponent
