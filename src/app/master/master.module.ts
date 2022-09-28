@@ -5,7 +5,7 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FooterModule } from '../footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SidenavModule,
     FooterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule
   ],
   exports:[
     MasterComponent
