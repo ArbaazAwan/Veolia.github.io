@@ -32,6 +32,7 @@ import { MasterComponent } from './master/master.component';
   declarations: [
     AppComponent,
     Error404Component,
+    
   ],
   imports: [
     AuthModule,
