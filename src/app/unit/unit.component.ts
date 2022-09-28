@@ -18,9 +18,80 @@ export class UnitComponent implements OnInit {
     'The Avengers',
     'Batgirl',
     'Batman',
-    'Batwoman'
-    
-  ]
+    'Batwoman',
+  ];
+  assetsArray: any[] = [
+    {
+      materials: [
+        {
+          item: '',
+          cost: '',
+        },
+        {
+          item: '',
+          cost: '',
+        },
+        {
+          item: '',
+          cost: '',
+        },
+        {
+          item: '',
+          cost: '',
+        },
+        {
+          item: '',
+          cost: '',
+        },
+      ],
+
+      labors: [
+        {
+          level: '',
+          hours: '',
+        },
+        {
+          level: '',
+          hours: '',
+        },
+        {
+          level: '',
+          hours: '',
+        },
+        {
+          level: '',
+          hours: '',
+        },
+        {
+          level: '',
+          hours: '',
+        },
+      ],
+
+      Shop_Contractors: [
+        {
+          desc: '',
+          cost: '',
+        },
+        {
+          desc: '',
+          cost: '',
+        },
+        {
+          desc: '',
+          cost: '',
+        },
+        {
+          desc: '',
+          cost: '',
+        },
+        {
+          desc: '',
+          cost: '',
+        },
+      ],
+    },
+  ];
 
   ngOnInit(): void {}
 }
