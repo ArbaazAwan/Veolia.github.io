@@ -25,6 +25,8 @@ import { PermissionModule } from './permission/permission.module';
 import { PermissionsTableComponent } from './permission/permissions-table.component';
 import { SummaryModule } from './summary/summary.module';
 import { SummaryComponent } from './summary/summary.component';
+import { MasterModule } from './master/master.module';
+import { MasterComponent } from './master/master.component';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,15 @@ import { SummaryComponent } from './summary/summary.component';
     UnitModule,
     PermissionModule,
     SummaryModule,
-    
+    MasterModule,
+
 
     BrowserModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'dashboard', component:DashboardComponent },
+      { path: 'master', component:MasterComponent },
       { path: 'model', component:ModelComponent },
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
