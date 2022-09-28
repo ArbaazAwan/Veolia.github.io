@@ -1,24 +1,36 @@
 <aside
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
-  id="sidenav-main">
+  id="sidenav-main"
+>
   <app-side-navbar></app-side-navbar>
 </aside>
 
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+<main
+  class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+>
   <app-navbar></app-navbar>
 
   <div class="content" role="main">
     <div class="card">
       <div class="form-group">
         <label for="search-text">Search Asset</label>
-        <input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
-          [(ngModel)]="searchText" placeholder="Enter text to search" 
-          autofocus>
+        <input
+          type="email"
+          class="form-control"
+          id="search-text"
+          aria-describedby="search-text"
+          [(ngModel)]="searchText"
+          placeholder="Enter text to search"
+          autofocus
+        />
       </div>
       <ul class="list-group list-group-flush">
         <!-- results of ngFor is passed to appFilter with argument searchText -->
-        <li class="list-group-item" *ngFor="let c of characters | assetFilter: searchText">
-          {{c}}
+        <li
+          class="list-group-item"
+          *ngFor="let c of characters | assetFilter: searchText"
+        >
+          {{ c }}
         </li>
       </ul>
     </div>
@@ -29,7 +41,9 @@
       <div class="col-12">
         <div class="card my-4">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <div
+              class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+            >
               <h6 class="text-white text-capitalize ps-3">Permissions Table</h6>
             </div>
           </div>
@@ -38,7 +52,11 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assets</th>
+                    <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Assets
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,7 +64,7 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{c}}</h6>
+                          <h6 class="mb-0 text-sm">{{ c }}</h6>
                         </div>
                       </div>
                     </td>
@@ -57,7 +75,8 @@
           </div>
         </div>
       </div>
-</div>
+    </div>
+  </div>
 
   <app-footer></app-footer>
 </main>
