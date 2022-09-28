@@ -1,13 +1,14 @@
 <aside
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
-  id="sidenav-main">
+  id="sidenav-main"
+  *ngIf="showSideNav">
   <app-side-navbar></app-side-navbar>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
   <app-navbar></app-navbar>
 
   <div class="container-fluid py-4">
-    <button type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
+    <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
       data-bs-target="#modal-form">
       Create Summary
     </button>
@@ -104,10 +105,10 @@
                   </div>
 
                   <div class="text-center">
-                    <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                    <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                       Create
                     </button>
-                    <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2" (click)="onCancel()">
+                    <button (click)="toggleSideNavShow()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2" (click)="onCancel()">
                       Cancel
                     </button>
                   </div>

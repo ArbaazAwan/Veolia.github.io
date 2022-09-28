@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormArrayName, FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-master',
@@ -8,91 +9,106 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class MasterComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
+  form!:FormGroup
+  showSideNav:boolean = true;
 
-  form!:FormGroup;
+  constructor(private fb:FormBuilder) {
 
-  unitArray:any[] = [];
+   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      maintanance:['',Validators.required],
-      description:['', Validators.required],
-      performEveryMOs:['',Validators.required],
-      strechForPartialLoading:['',Validators.required],
-      items: this.fb.array([]),
+      unitDesc:'',
+      appDesc: '',
+      unitMeas:'',
+      rev:'',
+      unitCode:'',
+      appCode:'',
+      replCost:'',
+      lifeMOs:'',
+      OHLife:'',
+      event:'',
+      maintenances:this.fb.array([]),
       labors:this.fb.array([]),
-      shop_Contractors:this.fb.array([]),
-    });
+      costs:this.fb.array([])
+    })
   }
 
-  // items() : FormArray
-  // {
-  //   return this.form.get("items") as FormArray
-  // }
+  maintenances():FormArray
+  {
+    return <FormArray>this.form.get("maintenances")
+  }
 
-  // labors() : FormArray
-  // {
-  //   return this.form.get("labors") as FormArray
-  // }
+  labors() : FormArray
+  {
+    return this.form.get("labors") as FormArray
+  }
 
-  // shop_Contractors() : FormArray
-  // {
-  //   return this.form.get("shop_Contractors") as FormArray
-  // }
+  costs() : FormArray
+  {
+    return this.form.get("costs") as FormArray
+  }
 
-  // newItem(): FormGroup
-  // {
-  //   return this.fb.group({
-  //     item: '',
-  //     cost: '',
-  //   })
-  // }
-  // newLabor(): FormGroup
-  // {
-  //   return this.fb.group({
-  //     level: '',
-  //     hrs: '',
-  //   })
-  // }
+  newMaintenance()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
 
-  // newShop_Contractor(): FormGroup
-  // {
-  //   return this.fb.group({
-  //     desc: '',
-  //     cost: '',
-  //   })
-  // }
+  newLabor(): FormGroup
+  {
+    return this.fb.group({
+      level: '',
+      hrs: '',
+    })
+  }
 
-  // addItem()
-  // {
-  //   this.items().push(this.newItem());
-  // }
-  // addLabor()
-  // {
-  //   this.labors().push(this.newLabor());
-  // }
-  // addShop_Contractor()
-  // {
-  //   this.shop_Contractors().push(this.newShop_Contractor());
-  // }
+  newCost()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
 
-  // removeItem(i:number)
-  // {
-  //   this.items().removeAt(i);
-  // }
-  // removeLabor(i:number)
-  // {
-  //   this.labors().removeAt(i);
-  // }
-  // removeShop_Contractor(i:number)
-  // {
-  //   this.shop_Contractors().removeAt(i);
-  // }
+  addMaintenance()
+  {
+    this.maintenances().push(this.newMaintenance());
+  }
 
-  // onSubmit()
-  // {
-  //   this.unitArray.push(this.form.value);
-  // }
+  addLabor()
+  {
+    this.labors().push(this.newLabor());
+  }
+
+  addCost()
+  {
+    this.costs().push(this.newCost());
+  }
+
+  removeMaintenance(index:number)
+  {
+    this.maintenances().removeAt(index);
+  }
+
+  removeLabor(i:number)
+  {
+    this.labors().removeAt(i);
+  }
+
+  removeCost(i:number)
+  {
+    this.costs().removeAt(i);
+  }
+
+  toggleShowSideNav(){
+    this.showSideNav = !this.showSideNav;
+  }
+
+  onSubmit(){
+
+  }
 
 }
