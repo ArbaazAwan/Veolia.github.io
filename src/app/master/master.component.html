@@ -10,191 +10,355 @@
 
   <app-navbar></app-navbar>
 
-  <!-- form here -->
+    <div class="container-fluid py-4">
+      <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
+        data-bs-target="#modal-form">
+        Create Master
+      </button>
+
+    </div>
+  <!-- table here -->
   <div class="container-fluid py-4">
-    <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form">
-      Create Master
-    </button>
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="card card-plain">
-              <div class="card-header pb-0 text-left">
-                <h5 class="">Master</h5>
-                <p class="mb-0">Enter Master Details</p>
-              </div>
-              <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Unit Description</label>
-                    <input type="text" formControlName="unitDesc" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">App Description</label>
-                    <input type="text" formControlName="appDesc" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Unit Measurement</label>
-                    <input type="text" formControlName="unitMeas" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Rev</label>
-                    <input type="text" formControlName="rev" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Unit Code</label>
-                    <input type="text" formControlName="unitCode" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">App Code</label>
-                    <input type="text" formControlName="appCode" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Replacement Cost</label>
-                    <input type="text" formControlName="replCost" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">Life MO's</label>
-                    <input type="text" formControlName="lifeMOs" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
-                    <label class="form-label">OH Life</label>
-                    <input type="text" formControlName="OHLife" class="form-control form-floating"
-                      onfocus="focused(this)" onfocusout="defocused(this)" />
-                  </div>
-                  <select formControlName="event" class="input-group input-group-outline form-select my-3 mb-0"
-                    name="event">
-                    <option value="" class="opacity-7" selected disabled>
-                      --select event
-                    </option>
-                    <option value="event1">Event1</option>
-                    <option value="event2">Event2</option>
-                    <option value="event1">Event3</option>
-                    <option value="event1">Event4</option>
-                    <option value="event1">Event5</option>
-                    <option value="event1">Event6</option>
-                    <option value="event1">Event7</option>
-                    <option value="event1">Event8</option>
-                  </select>
+    <div class="row">
+      <div class="col-12">
+        <div class="card my-4">
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h6 class="text-white text-capitalize ps-3">Assets Table</h6>
+            </div>
+          </div>
+          <div class="card-body px-0 pb-2">
+            <div class="table-blocked p-0">
+              <table class="table align-items-center mb-0">
+                <thead>
+                  <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asset Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">AppDesc</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">UnitMeas</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rev</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Unit Code</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">App Code</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Replacement Cost</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Lifemos</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">OH Life</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let asset of assets">
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.id}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.assetName}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.appDesc}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.unitMeas}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.rev}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.unitCode}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.appCode}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.replCost}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.lifeMOs}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">{{asset.OHLife}}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <span><a class="btn btn-link text-info text-xs mx-2 px-3 mb-0" (click)="viewAsset(asset)"><i class="material-icons text-sm me-2">visibility</i>View</a>
+                         <a class="btn btn-link text-dark text-xs px-3 mb-0" (click)="editAsset(asset)" data-bs-toggle="modal"
+                         data-bs-target="#modal-form"><i class="material-icons text-sm me-2">edit</i>Edit</a></span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- form here -->
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h5 class="">Master</h5>
+              <p class="mb-0">Enter Master Details</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Unit Description</label>
+                  <input type="text" formControlName="unitDesc" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">App Description</label>
+                  <input type="text" formControlName="appDesc" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Unit Measurement</label>
+                  <input type="text" formControlName="unitMeas" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Rev</label>
+                  <input type="text" formControlName="rev" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Unit Code</label>
+                  <input type="text" formControlName="unitCode" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">App Code</label>
+                  <input type="text" formControlName="appCode" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Replacement Cost</label>
+                  <input type="text" formControlName="replCost" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">Life MO's</label>
+                  <input type="text" formControlName="lifeMOs" class="form-control" onfocus="focused(this)"
+                    onfocusout="defocused(this)" />
+                </div>
+                <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
+                  <label class="form-label">OH Life</label>
+                  <input type="text" formControlName="OHLife" class="form-control form-floating"
+                    onfocus="focused(this)" onfocusout="defocused(this)" />
+                </div>
+                <select formControlName="event" class="input-group input-group-outline form-select my-3 mb-0"
+                  name="event">
+                  <option value="" class="opacity-7" selected disabled>
+                    --select event
+                  </option>
+                  <option value="event1">Event1</option>
+                  <option value="event2">Event2</option>
+                  <option value="event1">Event3</option>
+                  <option value="event1">Event4</option>
+                  <option value="event1">Event5</option>
+                  <option value="event1">Event6</option>
+                  <option value="event1">Event7</option>
+                  <option value="event1">Event8</option>
+                </select>
 
-                  <div class="btn-group mt-3" role="group" aria-label="Vertical radio toggle button group">
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
-                    <label class="btn btn-outline-info" for="vbtn-radio1">Event1</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio2">Event2</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio3">Event3</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio4">Event4</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio5">Event5</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio6" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio6">Event6</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio7" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio7">Event7</label>
-                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio8" autocomplete="off">
-                    <label class="btn btn-outline-info" for="vbtn-radio8">Event8</label>
-                  </div>
+                <div class="btn-group mt-3" role="group" aria-label="Vertical radio toggle button group">
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+                  <label class="btn btn-outline-info" for="vbtn-radio1">Event1</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio2">Event2</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio3">Event3</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio4">Event4</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio5">Event5</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio6" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio6">Event6</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio7" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio7">Event7</label>
+                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio8" autocomplete="off">
+                  <label class="btn btn-outline-info" for="vbtn-radio8">Event8</label>
+                </div>
+                
+                <div class="nav-wrapper position-relative end-0">
+                  <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                        <span class="ms-1">Event1</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event2</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event3</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event4</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event5</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event6</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event7</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                        <span class="ms-1">Event8</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
-                  <mat-tab-group mat-align-tabs="center" class="mt-3">
-                    <mat-tab label="Event1"></mat-tab>
-                    <mat-tab label="Event2"></mat-tab>
-                    <mat-tab label="Event3"></mat-tab>
-                    <mat-tab label="Event4"></mat-tab>
-                    <mat-tab label="Event5"></mat-tab>
-                    <mat-tab label="Event6"></mat-tab>
-                    <mat-tab label="Event7"></mat-tab>
-                    <mat-tab label="Event8"></mat-tab>
-                  </mat-tab-group>
+                <mat-tab-group mat-align-tabs="center" class="mt-3">
+                  <mat-tab label="Event1"></mat-tab>
+                  <mat-tab label="Event2"></mat-tab>
+                  <mat-tab label="Event3"></mat-tab>
+                  <mat-tab label="Event4"></mat-tab>
+                  <mat-tab label="Event5"></mat-tab>
+                  <mat-tab label="Event6"></mat-tab>
+                  <mat-tab label="Event7"></mat-tab>
+                  <mat-tab label="Event8"></mat-tab>
+                </mat-tab-group>
 
-                  <label class="text-bold mt-2">Maintenance</label>
-                  <div>
-                    <a type="button" (click)="addMaintenance()"><span class="material-icons">add_box</span></a>
-                  </div>
-                  <table formArrayName="maintenances">
-                    <tr *ngFor="
-                        let maintenance of maintenances().controls;
-                        let i = index
-                      " [formGroupName]="i">
-                      <td>
-                        <label for="maintenance" class="form-label">Desc</label>
-                        <input type="text" formControlName="desc" class="form-control" />
-                      </td>
-                      <td>
-                        <label for="cost" class="form-label">Cost</label>
-                        <input type="text" formControlName="cost" class="form-control" />
-                      </td>
-                      <td>
-                        <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
+                <label class="text-bold mt-2">Maintenance</label>
+                <div>
+                  <a type="button" (click)="addMaintenance()"><span class="material-icons">add_box</span></a>
+                </div>
+                <table formArrayName="maintenances">
+                  <tr *ngFor="
+                      let maintenance of maintenances().controls;
+                      let i = index
+                    " [formGroupName]="i">
+                    <td>
+                      <label for="maintenance" class="form-label">Desc</label>
+                      <input type="text" formControlName="desc" class="form-control" />
+                    </td>
+                    <td>
+                      <label for="cost" class="form-label">Cost</label>
+                      <input type="text" formControlName="cost" class="form-control" />
+                    </td>
+                    <td>
+                      <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </table>
 
-                  <label class="text-bold mt-2">Labor</label>
-                  <div>
-                    <a type="button" (click)="addLabor()"><span class="material-icons"> add_box </span></a>
-                  </div>
-                  <table formArrayName="labors">
-                    <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
-                      <td>
-                        <label for="level" class="form-label">Level</label>
-                        <input type="text" formControlName="level" class="form-control" />
-                      </td>
-                      <td>
-                        <label class="form-label" for="hrs">Hrs</label>
-                        <input type="text" formControlName="hrs" class="form-control" />
-                      </td>
-                      <td>
-                        <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
+                <label class="text-bold mt-2">Labor</label>
+                <div>
+                  <a type="button" (click)="addLabor()"><span class="material-icons"> add_box </span></a>
+                </div>
+                <table formArrayName="labors">
+                  <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                    <td>
+                      <label for="level" class="form-label">Level</label>
+                      <input type="text" formControlName="level" class="form-control" />
+                    </td>
+                    <td>
+                      <label class="form-label" for="hrs">Hrs</label>
+                      <input type="text" formControlName="hrs" class="form-control" />
+                    </td>
+                    <td>
+                      <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </table>
 
-                  <label class="text-bold mt-2">Cost</label>
-                  <div>
-                    <a type="button" (click)="addCost()"><span class="material-icons">add_box</span></a>
-                  </div>
-                  <table formArrayName="costs">
-                    <tr *ngFor="let cost of costs().controls; let i = index" [formGroupName]="i">
-                      <td>
-                        <label for="maintenance" class="form-label">Desc</label>
-                        <input type="text" formControlName="desc" class="form-control" />
-                      </td>
-                      <td>
-                        <label for="cost" class="form-label">Cost</label>
-                        <input type="text" formControlName="cost" class="form-control" />
-                      </td>
-                      <td>
-                        <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  </table>
-                  <div class="text-center">
-                    <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
-                      Create
-                    </button>
-                    <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </div>
+                <label class="text-bold mt-2">Cost</label>
+                <div>
+                  <a type="button" (click)="addCost()"><span class="material-icons">add_box</span></a>
+                </div>
+                <table formArrayName="costs">
+                  <tr *ngFor="let cost of costs().controls; let i = index" [formGroupName]="i">
+                    <td>
+                      <label for="maintenance" class="form-label">Desc</label>
+                      <input type="text" formControlName="desc" class="form-control" />
+                    </td>
+                    <td>
+                      <label for="cost" class="form-label">Cost</label>
+                      <input type="text" formControlName="cost" class="form-control" />
+                    </td>
+                    <td>
+                      <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+                <div class="text-center">
+                  <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                    Create
+                  </button>
+                  <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                    Cancel
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
