@@ -22,6 +22,7 @@ export class UnitComponent implements OnInit {
   ];
   assetsArray: any[] = [
     {
+
       materials: [
         {
           item: '',
