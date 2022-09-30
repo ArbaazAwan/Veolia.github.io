@@ -1,97 +1,49 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { Observable } from 'rxjs'
+import { map, startWith } from 'rxjs/operators'
+import { ServService } from './serv.service';
 
 @Component({
   selector: 'app-unit',
   templateUrl: './unit.component.html',
   styleUrls: ['./unit.component.scss'],
-})
+  })
 export class UnitComponent implements OnInit {
-  constructor() {}
 
-  title = 'angular-text-search-highlight';
   searchText = '';
-  characters = [
-    'Ant-Man',
-    'Aquaman',
-    'Asterix',
-    'The Atom',
-    'The Avengers',
-    'Batgirl',
-    'Batman',
-    'Batwoman',
-  ];
-  assetsArray: any[] = [
-    {
-      materials: [
-        {
-          item: '',
-          cost: '',
-        },
-        {
-          item: '',
-          cost: '',
-        },
-        {
-          item: '',
-          cost: '',
-        },
-        {
-          item: '',
-          cost: '',
-        },
-        {
-          item: '',
-          cost: '',
-        },
-      ],
+  title = 'autocomplete';
+  options !: string[];
+  filteredOptions!: string[];
+  formGroup!: any;
+  sampleVariable:any;
 
-      labors: [
-        {
-          level: '',
-          hours: '',
-        },
-        {
-          level: '',
-          hours: '',
-        },
-        {
-          level: '',
-          hours: '',
-        },
-        {
-          level: '',
-          hours: '',
-        },
-        {
-          level: '',
-          hours: '',
-        },
-      ],
+  constructor(private service : ServService, private fb : FormBuilder){}
 
-      Shop_Contractors: [
-        {
-          desc: '',
-          cost: '',
-        },
-        {
-          desc: '',
-          cost: '',
-        },
-        {
-          desc: '',
-          cost: '',
-        },
-        {
-          desc: '',
-          cost: '',
-        },
-        {
-          desc: '',
-          cost: '',
-        },
-      ],
-    },
-  ];
+  ngOnInit(){
+    this.initForm();
+    this.getNames();
+  }
 
-  ngOnInit(): void {}
+  initForm(){
+    this.formGroup = this.fb.group({
+      'asset' : ['']
+    })
+    this.formGroup.get('asset').valueChanges.subscribe((response: any) => {
+      this.filterData(response);
+    })
+  }
+
+  filterData(enteredData: string){
+    this.filteredOptions = this.options.filter(item => {
+      return item.toLowerCase().indexOf(enteredData.toLowerCase()) > -1
+    })
+  }
+
+  getNames(){
+    this.service.getData().subscribe(response => {
+      this.options = response;
+      this.filteredOptions = response;
+    })
+  }
 }

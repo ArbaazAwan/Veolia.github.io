@@ -65,6 +65,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [],
