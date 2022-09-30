@@ -1,0 +1,271 @@
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Assets Details</h6>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-2">
+          <div class="table-blocked p-0">
+            <table class="table align-items-center mb-0">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Asset Id</label>
+                        <h6 class="mb-0 text-sm">{{asset.id}}</h6>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Asset Name</label>
+                        <h6 class="mb-0 text-sm">{{asset.assetName}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">App Description</label>
+                        <h6 class="mb-0 text-sm">{{asset.appDesc}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">unit Measure</label>
+                        <h6 class="mb-0 text-sm">{{asset.unitMeas}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Rev</label>
+                        <h6 class="mb-0 text-sm">{{asset.rev}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Unit Code</label>
+                        <h6 class="mb-0 text-sm">{{asset.unitCode}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">App Code</label>
+                        <h6 class="mb-0 text-sm">{{asset.appCode}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Replacement Cost</label>
+                        <h6 class="mb-0 text-sm">{{asset.replCost}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">Life MOs</label>
+                        <h6 class="mb-0 text-sm">{{asset.lifeMOs}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <label class="text-bold mt-2">OH life</label>
+                        <h6 class="mb-0 text-sm">{{asset.OHLife}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+                <div class="row">
+                  <mat-tab-group mat-align-tabs="center" class="mt-3">
+                    <mat-tab label="Event1">
+                      <table>
+                        <tr>
+                          <label class="text-bold mt-2">Event1</label>
+                          <td>
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.title}}</h6>
+                          </td>
+                          <td>
+                            <label for="maintenance" class="form-label">Every</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.Every}}</h6>
+                          </td>
+                          <td>
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.Strch}}</h6>
+                          </td>
+                        </tr>
+                          <tr>
+                            <label class="text-bold mt-2">Maintenance1</label>
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance1.desc}}</h6>
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance1.cost}}</h6>
+                            </td>
+                          </tr>
+                          <tr>
+                            <label class="text-bold mt-2">Maintenance2</label>
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance2.desc}}</h6>
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance2.cost}}</h6>
+                            </td>
+                          </tr>
+                          <tr formGroupName="maintenance3">
+                            <label class="text-bold mt-2">Maintenance3</label>
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance3.desc}}</h6>
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance3.cost}}</h6>
+                            </td>
+                          </tr>
+                          <tr formGroupName="maintenance4">
+                            <label class="text-bold mt-2">Maintenance4</label>
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance4.desc}}</h6>
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance4.cost}}</h6>
+                            </td>
+                          </tr>
+                          <tr formGroupName="maintenance5">
+                            <label class="text-bold mt-2">Maintenance5</label>
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance5.desc}}</h6>
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <h6 class="mb-0 text-sm">{{asset.event1.maintenance5.cost}}</h6>
+                            </td>
+                          </tr>
+                        <tr formGroupName="labor1">
+                          <label class="text-bold mt-2">labor1</label>
+                          <td>
+                            <label for="maintenance" class="form-label">level</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor1.level}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Hours</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor1.hours}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="labor2">
+                          <label class="text-bold mt-2">labor2</label>
+                          <td>
+                            <label for="maintenance" class="form-label">level</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor2.level}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Hours</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor2.hours}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="labor3">
+                          <label class="text-bold mt-2">labor3</label>
+                          <td>
+                            <label for="maintenance" class="form-label">level</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor3.level}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Hours</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor3.hours}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="labor4">
+                          <label class="text-bold mt-2">labor4</label>
+                          <td>
+                            <label for="maintenance" class="form-label">level</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor4.level}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Hours</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.labor4.hours}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="cost1">
+                          <label class="text-bold mt-2">cost1</label>
+                          <td>
+                            <label for="maintenance" class="form-label">Description</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost1.desc}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Amount</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost1.amount}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="cost2">
+                          <label class="text-bold mt-2">cost2</label>
+                          <td>
+                            <label for="maintenance" class="form-label">Description</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost2.desc}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Amount</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost2.amount}}</h6>
+                          </td>
+                        </tr>
+                        <tr formGroupName="cost3">
+                          <label class="text-bold mt-2">cost3</label>
+                          <td>
+                            <label for="maintenance" class="form-label">Description</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost3.desc}}</h6>
+                          </td>
+                          <td>
+                            <label for="cost" class="form-label">Amount</label>
+                            <h6 class="mb-0 text-sm">{{asset.event1.cost3.amount}}</h6>
+                          </td>
+                        </tr>
+                      </table>
+                    </mat-tab>
+                    <mat-tab label="Event2"></mat-tab>
+                    <mat-tab label="Event3"></mat-tab>
+                    <mat-tab label="Event4"></mat-tab>
+                    <mat-tab label="Event5"></mat-tab>
+                    <mat-tab label="Event6"></mat-tab>
+                    <mat-tab label="Event7"></mat-tab>
+                    <mat-tab label="Event8"></mat-tab>
+                  </mat-tab-group>
+                </div>
