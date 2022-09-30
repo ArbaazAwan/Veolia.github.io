@@ -33,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     Error404Component,
-    
+
   ],
   imports: [
     AuthModule,
@@ -50,6 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
