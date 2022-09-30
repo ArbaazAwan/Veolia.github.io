@@ -27,6 +27,7 @@ import { SummaryModule } from './summary/summary.module';
 import { SummaryComponent } from './summary/summary.component';
 import { MasterModule } from './master/master.module';
 import { MasterComponent } from './master/master.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { MasterComponent } from './master/master.component';
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [],
