@@ -7,11 +7,12 @@ import { FooterModule } from '../footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
-
+import { ViewMasterTableComponent } from './view-master-table/view-master-table.component';
 
 @NgModule({
   declarations: [
-    MasterComponent
+    MasterComponent,
+    ViewMasterTableComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatSelectModule
   ],
   exports:[
-    MasterComponent
+    MasterComponent,
+    ViewMasterTableComponent
   ]
 })
 export class MasterModule { }

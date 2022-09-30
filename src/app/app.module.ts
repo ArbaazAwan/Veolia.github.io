@@ -27,12 +27,13 @@ import { SummaryModule } from './summary/summary.module';
 import { SummaryComponent } from './summary/summary.component';
 import { MasterModule } from './master/master.module';
 import { MasterComponent } from './master/master.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
-    
+
   ],
   imports: [
     AuthModule,
@@ -49,6 +50,7 @@ import { MasterComponent } from './master/master.component';
 
 
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
