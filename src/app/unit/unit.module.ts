@@ -9,6 +9,7 @@ import { FilterPipe } from '../search/search-filter.pipe.ts.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { MasterModule } from '../master/master.module';
 
 
 
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatAutocompleteModule,
     HttpClientModule,
     MatInputModule,
+    MasterModule
 
   ],
 
