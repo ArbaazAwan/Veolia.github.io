@@ -149,50 +149,50 @@
               </div>
             </div>
             <div class="card-body">
-              <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <form>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Unit Description</label>
-                  <input type="text" formControlName="assetName" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">App Description</label>
-                  <input type="text" formControlName="appDesc" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Unit Measurement</label>
-                  <input type="text" formControlName="unitMeas" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Rev</label>
-                  <input type="text" formControlName="rev" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Unit Code</label>
-                  <input type="text" formControlName="unitCode" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">App Code</label>
-                  <input type="text" formControlName="appCode" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Replacement Cost</label>
-                  <input type="text" formControlName="replCost" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">Life MO's</label>
-                  <input type="text" formControlName="lifeMOs" class="form-control" onfocus="focused(this)"
+                  <input type="text" class="form-control" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
                 <div class="input-group input-group-outline my-3 text-xs text-center font-weight-bold mb-0">
                   <label class="form-label">OH Life</label>
-                  <input type="text" formControlName="OHLife" class="form-control form-floating" onfocus="focused(this)"
+                  <input type="text" class="form-control form-floating" onfocus="focused(this)"
                     onfocusout="defocused(this)" />
                 </div>
 
@@ -285,119 +285,119 @@
 
                 <mat-tab-group mat-align-tabs="center" class="mt-3">
                   <mat-tab label="Event1">
-                    <table formGroupName="event1">
+                    <table>
                       <tr>
                         <label class="text-bold mt-2">Event1</label>
                         <td>
                           <label for="maintenance" class="form-label">Event title</label>
-                          <input type="text" formControlName='title' class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                         <td>
                           <label for="maintenance" class="form-label">Every</label>
-                          <input type="text" formControlName="Every" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                         <td>
                           <label for="maintenance" class="form-label">Strch</label>
-                          <input type="text" formControlName="Strch" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                       </tr>
-                        <tr formGroupName="maintenance1">
+                        <tr>
                           <label class="text-bold mt-2">Maintenance1</label>
                           <td>
                             <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                           <td>
                             <label for="cost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" />
+                            <input type="text"  class="form-control" />
                           </td>
                         </tr>
-                        <tr formGroupName="maintenance2">
+                        <tr>
                           <label class="text-bold mt-2">Maintenance2</label>
                           <td>
                             <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                           <td>
                             <label for="cost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                         </tr>
-                        <tr formGroupName="maintenance3">
+                        <tr>
                           <label class="text-bold mt-2">Maintenance3</label>
                           <td>
                             <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                           <td>
                             <label for="cost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                         </tr>
-                        <tr formGroupName="maintenance4">
+                        <tr>
                           <label class="text-bold mt-2">Maintenance4</label>
                           <td>
                             <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                           <td>
                             <label for="cost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                         </tr>
-                        <tr formGroupName="maintenance5">
+                        <tr>
                           <label class="text-bold mt-2">Maintenance5</label>
                           <td>
                             <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                           <td>
                             <label for="cost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" />
+                            <input type="text" class="form-control" />
                           </td>
                         </tr>
-                      <tr formGroupName="labor1">
+                      <tr>
                         <label class="text-bold mt-2">labor1</label>
                         <td>
                           <label for="maintenance" class="form-label">level</label>
-                          <input type="text" formControlName="level" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                         <td>
                           <label for="cost" class="form-label">Hours</label>
-                          <input type="text" formControlName="hours" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                       </tr>
-                      <tr formGroupName="labor2">
+                      <tr >
                         <label class="text-bold mt-2">labor2</label>
                         <td>
                           <label for="maintenance" class="form-label">level</label>
-                          <input type="text" formControlName="level" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                         <td>
                           <label for="cost" class="form-label">Hours</label>
-                          <input type="text" formControlName="hours" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                       </tr>
-                      <tr formGroupName="labor3">
+                      <tr>
                         <label class="text-bold mt-2">labor3</label>
                         <td>
                           <label for="maintenance" class="form-label">level</label>
-                          <input type="text" formControlName="level" class="form-control" />
+                          <input type="text" class="form-control" />
                         </td>
                         <td>
                           <label for="cost" class="form-label">Hours</label>
-                          <input type="text" formControlName="hours" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                       </tr>
-                      <tr formGroupName="labor4">
+                      <tr >
                         <label class="text-bold mt-2">labor4</label>
                         <td>
                           <label for="maintenance" class="form-label">level</label>
-                          <input type="text" formControlName="level" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                         <td>
                           <label for="cost" class="form-label">Hours</label>
-                          <input type="text" formControlName="hours" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                       </tr>
                       <tr formGroupName="cost1">
@@ -408,18 +408,18 @@
                         </td>
                         <td>
                           <label for="cost" class="form-label">Amount</label>
-                          <input type="text" formControlName="amount" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                       </tr>
                       <tr formGroupName="cost2">
                         <label class="text-bold mt-2">cost2</label>
                         <td>
                           <label for="maintenance" class="form-label">Description</label>
-                          <input type="text" formControlName="desc" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                         <td>
                           <label for="cost" class="form-label">Amount</label>
-                          <input type="text" formControlName="amount" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                       </tr>
                       <tr formGroupName="cost3">
@@ -430,7 +430,7 @@
                         </td>
                         <td>
                           <label for="cost" class="form-label">Amount</label>
-                          <input type="text" formControlName="amount" class="form-control" />
+                          <input type="text"  class="form-control" />
                         </td>
                       </tr>
                     </table>
