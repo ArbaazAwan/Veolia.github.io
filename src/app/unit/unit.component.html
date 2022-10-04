@@ -11,46 +11,25 @@
   <app-navbar></app-navbar>
 
   <form [formGroup]="formGroup">
-    <div class="content, col-3" role="main">
-      <div class="card mx-2">
-        <div class="form-group m-2">
-          <mat-form-field>
-            <mat-label> Search Assets... </mat-label>
-            <input
-              formControlName="asset"
-              matInput
-              type="text"
-              [matAutocomplete]="auto"
-            />
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let item of filteredOptions" [value]="item">
-                {{ item }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </div>
-      </div>
+    <div class="content col-2 m-2" role="main">
+      <mat-form-field appearance="outline">
+        <mat-label
+          ><mat-icon><i class="text-sm">search</i> </mat-icon> Search Assets...
+        </mat-label>
+        <input
+          formControlName="asset"
+          matInput
+          type="text"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let item of filteredOptions" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
   </form>
-  <!-- <div class="container-fluid py-4">
-    <div class="row">
-      <div class="col-12">
-        <div class="card my-4">
-          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h6 class="text-white text-capitalize ps-3">Asset Details</h6>
-            </div>
-          </div>
-          <div class="card-body px-0 pb-2">
-            <div class="table-responsive p-0">
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
   <app-view-master-table></app-view-master-table>
   <app-footer></app-footer>
