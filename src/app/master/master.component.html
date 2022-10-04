@@ -15,15 +15,15 @@
         <div class="card my-4">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <p class="text-white text-capitalize ps-3">Assets Table</p>
+              <p class="text-white text-capitalize text-bold ps-3">Assets Table</p>
             </div>
           </div>
           <div class="card-body px-0 pb-2">
-            <div class=" p-0">
+            <div class="p-0">
               <table class="table table-blocked mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ">Id</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder PS-2">Id</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Asset Name</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">AppDesc</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">UnitMeas</th>
@@ -69,7 +69,7 @@
                     <td>
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm ">{{asset.rev}}</p>
+                          <p class="mb-0 text-sm ">${{asset.rev}}</p>
                         </div>
                       </div>
                     </td>
@@ -90,7 +90,7 @@
                     <td>
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm ">{{asset.replCost}}</p>
+                          <p class="mb-0 text-sm ">${{asset.replCost}}</p>
                         </div>
                       </div>
                     </td>
@@ -104,7 +104,7 @@
                     <td>
                       <div class="d-flex py-1">
                         <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm ">{{asset.OHLife}}</p>
+                          <p class="mb-0 text-sm ">{{asset.OHLife}}%</p>
                         </div>
                       </div>
                     </td>
@@ -128,9 +128,10 @@
     </div>
   </div>
 
-  <!-- form here -->
+
+  <!-- Edit form here -->
   <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-body p-0">
           <div class="card card-plain">
@@ -146,59 +147,59 @@
                 <p class="mb-0">Update Asset Details</p>
               </div>
             </div>
-            <div class="card">
+            <div class="card-body">
               <form>
-                <div class="mx-4 mt-2">
+                <div class="mx-4 my-1 mt-2">
                   <label for="unitdesc" class="form-label text-bold">Unit Description</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input name="unitdesc" type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">App Description</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">Unit Measurement</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">Rev</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">Unit Code</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">App Code</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">Replacement Cost</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">Life MO's</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control" />
                   </div>
                 </div>
-                <div class="mx-4">
+                <div class="mx-4 my-1">
                   <label class="form-label text-bold">OH Life%</label>
-                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                     <input type="text" class="form-control form-floating"
                      />
                   </div>
@@ -223,7 +224,24 @@
                         </tr>
                       </table>
                     </mat-tab>
-                    <mat-tab label="Event2"></mat-tab>
+                    <mat-tab label="Event2">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" value="abc" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" value="12" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" value="yes" />
+                          </td>
+                        </tr>
+                      </table>
+                    </mat-tab>
                     <mat-tab label="Event3"></mat-tab>
                     <mat-tab label="Event4"></mat-tab>
                     <mat-tab label="Event5"></mat-tab>
@@ -238,7 +256,7 @@
                     Update
                   </button>
                   <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-bold m-2">
+                    class="btn bg-gradient-secondary m-2">
                     Cancel
                   </button>
                 </div>

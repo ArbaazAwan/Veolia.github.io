@@ -11,29 +11,41 @@
           <table class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Asset Type</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Size</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duty/Application</th>
-                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Quality</th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Asset Type</th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Size</th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Duty/Application</th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Quality</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let model of dropDownArray">
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-0 text-sm">{{model.assetType}}</h6>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm ">{{model.assetType}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <p class="text-xs font-weight-bold mb-0">{{model.size}}</p>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm ">{{model.size}}</p>
+                    </div>
+                  </div>
                 </td>
-                <td class="align-middle text-center text-sm">
-                  <span class="text-secondary text-xs font-weight-bold">{{model.duty_Application}}</span>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm ">{{model.duty_Application}}</p>
+                    </div>
+                  </div>
                 </td>
-                <td class="align-middle text-center">
-                  <span class="text-secondary text-xs font-weight-bold">{{model.quality}}</span>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm ">{{model.quality}}</p>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>

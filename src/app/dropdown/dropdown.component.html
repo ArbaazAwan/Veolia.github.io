@@ -1,5 +1,5 @@
 <aside
-  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start ms-3 bg-gradient-dark"
   id="sidenav-main"
   *ngIf="showSideNav">
   <app-side-navbar></app-side-navbar>
@@ -10,39 +10,49 @@
   <div class="container-fluid py-4">
     <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
       data-bs-target="#modal-form">
-      Create DropDown
+      Create Dropdown
     </button>
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
           <div class="modal-body p-0">
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
-                <h5 class="">DropDown</h5>
-                <p class="mb-0">Enter DropDown Details</p>
+                <h5 class="">Dropdown</h5>
+                <p class="mb-0">Enter Dropdown Details</p>
               </div>
               <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="submitForm()" role="form text-left">
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Asset Type</label>
+                <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+                  <div class="mx-4 my-1 mt-2">
+                  <label class="form-label text-bold">Asset Type</label>
+                  <div class="input-group input-group-outline">
                     <input type="text" formControlName="assetType" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Size</label>
+                  </div>
+                  <div class="mx-4 my-1">
+                    <label class="form-label text-bold">Size</label>
+                  <div class="input-group input-group-outline">
                     <input type="text" formControlName="size" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Duty/Application</label>
+                  </div>
+                  <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Duty/Application</label>
+                  <div class="input-group input-group-outline">
                     <input type="text" formControlName="duty_Application" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Quality</label>
+                  </div>
+                  <div class="mx-4 my-1">
+                    <label class="form-label text-bold">Quality</label>
+                  <div class="input-group input-group-outline">
                     <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
                       onfocusout="defocused(this)" />
                   </div>
+                  </div>
+
+
                   <div class="text-center">
                     <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                       Create
