@@ -10,7 +10,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MasterModule } from '../master/master.module';
-
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -29,7 +29,9 @@ import { MasterModule } from '../master/master.module';
     MatAutocompleteModule,
     HttpClientModule,
     MatInputModule,
-    MasterModule
+    MasterModule,
+    MatIconModule
+
 
   ],
 
