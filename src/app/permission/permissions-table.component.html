@@ -19,24 +19,28 @@
             </div>
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table table-blocked mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Users</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Admins</th>
+                      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Users</th>
+                      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Admins</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let user of users let i= index">
                       <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{user.name}}</h6>
+                        <div class="d-flex py-1">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0 text-sm">{{user.name}}</p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0" *ngIf="admins[i]">{{admins[i].name}}</p>
+                        <div class="d-flex py-1">
+                          <div class="d-flex flex-column">
+                            <p class="mb-0 text-sm " *ngIf="admins[i]">{{admins[i].name}}</p>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   </tbody>

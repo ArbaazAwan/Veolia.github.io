@@ -3,39 +3,39 @@
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-          <h6 class="text-white text-capitalize ps-3">Summary Table</h6>
+          <p class="text-white text-capitalize text-bold ps-3">Summary Table</p>
         </div>
       </div>
       <div class="card-body px-0 pb-2">
         <div class="p-0">
-          <table class="table table-blocked  mb-0">
+          <table class="table table-blocked mb-0">
             <thead>
               <tr>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Unit Name
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Asset Type
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Size
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Application/Duty
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Sub Application/Duty
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Quality
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Quantity
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Load
                 </th>
-                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Life
                 </th>
               </tr>
@@ -43,65 +43,65 @@
             <tbody>
               <tr *ngFor="let model of summaryArray">
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1 px-3">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.unitName }}</h6>
+                      <p class="mb-0 text-sm">{{ model.unitName }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.assetType.name }}</h6>
+                      <p class="mb-0 text-sm">{{ model.assetType.name }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.size.desc }}</h6>
+                      <p class="mb-0 text-sm">{{ model.size.desc }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.app.desc }}</h6>
+                      <p class="mb-0 text-sm">{{ model.app.desc }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.subApp.desc }}</h6>
+                      <p class="mb-0 text-sm">{{ model.subApp.desc }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.quality.desc }}</h6>
+                      <p class="mb-0 text-sm">{{ model.quality.desc }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.quantity }}</h6>
+                      <p class="mb-0 text-sm">{{ model.quantity }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.load }}</h6>
+                      <p class="mb-0 text-sm">{{ model.load }}%</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <h6 class="mb-0 text-xxs">{{ model.life }}</h6>
+                      <p class="mb-0 text-sm">{{ model.life }}%</p>
                     </div>
                   </div>
                 </td>

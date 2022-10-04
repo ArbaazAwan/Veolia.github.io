@@ -8,9 +8,15 @@ export class MasterService {
 
   assets!:any[];
   asset!:Subject<any>;
+  showSideNav:boolean =true;
 
   constructor() {
     this.asset = new Subject<any>();
+  }
+
+
+  toggleShowSideNav(){
+    this.showSideNav = !this.showSideNav;
   }
 
   setAsset(asset:any){
@@ -24,7 +30,7 @@ export class MasterService {
         assetName:'asset1',
         appDesc:'appdesc 1',
         unitMeas:'unit meas1',
-        rev:'rev1',
+        rev:'123',
         unitCode:'1',
         appCode:'1',
         replCost:'123',
@@ -142,7 +148,7 @@ export class MasterService {
         assetName:'asset2',
         appDesc:'appdesc 2',
         unitMeas:'unit meas2',
-        rev:'rev2',
+        rev:'234',
         unitCode:'2',
         appCode:'2',
         replCost:'123',
@@ -260,7 +266,7 @@ export class MasterService {
         assetName:'asset3',
         appDesc:'appdesc 3',
         unitMeas:'unit meas3',
-        rev:'rev3',
+        rev:'345',
         unitCode:'3',
         appCode:'3',
         replCost:'123',
@@ -325,7 +331,7 @@ export class MasterService {
         assetName:'asset4',
         appDesc:'appdesc 4',
         unitMeas:'unit meas4',
-        rev:'rev4',
+        rev:'456',
         unitCode:'4',
         appCode:'4',
         replCost:'123',
@@ -390,7 +396,7 @@ export class MasterService {
         assetName:'asset5',
         appDesc:'appdesc 5',
         unitMeas:'unit meas5',
-        rev:'rev5',
+        rev:'567',
         unitCode:'5',
         appCode:'5',
         replCost:'123',
@@ -455,7 +461,7 @@ export class MasterService {
         assetName:'asset6',
         appDesc:'appdesc 6',
         unitMeas:'unit meas6',
-        rev:'rev6',
+        rev:'678',
         unitCode:'6',
         appCode:'6',
         replCost:'123',
@@ -520,7 +526,7 @@ export class MasterService {
         assetName:'asset7',
         appDesc:'appdesc 7',
         unitMeas:'unit meas7',
-        rev:'rev7',
+        rev:'789',
         unitCode:'7',
         appCode:'7',
         replCost:'123',

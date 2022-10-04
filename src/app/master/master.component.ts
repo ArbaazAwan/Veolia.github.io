@@ -460,11 +460,9 @@ export class MasterComponent implements OnInit {
 
   }
 
-
   toggleShowSideNav(){
     this.showSideNav = !this.showSideNav;
   }
-
   viewAsset(asset:any){
     this.toggleShowSideNav();
     this.masterService.setAsset(asset);
@@ -472,7 +470,6 @@ export class MasterComponent implements OnInit {
 
   editAsset(asset:any){
     this.toggleShowSideNav();
-    this.form = asset;
   }
 
   onSubmit(){
