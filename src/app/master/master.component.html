@@ -15,110 +15,108 @@
         <div class="card my-4">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h6 class="text-white text-capitalize ps-3">Assets Table</h6>
+              <p class="text-white text-capitalize ps-3">Assets Table</p>
             </div>
           </div>
           <div class="card-body px-0 pb-2">
-            <div class="table-blocked p-0">
-              <table class="table align-items-center mb-0">
+            <div class=" p-0">
+              <table class="table table-blocked mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Id</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Asset Name</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">AppDesc</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">UnitMeas</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Rev</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Unit Code</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">App Code</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Repl Cost</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Lifemos</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">OH Life</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ">Id</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Asset Name</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">AppDesc</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">UnitMeas</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Rev</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Unit Code</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">App Code</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Repl Cost</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Lifemos</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">OH Life</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let asset of assets">
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.id}}</h6>
+                      <div class="d-flex px-3 py-1">
+                        <div class="d-flex flex-column ">
+                          <p class="mb-0 text-sm">{{asset.id}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.assetName}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.assetName}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.appDesc}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.appDesc}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.unitMeas}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.unitMeas}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.rev}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.rev}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.unitCode}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.unitCode}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.appCode}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.appCode}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.replCost}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.replCost}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.lifeMOs}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.lifeMOs}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">{{asset.OHLife}}</h6>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                          <p class="mb-0 text-sm ">{{asset.OHLife}}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <div class="d-flex px-2 py-1">
-                        <div class="d-flex flex-column justify-content-center">
-                          <span><a class="btn btn-link text-info text-xs mx-2 px-3 mb-0"
-                            data-bs-toggle="modal" data-bs-target="#modal-form-view" (click)="viewAsset(asset)">
-                            <i class="material-icons text-sm me-2">visibility</i>View</a>
-                            <a class="btn btn-link text-dark text-xs px-3 mb-0" (click)="editAsset(asset)"
-                              data-bs-toggle="modal" data-bs-target="#modal-form"><i
-                              class="material-icons text-sm me-2">edit</i>Edit</a></span>
-                        </div>
-                      </div>
+                      <span><a class="btn btn-info text-xs mx-1 mb-0" data-bs-toggle="modal"
+                          data-bs-target="#modal-form-view" (click)="viewAsset(asset)">
+                          <i class="material-icons">visibility</i> &nbsp;View
+                        </a>
+                        <a class="btn btn-dark text-xs mb-0" (click)="editAsset(asset)" data-bs-toggle="modal"
+                          data-bs-target="#modal-form">
+                          <i class="material-icons">edit</i>&nbsp; Edit
+                        </a></span>
                     </td>
                   </tr>
                 </tbody>
@@ -138,318 +136,109 @@
           <div class="card card-plain">
             <div class="card-header pb-0">
               <div class="text-left">
-                <h5 class="">Master</h5>
+                <h5 class="">Asset Details</h5>
                 <span class="text-right float-end">
                   <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
                     class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                     <i class="material-icons" style="font-size: 30px">close</i>
                   </button>
                 </span>
-                <p class="mb-0">Enter Master Details</p>
+                <p class="mb-0">Update Asset Details</p>
               </div>
             </div>
             <div class="card-body">
               <form>
-                <label class="form-label">Unit Description</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4 mt-2">
+                  <label for="unitdesc" class="form-label text-bold">Unit Description</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input name="unitdesc" type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">App Description</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">App Description</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">Unit Measurement</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">Unit Measurement</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">Rev</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">Rev</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">Unit Code</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">Unit Code</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">App Code</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">App Code</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">Replacement Cost</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">Replacement Cost</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">Life MO's</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">Life MO's</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
                 </div>
-                <label class="form-label">OH Life</label>
-                <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
-                  <input type="text" class="form-control form-floating" onfocus="focused(this)"
-                    onfocusout="defocused(this)" />
+                <div class="mx-4">
+                  <label class="form-label text-bold">OH Life%</label>
+                  <div class="input-group input-group-outline my-1 text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control form-floating"
+                     />
+                  </div>
                 </div>
-
-                <select class="input-group input-group-outline form-select my-3 mb-0"
-                  name="event">
-                  <option value="" class="opacity-7" selected disabled>
-                    --select event
-                  </option>
-                  <option value="event1">Event1</option>
-                  <option value="event2">Event2</option>
-                  <option value="event1">Event3</option>
-                  <option value="event1">Event4</option>
-                  <option value="event1">Event5</option>
-                  <option value="event1">Event6</option>
-                  <option value="event1">Event7</option>
-                  <option value="event1">Event8</option>
-                </select>
-
-                <div class="btn-group mt-3" role="group" aria-label="Vertical radio toggle button group">
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
-                  <label class="btn btn-outline-info" for="vbtn-radio1">Event1</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio2">Event2</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio3">Event3</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio4">Event4</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio5">Event5</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio6" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio6">Event6</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio7" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio7">Event7</label>
-                  <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio8" autocomplete="off">
-                  <label class="btn btn-outline-info" for="vbtn-radio8">Event8</label>
-                </div>
-
-                <!-- <div class="nav-wrapper position-relative end-0">
-                  <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 active " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="true">
-                        <span class="ms-1">Event1</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event2</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event3</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event4</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event5</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event6</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event7</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="javascript:;" role="tab"
-                        aria-selected="false">
-                        <span class="ms-1">Event8</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div> -->
-
-                <mat-tab-group mat-align-tabs="left" class="mt-3">
-                  <mat-tab label="Event1">
-                    <table>
-                      <tr>
-                        <label class="text-bold mt-2">Event1</label>
-                        <td>
-                          <label for="maintenance" class="form-label">Event title</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="maintenance" class="form-label">Every</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="maintenance" class="form-label">Strch</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                      </tr>
+                <div class="card card-plain my-4 mx-4">
+                  <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
+                    <mat-tab label="Event1">
+                      <table class="table">
                         <tr>
-                          <label class="text-bold mt-2">Maintenance1</label>
-                          <td>
-                            <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" class="form-control" />
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" value="abc" />
                           </td>
-                          <td>
-                            <label for="cost" class="form-label">Cost</label>
-                            <input type="text"  class="form-control" />
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" value="12" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" value="yes" />
                           </td>
                         </tr>
-                        <tr>
-                          <label class="text-bold mt-2">Maintenance2</label>
-                          <td>
-                            <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                          <td>
-                            <label for="cost" class="form-label">Cost</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <label class="text-bold mt-2">Maintenance3</label>
-                          <td>
-                            <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                          <td>
-                            <label for="cost" class="form-label">Cost</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <label class="text-bold mt-2">Maintenance4</label>
-                          <td>
-                            <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                          <td>
-                            <label for="cost" class="form-label">Cost</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <label class="text-bold mt-2">Maintenance5</label>
-                          <td>
-                            <label for="maintenance" class="form-label">Desc</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                          <td>
-                            <label for="cost" class="form-label">Cost</label>
-                            <input type="text" class="form-control" />
-                          </td>
-                        </tr>
-                      <tr>
-                        <label class="text-bold mt-2">labor1</label>
-                        <td>
-                          <label for="maintenance" class="form-label">level</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Hours</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                      </tr>
-                      <tr >
-                        <label class="text-bold mt-2">labor2</label>
-                        <td>
-                          <label for="maintenance" class="form-label">level</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Hours</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <label class="text-bold mt-2">labor3</label>
-                        <td>
-                          <label for="maintenance" class="form-label">level</label>
-                          <input type="text" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Hours</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                      </tr>
-                      <tr >
-                        <label class="text-bold mt-2">labor4</label>
-                        <td>
-                          <label for="maintenance" class="form-label">level</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Hours</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                      </tr>
-                      <tr formGroupName="cost1">
-                        <label class="text-bold mt-2">cost1</label>
-                        <td>
-                          <label for="maintenance" class="form-label">Description</label>
-                          <input type="text" formControlName="desc" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Amount</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                      </tr>
-                      <tr formGroupName="cost2">
-                        <label class="text-bold mt-2">cost2</label>
-                        <td>
-                          <label for="maintenance" class="form-label">Description</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Amount</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                      </tr>
-                      <tr formGroupName="cost3">
-                        <label class="text-bold mt-2">cost3</label>
-                        <td>
-                          <label for="maintenance" class="form-label">Description</label>
-                          <input type="text" formControlName="desc" class="form-control" />
-                        </td>
-                        <td>
-                          <label for="cost" class="form-label">Amount</label>
-                          <input type="text"  class="form-control" />
-                        </td>
-                      </tr>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="Event2"></mat-tab>
-                  <mat-tab label="Event3"></mat-tab>
-                  <mat-tab label="Event4"></mat-tab>
-                  <mat-tab label="Event5"></mat-tab>
-                  <mat-tab label="Event6"></mat-tab>
-                  <mat-tab label="Event7"></mat-tab>
-                  <mat-tab label="Event8"></mat-tab>
-                </mat-tab-group>
-                <div class="text-center">
+                      </table>
+                    </mat-tab>
+                    <mat-tab label="Event2"></mat-tab>
+                    <mat-tab label="Event3"></mat-tab>
+                    <mat-tab label="Event4"></mat-tab>
+                    <mat-tab label="Event5"></mat-tab>
+                    <mat-tab label="Event6"></mat-tab>
+                    <mat-tab label="Event7"></mat-tab>
+                    <mat-tab label="Event8"></mat-tab>
+                  </mat-tab-group>
+                </div>
+                <div class="text-center mb-4">
                   <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
                     class="btn bg-gradient-primary m-2">
                     Update
                   </button>
                   <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-secondary m-2">
+                    class="btn bg-gradient-bold m-2">
                     Cancel
                   </button>
                 </div>
@@ -462,7 +251,8 @@
   </div>
 
   <!-- view modal -->
-  <div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view" aria-hidden="true">
+  <div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view"
+    aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-body p-0">
@@ -473,7 +263,7 @@
                 <span class="float-end">
                   <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
                     class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                    <i class="material-icons" style="font-size: 30px" >close</i>
+                    <i class="material-icons" style="font-size: 30px">close</i>
                   </button>
                 </span>
                 <p class="mb-0">Enter Master Details</p>
