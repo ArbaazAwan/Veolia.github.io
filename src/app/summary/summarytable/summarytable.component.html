@@ -7,35 +7,35 @@
         </div>
       </div>
       <div class="card-body px-0 pb-2">
-        <div class="table-responsive p-0">
-          <table class="table align-items-center mb-0">
+        <div class="p-0">
+          <table class="table table-blocked  mb-0">
             <thead>
               <tr>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Unit Name
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Asset Type
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Size
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Application/Duty
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Sub Application/Duty
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Quality
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Quantity
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Load
                 </th>
-                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                <th class=" text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                   Life
                 </th>
               </tr>
@@ -43,64 +43,64 @@
             <tbody>
               <tr *ngFor="let model of summaryArray">
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.unitName }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.assetType.name }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.size.desc }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.app.desc }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.subApp.desc }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.quality.desc }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.quantity }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.load }}</h6>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-2 py-1">
-                    <div class="d-flex flex-column justify-content-center">
+                  <div class="d-flex">
+                    <div class="d-flex flex-column">
                       <h6 class="mb-0 text-xxs">{{ model.life }}</h6>
                     </div>
                   </div>
