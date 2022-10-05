@@ -28,6 +28,8 @@ import { SummaryComponent } from './summary/summary.component';
 import { MasterModule } from './master/master.module';
 import { MasterComponent } from './master/master.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileModule } from './profile/profile.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PermissionModule,
     SummaryModule,
     MasterModule,
+    ProfileModule,
 
 
     BrowserModule,
@@ -54,6 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
+      { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'master', component:MasterComponent },
       { path: 'model', component:ModelComponent },
