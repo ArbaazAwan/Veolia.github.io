@@ -219,6 +219,10 @@ export class SummaryComponent implements OnInit {
     this.onSubAppSelect(this.selectedSubApp)
   }
 
+  toggleShowSideNav(){
+    this.showSideNav = !this.showSideNav;
+  }
+
   onAssetTypeSelect(selectedAssetType: any) {
     this.selectedSizes = this.sizes.filter(
       (size: any) => size.assetType_id == selectedAssetType.id
