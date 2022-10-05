@@ -1,15 +1,14 @@
 <aside
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
-  id="sidenav-main"
-  *ngIf="showSideNav">
+  id="sidenav-main" *ngIf="showSideNav">
   <app-side-navbar></app-side-navbar>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
   <app-navbar></app-navbar>
 
   <div class="container-fluid py-4">
-    <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form">
+    <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
+      data-bs-toggle="modal" data-bs-target="#modal-form">
       Create Record
     </button>
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -27,98 +26,107 @@
                     <i class="material-icons" style="font-size: 30px">close</i>
                   </button>
                 </span>
-                
               </div>
               <div class="card-body">
-
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                  <div class="row">
 
-                  <label class="form-label text-bold">Unit or Equipment Functional Description</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="unitName" class="form-control"/>
+                    <div class="col-md-6">
+
+                      <label class="form-label text-bold">Unit or Equipment Functional Description</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <input type="text" formControlName="unitName" class="form-control" />
+                      </div>
+
+                      <label class="form-label text-bold" for="assetType">Asset Type</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <select formControlName="assetType" class="form-select" name="assetType"
+                          [(ngModel)]="selectedAssetType" (change)="onAssetTypeSelect(selectedAssetType)">
+                          <!-- <option value="0">--Select asset type</option> -->
+                          <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType">
+                            {{ assetType.name }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <label class="form-label text-bold" for="size">Size</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize"
+                          (change)="onSizeSelect(selectedSize)">
+                          <!-- <option value="0">--Select size</option> -->
+                          <option *ngFor="let size of selectedSizes" [ngValue]="size">
+                            {{ size.desc }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <label class="form-label text-bold" for="app">Duty or Application</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp"
+                          (change)="onAppSelect(selectedApp)">
+                          <!-- <option value="0">--Select Application/Duty</option> -->
+                          <option *ngFor="let app of selectedApps" [ngValue]="app">
+                            {{ app.desc }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <label class="form-label text-bold" for="subApp">Sub Duty or Application</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <select formControlName="subApp" class="form-select" name="subApp" [(ngModel)]="selectedSubApp"
+                          (change)="onSubAppSelect(selectedSubApp)">
+                          <!-- <option value="0">--Select Sub Application/Duty</option> -->
+                          <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp">
+                            {{ subApp.desc }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                      <label class="form-label text-bold" for="quality">Quality</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <select formControlName="quality" class="form-select" name="quality"
+                          [ngModel]="selectedQuality">
+                          <!-- <option value="0">--Select Quality</option> -->
+                          <option *ngFor="let quality of selectedQualities" [ngValue]="quality">
+                            {{ quality.desc }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <label class="form-label text-bold text-bold" for="quantity">Quantity</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <input type="text" formControlName="quantity" name="quantity" class="form-control"
+                          onfocus="focused(this)" onfocusout="defocused(this)" />
+                      </div>
+                      <label class="form-label text-bold" for="load">Load %</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <input type="text" formControlName="load" name="load" class="form-control"
+                          onfocus="focused(this)" onfocusout="defocused(this)" />
+                      </div>
+
+                      <label class="form-label text-bold" for="life">Life %</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <input type="text" formControlName="life" name="life" class="form-control"
+                          onfocus="focused(this)" onfocusout="defocused(this)" />
+                      </div>
+
+                    </div>
                   </div>
 
-                  <label class="form-label text-bold" for="assetType">Asset Type</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <select formControlName="assetType"  class="form-select" name="assetType"
-                      [(ngModel)]="selectedAssetType" (change)="onAssetTypeSelect(selectedAssetType)">
-                      <!-- <option value="0">--Select asset type</option> -->
-                      <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType">
-                        {{ assetType.name }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <label class="form-label text-bold" for="size">Size</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize"
-                      (change)="onSizeSelect(selectedSize)">
-                      <!-- <option value="0">--Select size</option> -->
-                      <option *ngFor="let size of selectedSizes" [ngValue]="size">
-                        {{ size.desc }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <label class="form-label text-bold" for="app">Duty or Application</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp"
-                      (change)="onAppSelect(selectedApp)">
-                      <!-- <option value="0">--Select Application/Duty</option> -->
-                      <option *ngFor="let app of selectedApps" [ngValue]="app">
-                        {{ app.desc }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <label class="form-label text-bold" for="subApp">Sub Duty or Application</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <select formControlName="subApp" class="form-select" name="subApp"
-                      [(ngModel)]="selectedSubApp" (change)="onSubAppSelect(selectedSubApp)">
-                      <!-- <option value="0">--Select Sub Application/Duty</option> -->
-                      <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp">
-                        {{ subApp.desc }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <label class="form-label text-bold" for="quality">Quality</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <select formControlName="quality" class="form-select" name="quality"
-                      [ngModel]="selectedQuality">
-                      <!-- <option value="0">--Select Quality</option> -->
-                      <option *ngFor="let quality of selectedQualities" [ngValue]="quality">
-                        {{ quality.desc }}
-                      </option>
-                    </select>
-                  </div>
-
-                  <label class="form-label text-bold text-bold" for="quantity">Quantity</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="quantity" name="quantity" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  <label class="form-label text-bold" for="load">Load %</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="load" name="load" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-
-                  <label class="form-label text-bold" for="life">Life %</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="life" name="life" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
 
                   <div class="text-center">
-                    <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                    <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal"
+                      class="btn bg-gradient-primary m-2">
                       Create
                     </button>
-                    <button (click)="toggleSideNavShow()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2" (click)="onCancel()">
+                    <button (click)="toggleSideNavShow()" type="button" data-bs-dismiss="modal"
+                      class="btn bg-gradient-secondary m-2" (click)="onCancel()">
                       Cancel
                     </button>
                   </div>
-
                 </form>
               </div>
             </div>
@@ -128,7 +136,6 @@
     </div>
 
     <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
-
   </div>
   <app-footer></app-footer>
 </main>
