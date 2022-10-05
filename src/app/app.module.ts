@@ -22,7 +22,6 @@ import { DropdownModule } from './dropdown/dropdown.module';
 import { UnitModule } from './unit/unit.module';
 import { UnitComponent } from './unit/unit.component';
 import { PermissionModule } from './permission/permission.module';
-import { PermissionsTableComponent } from './permission/permissions-table.component';
 import { SummaryModule } from './summary/summary.module';
 import { SummaryComponent } from './summary/summary.component';
 import { MasterModule } from './master/master.module';
@@ -30,6 +29,7 @@ import { MasterComponent } from './master/master.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileModule } from './profile/profile.module';
 import { ProfileComponent } from './profile/profile.component';
+import { PermissionComponent } from './permission/permission.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { ProfileComponent } from './profile/profile.component';
       { path:'dropdown',component:DropdownComponent },
       { path: 'unit', component:UnitComponent },
       { path: 'summary', component:SummaryComponent },
-      { path: 'permission',component:PermissionsTableComponent },
+      { path: 'permission',component:PermissionComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),

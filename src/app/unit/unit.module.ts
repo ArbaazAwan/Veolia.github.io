@@ -5,7 +5,6 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FooterModule } from '../footer/footer.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FilterPipe } from '../search/search-filter.pipe.ts.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,8 +15,6 @@ import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     UnitComponent,
-    FilterPipe,
-    
   ],
   imports: [
     CommonModule,
