@@ -7,7 +7,7 @@
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
   <app-navbar></app-navbar>
   <div class="container-fluid py-4">
-    <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right"
+    <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right"
       data-bs-toggle="modal" data-bs-target="#modal-form">
       Create Model
     </button>
@@ -19,6 +19,12 @@
               <div class="card-header pb-0 text-left">
                 <h5 class="">Model</h5>
                 <p class="mb-0">Enter Model Details</p>
+                <span class="text-right float-end">
+                  <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
               </div>
               <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="submitForm()" role="form text-left">
@@ -123,9 +129,9 @@
                   </div>
                   <div class="mx-4 my-1">
                     <div class="text-center">
-                      <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal"
+                      <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
                         class="btn bg-gradient-primary m-2 ">Create</button>
-                      <button (click)="toggleSideNavShow()" type="button" data-bs-dismiss="modal"
+                      <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
                         class="btn bg-gradient-secondary m-2">Cancel</button>
                     </div>
                   </div>

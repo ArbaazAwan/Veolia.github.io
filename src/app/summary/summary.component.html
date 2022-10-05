@@ -10,7 +10,7 @@
   <div class="container-fluid py-4">
     <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right" data-bs-toggle="modal"
       data-bs-target="#modal-form">
-      Create Summary
+      Create Record
     </button>
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
@@ -20,6 +20,14 @@
               <div class="card-header pb-0 text-left">
                 <h5 class="">Summary</h5>
                 <p class="mb-0">Enter Equipment Details</p>
+
+                <span class="text-right float-end">
+                  <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
+                
               </div>
               <div class="card-body">
 

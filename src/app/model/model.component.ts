@@ -34,7 +34,7 @@ export class ModelComponent implements OnInit {
     })
   }
 
-  toggleSideNavShow(){
+  toggleShowSideNav(){
     this.showSideNav = !this.showSideNav;
   }
 

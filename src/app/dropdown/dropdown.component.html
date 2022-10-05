@@ -20,6 +20,12 @@
               <div class="card-header pb-0 text-left">
                 <h5 class="">Dropdown</h5>
                 <p class="mb-0">Enter Dropdown Details</p>
+                <span class="text-right float-end">
+                  <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
               </div>
               <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
