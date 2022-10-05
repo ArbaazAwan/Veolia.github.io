@@ -8,8 +8,12 @@
 
   <app-navbar></app-navbar>
 
+  <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mb-6 mt-3 text-right"
+    data-bs-toggle="modal" data-bs-target="#modal-form-create">
+    Create Master
+  </button>
   <!-- table here -->
-  <div class="container-fluid py-4">
+  <div class="container-fluid py-2">
     <div class="row">
       <div class="col-12">
         <div class="card my-4">
@@ -20,10 +24,10 @@
           </div>
           <div class="card-body px-0 pb-2">
             <div class="p-0">
-              <table class="table table-blocked mb-0">
+              <table class="table table-blocked table-hover mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder PS">Id</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Id</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Asset Name</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">AppDesc</th>
                     <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">UnitMeas</th>
@@ -148,7 +152,7 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form [formGroup]="form">
                 <div class="mx-4 my-1 mt-2">
                   <label for="unitdesc" class="form-label text-bold">Unit Description</label>
                   <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
@@ -200,48 +204,103 @@
                 <div class="mx-4 my-1">
                   <label class="form-label text-bold">OH Life%</label>
                   <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" class="form-control form-floating"
-                     />
+                    <input type="text" class="form-control form-floating" />
                   </div>
                 </div>
                 <div class="card card-plain my-4 mx-4">
                   <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
                     <mat-tab label="Event1">
-                      <table class="table">
-                        <tr>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Event title</label>
-                            <input type="text" class="form-control" value="abc" />
-                          </td>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Every</label>
-                            <input type="text" class="form-control" value="12" />
-                          </td>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Strch</label>
-                            <input type="text" class="form-control" value="yes" />
-                          </td>
-                        </tr>
-                      </table>
+                      <div class="m-4">
+                        <table class="table">
+                          <tr>
+                            <td class="px-2">
+                              <label for="maintenance" class="form-label">Event title</label>
+                              <input type="text" class="form-control" value="abc" />
+                            </td>
+                            <td class="px-2">
+                              <label for="maintenance" class="form-label">Every</label>
+                              <input type="text" class="form-control" value="12" />
+                            </td>
+                            <td class="px-2">
+                              <label for="maintenance" class="form-label">Strch</label>
+                              <input type="text" class="form-control" value="yes" />
+                            </td>
+                          </tr>
+                        </table>
+                        <label class="text-bold mt-2">Maintenance</label>
+                        <div>
+                          <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                              class="material-icons">add_box</span>&nbsp; Create</a>
+                        </div>
+                        <table formArrayName="maintenances">
+                          <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                        " [formGroupName]="i">
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <input type="text" formControlName="desc" class="form-control" />
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <input type="text" formControlName="cost" class="form-control" />
+                            </td>
+                            <td>
+                              <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                Remove
+                              </button>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <label class="text-bold mt-2">Labor</label>
+                        <div>
+                          <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                              class="material-icons"> add_box </span>&nbsp; Create</a>
+                        </div>
+                        <table formArrayName="labors">
+                          <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                            <td>
+                              <label for="level" class="form-label">Level</label>
+                              <input type="text" formControlName="level" class="form-control" />
+                            </td>
+                            <td>
+                              <label class="form-label" for="hrs">Hrs</label>
+                              <input type="text" formControlName="hrs" class="form-control" />
+                            </td>
+                            <td>
+                              <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                Remove
+                              </button>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <label class="text-bold mt-2">Contractor/Shop</label>
+                        <div>
+                          <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                              class="material-icons">add_box</span>&nbsp; Create</a>
+                        </div>
+                        <table formArrayName="conts">
+                          <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                            <td>
+                              <label for="maintenance" class="form-label">Desc</label>
+                              <input type="text" formControlName="desc" class="form-control" />
+                            </td>
+                            <td>
+                              <label for="cost" class="form-label">Cost</label>
+                              <input type="text" formControlName="cost" class="form-control" />
+                            </td>
+                            <td>
+                              <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                Remove
+                              </button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
                     </mat-tab>
-                    <mat-tab label="Event2">
-                      <table class="table">
-                        <tr>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Event title</label>
-                            <input type="text" class="form-control" value="abc" />
-                          </td>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Every</label>
-                            <input type="text" class="form-control" value="12" />
-                          </td>
-                          <td class="px-2">
-                            <label for="maintenance" class="form-label">Strch</label>
-                            <input type="text" class="form-control" value="yes" />
-                          </td>
-                        </tr>
-                      </table>
-                    </mat-tab>
+                    <mat-tab label="Event2"></mat-tab>
                     <mat-tab label="Event3"></mat-tab>
                     <mat-tab label="Event4"></mat-tab>
                     <mat-tab label="Event5"></mat-tab>
@@ -249,6 +308,7 @@
                     <mat-tab label="Event7"></mat-tab>
                     <mat-tab label="Event8"></mat-tab>
                   </mat-tab-group>
+
                 </div>
                 <div class="text-center mb-4">
                   <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
@@ -268,7 +328,874 @@
     </div>
   </div>
 
-  <!-- view modal -->
+  <!-- Create form here -->
+  <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0">
+              <div class="text-left">
+                <h5 class="">Create Asset Form</h5>
+                <span class="text-right float-end">
+                  <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
+                <p class="mb-0">Create Asset</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form">
+                <div class="mx-4 my-1 mt-2">
+                  <label for="unitdesc" class="form-label text-bold">Unit Description</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input name="unitdesc" type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">App Description</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Unit Measurement</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Rev</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Unit Code</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">App Code</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Replacement Cost</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">Life MO's</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control" />
+                  </div>
+                </div>
+                <div class="mx-4 my-1">
+                  <label class="form-label text-bold">OH Life%</label>
+                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                    <input type="text" class="form-control form-floating" />
+                  </div>
+                </div>
+                <div class="card card-plain my-4 mx-4">
+                  <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
+                    <mat-tab label="Event1">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+
+                    </mat-tab>
+                    <mat-tab label="Event2">
+
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event3">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event4">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event5">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event6">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event7">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Event8">
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Event title</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Every</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                          <td class="px-2">
+                            <label for="maintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" />
+                          </td>
+                        </tr>
+                      </table>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="maintenances">
+                            <tr *ngFor="
+                          let maintenance of maintenances().controls;
+                          let i = index
+                          " [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="labors">
+                            <tr *ngFor="let item of labors().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="level" class="form-label">Level</label>
+                                <input type="text" formControlName="level" class="form-control" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="hrs">Hrs</label>
+                                <input type="text" formControlName="hrs" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp; Create</a>
+                          </div>
+                          <table formArrayName="conts">
+                            <tr *ngFor="let cost of conts().controls; let i = index" [formGroupName]="i">
+                              <td>
+                                <label for="maintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="desc" class="form-control" />
+                              </td>
+                              <td>
+                                <label for="cost" class="form-label">Cost</label>
+                                <input type="text" formControlName="cost" class="form-control" />
+                              </td>
+                              <td>
+                                <button (click)="removeCost(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+                <div class="text-center mb-4">
+                  <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
+                    class="btn bg-gradient-primary m-2">
+                    Create
+                  </button>
+                  <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
+                    class="btn bg-gradient-secondary m-2">
+                    Cancel
+                  </button>
+                </div> 
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- view table modal -->
   <div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view"
     aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
