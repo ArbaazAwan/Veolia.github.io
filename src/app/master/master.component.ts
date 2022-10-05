@@ -455,9 +455,82 @@ export class MasterComponent implements OnInit {
           desc:'',
           amount:''
         }),
-      })
+      }),
+      event:'',
+      maintenances:this.fb.array([]),
+      labors:this.fb.array([]),
+      conts:this.fb.array([])
     });
 
+  }
+
+  maintenances():FormArray
+  {
+    return <FormArray>this.form.get("maintenances")
+  }
+
+  labors() : FormArray
+  {
+    return this.form.get("labors") as FormArray
+  }
+
+  conts() : FormArray
+  {
+    return this.form.get("conts") as FormArray
+  }
+
+  newMaintenance()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
+
+  newLabor(): FormGroup
+  {
+    return this.fb.group({
+      level: '',
+      hrs: '',
+    })
+  }
+
+  newCont()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
+
+  addMaintenance()
+  {
+    this.maintenances().push(this.newMaintenance());
+  }
+
+  addLabor()
+  {
+    this.labors().push(this.newLabor());
+  }
+
+  addCont()
+  {
+    this.conts().push(this.newCont());
+  }
+
+  removeMaintenance(index:number)
+  {
+    this.maintenances().removeAt(index);
+  }
+
+  removeLabor(i:number)
+  {
+    this.labors().removeAt(i);
+  }
+
+  removeCost(i:number)
+  {
+    this.conts().removeAt(i);
   }
 
   toggleShowSideNav(){
