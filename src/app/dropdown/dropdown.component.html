@@ -1,15 +1,14 @@
 <aside
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
-  id="sidenav-main"
-  *ngIf="showSideNav">
+  id="sidenav-main" *ngIf="showSideNav">
   <app-side-navbar></app-side-navbar>
 </aside>
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
   <app-navbar></app-navbar>
   <div class="container-fluid py-4">
-    <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form">
+    <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
+      data-bs-toggle="modal" data-bs-target="#modal-form">
       Create Dropdown
     </button>
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
@@ -29,41 +28,58 @@
               </div>
               <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
-                  <div class="mx-4 my-1 mt-2">
-                  <label class="form-label text-bold">Asset Type</label>
-                  <div class="input-group input-group-outline">
-                    <input type="text" formControlName="assetType" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  </div>
-                  <div class="mx-4 my-1">
-                    <label class="form-label text-bold">Size</label>
-                  <div class="input-group input-group-outline">
-                    <input type="text" formControlName="size" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  </div>
-                  <div class="mx-4 my-1">
-                  <label class="form-label text-bold">Duty/Application</label>
-                  <div class="input-group input-group-outline">
-                    <input type="text" formControlName="duty_Application" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
-                  </div>
-                  <div class="mx-4 my-1">
-                    <label class="form-label text-bold">Quality</label>
-                  <div class="input-group input-group-outline">
-                    <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
-                      onfocusout="defocused(this)" />
-                  </div>
+
+                  <div class="row">
+
+                    <div class="col-md-6">
+
+                      <div class="mx-4 my-1 mt-2">
+                        <label class="form-label text-bold">Asset Type</label>
+                        <div class="input-group input-group-outline">
+                          <input type="text" formControlName="assetType" class="form-control" onfocus="focused(this)"
+                            onfocusout="defocused(this)" />
+                        </div>
+                      </div>
+                      <div class="mx-4 my-1">
+                        <label class="form-label text-bold">Size</label>
+                        <div class="input-group input-group-outline">
+                          <input type="text" formControlName="size" class="form-control" onfocus="focused(this)"
+                            onfocusout="defocused(this)" />
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+
+                      <div class="mx-4 my-1">
+                        <label class="form-label text-bold">Duty/Application</label>
+                        <div class="input-group input-group-outline">
+                          <input type="text" formControlName="duty_Application" class="form-control"
+                            onfocus="focused(this)" onfocusout="defocused(this)" />
+                        </div>
+                      </div>
+                      <div class="mx-4 my-1">
+                        <label class="form-label text-bold">Quality</label>
+                        <div class="input-group input-group-outline">
+                          <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
+                            onfocusout="defocused(this)" />
+                        </div>
+                      </div>
+
+                    </div>
+
                   </div>
 
 
                   <div class="text-center">
-                    <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                    <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
+                      class="btn bg-gradient-primary m-2">
                       Create
                     </button>
-                    <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                    <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
+                      class="btn bg-gradient-secondary m-2">
                       Cancel
                     </button>
                   </div>
