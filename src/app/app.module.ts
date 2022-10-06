@@ -30,6 +30,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileModule } from './profile/profile.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PermissionComponent } from './permission/permission.component';
+import { ClientsModule } from './clients/clients.module';
+import { ClientsComponent } from './clients/clients.component';
+import { SitesModule } from './sites/sites.module';
+import { SitesComponent } from './sites/sites.component';
 
 @NgModule({
   declarations: [
@@ -50,13 +54,16 @@ import { PermissionComponent } from './permission/permission.component';
     SummaryModule,
     MasterModule,
     ProfileModule,
-
+    ClientsModule,
+    SitesModule,
 
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
+      { path: 'clients', component:ClientsComponent },
+      { path: 'sites', component: SitesComponent },
       { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'master', component:MasterComponent },
@@ -69,7 +76,6 @@ import { PermissionComponent } from './permission/permission.component';
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
-    BrowserAnimationsModule,
   ],
 
   providers: [],
