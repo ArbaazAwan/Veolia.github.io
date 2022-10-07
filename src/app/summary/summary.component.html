@@ -35,12 +35,12 @@
 
                     <div class="col-md-6">
 
-                      <label class="form-label text-bold">Unit or Equipment Functional Description</label>
+                      <label class="form-label text-bold mt-3">Unit or Equipment Functional Description</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="unitName" class="form-control" placeholder="Please Enter Description"/>
                       </div>
 
-                      <label class="form-label text-bold" for="assetType">Asset Type</label>
+                      <label class="form-label text-bold mt-3" for="assetType">Asset Type</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="assetType" class="form-select" name="assetType"
                           [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
@@ -51,18 +51,18 @@
                         </select>
                       </div>
 
-                      <label class="form-label text-bold" for="size">Size</label>
+                      <label class="form-label text-bold mt-3" for="size">Size</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.id"
+                        <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.app_id"
                           (change)="onSizeSelect(selectedSize)">
                           <option value="0" selected disabled>--Select Size</option>
-                          <option *ngFor="let size of selectedSizes" [ngValue]="size.id">
+                          <option *ngFor="let size of selectedSizes" [ngValue]="size.app_id">
                             {{ size.desc }}
                           </option>
                         </select>
                       </div>
 
-                      <label class="form-label text-bold" for="app">Duty or Application</label>
+                      <label class="form-label text-bold mt-3" for="app">Duty or Application</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp.id"
                           (change)="onAppSelect(selectedApp)">
@@ -73,12 +73,12 @@
                         </select>
                       </div>
 
-                      <label class="form-label text-bold" for="subApp">Sub Duty or Application</label>
+                      <label class="form-label text-bold mt-3" for="subApp">Sub Duty or Application</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <select formControlName="subApp" class="form-select" name="subApp" [(ngModel)]="selectedSubApp.id"
+                        <select formControlName="subApp" class="form-select" name="subApp" [(ngModel)]="selectedSubApp.quality_id"
                           (change)="onSubAppSelect(selectedSubApp)">
                           <option value="0" selected disabled>--Select Sub Application/Duty</option>
-                          <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp.id">
+                          <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp.quality_id">
                             {{ subApp.desc }}
                           </option>
                         </select>
@@ -87,7 +87,7 @@
 
                     <div class="col-md-6">
 
-                      <label class="form-label text-bold" for="quality">Quality</label>
+                      <label class="form-label text-bold mt-3" for="quality">Quality</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="quality" class="form-select" name="quality"
                           [ngModel]="selectedQuality.id">
@@ -98,18 +98,18 @@
                         </select>
                       </div>
 
-                      <label class="form-label text-bold text-bold" for="quantity">Quantity</label>
+                      <label class="form-label text-bold text-bold mt-3" for="quantity">Quantity</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="quantity" name="quantity" class="form-control" 
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Quantity"/>
                       </div>
-                      <label class="form-label text-bold" for="load">Load %</label>
+                      <label class="form-label text-bold mt-3" for="load">Load %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="load" name="load" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Load %" />
                       </div>
 
-                      <label class="form-label text-bold" for="life">Life %</label>
+                      <label class="form-label text-bold mt-3" for="life">Life %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="life" name="life" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Life %" />
@@ -119,7 +119,7 @@
                   </div>
 
 
-                  <div class="text-center mt-2">
+                  <div class="text-center mt-4">
                     <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal"
                       class="btn bg-gradient-primary m-2">
                       Create

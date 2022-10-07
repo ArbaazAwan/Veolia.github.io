@@ -9,16 +9,25 @@
       <div class="card-body pt-4 p-3">
 
         <mat-accordion>
-          <mat-expansion-panel class="pt-2" *ngFor="let client of clientsArray" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel class="py-1" *ngFor="let client of clientsArray" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h4 class="mb-3 text-md">{{client.name}}</h4>
+                <h4 class=" text-dark font-weight-bold pt-2 text-md">{{client.name}}</h4>                
               </mat-panel-title>
+              
               <mat-panel-description>
-              <span class="mb-2 text-xs px-3">Company Name: <span
-                  class="text-dark font-weight-bold ms-sm-2">{{client.companyName}}</span></span>
-              <span class="mb-2 text-xs px-3">Email Address: <span
-                  class="text-dark ms-sm-2 font-weight-bold">{{client.email}}</span></span>
+
+                <tr>
+                  <td><span class="text-dark font-weight-bold ms-sm-5">Company Name: </span></td>
+                  <td><span class="mb-2 text-sm mx-3">{{client.companyName}}</span></td>
+                </tr>
+                
+                <tr>
+
+                  <td><span class="text-dark font-weight-bold ms-sm-5"> Email Address: </span></td>
+                  <td><span class="mb-2 text-sm mx-3">{{client.email}}</span></td>
+                </tr>
+
               </mat-panel-description>
             </mat-expansion-panel-header>
             <!-- collapsable data here -->
