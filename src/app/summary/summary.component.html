@@ -37,7 +37,7 @@
 
                       <label class="form-label text-bold">Unit or Equipment Functional Description</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="unitName" class="form-control" placeholder="Please enter description"/>
+                        <input type="text" formControlName="unitName" class="form-control" placeholder="Please Enter Description"/>
                       </div>
 
                       <label class="form-label text-bold" for="assetType">Asset Type</label>
@@ -55,7 +55,7 @@
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.id"
                           (change)="onSizeSelect(selectedSize)">
-                          <option value="0" selected disabled>--Select size</option>
+                          <option value="0" selected disabled>--Select Size</option>
                           <option *ngFor="let size of selectedSizes" [ngValue]="size.id">
                             {{ size.desc }}
                           </option>
@@ -101,18 +101,18 @@
                       <label class="form-label text-bold text-bold" for="quantity">Quantity</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="quantity" name="quantity" class="form-control" 
-                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please enter quantity"/>
+                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Quantity"/>
                       </div>
                       <label class="form-label text-bold" for="load">Load %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="load" name="load" class="form-control"
-                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please enter load %" />
+                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Load %" />
                       </div>
 
                       <label class="form-label text-bold" for="life">Life %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="life" name="life" class="form-control"
-                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please enter life percentage" />
+                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Life %" />
                       </div>
 
                     </div>
