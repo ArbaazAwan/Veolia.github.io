@@ -19,29 +19,32 @@
         <div class="card my-4">
           <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <p class="text-white text-capitalize text-bold ps-3">Assets Table</p>
+              <p class="text-white text-capitalize text-bold ps-3">Assets Table
             </div>
           </div>
           <div class="card-body px-0 pb-2">
+            <div class="flex-end px-3 pb-3 col-md-3">
+              <input [(ngModel)]="assetSearchText" class="form-control" placeholder="Search assets..." type="text">
+            </div>
             <div class="p-0">
-              <table class="table table-blocked table-hover mb-0">
+              <table class="table table-blocked table-hover mb-0"  matSort (matSortChange)="sortAssets($event)">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder">Id</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Asset Name</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">AppDesc</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">UnitMeas</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Rev</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Unit Code</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">App Code</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Repl Cost</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Lifemos</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">OH Life</th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">Actions</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="id">Id</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="assetName">Asset Name</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="appDesc">AppDesc</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">UnitMeas</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">Rev</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitCode">Unit Code</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="appCode">App Code</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replCost">Repl Cost</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMOs">Lifemos</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">OH Life</th>
+                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let asset of assets">
+                  <tr *ngFor="let asset of sortedAssets | searchFilter:assetSearchText">
                     <td>
                       <div class="d-flex px-3 py-1">
                         <div class="d-flex flex-column ">
@@ -113,14 +116,28 @@
                       </div>
                     </td>
                     <td>
-                      <span><a class="btn btn-info text-xs mx-1 mb-0" data-bs-toggle="modal"
-                          data-bs-target="#modal-form-view" (click)="viewAsset(asset)">
-                          <i class="material-icons">visibility</i> &nbsp;View
-                        </a>
-                        <a class="btn btn-dark text-xs mb-0" (click)="editAsset(asset)" data-bs-toggle="modal"
-                          data-bs-target="#modal-form">
-                          <i class="material-icons">edit</i>&nbsp; Edit
-                        </a></span>
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column">
+                            <div ngbDropdown>
+                              <button class="btn btn-sm bg-gradient-primary" id="gfg"
+                                      ngbDropdownToggle>Actions</button>
+                              <div ngbDropdownMenu="gfg">
+                                <button  ngbDropdownItem class="" data-bs-toggle="modal"
+                                    data-bs-target="#modal-form-view" (click)="viewAsset(asset)">
+                                    <i class="material-icons">visibility</i> &nbsp;View
+                              </button>
+                                  <button ngbDropdownItem class="" (click)="editAsset(asset)" data-bs-toggle="modal"
+                                  data-bs-target="#modal-form">
+                                    <i class="material-icons">edit</i>&nbsp;Edit
+                                </button>
+                                <button ngbDropdownItem class="">
+                                  <i class="material-icons">copy</i>&nbsp;Duplicate
+                                </button>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+
                     </td>
                   </tr>
                 </tbody>
@@ -354,7 +371,7 @@
                       </div>
 
                     </mat-tab>
-                    
+
                     <mat-tab label="Event 2">
                       <table class="table">
                         <tr>

@@ -1,7 +1,7 @@
-<div class="container-fluid p-4">
+<div class="container-fluid px-4"></div>
   <div class="row">
-    <div class="col-md-4" *ngFor="let site of sitesList">
-      <div class="card" >
+      <div class="col-md-4" *ngFor="let site of sitesList">
+        <div class="card" style="width: auto; height: auto;">
         <div class="card-header bg-gradient-primary pb-0 px-3">
           <h6 class="mb-4 text-white text-bold font-weight-bold text-lg">{{site.siteName}}</h6>
         </div>
@@ -13,5 +13,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

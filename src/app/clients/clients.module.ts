@@ -5,6 +5,8 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { FooterModule } from '../footer/footer.module';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { RouterModule } from '@angular/router';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SitesModule } from '../sites/sites.module';
 
 
 
@@ -18,7 +20,8 @@ import { RouterModule } from '@angular/router';
     NavbarModule,
     FooterModule,
     RouterModule,
-
+    MatExpansionModule,
+    SitesModule
   ],
   exports:[
     ClientsComponent,

@@ -10,6 +10,7 @@ export class ClientsListComponent implements OnInit {
   constructor() { }
 
   clientsArray!:any[];
+  panelOpenState:boolean= false;
 
   ngOnInit(): void {
     this.clientsArray = [
