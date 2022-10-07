@@ -33,13 +33,11 @@ import { PermissionComponent } from './permission/permission.component';
 import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
-import { SitesComponent } from './sites/sites.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
-
   ],
   imports: [
     AuthModule,
@@ -57,13 +55,13 @@ import { SitesComponent } from './sites/sites.component';
     ClientsModule,
     SitesModule,
 
+
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'clients', component:ClientsComponent },
-      { path: 'sites', component: SitesComponent },
       { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'master', component:MasterComponent },

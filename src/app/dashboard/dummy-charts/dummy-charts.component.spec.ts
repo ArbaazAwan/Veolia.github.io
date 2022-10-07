@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SitesComponent } from './sites.component';
+import { DummyChartsComponent } from './dummy-charts.component';
 
-describe('SitesComponent', () => {
-  let component: SitesComponent;
-  let fixture: ComponentFixture<SitesComponent>;
+describe('DummyChartsComponent', () => {
+  let component: DummyChartsComponent;
+  let fixture: ComponentFixture<DummyChartsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SitesComponent ]
+      declarations: [ DummyChartsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SitesComponent);
+    fixture = TestBed.createComponent(DummyChartsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
