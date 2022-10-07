@@ -21,7 +21,8 @@ export class MasterComponent implements OnInit {
   ngOnInit(): void {
    this.assets = this.masterService.loadAssets(); //loading the assets
 
-    this.form = this.fb.group({ //building form
+    this.form = this.fb.group({ 
+      //building form
       id:'',
       assetName:'',
       appDesc: '',
@@ -34,7 +35,11 @@ export class MasterComponent implements OnInit {
       OHLife:'',
       maintenances:this.fb.array([]),
       labors:this.fb.array([]),
-      conts:this.fb.array([])
+      conts:this.fb.array([]),
+      overhaulMaintenances:this.fb.array([]),
+      overhaulLabors:this.fb.array([]),
+      overhaulConts:this.fb.array([]),
+
     });
 
   }
@@ -43,15 +48,28 @@ export class MasterComponent implements OnInit {
   {
     return <FormArray>this.form.get("maintenances")
   }
+  overhaulMaintenances():FormArray
+  {
+    return <FormArray>this.form.get("overhaulMaintenances")
+  }
 
   labors() : FormArray
   {
     return this.form.get("labors") as FormArray
   }
+  overhaulLabors() : FormArray
+  {
+    return this.form.get("overhaulLabors") as FormArray
+  }
 
   conts() : FormArray
   {
     return this.form.get("conts") as FormArray
+  }
+
+  overhaulConts() : FormArray
+  {
+    return this.form.get("overhaulConts") as FormArray
   }
 
   newMaintenance()
@@ -61,8 +79,22 @@ export class MasterComponent implements OnInit {
       cost: ''
     })
   }
+  newOverhaulMaintenance()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
 
   newLabor(): FormGroup
+  {
+    return this.fb.group({
+      level: '',
+      hrs: '',
+    })
+  }
+  newOverhaulLabor(): FormGroup
   {
     return this.fb.group({
       level: '',
@@ -78,9 +110,22 @@ export class MasterComponent implements OnInit {
     })
   }
 
+  newOverhaulCont()
+  {
+    return this.fb.group({
+      desc: '',
+      cost: ''
+    })
+  }
+
   addMaintenance()
   {
     this.maintenances().push(this.newMaintenance());
+  }
+
+  addOverhaulMaintenance()
+  {
+    this.overhaulMaintenances().push(this.newOverhaulMaintenance());
   }
 
   addLabor()
@@ -88,9 +133,19 @@ export class MasterComponent implements OnInit {
     this.labors().push(this.newLabor());
   }
 
+  addOverhaulLabor()
+  {
+    this.overhaulLabors().push(this.newOverhaulLabor());
+  }
+
   addCont()
   {
     this.conts().push(this.newCont());
+  }
+
+  addOverhaulCont()
+  {
+    this.overhaulConts().push(this.newOverhaulCont());
   }
 
   removeMaintenance(index:number)
@@ -98,14 +153,29 @@ export class MasterComponent implements OnInit {
     this.maintenances().removeAt(index);
   }
 
+  removeOverhaulMaintenance(index:number)
+  {
+    this.overhaulMaintenances().removeAt(index);
+  }
+
   removeLabor(i:number)
   {
     this.labors().removeAt(i);
   }
 
-  removeCost(i:number)
+  removeOverhaulLabor(i:number)
+  {
+    this.overhaulLabors().removeAt(i);
+  }
+
+  removeCont(i:number)
   {
     this.conts().removeAt(i);
+  }
+
+  removeOverhaulCont(i:number)
+  {
+    this.overhaulConts().removeAt(i);
   }
 
   toggleShowSideNav(){
