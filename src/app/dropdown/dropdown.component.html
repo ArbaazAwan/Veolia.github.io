@@ -17,14 +17,15 @@
           <div class="modal-body p-0">
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
-                <h5 class="">Dropdown</h5>
+                <h5 class="">Dropdown
+                  <span class="text-right float-end">
+                    <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                      class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                      <i class="material-icons" style="font-size: 30px">close</i>
+                    </button>
+                  </span>
+                </h5>
                 <p class="mb-0">Enter Dropdown Details</p>
-                <span class="text-right float-end">
-                  <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
-                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                    <i class="material-icons" style="font-size: 30px">close</i>
-                  </button>
-                </span>
               </div>
               <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
@@ -33,17 +34,17 @@
 
                     <div class="col-md-6">
 
-                      <div class="mx-4 my-1 mt-2">
+                      <div class="mx-4 my-1">
                         <label class="form-label text-bold">Asset Type</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="assetType" class="form-control" onfocus="focused(this)"
+                          <input type="text" formControlName="assetType" class="form-control" placeholder="Please Enter Asset Type" onfocus="focused(this)"
                             onfocusout="defocused(this)" />
                         </div>
                       </div>
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Size</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="size" class="form-control" onfocus="focused(this)"
+                          <input type="text" formControlName="size" class="form-control" placeholder="Please Enter Size" onfocus="focused(this)"
                             onfocusout="defocused(this)" />
                         </div>
                       </div>
@@ -52,19 +53,18 @@
 
                     <div class="col-md-6">
 
-
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Duty/Application</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="duty_Application" class="form-control"
+                          <input type="text" formControlName="duty_Application" class="form-control" placeholder="Please Enter Duty/Application"
                             onfocus="focused(this)" onfocusout="defocused(this)" />
                         </div>
                       </div>
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Quality</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="quality" class="form-control" onfocus="focused(this)"
-                            onfocusout="defocused(this)" />
+                          <input type="text" formControlName="quality" class="form-control" placeholder="Please Enter Quality"
+                          onfocus="focused(this)" onfocusout="defocused(this)" />
                         </div>
                       </div>
 
@@ -73,7 +73,7 @@
                   </div>
 
 
-                  <div class="text-center">
+                  <div class="text-center mt-2">
                     <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
                       class="btn bg-gradient-primary m-2">
                       Create

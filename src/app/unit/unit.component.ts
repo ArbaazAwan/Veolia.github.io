@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { Observable } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
-import { ServService } from './serv.service';
+import { UnitService } from './unit.service';
 
 @Component({
   selector: 'app-unit',
@@ -18,7 +18,7 @@ export class UnitComponent implements OnInit {
   formGroup!: any;
   sampleVariable:any;
 
-  constructor(private service : ServService, private fb : FormBuilder){}
+  constructor(private service : UnitService, private fb : FormBuilder){}
 
   ngOnInit(){
     this.initForm();

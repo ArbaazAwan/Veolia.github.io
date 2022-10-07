@@ -11,27 +11,36 @@
   <app-navbar></app-navbar>
 
   <div class="row">
-    <div class="content col-2 m-2" role="main">
-      <mat-form-field appearance="outline">
-        <mat-label
-          ><mat-icon><i class="text-sm">search</i> </mat-icon> Search Assets...
-        </mat-label>
-        <input
-          formControlName="asset"
-          matInput
-          type="text"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let item of filteredOptions" [value]="item">
-            {{ item }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    
-  </div>
+    <form [formGroup]="formGroup">
+      <div class="content col-12" role="main">
 
+        <mat-form-field appearance="outline" class="mx-3 mb-3" style="font-size: 80%">
+          <mat-label
+            ><mat-icon style="font-size: 120%"><i class="text-sm">search</i> </mat-icon> Search Assets...
+          </mat-label>
+          <input
+            formControlName="asset"
+            matInput
+            type="text"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let item of filteredOptions" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <span class="float-end my-3 mx-5">
+          <button type="button" class="btn bg-gradient-primary text-right">
+          Export Model
+        </button>
+        </span>
+      </div>
+    </form>
+
+
+  </div>
 
 
 
