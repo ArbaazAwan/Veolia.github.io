@@ -8,11 +8,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import { ViewMasterTableComponent } from './view-master-table/view-master-table.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchPipe } from '../pipes/search.pipe';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     MasterComponent,
     ViewMasterTableComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
@@ -22,11 +26,14 @@ import { ViewMasterTableComponent } from './view-master-table/view-master-table.
     ReactiveFormsModule,
     FormsModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    NgbModule,
   ],
   exports:[
     MasterComponent,
-    ViewMasterTableComponent
+    ViewMasterTableComponent,
+    SearchPipe
   ]
 })
 export class MasterModule { }
