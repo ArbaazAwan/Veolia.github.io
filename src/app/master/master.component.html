@@ -1460,7 +1460,7 @@
                           </td>
                         </tr>
                       </table>
-  
+
                       <div class="row mx-1">
                         <div class="col-md-4">
                           <label class="text-bold mt-2">Maintenance</label>
@@ -1470,9 +1470,9 @@
                               Add</a>
                           </div>
                           <table formArrayName="overhaulMaintenances">
-                            
+
                             <tr>
-  
+
                               <td>
                                 <label for="overhaulMaintenance" class="form-label">Desc</label>
                                 <input type="text" class="form-control" value="OEM kits"
@@ -1488,9 +1488,9 @@
                                   Remove
                                 </button>
                               </td>
-  
+
                             </tr>
-  
+
                             <tr *ngFor="
                                 let overhaulMaintenance of overhaulMaintenances().controls;
                                 let i = index
@@ -1521,9 +1521,9 @@
                                 class="material-icons"> add_box </span>&nbsp; Add</a>
                           </div>
                           <table formArrayName="overhaulLabors">
-  
+
                             <tr>
-  
+
                               <td>
                                 <label for="overhaulLevel" class="form-label">Level</label>
                                 <input type="text" class="form-control" value="Basic Skilled"
@@ -1539,9 +1539,9 @@
                                   Remove
                                 </button>
                               </td>
-  
+
                             </tr>
-  
+
                             <tr *ngFor="
                                 let overhaulLabor of overhaulLabors().controls;
                                 let i = index
@@ -1564,7 +1564,7 @@
                             </tr>
                           </table>
                         </div>
-  
+
                         <div class="col-md-4">
                           <label class="text-bold mt-2">Contractor/Shop</label>
                           <div>
@@ -1612,7 +1612,7 @@
                             </tr>
                           </table>
                         </div>
-  
+
                       </div>
 
                     </mat-tab>
@@ -2615,7 +2615,7 @@
                     </mat-tab>
 
                     <mat-tab label="Overhaul">
-    
+
                         <table class="table">
                           <tr>
                             <td class="px-2">
@@ -2632,7 +2632,7 @@
                             </td>
                           </tr>
                         </table>
-    
+
                         <div class="row mx-1">
                           <div class="col-md-4">
                             <label class="text-bold mt-2">Maintenance</label>
@@ -2694,7 +2694,7 @@
                               </tr>
                             </table>
                           </div>
-    
+
                           <div class="col-md-4">
                             <label class="text-bold mt-2">Contractor/Shop</label>
                             <div>
@@ -2725,7 +2725,7 @@
                               </tr>
                             </table>
                           </div>
-    
+
                         </div>
 
                     </mat-tab>
@@ -2772,7 +2772,7 @@
               </div>
             </div>
             <div class="card-body">
-              <app-view-master-table></app-view-master-table>
+              <app-view-master-table [eventEvalTableShow]="eventEvalTableShow"></app-view-master-table>
             </div>
           </div>
         </div>

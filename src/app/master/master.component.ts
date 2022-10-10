@@ -15,6 +15,7 @@ export class MasterComponent implements OnInit {
   assets!:any[];
   assetSearchText:string='';
   sortedAssets!:any[];
+  eventEvalTableShow:boolean = false;
 
   constructor(private fb:FormBuilder,private masterService:MasterService) {
 
@@ -23,7 +24,7 @@ export class MasterComponent implements OnInit {
   ngOnInit(): void {
    this.assets = this.masterService.loadAssets(); //loading the assets
 
-    this.form = this.fb.group({ 
+    this.form = this.fb.group({
       //building form
       id:'',
       assetName:'',

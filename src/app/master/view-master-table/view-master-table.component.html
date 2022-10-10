@@ -84,33 +84,23 @@
 
           <!-- Event Tabs here -->
 
-          <div class="card m-4" >
+          <div class="card m-4">
             <mat-tab-group mat-align-tabs="left" class="mt-3">
               <mat-tab label="All">
-                    <p-treeTable [value]="files1" [columns]="cols" class="table table-fluid">
+                <p-treeTable [value]="files1" [columns]="cols" class="table table-fluid">
                   <ng-template pTemplate="header" let-columns>
-                      <tr class="">
+                    <tr class="">
                       <th *ngFor="let col of columns" class="">{{col.header}}</th>
-                      <!-- <th>Description</th>
-                      <th>Event1</th>
-                      <th>Event2</th>
-                      <th>Event3</th>
-                      <th>Event4</th>
-                      <th>Event5</th>
-                      <th>Event6</th>
-                      <th>Event7</th>
-                      <th>Event8</th>
-                      <th>Overhaul</th> -->
                     </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-                      <tr>
-                        <td *ngFor="let col of columns; let i = index">
-                            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
-                            {{rowData[col.field]}}
-                        </td>
+                    <tr>
+                      <td *ngFor="let col of columns; let i = index">
+                        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                        {{rowData[col.field]}}
+                      </td>
                     </tr>
-                </ng-template>
+                  </ng-template>
                 </p-treeTable>
               </mat-tab>
 
@@ -2728,7 +2718,7 @@
                       </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Perform Every (MOs): &nbsp;</label>
@@ -2737,7 +2727,7 @@
                       </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Stretch for Partial Loading: &nbsp;</label>
@@ -2766,7 +2756,7 @@
                         <label class="text-bold mt-2">Material 5</label>
                       </th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2775,9 +2765,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2786,7 +2776,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
@@ -2794,27 +2784,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
-                      <span>
-                        <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                        </label>
-                        <td>
-                          <p class="mb-0 text-sm">500</p>
-                        </td>
-                      </span>
-                      </td>
-                      <td>
-                        <span>
-                          <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                      <td>
-                        <p class="mb-0 text-sm">Maintainence</p>
-                      </td>
-                      </span>
-    
-                      <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2830,9 +2802,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2848,9 +2820,27 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
+                      <span>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;
+                        </label>
+                        <td>
+                          <p class="mb-0 text-sm">500</p>
+                        </td>
+                      </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
+                      <td>
+                        <p class="mb-0 text-sm">Maintainence</p>
+                      </td>
+                      </span>
+
+                      <br />
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2860,7 +2850,7 @@
                       </span>
                       </td>
                     </tr>
-    
+
                     <tr>
                       <th>
                         <label class="text-bold mt-2">Labor 1</label>
@@ -2876,7 +2866,7 @@
                       </th>
                       <th></th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2885,9 +2875,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2896,7 +2886,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2904,9 +2894,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2915,7 +2905,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2923,9 +2913,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2934,7 +2924,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2942,9 +2932,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2955,7 +2945,7 @@
                       </td>
                       <td></td>
                     </tr>
-    
+
                     <tr>
                       <th>
                         <label class="text-bold mt-2">Shop/Contractor 1</label>
@@ -2969,7 +2959,7 @@
                       <th></th>
                       <th></th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2978,9 +2968,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -2989,7 +2979,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
@@ -2997,9 +2987,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -3015,9 +3005,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -3036,7 +3026,7 @@
           </div>
           <!-- Event Evaluation Overview -->
 
-          <div class="card m-4">
+          <div class="card m-4" *ngIf="eventEvalTableShow">
 
 
             <div style="width:100%;overflow-x:scroll;">
