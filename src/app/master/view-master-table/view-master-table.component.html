@@ -21,28 +21,24 @@
                       <span class="mb-0 opacity-8 text-sm">1</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Asset Name: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">Berus Belt</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">App Description: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">Installation</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Unit Measure &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">544m</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Rev: &nbsp;</label>
@@ -50,7 +46,6 @@
                     </span>
                   </td>
                 </tr>
-
                 <tr>
                   <td>
                     <span>
@@ -58,28 +53,24 @@
                       <span class="mb-0 opacity-8 text-sm">124</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">App Code: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">852</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Replacement Cost: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">147</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Life MOs: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">12</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">OH life: &nbsp;</label>
@@ -93,8 +84,36 @@
 
           <!-- Event Tabs here -->
 
-          <div class="card m-4">
+          <div class="card m-4" >
             <mat-tab-group mat-align-tabs="left" class="mt-3">
+              <mat-tab label="All">
+                    <p-treeTable [value]="files1" [columns]="cols" class="table table-fluid">
+                  <ng-template pTemplate="header" let-columns>
+                      <tr class="">
+                      <th *ngFor="let col of columns" class="">{{col.header}}</th>
+                      <!-- <th>Description</th>
+                      <th>Event1</th>
+                      <th>Event2</th>
+                      <th>Event3</th>
+                      <th>Event4</th>
+                      <th>Event5</th>
+                      <th>Event6</th>
+                      <th>Event7</th>
+                      <th>Event8</th>
+                      <th>Overhaul</th> -->
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                      <tr>
+                        <td *ngFor="let col of columns; let i = index">
+                            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                            {{rowData[col.field]}}
+                        </td>
+                    </tr>
+                </ng-template>
+                </p-treeTable>
+              </mat-tab>
+
               <mat-tab label="Event 1">
                 <table class="table table-striped">
                   <tbody>
@@ -3060,7 +3079,7 @@
                   </tr>
 
                   <!-- event material cost -->
-                  <tr >
+                  <tr>
                     <td class="bg-light">
                       <label class="text-bold ">Event Material Cost</label>
                     </td>
@@ -3610,7 +3629,7 @@
                     </td>
 
 
-                    
+
                   </tr>
 
 
