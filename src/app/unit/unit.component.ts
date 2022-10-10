@@ -50,4 +50,10 @@ export class UnitComponent implements OnInit {
       this.filteredOptions = response;
     })
   }
+
+  processModel(){
+    // method needed to be implemented
+  }
+
+  
 }
