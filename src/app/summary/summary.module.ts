@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from '../navbar/navbar.module';
 import { SummarytableComponent } from './summarytable/summarytable.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { SummaryExportComponent } from './summaryExport/summary-export.component';
 
 
 
@@ -16,7 +15,6 @@ import { SummaryExportComponent } from './summaryExport/summary-export.component
   declarations: [
     SummaryComponent,
     SummarytableComponent,
-    SummaryExportComponent
   ],
   imports: [
     CommonModule,

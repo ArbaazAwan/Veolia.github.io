@@ -7,37 +7,35 @@
   <app-navbar></app-navbar>
 
   <div class="container-fluid py-4">
-
     <div class="float-start">
       <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
-            data-bs-toggle="modal" data-bs-target="#modal-form">
-            Create Record
-          </button>
+        data-bs-toggle="modal" data-bs-target="#modal-form">
+        Create Record
+      </button>
     </div>
 
     <div class="float-end">
       <button type="button" (click)="toggleSideNavShow()" class="btn bg-gradient-primary text-right mx-3 mt-1"
-      data-bs-toggle="modal" data-bs-target="#export-form">
+        data-bs-toggle="modal" data-bs-target="#export-form">
         View More Info
       </button>
     </div>
 
     <div class="float-end">
       <button type="button" class="btn bg-gradient-primary text-right mx-3 mt-1">
-       Export Summary
+        Export Summary
       </button>
     </div>
 
-      
-
-    
-    <div class="modal fade" id="export-form" tabindex="-1" role="dialog" aria-labelledby="export-form" aria-hidden="true">
+    <div class="modal fade" id="export-form" tabindex="-1" role="dialog" aria-labelledby="export-form"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
           <div class="modal-body p-0">
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
-                <h5 class="">Summary
+                <h5 class="">
+                  Summary
                   <span class="text-right float-end">
                     <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
                       class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -46,123 +44,115 @@
                   </span>
                 </h5>
                 <p class="mb-0">Equipment Details</p>
-
               </div>
 
               <div class="card m-4">
-
-
-                <div style="width:100%;overflow-x:scroll;">
-                  <table class="table  tabel-fluid">
+                <div style="width: 100%; overflow-x: scroll">
+                  <table class="table tabel-fluid">
                     <tbody>
-    
                       <!-- header list  -->
-                      <tr class="bg-light" >
+                      <tr class="bg-light">
                         <th>
-                          <h6 class="form-label text-bold m-2">Unit or Equipment Functional Description</h6>
+                          <h6 class="form-label text-bold m-2">
+                            Unit or Equipment Functional Description
+                          </h6>
                         </th>
                         <th>
                           <label class="text-bold mt-2">Average Year</label>
                         </th>
                         <th *ngFor="let header of assetTableHeaders">
-                          <label class="form-label text-bold mt-2">{{header}}</label>
+                          <label class="form-label text-bold mt-2">{{
+                            header
+                            }}</label>
                         </th>
-
                       </tr>
-    
+
                       <!-- event material cost -->
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 1 Diffusers</label>
+                          <label class="text-bold">Aer Tank 1 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 2 Diffusers</label>
+                          <label class="text-bold">Aer Tank 2 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 3 Diffusers</label>
+                          <label class="text-bold">Aer Tank 3 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 4 Diffusers</label>
+                          <label class="text-bold">Aer Tank 4 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 5 Diffusers</label>
+                          <label class="text-bold">Aer Tank 5 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 6 Diffusers</label>
+                          <label class="text-bold">Aer Tank 6 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 7 Diffusers</label>
+                          <label class="text-bold">Aer Tank 7 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Back Flow Preventor, Allard </label>
+                          <label class="text-bold">Back Flow Preventor, Allard
+                          </label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
 
-                      <tr >
+                      <tr>
                         <td class="bg-light">
-                          <label class="text-bold ">Aer Tank 8 Diffusers</label>
+                          <label class="text-bold">Aer Tank 8 Diffusers</label>
                         </td>
                         <td *ngFor="let number of assetTableNumbers">
-                          <p class="mb-0 text-sm">{{number}}</p>
+                          <p class="mb-0 text-sm">{{ number }}</p>
                         </td>
                       </tr>
-    
-    
-    
                     </tbody>
                   </table>
                 </div>
-    
-    
-    
               </div>
-
-
             </div>
           </div>
         </div>
@@ -175,7 +165,8 @@
           <div class="modal-body p-0">
             <div class="card card-plain">
               <div class="card-header pb-0 text-left">
-                <h5 class="">Summary
+                <h5 class="">
+                  Summary
                   <span class="text-right float-end">
                     <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
                       class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -184,25 +175,24 @@
                   </span>
                 </h5>
                 <p class="mb-0">Enter Equipment Details</p>
-
-
               </div>
               <div class="card-body">
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                   <div class="row">
-
                     <div class="col-md-6">
-
                       <label class="form-label text-bold mt-3">Unit or Equipment Functional Description</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="unitName" class="form-control" placeholder="Please Enter Description"/>
+                        <input type="text" formControlName="unitName" class="form-control"
+                          placeholder="Please Enter Description" />
                       </div>
 
                       <label class="form-label text-bold mt-3" for="assetType">Asset Type</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="assetType" class="form-select" name="assetType"
                           [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
-                          <option value="0" selected disabled>--Select asset type</option>
+                          <option value="0" selected disabled>
+                            --Select asset type
+                          </option>
                           <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType.id">
                             {{ assetType.name }}
                           </option>
@@ -213,7 +203,9 @@
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.app_id"
                           (change)="onSizeSelect(selectedSize)">
-                          <option value="0" selected disabled>--Select Size</option>
+                          <option value="0" selected disabled>
+                            --Select Size
+                          </option>
                           <option *ngFor="let size of selectedSizes" [ngValue]="size.app_id">
                             {{ size.desc }}
                           </option>
@@ -224,7 +216,9 @@
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp.id"
                           (change)="onAppSelect(selectedApp)">
-                          <option value="0" selected disabled>--Select Application/Duty</option>
+                          <option value="0" selected disabled>
+                            --Select Application/Duty
+                          </option>
                           <option *ngFor="let app of selectedApps" [ngValue]="app.id">
                             {{ app.desc }}
                           </option>
@@ -233,9 +227,11 @@
 
                       <label class="form-label text-bold mt-3" for="subApp">Sub Duty or Application</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <select formControlName="subApp" class="form-select" name="subApp" [(ngModel)]="selectedSubApp.quality_id"
-                          (change)="onSubAppSelect(selectedSubApp)">
-                          <option value="0" selected disabled>--Select Sub Application/Duty</option>
+                        <select formControlName="subApp" class="form-select" name="subApp"
+                          [(ngModel)]="selectedSubApp.quality_id" (change)="onSubAppSelect(selectedSubApp)">
+                          <option value="0" selected disabled>
+                            --Select Sub Application/Duty
+                          </option>
                           <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp.quality_id">
                             {{ subApp.desc }}
                           </option>
@@ -244,12 +240,13 @@
                     </div>
 
                     <div class="col-md-6">
-
                       <label class="form-label text-bold mt-3" for="quality">Quality</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="quality" class="form-select" name="quality"
                           [ngModel]="selectedQuality.id">
-                          <option value="0" selected disabled>--Select Quality</option>
+                          <option value="0" selected disabled>
+                            --Select Quality
+                          </option>
                           <option *ngFor="let quality of selectedQualities" [ngValue]="quality.id">
                             {{ quality.desc }}
                           </option>
@@ -258,8 +255,8 @@
 
                       <label class="form-label text-bold text-bold mt-3" for="quantity">Quantity</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="quantity" name="quantity" class="form-control" 
-                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Quantity"/>
+                        <input type="text" formControlName="quantity" name="quantity" class="form-control"
+                          onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Quantity" />
                       </div>
                       <label class="form-label text-bold mt-3" for="load">Load %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
@@ -272,7 +269,6 @@
                         <input type="text" formControlName="life" name="life" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Life %" />
                       </div>
-
                     </div>
                   </div>
 
@@ -294,10 +290,9 @@
       </div>
     </div>
 
-<div class="mt-6">
-  <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
-</div>
-    
+    <div class="mt-6">
+      <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
+    </div>
   </div>
   <app-footer></app-footer>
 </main>
