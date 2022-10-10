@@ -1441,185 +1441,183 @@
                         </div>
                       </div>
                     </mat-tab>
+
+                    <mat-tab label="Overhaul">
+
+                      <table class="table">
+                        <tr>
+                          <td class="px-2">
+                            <label for="overhaulMaintenance" class="form-label">Event Title</label>
+                            <input type="text" class="form-control" value="Refurb" placeholder="Please Enter Event Title" />
+                          </td>
+                          <td class="px-2">
+                            <label for="overhaulMaintenance" class="form-label">Repeat After Month</label>
+                            <input type="text" class="form-control" value="12" placeholder="Please Enter No. of Months" />
+                          </td>
+                          <td class="px-2">
+                            <label for="overhaulMaintenance" class="form-label">Strch</label>
+                            <input type="text" class="form-control" value="No" placeholder="Please Enter Strch" />
+                          </td>
+                        </tr>
+                      </table>
+  
+                      <div class="row mx-1">
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Maintenance</label>
+                          <div>
+                            <a type="button" (click)="addOverhaulMaintenance()"
+                              class="btn bg-gradient-dark text-xs mb-0"><span class="material-icons">add_box</span>&nbsp;
+                              Add</a>
+                          </div>
+                          <table formArrayName="overhaulMaintenances">
+                            
+                            <tr>
+  
+                              <td>
+                                <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                <input type="text" class="form-control" value="OEM kits"
+                                  placeholder="Enter Description" />
+                              </td>
+                              <td>
+                                <label for="overhaulCost" class="form-label">Cost</label>
+                                <input type="text" class="form-control" value="$780"
+                                  placeholder="Enter Cost" />
+                              </td>
+                              <td>
+                                <button class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+  
+                            </tr>
+  
+                            <tr *ngFor="
+                                let overhaulMaintenance of overhaulMaintenances().controls;
+                                let i = index
+                              " [formGroupName]="i">
+                              <td>
+                                <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="overhauldesc" class="form-control"
+                                  placeholder="Enter Description" />
+                              </td>
+                              <td>
+                                <label for="overhaulCost" class="form-label">Cost</label>
+                                <input type="text" formControlName="overhaulCost" class="form-control"
+                                  placeholder="Enter Cost" />
+                              </td>
+                              <td>
+                                <button (click)="removeOverhaulMaintenance(i)"
+                                  class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Labor</label>
+                          <div>
+                            <a type="button" (click)="addOverhaulLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons"> add_box </span>&nbsp; Add</a>
+                          </div>
+                          <table formArrayName="overhaulLabors">
+  
+                            <tr>
+  
+                              <td>
+                                <label for="overhaulLevel" class="form-label">Level</label>
+                                <input type="text" class="form-control" value="Basic Skilled"
+                                  placeholder="Enter Level" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="overhaulHrs">Hours</label>
+                                <input type="text" class="form-control" value="3"
+                                  placeholder="Enter Hours" />
+                              </td>
+                              <td>
+                                <button  class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+  
+                            </tr>
+  
+                            <tr *ngFor="
+                                let overhaulLabor of overhaulLabors().controls;
+                                let i = index
+                              " [formGroupName]="i">
+                              <td>
+                                <label for="overhaulLevel" class="form-label">Level</label>
+                                <input type="text" formControlName="overhaulLevel" class="form-control"
+                                  placeholder="Enter Level" />
+                              </td>
+                              <td>
+                                <label class="form-label" for="overhaulHrs">Hours</label>
+                                <input type="text" formControlName="overhaulHrs" class="form-control"
+                                  placeholder="Enter Hours" />
+                              </td>
+                              <td>
+                                <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+  
+                        <div class="col-md-4">
+                          <label class="text-bold mt-2">Contractor/Shop</label>
+                          <div>
+                            <a type="button" (click)="addOverhaulCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                class="material-icons">add_box</span>&nbsp;
+                              Add</a>
+                          </div>
+                          <table formArrayName="overhaulConts">
+                            <tr>
+                              <td>
+                                <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                <input type="text" class="form-control" value="Machine Work"
+                                  placeholder="Enter Description" />
+                              </td>
+                              <td>
+                                <label for="overhaulCost" class="form-label">Cost</label>
+                                <input type="text" class="form-control" value="$200"
+                                  placeholder="Enter Cost" />
+                              </td>
+                              <td>
+                                <button class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                            <tr *ngFor="
+                                let cont of overhaulConts().controls;
+                                let i = index
+                              " [formGroupName]="i">
+                              <td>
+                                <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                <input type="text" formControlName="overhaulDesc" class="form-control"
+                                  placeholder="Enter Description" />
+                              </td>
+                              <td>
+                                <label for="overhaulCost" class="form-label">Cost</label>
+                                <input type="text" formControlName="overhaulCost" class="form-control"
+                                  placeholder="Enter Cost" />
+                              </td>
+                              <td>
+                                <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+  
+                      </div>
+
+                    </mat-tab>
+
                   </mat-tab-group>
-<!-- Overhaul Tab -->
-                  <div class="my-4">
-                    <hr>
-                    <h5 class="mx-4">Item Overhaul:</h5>
-                    <hr>
-
-                    <table class="table">
-                      <tr>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Event Title</label>
-                          <input type="text" class="form-control" value="Refurb" placeholder="Please Enter Event Title" />
-                        </td>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Repeat After Month</label>
-                          <input type="text" class="form-control" value="12" placeholder="Please Enter No. of Months" />
-                        </td>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Strch</label>
-                          <input type="text" class="form-control" value="No" placeholder="Please Enter Strch" />
-                        </td>
-                      </tr>
-                    </table>
-
-                    <div class="row mx-1">
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Maintenance</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulMaintenance()"
-                            class="btn bg-gradient-dark text-xs mb-0"><span class="material-icons">add_box</span>&nbsp;
-                            Add</a>
-                        </div>
-                        <table formArrayName="overhaulMaintenances">
-                          
-                          <tr>
-
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" class="form-control" value="OEM kits"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" class="form-control" value="$780"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-
-                          </tr>
-
-                          <tr *ngFor="
-                              let overhaulMaintenance of overhaulMaintenances().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="overhauldesc" class="form-control"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" formControlName="overhaulCost" class="form-control"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulMaintenance(i)"
-                                class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Labor</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
-                              class="material-icons"> add_box </span>&nbsp; Add</a>
-                        </div>
-                        <table formArrayName="overhaulLabors">
-
-                          <tr>
-
-                            <td>
-                              <label for="overhaulLevel" class="form-label">Level</label>
-                              <input type="text" class="form-control" value="Basic Skilled"
-                                placeholder="Enter Level" />
-                            </td>
-                            <td>
-                              <label class="form-label" for="overhaulHrs">Hours</label>
-                              <input type="text" class="form-control" value="3"
-                                placeholder="Enter Hours" />
-                            </td>
-                            <td>
-                              <button  class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-
-                          </tr>
-
-                          <tr *ngFor="
-                              let overhaulLabor of overhaulLabors().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulLevel" class="form-label">Level</label>
-                              <input type="text" formControlName="overhaulLevel" class="form-control"
-                                placeholder="Enter Level" />
-                            </td>
-                            <td>
-                              <label class="form-label" for="overhaulHrs">Hours</label>
-                              <input type="text" formControlName="overhaulHrs" class="form-control"
-                                placeholder="Enter Hours" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Contractor/Shop</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulCont()" class="btn bg-gradient-dark text-xs mb-0"><span
-                              class="material-icons">add_box</span>&nbsp;
-                            Add</a>
-                        </div>
-                        <table formArrayName="overhaulConts">
-                          <tr>
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" class="form-control" value="Machine Work"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" class="form-control" value="$200"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                          <tr *ngFor="
-                              let cont of overhaulConts().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="overhaulDesc" class="form-control"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" formControlName="overhaulCost" class="form-control"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-
-                    </div>
-
-                  </div>
 
                 </div>
                 <div class="text-center mb-4">
@@ -2616,126 +2614,124 @@
                       </div>
                     </mat-tab>
 
+                    <mat-tab label="Overhaul">
+    
+                        <table class="table">
+                          <tr>
+                            <td class="px-2">
+                              <label for="overhaulMaintenance" class="form-label">Event Title</label>
+                              <input type="text" class="form-control" placeholder="Please Enter Event Title" />
+                            </td>
+                            <td class="px-2">
+                              <label for="overhaulMaintenance" class="form-label">Repeat After Month</label>
+                              <input type="text" class="form-control" placeholder="Please Enter No. of Months" />
+                            </td>
+                            <td class="px-2">
+                              <label for="overhaulMaintenance" class="form-label">Strch</label>
+                              <input type="text" class="form-control" placeholder="Please Enter Strch" />
+                            </td>
+                          </tr>
+                        </table>
+    
+                        <div class="row mx-1">
+                          <div class="col-md-4">
+                            <label class="text-bold mt-2">Maintenance</label>
+                            <div>
+                              <a type="button" (click)="addOverhaulMaintenance()"
+                                class="btn bg-gradient-dark text-xs mb-0"><span class="material-icons">add_box</span>&nbsp;
+                                Create</a>
+                            </div>
+                            <table formArrayName="overhaulMaintenances">
+                              <tr *ngFor="
+                                  let overhaulMaintenance of overhaulMaintenances().controls;
+                                  let i = index
+                                " [formGroupName]="i">
+                                <td>
+                                  <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                  <input type="text" formControlName="overhauldesc" class="form-control"
+                                    placeholder="Enter Description" />
+                                </td>
+                                <td>
+                                  <label for="overhaulCost" class="form-label">Cost</label>
+                                  <input type="text" formControlName="overhaulCost" class="form-control"
+                                    placeholder="Enter Cost" />
+                                </td>
+                                <td>
+                                  <button (click)="removeOverhaulMaintenance(i)"
+                                    class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                    Remove
+                                  </button>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div class="col-md-4">
+                            <label class="text-bold mt-2">Labor</label>
+                            <div>
+                              <a type="button" (click)="addOverhaulLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                  class="material-icons"> add_box </span>&nbsp; Create</a>
+                            </div>
+                            <table formArrayName="overhaulLabors">
+                              <tr *ngFor="
+                                  let overhaulLabor of overhaulLabors().controls;
+                                  let i = index
+                                " [formGroupName]="i">
+                                <td>
+                                  <label for="overhaulLevel" class="form-label">Level</label>
+                                  <input type="text" formControlName="overhaulLevel" class="form-control"
+                                    placeholder="Enter Level" />
+                                </td>
+                                <td>
+                                  <label class="form-label" for="overhaulHrs">Hours</label>
+                                  <input type="text" formControlName="overhaulHrs" class="form-control"
+                                    placeholder="Enter Hours" />
+                                </td>
+                                <td>
+                                  <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                    Remove
+                                  </button>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+    
+                          <div class="col-md-4">
+                            <label class="text-bold mt-2">Contractor/Shop</label>
+                            <div>
+                              <a type="button" (click)="addOverhaulCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                                  class="material-icons">add_box</span>&nbsp;
+                                Create</a>
+                            </div>
+                            <table formArrayName="overhaulConts">
+                              <tr *ngFor="
+                                  let cont of overhaulConts().controls;
+                                  let i = index
+                                " [formGroupName]="i">
+                                <td>
+                                  <label for="overhaulMaintenance" class="form-label">Desc</label>
+                                  <input type="text" formControlName="overhaulDesc" class="form-control"
+                                    placeholder="Enter Description" />
+                                </td>
+                                <td>
+                                  <label for="overhaulCost" class="form-label">Cost</label>
+                                  <input type="text" formControlName="overhaulCost" class="form-control"
+                                    placeholder="Enter Cost" />
+                                </td>
+                                <td>
+                                  <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                                    Remove
+                                  </button>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+    
+                        </div>
+
+                    </mat-tab>
+
                   </mat-tab-group>
-      <!-- overhaul card  -->
-                  <div class="my-4">
-                    <hr>
-                    <h5 class="mx-4">Item Overhaul:</h5>
-                    <hr>
 
-                    <table class="table">
-                      <tr>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Event Title</label>
-                          <input type="text" class="form-control" placeholder="Please Enter Event Title" />
-                        </td>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Repeat After Month</label>
-                          <input type="text" class="form-control" placeholder="Please Enter No. of Months" />
-                        </td>
-                        <td class="px-2">
-                          <label for="overhaulMaintenance" class="form-label">Strch</label>
-                          <input type="text" class="form-control" placeholder="Please Enter Strch" />
-                        </td>
-                      </tr>
-                    </table>
-
-                    <div class="row mx-1">
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Maintenance</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulMaintenance()"
-                            class="btn bg-gradient-dark text-xs mb-0"><span class="material-icons">add_box</span>&nbsp;
-                            Create</a>
-                        </div>
-                        <table formArrayName="overhaulMaintenances">
-                          <tr *ngFor="
-                              let overhaulMaintenance of overhaulMaintenances().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="overhauldesc" class="form-control"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" formControlName="overhaulCost" class="form-control"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulMaintenance(i)"
-                                class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Labor</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
-                              class="material-icons"> add_box </span>&nbsp; Create</a>
-                        </div>
-                        <table formArrayName="overhaulLabors">
-                          <tr *ngFor="
-                              let overhaulLabor of overhaulLabors().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulLevel" class="form-label">Level</label>
-                              <input type="text" formControlName="overhaulLevel" class="form-control"
-                                placeholder="Enter Level" />
-                            </td>
-                            <td>
-                              <label class="form-label" for="overhaulHrs">Hours</label>
-                              <input type="text" formControlName="overhaulHrs" class="form-control"
-                                placeholder="Enter Hours" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-
-                      <div class="col-md-4">
-                        <label class="text-bold mt-2">Contractor/Shop</label>
-                        <div>
-                          <a type="button" (click)="addOverhaulCont()" class="btn bg-gradient-dark text-xs mb-0"><span
-                              class="material-icons">add_box</span>&nbsp;
-                            Create</a>
-                        </div>
-                        <table formArrayName="overhaulConts">
-                          <tr *ngFor="
-                              let cont of overhaulConts().controls;
-                              let i = index
-                            " [formGroupName]="i">
-                            <td>
-                              <label for="overhaulMaintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="overhaulDesc" class="form-control"
-                                placeholder="Enter Description" />
-                            </td>
-                            <td>
-                              <label for="overhaulCost" class="form-label">Cost</label>
-                              <input type="text" formControlName="overhaulCost" class="form-control"
-                                placeholder="Enter Cost" />
-                            </td>
-                            <td>
-                              <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
-                                Remove
-                              </button>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-
-                    </div>
-
-                  </div>
                 </div>
                 <div class="text-center mb-4">
                   <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
