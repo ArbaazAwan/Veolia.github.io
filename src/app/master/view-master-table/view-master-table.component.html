@@ -21,28 +21,24 @@
                       <span class="mb-0 opacity-8 text-sm">1</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Asset Name: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">Berus Belt</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">App Description: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">Installation</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Unit Measure &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">544m</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Rev: &nbsp;</label>
@@ -50,7 +46,6 @@
                     </span>
                   </td>
                 </tr>
-
                 <tr>
                   <td>
                     <span>
@@ -58,28 +53,24 @@
                       <span class="mb-0 opacity-8 text-sm">124</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">App Code: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">852</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Replacement Cost: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">147</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">Life MOs: &nbsp;</label>
                       <span class="mb-0 opacity-8 text-sm">12</span>
                     </span>
                   </td>
-
                   <td>
                     <span>
                       <label class="text-bold">OH life: &nbsp;</label>
@@ -95,6 +86,24 @@
 
           <div class="card m-4">
             <mat-tab-group mat-align-tabs="left" class="mt-3">
+              <mat-tab label="All">
+                <p-treeTable [value]="files1" [columns]="cols" class="table table-fluid">
+                  <ng-template pTemplate="header" let-columns>
+                    <tr class="">
+                      <th *ngFor="let col of columns" class="">{{col.header}}</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                    <tr>
+                      <td *ngFor="let col of columns; let i = index">
+                        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+                        {{rowData[col.field]}}
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-treeTable>
+              </mat-tab>
+
               <mat-tab label="Event 1">
                 <table class="table table-striped">
                   <tbody>
@@ -2709,7 +2718,7 @@
                       </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Perform Every (MOs): &nbsp;</label>
@@ -2718,7 +2727,7 @@
                       </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Stretch for Partial Loading: &nbsp;</label>
@@ -2747,7 +2756,7 @@
                         <label class="text-bold mt-2">Material 5</label>
                       </th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2756,9 +2765,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2767,7 +2776,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
@@ -2775,27 +2784,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
-                      <span>
-                        <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                        </label>
-                        <td>
-                          <p class="mb-0 text-sm">500</p>
-                        </td>
-                      </span>
-                      </td>
-                      <td>
-                        <span>
-                          <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                      <td>
-                        <p class="mb-0 text-sm">Maintainence</p>
-                      </td>
-                      </span>
-    
-                      <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2811,9 +2802,9 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2829,9 +2820,27 @@
                         <p class="mb-0 text-sm">Maintainence</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
+                      <span>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;
+                        </label>
+                        <td>
+                          <p class="mb-0 text-sm">500</p>
+                        </td>
+                      </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
+                      <td>
+                        <p class="mb-0 text-sm">Maintainence</p>
+                      </td>
+                      </span>
+
+                      <br />
+
                       <span>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;
                         </label>
@@ -2841,7 +2850,7 @@
                       </span>
                       </td>
                     </tr>
-    
+
                     <tr>
                       <th>
                         <label class="text-bold mt-2">Labor 1</label>
@@ -2857,7 +2866,7 @@
                       </th>
                       <th></th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2866,9 +2875,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2877,7 +2886,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2885,9 +2894,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2896,7 +2905,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2904,9 +2913,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2915,7 +2924,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
@@ -2923,9 +2932,9 @@
                         <p class="mb-0 text-sm">Skilled</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Hours: &nbsp;
                         </label>
@@ -2936,7 +2945,7 @@
                       </td>
                       <td></td>
                     </tr>
-    
+
                     <tr>
                       <th>
                         <label class="text-bold mt-2">Shop/Contractor 1</label>
@@ -2950,7 +2959,7 @@
                       <th></th>
                       <th></th>
                     </tr>
-    
+
                     <tr>
                       <td>
                         <span>
@@ -2959,9 +2968,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -2970,7 +2979,7 @@
                         </td>
                       </span>
                       </td>
-    
+
                       <td>
                         <span>
                           <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
@@ -2978,9 +2987,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -2996,9 +3005,9 @@
                         <p class="mb-0 text-sm">Contractor</p>
                       </td>
                       </span>
-    
+
                       <br />
-    
+
                       <span>
                         <label for="cost" class="form-label text-bold">Amount: &nbsp;
                         </label>
@@ -3017,7 +3026,7 @@
           </div>
           <!-- Event Evaluation Overview -->
 
-          <div class="card m-4">
+          <div class="card m-4" *ngIf="eventEvalTableShow">
 
 
             <div style="width:100%;overflow-x:scroll;">
@@ -3060,7 +3069,7 @@
                   </tr>
 
                   <!-- event material cost -->
-                  <tr >
+                  <tr>
                     <td class="bg-light">
                       <label class="text-bold ">Event Material Cost</label>
                     </td>
@@ -3610,7 +3619,7 @@
                     </td>
 
 
-                    
+
                   </tr>
 
 

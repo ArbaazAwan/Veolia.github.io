@@ -11,6 +11,9 @@ import { ViewMasterTableComponent } from './view-master-table/view-master-table.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from '../pipes/search.pipe';
 import {MatSortModule} from '@angular/material/sort';
+import {TreeTableModule} from 'primeng/treetable';
+import { NodeService } from './view-master-table/node.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import {MatSortModule} from '@angular/material/sort';
     MatSelectModule,
     MatSortModule,
     NgbModule,
+    TreeTableModule,
+    HttpClientModule
   ],
   exports:[
     MasterComponent,

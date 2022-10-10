@@ -12,11 +12,12 @@ import * as CanvasJSAngularChart from '../../assets/canvasjs.angular.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
+
 @NgModule({
   declarations: [
     DashboardComponent,
     DummyChartsComponent,
-    CanvasJSChart
+    CanvasJSChart,
   ],
   imports: [
     CommonModule,

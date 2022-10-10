@@ -20,6 +20,7 @@ export class UnitComponent implements OnInit {
   filteredOptions!: string[];
   formGroup!: any;
   sampleVariable:any;
+  eventEvalTableShow:boolean = true;
 
   constructor(public modalService: NgbModal, private service : UnitService, private fb : FormBuilder){}
 
@@ -49,20 +50,4 @@ export class UnitComponent implements OnInit {
       this.filteredOptions = response;
     })
   }
-
-  processModel() {
-    const modalRef = this.modalService.open(ProcessModalComponent);
-
-
-    modalRef.result.then((result: any) => {
-      if (result) {
-        console.log(true);
-        this.export();
-      }
-    });
-  }
-  export() {
-    TableUtil.exportTableToExcel("ExampleMaterialTable");
-  }
-
 }
