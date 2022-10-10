@@ -11,6 +11,11 @@
           <table class="table table-blocked table-hover mx-3 mb-0">
             <thead>
               <tr>
+                <th class="px-2 pb-1 text-sm">
+                  <mat-checkbox class="example-margin"
+                  [indeterminate]="someComplete()"
+                  (change)="setAll($event.checked)"> </mat-checkbox>
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Unit Name
                 </th>
@@ -42,7 +47,15 @@
             </thead>
             <tbody>
               <tr *ngFor="let model of summaryArray">
-                <td>
+
+                <td class="pt-3">
+                  <mat-checkbox class="example-margin" 
+                  (ngModelChange)="updateAllComplete()"
+                  > 
+                </mat-checkbox>
+                </td>
+
+                  <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ model.unitName }}</p>

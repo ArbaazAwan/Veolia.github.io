@@ -7,10 +7,168 @@
   <app-navbar></app-navbar>
 
   <div class="container-fluid py-4">
-    <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
-      data-bs-toggle="modal" data-bs-target="#modal-form">
-      Create Record
-    </button>
+
+    <div class="float-start">
+      <button (click)="toggleSideNavShow()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
+            data-bs-toggle="modal" data-bs-target="#modal-form">
+            Create Record
+          </button>
+    </div>
+
+    <div class="float-end">
+      <button type="button" (click)="toggleSideNavShow()" class="btn bg-gradient-primary text-right mx-3 mt-1"
+      data-bs-toggle="modal" data-bs-target="#export-form">
+        View More Info
+      </button>
+    </div>
+
+    <div class="float-end">
+      <button type="button" class="btn bg-gradient-primary text-right mx-3 mt-1">
+       Export Summary
+      </button>
+    </div>
+
+      
+
+    
+    <div class="modal fade" id="export-form" tabindex="-1" role="dialog" aria-labelledby="export-form" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="card card-plain">
+              <div class="card-header pb-0 text-left">
+                <h5 class="">Summary
+                  <span class="text-right float-end">
+                    <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                      class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                      <i class="material-icons" style="font-size: 30px">close</i>
+                    </button>
+                  </span>
+                </h5>
+                <p class="mb-0">Equipment Details</p>
+
+              </div>
+
+              <div class="card m-4">
+
+
+                <div style="width:100%;overflow-x:scroll;">
+                  <table class="table  tabel-fluid">
+                    <tbody>
+    
+                      <!-- header list  -->
+                      <tr class="bg-light" >
+                        <th>
+                          <h6 class="form-label text-bold m-2">Unit or Equipment Functional Description</h6>
+                        </th>
+                        <th>
+                          <label class="text-bold mt-2">Average Year</label>
+                        </th>
+                        <th *ngFor="let header of assetTableHeaders">
+                          <label class="form-label text-bold mt-2">{{header}}</label>
+                        </th>
+
+                      </tr>
+    
+                      <!-- event material cost -->
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 1 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 2 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 3 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 4 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 5 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 6 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 7 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Back Flow Preventor, Allard </label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+
+                      <tr >
+                        <td class="bg-light">
+                          <label class="text-bold ">Aer Tank 8 Diffusers</label>
+                        </td>
+                        <td *ngFor="let number of assetTableNumbers">
+                          <p class="mb-0 text-sm">{{number}}</p>
+                        </td>
+                      </tr>
+    
+    
+    
+                    </tbody>
+                  </table>
+                </div>
+    
+    
+    
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
@@ -118,7 +276,6 @@
                     </div>
                   </div>
 
-
                   <div class="text-center mt-4">
                     <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal"
                       class="btn bg-gradient-primary m-2">
@@ -137,7 +294,10 @@
       </div>
     </div>
 
-    <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
+<div class="mt-6">
+  <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
+</div>
+    
   </div>
   <app-footer></app-footer>
 </main>
