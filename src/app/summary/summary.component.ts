@@ -11,14 +11,36 @@ export class SummaryComponent implements OnInit {
   constructor(private fb:FormBuilder) {
     this.form =fb.group({
       unitName:'',
-      assetType:'--Select asset type',
-      size:'',
-      app:'',
-      subApp:'',
-      quality:'',
+      assetType:{
+        id:0,
+        name:''
+      },
+      size:{
+        id: 0,
+        desc: '',
+        assetType_id: 0,
+        app_id:0
+      },
+      app:{
+        id: 0,
+        desc: '',
+      },
+      subApp:{
+        id: 0,
+        desc: '',
+        app_id: 0,
+        quality_id:0
+
+      },
+      quality:{
+        id: 0,
+        desc: '',
+        assetType_id: 0,
+      },
       quantity:'',
       load:'',
       life:'',
+      isChecked: false,
     })
   }
   form!:FormGroup;
@@ -62,7 +84,23 @@ export class SummaryComponent implements OnInit {
 
   summaryArray:any[]=[];
 
+  assetTableHeaders:string[]=[];
+  assetTableNumbers:string[]=[];
+
+
   ngOnInit(): void {
+    for(let i=1;i<=50;i++)
+    {
+      let a = "Year "+ i.toString();
+      this.assetTableHeaders.push(a);
+    }
+    
+    for(let i=1;i<=51;i++)
+    {
+      let a = "500";
+      this.assetTableNumbers.push(a);
+    }
+
     this.db = [
       {
         assetTypes: [
@@ -243,7 +281,14 @@ export class SummaryComponent implements OnInit {
   }
 
   onSubmit(){
+    this.form.value.assetType = this.assetTypes.find((x:any)=>x.id == this.form.value.assetType)
+    this.form.value.size = this.sizes.find((x:any)=>x.id == this.form.value.size)
+    this.form.value.app = this.apps.find((x:any)=>x.id == this.form.value.app)
+    this.form.value.subApp = this.subApps.find((x:any)=>x.id == this.form.value.subApp)
+    this.form.value.quality = this.qualities.find((x:any)=>x.id == this.form.value.quality)
+
     this.summaryArray.push(this.form.value);
+    console.log(" here is the summary array:", this.summaryArray);
     this.form.reset();
   }
 

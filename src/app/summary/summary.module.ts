@@ -6,13 +6,15 @@ import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from '../navbar/navbar.module';
 import { SummarytableComponent } from './summarytable/summarytable.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
 @NgModule({
   declarations: [
     SummaryComponent,
-    SummarytableComponent
+    SummarytableComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { SummarytableComponent } from './summarytable/summarytable.component';
     SidenavModule,
     FormsModule,
     ReactiveFormsModule,
-    NavbarModule
+    NavbarModule,
+    MatCheckboxModule
   ]
 })
 export class SummaryModule { }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs'
 import { map, startWith } from 'rxjs/operators'
+import { ProcessModalComponent } from '../process-modal/process-modal.component';
 import { UnitService } from './unit.service';
+import { TableUtil } from './unitServices/tableUtil';
 
 @Component({
   selector: 'app-unit',
@@ -19,7 +22,7 @@ export class UnitComponent implements OnInit {
   sampleVariable:any;
   eventEvalTableShow:boolean = true;
 
-  constructor(private service : UnitService, private fb : FormBuilder){}
+  constructor(public modalService: NgbModal, private service : UnitService, private fb : FormBuilder){}
 
   ngOnInit(){
     this.initForm();
@@ -47,4 +50,10 @@ export class UnitComponent implements OnInit {
       this.filteredOptions = response;
     })
   }
+
+  processModel(){
+    // method needed to be implemented
+  }
+
+  
 }
