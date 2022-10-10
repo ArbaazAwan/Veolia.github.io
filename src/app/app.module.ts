@@ -33,6 +33,7 @@ import { PermissionComponent } from './permission/permission.component';
 import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
+import { NodeService } from './master/view-master-table/node.service';
 
 @NgModule({
   declarations: [
