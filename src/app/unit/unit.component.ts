@@ -17,6 +17,7 @@ export class UnitComponent implements OnInit {
   filteredOptions!: string[];
   formGroup!: any;
   sampleVariable:any;
+  eventEvalTableShow:boolean = true;
 
   constructor(private service : UnitService, private fb : FormBuilder){}
 

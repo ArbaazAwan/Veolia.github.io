@@ -14,8 +14,7 @@ export class ViewMasterTableComponent implements OnInit {
    }
    asset:any;
    files1!: TreeNode[];
-
-
+   @Input() eventEvalTableShow!:boolean;
     cols!: any[];
 
   ngOnInit(): void {
