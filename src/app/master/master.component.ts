@@ -10,187 +10,163 @@ import { MasterService } from './master.service';
 })
 export class MasterComponent implements OnInit {
 
-  form!:FormGroup
-  showSideNav:boolean = true;
-  assets!:any[];
-  assetSearchText:string='';
-  sortedAssets!:any[];
-  eventEvalTableShow:boolean = false;
+  form!: FormGroup
+  showSideNav: boolean = true;
+  assets!: any[];
+  assetSearchText: string = '';
+  sortedAssets!: any[];
+  eventEvalTableShow: boolean = false;
 
-  constructor(private fb:FormBuilder,private masterService:MasterService) {
+  constructor(private fb: FormBuilder, private masterService: MasterService) {
 
   }
-
+ 
   ngOnInit(): void {
-   this.assets = this.masterService.loadAssets(); //loading the assets
+    this.assets = this.masterService.loadAssets(); //loading the assets
 
     this.form = this.fb.group({
       //building form
-      id:'',
-      assetName:'',
+      id: '',
+      unitDesc: '',
       appDesc: '',
-      unitMeas:'',
-      rev:'',
-      unitCode:'',
-      appCode:'',
-      replCost:'',
-      lifeMOs:'',
-      OHLife:'',
-      maintenances:this.fb.array([]),
-      labors:this.fb.array([]),
-      conts:this.fb.array([]),
-      overhaulMaintenances:this.fb.array([]),
-      overhaulLabors:this.fb.array([]),
-      overhaulConts:this.fb.array([]),
+      unitMeas: '',
+      rev: '',
+      unitCode: '',
+      appCode: '',
+      replCost: '',
+      lifeMOs: '',
+      OHLife: '',
+      maintenances: this.fb.array([]),
+      labors: this.fb.array([]),
+      conts: this.fb.array([]),
+      overhaulMaintenances: this.fb.array([]),
+      overhaulLabors: this.fb.array([]),
+      overhaulConts: this.fb.array([]),
 
     });
     this.sortedAssets = this.assets.slice();
 
   }
 
-  maintenances():FormArray
-  {
+  maintenances(): FormArray {
     return <FormArray>this.form.get("maintenances")
   }
-  overhaulMaintenances():FormArray
-  {
+  overhaulMaintenances(): FormArray {
     return <FormArray>this.form.get("overhaulMaintenances")
   }
 
-  labors() : FormArray
-  {
+  labors(): FormArray {
     return this.form.get("labors") as FormArray
   }
-  overhaulLabors() : FormArray
-  {
+  overhaulLabors(): FormArray {
     return this.form.get("overhaulLabors") as FormArray
   }
 
-  conts() : FormArray
-  {
+  conts(): FormArray {
     return this.form.get("conts") as FormArray
   }
 
-  overhaulConts() : FormArray
-  {
+  overhaulConts(): FormArray {
     return this.form.get("overhaulConts") as FormArray
   }
 
-  newMaintenance()
-  {
+  newMaintenance() {
     return this.fb.group({
       desc: '',
       cost: ''
     })
   }
-  newOverhaulMaintenance()
-  {
+  newOverhaulMaintenance() {
     return this.fb.group({
       desc: '',
       cost: ''
     })
   }
 
-  newLabor(): FormGroup
-  {
+  newLabor(): FormGroup {
     return this.fb.group({
       level: '',
       hrs: '',
     })
   }
-  newOverhaulLabor(): FormGroup
-  {
+  newOverhaulLabor(): FormGroup {
     return this.fb.group({
       level: '',
       hrs: '',
     })
   }
 
-  newCont()
-  {
+  newCont() {
     return this.fb.group({
       desc: '',
       cost: ''
     })
   }
 
-  newOverhaulCont()
-  {
+  newOverhaulCont() {
     return this.fb.group({
       desc: '',
       cost: ''
     })
   }
 
-  addMaintenance()
-  {
+  addMaintenance() {
     this.maintenances().push(this.newMaintenance());
   }
 
-  addOverhaulMaintenance()
-  {
+  addOverhaulMaintenance() {
     this.overhaulMaintenances().push(this.newOverhaulMaintenance());
   }
 
-  addLabor()
-  {
+  addLabor() {
     this.labors().push(this.newLabor());
   }
 
-  addOverhaulLabor()
-  {
+  addOverhaulLabor() {
     this.overhaulLabors().push(this.newOverhaulLabor());
   }
 
-  addCont()
-  {
+  addCont() {
     this.conts().push(this.newCont());
   }
 
-  addOverhaulCont()
-  {
+  addOverhaulCont() {
     this.overhaulConts().push(this.newOverhaulCont());
   }
 
-  removeMaintenance(index:number)
-  {
+  removeMaintenance(index: number) {
     this.maintenances().removeAt(index);
   }
 
-  removeOverhaulMaintenance(index:number)
-  {
+  removeOverhaulMaintenance(index: number) {
     this.overhaulMaintenances().removeAt(index);
   }
 
-  removeLabor(i:number)
-  {
+  removeLabor(i: number) {
     this.labors().removeAt(i);
   }
 
-  removeOverhaulLabor(i:number)
-  {
+  removeOverhaulLabor(i: number) {
     this.overhaulLabors().removeAt(i);
   }
 
-  removeCont(i:number)
-  {
+  removeCont(i: number) {
     this.conts().removeAt(i);
   }
 
-  removeOverhaulCont(i:number)
-  {
+  removeOverhaulCont(i: number) {
     this.overhaulConts().removeAt(i);
   }
 
-  toggleShowSideNav(){
+  toggleShowSideNav() {
     this.showSideNav = !this.showSideNav;
   }
-  viewAsset(asset:any){
+  viewAsset(asset: any) {
     this.toggleShowSideNav();
     this.masterService.setAsset(asset);
   }
 
-  editAsset(asset:any){
+  editAsset(asset: any) {
     this.toggleShowSideNav();
   }
 
@@ -205,8 +181,8 @@ export class MasterComponent implements OnInit {
       switch (sort.active) {
         case 'id':
           return this.compare(a.id, b.id, isAsc)
-        case 'assetName':
-          return this.compare(a.assetName, b.assetName, isAsc)
+        case 'unitDesc':
+          return this.compare(a.unitDesc, b.unitDesc, isAsc)
         case 'appDesc':
           return this.compare(a.appDesc, b.appDesc, isAsc)
         case 'unitMeas':
@@ -229,11 +205,11 @@ export class MasterComponent implements OnInit {
       }
     });
   }
-   compare(a: number | string, b: number | string, isAsc: boolean):any {
+  compare(a: number | string, b: number | string, isAsc: boolean): any {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.masterService.assets.push(this.form.value);
   }
 
