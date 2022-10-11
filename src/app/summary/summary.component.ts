@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MasterService } from '../master/master.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-summary',
@@ -8,38 +8,20 @@ import { MasterService } from '../master/master.service';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  constructor(private fb:FormBuilder) {
-    this.form =fb.group({
-      unitName:'',
-      assetType:{
-        id:0,
-        name:''
-      },
-      size:{
-        id: 0,
-        desc: '',
-        assetType_id: 0,
-        app_id:0
-      },
-      app:{
-        id: 0,
-        desc: '',
-      },
-      subApp:{
-        id: 0,
-        desc: '',
-        app_id: 0,
-        quality_id:0
 
-      },
-      quality:{
-        id: 0,
-        desc: '',
-        assetType_id: 0,
-      },
-      quantity:'',
-      load:'',
-      life:'',
+@ViewChild('modalClose') modalClose!:ElementRef;
+
+  constructor(private fb:FormBuilder) {
+    this.form = this.fb.group({
+      unitName:["", Validators.required],
+      assetType:['',Validators.required],
+      size:['',Validators.required],
+      app:['',Validators.required],
+      subApp:['',Validators.required],
+      quality:['',Validators.required],
+      quantity:['',Validators.required],
+      load:['', Validators.required],
+      life:['', Validators.required],
       isChecked: false,
     })
   }
@@ -52,33 +34,33 @@ export class SummaryComponent implements OnInit {
   apps!: any[];
   subApps!: any[];
   selectedAssetType: any ={
-    id:0,
+    id:null,
     name:''
   };
   qualities!: any[];
   selectedSizes!: any[];
   selectedSize: any = {
-    id: 0,
+    id: null,
     desc: '',
-    app_id:0
+    app_id:null
   };
 
   selectedApps!: any[];
   selectedApp: any = {
-    id: 0,
+    id: null,
     desc: ''
   };
 
   selectedSubApps!:any[];
   selectedSubApp:any={
-    id:0,
-    quality_id:0,
+    id:null,
+    quality_id:null,
     desc:''
   }
 
   selectedQualities!:any[];
   selectedQuality:any={
-    id:0,
+    id:null,
     desc:''
   }
 
@@ -86,6 +68,7 @@ export class SummaryComponent implements OnInit {
 
   assetTableHeaders:string[]=[];
   assetTableNumbers:string[]=[];
+  submitted:boolean = false;
 
 
   ngOnInit(): void {
@@ -94,7 +77,7 @@ export class SummaryComponent implements OnInit {
       let a = "Year "+ i.toString();
       this.assetTableHeaders.push(a);
     }
-    
+
     for(let i=1;i<=51;i++)
     {
       let a = "500";
@@ -280,16 +263,41 @@ export class SummaryComponent implements OnInit {
     this.selectedQualities = this.qualities.filter((q)=>q.id == selectedSubApp.quality_id);
   }
 
-  onSubmit(){
+  mapCascadingFormValues(){
     this.form.value.assetType = this.assetTypes.find((x:any)=>x.id == this.form.value.assetType)
     this.form.value.size = this.sizes.find((x:any)=>x.id == this.form.value.size)
     this.form.value.app = this.apps.find((x:any)=>x.id == this.form.value.app)
     this.form.value.subApp = this.subApps.find((x:any)=>x.id == this.form.value.subApp)
     this.form.value.quality = this.qualities.find((x:any)=>x.id == this.form.value.quality)
+  }
 
+  private validateAllFormFields(formGroup:FormGroup){
+    Object.keys(formGroup.controls).forEach(field=>{
+      const control = formGroup.get(field);
+      if(control instanceof FormControl)
+      {
+        control.markAsDirty({onlySelf:true});
+      }
+      else if(control instanceof FormGroup)
+        this.validateAllFormFields(control);
+    })
+  }
+
+  onSubmit(){
+
+    if(this.form.valid)
+    {
+    this.submitted = true;
+    this.mapCascadingFormValues();
     this.summaryArray.push(this.form.value);
-    console.log(" here is the summary array:", this.summaryArray);
+    this.modalClose.nativeElement.click()
     this.form.reset();
+    }
+    else
+    {
+      this.validateAllFormFields(this.form)
+    }
+
   }
 
   toggleSideNavShow(){
