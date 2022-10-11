@@ -16,7 +16,7 @@
 
     <div class="float-end">
       <button type="button" (click)="toggleSideNavShow()" class="btn bg-gradient-primary text-right mx-3 mt-1"
-        data-bs-toggle="modal" data-bs-target="#export-form">
+        data-bs-toggle="modal" data-bs-target="#detail-table">
         View More Info
       </button>
     </div>
@@ -27,10 +27,8 @@
       </button>
     </div>
 
-
-
-<!-- Export form here -->
-    <div class="modal fade" id="export-form" tabindex="-1" role="dialog" aria-labelledby="export-form"
+    <!-- asset detail form modal -->
+    <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
@@ -162,8 +160,7 @@
       </div>
     </div>
 
-
-<!--Create Summary Record form here   -->
+    <!-- summary modal form -->
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
         <div class="modal-content">
@@ -173,7 +170,7 @@
                 <h5 class="">
                   Summary
                   <span class="text-right float-end">
-                    <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    <button #modalClose (click)="toggleShowSideNav()" data-bs-dismiss="modal"
                       class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                       <i class="material-icons" style="font-size: 30px">close</i>
                     </button>
@@ -190,12 +187,17 @@
                         <input type="text" formControlName="unitName" class="form-control"
                           placeholder="Please Enter Description" />
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['unitName'].dirty || form.controls['unitName'].touched) && form.hasError('required','unitName')">
+                          unit name is required
+                        </small>
+                      </div>
 
                       <label class="form-label text-bold mt-3" for="assetType">Asset Type</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <select formControlName="assetType" class="form-select" name="assetType"
+                        <select formControlName="assetType" class="form-control" name="assetType"
                           [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
-                          <option value="0" selected disabled>
+                          <option [ngValue]="null" [disabled]="true">
                             --Select asset type
                           </option>
                           <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType.id">
@@ -203,12 +205,17 @@
                           </option>
                         </select>
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['assetType'].dirty || form.controls['assetType'].touched) && form.hasError('required','assetType')">
+                          quantity is required
+                        </small>
+                      </div>
 
                       <label class="form-label text-bold mt-3" for="size">Size</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.app_id"
                           (change)="onSizeSelect(selectedSize)">
-                          <option value="0" selected disabled>
+                          <option [ngValue]="null" [disabled]="true">
                             --Select Size
                           </option>
                           <option *ngFor="let size of selectedSizes" [ngValue]="size.app_id">
@@ -216,12 +223,17 @@
                           </option>
                         </select>
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['size'].dirty || form.controls['size'].touched) && form.hasError('required','size')">
+                          size is required
+                        </small>
+                      </div>
 
                       <label class="form-label text-bold mt-3" for="app">Duty or Application</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp.id"
                           (change)="onAppSelect(selectedApp)">
-                          <option value="0" selected disabled>
+                          <option [ngValue]="null" [disabled]="true">
                             --Select Application/Duty
                           </option>
                           <option *ngFor="let app of selectedApps" [ngValue]="app.id">
@@ -229,18 +241,28 @@
                           </option>
                         </select>
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['app'].dirty || form.controls['app'].touched) && form.hasError('required','app')">
+                          app is required
+                        </small>
+                      </div>
 
                       <label class="form-label text-bold mt-3" for="subApp">Sub Duty or Application</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="subApp" class="form-select" name="subApp"
                           [(ngModel)]="selectedSubApp.quality_id" (change)="onSubAppSelect(selectedSubApp)">
-                          <option value="0" selected disabled>
+                          <option [ngValue]="null" [disabled]="true">
                             --Select Sub Application/Duty
                           </option>
                           <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp.quality_id">
                             {{ subApp.desc }}
                           </option>
                         </select>
+                      </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['subApp'].dirty || form.controls['subApp'].touched) && form.hasError('required','subApp')">
+                          subApp is required
+                        </small>
                       </div>
                     </div>
 
@@ -249,7 +271,7 @@
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <select formControlName="quality" class="form-select" name="quality"
                           [ngModel]="selectedQuality.id">
-                          <option value="0" selected disabled>
+                          <option [ngValue]="null" [disabled]="true">
                             --Select Quality
                           </option>
                           <option *ngFor="let quality of selectedQualities" [ngValue]="quality.id">
@@ -257,16 +279,31 @@
                           </option>
                         </select>
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['quality'].dirty || form.controls['quality'].touched) && form.hasError('required','quality')">
+                          quality is required
+                        </small>
+                      </div>
 
                       <label class="form-label text-bold text-bold mt-3" for="quantity">Quantity</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="quantity" name="quantity" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Quantity" />
                       </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.hasError('required','quantity')">
+                          quantity is required
+                        </small>
+                      </div>
                       <label class="form-label text-bold mt-3" for="load">Load %</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input type="text" formControlName="load" name="load" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Load %" />
+                      </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['load'].dirty || form.controls['load'].touched) && form.hasError('required','load')">
+                          load is required
+                        </small>
                       </div>
 
                       <label class="form-label text-bold mt-3" for="life">Life %</label>
@@ -274,11 +311,16 @@
                         <input type="text" formControlName="life" name="life" class="form-control"
                           onfocus="focused(this)" onfocusout="defocused(this)" placeholder="Please Enter Life %" />
                       </div>
+                      <div class="text-danger" >
+                        <small *ngIf="form.controls['life'].dirty && form.hasError('required','life')">
+                          life is required
+                        </small>
+                      </div>
                     </div>
                   </div>
 
                   <div class="text-center mt-4">
-                    <button (click)="toggleSideNavShow()" type="submit" data-bs-dismiss="modal"
+                    <button type="submit"
                       class="btn bg-gradient-primary m-2">
                       Create
                     </button>
