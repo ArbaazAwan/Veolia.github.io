@@ -18,12 +18,13 @@ export class SummarytableComponent implements OnInit {
   constructor() { }
 
   @Input() summaryArray!:any[];
+  showSideNav: boolean = true;
+  allComplete: boolean = false;
+  completed: boolean = false;
 
   ngOnInit(): void {
   }
 
-  allComplete: boolean = false;
-  completed: boolean = false;
 
   updateAllComplete() {
     this.allComplete = this.summaryArray != null && this.summaryArray.every(t => t.isChecked);
@@ -42,5 +43,10 @@ export class SummarytableComponent implements OnInit {
     }
     this.summaryArray.forEach(t => (t.completed = completed));
   }
+  
+  toggleShowSideNav() {
+    this.showSideNav = !this.showSideNav;
+  } 
+
 
 }
