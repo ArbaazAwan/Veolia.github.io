@@ -216,7 +216,7 @@
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['unitMeas'].dirty || form.controls['unitMeas'].touched) && form.hasError('required','unitMeas')">
-                          *unit description is required
+                          *unit Meas is required
                         </small>
                       </div>
                     </div>
@@ -227,7 +227,7 @@
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['rev'].dirty || form.controls['rev'].touched) && form.hasError('required','rev')">
-                          *unit description is required
+                          *rev is required
                         </small>
                       </div>
                     </div>
@@ -242,7 +242,7 @@
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['replCost'].dirty || form.controls['replCost'].touched) && form.hasError('required','replCost')">
-                          *unit description is required
+                          *replacement cost is required
                         </small>
                       </div>
                     </div>
@@ -253,7 +253,7 @@
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['lifeMOs'].dirty || form.controls['lifeMOs'].touched) && form.hasError('required','lifeMOs')">
-                          *unit description is required
+                          *life MOs is required
                         </small>
                       </div>
                     </div>
@@ -265,7 +265,7 @@
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['OHLife'].dirty || form.controls['OHLife'].touched) && form.hasError('required','OHLife')">
-                          *unit description is required
+                          *OH life is required
                         </small>
                       </div>
                     </div>
@@ -1779,6 +1779,7 @@
                       <label for="unitDesc" class="form-label text-bold">Unit Description</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
                         <input name="unitDesc" formControlName="unitDesc" type="text" class="form-control"
+                        [ngClass]="(form.controls['unitDesc'].dirty || form.controls['unitDesc'].touched) && form.hasError('required','unitDesc')==true? 'border-danger': ''"
                           placeholder="Please Enter Unit Description" />
                       </div>
                       <div>
@@ -1790,7 +1791,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">App Description</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="appDesc" class="form-control" placeholder="Please Enter App Description" />
+                        <input type="text" formControlName="appDesc" class="form-control" placeholder="Please Enter App Description"
+                        [ngClass]="(form.controls['appDesc'].dirty || form.controls['appDesc'].touched) && form.hasError('required','appDesc')==true? 'border-danger': ''" />
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['appDesc'].dirty || form.controls['appDesc'].touched) && form.hasError('required','appDesc')">
@@ -1801,7 +1803,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">Unit Measurement</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="unitMeas" class="form-control" placeholder="Please Enter Unit Description" />
+                        <input type="text" formControlName="unitMeas" class="form-control" placeholder="Please Enter Unit Description"
+                        [ngClass]="(form.controls['unitMeas'].dirty || form.controls['unitMeas'].touched) && form.hasError('required','unitMeas')==true? 'border-danger': ''" />
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['unitMeas'].dirty || form.controls['unitMeas'].touched) && form.hasError('required','unitMeas')">
@@ -1812,7 +1815,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">Rev</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="rev" class="form-control" placeholder="Please Enter Rev" />
+                        <input type="text" formControlName="rev" class="form-control" placeholder="Please Enter Rev"
+                        [ngClass]="(form.controls['rev'].dirty || form.controls['rev'].touched) && form.hasError('required','rev')==true? 'border-danger': ''"/>
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['rev'].dirty || form.controls['rev'].touched) && form.hasError('required','rev')">
@@ -1826,7 +1830,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">Replacement Cost</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="replCost" class="form-control" placeholder=" Please Enter Replacement Cost" />
+                        <input type="text" formControlName="replCost" class="form-control" placeholder=" Please Enter Replacement Cost"
+                        [ngClass]="(form.controls['replCost'].dirty || form.controls['replCost'].touched) && form.hasError('required','replCost')==true? 'border-danger': ''" />
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['replCost'].dirty || form.controls['replCost'].touched) && form.hasError('required','replCost')">
@@ -1837,7 +1842,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">Life MO's</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="lifeMOs" class="form-control" placeholder="Please Enter Number of Life Months" />
+                        <input type="text" formControlName="lifeMOs" class="form-control" placeholder="Please Enter Number of Life Months"
+                        [ngClass]="(form.controls['lifeMOs'].dirty || form.controls['lifeMOs'].touched) && form.hasError('required','lifeMOs')==true? 'border-danger': ''"/>
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['lifeMOs'].dirty || form.controls['lifeMOs'].touched) && form.hasError('required','lifeMOs')">
@@ -1848,7 +1854,8 @@
                     <div class="mx-4 my-1">
                       <label class="form-label text-bold">OH Life%</label>
                       <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="OHLife" class="form-control form-floating" placeholder="Please Enter OH Life %" />
+                        <input type="text" formControlName="OHLife" class="form-control form-floating" placeholder="Please Enter OH Life %"
+                        [ngClass]="(form.controls['OHLife'].dirty || form.controls['OHLife'].touched) && form.hasError('required','OHLife')==true? 'border-danger': ''"/>
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['OHLife'].dirty || form.controls['OHLife'].touched) && form.hasError('required','OHLife')">
