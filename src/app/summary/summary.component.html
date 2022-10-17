@@ -345,7 +345,7 @@
     </div>
 
     <div class="mt-6">
-      <app-summarytable [summaryArray]="summaryArray"></app-summarytable>
+      <app-summarytable (sideNavOutput)="getSideNavOutPut($event)" [summaryArray]="summaryArray"></app-summarytable>
     </div>
   </div>
   <app-footer></app-footer>
