@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-clients',
@@ -8,11 +8,18 @@ import { FormGroup } from '@angular/forms';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb:FormBuilder) { }
   showSideNav:boolean = true;
   form!:FormGroup;
+  clientsArray:any[]=[];
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      clientName:['', Validators.required],
+      clientCompanyName:['', Validators.required],
+      clientAddress:['', Validators.required],
+      clientEmail:['', Validators.required],
+    })
   }
 
   selectedClient: any ={
@@ -21,11 +28,21 @@ export class ClientsComponent implements OnInit {
   };
   clients!:any[];
   onClientSelect(selectedClient:any){
-    
+
+  }
+  resetForm(){
+    this.form.reset();
   }
 
   toggleSideNavShow(){
     this.showSideNav = !this.showSideNav;
+  }
+
+  onSubmit(){
+    this.clientsArray.push(this.form.value);
+
+    this.toggleSideNavShow();
+    this.resetForm();
   }
 
 
