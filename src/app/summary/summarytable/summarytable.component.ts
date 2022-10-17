@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
@@ -21,6 +22,7 @@ export class SummarytableComponent implements OnInit {
   showSideNav: boolean = true;
   allComplete: boolean = false;
   completed: boolean = false;
+  selectedAssets:any[]=[];
 
   ngOnInit(): void {
   }
@@ -43,10 +45,24 @@ export class SummarytableComponent implements OnInit {
     }
     this.summaryArray.forEach(t => (t.completed = completed));
   }
-  
+
   toggleShowSideNav() {
     this.showSideNav = !this.showSideNav;
-  } 
+  }
 
+  selection = new SelectionModel<any>(true, []);
 
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.summaryArray.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.summaryArray.forEach(row => this.selection.select(row));
+  }
 }

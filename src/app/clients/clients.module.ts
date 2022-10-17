@@ -7,13 +7,17 @@ import { ClientsListComponent } from './clients-list/clients-list.component';
 import { RouterModule } from '@angular/router';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { SitesModule } from '../sites/sites.module';
+import { ClientstableComponent } from './clientstable/clientstable.component';
+import { SidenavModule } from '../sidenav/sidenav.module';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     ClientsComponent,
-    ClientsListComponent
+    ClientsListComponent,
+    ClientstableComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { SitesModule } from '../sites/sites.module';
     FooterModule,
     RouterModule,
     MatExpansionModule,
-    SitesModule
+    SitesModule,
+    SidenavModule,
+    FormsModule,
   ],
   exports:[
     ClientsComponent,

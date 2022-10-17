@@ -8,7 +8,7 @@ import { NavbarModule } from '../navbar/navbar.module';
 import { SummarytableComponent } from './summarytable/summarytable.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -25,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NavbarModule,
     MatCheckboxModule,
-    NgbModule
+    NgbModule,
+    MatSelectModule
   ]
 })
 export class SummaryModule { }
