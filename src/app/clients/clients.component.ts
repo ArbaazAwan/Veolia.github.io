@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-clients',
@@ -8,8 +9,24 @@ import { Component, OnInit } from '@angular/core';
 export class ClientsComponent implements OnInit {
 
   constructor() { }
+  showSideNav:boolean = true;
+  form!:FormGroup;
 
   ngOnInit(): void {
   }
+
+  selectedClient: any ={
+    id:null,
+    name:''
+  };
+  clients!:any[];
+  onClientSelect(selectedClient:any){
+    
+  }
+
+  toggleSideNavShow(){
+    this.showSideNav = !this.showSideNav;
+  }
+
 
 }

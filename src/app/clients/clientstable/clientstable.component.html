@@ -1,108 +1,81 @@
+<div class="row mt-6">
+  <div class="col-12">
+    <div class="card my-4">
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <p class="text-white text-capitalize text-bold ps-3">Clients Table</p>
+        </div>
+      </div>
 
-  <div class="container-fluid py-4">
-    <div class="float-start">
-      <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right">
-        Add Client
-      </button>
-    </div>
-
-    <div class="float-end">
-      <span>
-
-        <label class="form-label text-bold mt-3" for="assetType">Asset Type</label>
-                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <select class="form-select" name="assetType"
-                          [(ngModel)]="selectedClient.id" (change)="onClientSelect(selectedClient)">
-                          <option [ngValue]="null" [disabled]="true">
-                           --Select Client
-                          </option>
-                          <option class="dropdown-item" *ngFor="let client of clients" [ngValue]="client.id">
-                            {{ client.name }}
-                          </option>
-                        </select>
+      <!-- Summary table -->
+      <div class="card-body px-0 pb-2">
+        <div class="p-0">
+          <table class="table table-blocked table-hover mx-3 mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  id
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Client Name
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Company Name
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Address
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Edit
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">123</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">abc</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">cdf</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">dgr</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1 ps-3">
+                    <div class="d-flex flex-column">
+                      <div>
+                        <button class="btn btn-sm bg-gradient-primary">
+                          Edit
+                        </button>
                       </div>
-
-         <input type="text" placeholder="dropdown for clients">    <input type="text" placeholder="dropdown for sites"></span>
-    </div>
-
-    <div class="row mt-6">
-      <div class="col-12">
-        <div class="card my-4">
-          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <p class="text-white text-capitalize text-bold ps-3">Clients Table</p>
-            </div>
-          </div>
-
-          <!-- Summary table -->
-          <div class="card-body px-0 pb-2">
-            <div class="p-0">
-              <table class="table table-blocked table-hover mx-3 mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                      id
-                    </th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                      Client Name
-                    </th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                      Company Name
-                    </th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                      Address
-                    </th>
-                    <th class="text-uppercase text-bold text-xs font-weight-bolder ">
-                      Edit
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm">123</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm">abc</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm">cdf</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex py-1">
-                        <div class="d-flex flex-column">
-                          <p class="mb-0 text-sm">dgr</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex py-1 ps-3">
-                        <div class="d-flex flex-column">
-                          <div>
-                            <button class="btn btn-sm bg-gradient-primary">Edit</button>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-
   </div>
+</div>
