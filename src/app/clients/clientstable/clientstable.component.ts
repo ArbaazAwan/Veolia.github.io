@@ -8,14 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ClientstableComponent implements OnInit {
 
   constructor() { }
-  selectedClient: any ={
-    id:null,
-    name:''
-  };
-  clients!:any[];
-  onClientSelect(selectedClient:any){
-
-  }
+  
 
   ngOnInit(): void {
   }
