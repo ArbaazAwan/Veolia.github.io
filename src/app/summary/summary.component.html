@@ -15,17 +15,15 @@
     </div>
 
     <div class="float-end">
-      <button type="button" (click)="toggleSideNavShow()" class="btn bg-gradient-primary text-right mx-3 mt-1"
+      <button type="button" (click)="toggleSideNavShow()" class="btn bg-gradient-primary text-right mx-2 mt-1"
         data-bs-toggle="modal" data-bs-target="#detail-table">
         View More Info
       </button>
-    </div>
-
-    <div class="float-end">
-      <button type="button" class="btn bg-gradient-primary text-right mx-3 mt-1">
+      <button type="button" class="btn bg-gradient-primary text-right mx-2 mt-1">
         Export Summary
       </button>
     </div>
+
 
     <!-- asset detail table modal -->
     <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table"
@@ -205,9 +203,7 @@
                           <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType.id">
                             {{ assetType.name }}
                           </option>
-
                         </select>
-
                       </div>
                       <div>
                         <small class="text-danger" *ngIf="(form.controls['assetType'].dirty || form.controls['assetType'].touched) && form.hasError('required','assetType')">
