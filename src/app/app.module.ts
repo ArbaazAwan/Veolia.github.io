@@ -36,6 +36,7 @@ import { SitesModule } from './sites/sites.module';
 import { NodeService } from './master/view-master-table/node.service';
 import { ClientstableComponent } from './clients/clientstable/clientstable.component';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
+import { SitesComponent } from './sites/sites.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ClientsListComponent } from './clients/clients-list/clients-list.compon
       { path: 'registration', component:RegistrationComponent },
       { path: 'clients', component:ClientsListComponent },
       { path: 'clientstable', component:ClientsComponent },
+      { path: 'sites', component:SitesComponent },
       { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'master', component:MasterComponent },
