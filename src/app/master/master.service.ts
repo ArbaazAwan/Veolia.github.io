@@ -461,7 +461,7 @@ export class MasterService {
       },
       {
         id: '3',
-        assetName: 'asset3',
+        unitDesc: 'asset3',
         appDesc: 'appdesc 3',
         unitMeas: 'unit meas3',
         rev: '345',

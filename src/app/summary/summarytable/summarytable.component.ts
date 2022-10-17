@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
 export interface Task {
@@ -18,9 +19,11 @@ export class SummarytableComponent implements OnInit {
   constructor() { }
 
   @Input() summaryArray!:any[];
-  showSideNav: boolean = true;
+  @Output() sideNavOutput =new EventEmitter<{ showSideNav: boolean }>();
+  showSideNav:boolean = true;
   allComplete: boolean = false;
   completed: boolean = false;
+  selectedAssets:any[]=[];
 
   ngOnInit(): void {
   }
@@ -43,10 +46,29 @@ export class SummarytableComponent implements OnInit {
     }
     this.summaryArray.forEach(t => (t.completed = completed));
   }
-  
+
   toggleShowSideNav() {
     this.showSideNav = !this.showSideNav;
-  } 
+    this.sideNavOutput.emit({showSideNav:this.showSideNav});
+  }
 
+  selection = new SelectionModel<any>(true, []);
 
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.summaryArray.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.summaryArray.forEach(row => this.selection.select(row));
+  }
 }
+function output() {
+  throw new Error('Function not implemented.');
+}
+

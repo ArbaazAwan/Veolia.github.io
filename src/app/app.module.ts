@@ -34,8 +34,8 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
 import { NodeService } from './master/view-master-table/node.service';
-import { UsersModule } from './users/users.module';
-import { UsersComponent } from './users/users.component';
+import { ClientstableComponent } from './clients/clientstable/clientstable.component';
+import { ClientsListComponent } from './clients/clients-list/clients-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,8 @@ import { UsersComponent } from './users/users.component';
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
-      { path: 'clients', component:ClientsComponent },
+      { path: 'clients', component:ClientsListComponent },
+      { path: 'clientstable', component:ClientsComponent },
       { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
       { path: 'master', component:MasterComponent },
