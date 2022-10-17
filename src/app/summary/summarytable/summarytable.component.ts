@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 
 export interface Task {
@@ -19,7 +19,8 @@ export class SummarytableComponent implements OnInit {
   constructor() { }
 
   @Input() summaryArray!:any[];
-  showSideNav: boolean = true;
+  @Output() sideNavOutput =new EventEmitter<{ showSideNav: boolean }>();
+  showSideNav:boolean = true;
   allComplete: boolean = false;
   completed: boolean = false;
   selectedAssets:any[]=[];
@@ -48,6 +49,7 @@ export class SummarytableComponent implements OnInit {
 
   toggleShowSideNav() {
     this.showSideNav = !this.showSideNav;
+    this.sideNavOutput.emit({showSideNav:this.showSideNav});
   }
 
   selection = new SelectionModel<any>(true, []);
@@ -66,3 +68,7 @@ export class SummarytableComponent implements OnInit {
         this.summaryArray.forEach(row => this.selection.select(row));
   }
 }
+function output() {
+  throw new Error('Function not implemented.');
+}
+

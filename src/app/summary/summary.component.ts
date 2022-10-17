@@ -282,6 +282,9 @@ export class SummaryComponent implements OnInit {
         this.validateAllFormFields(control);
     })
   }
+  getSideNavOutPut(showSideNav:{showSideNav:boolean}){
+    this.showSideNav = showSideNav.showSideNav;
+  }
 
   onSubmit(){
 
