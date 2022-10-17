@@ -1,0 +1,106 @@
+<aside
+  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+  id="sidenav-main" *ngIf="showSideNav">
+  <app-side-navbar>
+
+  </app-side-navbar>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
+  <app-navbar></app-navbar>
+
+  <div class="container-fluid py-4">
+    <div class="float-start">
+      <button (click)="toggleSideNavShow() ; formReset();"type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
+      data-bs-toggle="modal" data-bs-target="#modal-form">
+        Create User
+      </button>
+    </div>
+
+    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card card-plain">
+                <div class="card-header pb-0 text-left">
+                  <h5 class="">User
+                    <span class="text-right float-end">
+                      <button (click)="toggleSideNavShow()" data-bs-dismiss="modal"
+                        class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="material-icons" style="font-size: 30px">close</i>
+                      </button>
+                    </span>
+                  </h5>
+                  <p class="mb-0">Enter User Details</p>
+                </div>
+                <div class="card-body">
+                  <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+  
+                    <div class="row">
+  
+                      <div class="col-md-6">
+  
+                        <div class="mx-4 my-1">
+                          <label class="form-label text-bold">Serial Number</label>
+                          <div class="input-group input-group-outline">
+                            <input type="number" formControlName="serialNumber" class="form-control" placeholder="Please Enter Serial Number" onfocus="focused(this)"
+                              onfocusout="defocused(this)" />
+                          </div>
+                        </div>
+                        <div class="mx-4 my-1">
+                          <label class="form-label text-bold">Name</label>
+                          <div class="input-group input-group-outline">
+                            <input type="text" formControlName="name" class="form-control" placeholder="Please Enter Name" onfocus="focused(this)"
+                              onfocusout="defocused(this)" />
+                          </div>
+                        </div>
+  
+                      </div>
+  
+                      <div class="col-md-6">
+  
+                        <div class="mx-4 my-1">
+                          <label class="form-label text-bold">Email</label>
+                          <div class="input-group input-group-outline">
+                            <input type="email" formControlName="email" class="form-control" placeholder="Please Enter email"
+                              onfocus="focused(this)" onfocusout="defocused(this)" />
+                          </div>
+                        </div>
+                        <div class="mx-4 my-1">
+                          <label class="form-label text-bold">Role</label>
+                          <div class="input-group input-group-outline">
+                            <input type="text" formControlName="role" class="form-control" placeholder="Please Enter Role"
+                            onfocus="focused(this)" onfocusout="defocused(this)" />
+                          </div>
+                        </div>
+  
+                      </div>
+  
+                    </div>
+                    <div class="text-center mt-2">
+                      <button (click)="toggleSideNavShow();" type="submit" data-bs-dismiss="modal"
+                        class="btn bg-gradient-primary m-2">
+                        Create
+                      </button>
+                      <button (click)="toggleSideNavShow();formReset();" type="button" data-bs-dismiss="modal"
+                        class="btn bg-gradient-secondary m-2">
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div class="mt-6">
+      <app-userstable [userArray]="userArray"></app-userstable>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</main>
+
+<app-setting-plugin></app-setting-plugin>

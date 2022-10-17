@@ -34,6 +34,8 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
 import { NodeService } from './master/view-master-table/node.service';
+import { UsersModule } from './users/users.module';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { NodeService } from './master/view-master-table/node.service';
     ProfileModule,
     ClientsModule,
     SitesModule,
+    UsersModule,
 
 
     BrowserModule,
@@ -71,6 +74,7 @@ import { NodeService } from './master/view-master-table/node.service';
       { path: 'unit', component:UnitComponent },
       { path: 'summary', component:SummaryComponent },
       { path: 'permission',component:PermissionComponent },
+      { path: 'users',component:UsersComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),
