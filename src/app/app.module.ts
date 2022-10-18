@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { RouterModule } from '@angular/router';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -33,8 +30,6 @@ import { PermissionComponent } from './permission/permission.component';
 import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
-import { NodeService } from './master/view-master-table/node.service';
-import { ClientstableComponent } from './clients/clientstable/clientstable.component';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
 import { SitesComponent } from './sites/sites.component';
 

@@ -10,6 +10,7 @@ import { SitesModule } from '../sites/sites.module';
 import { ClientstableComponent } from './clientstable/clientstable.component';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SitesModule,
     SidenavModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   exports:[
     ClientsComponent,

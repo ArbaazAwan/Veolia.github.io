@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchPipe } from '../pipes/search.pipe';
 import {MatSortModule} from '@angular/material/sort';
 import {TreeTableModule} from 'primeng/treetable';
-import { NodeService } from './view-master-table/node.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
