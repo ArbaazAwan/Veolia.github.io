@@ -9,6 +9,12 @@
 
       <!-- Summary table -->
       <div class="card-body px-0 pb-2">
+        <div class="flex-end px-3 pb-3 col-md-3">
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+            <mat-label>Search Clients</mat-label>
+            <input matInput type="text" [(ngModel)]="searchText">
+          </mat-form-field>
+        </div>
         <div class="p-0">
           <table class="table table-blocked table-hover mx-3 mb-0">
             <thead>
@@ -34,7 +40,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let client of clientsArray">
+              <tr *ngFor="let client of clientsArray|searchFilter:searchText">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">

@@ -15,21 +15,27 @@ export class SitesListComponent implements OnInit {
     this.sitesList=[
       {
         siteName:'Site 1',
-        desc:'this is the description',
+        address:'abc street xyz city',
         siteClient:'Client1',
-        siteManager:'ABC'
+        siteContactPerson:'ABC',
+        phone:'123456',
+        email:'abc@xyz.com'
       },
       {
         siteName:'Site 2',
-        desc:'this is the description',
+        address:'abc street xyz city',
         siteClient:'Client1',
-        siteManager:'BCD'
+        siteContactPerson:'BCD',
+        phone:'123456',
+        email:'abc@xyz.com'
       },
       {
         siteName:'Site 3',
-        desc:'this is the description',
+        address:'abc street xyz city',
         siteClient:'Client1',
-        siteManager:'CDE'
+        siteContactPerson:'CDE',
+        phone:'123456',
+        email:'abc@xyz.com'
       }
     ]
   }

@@ -25,7 +25,10 @@
           </div>
           <div class="card-body px-0 pb-2">
             <div class="flex-end px-3 pb-3 col-md-3">
-              <input [(ngModel)]="assetSearchText" class="form-control" placeholder="Search assets..." type="text" />
+              <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+                <mat-label>Search assets</mat-label>
+                <input matInput type="text" [(ngModel)]="assetSearchText">
+              </mat-form-field>
             </div>
             <div class="p-0">
               <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
