@@ -9,6 +9,9 @@ import { SummarytableComponent } from './summarytable/summarytable.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatSelectModule } from '@angular/material/select';
+import { PipesModule } from '../pipes/pipes.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -25,8 +28,11 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     NavbarModule,
     MatCheckboxModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
     NgbModule,
-    MatSelectModule
+    PipesModule
   ]
 })
 export class SummaryModule { }
