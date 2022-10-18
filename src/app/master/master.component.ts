@@ -13,6 +13,7 @@ import { MasterService } from './master.service';
   styleUrls: ['./master.component.scss'],
 })
 export class MasterComponent implements OnInit {
+  title:string='Master';
   form!: FormGroup;
   showSideNav: boolean = true;
   assets!: any[];

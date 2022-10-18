@@ -65,8 +65,8 @@ import { SitesComponent } from './sites/sites.component';
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
-      { path: 'clients', component:ClientsListComponent },
-      { path: 'clientstable', component:ClientsComponent },
+      { path: 'clientslist', component:ClientsListComponent },
+      { path: 'clients', component:ClientsComponent },
       { path: 'sites', component:SitesComponent },
       { path: 'profile',component:ProfileComponent },
       { path: 'dashboard', component:DashboardComponent },
