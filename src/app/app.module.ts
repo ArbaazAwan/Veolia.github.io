@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { Error404Component } from './errors/404.component';
 import { ModelComponent } from './model/model.component';
 import { ModelModule } from './model/model.module';
@@ -31,7 +30,10 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
+import { UsersComponent } from './users/users.component';
+import { UsersModule } from './users/users.module';
 import { SitesComponent } from './sites/sites.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { SitesComponent } from './sites/sites.component';
     ProfileModule,
     ClientsModule,
     SitesModule,
+    UsersModule,
 
 
     BrowserModule,
@@ -71,6 +74,7 @@ import { SitesComponent } from './sites/sites.component';
       { path: 'unit', component:UnitComponent },
       { path: 'summary', component:SummaryComponent },
       { path: 'permission',component:PermissionComponent },
+      { path: 'users',component:UsersComponent },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),
