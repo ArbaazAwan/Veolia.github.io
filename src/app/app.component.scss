@@ -1,1 +1,8 @@
 
+:host ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  color: rgb(221,37,103);
+}
+
+:host::ng-deep .mat-form-field-appearance-outline.mat-focused mat-label{
+  color: rgb(221,37,103);
+}

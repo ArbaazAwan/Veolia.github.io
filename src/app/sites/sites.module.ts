@@ -11,6 +11,7 @@ import { SidenavModule } from '../sidenav/sidenav.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -30,7 +31,8 @@ import { MatInputModule } from '@angular/material/input';
     SidenavModule,
     NgbModule,
     PipesModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   exports:[
     SitesListComponent,

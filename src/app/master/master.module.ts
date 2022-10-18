@@ -14,6 +14,7 @@ import {TreeTableModule} from 'primeng/treetable';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
 import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {MatInputModule} from '@angular/material/input';
     MatSelectModule,
     MatSortModule,
     MatInputModule,
+    MatIconModule,
     NgbModule,
     TreeTableModule,
     HttpClientModule,

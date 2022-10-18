@@ -24,6 +24,7 @@ export class SummarytableComponent implements OnInit {
   allComplete: boolean = false;
   completed: boolean = false;
   selectedAssets:any[]=[];
+  searchText:string = '';
 
   ngOnInit(): void {
   }
