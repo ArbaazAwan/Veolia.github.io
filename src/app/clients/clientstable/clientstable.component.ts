@@ -10,9 +10,10 @@ export class ClientstableComponent implements OnInit {
   constructor() { }
 
   @Input() clientsArray!:any[];
+  searchText:string='';
 
   ngOnInit(): void {
-    
+
   }
 
 }

@@ -11,6 +11,9 @@ import { ClientstableComponent } from './clientstable/clientstable.component';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PipesModule } from '../pipes/pipes.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -30,7 +33,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidenavModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    PipesModule,
+    MatInputModule,
+    MatIconModule
   ],
   exports:[
     ClientsComponent,

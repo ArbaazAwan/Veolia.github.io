@@ -1,108 +1,36 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-  <div class="container-fluid py-1 px-3">
-    <nav aria-label="breadcrumb">
-      <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
-      </ol> -->
-      <h4 class="font-weight-bolder mb-0">{{title}}</h4>
-    </nav>
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+  data-scroll="true">
+  <div class="container-fluid py-1">
+      <h4 class="font-weight-bolder mb-0">{{ title }}</h4>
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="row float-end">
-            <div class="col-sm-6">
-              <!-- <mat-form-field appearance="outline" class="mx-3 mb-3" style="font-size: 80%">
-                <mat-label
-                  ><mat-icon style="font-size: 120%"><i class="text-sm">people</i> </mat-icon> Search Clients
-                </mat-label>
-                <input
-                [(ngModel)]="selectedClient.name"
-                  matInput
-                  type="text"
-                  [matAutocomplete]="auto"
-                />
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let client of filteredClients" [value]="client.name">
-                    {{ client.name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field> -->
-              <!-- <p-dropdown dropdownIcon="pi pi-user" [options]="clients" [(ngModel)]="selectedClient" placeholder="Select a Client" [filter]="true" filterBy="name"  optionLabel="name" [showClear]="true"></p-dropdown> -->
-              <span></span>
-              <div class="row">
-                  <div class="col-md-2 mt-2 mx-0">
-                    <i class="large material-icons">people</i>
-                  </div>
-                <div class="col-md-10">
-                    <ng-autocomplete
-                  [data]="clients"
-                  [searchKeyword]="keyword"
-                  placeholder="Enter the Client Name"
-                  (selected)='selectEvent($event)'
-                  (inputChanged)='onChangeSearch($event)'
-                  (inputFocused)='onFocused($event)'
-                  historyIdentifier="clients"
-                  [itemTemplate]="itemTemplate"
-                  [notFoundTemplate]="notFoundTemplate">
-                </ng-autocomplete>
-
-                  <ng-template #itemTemplate let-item>
-                    <a [innerHTML]="item.name"></a>
-                  </ng-template>
-                  <ng-template #notFoundTemplate let-item>
-                    <p>Client not Found</p>
-                  </ng-template>
-              </div>
-
-              </div>
-
-            </div>
-            <div class="col-sm-6">
-              <!-- <mat-form-field appearance="outline" class="mx-3 mb-3" style="font-size: 80%">
-                <mat-label
-                  ><mat-icon style="font-size: 120%"><i class="text-sm">building</i> </mat-icon> Search Sites
-                </mat-label>
-                <input
-                  matInput
-                  type="text"
-                  [matAutocomplete]="auto2"
-                />
-                <mat-autocomplete #auto2="matAutocomplete">
-                  <mat-option *ngFor="let site of sites" [value]="site.name">
-                    {{ site.name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field> -->
-
-              <div class="row">
-                <div class="col-md-2 mt-2">
-                  <i class="large material-icons">business</i>
-                </div>
-                <div class="col-md-10">
-                  <ng-autocomplete
-                [data]="sites"
-                [searchKeyword]="keyword"
-                placeholder="Enter the Site Name"
-                (selected)='selectEvent($event)'
-                (inputChanged)='onChangeSearch($event)'
-                (inputFocused)='onFocused($event)'
-                historyIdentifier="sites"
-                [itemTemplate]="itemTemplate"
-                [notFoundTemplate]="notFoundTemplate">
-              </ng-autocomplete>
-
-              <ng-template #itemTemplate let-item>
-                <a [innerHTML]="item.name"></a>
-              </ng-template>
-              <ng-template #notFoundTemplate let-item>
-                <p>Site not Found</p>
-              </ng-template>
-                </div>
-              </div>
-
-            </div>
+        <div class="row float-end">
+          <div class="col-sm-6 my-3">
+            <mat-form-field appearance="outline" class="text-xs">
+              <mat-label> Select Client </mat-label>
+              <input [(ngModel)]="selectedClient.name" matInput type="text" [matAutocomplete]="auto" />
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="
+                    let client of clients | searchFilter: selectedClient.name" [value]="client.name">
+                  {{ client.name }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-icon matSuffix>people</mat-icon>
+            </mat-form-field>
           </div>
-
+          <div class="col-sm-6 my-3">
+            <mat-form-field appearance="outline" class="text-xs">
+              <mat-label> Select Site </mat-label>
+              <input [(ngModel)]="selectedSite.name" matInput type="text" [matAutocomplete]="auto2" />
+              <mat-autocomplete #auto2="matAutocomplete">
+                <mat-option *ngFor="let site of sites | searchFilter: selectedSite.name" [value]="site.name">
+                  {{ site.name }}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-icon matSuffix>business</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
       </div>
       <ul class="navbar-nav justify-content-end">
         <li class="nav-item d-flex align-items-center">

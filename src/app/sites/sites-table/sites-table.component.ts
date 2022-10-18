@@ -10,6 +10,7 @@ export class SitesTableComponent implements OnInit {
   constructor() { }
 
   @Input() sitesArray!:any[];
+  searchText:string = '';
 
   ngOnInit(): void {
   }

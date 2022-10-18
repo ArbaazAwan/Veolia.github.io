@@ -13,10 +13,9 @@
   <div class="row">
     <form [formGroup]="formGroup">
       <div class="content col-12" role="main">
-
         <mat-form-field appearance="outline" class="mx-3 mb-3" style="font-size: 80%">
           <mat-label
-            ><mat-icon style="font-size: 120%"><i class="text-sm">search</i> </mat-icon> Search Assets...
+            > Search Assets
           </mat-label>
           <input
             formControlName="asset"
@@ -29,6 +28,7 @@
               {{ item }}
             </mat-option>
           </mat-autocomplete>
+          <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
         <span class="float-end my-3 mx-5">
