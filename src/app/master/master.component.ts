@@ -16,15 +16,11 @@ export class MasterComponent implements OnInit {
   title:string='Master';
   form!: FormGroup;
   showSideNav: boolean = true;
-  assets!: any[];
-  assetSearchText: string = '';
-  sortedAssets!: any[];
   eventEvalTableShow: boolean = false;
 
   constructor(private fb: FormBuilder, private masterService: MasterService) {}
 
   ngOnInit(): void {
-    this.assets = this.masterService.loadAssets(); //loading the assets
 
     this.form = this.fb.group({
       //building form
@@ -42,7 +38,6 @@ export class MasterComponent implements OnInit {
       overhaulLabors: this.fb.array([]),
       overhaulConts: this.fb.array([]),
     });
-    this.sortedAssets = this.assets.slice();
   }
 
   maintenances(): FormArray {
@@ -161,53 +156,6 @@ export class MasterComponent implements OnInit {
 
   toggleShowSideNav() {
     this.showSideNav = !this.showSideNav;
-  }
-  viewAsset(asset: any) {
-    this.toggleShowSideNav();
-    this.masterService.setAsset(asset);
-  }
-
-  editAsset(asset: any) {
-    this.toggleShowSideNav();
-  }
-
-  sortAssets(sort: any) {
-    const data = this.assets.slice();
-    if (!sort.active || sort.direction === '') {
-      return;
-    }
-
-    this.sortedAssets = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'id':
-          return this.compare(a.id, b.id, isAsc);
-        case 'unitDesc':
-          return this.compare(a.unitDesc, b.unitDesc, isAsc);
-        case 'appDesc':
-          return this.compare(a.appDesc, b.appDesc, isAsc);
-        case 'unitMeas':
-          return this.compare(a.unitMeas, b.unitMeas, isAsc);
-        case 'rev':
-          return this.compare(a.rev, b.rev, isAsc);
-        case 'unitCode':
-          return this.compare(a.unitCode, b.unitCode, isAsc);
-        case 'appCode':
-          return this.compare(a.appCode, b.appCode, isAsc);
-        case 'replCost':
-          return this.compare(a.replCost, b.replCost, isAsc);
-        case 'lifeMOs':
-          return this.compare(a.lifeMOs, b.lifeMOs, isAsc);
-        case 'OHLife':
-          return this.compare(a.OHLife, b.OHLife, isAsc);
-
-        default:
-          return 0;
-      }
-    });
-  }
-  compare(a: number | string, b: number | string, isAsc: boolean): any {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   onSubmit() {

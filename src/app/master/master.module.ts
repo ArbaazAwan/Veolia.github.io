@@ -15,11 +15,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MasterTableComponent } from './master-table/master-table.component';
+import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
 
 @NgModule({
   declarations: [
     MasterComponent,
     ViewMasterTableComponent,
+    MasterTableComponent,
+    CreateMasterFormComponent,
   ],
   imports: [
     CommonModule,
