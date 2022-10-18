@@ -36,6 +36,8 @@ import { SitesModule } from './sites/sites.module';
 import { NodeService } from './master/view-master-table/node.service';
 import { ClientstableComponent } from './clients/clientstable/clientstable.component';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
+import { UsersComponent } from './users/users.component';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
