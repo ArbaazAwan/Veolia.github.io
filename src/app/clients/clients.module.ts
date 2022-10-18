@@ -12,6 +12,7 @@ import { SidenavModule } from '../sidenav/sidenav.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -32,7 +33,8 @@ import { PipesModule } from '../pipes/pipes.module';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    PipesModule
+    PipesModule,
+    MatInputModule
   ],
   exports:[
     ClientsComponent,

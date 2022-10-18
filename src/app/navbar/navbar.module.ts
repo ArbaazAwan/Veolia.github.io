@@ -6,8 +6,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
-
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { PipesModule } from '../pipes/pipes.module';
 
 
@@ -23,7 +21,6 @@ import { PipesModule } from '../pipes/pipes.module';
     MatInputModule,
     FormsModule,
     MatIconModule,
-    AutocompleteLibModule,
     PipesModule
   ],
   exports:[

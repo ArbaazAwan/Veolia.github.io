@@ -9,11 +9,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select';
 import { ViewMasterTableComponent } from './view-master-table/view-master-table.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SearchPipe } from '../pipes/search.pipe';
 import {MatSortModule} from '@angular/material/sort';
 import {TreeTableModule} from 'primeng/treetable';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { PipesModule } from '../pipes/pipes.module';
     MatTabsModule,
     MatSelectModule,
     MatSortModule,
+    MatInputModule,
     NgbModule,
     TreeTableModule,
     HttpClientModule,

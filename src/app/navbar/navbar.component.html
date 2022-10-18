@@ -5,8 +5,8 @@
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
         <div class="row float-end">
-          <div class="col-sm-6">
-            <mat-form-field appearance="outline" class="my-3 text-xs">
+          <div class="col-sm-6 my-3">
+            <mat-form-field appearance="outline" class="text-xs">
               <mat-label> Select Client </mat-label>
               <input [(ngModel)]="selectedClient.name" matInput type="text" [matAutocomplete]="auto" />
               <mat-autocomplete #auto="matAutocomplete">
@@ -18,8 +18,8 @@
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
           </div>
-          <div class="col-sm-6">
-            <mat-form-field appearance="outline" class="text-xs my-3">
+          <div class="col-sm-6 my-3">
+            <mat-form-field appearance="outline" class="text-xs">
               <mat-label> Select Site </mat-label>
               <input [(ngModel)]="selectedSite.name" matInput type="text" [matAutocomplete]="auto2" />
               <mat-autocomplete #auto2="matAutocomplete">
