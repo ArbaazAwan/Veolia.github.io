@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { Error404Component } from './errors/404.component';
 import { ModelComponent } from './model/model.component';
 import { ModelModule } from './model/model.module';
@@ -34,6 +33,7 @@ import { ClientsListComponent } from './clients/clients-list/clients-list.compon
 import { UsersComponent } from './users/users.component';
 import { UsersModule } from './users/users.module';
 import { SitesComponent } from './sites/sites.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [

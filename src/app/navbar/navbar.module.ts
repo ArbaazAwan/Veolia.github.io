@@ -12,7 +12,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
   imports: [
     CommonModule,
     RouterModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
   ],
   exports:[
     NavbarComponent
