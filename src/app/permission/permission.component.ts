@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-permission',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PermissionComponent implements OnInit {
 
   constructor() { }
+  @Input() title:string = 'Permissions';
 
   ngOnInit(): void {
   }

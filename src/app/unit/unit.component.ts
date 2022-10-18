@@ -15,7 +15,7 @@ import { TableUtil } from './unitServices/tableUtil';
 export class UnitComponent implements OnInit {
 
   searchText = '';
-  title = 'autocomplete';
+  title = 'Unit';
   options !: string[];
   filteredOptions!: string[];
   formGroup!: any;
@@ -55,5 +55,5 @@ export class UnitComponent implements OnInit {
     // method needed to be implemented
   }
 
-  
+
 }

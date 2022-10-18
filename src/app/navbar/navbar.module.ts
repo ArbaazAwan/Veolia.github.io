@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { DropdownModule } from 'primeng/dropdown';
-
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 
 @NgModule({
@@ -14,8 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule,
-    DropdownModule
+    AutocompleteLibModule
   ],
   exports:[
     NavbarComponent

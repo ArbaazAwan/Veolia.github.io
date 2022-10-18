@@ -4,7 +4,7 @@
   <app-side-navbar></app-side-navbar>
 </aside>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-  <app-navbar></app-navbar>
+  <app-navbar [title]="title"></app-navbar>
   <div class="container-fluid py-2">
 
     <div class="float-start">
@@ -22,7 +22,7 @@
   <!-- clients form here -->
 
   <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
       <div class="modal-content">
         <div class="modal-body p-0">
           <div class="card card-plain">
