@@ -74,9 +74,25 @@
                   <div class="d-flex py-1 ps-3">
                     <div class="d-flex flex-column">
                       <div>
-                        <button class="btn btn-sm bg-gradient-primary">
-                          Edit
-                        </button>
+                        <div class="d-flex py-1">
+                          <div class="d-flex flex-column">
+                            <div ngbDropdown>
+                              <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                                Actions
+                              </button>
+                              <div ngbDropdownMenu="gfg">
+                                <button ngbDropdownItem class="">
+                                  <i class="material-icons">edit</i>&nbsp;
+                                  Edit
+                                </button>
+                                <button ngbDropdownItem class="text-danger">
+                                  <i class="material-icons">delete</i>&nbsp;
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

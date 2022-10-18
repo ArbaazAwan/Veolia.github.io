@@ -12,6 +12,7 @@ export class ClientsComponent implements OnInit {
   showSideNav:boolean = true;
   form!:FormGroup;
   clientsArray:any[]=[];
+  title:string = "Clients";
 
   ngOnInit(): void {
     this.form = this.fb.group({

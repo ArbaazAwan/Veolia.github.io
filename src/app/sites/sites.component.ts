@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ export class SitesComponent implements OnInit {
   showSideNav:boolean = true;
   form!:FormGroup;
   sitesArray:any[]=[];
+  @Input() title:string = 'Sites';
 
   ngOnInit(): void {
     this.form = this.fb.group({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,10 +9,20 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
-  selectedClient: any;
+  @Input() title:string='';
+
+  selectedClient: any={
+    name:''
+  };
   clients!:any[];
-  selectedSite:any;
+  selectedSite:any={
+    name:''
+  };
   sites!:any[];
+  filteredSites:any[]=[];
+  filteredClients:any[]=[];
+
+  keyword = 'name';
 
   ngOnInit(): void {
     this.clients= [
@@ -27,7 +37,20 @@ export class NavbarComponent implements OnInit {
       { name: "Site 3" },
       { name: "Site 4" },
       { name: "Site 5" },
-    ]
+    ];
+  }
+
+  selectEvent(item:any) {
+    // do something with selected item
+  }
+
+  onChangeSearch(search: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+  }
+
+  onFocused(e:any) {
+    // do something
   }
   onClientSelect(selectedClient:any){
 
@@ -36,5 +59,6 @@ export class NavbarComponent implements OnInit {
   onSiteSelect(selectedClient:any){
 
   }
+
 
 }

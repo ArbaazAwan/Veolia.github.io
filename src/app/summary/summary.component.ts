@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
@@ -10,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class SummaryComponent implements OnInit {
 
 @ViewChild('modalClose') modalClose!:ElementRef;
-
+@Input() title:string = 'Summary';
   constructor(private fb:FormBuilder) {
     this.form = this.fb.group({
       unitName:["", Validators.required],

@@ -8,6 +8,7 @@ import { SitesComponent } from './sites.component';
 import { SitesTableComponent } from './sites-table/sites-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavModule } from '../sidenav/sidenav.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -25,6 +26,7 @@ import { SidenavModule } from '../sidenav/sidenav.module';
     FormsModule,
     ReactiveFormsModule,
     SidenavModule,
+    NgbModule
   ],
   exports:[
     SitesListComponent,
