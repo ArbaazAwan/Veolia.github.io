@@ -14,9 +14,11 @@
             <table class="table table-blocked table-hover mx-3 mb-0">
               <thead>
                 <tr>
+
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                     Sr.#
                   </th>
+
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                     Name
                   </th>
@@ -26,19 +28,18 @@
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                     Role
                   </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Status
+                  </th>
+                  <th class="text-uppercase text-bold text-xs float-end font-weight-bolder mx-6 ps-2">
+                    Actions
+                  </th>
                   
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let user of userArray">
-    
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{user.serialNumber}}</p>
-                      </div>
-                    </div>
-                  </td>
+
                   <td>
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
