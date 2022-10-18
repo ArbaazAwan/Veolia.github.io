@@ -21,9 +21,7 @@ export class NavbarComponent implements OnInit {
   sites!:any[];
   filteredSites:any[]=[];
   filteredClients:any[]=[];
-
-  keyword = 'name';
-
+  keyword:string='name'
   ngOnInit(): void {
     this.clients= [
       { name: "Client 1"},

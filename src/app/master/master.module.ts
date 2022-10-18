@@ -13,12 +13,12 @@ import { SearchPipe } from '../pipes/search.pipe';
 import {MatSortModule} from '@angular/material/sort';
 import {TreeTableModule} from 'primeng/treetable';
 import { HttpClientModule } from '@angular/common/http';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
     MasterComponent,
     ViewMasterTableComponent,
-    SearchPipe,
   ],
   imports: [
     CommonModule,
@@ -32,12 +32,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     NgbModule,
     TreeTableModule,
-    HttpClientModule
+    HttpClientModule,
+    PipesModule
   ],
   exports:[
     MasterComponent,
     ViewMasterTableComponent,
-    SearchPipe
   ]
 })
 export class MasterModule { }

@@ -9,6 +9,7 @@ import { SitesTableComponent } from './sites-table/sites-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavModule } from '../sidenav/sidenav.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -26,7 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     SidenavModule,
-    NgbModule
+    NgbModule,
+    PipesModule,
   ],
   exports:[
     SitesListComponent,

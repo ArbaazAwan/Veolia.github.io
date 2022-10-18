@@ -9,6 +9,9 @@
 
       <!-- Summary table -->
       <div class="card-body px-0 pb-2">
+        <div class="flex-end px-3 pb-3 col-md-3">
+          <input [(ngModel)]="searchText" class="form-control" placeholder="Search Sites..." type="text" />
+        </div>
         <div class="p-0">
           <table class="table table-blocked table-hover mx-3 mb-0">
             <thead>
@@ -34,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let site of sitesArray">
+              <tr *ngFor="let site of sitesArray|searchFilter:searchText">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
