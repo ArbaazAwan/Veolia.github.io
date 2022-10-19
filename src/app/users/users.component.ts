@@ -17,10 +17,10 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
 
-      serialNumber:['',Validators.required],
       name: ['',Validators.required],
       email: ['',Validators.required],
-      role: ['',Validators.required]
+      role: ['',Validators.required],
+      status: ['',Validators.required],
 
     })
   }

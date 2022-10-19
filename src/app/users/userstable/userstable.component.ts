@@ -11,6 +11,7 @@ export class UserstableComponent implements OnInit {
   constructor() { }
 
   @Input() userArray!:any[]
+  searchText:string = '';
 
   ngOnInit(): void {
   }
