@@ -8,15 +8,10 @@ export class MasterService {
 
   assets!: any[];
   asset!: Subject<any>;
-  showSideNav: boolean = true;
+  navbool:boolean = true;
 
   constructor() {
     this.asset = new Subject<any>();
-  }
-
-
-  toggleShowSideNav() {
-    this.showSideNav = !this.showSideNav;
   }
 
   setAsset(asset: any) {

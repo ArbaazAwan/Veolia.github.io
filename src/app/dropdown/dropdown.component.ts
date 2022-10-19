@@ -13,8 +13,7 @@ export class DropdownComponent implements OnInit {
 
   form!:FormGroup;
   dropDownArray:any[] = [];
-  showSideNav:boolean = true;
-
+  
   ngOnInit(): void {
       this.form = this.formBuilder.group({
       assetType:['',Validators.required],
@@ -24,9 +23,7 @@ export class DropdownComponent implements OnInit {
 
     })
   }
-  toggleShowSideNav(){
-    this.showSideNav = !this.showSideNav;
-  }
+
   submitForm(){
     this.dropDownArray.push(this.form.value);
 

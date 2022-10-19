@@ -1,13 +1,6 @@
-<aside
-  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
-  id="sidenav-main" *ngIf="showSideNav">
-  <app-side-navbar></app-side-navbar>
-</aside>
 
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
-  <app-navbar></app-navbar>
   <div class="container-fluid py-4">
-    <button (click)="toggleShowSideNav()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
+    <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
       data-bs-toggle="modal" data-bs-target="#modal-form">
       Create Model
     </button>
@@ -19,7 +12,7 @@
               <div class="card-header pb-0 text-left">
                 <h5 class="">Model
                   <span class="text-right float-end">
-                    <button (click)="toggleShowSideNav()" data-bs-dismiss="modal"
+                    <button data-bs-dismiss="modal"
                       class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                       <i class="material-icons" style="font-size: 30px">close</i>
                     </button>
@@ -139,11 +132,11 @@
 
                   <div class="mx-4 my-1">
                     <div class="text-center">
-                      <button (click)="toggleShowSideNav()" type="submit" data-bs-dismiss="modal"
+                      <button type="submit" data-bs-dismiss="modal"
                         class="btn bg-gradient-primary m-2">
                         Create
                       </button>
-                      <button (click)="toggleShowSideNav()" type="button" data-bs-dismiss="modal"
+                      <button type="button" data-bs-dismiss="modal"
                         class="btn bg-gradient-secondary m-2">
                         Cancel
                       </button>
@@ -158,6 +151,3 @@
     </div>
     <app-model-table [modelArray]="modelArray"></app-model-table>
   </div>
-  <app-footer></app-footer>
-</main>
-<app-setting-plugin></app-setting-plugin>

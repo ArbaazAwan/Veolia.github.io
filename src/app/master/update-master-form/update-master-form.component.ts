@@ -1,26 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { MasterService } from './master.service';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-master',
-  templateUrl: './master.component.html',
-  styleUrls: ['./master.component.scss'],
+  selector: 'app-update-master-form',
+  templateUrl: './update-master-form.component.html',
+  styleUrls: ['./update-master-form.component.scss']
 })
-export class MasterComponent implements OnInit {
-  title:string='Master';
-  form!: FormGroup;
-  eventEvalTableShow: boolean = false;
+export class UpdateMasterFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private masterService: MasterService) {}
+  constructor(private fb:FormBuilder) { }
+  form!: FormGroup;
 
   ngOnInit(): void {
-
     this.form = this.fb.group({
       //building form
       unitDesc: ['',Validators.required],
@@ -153,7 +144,4 @@ export class MasterComponent implements OnInit {
     this.overhaulConts().removeAt(i);
   }
 
-  onSubmit() {
-    this.masterService.assets.push(this.form.value);
-  }
 }

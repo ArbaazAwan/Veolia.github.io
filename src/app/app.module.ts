@@ -32,11 +32,13 @@ import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
 import { SitesComponent } from './sites/sites.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
+    MainComponent,
   ],
   imports: [
     AuthModule,
@@ -61,16 +63,19 @@ import { SitesComponent } from './sites/sites.component';
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'clientslist', component:ClientsListComponent },
-      { path: 'clients', component:ClientsComponent },
-      { path: 'sites', component:SitesComponent },
-      { path: 'profile',component:ProfileComponent },
-      { path: 'dashboard', component:DashboardComponent },
-      { path: 'master', component:MasterComponent },
-      { path: 'model', component:ModelComponent },
-      { path:'dropdown',component:DropdownComponent },
-      { path: 'unit', component:UnitComponent },
-      { path: 'summary', component:SummaryComponent },
-      { path: 'permission',component:PermissionComponent },
+      {path:'', component:MainComponent,children:[
+          { path: 'clients', component:ClientsComponent },
+          { path: 'sites', component:SitesComponent },
+          { path: 'profile',component:ProfileComponent },
+          { path: 'dashboard', component:DashboardComponent },
+          { path: 'master', component:MasterComponent },
+          { path: 'model', component:ModelComponent },
+          { path:'dropdown',component:DropdownComponent },
+          { path: 'unit', component:UnitComponent },
+          { path: 'summary', component:SummaryComponent },
+          { path: 'permission',component:PermissionComponent },
+      ]},
+
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),
