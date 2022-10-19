@@ -38,8 +38,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let user of userArray">
+                <tr *ngFor="let user of userArray let i = index">
 
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{i+1}}</p>
+                      </div>
+                    </div>
+                  </td>
                   <td>
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
@@ -58,6 +65,13 @@
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{user.role}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{user.status}}</p>
                       </div>
                     </div>
                   </td>
