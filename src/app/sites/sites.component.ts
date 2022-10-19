@@ -9,7 +9,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SitesComponent implements OnInit {
 
   constructor(private fb:FormBuilder) { }
-  showSideNav:boolean = true;
   form!:FormGroup;
   sitesArray:any[]=[];
   @Input() title:string = 'Sites';
@@ -35,14 +34,8 @@ export class SitesComponent implements OnInit {
     this.form.reset();
   }
 
-  toggleSideNavShow(){
-    this.showSideNav = !this.showSideNav;
-  }
-
   onSubmit(){
     this.sitesArray.push(this.form.value);
-
-    this.toggleSideNavShow();
     this.resetForm();
   }
 

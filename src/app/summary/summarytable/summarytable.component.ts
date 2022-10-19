@@ -19,8 +19,6 @@ export class SummarytableComponent implements OnInit {
   constructor() { }
 
   @Input() summaryArray!:any[];
-  @Output() sideNavOutput =new EventEmitter<{ showSideNav: boolean }>();
-  showSideNav:boolean = true;
   allComplete: boolean = false;
   completed: boolean = false;
   selectedAssets:any[]=[];
@@ -46,11 +44,6 @@ export class SummarytableComponent implements OnInit {
       return;
     }
     this.summaryArray.forEach(t => (t.completed = completed));
-  }
-
-  toggleShowSideNav() {
-    this.showSideNav = !this.showSideNav;
-    this.sideNavOutput.emit({showSideNav:this.showSideNav});
   }
 
   selection = new SelectionModel<any>(true, []);

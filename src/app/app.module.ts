@@ -33,12 +33,14 @@ import { ClientsListComponent } from './clients/clients-list/clients-list.compon
 import { UsersComponent } from './users/users.component';
 import { UsersModule } from './users/users.module';
 import { SitesComponent } from './sites/sites.component';
+import { MainComponent } from './main/main.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
+    MainComponent,
   ],
   imports: [
     AuthModule,
@@ -57,24 +59,26 @@ import { DashboardModule } from './dashboard/dashboard.module';
     SitesModule,
     UsersModule,
 
-
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'clientslist', component:ClientsListComponent },
-      { path: 'clients', component:ClientsComponent },
-      { path: 'sites', component:SitesComponent },
-      { path: 'profile',component:ProfileComponent },
-      { path: 'dashboard', component:DashboardComponent },
-      { path: 'master', component:MasterComponent },
-      { path: 'model', component:ModelComponent },
-      { path:'dropdown',component:DropdownComponent },
-      { path: 'unit', component:UnitComponent },
-      { path: 'summary', component:SummaryComponent },
-      { path: 'permission',component:PermissionComponent },
-      { path: 'users',component:UsersComponent },
+      {path:'', component:MainComponent,children:[
+          { path: 'clients', component:ClientsComponent },
+          { path: 'sites', component:SitesComponent },
+          { path: 'users', component:UsersComponent },
+          { path: 'profile',component:ProfileComponent },
+          { path: 'dashboard', component:DashboardComponent },
+          { path: 'master', component:MasterComponent },
+          { path: 'model', component:ModelComponent },
+          { path:'dropdown',component:DropdownComponent },
+          { path: 'unit', component:UnitComponent },
+          { path: 'summary', component:SummaryComponent },
+          { path: 'permission',component:PermissionComponent },
+      ]},
+
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),
