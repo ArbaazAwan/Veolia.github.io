@@ -1,4 +1,4 @@
-  <div class="container-fluid py-4">
+  <div class="container-fluid py-1">
     <div class="float-start">
       <button (click)="toggleSideNavShow() ; formReset();"type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
       data-bs-toggle="modal" data-bs-target="#modal-form">
@@ -7,7 +7,7 @@
     </div>
 <!-- create user form -->
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
           <div class="modal-content">
             <div class="modal-body p-0">
               <div class="card card-plain">
@@ -27,46 +27,39 @@
 
                     <div class="row">
 
-                      <div class="col-md-6">
 
-                        <div class="mx-4 my-1">
+                        <div class="my-1">
                           <label class="form-label text-bold">Name</label>
                           <div class="input-group input-group-outline">
-                            <input type="text" formControlName="name" class="form-control" placeholder="Please Enter Name" onfocus="focused(this)"
-                              onfocusout="defocused(this)" />
+                            <input type="text" formControlName="name" class="form-control" placeholder="Please Enter Name" />
                           </div>
                         </div>
 
-                        <div class="mx-4 my-1">
+                        <div class="my-1">
                           <label class="form-label text-bold">Email</label>
                           <div class="input-group input-group-outline">
                             <input type="email" formControlName="email" class="form-control" placeholder="Please Enter email"
-                              onfocus="focused(this)" onfocusout="defocused(this)" />
+                               />
                           </div>
                         </div>
 
-                      </div>
-
-                      <div class="col-md-6">
-
-                        <div class="mx-4 my-1">
+                        <div class="my-1">
                           <label class="form-label text-bold">Role</label>
                           <div class="input-group input-group-outline">
                             <input type="text" formControlName="role" class="form-control" placeholder="Please Enter User Role"
-                            onfocus="focused(this)" onfocusout="defocused(this)" />
+                             />
                           </div>
                         </div>
-                        <div class="mx-4 my-1">
+                        <div class="my-1">
                           <label class="form-label text-bold">Status</label>
                           <div class="input-group input-group-outline">
                             <input type="text" formControlName="status" class="form-control" placeholder="Please Enter User Status"
-                            onfocus="focused(this)" onfocusout="defocused(this)" />
+                            />
                           </div>
                         </div>
 
                       </div>
 
-                    </div>
                     <div class="text-center mt-2">
                       <button (click)="toggleSideNavShow();" type="submit" data-bs-dismiss="modal"
                         class="btn bg-gradient-primary m-2">
