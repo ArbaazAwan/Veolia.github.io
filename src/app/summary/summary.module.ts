@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateSummaryFormComponent } from './create-summary-form/create-summary-form.component';
+import { SummaryViewdetailsTableComponent } from './summary-viewdetails-table/summary-viewdetails-table.component';
 
 
 
@@ -16,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     SummaryComponent,
     SummarytableComponent,
+    CreateSummaryFormComponent,
+    SummaryViewdetailsTableComponent,
   ],
   imports: [
     CommonModule,
