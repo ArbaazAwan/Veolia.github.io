@@ -26,7 +26,6 @@ export class SummaryComponent implements OnInit {
     })
   }
   form!:FormGroup;
-  showSideNav:boolean = true;
 
   db!: any[];
   assetTypes!: any[];
@@ -240,10 +239,6 @@ export class SummaryComponent implements OnInit {
     this.onSubAppSelect(this.selectedSubApp)
   }
 
-  toggleShowSideNav(){
-    this.showSideNav = !this.showSideNav;
-  }
-
   onAssetTypeSelect(selectedAssetType: any) {
     this.selectedSizes = this.sizes.filter(
       (size: any) => size.assetType_id == selectedAssetType.id
@@ -282,9 +277,6 @@ export class SummaryComponent implements OnInit {
         this.validateAllFormFields(control);
     })
   }
-  getSideNavOutPut(showSideNav:{showSideNav:boolean}){
-    this.showSideNav = showSideNav.showSideNav;
-  }
 
   onSubmit(){
 
@@ -301,10 +293,6 @@ export class SummaryComponent implements OnInit {
       this.validateAllFormFields(this.form)
     }
 
-  }
-
-  toggleSideNavShow(){
-    this.showSideNav = !this.showSideNav;
   }
 
   onCancel(){
