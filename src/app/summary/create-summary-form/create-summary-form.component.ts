@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,6 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 })
 export class CreateSummaryFormComponent implements OnInit {
 
-  @ViewChild('modalClose') modalClose!:ElementRef;
   @Input() title:string = 'Summary';
     constructor(private fb:FormBuilder) {
       this.form = this.fb.group({
@@ -62,10 +61,7 @@ export class CreateSummaryFormComponent implements OnInit {
     desc:''
   }
 
-  summaryArray:any[]=[];
   submitted:boolean = false;
-
-
 
   ngOnInit(): void {
     this.db = [
@@ -270,8 +266,6 @@ export class CreateSummaryFormComponent implements OnInit {
     {
     this.submitted = true;
     this.mapCascadingFormValues();
-    this.summaryArray.push(this.form.value);
-    this.modalClose.nativeElement.click()
     this.form.reset();
     }
     else

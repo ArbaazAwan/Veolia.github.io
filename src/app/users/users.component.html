@@ -14,7 +14,7 @@
                 <div class="card-header pb-0 text-left">
                   <h5 class="">User
                     <span class="text-right float-end">
-                      <button (click)="toggleSideNavShow()" data-bs-dismiss="modal"
+                      <button data-bs-dismiss="modal"
                         class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                         <i class="material-icons" style="font-size: 30px">close</i>
                       </button>
@@ -24,17 +24,13 @@
                 </div>
                 <div class="card-body">
                   <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
-
                     <div class="row">
-
-
                         <div class="my-1">
                           <label class="form-label text-bold">Name</label>
                           <div class="input-group input-group-outline">
                             <input type="text" formControlName="name" class="form-control" placeholder="Please Enter Name" />
                           </div>
                         </div>
-
                         <div class="my-1">
                           <label class="form-label text-bold">Email</label>
                           <div class="input-group input-group-outline">
@@ -42,7 +38,6 @@
                                />
                           </div>
                         </div>
-
                         <div class="my-1">
                           <label class="form-label text-bold">Role</label>
                           <div class="input-group input-group-outline">
@@ -57,15 +52,13 @@
                             />
                           </div>
                         </div>
-
                       </div>
-
                     <div class="text-center mt-2">
-                      <button (click)="toggleSideNavShow();" type="submit" data-bs-dismiss="modal"
+                      <button type="submit" data-bs-dismiss="modal"
                         class="btn bg-gradient-primary m-2">
                         Create
                       </button>
-                      <button (click)="toggleSideNavShow();formReset();" type="button" data-bs-dismiss="modal"
+                      <button (click)="formReset();" type="button" data-bs-dismiss="modal"
                         class="btn bg-gradient-secondary m-2">
                         Cancel
                       </button>
@@ -77,9 +70,6 @@
           </div>
         </div>
       </div>
-
-
-
     <div class="mt-6">
       <app-userstable [userArray]="userArray"></app-userstable>
     </div>
