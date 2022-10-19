@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { Error404Component } from './errors/404.component';
 import { ModelComponent } from './model/model.component';
 import { ModelModule } from './model/model.module';
@@ -31,8 +30,11 @@ import { ClientsModule } from './clients/clients.module';
 import { ClientsComponent } from './clients/clients.component';
 import { SitesModule } from './sites/sites.module';
 import { ClientsListComponent } from './clients/clients-list/clients-list.component';
+import { UsersComponent } from './users/users.component';
+import { UsersModule } from './users/users.module';
 import { SitesComponent } from './sites/sites.component';
 import { MainComponent } from './main/main.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,7 @@ import { MainComponent } from './main/main.component';
     ProfileModule,
     ClientsModule,
     SitesModule,
-
+    UsersModule,
 
     BrowserModule,
     BrowserAnimationsModule,
@@ -66,6 +68,7 @@ import { MainComponent } from './main/main.component';
       {path:'', component:MainComponent,children:[
           { path: 'clients', component:ClientsComponent },
           { path: 'sites', component:SitesComponent },
+          { path: 'users', component:UsersComponent },
           { path: 'profile',component:ProfileComponent },
           { path: 'dashboard', component:DashboardComponent },
           { path: 'master', component:MasterComponent },
