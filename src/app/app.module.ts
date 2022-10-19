@@ -65,7 +65,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
       { path: 'clientslist', component:ClientsListComponent },
-      {path:'', component:MainComponent,children:[
+      { path: '', redirectTo:'login', pathMatch:'full' },
+      { path:'', component:MainComponent,children:[
           { path: 'clients', component:ClientsComponent },
           { path: 'sites', component:SitesComponent },
           { path: 'users', component:UsersComponent },
@@ -78,8 +79,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
           { path: 'summary', component:SummaryComponent },
           { path: 'permission',component:PermissionComponent },
       ]},
-
-      { path: '', redirectTo:'login', pathMatch:'full' },
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
