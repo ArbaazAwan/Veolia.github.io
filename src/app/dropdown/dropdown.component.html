@@ -20,7 +20,7 @@
                 <p class="mb-0">Enter Dropdown Details</p>
               </div>
               <div class="card-body">
-                <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+                <form (ngSubmit)="submitForm()">
 
                   <div class="row">
 
@@ -29,14 +29,14 @@
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Asset Type</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="assetType" class="form-control" placeholder="Please Enter Asset Type" onfocus="focused(this)"
+                          <input type="text" class="form-control" placeholder="Please Enter Asset Type"
                             onfocusout="defocused(this)" />
                         </div>
                       </div>
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Size</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="size" class="form-control" placeholder="Please Enter Size" onfocus="focused(this)"
+                          <input type="text" class="form-control" placeholder="Please Enter Size"
                             onfocusout="defocused(this)" />
                         </div>
                       </div>
@@ -48,15 +48,15 @@
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Duty/Application</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="duty_Application" class="form-control" placeholder="Please Enter Duty/Application"
-                            onfocus="focused(this)" onfocusout="defocused(this)" />
+                          <input type="text" class="form-control" placeholder="Please Enter Duty/Application"
+                             />
                         </div>
                       </div>
                       <div class="mx-4 my-1">
                         <label class="form-label text-bold">Quality</label>
                         <div class="input-group input-group-outline">
-                          <input type="text" formControlName="quality" class="form-control" placeholder="Please Enter Quality"
-                          onfocus="focused(this)" onfocusout="defocused(this)" />
+                          <input type="text" class="form-control" placeholder="Please Enter Quality"
+                           />
                         </div>
                       </div>
 
@@ -83,6 +83,6 @@
       </div>
     </div>
 
-    <app-dropdown-table [dropDownArray]="dropDownArray"></app-dropdown-table>
+    <!-- <app-dropdown-table [dropDownArray]="dropDownArray"></app-dropdown-table> -->
 
   </div>
