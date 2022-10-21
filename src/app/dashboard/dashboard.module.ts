@@ -5,6 +5,7 @@ import { DummyChartsComponent } from './dummy-charts/dummy-charts.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 
 import * as CanvasJSAngularChart from '../../assets/canvasjs.angular.component';
+import { ChartsModule } from '../charts/charts.module';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 
@@ -17,7 +18,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
   ],
   imports: [
     CommonModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    ChartsModule
 
   ],
   exports:[DashboardComponent]
