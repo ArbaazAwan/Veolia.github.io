@@ -8,18 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SitesComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
-  form!:FormGroup;
+  constructor() { }
+ 
   sitesArray:any[]=[];
   @Input() title:string = 'Sites';
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      siteName:['', Validators.required],
-      siteCompanyName:['', Validators.required],
-      siteAddress:['', Validators.required],
-      siteEmail:['', Validators.required],
-    })
+    
   }
 
   selectedsite: any ={
@@ -30,13 +25,6 @@ export class SitesComponent implements OnInit {
   onsiteSelect(selectedsite:any){
 
   }
-  resetForm(){
-    this.form.reset();
-  }
-
-  onSubmit(){
-    this.sitesArray.push(this.form.value);
-    this.resetForm();
-  }
+  
 
 }

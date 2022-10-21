@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-clients',
-  templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.scss']
+  selector: 'app-client-editform',
+  templateUrl: './client-editform.component.html',
+  styleUrls: ['./client-editform.component.scss']
 })
-export class ClientsComponent implements OnInit {
+export class ClientEditformComponent implements OnInit {
 
   constructor(private fb:FormBuilder) { }
+  @Input() clientsArray!:any[];
   form!:FormGroup;
-  clientsArray:any[]=[];
-  title:string = "Clients";
- 
+
   ngOnInit(): void {
     this.form = this.fb.group({
       clientName:['', Validators.required],
@@ -22,14 +21,6 @@ export class ClientsComponent implements OnInit {
     })
   }
 
-  selectedClient: any ={
-    id:null,
-    name:''
-  };
-  clients!:any[];
-  onClientSelect(selectedClient:any){
-
-  }
   resetForm(){
     this.form.reset();
   }
@@ -39,6 +30,5 @@ export class ClientsComponent implements OnInit {
     this.clientsArray.push(this.form.value);
     this.resetForm();
   }
-
 
 }
