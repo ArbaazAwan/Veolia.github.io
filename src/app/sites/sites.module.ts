@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { SiteFormComponent } from './site-form/site-form.component';
 
 
 
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     SitesListComponent,
     SitesComponent,
     SitesTableComponent,
+    SiteFormComponent,
   ],
   imports: [
     CommonModule,

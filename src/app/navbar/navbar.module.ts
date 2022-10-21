@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { PipesModule } from '../pipes/pipes.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -21,7 +22,8 @@ import { PipesModule } from '../pipes/pipes.module';
     MatInputModule,
     FormsModule,
     MatIconModule,
-    PipesModule
+    PipesModule,
+    NgbModule
   ],
   exports:[
     NavbarComponent

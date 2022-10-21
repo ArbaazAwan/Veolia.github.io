@@ -17,99 +17,104 @@
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
-          <table class="table table-blocked table-hover mx-3 mb-0">
-            <thead>
-              <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Sr.#
-                </th>
 
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Name
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Email
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Role
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Status
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="
-                  let user of userArray | searchFilter: searchText;
-                  let i = index
-                ">
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ i + 1 }}</p>
+          <div class="table-responsive">
+            <table class="table table-blocked table-hover mx-3 mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Sr.#
+                  </th>
+  
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Name
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Email
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Role
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Status
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="
+                    let user of userArray | searchFilter: searchText;
+                    let i = index
+                  ">
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ i + 1 }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ user.name }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ user.name }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ user.email }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ user.email }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ user.role }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ user.role }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ user.status }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ user.status }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-
-                <td>
-                  <div class="d-flex py-1 ">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex py-1">
-                              <div class="d-flex flex-column">
-                                <div ngbDropdown>
-                                  <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
-                                    Actions
-                                  </button>
-                                  <div ngbDropdownMenu="gfg">
-                                    <button ngbDropdownItem class="">
-                                      <i class="material-icons">edit</i>&nbsp;
-                                      Edit
+                  </td>
+  
+                  <td>
+                    <div class="d-flex py-1 ">
+                          <div class="d-flex flex-column">
+                              <div class="d-flex py-1">
+                                <div class="d-flex flex-column">
+                                  <div ngbDropdown>
+                                    <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                                      Actions
                                     </button>
-                                    <button ngbDropdownItem class="text-danger">
-                                      <i class="material-icons">delete</i>&nbsp;
-                                      Delete
-                                    </button>
+                                    <div ngbDropdownMenu="gfg">
+                                      <button ngbDropdownItem class="">
+                                        <i class="material-icons">edit</i>&nbsp;
+                                        Edit
+                                      </button>
+                                      <button ngbDropdownItem class="text-danger">
+                                        <i class="material-icons">delete</i>&nbsp;
+                                        Delete
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
                           </div>
-                        </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+
         </div>
       </div>
     </div>
