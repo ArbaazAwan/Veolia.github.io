@@ -1,7 +1,7 @@
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
   data-scroll="true">
   <div class="container-fluid py-1">
-      <h4 class="font-weight-bolder mb-0">{{ title }}</h4>
+    <h4 class="font-weight-bolder mb-0">{{ title }}</h4>
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
         <div class="row float-end">
@@ -11,7 +11,8 @@
               <input [(ngModel)]="selectedClient.name" matInput type="text" [matAutocomplete]="auto" />
               <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="
-                    let client of clients | searchFilter: selectedClient.name" [value]="client.name">
+                    let client of clients | searchFilter: selectedClient.name
+                  " [value]="client.name">
                   {{ client.name }}
                 </mat-option>
               </mat-autocomplete>
@@ -32,23 +33,20 @@
           </div>
         </div>
       </div>
-      <ul class="navbar-nav justify-content-end">
-        <li class="nav-item d-flex align-items-center">
-          <a routerLink="/login" class="nav-link text-body font-weight-bold px-0">
+
+      <div class="d-flex pb-3">
+        <div ngbDropdown class="d-inline-block">
+          <div class="nav-link text-body font-weight-bold" id="gfg" ngbDropdownToggle>
             <i class="fa fa-user me-sm-1"></i>
-            <span class="d-sm-inline d-none">User 1</span>
-          </a>
-        </li>
-        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-            <div class="sidenav-toggler-inner">
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
-            </div>
-          </a>
-        </li>
-      </ul>
+            User 1
+          </div>
+          <div ngbDropdownMenu="gfg">
+            <button ngbDropdownItem class="" routerLink="/login" [routerLinkActive]="['bg-gradient-primary']">
+              <i class="material-icons">login</i>&nbsp;Logout
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

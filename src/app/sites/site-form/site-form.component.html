@@ -1,0 +1,77 @@
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card card-plain">
+            <div class="card-header pb-0 text-left">
+              <h5 class="">
+                Site
+                <span class="text-right float-end">
+                  <button type="button" data-bs-dismiss="modal"
+                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
+              </h5>
+              <p class="mb-0">Enter Site Details</p>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="form">
+                <label class="form-label text-bold mt-3">Site Name</label>
+                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
+                        <input type="text" formControlName="siteName" class="form-control"
+                        [ngClass]="(form.controls['siteName'].dirty || form.controls['siteName'].touched) && form.hasError('required','siteName')==true? 'border-danger': ''"
+                          placeholder="Please Enter site Name" />
+                      </div>
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['siteName'].dirty || form.controls['siteName'].touched) && form.hasError('required','siteName')">
+                          *site name is required
+                        </small>
+                      </div>
+                      <label class="form-label text-bold mt-3">Site Company Name</label>
+                      <input type="text" formControlName="siteCompanyName" class="form-control"
+                        [ngClass]="(form.controls['siteCompanyName'].dirty || form.controls['siteCompanyName'].touched) && form.hasError('required','siteCompanyName')==true? 'border-danger': ''"
+                          placeholder="Please Enter Company Name" />
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['siteCompanyName'].dirty || form.controls['siteCompanyName'].touched) && form.hasError('required','siteCompanyName')">
+                          *site company is required
+                        </small>
+                      </div>
+
+                      <label class="form-label text-bold mt-3">Site Address</label>
+                      <input type="text" formControlName="siteAddress" class="form-control"
+                        [ngClass]="(form.controls['siteAddress'].dirty || form.controls['siteAddress'].touched) && form.hasError('required','siteAddress')==true? 'border-danger': ''"
+                          placeholder="Please Enter site Address" />
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['siteAddress'].dirty || form.controls['siteAddress'].touched) && form.hasError('required','siteAddress')">
+                          *site address is required
+                        </small>
+                      </div>
+
+                      <label class="form-label text-bold mt-3">Site Email</label>
+                      <input type="text" formControlName="siteEmail" class="form-control"
+                        [ngClass]="(form.controls['siteEmail'].dirty || form.controls['siteEmail'].touched) && form.hasError('required','siteEmail')==true? 'border-danger': ''"
+                          placeholder="Please Enter site Address" />
+                      <div>
+                        <small class="text-danger" *ngIf="(form.controls['siteEmail'].dirty || form.controls['siteEmail'].touched) && form.hasError('required','siteEmail')">
+                          *site email is required
+                        </small>
+                      </div>
+
+                <div class="text-center mt-4">
+                  <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
+                    class="btn bg-gradient-primary m-2">
+                    Create
+                  </button>
+                  <button type="button" data-bs-dismiss="modal"
+                    class="btn bg-gradient-secondary m-2">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
