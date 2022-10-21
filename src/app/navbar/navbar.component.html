@@ -34,13 +34,15 @@
         </div>
       </div>
 
-      <div class="d-flex pb-3">
-        <div ngbDropdown class="d-inline-block">
+      <div class="pb-3">
+        <div ngbDropdown>
           <div class="nav-link text-body font-weight-bold" id="gfg" ngbDropdownToggle>
-            <i class="fa fa-user me-sm-1"></i>
-            User 1
+            <i class="fa fa-user"></i>&nbsp;User 1
           </div>
           <div ngbDropdownMenu="gfg">
+            <button ngbDropdownItem class="" routerLink="/profile" [routerLinkActive]="['bg-gradient-primary']">
+              <i class="material-icons">people</i>&nbsp;Profile
+            </button>
             <button ngbDropdownItem class="" routerLink="/login" [routerLinkActive]="['bg-gradient-primary']">
               <i class="material-icons">login</i>&nbsp;Logout
             </button>
