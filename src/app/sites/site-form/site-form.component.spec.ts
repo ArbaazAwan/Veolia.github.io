@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DummyChartsComponent } from './dummy-charts.component';
+import { SiteFormComponent } from './site-form.component';
 
-describe('DummyChartsComponent', () => {
-  let component: DummyChartsComponent;
-  let fixture: ComponentFixture<DummyChartsComponent>;
+describe('SiteFormComponent', () => {
+  let component: SiteFormComponent;
+  let fixture: ComponentFixture<SiteFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DummyChartsComponent ]
+      declarations: [ SiteFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DummyChartsComponent);
+    fixture = TestBed.createComponent(SiteFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

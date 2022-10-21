@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingPluginComponent } from './setting-plugin.component';
+import { ClientEditformComponent } from './client-editform.component';
 
-describe('SettingPluginComponent', () => {
-  let component: SettingPluginComponent;
-  let fixture: ComponentFixture<SettingPluginComponent>;
+describe('ClientEditformComponent', () => {
+  let component: ClientEditformComponent;
+  let fixture: ComponentFixture<ClientEditformComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SettingPluginComponent ]
+      declarations: [ ClientEditformComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SettingPluginComponent);
+    fixture = TestBed.createComponent(ClientEditformComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
