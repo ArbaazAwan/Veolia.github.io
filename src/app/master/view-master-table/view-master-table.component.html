@@ -9,10 +9,10 @@
                     </div>
                   </div>
                   <div class="card-body px-0 pb-2">
-                    <div class="table-blocked p-0">
+                    <div class="table-blocked ">
 
                       <!-- Asset Detail here -->
-                      <table class="table m-4">
+                      <table class="table mx-4 ">
                         <tbody>
                           <tr>
                             <td>
@@ -72,10 +72,10 @@
 
                     <!-- Tabs here -->
 
-                    <div class="card m-4">
-                      <mat-tab-group mat-align-tabs="left" class="mt-3">
+                    <div class="card mx-4">
+                      <mat-tab-group mat-align-tabs="left">
                         <mat-tab label="All">
-                          <div class="table-responsive">
+                          <div class="table-responsive overflow-hidden">
                             <p-treeTable [value]="files1" [columns]="cols" class="table">
                               <ng-template pTemplate="header" let-columns>
                                 <tr>
