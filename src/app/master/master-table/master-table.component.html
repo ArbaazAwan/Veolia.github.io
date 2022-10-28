@@ -1,6 +1,6 @@
 <div class="row mx-1">
   <div class="col-12">
-    <div class="card my-4">
+    <div class="card my-1">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">
@@ -8,15 +8,15 @@
           </p> 
         </div>
       </div>
-      <div class="card-body px-0 pb-2">
-        <div class="flex-end px-3 pb-3 col-md-3">
+      <div class="card-body px-0">
+        <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive">
+        <div class="p-0 table-responsive overflow-hidden ">
           <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
             <thead>
               <tr>

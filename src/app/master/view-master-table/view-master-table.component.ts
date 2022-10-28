@@ -28,6 +28,7 @@ export class ViewMasterTableComponent implements OnInit {
 
         this.cols = [
             { field: 'desc', header: '' },
+            { field: 'oh', header: 'OverHaul'},
             { field: 'ev1', header: 'Event1' },
             { field: 'ev2', header: 'Event2' },
             { field: 'ev3', header: 'Event3' },
@@ -36,7 +37,7 @@ export class ViewMasterTableComponent implements OnInit {
             { field: 'ev6', header: 'Event6' },
             { field: 'ev7', header: 'Event7' },
             { field: 'ev8', header: 'Event8' },
-            { field: 'oh', header: 'OverHaul'}
+
         ];
   }
 
