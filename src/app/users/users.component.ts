@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit {
   submitForm(){
     // this.userArray.push(this.form.value);
     this.userService.getUsers(); //just to check values
+    // this.userService.getUserById('1');
   }
 
   formReset(){

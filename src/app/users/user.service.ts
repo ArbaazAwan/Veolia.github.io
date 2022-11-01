@@ -8,7 +8,7 @@ import { IUser } from '../data-models/user';
 export class UserService {
 
   getUsersUrl:string = 'http://127.0.0.1:3000/user';
-  getUserByIdUrl:string = '';
+  getUserByIdUrl:string = 'http://127.0.0.1:3000/user/';
   postUserUrl:string = '';
   updateUserUrl:string = '';
   deleteUserUrl:string = '';
@@ -28,6 +28,13 @@ export class UserService {
     .subscribe((res:any)=>{
         console.log(res);
       });
+  }
+
+  getUserById(id:string){
+    this.http.get(this.getUserByIdUrl+id)
+    .subscribe((res:any)=>{
+      console.log(res);
+    })
   }
 
 }
