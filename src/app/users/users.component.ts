@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
 
   form!:FormGroup
   userArray:any[]=[];
+  user!:any;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -26,8 +27,20 @@ export class UsersComponent implements OnInit {
 
   submitForm(){
     // this.userArray.push(this.form.value);
-    this.userService.getUsers(); //just to check values
+    // this.userService.getUsers(); //just to check values
     // this.userService.getUserById('1');
+
+    // this.user = {
+    //   userId:'1',
+    //   userName:'testuser',
+    //   userEmail:'testsample@example.com',
+    //   role: 'admin',
+    //   userStatus:true
+    // }
+    // this.userService.postUser(this.user);
+
+    // this.userService.updateUser('1' /*id here*/,this.user);
+    // this.userService.deleteUser('1');
   }
 
   formReset(){
