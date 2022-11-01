@@ -42,12 +42,12 @@
           </div>
           <div ngbDropdownMenu="gfg" class="">
 
-            <button ngbDropdownItem routerLink="/profile" [routerLinkActive]="['bg-gradient-primary']">
-              <i class="material-icons">login</i>&nbsp;Profile
+            <button ngbDropdownItem routerLink="/profile" >
+              <i class="material-icons">person</i>&nbsp;Profile
             </button>
 
-            <button ngbDropdownItem routerLink="/login" [routerLinkActive]="['bg-gradient-primary']">
-              <i class="material-icons">login</i>&nbsp;Logout
+            <button ngbDropdownItem (click)="logOut()" >
+              <i class="material-icons">logout</i>&nbsp;Logout
             </button>
           </div>
         </div>

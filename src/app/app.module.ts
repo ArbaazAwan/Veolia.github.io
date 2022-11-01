@@ -22,6 +22,7 @@ import { UsersComponent } from './users/users.component';
 import { SitesComponent } from './sites/sites.component';
 import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
+import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { MainModule } from './main/main.module';
     RouterModule.forRoot([
       { path: 'login', component:LoginComponent },
       { path: 'registration', component:RegistrationComponent },
-      { path: 'clientslist', component:ClientsListComponent },
+      { path: 'clientslist', component:ClientsListComponent, canActivate:[IsAuthenticatedGuard] },
       { path: '', redirectTo:'login', pathMatch:'full' },
       { path:'', component:MainComponent,children:[
           { path: 'clients', component:ClientsComponent },
@@ -51,7 +52,7 @@ import { MainModule } from './main/main.module';
           { path: 'unit', component:UnitComponent },
           { path: 'summary', component:SummaryComponent },
           { path: 'permission',component:PermissionComponent },
-      ]},
+      ],canActivate:[IsAuthenticatedGuard]},
       { path: '**', component:Error404Component }
     ]),
     NgbModule,
