@@ -5,29 +5,30 @@ import { UserService } from './user.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
 
-  constructor(private formBuilder:FormBuilder, private userService:UserService) { }
-
-  form!:FormGroup
-  userArray:any[]=[];
-  user!:any;
+  form!: FormGroup;
+  userArray: any[] = [];
+  user!: any;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: ['',Validators.required],
-      email: ['',[Validators.required, Validators.email]],
-      role: ['',Validators.required],
-      status: ['',Validators.required],
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['', Validators.required],
+      status: ['', Validators.required],
     });
-
   }
 
-  submitForm(){
+  submitForm() {
     // this.userArray.push(this.form.value);
-    // this.userService.getUsers(); //just to check values
+    this.userService.getUsers(); //just to check values
     // this.userService.getUserById('1');
 
     // this.user = {
@@ -43,8 +44,7 @@ export class UsersComponent implements OnInit {
     // this.userService.deleteUser('1');
   }
 
-  formReset(){
+  formReset() {
     this.form.reset();
   }
-
 }
