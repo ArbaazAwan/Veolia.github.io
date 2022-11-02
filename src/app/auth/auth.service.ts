@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
@@ -19,16 +20,15 @@ export class AuthService {
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
   userLogin(email: string, password: string) {
-    this.http
+    return this.http
       .post(
         this.url,
         { email: email, password: password },
         { headers: this.headers }
-      )
-      .subscribe((response: any) => {
-        this._isLoggedIn$.next(true);
-
-        localStorage.setItem('login_auth',response.token);
-      });
+      ).pipe(
+        tap((res:any)=>{
+          this._isLoggedIn$.next(true);
+        })
+      );
   }
 }

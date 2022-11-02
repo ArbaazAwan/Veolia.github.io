@@ -21,17 +21,27 @@ export class LoginComponent implements OnInit {
   ) { }
 
   form!: FormGroup;
+  isLoading:boolean=false;
+  hasError:boolean = false;
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
-      password: ['', Validators.required,]
+      email: [null, [Validators.required,Validators.email]],
+      password: [null, Validators.required,]
     });
   }
 
   login() {
-    this.authService.userLogin(this.form.value.email, this.form.value.password);
-
-    this.router.navigate(['/clientslist']);
+    this.isLoading = true;
+    this.authService.userLogin(this.form.value.email, this.form.value.password)
+    .subscribe((response: any) => {
+      localStorage.setItem('login_auth',response.token);
+      this.router.navigate(['/clientslist']);
+    },
+    (error:any)=>{
+      this.isLoading= false;
+      this.hasError = true;
+    }
+    );
   }
 }

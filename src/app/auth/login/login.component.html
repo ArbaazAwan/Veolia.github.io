@@ -9,36 +9,25 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                 <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                <!-- <div class="row mt-3">
-                  <div class="col-2 text-center ms-auto">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-facebook text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div class="col-2 text-center px-1">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-github text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div class="col-2 text-center me-auto">
-                    <a class="btn btn-link px-3" href="javascript:;">
-                      <i class="fa fa-google text-white text-lg"></i>
-                    </a>
-                  </div>
-                </div> -->
               </div>
             </div>
             <div class="card-body">
+              <div>
+                <small class="text-danger mb-4" *ngIf="hasError">
+                    *incorrect email/password
+                </small>
+              </div>
+
               <form role="form" [formGroup]="form" class="text-start" (ngSubmit)="login()">
 
                 <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
                   <mat-label>Email</mat-label>
                   <input formControlName="email" matInput type="email"
                     [ngClass]="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')==true? 'border-danger': ''">
-                    <small class="text-danger float-end"
-                  *ngIf="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')">
-                  email is required
-                </small>
+                  <small class="text-danger float-end"
+                    *ngIf="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')">
+                    email is required
+                  </small>
                 </mat-form-field>
 
 
@@ -58,7 +47,11 @@
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                 </div>
                 <div class="text-center">
-                  <button [disabled]="form.invalid" type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                  <button [disabled]="form.invalid" type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">
+                    <span *ngIf="!this.isLoading">SignIn</span>
+                    <div class="spinner-border spinner-border-sm text-light" role="status" *ngIf="this.isLoading">
+                    </div>
+                  </button>
                 </div>
                 <p class="mt-4 text-sm text-center">
                   Don't have an account?
