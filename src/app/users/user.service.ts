@@ -12,24 +12,30 @@ export class UserService {
   updateUserUrl: string = 'http://127.0.0.1:3000/user/';
   deleteUserUrl: string = 'http://127.0.0.1:3000/user/';
 
-  users: IUser[] = [];
+  users: any[] = [];
 
   headers = new HttpHeaders({});
+  postHeaders = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*"
+  });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getUsers() {
-    this.http
-      .get(this.getUsersUrl, { headers: this.headers })
-      .subscribe((res: any) => {
-        console.log(res);
-      });
+   return this.http
+      .get(this.getUsersUrl, { headers: this.headers });
   }
 
   getUserById(id: string) {
+    let user:any;
     this.http.get(this.getUserByIdUrl + id).subscribe((res: any) => {
       console.log(res);
+      user = res;
     });
+    return user;
   }
 
   postUser(user: any) {
@@ -37,25 +43,23 @@ export class UserService {
       .post(
         this.postUserUrl,
         {
-          userId: user.userId,
           userName: user.userName,
           userEmail: user.userEmail,
           role: user.role,
           userStatus: user.userStatus,
-        },
-        { headers: this.headers }
+        }
       )
       .subscribe((res) => {
         console.log(res);
       });
   }
 
-  updateUser(id: string, user: any) {
+  updateUser(id: any) {
+    let user:any =  this.getUserById(id);
     this.http
       .put(
-        this.updateUserUrl + id,
+        this.updateUserUrl + id.toString(),
         {
-          userId: user.userId,
           userName: user.userName,
           userEmail: user.userEmail,
           role: user.role,
@@ -68,7 +72,7 @@ export class UserService {
       });
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: any) {
     this.http.delete(this.deleteUserUrl + id).subscribe((res) => {
       console.log(res);
     });

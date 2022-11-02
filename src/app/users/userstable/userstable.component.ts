@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-userstable',
@@ -8,12 +8,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class UserstableComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService:UserService) { }
 
-  @Input() userArray!:any[]
   searchText:string = '';
+  users:any[] =[];
 
   ngOnInit(): void {
+    this.userService.getUsers().subscribe(
+      (res:any)=>{
+        this.users= res;
+      }
+    )
+  }
+  updateUser(id:any){
+    this.userService.updateUser(id);
+  }
+  deleteUser(id:any){
+    this.userService.deleteUser(id);
   }
 
 }

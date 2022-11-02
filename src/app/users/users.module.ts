@@ -7,13 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserformComponent } from './userform/userform.component';
 
 
 
 @NgModule({
   declarations: [
     UsersComponent,
-    UserstableComponent
+    UserstableComponent,
+    UserformComponent
   ],
   imports: [
     CommonModule,
