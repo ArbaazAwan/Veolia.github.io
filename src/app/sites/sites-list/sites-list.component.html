@@ -1,15 +1,17 @@
 <hr>
 <div class="container-fluid px-4 py-2"></div>
-  <div class="row">
+<div class="d-flex justify-content-center">
+  <div class="spinner-border" *ngIf="isLoading"></div>
+</div>
+  <div class="row" *ngIf="!isLoading">
       <div class="col-md-4" *ngFor="let site of sitesList">
         <div class="card" style="width: auto; height: auto;">
         <div class="card-header bg-gradient-primary pb-0 px-3">
           <h6 class="mb-4 text-white text-bold font-weight-bold text-lg">{{site.siteName}}</h6>
         </div>
         <div class="card-body">
-          <div><span class="card-text text-bold">Contact Person: </span><span class="text-sm">{{site.siteContactPerson}}</span></div>
-          <div><span class="card-text text-bold">Phone#: </span><span class="text-sm">{{site.phone}}</span></div>
-          <div><span class="card-text text-bold">Site Address: </span> <span class="text-sm ">{{site.address}}</span></div>
+          <div><span class="card-text text-bold">Site Id </span><span class="text-sm">{{site.siteId}}</span></div>
+          <div><span class="card-text text-bold">Site Status </span> <span class="text-sm ">{{site.siteStatus}}</span></div>
           <button type="button" [routerLink]="['/dashboard']" routerLinkActive="router-link-active"  class="btn bg-gradient-primary mt-4">visit</button>
         </div>
       </div>
