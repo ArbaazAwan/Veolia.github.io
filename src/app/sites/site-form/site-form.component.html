@@ -18,78 +18,93 @@
           <div class="card-body">
             <form [formGroup]="form">
 
-              <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                <mat-label class="text-bold">Site Name</mat-label>
-                <input formControlName="username" matInput type="text" [ngClass]="
-                    (form.controls['username'].dirty ||
-                      form.controls['username'].touched) &&
-                    form.hasError('required', 'username') == true
+              <div class="row">
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Site Name</mat-label>
+                  <input formControlName="siteName" matInput type="text" [ngClass]="
+                    (form.controls['siteName'].dirty ||
+                      form.controls['siteName'].touched) &&
+                    form.hasError('required', 'siteName') == true
                       ? 'border-danger'
                       : ''
                   " />
-                <small class="text-danger float-end" *ngIf="
-                    (form.controls['username'].dirty ||
-                      form.controls['username'].touched) &&
-                    form.hasError('required', 'email')
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['siteName'].dirty ||
+                      form.controls['siteName'].touched) &&
+                    form.hasError('required', 'siteName')
                   ">
-                  Username is required
-                </small>
-              </mat-form-field>
+                    Site Name is required
+                  </small>
+                </mat-form-field>
 
-              <!-- <label class="form-label text-bold mt-3">Site Name</label>
-              <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                <input type="text" formControlName="siteName" class="form-control"
-                  [ngClass]="(form.controls['siteName'].dirty || form.controls['siteName'].touched) && form.hasError('required','siteName')==true? 'border-danger': ''"
-                  placeholder="Please Enter site Name" />
-              </div>
-              <div>
-                <small class="text-danger"
-                  *ngIf="(form.controls['siteName'].dirty || form.controls['siteName'].touched) && form.hasError('required','siteName')">
-                  *site name is required
-                </small>
-              </div> -->
-              
-              <label class="form-label text-bold mt-3">Site Company Name</label>
-              <input type="text" formControlName="siteCompanyName" class="form-control"
-                [ngClass]="(form.controls['siteCompanyName'].dirty || form.controls['siteCompanyName'].touched) && form.hasError('required','siteCompanyName')==true? 'border-danger': ''"
-                placeholder="Please Enter Company Name" />
-              <div>
-                <small class="text-danger"
-                  *ngIf="(form.controls['siteCompanyName'].dirty || form.controls['siteCompanyName'].touched) && form.hasError('required','siteCompanyName')">
-                  *site company is required
-                </small>
-              </div>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Site Company Name</mat-label>
+                  <input formControlName="siteCompanyName" matInput type="text" [ngClass]="
+                    (form.controls['siteCompanyName'].dirty ||
+                      form.controls['siteCompanyName'].touched) &&
+                    form.hasError('required', 'siteCompanyName') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['siteCompanyName'].dirty ||
+                      form.controls['siteCompanyName'].touched) &&
+                    form.hasError('required', 'siteCompanyName')
+                  ">
+                    Site company name is required
+                  </small>
+                </mat-form-field>
 
-              <label class="form-label text-bold mt-3">Site Address</label>
-              <input type="text" formControlName="siteAddress" class="form-control"
-                [ngClass]="(form.controls['siteAddress'].dirty || form.controls['siteAddress'].touched) && form.hasError('required','siteAddress')==true? 'border-danger': ''"
-                placeholder="Please Enter site Address" />
-              <div>
-                <small class="text-danger"
-                  *ngIf="(form.controls['siteAddress'].dirty || form.controls['siteAddress'].touched) && form.hasError('required','siteAddress')">
-                  *site address is required
-                </small>
-              </div>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Site Address</mat-label>
+                  <input formControlName="siteAddress" matInput type="text" [ngClass]="
+                    (form.controls['siteAddress'].dirty ||
+                      form.controls['siteAddress'].touched) &&
+                    form.hasError('required', 'siteAddress') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['siteAddress'].dirty ||
+                      form.controls['siteAddress'].touched) &&
+                    form.hasError('required', 'siteAddress')
+                  ">
+                    Site address is required
+                  </small>
+                </mat-form-field>
 
-              <label class="form-label text-bold mt-3">Site Email</label>
-              <input type="text" formControlName="siteEmail" class="form-control"
-                [ngClass]="(form.controls['siteEmail'].dirty || form.controls['siteEmail'].touched) && form.hasError('required','siteEmail')==true? 'border-danger': ''"
-                placeholder="Please Enter site Address" />
-              <div>
-                <small class="text-danger"
-                  *ngIf="(form.controls['siteEmail'].dirty || form.controls['siteEmail'].touched) && form.hasError('required','siteEmail')">
-                  *site email is required
-                </small>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Email</mat-label>
+                  <input formControlName="siteEmail" matInput type="email" [ngClass]="
+                      (form.controls['siteEmail'].dirty ||
+                        form.controls['siteEmail'].touched) &&
+                      form.hasError('required', 'siteEmail') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['siteEmail'].dirty ||
+                        form.controls['siteEmail'].touched) &&
+                      form.hasError('required', 'siteEmail')
+                    ">
+                    Site email is required
+                  </small>
+                </mat-form-field>
+
               </div>
 
               <div class="text-center mt-4">
+
                 <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-primary m-2">
                   Create
                 </button>
+
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
                   Cancel
                 </button>
+
               </div>
             </form>
           </div>
