@@ -12,11 +12,14 @@ export class UserstableComponent implements OnInit {
 
   searchText:string = '';
   users:any[] =[];
+  isLoading:boolean = false;
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.userService.getUsers().subscribe(
       (res:any)=>{
         this.users= res;
+        this.isLoading = false;
       }
     )
   }

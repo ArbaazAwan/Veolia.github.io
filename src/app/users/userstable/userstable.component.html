@@ -12,14 +12,17 @@
         <div class="p-0">
           <div class="flex-end px-3 col-md-3">
             <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-              <mat-label>Search Sites</mat-label>
+              <mat-label>Search Users</mat-label>
               <input matInput type="text" [(ngModel)]="searchText" />
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
 
           <div class="table-responsive overflow-hidden">
-            <table class="table table-blocked table-hover mx-3">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" *ngIf="isLoading"></div>
+            </div>
+            <table class="table table-blocked table-hover mx-3" *ngIf="!isLoading">
               <thead>
                 <tr>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
@@ -86,27 +89,27 @@
 
                   <td>
                     <div class="d-flex py-1 ">
+                      <div class="d-flex flex-column">
+                        <div class="d-flex py-1">
                           <div class="d-flex flex-column">
-                              <div class="d-flex py-1">
-                                <div class="d-flex flex-column">
-                                  <div ngbDropdown>
-                                    <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
-                                      Actions
-                                    </button>
-                                    <div ngbDropdownMenu="gfg">
-                                      <button ngbDropdownItem class="">
-                                        <i class="material-icons" (click)="updateUser(user.userId)">edit</i>&nbsp;
-                                        Edit
-                                      </button>
-                                      <button ngbDropdownItem class="text-danger">
-                                        <i class="material-icons" (click)="deleteUser(user.userId)" >delete</i>&nbsp;
-                                        Delete
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
+                            <div ngbDropdown>
+                              <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                                Actions
+                              </button>
+                              <div ngbDropdownMenu="gfg">
+                                <button ngbDropdownItem class="">
+                                  <i class="material-icons" (click)="updateUser(user.userId)">edit</i>&nbsp;
+                                  Edit
+                                </button>
+                                <button ngbDropdownItem class="text-danger">
+                                  <i class="material-icons" (click)="deleteUser(user.userId)">delete</i>&nbsp;
+                                  Delete
+                                </button>
+                              </div>
                             </div>
                           </div>
+                        </div>
+                      </div>
                     </div>
                   </td>
                 </tr>

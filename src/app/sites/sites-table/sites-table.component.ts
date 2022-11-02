@@ -11,13 +11,16 @@ export class SitesTableComponent implements OnInit {
   constructor(private siteService:SiteService) { }
 
   searchText:string = '';
+  isLoading:boolean = false;
 
   sites:any[] =[];
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.siteService.getSites().subscribe(
       (res:any)=>{
         this.sites= res;
+        this.isLoading = false;
       }
     )
   }
