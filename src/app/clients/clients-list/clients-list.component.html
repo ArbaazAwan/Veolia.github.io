@@ -6,29 +6,32 @@
           <div class="card-header bg-gradient-primary pb-0 px-3">
             <h6 class="mb-4 text-white text-bold font-weight-bold text-lg">Clients List</h6>
           </div>
+          <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border" *ngIf="isLoading"></div>
+          </div>
           <div class="card-body pt-4 p-3">
 
             <mat-accordion>
-              <mat-expansion-panel class="py-1" *ngFor="let client of clientsArray" (opened)="panelOpenState = true"
+              <mat-expansion-panel class="py-1" *ngFor="let client of clients" (opened)="panelOpenState = true"
                 (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
-                    <h4 class=" text-dark font-weight-bold pt-2 text-md">{{client.name}}</h4>
+                    <h4 class=" text-dark font-weight-bold pt-2 text-md">{{client.clientName}}</h4>
                   </mat-panel-title>
 
                   <mat-panel-description>
                     <tr>
-                      <td><span class="text-dark font-weight-bold ms-sm-5">Company Name: </span></td>
-                      <td><span class="mb-2 text-sm mx-3">{{client.companyName}}</span></td>
+                      <td><span class="text-dark font-weight-bold ms-sm-5">Contract Years </span></td>
+                      <td><span class="mb-2 text-sm mx-3">{{client.contractYears}}</span></td>
                     </tr>
                     <tr>
-                      <td><span class="text-dark font-weight-bold ms-sm-5"> Email Address: </span></td>
-                      <td><span class="mb-2 text-sm mx-3">{{client.email}}</span></td>
+                      <td><span class="text-dark font-weight-bold ms-sm-5"> Client Status </span></td>
+                      <td><span class="mb-2 text-sm mx-3">{{client.clientStatus}}</span></td>
                     </tr>
                   </mat-panel-description>
                 </mat-expansion-panel-header>
                 <!-- collapsable data here -->
-                <app-sites-list></app-sites-list>
+                <app-sites-list [clientId]="client.clientId"></app-sites-list>
               </mat-expansion-panel>
             </mat-accordion>
           </div>

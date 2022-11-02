@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-clients-list',
@@ -7,43 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private clientService:ClientService) { }
 
-  clientsArray!:any[];
-  panelOpenState:boolean= false;
+  clients!:any[];
+  isLoading:boolean = false;
+  panelOpenState:boolean = false;
 
   ngOnInit(): void {
-    this.clientsArray = [
-      {
-        id:'1',
-        name:'Client 1',
-        companyName:'Company1',
-        email:'email1@example.com'
-      },
-      {
-        id:'2',
-        name:'Client 2',
-        companyName:'Company2',
-        email:'email2@example.com'
-      },
-      {
-        id:'3',
-        name:'Client 3',
-        companyName:'Company3',
-        email:'email3@example.com'
-      },
-      {
-        id:'4',
-        name:'Client 4',
-        companyName:'Company4',
-        email:'email4@example.com'
-      },
-      {
-        id:'5',
-        name:'Client 5',
-        companyName:'Company5',
-        email:'email5@example.com'
-      },
-    ]
+    this.isLoading = true;
+    this.clientService.getClients().subscribe(
+      (res:any)=>{
+        this.clients = res;
+        this.isLoading = false;
+      }
+    )
+
   }
 }

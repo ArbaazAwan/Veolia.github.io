@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,13 @@ export class SiteService {
      });
      return site;
    }
+
+   getSiteByClientId(id: string) {
+    return this.http.get(this.getSiteByIdUrl + id).pipe(
+      tap((res: any) => {
+      console.log(res);
+    }));
+  }
 
    postSite(site: any) {
      this.http
