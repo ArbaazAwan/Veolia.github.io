@@ -16,95 +16,141 @@
             <p class="mb-0">Update Asset Details</p>
           </div>
         </div>
-        <div class="card-body">
+        <div class="card-body mx-2">
           <form [formGroup]="form">
             <div class="row">
               <div class="col-md-6">
-                <div class="mx-4 my-1">
-                  <label for="unitDesc" class="form-label text-bold">Unit Description</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input name="unitDesc" formControlName="unitDesc" type="text" class="form-control" value="Buric Taper Turbine"
-                      placeholder="Please Enter Unit Description" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['unitDesc'].dirty || form.controls['unitDesc'].touched) && form.hasError('required','unitDesc')">
-                      *unit description is required
-                    </small>
-                  </div>
-                </div>
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">App Description</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="appDesc" class="form-control" value="Simple Concrete Pipe Gallery"
-                      placeholder="Please Enter App Description" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['appDesc'].dirty || form.controls['appDesc'].touched) && form.hasError('required','appDesc')">
-                      *app description is required
-                    </small>
-                  </div>
-                </div>
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">Unit Measurement</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="unitMeas" class="form-control" value="500 sq.ft"
-                      placeholder="Please Enter Unit Measurement" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['unitMeas'].dirty || form.controls['unitMeas'].touched) && form.hasError('required','unitMeas')">
-                      *unit Meas is required
-                    </small>
-                  </div>
-                </div>
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">Rev</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="rev" class="form-control" value="Draft" placeholder="Please Enter Rev" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['rev'].dirty || form.controls['rev'].touched) && form.hasError('required','rev')">
-                      *rev is required
-                    </small>
-                  </div>
-                </div>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Unit Description</mat-label>
+                  <input formControlName="unitDesc" matInput type="text" [ngClass]="
+                    (form.controls['unitDesc'].dirty ||
+                      form.controls['unitDesc'].touched) &&
+                    form.hasError('required', 'unitDesc') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['unitDesc'].dirty ||
+                      form.controls['unitDesc'].touched) &&
+                    form.hasError('required', 'unitDesc')
+                  ">
+                  Unit Description is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">App Description</mat-label>
+                  <input formControlName="appDesc" matInput type="text" [ngClass]="
+                    (form.controls['appDesc'].dirty ||
+                      form.controls['appDesc'].touched) &&
+                    form.hasError('required', 'appDesc') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['appDesc'].dirty ||
+                      form.controls['appDesc'].touched) &&
+                    form.hasError('required', 'appDesc')
+                  ">
+                  App Description is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Unit Measurement</mat-label>
+                  <input formControlName="unitMeas" matInput type="text" [ngClass]="
+                    (form.controls['unitMeas'].dirty ||
+                      form.controls['unitMeas'].touched) &&
+                    form.hasError('required', 'unitMeas') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['unitMeas'].dirty ||
+                      form.controls['unitMeas'].touched) &&
+                    form.hasError('required', 'unitMeas')
+                  ">
+                  Unit Measurement is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Rev</mat-label>
+                  <input formControlName="rev" matInput type="text" [ngClass]="
+                    (form.controls['rev'].dirty ||
+                      form.controls['rev'].touched) &&
+                    form.hasError('required', 'rev') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['rev'].dirty ||
+                      form.controls['rev'].touched) &&
+                    form.hasError('required', 'rev')
+                  ">
+                  Rev is required
+                  </small>
+                </mat-form-field>
+
               </div>
 
               <div class="col-md-6">
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">Replacement Cost</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="replCost" class="form-control" value="5000"
-                      placeholder="Plase Enter Replacement Cost" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['replCost'].dirty || form.controls['replCost'].touched) && form.hasError('required','replCost')">
-                      *replacement cost is required
-                    </small>
-                  </div>
-                </div>
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">Life MO's</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="lifeMOs" class="form-control" value="300" placeholder="Please Enter Life Months" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['lifeMOs'].dirty || form.controls['lifeMOs'].touched) && form.hasError('required','lifeMOs')">
-                      *life MOs is required
-                    </small>
-                  </div>
-                </div>
-                <div class="mx-4 my-1">
-                  <label class="form-label text-bold">OH Life %</label>
-                  <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                    <input type="text" formControlName="OHLife" class="form-control form-floating" value="100"
-                      placeholder="Please Enter OH Life %" />
-                  </div>
-                  <div>
-                    <small class="text-danger" *ngIf="(form.controls['OHLife'].dirty || form.controls['OHLife'].touched) && form.hasError('required','OHLife')">
-                      *OH life is required
-                    </small>
-                  </div>
-                </div>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Replacement Cost</mat-label>
+                  <input formControlName="replCost" matInput type="text" [ngClass]="
+                    (form.controls['replCost'].dirty ||
+                      form.controls['replCost'].touched) &&
+                    form.hasError('required', 'replCost') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['replCost'].dirty ||
+                      form.controls['replCost'].touched) &&
+                    form.hasError('required', 'replCost')
+                  ">
+                  Replacement cost is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Life MO's</mat-label>
+                  <input formControlName="lifeMOs" matInput type="text" [ngClass]="
+                    (form.controls['lifeMOs'].dirty ||
+                      form.controls['lifeMOs'].touched) &&
+                    form.hasError('required', 'lifeMOs') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['lifeMOs'].dirty ||
+                      form.controls['lifeMOs'].touched) &&
+                    form.hasError('required', 'lifeMOs')
+                  ">
+                  Life MO's is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">OH Life %</mat-label>
+                  <input formControlName="OHLife" matInput type="text" [ngClass]="
+                    (form.controls['OHLife'].dirty ||
+                      form.controls['OHLife'].touched) &&
+                    form.hasError('required', 'OHLife') == true
+                      ? 'border-danger'
+                      : ''
+                  " />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['OHLife'].dirty ||
+                      form.controls['OHLife'].touched) &&
+                    form.hasError('required', 'OHLife')
+                  ">
+                  OH Life % is required
+                  </small>
+                </mat-form-field>
+
               </div>
             </div>
             <!-- Tabs -->
@@ -114,18 +160,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="overhaulMaintenance" class="form-label">Overhaul Title</label>
-                        <input type="text" class="form-control" value="Refurb"
-                          placeholder="Please Enter Overhaul Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Overhaul Title</mat-label>
+                          <input matInput type="text" value="Overhaul"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="overhaulMaintenance" class="form-label">Repeat After Month</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="overhaulMaintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="No" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -283,18 +336,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -444,18 +504,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -605,18 +672,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -766,18 +840,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -927,18 +1008,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -1088,18 +1176,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -1249,18 +1344,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -1410,18 +1512,25 @@
                   <table class="table">
                     <tr>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" value="Steel Pipe"
-                          placeholder="Please Enter Event Title" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Event Title</mat-label>
+                          <input matInput type="text" value="Overhaul" placeholder="Please Enter Event Title"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Every</label>
-                        <input type="text" class="form-control" value="12"
-                          placeholder="Please Enter No. of Months" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Repeat After Month</mat-label>
+                          <input matInput type="text" value="12" placeholder="Please Enter No. of Months"/>
+                        </mat-form-field>
+
                       </td>
                       <td class="px-2">
-                        <label for="maintenance" class="form-label">Strch</label>
-                        <input type="text" class="form-control" value="Yes" placeholder="Please Enter Strch" />
+                        <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                          <mat-label class="text-bold">Strch</mat-label>
+                          <input matInput type="text" value="Yes" placeholder="Please Enter Strch"/>
+                        </mat-form-field>
+
                       </td>
                     </tr>
                   </table>
@@ -1566,6 +1675,7 @@
                     </div>
                   </div>
                 </mat-tab>
+
               </mat-tab-group>
             </div>
             <div class="text-center mb-4">
