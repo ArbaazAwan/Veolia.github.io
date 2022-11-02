@@ -21,19 +21,13 @@
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  id
+                  site Id
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Site Name
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Company Name
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Address
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Email
+                  Site Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
                   Edit
@@ -41,11 +35,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let site of sitesArray|searchFilter:searchText">
+              <tr *ngFor="let site of sites|searchFilter:searchText">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">123456</p>
+                      <p class="mb-0 text-sm">{{site.siteId}}</p>
                     </div>
                   </div>
                 </td>
@@ -59,21 +53,7 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteCompanyName}}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteAddress}}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteEmail}}</p>
+                      <p class="mb-0 text-sm">{{site.siteStatus}}</p>
                     </div>
                   </div>
                 </td>
@@ -91,11 +71,11 @@
                                   </button>
                                   <div ngbDropdownMenu="gfg">
                                     <button ngbDropdownItem class="">
-                                      <i class="material-icons">edit</i>&nbsp;
+                                      <i class="material-icons" (click)="updateSite(site.siteId)">edit</i>&nbsp;
                                       Edit
                                     </button>
                                     <button ngbDropdownItem class="text-danger">
-                                      <i class="material-icons">delete</i>&nbsp;
+                                      <i class="material-icons" (click)="deleteSite(site.siteId)">delete</i>&nbsp;
                                       Delete
                                     </button>
                                   </div>
