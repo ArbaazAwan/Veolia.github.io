@@ -16,8 +16,12 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
+
         <div class="p-0 table-responsive overflow-hidden ">
-          <table class="table table-blocked table-hover mx-3 mb-0">
+          <div class="d-flex justify-content-center">
+              <div class="spinner-border" *ngIf="isLoading"></div>
+          </div>
+          <table class="table table-blocked table-hover mx-3 mb-0" *ngIf="!isLoading">
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
