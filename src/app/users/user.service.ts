@@ -73,8 +73,6 @@ export class UserService {
   }
 
   deleteUser(id: any) {
-    this.http.delete(this.deleteUserUrl + id).subscribe((res) => {
-      console.log(res);
-    });
+    this.http.delete(this.deleteUserUrl + id).subscribe();
   }
 }

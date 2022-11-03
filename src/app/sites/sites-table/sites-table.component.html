@@ -74,12 +74,12 @@
                                     Actions
                                   </button>
                                   <div ngbDropdownMenu="gfg">
-                                    <button ngbDropdownItem class="">
-                                      <i class="material-icons" (click)="updateSite(site.siteId)">edit</i>&nbsp;
+                                    <button ngbDropdownItem (click)="updateSite(site.siteId)">
+                                      <i class="material-icons">edit</i>&nbsp;
                                       Edit
                                     </button>
-                                    <button ngbDropdownItem class="text-danger">
-                                      <i class="material-icons" (click)="deleteSite(site.siteId)">delete</i>&nbsp;
+                                    <button ngbDropdownItem class="text-danger" (click)="deleteSite(site.siteId)">
+                                      <i class="material-icons" >delete</i>&nbsp;
                                       Delete
                                     </button>
                                   </div>

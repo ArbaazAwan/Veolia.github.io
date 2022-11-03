@@ -28,6 +28,7 @@ export class SitesTableComponent implements OnInit {
     this.siteService.updateSite(id);
   }
   deleteSite(id:any){
+    this.sites = this.sites.filter(({siteId})=> siteId !=id);
     this.siteService.deleteSite(id);
   }
 
