@@ -9,36 +9,43 @@ import { UserService } from '../user.service';
 })
 export class UserformComponent implements OnInit {
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService
-  ) {}
+  constructor(private formBuilder: FormBuilder,private userService: UserService) {}
 
   form!: FormGroup;
   userArray: any[] = [];
-  user!: any;
 
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      role: ['', Validators.required],
-      status: true,
-    });
-}
-submitForm() {
-  let formValue = this.form.value;
-  this.user = {
-    userName: formValue.username,
-    userEmail: formValue.email,
-    role: formValue.role,
-    userStatus:formValue.status
+  ngOnInit() {
+
+    this.initializeForm();
+
   }
-  this.userService.postUser(this.user);
+
+initializeForm(){
+  this.form = this.formBuilder.group({
+    username: [null, Validators.required],
+    email: [null, [Validators.required, Validators.email]],
+    role: [null, Validators.required],
+  });
+}
+
+submitForm() {
+  let user =
+  {
+    userName: this.form.value.username,
+    userEmail: this.form.value.email,
+    role: this.form.value.role
+  }
+  this.userService.postUser(user)
+  .subscribe(
+    (res:any)=>{
+      console.log(res);
+    }
+  );
 }
 
 formReset() {
   this.form.reset();
 }
+
 }
 

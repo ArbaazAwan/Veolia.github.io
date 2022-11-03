@@ -25,59 +25,58 @@ export class SiteService {
 
   getSites() {
     return this.http
-       .get(this.getSitesUrl, { headers: this.headers });
-   }
-
-   getSiteById(id: string) {
-     let site:any;
-     this.http.get(this.getSiteByIdUrl + id).subscribe((res: any) => {
-       console.log(res);
-       site = res;
-     });
-     return site;
-   }
-
-   getSiteByClientId(id: string) {
-    return this.http.get(this.getSiteByIdUrl + id).pipe(
-      tap((res: any) => {
-      console.log(res);
-    }));
+      .get(this.getSitesUrl, { headers: this.headers });
   }
 
-   postSite(site: any) {
-     this.http
-       .post(
-         this.postSiteUrl,
-         {
-           clientId: site.clientId,
-           siteName: site.siteName,
-           siteStatus: site.siteStatus,
-         }
-       )
-       .subscribe((res) => {
-         console.log(res);
-       });
-   }
+  getSiteById(id: string) {
+    let site: any;
+    this.http.get(this.getSiteByIdUrl + id).subscribe((res: any) => {
+      console.log(res);
+      site = res;
+    });
+    return site;
+  }
 
-   updateSite(id: any) {
-     let site:any =  this.getSiteById(id);
-     this.http
-       .put(
-         this.updateSiteUrl + id.toString(),
-         {
-           siteName: site.siteName,
-           siteStatus: site.siteStatus,
-         },
-         { headers: this.headers }
-       )
-       .subscribe((res) => {
-         console.log(res);
-       });
-   }
+  getSiteByClientId(id: string) {
+    return this.http.get(this.getSiteByIdUrl + id).pipe(
+      tap((res: any) => {
+        console.log(res);
+      }));
+  }
 
-   deleteSite(id: any) {
-     this.http.delete(this.deleteSiteUrl + id).subscribe((res) => {
-       console.log(res);
-     });
-   }
+  postSite(siteName: string, selectedClientId: any) {
+    return this.http
+      .post(
+        this.postSiteUrl,
+        {
+          clientId: selectedClientId,
+          siteName: siteName,
+        },
+        {
+          headers:this.postHeaders
+        }
+        );
+  }
+
+  updateSite(id: any) {
+    let site: any = this.getSiteById(id);
+    this.http
+      .put(
+        this.updateSiteUrl + id.toString(),
+        {
+          siteName: site.siteName,
+          siteStatus: site.siteStatus,
+        },
+        { headers: this.headers }
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  deleteSite(id: any) {
+    this.http.delete(this.deleteSiteUrl + id).subscribe((res) => {
+      console.log(res);
+    });
+  }
 }

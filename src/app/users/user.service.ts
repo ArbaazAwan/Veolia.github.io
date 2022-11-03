@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../data-models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +16,8 @@ export class UserService {
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*"
+    "Access-Control-Allow-Origin": "'*'",
+    "Access-Control-Allow-Headers": "'*'"
   });
 
   constructor(private http: HttpClient) {
@@ -39,26 +38,23 @@ export class UserService {
   }
 
   postUser(user: any) {
-    this.http
+    return this.http
       .post(
         this.postUserUrl,
         {
-          userName: user.userName,
-          userEmail: user.userEmail,
-          role: user.role,
-          userStatus: user.userStatus,
-        }
-      )
-      .subscribe((res) => {
-        console.log(res);
-      });
+          userName:user.userName,
+          userEmail:user.userEmail,
+          role:user.role
+        },
+        {headers:this.headers}
+      );
   }
 
   updateUser(id: any) {
     let user:any =  this.getUserById(id);
     this.http
       .put(
-        this.updateUserUrl + id.toString(),
+        this.updateUserUrl + id,
         {
           userName: user.userName,
           userEmail: user.userEmail,
