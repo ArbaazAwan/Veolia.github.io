@@ -20,7 +20,7 @@ export class PriceYearLineChartComponent implements OnInit {
 
     for (let i = 1; i <= 50; i++) {
       years.push('Year ' + i.toString());
-      prices.push(getRandomInt(500));
+      // prices.push(getRandomInt(500));
     }
     this.basicOptions = {
       responsive: true,
