@@ -17,94 +17,29 @@
           </div>
           <div class="card-body">
             <form [formGroup]="form">
-
               <div class="row">
-
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
                   <input formControlName="siteName" matInput type="text" [ngClass]="
                     (form.controls['siteName'].dirty ||
                       form.controls['siteName'].touched) &&
-                    form.hasError('required', 'siteName') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
+                    form.hasError('required', 'siteName') == true? 'border-danger': ''" />
                   <small class="text-danger float-end" *ngIf="
                     (form.controls['siteName'].dirty ||
                       form.controls['siteName'].touched) &&
-                    form.hasError('required', 'siteName')
-                  ">
+                    form.hasError('required', 'siteName')">
                     Site Name is required
                   </small>
                 </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Site Company Name</mat-label>
-                  <input formControlName="siteCompanyName" matInput type="text" [ngClass]="
-                    (form.controls['siteCompanyName'].dirty ||
-                      form.controls['siteCompanyName'].touched) &&
-                    form.hasError('required', 'siteCompanyName') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['siteCompanyName'].dirty ||
-                      form.controls['siteCompanyName'].touched) &&
-                    form.hasError('required', 'siteCompanyName')
-                  ">
-                    Site company name is required
-                  </small>
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Site Address</mat-label>
-                  <input formControlName="siteAddress" matInput type="text" [ngClass]="
-                    (form.controls['siteAddress'].dirty ||
-                      form.controls['siteAddress'].touched) &&
-                    form.hasError('required', 'siteAddress') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['siteAddress'].dirty ||
-                      form.controls['siteAddress'].touched) &&
-                    form.hasError('required', 'siteAddress')
-                  ">
-                    Site address is required
-                  </small>
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Email</mat-label>
-                  <input formControlName="siteEmail" matInput type="email" [ngClass]="
-                      (form.controls['siteEmail'].dirty ||
-                        form.controls['siteEmail'].touched) &&
-                      form.hasError('required', 'siteEmail') == true
-                        ? 'border-danger'
-                        : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
-                      (form.controls['siteEmail'].dirty ||
-                        form.controls['siteEmail'].touched) &&
-                      form.hasError('required', 'siteEmail')
-                    ">
-                    Site email is required
-                  </small>
-                </mat-form-field>
-
               </div>
-
               <div class="text-center mt-4">
-
                 <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-primary m-2">
                   Create
                 </button>
-
-                <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                <button type="button" (click)="resetForm()" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
                   Cancel
                 </button>
-
               </div>
             </form>
           </div>

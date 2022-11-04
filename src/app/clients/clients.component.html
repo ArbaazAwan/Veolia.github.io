@@ -1,94 +1,91 @@
-  <div class="container-fluid py-1">
+<div class="container-fluid py-1">
 
-    <div class="float-start">
-      <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
-      data-bs-toggle="modal" data-bs-target="#modal-form">
-        Add Client
-      </button>
-    </div>
-
-   <app-clientstable [clientsArray]="clientsArray"></app-clientstable>
-   
-   <app-client-editform [clientsArray]="clientsArray"></app-client-editform>
-
+  <div class="float-start">
+    <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
+      data-bs-target="#modal-form">
+      Add Client
+    </button>
   </div>
 
-  <!-- clients form here -->
+  <app-clientstable></app-clientstable>
 
-  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <div class="card card-plain">
-            <div class="card-header pb-0 text-left">
-              <h5 class="">
-                Client
-                <span class="text-right float-end">
-                  <button type="button" data-bs-dismiss="modal"
-                    class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                    <i class="material-icons" style="font-size: 30px">close</i>
-                  </button>
-                </span>
-              </h5>
-              <p class="mb-0">Enter Client Details</p>
+  <!-- <app-client-editform [clientsArray]="clientsArray"></app-client-editform> -->
+
+</div>
+
+<!-- clients form here -->
+
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              Client
+              <span class="text-right float-end">
+                <button type="button" data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter Client Details</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form">
+
+              <div class="row">
+
+              <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-label class="text-bold">Client Name</mat-label>
+                <input formControlName="clientName" matInput type="text" [ngClass]="
+                  (form.controls['clientName'].dirty ||
+                    form.controls['clientName'].touched) &&
+                  form.hasError('required', 'clientName') == true
+                    ? 'border-danger'
+                    : ''
+                " />
+                <small class="text-danger float-end" *ngIf="
+                  (form.controls['clientName'].dirty ||
+                    form.controls['clientName'].touched) &&
+                  form.hasError('required', 'clientName')
+                ">
+                *Client name is required
+                </small>
+              </mat-form-field>
+
+              <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-label class="text-bold">Contract Years</mat-label>
+                <input formControlName="contractYears" matInput type="text" [ngClass]="
+                  (form.controls['contractYears'].dirty ||
+                    form.controls['contractYears'].touched) &&
+                  form.hasError('required', 'contractYears') == true
+                    ? 'border-danger'
+                    : ''
+                " />
+                <small class="text-danger float-end" *ngIf="
+                  (form.controls['contractYears'].dirty ||
+                    form.controls['contractYears'].touched) &&
+                  form.hasError('required', 'contractYears')
+                ">
+                *Contract years is required
+                </small>
+              </mat-form-field>
             </div>
-            <div class="card-body">
-              <form [formGroup]="form">
-                <label class="form-label text-bold mt-3">Client Name</label>
-                      <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-0">
-                        <input type="text" formControlName="clientName" class="form-control"
-                        [ngClass]="(form.controls['clientName'].dirty || form.controls['clientName'].touched) && form.hasError('required','clientName')==true? 'border-danger': ''"
-                          placeholder="Please Enter Client Name" />
-                      </div>
-                      <div>
-                        <small class="text-danger" *ngIf="(form.controls['clientName'].dirty || form.controls['clientName'].touched) && form.hasError('required','clientName')">
-                          *client name is required
-                        </small>
-                      </div>
-                      <label class="form-label text-bold mt-3">Client Company Name</label>
-                      <input type="text" formControlName="clientCompanyName" class="form-control"
-                        [ngClass]="(form.controls['clientCompanyName'].dirty || form.controls['clientCompanyName'].touched) && form.hasError('required','clientCompanyName')==true? 'border-danger': ''"
-                          placeholder="Please Enter Company Name" />
-                      <div>
-                        <small class="text-danger" *ngIf="(form.controls['clientCompanyName'].dirty || form.controls['clientCompanyName'].touched) && form.hasError('required','clientCompanyName')">
-                          *client company is required
-                        </small>
-                      </div>
-
-                      <label class="form-label text-bold mt-3">Client Address</label>
-                      <input type="text" formControlName="clientAddress" class="form-control"
-                        [ngClass]="(form.controls['clientAddress'].dirty || form.controls['clientAddress'].touched) && form.hasError('required','clientAddress')==true? 'border-danger': ''"
-                          placeholder="Please Enter Client Address" />
-                      <div>
-                        <small class="text-danger" *ngIf="(form.controls['clientAddress'].dirty || form.controls['clientAddress'].touched) && form.hasError('required','clientAddress')">
-                          *client address is required
-                        </small>
-                      </div>
-
-                      <label class="form-label text-bold mt-3">Client Email</label>
-                      <input type="text" formControlName="clientEmail" class="form-control"
-                        [ngClass]="(form.controls['clientEmail'].dirty || form.controls['clientEmail'].touched) && form.hasError('required','clientEmail')==true? 'border-danger': ''"
-                          placeholder="Please Enter Client Address" />
-                      <div>
-                        <small class="text-danger" *ngIf="(form.controls['clientEmail'].dirty || form.controls['clientEmail'].touched) && form.hasError('required','clientEmail')">
-                          *client email is required
-                        </small>
-                      </div>
-
-                <div class="text-center mt-4">
-                  <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-primary m-2">
-                    Create
-                  </button>
-                  <button type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-secondary m-2">
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div class="text-center mt-4">
+                <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2">
+                  Create
+                </button>
+                <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

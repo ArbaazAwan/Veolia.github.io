@@ -27,6 +27,7 @@ export class UserstableComponent implements OnInit {
     this.userService.updateUser(id);
   }
   deleteUser(id:any){
+    this.users = this.users.filter(({userId})=> userId !=id);
     this.userService.deleteUser(id);
   }
 

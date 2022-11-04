@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SiteService } from '../site.service';
 
 @Component({
   selector: 'app-sites-list',
@@ -7,37 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SitesListComponent implements OnInit {
 
-  constructor() { }
+  @Input() clientId:any;
+  constructor(private siteService:SiteService) { }
 
   sitesList!:any[];
+  isLoading:boolean = false;
 
   ngOnInit(): void {
-    this.sitesList=[
-      {
-        siteName:'Site 1',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'ABC',
-        phone:'123456',
-        email:'abc@xyz.com'
-      },
-      {
-        siteName:'Site 2',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'BCD',
-        phone:'123456',
-        email:'abc@xyz.com'
-      },
-      {
-        siteName:'Site 3',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'CDE',
-        phone:'123456',
-        email:'abc@xyz.com'
+    this.isLoading = true;
+    this.siteService.getSiteByClientId(this.clientId).subscribe(
+      (res:any)=>{
+        this.isLoading = false;
+        this.sitesList = res;
       }
-    ]
+    )
   }
 
 }
