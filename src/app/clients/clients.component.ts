@@ -8,34 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor(private fb:FormBuilder) { }
-  form!:FormGroup;
-  clientsArray:any[]=[];
-  title:string = "Clients";
- 
+  constructor() { }
+
   ngOnInit(): void {
-    this.form = this.fb.group({
-      clientName:['', Validators.required],
-      contractYears:['', Validators.required],
-    })
-  }
-
-  selectedClient: any ={
-    id:null,
-    name:''
-  };
-  clients!:any[];
-  onClientSelect(selectedClient:any){
-
-  }
-  resetForm(){
-    this.form.reset();
-  }
-
-
-  onSubmit(){
-    this.clientsArray.push(this.form.value);
-    this.resetForm();
+    
   }
 
 

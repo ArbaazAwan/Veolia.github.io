@@ -9,6 +9,7 @@ export class ClientService {
 
   clients: any[] = [];
   CLIENT_URL:string = environment.baseUrl + "client/";
+  isEdit = true;
 
   headers = new HttpHeaders({})
   postHeaders = new HttpHeaders({
@@ -33,18 +34,18 @@ export class ClientService {
      return client;
    }
 
-   postClient(client: any) {
-     this.http
+   postClient(clientName: string,contractYears:any) {
+     return this.http
        .post(
         this.CLIENT_URL,
          {
-           clientName: client.clientName,
-           contractYears: client.contractYears
+           clientName: clientName,
+           contractYears: contractYears
+         },
+         {
+          headers:this.postHeaders
          }
-       )
-       .subscribe((res) => {
-         console.log(res);
-       });
+       );
    }
 
    updateClient(id: any) {
