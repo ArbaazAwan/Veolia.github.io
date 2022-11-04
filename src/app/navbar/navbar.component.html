@@ -1,33 +1,40 @@
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
   data-scroll="true">
   <div class="container-fluid py-1">
-    <h4 class="font-weight-bolder mb-0">{{ title }}</h4>
     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1" id="navbar">
       <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        <div class="row float-end">
+        <div class="row float-end text-xs">
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline" class="text-xs">
-              <mat-label> Select Client </mat-label>
-              <input [(ngModel)]="selectedClient.name" matInput type="text" [matAutocomplete]="auto" />
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="
-                    let client of clients | searchFilter: selectedClient.name
-                  " [value]="client.name">
-                  {{ client.name }}
+            <mat-form-field appearance="outline">
+              <mat-label *ngIf="isLoadingClient">
+                <div class="select-placeholder-container" >
+                  <span>Loading...</span>
+                  <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                </div>
+              </mat-label>
+              <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
+              <mat-select [(ngModel)]="selectedClient" matInput type="text" (valueChange)="populateSites($event)" [disabled]="isLoadingClient">
+                <mat-option *ngFor="let client of clients" [value]="client">
+                  {{ client.clientName }}
                 </mat-option>
-              </mat-autocomplete>
+              </mat-select>
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
           </div>
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline" class="text-xs">
-              <mat-label> Select Site </mat-label>
-              <input [(ngModel)]="selectedSite.name" matInput type="text" [matAutocomplete]="auto2" />
-              <mat-autocomplete #auto2="matAutocomplete">
-                <mat-option *ngFor="let site of sites | searchFilter: selectedSite.name" [value]="site.name">
-                  {{ site.name }}
+            <mat-form-field appearance="outline">
+              <mat-label *ngIf="isLoadingSite">
+                <div class="select-placeholder-container" >
+                  <span>Loading...</span>
+                  <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                </div>
+              </mat-label>
+              <mat-label *ngIf="!isLoadingSite">Select Site</mat-label>
+              <mat-select [(ngModel)]="selectedSite" matInput type="text" [disabled]="isLoadingSite">
+                <mat-option *ngFor="let site of sites" [value]="site">
+                  {{ site.siteName }}
                 </mat-option>
-              </mat-autocomplete>
+              </mat-select>
               <mat-icon matSuffix>business</mat-icon>
             </mat-form-field>
           </div>
@@ -41,11 +48,9 @@
             User
           </div>
           <div ngbDropdownMenu="gfg" class="">
-
             <button ngbDropdownItem routerLink="/profile" >
               <i class="material-icons">person</i>&nbsp;Profile
             </button>
-
             <button ngbDropdownItem (click)="logOut()" >
               <i class="material-icons">logout</i>&nbsp;Logout
             </button>

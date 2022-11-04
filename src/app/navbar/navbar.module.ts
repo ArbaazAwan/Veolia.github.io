@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {MatSelectModule} from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     MatIconModule,
     PipesModule,
-    NgbModule
+    NgbModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     NavbarComponent
