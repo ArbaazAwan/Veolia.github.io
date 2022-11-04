@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ClientService } from '../clients/client.service';
+import { SiteService } from '../sites/site.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,35 +10,51 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private clientService:ClientService, private siteService:SiteService) { }
 
-  @Input() title:string='';
+  isLoadingClient:boolean = false;
+  isLoadingSite:boolean = false;
 
-  selectedClient: any={
-    name:''
-  };
-  clients!:any[];
+  selectedClient:any={
+    clientId:null,
+    clientName:null
+  }
   selectedSite:any={
-    name:''
-  };
+    siteId:null,
+    siteName:null
+  }
+
+  clients!:any[];
   sites!:any[];
   filteredSites:any[]=[];
   filteredClients:any[]=[];
+
   keyword:string='name'
+
   ngOnInit(): void {
-    this.clients= [
-      { name: "Client 1"},
-      { name: "Client 2"},
-      { name: "Client 3"},
-      { name: "Client 4"},
-    ];
-    this.sites = [
-      { name: "Site 1" },
-      { name: "Site 2" },
-      { name: "Site 3" },
-      { name: "Site 4" },
-      { name: "Site 5" },
-    ];
+    this.populateClients();
+  }
+
+  async populateClients(){
+    this.isLoadingClient = true;
+    await this.clientService.getClients().subscribe(
+      (res:any)=>{
+        this.clients = res;
+        this.isLoadingClient = false;
+      }
+    )
+  }
+
+   populateSites(client:any){
+    this.isLoadingSite = true;
+     this.siteService.getSiteByClientId(client.clientId)
+     .subscribe(
+      (res:any)=>{
+        this.sites = res;
+        this.isLoadingSite = false;
+      }
+     )
+
   }
 
   selectEvent(item:any) {

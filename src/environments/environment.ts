@@ -3,7 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  getSitesUrl: 'http://127.0.0.1:3000/site',
+  getSiteByIdUrl: 'http://127.0.0.1:3000/site/',
+  postSiteUrl: 'http://127.0.0.1:3000/site',
+  updateSiteUrl: 'http://127.0.0.1:3000/site/',
+  deleteSiteUrl: 'http://127.0.0.1:3000/site/',
+
+  getUsersUrl: 'http://127.0.0.1:3000/user',
+  getUserByIdUrl: 'http://127.0.0.1:3000/user/',
+  postUserUrl: 'http://127.0.0.1:3000/user',
+  updateUserUrl: 'http://127.0.0.1:3000/user/',
+  deleteUserUrl: 'http://127.0.0.1:3000/user/',
+
+  getClientsUrl: 'http://127.0.0.1:3000/client',
+  getClientByIdUrl: 'http://127.0.0.1:3000/client/',
+  postClientUrl: 'http://127.0.0.1:3000/client',
+  updateClientUrl: 'http://127.0.0.1:3000/client/',
+  deleteClientUrl: 'http://127.0.0.1:3000/client/',
 };
 
 /*

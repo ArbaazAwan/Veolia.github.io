@@ -1,16 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
-  getSitesUrl: string = 'http://127.0.0.1:3000/site';
-  getSiteByIdUrl: string = 'http://127.0.0.1:3000/site/';
-  postSiteUrl: string = 'http://127.0.0.1:3000/site';
-  updateSiteUrl: string = 'http://127.0.0.1:3000/site/';
-  deleteSiteUrl: string = 'http://127.0.0.1:3000/site/';
 
   sites: any[] = [];
 
@@ -25,12 +20,12 @@ export class SiteService {
 
   getSites() {
     return this.http
-      .get(this.getSitesUrl, { headers: this.headers });
+      .get(environment.getSitesUrl, { headers: this.headers });
   }
 
   getSiteById(id: string) {
     let site: any;
-    this.http.get(this.getSiteByIdUrl + id).subscribe((res: any) => {
+    this.http.get(environment.getSiteByIdUrl + id).subscribe((res: any) => {
       console.log(res);
       site = res;
     });
@@ -38,7 +33,7 @@ export class SiteService {
   }
 
   getSiteByClientId(id: string) {
-    return this.http.get(this.getSiteByIdUrl + id).pipe(
+    return this.http.get(environment.getSiteByIdUrl + id).pipe(
       tap((res: any) => {
         console.log(res);
       }));
@@ -47,7 +42,7 @@ export class SiteService {
   postSite(siteName: string, selectedClientId: any) {
     return this.http
       .post(
-        this.postSiteUrl,
+        environment.postSiteUrl,
         {
           clientId: selectedClientId,
           siteName: siteName,
@@ -62,7 +57,7 @@ export class SiteService {
     let site: any = this.getSiteById(id);
     this.http
       .put(
-        this.updateSiteUrl + id.toString(),
+        environment.updateSiteUrl + id.toString(),
         {
           siteName: site.siteName,
           siteStatus: site.siteStatus,
@@ -75,7 +70,7 @@ export class SiteService {
   }
 
   deleteSite(id: any) {
-    this.http.delete(this.deleteSiteUrl + id).subscribe((res) => {
+    this.http.delete(environment.deleteSiteUrl + id).subscribe((res) => {
       console.log(res);
     });
   }

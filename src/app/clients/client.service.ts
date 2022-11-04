@@ -1,15 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  getClientsUrl: string = 'http://127.0.0.1:3000/client';
-  getClientByIdUrl: string = 'http://127.0.0.1:3000/client/';
-  postClientUrl: string = 'http://127.0.0.1:3000/client';
-  updateClientUrl: string = 'http://127.0.0.1:3000/client/';
-  deleteClientUrl: string = 'http://127.0.0.1:3000/client/';
+
 
   clients: any[] = [];
 
@@ -25,12 +22,12 @@ export class ClientService {
 
   getClients() {
     return this.http
-       .get(this.getClientsUrl, { headers: this.headers });
+       .get(environment.getClientsUrl, { headers: this.headers });
    }
 
    getClientById(id: string) {
      let client:any;
-     this.http.get(this.getClientByIdUrl + id).subscribe((res: any) => {
+     this.http.get(environment.getClientByIdUrl + id).subscribe((res: any) => {
        console.log(res);
        client = res;
      });
@@ -40,7 +37,7 @@ export class ClientService {
    postClient(client: any) {
      this.http
        .post(
-         this.postClientUrl,
+        environment.postClientUrl,
          {
            clientName: client.clientName,
            clientStatus: client.clientStatus,
@@ -56,7 +53,7 @@ export class ClientService {
      let client:any =  this.getClientById(id);
      this.http
        .put(
-         this.updateClientUrl + id.toString(),
+        environment.updateClientUrl + id.toString(),
          {
            clientName: client.clientName,
            clientStatus: client.clientStatus,
@@ -70,7 +67,7 @@ export class ClientService {
    }
 
    deleteClient(id: any) {
-     this.http.delete(this.deleteClientUrl + id).subscribe((res) => {
+     this.http.delete(environment.deleteClientUrl + id).subscribe((res) => {
        console.log(res);
      });
    }
