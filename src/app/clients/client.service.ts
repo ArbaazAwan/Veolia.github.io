@@ -13,12 +13,11 @@ export class ClientService {
 
   clients: any[] = [];
 
-  headers = new HttpHeaders({
-
-    'Content-Type': 'application/json',
-
-    'Access-Control-Allow-Origin': '*',
-
+  headers = new HttpHeaders({})
+  postHeaders = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*"
   });
 
   constructor(private http: HttpClient) { }
@@ -43,7 +42,6 @@ export class ClientService {
          this.postClientUrl,
          {
            clientName: client.clientName,
-           clientStatus: client.clientStatus,
            contractYears: client.contractYears
          }
        )
@@ -70,7 +68,9 @@ export class ClientService {
    }
 
    deleteClient(id: any) {
-     this.http.delete(this.deleteClientUrl + id).subscribe((res) => {
+     this.http.delete(this.deleteClientUrl + id,
+      )
+     .subscribe((res) => {
        console.log(res);
      });
    }

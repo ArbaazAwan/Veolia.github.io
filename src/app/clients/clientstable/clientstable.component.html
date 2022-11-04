@@ -17,23 +17,26 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive overflow-hidden">
-          <table class="table table-blocked table-hover mx-3 mb-0 ">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" *ngIf="isLoading"></div>
+          </div>
+          <table class="table table-blocked table-hover mx-3 mb-0 " *ngIf="!isLoading">
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  id
+                  Client id
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Client Name
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Company Name
+                  Contract Years
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Address
+                  Client Created
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Email
+                  Client Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
                   Edit
@@ -41,11 +44,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let client of clientsArray|searchFilter:searchText">
+              <tr *ngFor="let client of clients|searchFilter:searchText; let i = index">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">123456</p>
+                      <p class="mb-0 text-sm">{{ client.clientId}}</p>
                     </div>
                   </div>
                 </td>
@@ -59,21 +62,21 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientCompanyName}}</p>
+                      <p class="mb-0 text-sm">{{client.contractYears}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientAddress}}</p>
+                      <p class="mb-0 text-sm">{{client.clientCreated}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientEmail}}</p>
+                      <p class="mb-0 text-sm">{{client.clientStatus}}</p>
                     </div>
                   </div>
                 </td>
@@ -88,11 +91,12 @@
                                 Actions
                               </button>
                               <div ngbDropdownMenu="gfg">
-                                <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form">
+                                <button ngbDropdownItem (click)="updateClient(client.clientId)" data-bs-toggle="modal"
+                                data-bs-target="#modal-form">
                                   <i class="material-icons">edit</i>&nbsp;
                                   Edit
                                 </button>
-                                <button ngbDropdownItem class="text-danger">
+                                <button ngbDropdownItem class="text-danger" (click)="deleteClient(client.clientId)">
                                   <i class="material-icons">delete</i>&nbsp;
                                   Delete
                                 </button>
