@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class SiteService {
 
   sites: any[] = [];
+  SITE_URL:string = environment.baseUrl + "site/";
 
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
@@ -20,12 +21,12 @@ export class SiteService {
 
   getSites() {
     return this.http
-      .get(environment.getSitesUrl, { headers: this.headers });
+      .get(this.SITE_URL, { headers: this.headers });
   }
 
   getSiteById(id: string) {
     let site: any;
-    this.http.get(environment.getSiteByIdUrl + id).subscribe((res: any) => {
+    this.http.get(this.SITE_URL + id).subscribe((res: any) => {
       console.log(res);
       site = res;
     });
@@ -33,7 +34,7 @@ export class SiteService {
   }
 
   getSiteByClientId(id: string) {
-    return this.http.get(environment.getSiteByIdUrl + id).pipe(
+    return this.http.get(this.SITE_URL+ "client/" + id).pipe(
       tap((res: any) => {
         console.log(res);
       }));
@@ -42,7 +43,7 @@ export class SiteService {
   postSite(siteName: string, selectedClientId: any) {
     return this.http
       .post(
-        environment.postSiteUrl,
+        this.SITE_URL,
         {
           clientId: selectedClientId,
           siteName: siteName,
@@ -57,7 +58,7 @@ export class SiteService {
     let site: any = this.getSiteById(id);
     this.http
       .put(
-        environment.updateSiteUrl + id.toString(),
+        this.SITE_URL + id.toString(),
         {
           siteName: site.siteName,
           siteStatus: site.siteStatus,
@@ -70,7 +71,7 @@ export class SiteService {
   }
 
   deleteSite(id: any) {
-    this.http.delete(environment.deleteSiteUrl + id).subscribe((res) => {
+    this.http.delete(this.SITE_URL + id).subscribe((res) => {
       console.log(res);
     });
   }

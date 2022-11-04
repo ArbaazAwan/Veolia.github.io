@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientService {
 
-
   clients: any[] = [];
+  CLIENT_URL:string = environment.baseUrl + "client/";
 
   headers = new HttpHeaders({
 
@@ -22,12 +22,12 @@ export class ClientService {
 
   getClients() {
     return this.http
-       .get(environment.getClientsUrl, { headers: this.headers });
+       .get(this.CLIENT_URL, { headers: this.headers });
    }
 
    getClientById(id: string) {
      let client:any;
-     this.http.get(environment.getClientByIdUrl + id).subscribe((res: any) => {
+     this.http.get(this.CLIENT_URL + id).subscribe((res: any) => {
        console.log(res);
        client = res;
      });
@@ -37,7 +37,7 @@ export class ClientService {
    postClient(client: any) {
      this.http
        .post(
-        environment.postClientUrl,
+        this.CLIENT_URL,
          {
            clientName: client.clientName,
            clientStatus: client.clientStatus,
@@ -53,7 +53,7 @@ export class ClientService {
      let client:any =  this.getClientById(id);
      this.http
        .put(
-        environment.updateClientUrl + id.toString(),
+        this.CLIENT_URL + id.toString(),
          {
            clientName: client.clientName,
            clientStatus: client.clientStatus,
@@ -67,7 +67,7 @@ export class ClientService {
    }
 
    deleteClient(id: any) {
-     this.http.delete(environment.deleteClientUrl + id).subscribe((res) => {
+     this.http.delete(this.CLIENT_URL + id).subscribe((res) => {
        console.log(res);
      });
    }
