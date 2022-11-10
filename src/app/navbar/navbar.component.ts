@@ -6,58 +6,54 @@ import { SiteService } from '../sites/site.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private clientService: ClientService,
+    private siteService: SiteService
+  ) {}
 
-  constructor(private router:Router, private clientService:ClientService, private siteService:SiteService) { }
+  isLoadingClient: boolean = false;
+  isLoadingSite: boolean = false;
 
-  isLoadingClient:boolean = false;
-  isLoadingSite:boolean = false;
+  selectedClient: any;
+  selectedSite: any;
 
-  selectedClient:any={
-    clientId:null,
-    clientName:null
-  }
-  selectedSite:any={
-    siteId:null,
-    siteName:null
-  }
+  clients!: any[];
+  sites!: any[];
+  filteredSites: any[] = [];
+  filteredClients: any[] = [];
 
-  clients!:any[];
-  sites!:any[];
-  filteredSites:any[]=[];
-  filteredClients:any[]=[];
-
-  keyword:string='name'
+  keyword: string = 'name';
 
   ngOnInit(): void {
     this.populateClients();
+    this.selectedClient = localStorage.getItem('clientId');
+    this.selectedSite = localStorage.getItem('siteId');
   }
 
-  async populateClients(){
+  populateClients() {
     this.isLoadingClient = true;
-    await this.clientService.getClients().subscribe(
-      (res:any)=>{
-        this.clients = res;
-        this.isLoadingClient = false;
-      }
-    )
+    this.clientService.getClients().subscribe((res: any) => {
+      this.clients = res;
+      this.isLoadingClient = false;
+    });
   }
 
-   populateSites(client:any){
+  populateSites(client: any) {
     this.isLoadingSite = true;
-     this.siteService.getSiteByClientId(client.clientId)
-     .subscribe(
-      (res:any)=>{
+    this.siteService
+      .getSiteByClientId(client.clientId)
+      .subscribe((res: any) => {
         this.sites = res;
         this.isLoadingSite = false;
-      }
-     )
-
+      });
   }
 
-  selectEvent(item:any) {
+  selectEvent(item: any) {
+    this.populateClients();
     // do something with selected item
   }
 
@@ -66,20 +62,20 @@ export class NavbarComponent implements OnInit {
     // And reassign the 'data' which is binded to 'data' property.
   }
 
-  onFocused(e:any) {
+  onFocused(e: any) {
     // do something
   }
-  onClientSelect(selectedClient:any){
-
+  onClientSelect(selectedClient: any) {
+    localStorage.setItem('clientId', selectedClient.value.clientId);
   }
 
-  onSiteSelect(selectedClient:any){
-
+  onSiteSelect(selectedClient: any) {
+    localStorage.setItem('siteId', selectedClient.value.siteId);
   }
-  logOut(){
+  logOut() {
     localStorage.removeItem('login_auth');
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('siteId');
     this.router.navigate(['/login']);
   }
-
-
 }

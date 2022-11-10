@@ -51,15 +51,14 @@ export class SitesComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
-    this.siteService
-      .postSite(this.form.value.siteName, this.selectedClientId)
-      .subscribe({
-        next: (_) => this.getSites(),
-        error: (e) => {
-          this.error = e;
-          this.getSites();
-        },
-      });
+    const clientID = localStorage.getItem('clientId');
+    this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
+      next: (_) => this.getSites(),
+      error: (e) => {
+        this.error = e;
+        this.getSites();
+      },
+    });
     this.resetForm();
   }
 

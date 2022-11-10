@@ -12,7 +12,7 @@
         <div class="card-body">
           <div><span class="card-text text-bold">Site Id </span><span class="text-sm">{{site.siteId}}</span></div>
           <div><span class="card-text text-bold">Site Status </span> <span class="text-sm ">{{site.siteStatus}}</span></div>
-          <button type="button" [routerLink]="['/dashboard']" routerLinkActive="router-link-active"  class="btn bg-gradient-primary mt-4">visit</button>
+          <button type="button" (click)="setclient($event)" data-id={{site.siteId}} [routerLink]="['/dashboard']" routerLinkActive="router-link-active"  class="btn bg-gradient-primary mt-4">visit</button>
         </div>
       </div>
     </div>

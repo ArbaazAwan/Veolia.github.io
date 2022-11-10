@@ -27,11 +27,9 @@ export class SiteService {
   }
 
   getSiteByClientId(id: string) {
-    return this.http.get(this.SITE_URL + 'client/' + id).pipe(
-      tap((res: any) => {
-        console.log(res);
-      })
-    );
+    return this.http
+      .get(this.SITE_URL + 'client/' + id)
+      .pipe(tap((res: any) => {}));
   }
 
   postSite(siteName: string, selectedClientId: any) {
@@ -59,8 +57,6 @@ export class SiteService {
   }
 
   deleteSite(id: any) {
-    this.http.delete(this.SITE_URL + id).subscribe((res) => {
-      console.log(res);
-    });
+    this.http.delete(this.SITE_URL + id).subscribe((res) => {});
   }
 }
