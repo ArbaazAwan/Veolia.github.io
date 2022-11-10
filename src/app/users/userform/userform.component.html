@@ -1,5 +1,12 @@
 <!-- create user form -->
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modal-form"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-form"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -8,7 +15,10 @@
             <h5 class="">
               User
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                <button
+                  data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
+                >
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -18,64 +28,135 @@
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
               <div class="row">
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
                   <mat-label class="text-bold">Username</mat-label>
-                  <input formControlName="username" matInput type="text" [ngClass]="
+                  <input
+                    formControlName="username"
+                    matInput
+                    type="text"
+                    [ngClass]="
                       (form.controls['username'].dirty ||
                         form.controls['username'].touched) &&
                       form.hasError('required', 'username') == true
                         ? 'border-danger'
                         : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
                       (form.controls['username'].dirty ||
                         form.controls['username'].touched) &&
                       form.hasError('required', 'email')
-                    ">
+                    "
+                  >
                     Username is required
                   </small>
                 </mat-form-field>
-                <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+                <mat-form-field
+                  class="example-form-field"
+                  appearance="outline"
+                  class="text-xs"
+                >
                   <mat-label class="text-bold">Email</mat-label>
-                  <input formControlName="email" matInput type="email" [ngClass]="
+                  <input
+                    formControlName="email"
+                    matInput
+                    type="email"
+                    [ngClass]="
                       (form.controls['email'].dirty ||
                         form.controls['email'].touched) &&
                       form.hasError('required', 'email') == true
                         ? 'border-danger'
                         : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
                       (form.controls['email'].dirty ||
                         form.controls['email'].touched) &&
                       form.hasError('required', 'email')
-                    ">
+                    "
+                  >
                     Email is required
                   </small>
                 </mat-form-field>
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Role</mat-label>
-                  <input formControlName="role" matInput type="text" [ngClass]="
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
+                  <mat-label class="text-bold">Password</mat-label>
+                  <input
+                    formControlName="password"
+                    matInput
+                    type="text"
+                    [ngClass]="
                       (form.controls['role'].dirty ||
                         form.controls['role'].touched) &&
                       form.hasError('required', 'role') == true
                         ? 'border-danger'
                         : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
                       (form.controls['role'].dirty ||
                         form.controls['role'].touched) &&
                       form.hasError('required', 'role')
-                    ">
+                    "
+                  >
+                    Role is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
+                  <mat-label class="text-bold">Role</mat-label>
+                  <input
+                    formControlName="role"
+                    matInput
+                    type="text"
+                    [ngClass]="
+                      (form.controls['role'].dirty ||
+                        form.controls['role'].touched) &&
+                      form.hasError('required', 'role') == true
+                        ? 'border-danger'
+                        : ''
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
+                      (form.controls['role'].dirty ||
+                        form.controls['role'].touched) &&
+                      form.hasError('required', 'role')
+                    "
+                  >
                     Role is required
                   </small>
                 </mat-form-field>
               </div>
               <div class="text-center mt-2">
-                <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                <button
+                  type="submit"
+                  data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2"
+                >
                   Create
                 </button>
-                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-secondary m-2">
+                <button
+                  (click)="formReset()"
+                  type="button"
+                  data-bs-dismiss="modal"
+                  class="btn bg-gradient-secondary m-2"
+                >
                   Cancel
                 </button>
               </div>

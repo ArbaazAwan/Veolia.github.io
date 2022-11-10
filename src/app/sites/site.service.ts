@@ -3,71 +3,59 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SiteService {
-
   sites: any[] = [];
-  SITE_URL:string = environment.baseUrl + "site/";
+  SITE_URL: string = environment.baseUrl + 'site/';
 
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*"
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': '*',
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getSites() {
-    return this.http
-      .get(this.SITE_URL, { headers: this.headers });
+    return this.http.get(this.SITE_URL, { headers: this.headers });
   }
 
   getSiteById(id: string) {
-    let site: any;
-    this.http.get(this.SITE_URL + id).subscribe((res: any) => {
-      console.log(res);
-      site = res;
-    });
-    return site;
+    return this.http.get(this.SITE_URL + id, { headers: this.postHeaders });
   }
 
   getSiteByClientId(id: string) {
-    return this.http.get(this.SITE_URL+ "client/" + id).pipe(
+    return this.http.get(this.SITE_URL + 'client/' + id).pipe(
       tap((res: any) => {
         console.log(res);
-      }));
+      })
+    );
   }
 
   postSite(siteName: string, selectedClientId: any) {
-    return this.http
-      .post(
-        this.SITE_URL,
-        {
-          clientId: selectedClientId,
-          siteName: siteName,
-        },
-        {
-          headers:this.postHeaders
-        }
-        );
+    return this.http.post(
+      this.SITE_URL,
+      {
+        clientId: selectedClientId,
+        siteName: siteName,
+      },
+      {
+        headers: this.postHeaders,
+      }
+    );
   }
 
-  updateSite(id: any) {
-    let site: any = this.getSiteById(id);
-    this.http
-      .put(
-        this.SITE_URL + id.toString(),
-        {
-          siteName: site.siteName,
-          siteStatus: site.siteStatus,
-        },
-        { headers: this.headers }
-      )
-      .subscribe((res) => {
-        console.log(res);
-      });
+  updateSite(_site: any, data: any) {
+    return this.http.put(
+      this.SITE_URL + _site.siteId,
+      {
+        siteName: data.siteName,
+        siteStatus: _site.siteStatus,
+      },
+      { headers: this.headers }
+    );
   }
 
   deleteSite(id: any) {

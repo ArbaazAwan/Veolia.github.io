@@ -1,35 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { SiteService } from '../site.service';
 
 @Component({
   selector: 'app-sites-table',
   templateUrl: './sites-table.component.html',
-  styleUrls: ['./sites-table.component.scss']
+  styleUrls: ['./sites-table.component.scss'],
 })
 export class SitesTableComponent implements OnInit {
+  constructor(private siteService: SiteService) {}
 
-  constructor(private siteService:SiteService) { }
+  searchText: string = '';
+  @Input() isLoading: boolean = false;
+  @Input() sites: any[] = [];
 
-  searchText:string = '';
-  isLoading:boolean = false;
+  @Output() deleteSiteEvent = new EventEmitter();
+  @Output() editSiteEvent = new EventEmitter();
 
-  sites:any[] =[];
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.siteService.getSites().subscribe(
-      (res:any)=>{
-        this.sites= res;
-        this.isLoading = false;
-      }
-    )
-  }
-  updateSite(id:any){
-    this.siteService.updateSite(id);
-  }
-  deleteSite(id:any){
-    this.sites = this.sites.filter(({siteId})=> siteId !=id);
-    this.siteService.deleteSite(id);
+  editSite(id: any) {
+    this.editSiteEvent.emit(id);
   }
 
+  deleteSite(id: any) {
+    this.deleteSiteEvent.emit(id);
+  }
 }

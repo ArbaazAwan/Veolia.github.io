@@ -1,4 +1,11 @@
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modal-form"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-form"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -7,8 +14,11 @@
             <h5 class="">
               Client
               <span class="text-right float-end">
-                <button type="button" data-bs-dismiss="modal"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
+                >
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -17,89 +27,138 @@
           </div>
           <div class="card-body">
             <form [formGroup]="form">
-
               <div class="row">
-
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
                   <mat-label class="text-bold">Client Name</mat-label>
-                  <input formControlName="clientName" matInput type="text" [ngClass]="
-                  (form.controls['clientName'].dirty ||
-                    form.controls['clientName'].touched) &&
-                  form.hasError('required', 'clientName') == true
-                    ? 'border-danger'
-                    : ''
-                " />
-                  <small class="text-danger float-end" *ngIf="
-                  (form.controls['clientName'].dirty ||
-                    form.controls['clientName'].touched) &&
-                  form.hasError('required', 'clientName')
-                ">
+                  <input
+                    formControlName="clientName"
+                    matInput
+                    type="text"
+                    [ngClass]="
+                      (form.controls['clientName'].dirty ||
+                        form.controls['clientName'].touched) &&
+                      form.hasError('required', 'clientName') == true
+                        ? 'border-danger'
+                        : ''
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
+                      (form.controls['clientName'].dirty ||
+                        form.controls['clientName'].touched) &&
+                      form.hasError('required', 'clientName')
+                    "
+                  >
                     Client Name is required
                   </small>
                 </mat-form-field>
 
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
                   <mat-label class="text-bold">Client Company Name</mat-label>
-                  <input formControlName="clientCompanyName" matInput type="text" [ngClass]="
-                  (form.controls['clientCompanyName'].dirty ||
-                    form.controls['clientCompanyName'].touched) &&
-                  form.hasError('required', 'clientCompanyName') == true
-                    ? 'border-danger'
-                    : ''
-                " />
-                  <small class="text-danger float-end" *ngIf="
-                  (form.controls['clientCompanyName'].dirty ||
-                    form.controls['clientCompanyName'].touched) &&
-                  form.hasError('required', 'clientCompanyName')
-                ">
+                  <input
+                    formControlName="clientCompanyName"
+                    matInput
+                    type="text"
+                    [ngClass]="
+                      (form.controls['clientCompanyName'].dirty ||
+                        form.controls['clientCompanyName'].touched) &&
+                      form.hasError('required', 'clientCompanyName') == true
+                        ? 'border-danger'
+                        : ''
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
+                      (form.controls['clientCompanyName'].dirty ||
+                        form.controls['clientCompanyName'].touched) &&
+                      form.hasError('required', 'clientCompanyName')
+                    "
+                  >
                     Client company name is required
                   </small>
                 </mat-form-field>
 
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
                   <mat-label class="text-bold">Client Address</mat-label>
-                  <input formControlName="clientAddress" matInput type="text" [ngClass]="
-                  (form.controls['clientAddress'].dirty ||
-                    form.controls['clientAddress'].touched) &&
-                  form.hasError('required', 'clientAddress') == true
-                    ? 'border-danger'
-                    : ''
-                " />
-                  <small class="text-danger float-end" *ngIf="
-                  (form.controls['clientAddress'].dirty ||
-                    form.controls['clientAddress'].touched) &&
-                  form.hasError('required', 'clientAddress')
-                ">
+                  <input
+                    formControlName="clientAddress"
+                    matInput
+                    type="text"
+                    [ngClass]="
+                      (form.controls['clientAddress'].dirty ||
+                        form.controls['clientAddress'].touched) &&
+                      form.hasError('required', 'clientAddress') == true
+                        ? 'border-danger'
+                        : ''
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
+                      (form.controls['clientAddress'].dirty ||
+                        form.controls['clientAddress'].touched) &&
+                      form.hasError('required', 'clientAddress')
+                    "
+                  >
                     Client address is required
                   </small>
                 </mat-form-field>
 
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field
+                  class="example-form-field text-xs my-1"
+                  appearance="outline"
+                >
                   <mat-label class="text-bold">Client Email</mat-label>
-                  <input formControlName="clientEmail" matInput type="email" [ngClass]="
-                    (form.controls['clientEmail'].dirty ||
-                      form.controls['clientEmail'].touched) &&
-                    form.hasError('required', 'clientEmail') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['clientEmail'].dirty ||
-                      form.controls['clientEmail'].touched) &&
-                    form.hasError('required', 'clientEmail')
-                  ">
+                  <input
+                    formControlName="clientEmail"
+                    matInput
+                    type="email"
+                    [ngClass]="
+                      (form.controls['clientEmail'].dirty ||
+                        form.controls['clientEmail'].touched) &&
+                      form.hasError('required', 'clientEmail') == true
+                        ? 'border-danger'
+                        : ''
+                    "
+                  />
+                  <small
+                    class="text-danger float-end"
+                    *ngIf="
+                      (form.controls['clientEmail'].dirty ||
+                        form.controls['clientEmail'].touched) &&
+                      form.hasError('required', 'clientEmail')
+                    "
+                  >
                     Client email is required
                   </small>
                 </mat-form-field>
-
               </div>
 
               <div class="text-center mt-4">
-                <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2">
+                <button
+                  type="submit"
+                  (click)="onSubmit()"
+                  data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2"
+                >
                   Create
                 </button>
-                <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+                <button
+                  type="button"
+                  data-bs-dismiss="modal"
+                  class="btn bg-gradient-secondary m-2"
+                >
                   Cancel
                 </button>
               </div>
