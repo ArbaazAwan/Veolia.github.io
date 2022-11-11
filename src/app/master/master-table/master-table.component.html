@@ -16,7 +16,7 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive overflow-hidden ">
+        <div class="p-0 table-responsive">
           <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
@@ -24,13 +24,25 @@
                   Id
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitDesc">
-                  Unit Desc
+                  Old Asset Type
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="appDesc">
-                  AppDesc
+                  New Asset Type
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
-                  UnitMeas
+                  Master Style
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                  Master Size
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                  Old Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                  New Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                  Unit Measurement
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
                   Rev
@@ -39,7 +51,7 @@
                   Repl Cost
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMOs">
-                  Lifemos
+                  Life Months
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
                   OH Life

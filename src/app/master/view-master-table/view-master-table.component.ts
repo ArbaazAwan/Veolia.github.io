@@ -18,11 +18,11 @@ export class ViewMasterTableComponent implements OnInit {
     cols!: any[];
 
   ngOnInit(): void {
-    this.masterService.asset.subscribe(
-      value=>{
-        this.asset = value;
-      }
-    )
+    // this.masterService.asset.subscribe(
+    //   value=>{
+    //     this.asset = value;
+    //   }
+    // )
 
     this.nodeService.getFilesystem().then(files => this.files1 = files);
 

@@ -154,6 +154,6 @@ export class MasterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.masterService.assets.push(this.form.value);
+    // this.masterService.assets.push(this.form.value);
   }
 }

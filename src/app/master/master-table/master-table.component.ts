@@ -14,7 +14,7 @@ export class MasterTableComponent implements OnInit {
   sortedAssets!: any[];
 
   ngOnInit(): void {
-    this.assets = this.masterService.loadAssets(); //loading the assets
+    // this.assets = this.masterService.loadAssets(); //loading the assets
     this.sortedAssets = this.assets.slice();
   }
   sortAssets(sort: any) {
@@ -56,7 +56,7 @@ export class MasterTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
   viewAsset(asset: any) {
-    this.masterService.setAsset(asset);
+    // this.masterService.setAsset(asset);
   }
 
   editAsset(asset: any) {
