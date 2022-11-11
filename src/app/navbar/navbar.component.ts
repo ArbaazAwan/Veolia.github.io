@@ -44,12 +44,10 @@ export class NavbarComponent implements OnInit {
 
   populateSites(client: any) {
     this.isLoadingSite = true;
-    this.siteService
-      .getSiteByClientId(client.clientId)
-      .subscribe((res: any) => {
-        this.sites = res;
-        this.isLoadingSite = false;
-      });
+    this.siteService.getSiteByClientId(client).subscribe((res: any) => {
+      this.sites = res;
+      this.isLoadingSite = false;
+    });
   }
 
   selectEvent(item: any) {
@@ -66,11 +64,11 @@ export class NavbarComponent implements OnInit {
     // do something
   }
   onClientSelect(selectedClient: any) {
-    localStorage.setItem('clientId', selectedClient.value.clientId);
+    localStorage.setItem('clientId', selectedClient.value);
   }
 
   onSiteSelect(selectedClient: any) {
-    localStorage.setItem('siteId', selectedClient.value.siteId);
+    localStorage.setItem('siteId', selectedClient.value);
   }
   logOut() {
     localStorage.removeItem('login_auth');
