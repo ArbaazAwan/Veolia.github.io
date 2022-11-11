@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SiteService } from '../site.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sites-list',
@@ -8,7 +9,7 @@ import { SiteService } from '../site.service';
 })
 export class SitesListComponent implements OnInit {
   @Input() clientId: any;
-  constructor(private siteService: SiteService) {}
+  constructor(private siteService: SiteService, private router: Router) {}
 
   sitesList!: any[];
   isLoading: boolean = false;
@@ -27,5 +28,7 @@ export class SitesListComponent implements OnInit {
       localStorage.setItem('clientId', res[0].clientId);
       localStorage.setItem('siteId', event.target.id);
     });
+    // this.router.navigate(['/dashboard']);
+    this.router.navigateByUrl('/dashboard', { skipLocationChange: true });
   }
 }
