@@ -2,7 +2,9 @@
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+        <div
+          class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
+        >
           <p class="text-white text-capitalize text-bold ps-3">Sites Table</p>
         </div>
       </div>
@@ -10,27 +12,40 @@
       <!-- Summary table -->
       <div class="card-body px-0">
         <div class="flex-end px-3 col-md-3">
-          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+          <mat-form-field
+            class="example-form-field"
+            appearance="outline"
+            class="text-xs"
+          >
             <mat-label>Search Sites</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText">
+            <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
 
-        <div class="p-0 table-responsive overflow-hidden ">
+        <div class="p-0 table-responsive overflow-hidden">
           <div class="d-flex justify-content-center">
-              <div class="spinner-border" *ngIf="isLoading"></div>
+            <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
-          <table class="table table-blocked table-hover mx-3 mb-0" *ngIf="!isLoading">
+          <table
+            class="table table-blocked table-hover mx-3 mb-0"
+            *ngIf="!isLoading"
+          >
             <thead>
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
+                >
                   site Id
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
+                >
                   Site Name
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
+                >
                   Site Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -39,25 +54,25 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let site of sites|searchFilter:searchText">
+              <tr *ngFor="let site of sites | searchFilter: searchText">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteId}}</p>
+                      <p class="mb-0 text-sm">{{ site.siteId }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteName}}</p>
+                      <p class="mb-0 text-sm">{{ site.siteName }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{site.siteStatus}}</p>
+                      <p class="mb-0 text-sm">{{ site.siteStatus }}</p>
                     </div>
                   </div>
                 </td>
@@ -70,16 +85,29 @@
                             <div class="d-flex py-1">
                               <div class="d-flex flex-column">
                                 <div ngbDropdown>
-                                  <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                                  <button
+                                    class="btn btn-sm bg-gradient-primary"
+                                    id="gfg"
+                                    ngbDropdownToggle
+                                  >
                                     Actions
                                   </button>
                                   <div ngbDropdownMenu="gfg">
-                                    <button ngbDropdownItem (click)="updateSite(site.siteId)">
+                                    <button
+                                      ngbDropdownItem
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#edit-modal-form"
+                                      (click)="editSite(site.siteId)"
+                                    >
                                       <i class="material-icons">edit</i>&nbsp;
                                       Edit
                                     </button>
-                                    <button ngbDropdownItem class="text-danger" (click)="deleteSite(site.siteId)">
-                                      <i class="material-icons" >delete</i>&nbsp;
+                                    <button
+                                      ngbDropdownItem
+                                      class="text-danger"
+                                      (click)="deleteSite(site.siteId)"
+                                    >
+                                      <i class="material-icons">delete</i>&nbsp;
                                       Delete
                                     </button>
                                   </div>

@@ -13,8 +13,8 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
-              <mat-select [(ngModel)]="selectedClient" matInput type="text" (valueChange)="populateSites($event)" [disabled]="isLoadingClient">
-                <mat-option *ngFor="let client of clients" [value]="client">
+              <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"  (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)" [disabled]="isLoadingClient">
+                <mat-option *ngFor="let client of clients" value={{client.clientId}}>
                   {{ client.clientName }}
                 </mat-option>
               </mat-select>
@@ -30,8 +30,8 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingSite">Select Site</mat-label>
-              <mat-select [(ngModel)]="selectedSite" matInput type="text" [disabled]="isLoadingSite">
-                <mat-option *ngFor="let site of sites" [value]="site">
+              <mat-select [(ngModel)]="selectedSite" [(value)]="selectedSite" matInput type="text" (selectionChange)="onSiteSelect($event)" [disabled]="isLoadingSite">
+                <mat-option *ngFor="let site of sites" value={{site.siteId}}>
                   {{ site.siteName }}
                 </mat-option>
               </mat-select>

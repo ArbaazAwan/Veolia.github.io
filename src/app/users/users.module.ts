@@ -8,15 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserformComponent } from './userform/userform.component';
-
-
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  declarations: [
-    UsersComponent,
-    UserstableComponent,
-    UserformComponent
-  ],
+  declarations: [UsersComponent, UserstableComponent, UserformComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,7 +19,8 @@ import { UserformComponent } from './userform/userform.component';
     MatInputModule,
     MatIconModule,
     PipesModule,
-    NgbModule
-  ]
+    NgbModule,
+    MatSelectModule,
+  ],
 })
-export class UsersModule { }
+export class UsersModule {}

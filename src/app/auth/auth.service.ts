@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,9 @@ export class AuthService {
     this._isLoggedIn$.next(!!token);
   }
 
-  url: string = 'http://127.0.0.1:3000/login';
+  CLIENT_URL: string = environment.baseUrl + 'login';
+
+  // url: string = 'http://127.0.0.1:3000/login';
   headers = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
   });
@@ -22,11 +25,12 @@ export class AuthService {
   userLogin(email: string, password: string) {
     return this.http
       .post(
-        this.url,
+        this.CLIENT_URL,
         { email: email, password: password },
         { headers: this.headers }
-      ).pipe(
-        tap((res:any)=>{
+      )
+      .pipe(
+        tap((res: any) => {
           this._isLoggedIn$.next(true);
         })
       );

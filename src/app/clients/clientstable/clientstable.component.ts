@@ -1,36 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-clientstable',
   templateUrl: './clientstable.component.html',
-  styleUrls: ['./clientstable.component.scss']
+  styleUrls: ['./clientstable.component.scss'],
 })
 export class ClientstableComponent implements OnInit {
-
-  constructor(private clientService:ClientService) { }
-
+  constructor(private clientService: ClientService) {}
   // @Input() clientsArray!:any[];
 
-  searchText:string='';
-  clients:any[] =[];
-  isLoading:boolean = false;
+  searchText: string = '';
+  @Input() clients: any[] = [];
+  @Input() isLoading: boolean = false;
+  @Output() deleteClientEvent = new EventEmitter();
+  @Output() editClientEvent = new EventEmitter();
 
-  ngOnInit(): void {
-    this.isLoading = true;
-    this.clientService.getClients().subscribe(
-      (res:any)=>{
-        this.clients= res;
-        this.isLoading = false;
-      }
-    )
-  }
-  updateClient(id:any){
-    this.clientService.updateClient(id);
-  }
-  deleteClient(id:any){
-    this.clients = this.clients.filter(({clientId})=> clientId !=id);
-    this.clientService.deleteClient(id);
+  ngOnInit(): void {}
+
+  editClient(id: any) {
+    this.editClientEvent.emit(id);
   }
 
+  deleteClient(id: any) {
+    this.deleteClientEvent.emit(id);
+  }
 }

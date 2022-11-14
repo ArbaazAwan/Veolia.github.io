@@ -3,71 +3,54 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientService {
+  CLIENT_URL: string = environment.baseUrl + 'client/';
 
-  clients: any[] = [];
-  CLIENT_URL:string = environment.baseUrl + "client/";
-  isEdit = true;
-
-  headers = new HttpHeaders({})
+  headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "*"
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getClients() {
-    return this.http
-       .get(this.CLIENT_URL, { headers: this.headers });
-   }
+    return this.http.get(this.CLIENT_URL, { headers: this.headers });
+  }
 
-   getClientById(id: string) {
-     let client:any;
-     this.http.get(this.CLIENT_URL + id).subscribe((res: any) => {
-       console.log(res);
-       client = res;
-     });
-     return client;
-   }
+  getClientById(id: string) {
+    return this.http.get(this.CLIENT_URL + id, { headers: this.postHeaders });
+  }
 
-   postClient(clientName: string,contractYears:any) {
-     return this.http
-       .post(
-        this.CLIENT_URL,
-         {
-           clientName: clientName,
-           contractYears: contractYears
-         },
-         {
-          headers:this.postHeaders
-         }
-       );
-   }
+  postClient(client: any) {
+    return this.http.post(
+      this.CLIENT_URL,
+      {
+        clientName: client.clientName,
+        contractYears: client.contractYears,
+      },
+      { headers: this.postHeaders }
+    );
+  }
 
-   updateClient(id: any) {
-     let client:any =  this.getClientById(id);
-     this.http
-       .put(
-        this.CLIENT_URL + id.toString(),
-         {
-           clientName: client.clientName,
-           clientStatus: client.clientStatus,
-           contractYears: client.contractYears
-         },
-         { headers: this.headers }
-       )
-       .subscribe((res) => {
-         console.log(res);
-       });
-   }
+  updateClient(_client: any, data: any) {
+    return this.http.put(
+      this.CLIENT_URL + _client.clientId,
+      {
+        clientName: data.clientName,
+        clientStatus: _client.clientStatus,
+        contractYears: data.contractYears,
+      },
+      { headers: this.postHeaders }
+    );
+  }
 
-   deleteClient(id: any) {
-     this.http.delete(this.CLIENT_URL + id).subscribe((res) => {
-       console.log(res);
-     });
-   }
+  deleteClient(id: any) {
+    this.http
+      .delete(this.CLIENT_URL + id, { headers: this.postHeaders })
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 }

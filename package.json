@@ -1,6 +1,6 @@
 {
   "name": "veolia-angular",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,7 +24,7 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "angular-ng-autocomplete": "^2.0.12",
-    "aws-amplify": "^4.3.42",
+    "aws-amplify": "^4.3.43",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
     "mat-select-search": "^1.2.21",
@@ -34,7 +34,7 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.3",
