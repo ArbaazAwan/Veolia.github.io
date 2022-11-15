@@ -12,30 +12,36 @@ export interface Task {
 @Component({
   selector: 'app-summarytable',
   templateUrl: './summarytable.component.html',
-  styleUrls: ['./summarytable.component.scss']
+  styleUrls: ['./summarytable.component.scss'],
 })
 export class SummarytableComponent implements OnInit {
-
-  constructor() { }
-
-  @Input() summaryArray!:any[];
   allComplete: boolean = false;
   completed: boolean = false;
-  selectedAssets:any[]=[];
-  searchText:string = '';
+  selectedAssets: any[] = [];
+  searchText: string = '';
 
-  ngOnInit(): void {
-  }
+  @Input() summaryArray!: any[];
+  @Input() isLoading: boolean = false;
+  @Input() summaryData: any[] = [];
+  @Output() deleteSummaryEvent = new EventEmitter();
+  @Output() eidtSummaryEvent = new EventEmitter();
 
+  constructor() {}
+
+  ngOnInit(): void {}
 
   updateAllComplete() {
-    this.allComplete = this.summaryArray != null && this.summaryArray.every(t => t.isChecked);
+    this.allComplete =
+      this.summaryArray != null && this.summaryArray.every((t) => t.isChecked);
   }
   someComplete(): boolean {
     if (this.summaryArray == null) {
       return false;
     }
-    return this.summaryArray.filter(t => t.completed).length > 0 && !this.allComplete;
+    return (
+      this.summaryArray.filter((t) => t.completed).length > 0 &&
+      !this.allComplete
+    );
   }
 
   setAll(completed: boolean) {
@@ -43,7 +49,7 @@ export class SummarytableComponent implements OnInit {
     if (this.summaryArray == null) {
       return;
     }
-    this.summaryArray.forEach(t => (t.completed = completed));
+    this.summaryArray.forEach((t) => (t.completed = completed));
   }
 
   selection = new SelectionModel<any>(true, []);
@@ -57,12 +63,21 @@ export class SummarytableComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.summaryArray.forEach(row => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.summaryArray.forEach((row) => this.selection.select(row));
+  }
+
+  deleteSummary(id: any) {
+    console.log(id, 'deleteSummary');
+    this.deleteSummaryEvent.emit(id);
+  }
+
+  editSummary(id: any) {
+    this.eidtSummaryEvent.emit(id);
   }
 }
+
 function output() {
   throw new Error('Function not implemented.');
 }
-
