@@ -8,3 +8,5 @@
 :host::ng-deep .mat-form-field-appearance-outline.mat-focused mat-label {
   color: rgb(221, 37, 103);
 }
+
+::ng-deep { .cdk-global-overlay-wrapper, .cdk-overlay-container { z-index: 9999!important; } }

@@ -39,6 +39,10 @@ export class UserService {
     });
   }
 
+  changeUserPassword(data:any){
+    return this.http.put(this.USER_URL + "password",data,{headers:this.postHeaders});
+  }
+
   deleteUser(id: any, username: string) {
     this.http
       .delete(this.USER_URL + id, {

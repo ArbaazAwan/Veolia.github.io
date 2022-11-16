@@ -13,13 +13,16 @@
               </div>
               <div class="col-md-10">
                 <div class="card m-3">
-                  <div class="card-body">
+                  <div class="d-flex justify-content-center">
+                      <div class="spinner-border" *ngIf="isLoading"></div>
+                    </div>
+                  <div class="card-body" *ngIf="!isLoading">
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Full Name</h6>
+                        <h6 class="mb-0">Username</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        Kenneth Valdez
+                        {{user.userName}}
                       </div>
                     </div>
                     <hr>
@@ -28,16 +31,16 @@
                         <h6 class="mb-0">Email</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        fip@jukmuh.al
+                        {{user.userEmail}}
                       </div>
                     </div>
                     <hr>
                     <div class="row">
                       <div class="col-sm-3">
-                        <h6 class="mb-0">Phone</h6>
+                        <h6 class="mb-0">Role</h6>
                       </div>
                       <div class="col-sm-9 text-secondary">
-                        (239) 816-9029
+                        {{user.role}}
                       </div>
                     </div>
                     <hr>
@@ -74,48 +77,56 @@
             <p class="mb-0">Update User Details</p>
           </div>
           <div class="card-body">
-            <form role="form">
+            <form [formGroup]="form" role="form">
               <div class="row">
-                <div class="my-1">
-                  <label class="form-label text-bold">Name</label>
-                  <div class="input-group input-group-outline">
-                    <input type="text" class="form-control" placeholder="Please Enter Name" />
-                  </div>
-                </div>
-                <div class="my-1">
-                  <label class="form-label text-bold">Email</label>
-                  <div class="input-group input-group-outline">
-                    <input type="email" class="form-control" placeholder="Please Enter email" />
-                  </div>
-                </div>
-                <div class="my-1">
-                  <label class="form-label text-bold">Phone No.</label>
-                  <div class="input-group input-group-outline">
-                    <input type="email" class="form-control" placeholder="Please Enter email" />
-                  </div>
-                </div>
-                <div class="my-1">
-                  <label class="form-label text-bold">Old Password</label>
-                  <div class="input-group input-group-outline">
-                    <input type="password" class="form-control" placeholder="Please Enter email" />
-                  </div>
-                </div>
-                <div class="my-1">
-                  <label class="form-label text-bold">Password</label>
-                  <div class="input-group input-group-outline">
-                    <input type="password" class="form-control" placeholder="Please Enter email" />
-                  </div>
-                </div>
-                <div class="my-1">
-                  <label class="form-label text-bold">Confirm Password</label>
-                  <div class="input-group input-group-outline">
-                    <input type="password" class="form-control" placeholder="Please Enter email" />
-                  </div>
-                </div>
+                <mat-form-field  class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Username</mat-label>
+                  <input formControlName="username" matInput type="text" [ngClass]="
+                    (form.controls['username'].dirty ||
+                      form.controls['username'].touched) &&
+                    form.hasError('required', 'username') == true? 'border-danger': ''" />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['username'].dirty ||
+                      form.controls['username'].touched) &&
+                    form.hasError('required', 'username')">
+                  username is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-form-field text-xs my-1">
+                  <mat-label>Select</mat-label>
+                  <mat-select formControlName="role" [value]="form.value.role" [ngClass]="
+                  (form.controls['role'].dirty ||
+                    form.controls['role'].touched) &&
+                  form.hasError('required', 'role') == true? 'border-danger': ''">
+                    <mat-option value="admin">Admin</mat-option>
+                    <mat-option value="user">User</mat-option>
+                  </mat-select>
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['role'].dirty ||
+                      form.controls['role'].touched) &&
+                    form.hasError('required', 'role')">
+                    role is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field  class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Email</mat-label>
+                  <input formControlName="email" matInput type="text" [ngClass]="
+                    (form.controls['email'].dirty ||
+                      form.controls['email'].touched) &&
+                    form.hasError('required', 'email') == true? 'border-danger': ''" />
+                  <small class="text-danger float-end" *ngIf="
+                    (form.controls['email'].dirty ||
+                      form.controls['email'].touched) &&
+                    form.hasError('required', 'email')">
+                    email is required
+                  </small>
+                </mat-form-field>
               </div>
               <div class="text-center mt-2">
-                <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
-                  Create
+                <button type="submit" (click)="updateUser()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                  Update
                 </button>
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
                   Cancel

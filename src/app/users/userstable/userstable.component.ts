@@ -12,10 +12,15 @@ export class UserstableComponent implements OnInit {
   @Input() searchText: string = '';
   @Output() deleteUserEvent = new EventEmitter();
   @Output() editUserEvent = new EventEmitter();
+  @Output() changeUserPasswordEvent = new EventEmitter();
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
+
+  changeUserPassword(userId:any){
+    this.changeUserPasswordEvent.emit(userId);
+  }
 
   editUser(id: any) {
     this.editUserEvent.emit(id);
