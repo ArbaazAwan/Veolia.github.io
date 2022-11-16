@@ -18,51 +18,75 @@
                             <td>
                               <span>
                                 <label class="text-bold">Asset ID: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">1</span>
+                                <span class="mb-0 opacity-8 text-sm">{{master.masterId}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">Unit Description: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">Berus Belt</span>
+                                <label class="text-bold">Old Asset Type: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.oldAssetType}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">App Description: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">Installation</span>
+                                <label class="text-bold">New Asset Type: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.newAssetType}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">Unit Measure &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">544m</span>
+                                <label class="text-bold">Master Style: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.masterStyle}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">Rev: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">Revenue</span>
+                                <label class="text-bold">Master Size: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.masterSize}}</span>
+                              </span>
+                            </td>
+                            <td>
+                              <span>
+                                <label class="text-bold">Old Description: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.oldDescription}}</span>
                               </span>
                             </td>
                           </tr>
                           <tr>
                             <td>
                               <span>
+                                <label class="text-bold">New Description: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.newDescription}}</span>
+                              </span>
+                            </td>
+                            <td>
+                              <span>
+                                <label class="text-bold">Unit Measurement: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.unitMeasurement}}</span>
+                              </span>
+                            </td>
+                            <td>
+                              <span>
+                                <label class="text-bold">Rev: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.rev}}</span>
+                              </span>
+                            </td>
+                            <td>
+                              <span>
                                 <label class="text-bold">Replacement Cost: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">147</span>
+                                <span class="mb-0 opacity-8 text-sm">{{master.replacementCost | currency}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">Life MOs: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">12</span>
+                                <label class="text-bold">Life Months: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm"> {{master.lifeMonths}}</span>
                               </span>
                             </td>
                             <td>
                               <span>
-                                <label class="text-bold">OH life: &nbsp;</label>
-                                <span class="mb-0 opacity-8 text-sm">57 %</span>
+                                <label class="text-bold">Overhaul Life: &nbsp;</label>
+                                <span class="mb-0 opacity-8 text-sm">{{master.overhaulLife | percent}}</span>
                               </span>
                             </td>
                           </tr>

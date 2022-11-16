@@ -15,14 +15,14 @@ export class ViewMasterTableComponent implements OnInit {
    asset:any;
    files1!: TreeNode[];
    @Input() eventEvalTableShow!:boolean;
+   @Input() master:any;
     cols!: any[];
 
   ngOnInit(): void {
-    // this.masterService.asset.subscribe(
-    //   value=>{
-    //     this.asset = value;
-    //   }
-    // )
+    
+
+    console.log(this.masterService.getViewMasterById("1"));
+
 
     this.nodeService.getFilesystem().then(files => this.files1 = files);
 
@@ -40,5 +40,7 @@ export class ViewMasterTableComponent implements OnInit {
 
         ];
   }
+
+
 
 }

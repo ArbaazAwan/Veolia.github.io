@@ -48,13 +48,13 @@
                   Rev
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replCost">
-                  Repl Cost
+                  Replacement Cost
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMOs">
                   Life Months
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
-                  OH Life
+                  Overhaul Life
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
                   Actions
@@ -63,40 +63,75 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let asset of sortedAssets | searchFilter: assetSearchText
+                  let master of masters | searchFilter: assetSearchText
                 ">
                 <td>
                   <div class="d-flex px-3 py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.id }}</p>
+                      <p class="mb-0 text-sm">{{ master.masterId }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.unitDesc }}</p>
+                      <p class="mb-0 text-sm">{{ master.oldAssetType }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.appDesc }}</p>
+                      <p class="mb-0 text-sm">{{ master.newAssetType }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.unitMeas }}</p>
+                      <p class="mb-0 text-sm">{{ master.masterStyle }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.rev | currency }}</p>
+                      <p class="mb-0 text-sm">{{ master.masterSize }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.unitMeasurement }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.rev }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.replacementCost | currency }}</p>
                     </div>
                   </div>
                 </td>
@@ -105,7 +140,7 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ asset.replCost | currency }}
+                        {{ master.lifeMonths }}
                       </p>
                     </div>
                   </div>
@@ -113,15 +148,8 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.lifeMOs }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ asset.OHLife / 100 | percent }}
+                        {{ master.overhaulLife / 100 | percent }}
                       </p>
                     </div>
                   </div>
@@ -134,20 +162,25 @@
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form-view"
-                            (click)="viewAsset(asset)">
+                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" data-bs-target="#modal-form-view"
+                            (click)="viewMaster(master.masterId)">
                             <i class="material-icons">visibility</i>
                             &nbsp;View
                           </button>
-                          <button ngbDropdownItem class="" (click)="editAsset(asset)" data-bs-toggle="modal"
+                          <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
                             data-bs-target="#modal-form">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem class="">
-                            <i class="material-icons">content_copy</i>&nbsp;
-                            Duplicate
-                          </button>
+                          <button
+                          ngbDropdownItem
+                          class="text-danger"
+                          (click)="deleteMaster(master.masterId)"
+                        >
+                          <i class="material-icons">delete</i>&nbsp;
+                          Delete
+                        </button>
+
                         </div>
                       </div>
                     </div>

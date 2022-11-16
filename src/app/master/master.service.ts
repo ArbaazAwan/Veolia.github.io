@@ -9,14 +9,13 @@ import { environment } from 'src/environments/environment';
 export class MasterService {
 
   MASTER_URL: string = environment.baseUrl + 'master/';
-  //CREATE_MASTER_URL: string = environment.baseUrl + 'master/{id}';
   masters: any[] = [];
 
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    // 'Access-Control-Allow-Origin': "'*'",
-    // "Access-Control-Allow-Headers": "'*'"
+    'Access-Control-Allow-Origin': "'*'",
+    "Access-Control-Allow-Headers": "'*'"
   });
 
 
@@ -29,6 +28,11 @@ export class MasterService {
   getMasterById(id: string) {
     return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
   }
+  getViewMasterById(id: string) {
+    return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
+  }
+
+
 
   postMaster(master: any) {
     return this.http.post(this.MASTER_URL, master, {
@@ -42,13 +46,9 @@ export class MasterService {
     });
   }
 
-  deleteUser(id: any, username: string) {
+  deleteMaster(id: any) {
     this.http
-      .delete(this.MASTER_URL + id, {
-        body: {
-          username
-        },
-      })
+      .delete(this.MASTER_URL + id)
       .subscribe((res) => {
         console.log(res, 'deleted');
       });
