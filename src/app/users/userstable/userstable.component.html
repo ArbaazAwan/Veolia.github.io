@@ -115,7 +115,7 @@
                       <div class="d-flex flex-column">
                         <div class="d-flex py-1">
                           <div class="d-flex flex-column">
-                            <div ngbDropdown>
+                            <div ngbDropdown container="body" class="fix-size">
                               <button
                                 class="btn btn-sm bg-gradient-primary"
                                 id="gfg"
@@ -124,6 +124,14 @@
                                 Actions
                               </button>
                               <div ngbDropdownMenu="gfg">
+                                <button
+                                  ngbDropdownItem
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#modal-form-pass"
+                                  (click)="changeUserPassword(user.userId)"
+                                >
+                                  <i class="material-icons">password</i>&nbsp; Set password
+                                </button>
                                 <button
                                   ngbDropdownItem
                                   data-bs-toggle="modal"

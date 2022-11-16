@@ -7,6 +7,7 @@ import {
   ValidatorFn,
   AbstractControl,
 } from '@angular/forms';
+import Validation from '../utils/validation';
 import { UserService } from './user.service';
 
 type UserType = 'admin' | 'user';
@@ -18,6 +19,7 @@ type UserType = 'admin' | 'user';
 })
 export class UsersComponent implements OnInit {
   form!: FormGroup;
+  pForm!:FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
   isLoading: boolean = false;
@@ -52,6 +54,10 @@ export class UsersComponent implements OnInit {
     };
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.pForm.controls;
+  }
+
   initializeForm() {
     this.form = this.formBuilder.group({
       username: [null, Validators.required],
@@ -61,15 +67,34 @@ export class UsersComponent implements OnInit {
         Validators.compose([Validators.required, this.patternValidator()]),
       ],
     });
+    this.pForm = this.formBuilder.group({
+      password: ['',Validators.compose([Validators.required, this.patternValidator()])],
+      confirmPassword: ['',Validators.compose([Validators.required, this.patternValidator()])],
+    },
+    {
+      validators: [Validation.match("password", "confirmPassword")]
+    }
+    )
   }
 
   getUsers() {
     this.isLoading = true;
     this.userService.getUsers().subscribe((res: any) => {
       this.users = res;
-
       this.isLoading = false;
     });
+  }
+
+  submitPassword(){
+    if(!this.pForm.value.password  == this.pForm.value.confirmPassword)
+    {
+      return;
+    }
+    this.userService.changeUserPassword(this.pForm.value.password).subscribe(
+      (res:any)=>{
+        console.log(res);
+      }
+    )
   }
 
   submitForm() {
@@ -94,6 +119,15 @@ export class UsersComponent implements OnInit {
     });
 
     this.formReset();
+  }
+
+  onChangePassword(id:any){
+    this.userService.getUserById(id).subscribe(
+      (res:any)=>{
+        let { userName } = res[0];
+
+      }
+    )
   }
 
   onUpdateUser() {
@@ -123,6 +157,7 @@ export class UsersComponent implements OnInit {
 
   formReset() {
     this.form.reset();
+    this.pForm.reset();
   }
 
   onDeleteUser(user: any) {
