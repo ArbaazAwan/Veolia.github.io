@@ -34,4 +34,11 @@ export class AuthService {
         })
       );
   }
+
+  logout(){
+
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('siteId');
+    localStorage.removeItem('login_auth');
+  }
 }

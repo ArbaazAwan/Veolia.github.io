@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
 
@@ -12,7 +13,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private clientService: ClientService,
-    private siteService: SiteService
+    private siteService: SiteService,
+    private authService:AuthService
   ) {}
 
   isLoadingClient: boolean = false;
@@ -70,10 +72,9 @@ export class NavbarComponent implements OnInit {
   onSiteSelect(selectedClient: any) {
     localStorage.setItem('siteId', selectedClient.value);
   }
+  
   logOut() {
-    localStorage.removeItem('login_auth');
-    localStorage.removeItem('clientId');
-    localStorage.removeItem('siteId');
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 }

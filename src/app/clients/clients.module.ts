@@ -11,16 +11,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { ClientformComponent } from './clientform/clientform.component';
-
-
 
 @NgModule({
   declarations: [
     ClientsComponent,
     ClientsListComponent,
     ClientstableComponent,
-    ClientformComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +32,7 @@ import { ClientformComponent } from './clientform/clientform.component';
   ],
   exports:[
     ClientsComponent,
+    ClientstableComponent,
     ClientsListComponent,
   ]
 })
