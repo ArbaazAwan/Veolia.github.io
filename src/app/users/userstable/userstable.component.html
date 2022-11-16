@@ -127,6 +127,14 @@
                                 <button
                                   ngbDropdownItem
                                   data-bs-toggle="modal"
+                                  data-bs-target="#modal-form-pass"
+                                  (click)="changeUserPassword(user.userId)"
+                                >
+                                  <i class="material-icons">password</i>&nbsp; Set password
+                                </button>
+                                <button
+                                  ngbDropdownItem
+                                  data-bs-toggle="modal"
                                   data-bs-target="#edit-modal-form"
                                   (click)="editUser(user.userId)"
                                 >

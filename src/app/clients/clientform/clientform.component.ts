@@ -34,7 +34,7 @@ export class ClientformComponent implements OnInit {
 
 
   onSubmit(){
-    this.clientService.postClient(this.form.value.clientName,this.form.value.contractYears)
+    this.clientService.postClient(this.form.value)
     .subscribe(
       (res:any)=>{
         console.log(res);

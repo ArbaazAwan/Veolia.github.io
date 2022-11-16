@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports:[
     ProfileComponent

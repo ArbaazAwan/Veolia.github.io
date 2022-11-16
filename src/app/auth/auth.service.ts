@@ -15,7 +15,6 @@ export class AuthService {
 
   CLIENT_URL: string = environment.baseUrl + 'login';
 
-  // url: string = 'http://127.0.0.1:3000/login';
   headers = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
   });
