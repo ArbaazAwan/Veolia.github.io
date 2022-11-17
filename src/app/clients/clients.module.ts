@@ -11,7 +11,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { ClientformComponent } from './clientform/clientform.component';
 
 
 
@@ -20,7 +19,6 @@ import { ClientformComponent } from './clientform/clientform.component';
     ClientsComponent,
     ClientsListComponent,
     ClientstableComponent,
-    ClientformComponent,
   ],
   imports: [
     CommonModule,

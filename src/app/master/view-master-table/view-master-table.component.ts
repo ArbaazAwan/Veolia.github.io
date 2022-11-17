@@ -15,15 +15,13 @@ export class ViewMasterTableComponent implements OnInit {
    asset:any;
    files1!: TreeNode[];
    @Input() eventEvalTableShow!:boolean;
-   @Input() master:any;
+   @Input() master:any={}
     cols!: any[];
+
+  events:any[] = [];
 
   ngOnInit(): void {
     
-
-    console.log(this.masterService.getViewMasterById("1"));
-
-
     this.nodeService.getFilesystem().then(files => this.files1 = files);
 
         this.cols = [
@@ -39,6 +37,15 @@ export class ViewMasterTableComponent implements OnInit {
             { field: 'ev8', header: 'Event8' },
 
         ];
+  }
+
+  getEvents(){
+    this.masterService.getEventsByMasterId(this.master.masterId).subscribe(
+      (res:any)=>{
+        this.events = res;
+        console.log('these are events:',this.events);
+      }
+    )
   }
 
 

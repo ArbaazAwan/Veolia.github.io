@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 export class MasterService {
 
   MASTER_URL: string = environment.baseUrl + 'master/';
+  EVENTS_URL: string = environment.baseUrl + 'event/master/';
+  OVERHAUL_URL: string = environment.baseUrl + 'overhaul/master/';
   masters: any[] = [];
 
   headers = new HttpHeaders({});
@@ -32,7 +34,12 @@ export class MasterService {
     return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
   }
 
-
+  getEventsByMasterId(id: string) {
+    return this.http.get(this.EVENTS_URL + id, { headers: this.headers });
+  }
+  getOverhaulByMasterId(id: string) {
+    return this.http.get(this.OVERHAUL_URL + id, { headers: this.headers });
+  }
 
   postMaster(master: any) {
     return this.http.post(this.MASTER_URL, master, {

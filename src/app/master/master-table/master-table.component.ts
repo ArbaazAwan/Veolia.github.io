@@ -66,8 +66,8 @@ export class MasterTableComponent implements OnInit {
   viewMaster(masterId:any){
     this.viewMasterEvent.emit(masterId);
   }
-  editMaster(id: any) {
-    this.editMasterEvent.emit(id);
+  editMaster(masterid: any) {
+    this.editMasterEvent.emit(masterid);
   }
 
   deleteMaster(id: any) {
