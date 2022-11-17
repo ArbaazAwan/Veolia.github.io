@@ -1,67 +1,73 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-create-summary-form',
   templateUrl: './create-summary-form.component.html',
-  styleUrls: ['./create-summary-form.component.scss']
+  styleUrls: ['./create-summary-form.component.scss'],
 })
 export class CreateSummaryFormComponent implements OnInit {
-
-  @Input() title:string = 'Summary';
-    constructor(private fb:FormBuilder) {
-      this.form = this.fb.group({
-        unitName:["", Validators.required],
-        assetType:['',Validators.required],
-        size:['',Validators.required],
-        app:['',Validators.required],
-        subApp:['',Validators.required],
-        quality:['',Validators.required],
-        quantity:['',Validators.required],
-        load:['', Validators.required],
-        life:['', Validators.required],
-        isChecked: false,
-      })
-    }
-  form!:FormGroup;
+  @Input() title: string = 'Summary';
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      unitName: ['', Validators.required],
+      assetType: ['', Validators.required],
+      size: ['', Validators.required],
+      app: ['', Validators.required],
+      subApp: ['', Validators.required],
+      quality: ['', Validators.required],
+      quantity: ['', Validators.required],
+      load: ['', Validators.required],
+      life: ['', Validators.required],
+      isChecked: false,
+    });
+  }
+  form!: FormGroup;
 
   db!: any[];
   assetTypes!: any[];
   sizes!: any[];
   apps!: any[];
   subApps!: any[];
-  selectedAssetType: any ={
-    id:null,
-    name:''
+  selectedAssetType: any = {
+    id: null,
+    name: '',
   };
   qualities!: any[];
+
   selectedSizes!: any[];
+
   selectedSize: any = {
     id: null,
     desc: '',
-    app_id:null
+    app_id: null,
   };
 
   selectedApps!: any[];
   selectedApp: any = {
     id: null,
-    desc: ''
+    desc: '',
   };
 
-  selectedSubApps!:any[];
-  selectedSubApp:any={
-    id:null,
-    quality_id:null,
-    desc:''
-  }
+  selectedSubApps!: any[];
+  selectedSubApp: any = {
+    id: null,
+    quality_id: null,
+    desc: '',
+  };
 
-  selectedQualities!:any[];
-  selectedQuality:any={
-    id:null,
-    desc:''
-  }
+  selectedQualities!: any[];
+  selectedQuality: any = {
+    id: null,
+    desc: '',
+  };
 
-  submitted:boolean = false;
+  submitted: boolean = false;
 
   ngOnInit(): void {
     this.db = [
@@ -83,49 +89,49 @@ export class CreateSummaryFormComponent implements OnInit {
             id: 1,
             desc: '24 to 36 in',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 2,
             desc: '6 ft wide',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 3,
             desc: '< 4ft wide',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 4,
             desc: '4ft to 5ft wide',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 5,
             desc: '6ft to 8ft wide',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 6,
             desc: '24 to 36',
             assetType_id: 1,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 7,
             desc: 'medium',
             assetType_id: 2,
-            app_id:3
+            app_id: 3,
           },
           {
             id: 8,
             desc: 'large',
             assetType_id: 2,
-            app_id:3
+            app_id: 3,
           },
         ],
       },
@@ -141,7 +147,7 @@ export class CreateSummaryFormComponent implements OnInit {
           },
           {
             id: 3,
-            desc: 'screen'
+            desc: 'screen',
           },
         ],
       },
@@ -151,44 +157,43 @@ export class CreateSummaryFormComponent implements OnInit {
             id: 1,
             desc: 'hydraulic ram',
             app_id: 1,
-            quality_id:1
-
+            quality_id: 1,
           },
           {
             id: 2,
             desc: 'screw',
             app_id: 1,
-            quality_id:2
+            quality_id: 2,
           },
           {
             id: 3,
             desc: 'annular type rotary drum',
             app_id: 3,
-            quality_id:1
+            quality_id: 1,
           },
           {
             id: 4,
             desc: 'chain mat',
             app_id: 3,
-            quality_id:1
+            quality_id: 1,
           },
           {
             id: 5,
             desc: 'climber',
             app_id: 3,
-            quality_id:2
+            quality_id: 2,
           },
           {
             id: 6,
             desc: 'manual bar screen',
             app_id: 3,
-            quality_id:2
+            quality_id: 2,
           },
           {
             id: 7,
             desc: 'rotary drum',
             app_id: 3,
-            quality_id:1
+            quality_id: 1,
           },
         ],
       },
@@ -217,9 +222,8 @@ export class CreateSummaryFormComponent implements OnInit {
     this.onAssetTypeSelect(this.selectedAssetType);
     this.onSizeSelect(this.selectedSize);
     this.onAppSelect(this.selectedApp);
-    this.onSubAppSelect(this.selectedSubApp)
+    this.onSubAppSelect(this.selectedSubApp);
   }
-
 
   onAssetTypeSelect(selectedAssetType: any) {
     this.selectedSizes = this.sizes.filter(
@@ -228,55 +232,62 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onSizeSelect(selectedSize: any) {
-    this.selectedApps = this.apps.filter((app) => app.id == selectedSize.app_id);
-
+    this.selectedApps = this.apps.filter(
+      (app) => app.id == selectedSize.app_id
+    );
   }
 
-  onAppSelect(selectedApp:any){
-    this.selectedSubApps = this.subApps.filter((subApp)=>subApp.app_id == selectedApp.id);
+  onAppSelect(selectedApp: any) {
+    this.selectedSubApps = this.subApps.filter(
+      (subApp) => subApp.app_id == selectedApp.id
+    );
   }
 
-  onSubAppSelect(selectedSubApp:any){
-    this.selectedQualities = this.qualities.filter((q)=>q.id == selectedSubApp.quality_id);
+  onSubAppSelect(selectedSubApp: any) {
+    this.selectedQualities = this.qualities.filter(
+      (q) => q.id == selectedSubApp.quality_id
+    );
   }
 
-  mapCascadingFormValues(){
-    this.form.value.assetType = this.assetTypes.find((x:any)=>x.id == this.form.value.assetType)
-    this.form.value.size = this.sizes.find((x:any)=>x.id == this.form.value.size)
-    this.form.value.app = this.apps.find((x:any)=>x.id == this.form.value.app)
-    this.form.value.subApp = this.subApps.find((x:any)=>x.id == this.form.value.subApp)
-    this.form.value.quality = this.qualities.find((x:any)=>x.id == this.form.value.quality)
+  mapCascadingFormValues() {
+    this.form.value.assetType = this.assetTypes.find(
+      (x: any) => x.id == this.form.value.assetType
+    );
+    this.form.value.size = this.sizes.find(
+      (x: any) => x.id == this.form.value.size
+    );
+    this.form.value.app = this.apps.find(
+      (x: any) => x.id == this.form.value.app
+    );
+    this.form.value.subApp = this.subApps.find(
+      (x: any) => x.id == this.form.value.subApp
+    );
+    this.form.value.quality = this.qualities.find(
+      (x: any) => x.id == this.form.value.quality
+    );
   }
 
-  private validateAllFormFields(formGroup:FormGroup){
-    Object.keys(formGroup.controls).forEach(field=>{
+  private validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
-      if(control instanceof FormControl)
-      {
-        control.markAsDirty({onlySelf:true});
-      }
-      else if(control instanceof FormGroup)
+      if (control instanceof FormControl) {
+        control.markAsDirty({ onlySelf: true });
+      } else if (control instanceof FormGroup)
         this.validateAllFormFields(control);
-    })
+    });
   }
 
-  onSubmit(){
-
-    if(this.form.valid)
-    {
-    this.submitted = true;
-    this.mapCascadingFormValues();
-    this.form.reset();
+  onSubmit() {
+    if (this.form.valid) {
+      this.submitted = true;
+      this.mapCascadingFormValues();
+      this.form.reset();
+    } else {
+      this.validateAllFormFields(this.form);
     }
-    else
-    {
-      this.validateAllFormFields(this.form)
-    }
-
   }
 
-  onCancel(){
+  onCancel() {
     this.form.reset();
   }
-
 }
