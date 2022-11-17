@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientsComponent } from './clients.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { RouterModule } from '@angular/router';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { SitesModule } from '../sites/sites.module';
 import { ClientstableComponent } from './clientstable/clientstable.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,17 +11,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { ClientformComponent } from './clientform/clientform.component';
-
-
 
 @NgModule({
-  declarations: [
-    ClientsComponent,
-    ClientsListComponent,
-    ClientstableComponent,
-    ClientformComponent,
-  ],
+  declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -32,11 +24,8 @@ import { ClientformComponent } from './clientform/clientform.component';
     NgbModule,
     PipesModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
   ],
-  exports:[
-    ClientsComponent,
-    ClientsListComponent,
-  ]
+  exports: [ClientsComponent, ClientsListComponent],
 })
-export class ClientsModule { }
+export class ClientsModule {}
