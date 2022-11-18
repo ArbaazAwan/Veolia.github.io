@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 export class CreateMasterFormComponent implements OnInit {
 
   constructor(private fb:FormBuilder) { }
+
+
   form!: FormGroup;
 
   ngOnInit(): void

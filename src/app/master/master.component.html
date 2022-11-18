@@ -4,7 +4,13 @@
     </button>
     <!-- table here -->
     <div class="container-fluid py-4">
-      <app-master-table></app-master-table>
+      <app-master-table 
+      [masters]="masters"
+      [isLoading]="isLoading"
+      (deleteMasterEvent)="onDeleteMaster($event)"
+      (editMasterEvent)="onEditMaster($event)"
+      (viewMasterEvent)="onViewMaster($event)"
+      ></app-master-table>
     </div>
 
     <!-- Edit form here -->
@@ -39,7 +45,10 @@
                 </div>
               </div>
               <div class="card-body">
-                <app-view-master-table [eventEvalTableShow]="eventEvalTableShow"></app-view-master-table>
+                <app-view-master-table 
+                [eventEvalTableShow]="eventEvalTableShow"
+                [master] = "viewMaster"
+                ></app-view-master-table>
               </div>
             </div>
           </div>
