@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-side-navbar',
@@ -7,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService:AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

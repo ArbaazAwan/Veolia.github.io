@@ -4,7 +4,10 @@
       <div class="col-md-12 mb-3">
         <div class="card">
           <div class="card-body">
-            <div class="row">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" *ngIf="isLoading"></div>
+            </div>
+            <div class="row"  *ngIf="!isLoading">
               <div class="col-md-2">
                 <div class="d-flex flex-column align-items-center text-center mt-6">
                   <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="profile picture"
@@ -13,10 +16,7 @@
               </div>
               <div class="col-md-10">
                 <div class="card m-3">
-                  <div class="d-flex justify-content-center">
-                      <div class="spinner-border" *ngIf="isLoading"></div>
-                    </div>
-                  <div class="card-body" *ngIf="!isLoading">
+                  <div class="card-body">
                     <div class="row">
                       <div class="col-sm-3">
                         <h6 class="mb-0">Username</h6>
@@ -79,7 +79,7 @@
           <div class="card-body">
             <form [formGroup]="form" role="form">
               <div class="row">
-                <mat-form-field  class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Username</mat-label>
                   <input formControlName="username" matInput type="text" [ngClass]="
                     (form.controls['username'].dirty ||
@@ -89,7 +89,7 @@
                     (form.controls['username'].dirty ||
                       form.controls['username'].touched) &&
                     form.hasError('required', 'username')">
-                  username is required
+                    username is required
                   </small>
                 </mat-form-field>
 
@@ -110,7 +110,7 @@
                   </small>
                 </mat-form-field>
 
-                <mat-form-field  class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Email</mat-label>
                   <input formControlName="email" matInput type="text" [ngClass]="
                     (form.controls['email'].dirty ||
@@ -125,7 +125,8 @@
                 </mat-form-field>
               </div>
               <div class="text-center mt-2">
-                <button type="submit" (click)="updateUser()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                <button type="submit" (click)="updateUser()" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2">
                   Update
                 </button>
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">

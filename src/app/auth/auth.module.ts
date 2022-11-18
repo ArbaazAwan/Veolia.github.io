@@ -5,6 +5,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -18,7 +19,8 @@ import { MatInputModule } from '@angular/material/input';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   exports:[
     LoginComponent,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-master-form',
@@ -10,16 +10,28 @@ export class CreateMasterFormComponent implements OnInit {
 
   constructor(private fb:FormBuilder) { }
   form!: FormGroup;
-  ngOnInit(): void {
+
+  ngOnInit(): void
+  {
+    this.initializeForm();
+  }
+
+  initializeForm(){
     this.form = this.fb.group({
-      //building form
-      unitDesc: ['',Validators.required],
-      appDesc: ['',Validators.required],
-      unitMeas: ['',Validators.required],
+      oldAssetType: ['',Validators.required],
+      masterStyle: ['',Validators.required],
+      newAssetType: ['',Validators.required],
+      masterSize: ['',Validators.required],
+      oldDescription: ['',Validators.required],
+      newDescription: ['',Validators.required],
+      unitMeasurement: ['',Validators.required],
       rev: ['',Validators.required],
-      replCost: ['',Validators.required],
-      lifeMOs: ['',Validators.required],
-      OHLife: ['',Validators.required],
+      replacementCost: ['',Validators.required],
+      lifeMonths: ['',Validators.required],
+      overhaulLife: ['',Validators.required],
+      ovTitle:['', Validators.required],
+      ovStretch:['', Validators.required],
+      events: this.fb.array([]),
       maintenances: this.fb.array([]),
       labors: this.fb.array([]),
       conts: this.fb.array([]),
@@ -27,6 +39,10 @@ export class CreateMasterFormComponent implements OnInit {
       overhaulLabors: this.fb.array([]),
       overhaulConts: this.fb.array([]),
     });
+  }
+
+  events(): FormArray {
+     return <FormArray>this.form.get('events');
   }
 
   maintenances(): FormArray {
@@ -51,6 +67,13 @@ export class CreateMasterFormComponent implements OnInit {
 
   overhaulConts(): FormArray {
     return this.form.get('overhaulConts') as FormArray;
+  }
+
+  newEvent() {
+    return this.fb.group({
+      desc: ['',Validators.required], //todo
+      cost: ['',Validators.required], //todo
+    });
   }
 
   newMaintenance() {
@@ -95,6 +118,10 @@ export class CreateMasterFormComponent implements OnInit {
     });
   }
 
+  addEvent() {
+    this.events().push(this.newEvent());
+  }
+
   addMaintenance() {
     this.maintenances().push(this.newMaintenance());
   }
@@ -117,6 +144,10 @@ export class CreateMasterFormComponent implements OnInit {
 
   addOverhaulCont() {
     this.overhaulConts().push(this.newOverhaulCont());
+  }
+
+  removeEvent(index: number) {
+    this.events().removeAt(index);
   }
 
   removeMaintenance(index: number) {

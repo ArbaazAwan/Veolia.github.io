@@ -23,6 +23,7 @@ import { SitesComponent } from './sites/sites.component';
 import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
 import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
+import { IsAdminGuard } from './auth/is-admin.guard';
 
 @NgModule({
   declarations: [AppComponent, Error404Component],
