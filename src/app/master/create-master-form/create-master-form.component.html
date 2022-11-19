@@ -7,7 +7,7 @@
             <h5 class="">
               Create Asset Form
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
+                <button (click)="resetForm()" data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="card-body">
-          <form [formGroup]="form">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-6">
 
@@ -226,6 +226,7 @@
 
             <div class="card card-plain mx-4">
               <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
+
                 <mat-tab label="Overhaul">
                   <table class="table">
                     <tr>
@@ -272,18 +273,16 @@
                             let i = index
                           " [formGroupName]="i">
                           <td>
-                            <label for="overhaulMaintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control"
-                              placeholder="Enter Description" />
+                              <label class="text-bold">Maintenance</label>
+                              <input matInput type="text" formControlName="ohMaintenance" />
                           </td>
                           <td>
-
-                            <label for="overhaulCost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" placeholder="Enter Cost" />
+                              <label class="text-bold">Cost</label>
+                              <input matInput type="text" formControlName="ohCost"  />
                           </td>
                           <td>
                             <button (click)="removeOverhaulMaintenance(i)"
-                              class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              class="btn btn-sm bg-gradient-danger mx-2">
                               Remove
                             </button>
                           </td>
@@ -302,16 +301,15 @@
                             let overhaulLabor of overhaulLabors().controls;
                             let i = index" [formGroupName]="i">
                           <td>
-                            <label>Level</label>
-                            <input type="text" formControlName="level" formControlName="level" class="form-control"
-                              placeholder="Enter Level" />
+                              <label class="text-bold">Overhaul Labour</label>
+                              <input matInput type="text" formControlName="ohLabour"/>
                           </td>
                           <td>
-                            <label class="form-label">Hours</label>
-                            <input type="text" formControlName="hrs" class="form-control" placeholder="Enter Hours" />
+                              <label class="text-bold">Hours</label>
+                              <input matInput type="text" formControlName="ohHour"  />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                            <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2">
                               Remove
                             </button>
                           </td>
@@ -332,16 +330,15 @@
                             let i = index
                           " [formGroupName]="i">
                           <td>
-                            <label for="overhaulMaintenance" class="form-label">Desc</label>
-                            <input type="text" formControlName="desc" class="form-control"
-                              placeholder="Enter Description" />
+                              <label class="text-bold">Overhaul Labour</label>
+                              <input matInput type="text" formControlName="ohLabour"  />
                           </td>
                           <td>
-                            <label for="overhaulCost" class="form-label">Cost</label>
-                            <input type="text" formControlName="cost" class="form-control" placeholder="Enter Cost" />
+                              <label class="text-bold">Overhaul Hour</label>
+                              <input matInput type="text" formControlName="ohHour" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                            <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2">
                               Remove
                             </button>
                           </td>
@@ -350,6 +347,7 @@
                     </div>
                   </div>
                 </mat-tab>
+
                 <mat-tab disabled>
                   <ng-template mat-tab-label>
                     <div>
@@ -362,6 +360,7 @@
                 </mat-tab>
 
                 <div formArrayName="events">
+
                   <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="Event 1">
                     <button mat-raised-button class="btn btn-sm bg-gradient-danger" (click)="removeEvent(i)">
                       Romove Event
@@ -371,23 +370,22 @@
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Title</mat-label>
-                            <input matInput type="text" />
+                            <input matInput type="text" formControlName='eventTitle'/>
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                            <mat-label class="text-bold">Repeat After Month</mat-label>
-                            <input matInput type="text" />
+                            <mat-label class="text-bold">Event Occurence</mat-label>
+                            <input matInput type="text" formControlName="eventOccurence"/>
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                            <mat-label class="text-bold">Strch</mat-label>
-                            <input matInput type="text" />
+                            <mat-label class="text-bold">Event Stretch</mat-label>
+                            <input matInput type="text" formControlName="eventStretch"/>
                           </mat-form-field>
-
                         </td>
                       </tr>
                     </table>
@@ -396,26 +394,26 @@
                       <div class="col-md-4">
                         <label class="text-bold mt-2">Maintenance</label>
                         <div>
-                          <a type="button" (click)="addMaintenance()" class="btn bg-gradient-dark text-xs mb-0"><span
+                          <a type="button" (click)="addMaintenance(i)" class="btn bg-gradient-dark text-xs mb-0"><span
                               class="material-icons">add_box</span>&nbsp;
                             Create</a>
                         </div>
-                        <table formArrayName="maintenances">
+                        <table formArrayName="eventMaintenance">
                           <tr *ngFor="
-                            let maintenance of maintenances().controls;
-                            let i = index
-                          " [formGroupName]="i">
+                            let maintenance of maintenances(i).controls;
+                            let im = index
+                          " [formGroupName]="im">
                             <td>
-                              <label for="maintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="desc" class="form-control"
-                                placeholder="Enter Description" />
+                              <label for="maintenance" class="form-label">Maintenance</label>
+                              <input type="text" formControlName="evMaintenance" class="form-control"
+                                placeholder="Enter Maintenance" />
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="cost" class="form-control" placeholder="Enter Cost" />
+                              <input type="text" formControlName="evCost" class="form-control" placeholder="Enter Cost" />
                             </td>
                             <td>
-                              <button (click)="removeMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeMaintenance(im)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
@@ -425,25 +423,25 @@
                       <div class="col-md-4">
                         <label class="text-bold mt-2">Labor</label>
                         <div>
-                          <a type="button" (click)="addLabor()" class="btn bg-gradient-dark text-xs mb-0"><span
+                          <a type="button" (click)="addLabor(i)" class="btn bg-gradient-dark text-xs mb-0"><span
                               class="material-icons"> add_box </span>&nbsp; Create</a>
                         </div>
-                        <table formArrayName="labors">
+                        <table formArrayName="eventLabours">
                           <tr *ngFor="
-                            let item of labors().controls;
-                            let i = index
-                          " [formGroupName]="i">
+                            let item of labors(i).controls;
+                            let il = index
+                          " [formGroupName]="il">
                             <td>
-                              <label for="level" class="form-label">Level</label>
-                              <input type="text" formControlName="level" class="form-control"
-                                placeholder="Enter Level" />
+                              <label for="level" class="form-label">Labor</label>
+                              <input type="text" formControlName="evLabour" class="form-control"
+                                placeholder="Enter Labour" />
                             </td>
                             <td>
                               <label class="form-label" for="hrs">Hours</label>
-                              <input type="text" formControlName="hrs" class="form-control" placeholder="Enter Hours" />
+                              <input type="text" formControlName="evHour" class="form-control" placeholder="Enter Hours" />
                             </td>
                             <td>
-                              <button (click)="removeLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeLabor(il)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
@@ -453,26 +451,26 @@
                       <div class="col-md-4">
                         <label class="text-bold mt-2">Contractor/Shop</label>
                         <div>
-                          <a type="button" (click)="addCont()" class="btn bg-gradient-dark text-xs mb-0"><span
+                          <a type="button" (click)="addCont(i)" class="btn bg-gradient-dark text-xs mb-0"><span
                               class="material-icons">add_box</span>&nbsp;
                             Create</a>
                         </div>
-                        <table formArrayName="conts">
+                        <table formArrayName="eventContractors">
                           <tr *ngFor="
-                            let cost of conts().controls;
-                            let i = index
-                          " [formGroupName]="i">
+                            let cost of conts(i).controls;
+                            let ic = index
+                          " [formGroupName]="ic">
                             <td>
                               <label for="maintenance" class="form-label">Desc</label>
-                              <input type="text" formControlName="desc" class="form-control"
-                                placeholder="Enter Description" />
+                              <input type="text" formControlName="evContractor" class="form-control"
+                                placeholder="Enter Contractor" />
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="cost" class="form-control" placeholder="Enter Cost" />
+                              <input type="text" formControlName="evCost" class="form-control" placeholder="Enter Cost" />
                             </td>
                             <td>
-                              <button (click)="removeCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeCont(ic)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
@@ -481,17 +479,17 @@
                       </div>
                     </div>
                   </mat-tab>
+
                 </div>
 
-
-
               </mat-tab-group>
+
             </div>
             <div class="text-center mb-4">
               <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                 Create
               </button>
-              <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+              <button (click)="resetForm()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
                 Cancel
               </button>
             </div>
