@@ -27,6 +27,10 @@ export class UserService {
     return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
   }
 
+  getUserByEmail(email:any) {
+    return this.http.get(this.USER_URL + "email/"+ email, { headers: this.headers });
+  }
+
   postUser(user: any) {
     return this.http.post(this.CREATE_USER_URL, user, {
       headers: this.postHeaders,

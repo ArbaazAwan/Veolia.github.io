@@ -1,6 +1,5 @@
 <main class="main-content  mt-0">
-  <div class="page-header align-items-start min-vh-100"
-    style="background-image: url('assets/img/login-bg.avif');">
+  <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/login-bg.avif');">
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container my-auto">
       <div class="row">
@@ -18,6 +17,7 @@
                   <mat-label>Email</mat-label>
                   <input formControlName="email" matInput type="email"
                     [ngClass]="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')==true? 'border-danger': ''">
+                  <mat-icon matSuffix>email</mat-icon>
                   <small class="text-danger float-end"
                     *ngIf="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')">
                     email is required
@@ -27,8 +27,11 @@
 
                 <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
                   <mat-label>Password</mat-label>
-                  <input formControlName="password" matInput type="password"
+                  <input formControlName="password" matInput type="password" [type]="showPassword ? 'text' : 'password'" name="password"
                     [ngClass]="(form.controls['password'].dirty || form.controls['password'].touched) && form.hasError('required','password')==true? 'border-danger': ''">
+                  <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                    {{showPassword?'visibility_off':'visibility'}}
+                  </mat-icon>
                   <small class="text-danger text-xxs float-end"
                     *ngIf="(form.controls['password'].dirty || form.controls['password'].touched) && form.hasError('required','password')">
                     password is required
@@ -36,11 +39,12 @@
                 </mat-form-field>
                 <div class="text-left">
                   <small class="text-danger mb-4" *ngIf="hasError">
-                      *incorrect email/password
+                    *incorrect email/password
                   </small>
                 </div>
                 <div class="text-center">
-                  <button [disabled]="form.invalid || isLoading" type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">
+                  <button [disabled]="form.invalid || isLoading" type="submit"
+                    class="btn bg-gradient-primary w-100 my-4 mb-2">
                     <span *ngIf="!this.isLoading">SignIn</span>
                     <div class="spinner-border spinner-border-sm text-light" role="status" *ngIf="this.isLoading">
                     </div>

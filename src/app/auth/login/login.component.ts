@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   isLoading: boolean = false;
   hasError: boolean = false;
+  showPassword:boolean = false;
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           localStorage.setItem('login_auth', response.token);
+          localStorage.setItem('user_email',this.form.value.email);
           this.router.navigate(['/clientslist']);
         },
         (error: any) => {
@@ -45,5 +47,9 @@ export class LoginComponent implements OnInit {
           this.hasError = true;
         }
       );
+  }
+
+  togglePasswordVisibility(){
+    this.showPassword = !this.showPassword;
   }
 }
