@@ -11,15 +11,28 @@ export class CreateMasterFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private masterService:MasterService) { }
 
-
+  @Input() editMasterId:any;
   form!: FormGroup;
   siteId: any = localStorage.getItem('siteId');
+  isLoading:boolean = false;
 
   ngOnInit(): void {
+
     this.initializeForm();
+
   }
 
   initializeForm() {
+    if(this.editMasterId!=null && this.editMasterId != ''){
+      this.editForm(this.editMasterId);
+      this.editMasterId = null; //reset the id
+    }
+    else{
+      this.createForm();
+    }
+  }
+
+  createForm(){
     this.form = this.fb.group({
       oldAssetType: ['', Validators.required],
       masterStyle: ['', Validators.required],
@@ -37,8 +50,41 @@ export class CreateMasterFormComponent implements OnInit {
       events: this.fb.array([]),
       overhaulMaintenances: this.fb.array([]),
       overhaulLabors: this.fb.array([]),
-      overhaulConts: this.fb.array([]),
+      overhaulContractors: this.fb.array([]),
     });
+  }
+
+  editForm(masterId:any){
+    this.isLoading = true;
+    this.masterService.getCompleteMaster(masterId).subscribe(
+      (el:any)=>{
+        
+        const [_masterComplete] = el;
+        const [_master] = _masterComplete.master;
+
+        this.form = this.fb.group({
+          oldAssetType: [_master.oldAssetType, Validators.required],
+          masterStyle: [_master.masterStyle, Validators.required],
+          newAssetType: [_master.newAssetType, Validators.required],
+          masterSize: [_master.masterSize, Validators.required],
+          oldDescription: [_master.oldDescription, Validators.required],
+          newDescription: [_master.newDescription, Validators.required],
+          unitMeasurement: [_master.unitMeasurement, Validators.required],
+          rev: [_master.rev, Validators.required],
+          replacementCost: [_master.replacementCost, Validators.required],
+          lifeMonths: [_master.lifeMonths, Validators.required],
+          overhaulLife: [_master.overhaulLife, Validators.required],
+          ovTitle: [_masterComplete.overHaul.ovTitle, Validators.required],
+          ovStretch: [_masterComplete.overHaul.ovStretch, Validators.required],
+          events: this.fb.array([]).setValue(_masterComplete.events),
+          overhaulMaintenances: this.fb.array([]).setValue(_masterComplete.overHaul.overhaulMaintenances),
+          overhaulLabors: this.fb.array([]).setValue(_masterComplete.overHaul.overhaulLabours),
+          overhaulContractors: this.fb.array([]).setValue(_masterComplete.overHaul.overhaulContractors),
+        });
+
+        this.isLoading = false;
+      }
+    )
   }
 
   resetForm(){
@@ -69,25 +115,17 @@ export class CreateMasterFormComponent implements OnInit {
       "overhaulLife": f.overhaulLife
     };
 
-    let overhaulMaintenances = f.overhaulMaintenances;
-
-    let overhaulLabours = f.overhaulLabors;
-
-    let overhaulContractors = f.overhaulConts;
-
-    let events = f.events;
-
     let completeMaster = {
 
       master: master,
       overHaul: {
         ovTitle: f.ovTitle,
         ovStretch: f.ovStretch,
-        overhaulMaintenances: overhaulMaintenances, //maintenance array
-        overhaulLabours: overhaulLabours,             //labors array
-        OverhaulContractors: overhaulContractors   //contractors array
+        overhaulMaintenances: f.overhaulMaintenances, //maintenance array
+        overhaulLabours: f.overhaulLabours,             //labors array
+        OverhaulContractors: f.overhaulContractors   //contractors array
       },
-      events: events, //events array
+      events: f.events, //events array
 
     }
 
@@ -131,7 +169,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   overhaulConts(): FormArray {
-    return this.form.get('overhaulConts') as FormArray;
+    return this.form.get('overhaulContractors') as FormArray;
   }
 
   newEvent() {

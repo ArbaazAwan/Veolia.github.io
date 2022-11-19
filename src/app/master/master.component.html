@@ -1,10 +1,10 @@
     <button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form-create"> 
+      data-bs-target="#modal-form-create">
       Insert Record
     </button>
     <!-- table here -->
     <div class="container-fluid py-4">
-      <app-master-table 
+      <app-master-table
       [masters]="masters"
       [isLoading]="isLoading"
       (deleteMasterEvent)="onDeleteMaster($event)"
@@ -21,7 +21,9 @@
     <!-- Create form here -->
     <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
       aria-hidden="true">
-      <app-create-master-form></app-create-master-form>
+      <app-create-master-form
+      [editMasterId]="editMasterId"
+      ></app-create-master-form>
     </div>
 
     <!-- View Table Modal -->
@@ -45,7 +47,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <app-view-master-table 
+                <app-view-master-table
                 [eventEvalTableShow]="eventEvalTableShow"
                 [master] = "viewMaster"
                 ></app-view-master-table>

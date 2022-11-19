@@ -5,7 +5,7 @@
         <div class="card-header pb-0">
           <div class="text-left">
             <h5 class="">
-              Create Asset Form
+              Master Form
               <span class="text-right float-end">
                 <button (click)="resetForm()" data-bs-dismiss="modal"
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
@@ -13,11 +13,14 @@
                 </button>
               </span>
             </h5>
-            <p class="mb-0">Create Asset</p>
+            <p class="mb-0">Asset</p>
           </div>
         </div>
         <div class="card-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <div class="spinner-border"></div>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
             <div class="row">
               <div class="col-md-6">
 
@@ -327,7 +330,7 @@
                             class="material-icons">add_box</span>&nbsp;
                           Add</a>
                       </div>
-                      <table formArrayName="overhaulConts">
+                      <table formArrayName="overhaulContractors">
                         <tr *ngFor="
                             let cont of overhaulConts().controls;
                             let i = index

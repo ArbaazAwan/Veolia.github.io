@@ -21,6 +21,7 @@ export class MasterComponent implements OnInit {
   isEditFormLoading: boolean = true;
   error: any = {};
   viewMaster:any;
+  editMasterId:any;
 
   constructor(private fb: FormBuilder, private masterService: MasterService) {}
 
@@ -70,20 +71,21 @@ export class MasterComponent implements OnInit {
     this.resetForm();
   }
 
-  onEditMaster(id: any) {
-    this.isEditFormLoading = true;
+  onEditMaster(masterId: any) {
+    this.editMasterId = masterId;
+    // this.isEditFormLoading = true;
 
-    this.masterService.getMasterById(id).subscribe((el: any) => {
-      const [_master] = el;
+    // this.masterService.getMasterById(id).subscribe((el: any) => {
+    //   const [_master] = el;
 
-      this.currentMaster = _master;
-      console.log(_master);
-      this.form = this.fb.group({
-        masterName: [_master, Validators.required],
-      });
+    //   this.currentMaster = _master;
+    //   console.log(_master);
+    //   this.form = this.fb.group({
+    //     masterName: [_master, Validators.required],
+    //   });
 
-      this.isEditFormLoading = false;
-    });
+    //   this.isEditFormLoading = false;
+    // });
   }
   onViewMaster(id:any){
 

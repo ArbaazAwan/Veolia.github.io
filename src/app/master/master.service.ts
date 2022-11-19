@@ -28,6 +28,10 @@ export class MasterService {
     return this.http.get(this.MASTER_URL, { headers: this.headers });
   }
 
+  getCompleteMaster(id:any){
+    return this.http.get(this.BASE_URL + "complete-master/" + id, { headers: this.headers })
+  }
+
   getMasterById(id: string) {
     return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
   }
