@@ -11,12 +11,13 @@ export class ProfileComponent implements OnInit {
 
   form!:FormGroup
   user:any={};
+  email?:string = '';
   isLoading:boolean = false;
-  constructor(private fb:FormBuilder, private userService:UserService) {
-    this.initializeForm();
-   }
+  constructor(private fb:FormBuilder, private userService:UserService) {}
 
   ngOnInit(): void {
+    this.initializeForm();
+    this.email =  localStorage.getItem('user_email')?.toString();
     this.getUser();
   }
 
@@ -30,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
  async getUser(){
   this.isLoading = true;
-     await this.userService.getUserById('52').subscribe( //hardcoded userId
+     await this.userService.getUserByEmail(this.email).subscribe(
       (res:any)=>{
         this.user = res[0];
         console.log(this.user);

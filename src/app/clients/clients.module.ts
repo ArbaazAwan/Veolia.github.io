@@ -12,8 +12,14 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
+
+
 @NgModule({
-  declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
+  declarations: [
+    ClientsComponent,
+    ClientsListComponent,
+    ClientstableComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
