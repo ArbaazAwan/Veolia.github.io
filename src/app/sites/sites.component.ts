@@ -39,6 +39,7 @@ export class SitesComponent implements OnInit {
     this.siteService.getSites().subscribe((res: any) => {
       this.sites = res;
       this.isLoading = false;
+      console.log(this.sites);
     });
   }
 
