@@ -8,9 +8,10 @@ import { environment } from 'src/environments/environment';
 })
 export class MasterService {
 
-  MASTER_URL: string = environment.baseUrl + 'master/';
-  EVENTS_URL: string = environment.baseUrl + 'event/master/';
-  OVERHAUL_URL: string = environment.baseUrl + 'overhaul/master/';
+  BASE_URL:string = environment.baseUrl;
+  MASTER_URL: string = this.BASE_URL + 'master/';
+  EVENTS_URL: string = this.BASE_URL + 'event/master/';
+  OVERHAUL_URL: string = this.BASE_URL + 'overhaul/master/';
   masters: any[] = [];
 
   headers = new HttpHeaders({});
@@ -45,6 +46,11 @@ export class MasterService {
     return this.http.post(this.MASTER_URL, master, {
       headers: this.postHeaders,
     });
+  }
+
+  postCompleteMaster(data:any){
+    return this.http.post(this.BASE_URL+"complete-master", data,
+     { headers: this.postHeaders });
   }
 
   updateMaster(id: any, data: any) {

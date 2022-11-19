@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-create-master-form',
@@ -8,7 +9,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class CreateMasterFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private masterService:MasterService) { }
 
 
   form!: FormGroup;
@@ -46,11 +47,11 @@ export class CreateMasterFormComponent implements OnInit {
 
 
   onSubmit() {
-    this.getformMaster();
+    this.postformMaster();
     this.resetForm();
   }
 
-  getformMaster() {
+  postformMaster() {
     let f = this.form.value;
 
     const master = {
@@ -90,8 +91,11 @@ export class CreateMasterFormComponent implements OnInit {
 
     }
 
-    console.log("complete form:", this.form.value);
-    console.log("this is master:", completeMaster);
+    this.masterService.postCompleteMaster(completeMaster).subscribe(
+      (res:any)=>{
+        console.log(res);
+      }
+    );
 
   }
 

@@ -7,7 +7,8 @@
             <h5 class="">
               Create Asset Form
               <span class="text-right float-end">
-                <button (click)="resetForm()" data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
+                <button (click)="resetForm()" data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -239,7 +240,7 @@
                           <small class="text-danger float-end" *ngIf="(form.controls['ovTitle'].dirty ||
                               form.controls['ovTitle'].touched) &&
                                 form.hasError('required', 'ovTitle')">
-                                overhaul title is required
+                            overhaul title is required
                           </small>
                         </mat-form-field>
                       </td>
@@ -252,7 +253,7 @@
                           <small class="text-danger float-end" *ngIf="(form.controls['ovStretch'].dirty ||
                               form.controls['ovStretch'].touched) &&
                                 form.hasError('required', 'ovStretch')">
-                                overhaul stretch is required
+                            overhaul stretch is required
                           </small>
                         </mat-form-field>
                       </td>
@@ -273,16 +274,16 @@
                             let i = index
                           " [formGroupName]="i">
                           <td>
-                              <label class="text-bold">Maintenance</label>
-                              <input matInput type="text" formControlName="ohMaintenance" />
+                            <label class="form-label">Maintenance</label>
+                            <input class="form-control" type="text" formControlName="ohMaintenance"
+                              placeholder="enter maintenance" />
                           </td>
                           <td>
-                              <label class="text-bold">Cost</label>
-                              <input matInput type="text" formControlName="ohCost"  />
+                            <label class="form-label">Cost</label>
+                            <input class="form-control" type="text" formControlName="ohCost" placeholder="enter cost" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulMaintenance(i)"
-                              class="btn btn-sm bg-gradient-danger mx-2">
+                            <button (click)="removeOverhaulMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2">
                               Remove
                             </button>
                           </td>
@@ -301,12 +302,14 @@
                             let overhaulLabor of overhaulLabors().controls;
                             let i = index" [formGroupName]="i">
                           <td>
-                              <label class="text-bold">Overhaul Labour</label>
-                              <input matInput type="text" formControlName="ohLabour"/>
+                            <label class="form-label">Overhaul Labour</label>
+                            <input class="form-control" type="text" formControlName="ohLabour"
+                              placeholder="enter labour" />
                           </td>
                           <td>
-                              <label class="text-bold">Hours</label>
-                              <input matInput type="text" formControlName="ohHour"  />
+                            <label class="form-label">Hours</label>
+                            <input class="form-control" type="text" formControlName="ohHour"
+                              placeholder="enter hours" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2">
@@ -330,12 +333,14 @@
                             let i = index
                           " [formGroupName]="i">
                           <td>
-                              <label class="text-bold">Overhaul Labour</label>
-                              <input matInput type="text" formControlName="ohLabour"  />
+                            <label class="form-label">Overhaul Labour</label>
+                            <input class="form-control" type="text" formControlName="ohLabour"
+                              placeholder="enter labour" />
                           </td>
                           <td>
-                              <label class="text-bold">Overhaul Hour</label>
-                              <input matInput type="text" formControlName="ohHour" />
+                            <label class="form-label">Overhaul Hour</label>
+                            <input class="form-control" type="text" formControlName="ohHour"
+                              placeholder="enter hours" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2">
@@ -370,21 +375,21 @@
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Title</mat-label>
-                            <input matInput type="text" formControlName='eventTitle'/>
+                            <input matInput type="text" formControlName='eventTitle' />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Occurence</mat-label>
-                            <input matInput type="text" formControlName="eventOccurence"/>
+                            <input matInput type="text" formControlName="eventOccurence" />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Stretch</mat-label>
-                            <input matInput type="text" formControlName="eventStretch"/>
+                            <input matInput type="text" formControlName="eventStretch" />
                           </mat-form-field>
                         </td>
                       </tr>
@@ -410,7 +415,8 @@
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="evCost" class="form-control" placeholder="Enter Cost" />
+                              <input type="text" formControlName="evCost" class="form-control"
+                                placeholder="Enter Cost" />
                             </td>
                             <td>
                               <button (click)="removeMaintenance(im)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
@@ -438,7 +444,8 @@
                             </td>
                             <td>
                               <label class="form-label" for="hrs">Hours</label>
-                              <input type="text" formControlName="evHour" class="form-control" placeholder="Enter Hours" />
+                              <input type="text" formControlName="evHour" class="form-control"
+                                placeholder="Enter Hours" />
                             </td>
                             <td>
                               <button (click)="removeLabor(il)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
@@ -467,7 +474,8 @@
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="evCost" class="form-control" placeholder="Enter Cost" />
+                              <input type="text" formControlName="evCost" class="form-control"
+                                placeholder="Enter Cost" />
                             </td>
                             <td>
                               <button (click)="removeCont(ic)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">

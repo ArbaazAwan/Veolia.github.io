@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormGroup,
   Validators,
@@ -53,119 +52,6 @@ export class MasterComponent implements OnInit {
     });
   }
 
-  // maintenances(): FormArray {
-  //   return <FormArray>this.form.get('maintenances');
-  // }
-
-  // overhaulMaintenances(): FormArray {
-  //   return this.form.get('overhaulMaintenances') as FormArray
-  // }
-
-  // labors(): FormArray {
-  //   return this.form.get('labors') as FormArray;
-  // }
-
-  // overhaulLabors(): FormArray {
-  //   return this.form.get('overhaulLabors') as FormArray;
-  // }
-
-  // conts(): FormArray {
-  //   return this.form.get('conts') as FormArray;
-  // }
-
-  // overhaulConts(): FormArray {
-  //   return this.form.get('overhaulConts') as FormArray;
-  // }
-
-  // newMaintenance() {
-  //   return this.fb.group({
-  //     desc: ['',Validators.required],
-  //     cost: ['',Validators.required],
-  //   });
-  // }
-
-  // newOverhaulMaintenance() {
-  //   return this.fb.group({
-  //     desc: ['',Validators.required],
-  //     cost: ['',Validators.required],
-  //   });
-  // }
-
-  // newLabor(): FormGroup {
-  //   return this.fb.group({
-  //     level: ['',Validators.required],
-  //     hrs: ['',Validators.required],
-  //   });
-  // }
-
-  // newOverhaulLabor(): FormGroup {
-  //   return this.fb.group({
-  //     level: ['',Validators.required],
-  //     hrs: ['',Validators.required],
-  //   });
-  // }
-
-  // newCont() {
-  //   return this.fb.group({
-  //     desc: ['',Validators.required],
-  //     cost: ['',Validators.required],
-  //   });
-  // }
-
-  // newOverhaulCont() {
-  //   return this.fb.group({
-  //     desc: ['',Validators.required],
-  //     cost: ['',Validators.required],
-  //   });
-  // }
-
-  // addMaintenance() {
-  //   this.maintenances().push(this.newMaintenance());
-  // }
-
-  // addOverhaulMaintenance() {
-  //   this.overhaulMaintenances().push(this.newOverhaulMaintenance());
-  // }
-
-  // addLabor() {
-  //   this.labors().push(this.newLabor());
-  // }
-
-  // addOverhaulLabor() {
-  //   this.overhaulLabors().push(this.newOverhaulLabor());
-  // }
-
-  // addCont() {
-  //   this.conts().push(this.newCont());
-  // }
-
-  // addOverhaulCont() {
-  //   this.overhaulConts().push(this.newOverhaulCont());
-  // }
-
-  // removeMaintenance(index: number) {
-  //   this.maintenances().removeAt(index);
-  // }
-
-  // removeOverhaulMaintenance(index: number) {
-  //   this.overhaulMaintenances().removeAt(index);
-  // }
-
-  // removeLabor(i: number) {
-  //   this.labors().removeAt(i);
-  // }
-
-  // removeOverhaulLabor(i: number) {
-  //   this.overhaulLabors().removeAt(i);
-  // }
-
-  // removeCont(i: number) {
-  //   this.conts().removeAt(i);
-  // }
-
-  // removeOverhaulCont(i: number) {
-  //   this.overhaulConts().removeAt(i);
-  // }
 
   resetForm() {
     this.form.reset();
