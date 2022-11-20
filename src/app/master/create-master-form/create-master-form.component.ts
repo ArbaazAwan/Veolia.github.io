@@ -58,7 +58,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.isLoading = true;
     this.masterService.getCompleteMaster(masterId).subscribe(
       (el:any)=>{
-        
+
         const [_masterComplete] = el;
         const [_master] = _masterComplete.master;
 
@@ -118,20 +118,22 @@ export class CreateMasterFormComponent implements OnInit {
     let completeMaster = {
 
       master: master,
-      overHaul: {
+      overhaul: {
         ovTitle: f.ovTitle,
         ovStretch: f.ovStretch,
-        overhaulMaintenances: f.overhaulMaintenances, //maintenance array
-        overhaulLabours: f.overhaulLabours,             //labors array
-        OverhaulContractors: f.overhaulContractors   //contractors array
+        overhaulMaintenance: f.overhaulMaintenances, //maintenance array
+        overhaulLabours: f.overhaulLabors,             //labors array
+        overhaulContractors: f.overhaulContractors   //contractors array
       },
       events: f.events, //events array
 
     }
 
+    // console.log("this is complete Master:",completeMaster);
+
     this.masterService.postCompleteMaster(completeMaster).subscribe(
       (res:any)=>{
-        console.log(res);
+        console.log(res.message);
       }
     );
 
@@ -174,9 +176,9 @@ export class CreateMasterFormComponent implements OnInit {
 
   newEvent() {
     return this.fb.group({
-      eventTitle: '',
-      eventOccurence:'',
-      eventStretch: '',
+      evTitle: '',
+      evOccurence:'',
+      evStretch: '',
       eventMaintenance:this.fb.array([]),
       eventLabours:this.fb.array([]),
       eventContractors: this.fb.array([])
