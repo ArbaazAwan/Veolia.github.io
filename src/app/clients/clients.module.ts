@@ -11,15 +11,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
-
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
-  declarations: [
-    ClientsComponent,
-    ClientsListComponent,
-    ClientstableComponent,
-  ],
+  declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -31,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     PipesModule,
     MatInputModule,
     MatIconModule,
+    NgxPaginationModule,
   ],
   exports: [ClientsComponent, ClientsListComponent],
 })

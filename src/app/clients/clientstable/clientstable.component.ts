@@ -9,6 +9,7 @@ import { ClientService } from '../client.service';
 export class ClientstableComponent implements OnInit {
   constructor(private clientService: ClientService) {}
   // @Input() clientsArray!:any[];
+  p: number = 1;
 
   searchText: string = '';
   @Input() clients: any[] = [];
