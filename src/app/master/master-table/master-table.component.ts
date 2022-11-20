@@ -10,15 +10,15 @@ export class MasterTableComponent implements OnInit {
 
   constructor(private masterService:MasterService) { }
   assetSearchText: string = '';
-  sortedMasters!: any[];
-  @Input() isLoading: boolean = false;
-  @Input() masters: any[] = [];
-  @Output() deleteMasterEvent = new EventEmitter();
-  @Output() editMasterEvent = new EventEmitter();
+  sortedMasters: any[]=[];
+  masters:any[] =[];
+  isLoading: boolean = false;
+  // @Input() masters: any[] = [];
+  // @Output() deleteMasterEvent = new EventEmitter();
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    // this.assets = this.masterService.loadAssets(); //loading the assets
+    this.getMasters();
     this.sortedMasters = this.masters.slice();
   }
   sortAssets(sort: any) {
@@ -66,12 +66,22 @@ export class MasterTableComponent implements OnInit {
   viewMaster(masterId:any){
     this.viewMasterEvent.emit(masterId);
   }
-  editMaster(masterid: any) {
-    this.editMasterEvent.emit(masterid);
+
+  getMasters(){
+    this.isLoading = true;
+    this.masterService.getMasters().subscribe(
+      (masters:any)=>{
+        this.masters = masters;
+        this.isLoading = false;
+      }
+    )
+  }
+  editMaster(masterId: any) {
+    localStorage.setItem('masterId',masterId);
   }
 
   deleteMaster(id: any) {
-    this.deleteMasterEvent.emit(id);
+    // this.deleteMasterEvent.emit(id);
   }
 
 }

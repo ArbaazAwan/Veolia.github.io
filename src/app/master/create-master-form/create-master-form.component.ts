@@ -11,7 +11,7 @@ export class CreateMasterFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private masterService:MasterService) { }
 
-  @Input() editMasterId:any;
+  editMasterId:any;
   form!: FormGroup;
   siteId: any = localStorage.getItem('siteId');
   isLoading:boolean = false;
@@ -23,9 +23,10 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   initializeForm() {
+    this.editMasterId = localStorage.getItem('masterId');
     if(this.editMasterId!=null && this.editMasterId != ''){
       this.editForm(this.editMasterId);
-      this.editMasterId = null; //reset the id
+      localStorage.removeItem('masterId'); //reset the id
     }
     else{
       this.createForm();
@@ -129,13 +130,13 @@ export class CreateMasterFormComponent implements OnInit {
 
     }
 
-    // console.log("this is complete Master:",completeMaster);
+    console.log("this is complete Master:",completeMaster);
 
-    this.masterService.postCompleteMaster(completeMaster).subscribe(
-      (res:any)=>{
-        console.log(res.message);
-      }
-    );
+    // this.masterService.postCompleteMaster(completeMaster).subscribe(
+    //   (res:any)=>{
+    //     console.log(res.message);
+    //   }
+    // );
 
   }
 
@@ -176,9 +177,9 @@ export class CreateMasterFormComponent implements OnInit {
 
   newEvent() {
     return this.fb.group({
-      evTitle: '',
-      evOccurence:'',
-      evStretch: '',
+      evTitle: ["",Validators.required],
+      evOccurence:["",Validators.required],
+      evStretch: ["", Validators.required],
       eventMaintenance:this.fb.array([]),
       eventLabours:this.fb.array([]),
       eventContractors: this.fb.array([])

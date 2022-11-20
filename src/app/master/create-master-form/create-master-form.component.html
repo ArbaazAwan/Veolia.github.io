@@ -369,30 +369,30 @@
 
                 <div formArrayName="events">
 
-                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="Event 1">
-                    <button mat-raised-button class="btn btn-sm bg-gradient-danger" (click)="removeEvent(i)">
-                      Romove Event
+                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="{{'Event ' + (i+1)}}">
+                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end" (click)="removeEvent(i)">
+                      Remove Event
                     </button>
                     <table class="table">
                       <tr>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Title</mat-label>
-                            <input matInput type="text" formControlName='evtTitle' />
+                            <input matInput type="text" formControlName='evTitle' />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Occurence</mat-label>
-                            <input matInput type="text" formControlName="evtOccurence" />
+                            <input matInput type="text" formControlName="evOccurence" />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Stretch</mat-label>
-                            <input matInput type="text" formControlName="evtStretch" />
+                            <input matInput type="text" formControlName="evStretch" />
                           </mat-form-field>
                         </td>
                       </tr>

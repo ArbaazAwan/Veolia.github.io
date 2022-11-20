@@ -5,10 +5,6 @@
     <!-- table here -->
     <div class="container-fluid py-4">
       <app-master-table
-      [masters]="masters"
-      [isLoading]="isLoading"
-      (deleteMasterEvent)="onDeleteMaster($event)"
-      (editMasterEvent)="onEditMaster($event)"
       (viewMasterEvent)="onViewMaster($event)"
       ></app-master-table>
     </div>
@@ -21,9 +17,7 @@
     <!-- Create form here -->
     <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
       aria-hidden="true">
-      <app-create-master-form
-      [editMasterId]="editMasterId"
-      ></app-create-master-form>
+      <app-create-master-form></app-create-master-form>
     </div>
 
     <!-- View Table Modal -->
