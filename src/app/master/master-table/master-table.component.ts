@@ -13,8 +13,6 @@ export class MasterTableComponent implements OnInit {
   sortedMasters: any[]=[];
   masters:any[] =[];
   isLoading: boolean = false;
-  // @Input() masters: any[] = [];
-  // @Output() deleteMasterEvent = new EventEmitter();
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
@@ -81,7 +79,12 @@ export class MasterTableComponent implements OnInit {
   }
 
   deleteMaster(id: any) {
-    // this.deleteMasterEvent.emit(id);
+    this.masterService.deleteMaster(id)
+    .subscribe(
+      (res:any) => {
+      console.log(res.message);
+    }
+    );
   }
 
 }

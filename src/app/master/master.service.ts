@@ -64,11 +64,8 @@ export class MasterService {
   }
 
   deleteMaster(id: any) {
-    this.http
+    return this.http
       .delete(this.MASTER_URL + id)
-      .subscribe((res) => {
-        console.log(res, 'deleted');
-      });
   }
 
 }
