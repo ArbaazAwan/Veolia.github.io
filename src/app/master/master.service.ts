@@ -28,6 +28,10 @@ export class MasterService {
     return this.http.get(this.MASTER_URL, { headers: this.headers });
   }
 
+  getCompleteMasterById(id:any){
+    return this.http.get(this.BASE_URL + "get-complete-master/" + id, { headers: this.headers })
+  }
+
   getMasterById(id: string) {
     return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
   }
@@ -60,11 +64,8 @@ export class MasterService {
   }
 
   deleteMaster(id: any) {
-    this.http
+    return this.http
       .delete(this.MASTER_URL + id)
-      .subscribe((res) => {
-        console.log(res, 'deleted');
-      });
   }
 
 }

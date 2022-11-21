@@ -5,7 +5,7 @@
         <div class="card-header pb-0">
           <div class="text-left">
             <h5 class="">
-              Create Asset Form
+              Master Form
               <span class="text-right float-end">
                 <button (click)="resetForm()" data-bs-dismiss="modal"
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
@@ -13,11 +13,14 @@
                 </button>
               </span>
             </h5>
-            <p class="mb-0">Create Asset</p>
+            <p class="mb-0">Asset</p>
           </div>
         </div>
         <div class="card-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <div class="spinner-border"></div>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
             <div class="row">
               <div class="col-md-6">
 
@@ -327,7 +330,7 @@
                             class="material-icons">add_box</span>&nbsp;
                           Add</a>
                       </div>
-                      <table formArrayName="overhaulConts">
+                      <table formArrayName="overhaulContractors">
                         <tr *ngFor="
                             let cont of overhaulConts().controls;
                             let i = index
@@ -366,30 +369,30 @@
 
                 <div formArrayName="events">
 
-                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="Event 1">
-                    <button mat-raised-button class="btn btn-sm bg-gradient-danger" (click)="removeEvent(i)">
-                      Romove Event
+                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="{{'Event ' + (i+1)}}">
+                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end" (click)="removeEvent(i)">
+                      Remove Event
                     </button>
                     <table class="table">
                       <tr>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Title</mat-label>
-                            <input matInput type="text" formControlName='eventTitle' />
+                            <input matInput type="text" formControlName='evTitle' />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Occurence</mat-label>
-                            <input matInput type="text" formControlName="eventOccurence" />
+                            <input matInput type="text" formControlName="evOccurence" />
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Stretch</mat-label>
-                            <input matInput type="text" formControlName="eventStretch" />
+                            <input matInput type="text" formControlName="evStretch" />
                           </mat-form-field>
                         </td>
                       </tr>

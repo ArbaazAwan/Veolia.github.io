@@ -1,14 +1,10 @@
     <button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form-create"> 
+      data-bs-target="#modal-form-create">
       Insert Record
     </button>
     <!-- table here -->
     <div class="container-fluid py-4">
-      <app-master-table 
-      [masters]="masters"
-      [isLoading]="isLoading"
-      (deleteMasterEvent)="onDeleteMaster($event)"
-      (editMasterEvent)="onEditMaster($event)"
+      <app-master-table
       (viewMasterEvent)="onViewMaster($event)"
       ></app-master-table>
     </div>
@@ -45,7 +41,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <app-view-master-table 
+                <app-view-master-table
                 [eventEvalTableShow]="eventEvalTableShow"
                 [master] = "viewMaster"
                 ></app-view-master-table>

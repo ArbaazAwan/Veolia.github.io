@@ -10,17 +10,15 @@ export class MasterTableComponent implements OnInit {
 
   constructor(private masterService:MasterService) { }
   assetSearchText: string = '';
-  sortedMasters!: any[];
-  @Input() isLoading: boolean = false;
-  @Input() masters: any[] = [];
-  @Output() deleteMasterEvent = new EventEmitter();
-  @Output() editMasterEvent = new EventEmitter();
+  sortedMasters: any[]=[];
+  masters:any[] =[];
+  isLoading: boolean = false;
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    // this.assets = this.masterService.loadAssets(); //loading the assets
-    this.sortedMasters = this.masters.slice();
+    this.getMasters();
   }
+  
   sortAssets(sort: any) {
     const data = this.masters.slice();
     if (!sort.active || sort.direction === '') {
@@ -66,12 +64,28 @@ export class MasterTableComponent implements OnInit {
   viewMaster(masterId:any){
     this.viewMasterEvent.emit(masterId);
   }
-  editMaster(masterid: any) {
-    this.editMasterEvent.emit(masterid);
+
+  getMasters(){
+    this.isLoading = true;
+    this.masterService.getMasters().subscribe(
+      (masters:any)=>{
+        this.masters = masters;
+        this.isLoading = false;
+        this.sortedMasters = this.masters.slice();
+      }
+    )
+  }
+  editMaster(masterId: any) {
+    localStorage.setItem('masterId',masterId);
   }
 
   deleteMaster(id: any) {
-    this.deleteMasterEvent.emit(id);
+    this.masterService.deleteMaster(id)
+    .subscribe(
+      (res:any) => {
+      console.log(res.message);
+    }
+    );
   }
 
 }

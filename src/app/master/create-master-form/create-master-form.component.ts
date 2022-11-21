@@ -9,17 +9,30 @@ import { MasterService } from '../master.service';
 })
 export class CreateMasterFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private masterService:MasterService) { }
+  constructor(private fb: FormBuilder, private masterService: MasterService) { }
 
-
+  editMasterId: any;
   form!: FormGroup;
   siteId: any = localStorage.getItem('siteId');
+  isLoading: boolean = false;
 
   ngOnInit(): void {
+
     this.initializeForm();
+
   }
 
   initializeForm() {
+    this.editMasterId = 148; //hard coded value
+    localStorage.getItem('masterId');
+    this.createForm(); //initial form
+    if (this.editMasterId != null && this.editMasterId != '') {
+      this.editForm(this.editMasterId);
+      // localStorage.removeItem('masterId'); //reset the id
+    }
+  }
+
+  createForm() {
     this.form = this.fb.group({
       oldAssetType: ['', Validators.required],
       masterStyle: ['', Validators.required],
@@ -37,11 +50,79 @@ export class CreateMasterFormComponent implements OnInit {
       events: this.fb.array([]),
       overhaulMaintenances: this.fb.array([]),
       overhaulLabors: this.fb.array([]),
-      overhaulConts: this.fb.array([]),
+      overhaulContractors: this.fb.array([]),
     });
   }
 
-  resetForm(){
+  editForm(masterId: any) {
+    this.isLoading = true;
+    this.masterService.getCompleteMasterById(masterId).subscribe(
+      (el: any) => {
+        const _masterComplete = el;
+        console.log("this is complete master:",_masterComplete);
+
+        const _master = _masterComplete.master;
+        console.log("this is master:",_master);
+
+        const _events = _masterComplete.events;
+        console.log("this is events:",_events);
+
+        if (_events) {
+          _events.forEach((event: any) => {
+            this.addEvent(event);
+          });
+        }
+
+        const _overhaul = _masterComplete.overhaul;
+        if (_overhaul) {
+          if (_overhaul.overhaulMaintenance) {
+            _overhaul.overhaulMaintenance.forEach((ovM: any) => {
+              this.addOverhaulMaintenance(ovM);
+            });
+          }
+          if (_overhaul.overhaulLabours) {
+            _overhaul.overhaulLabours.forEach(
+              (ovL: any) => {
+                this.addOverhaulLabor(ovL);
+              }
+            )
+          }
+          if (_overhaul.overhaulContractors) {
+            _overhaul.overhaulContractors.forEach(
+              (ovC: any) => {
+                this.addOverhaulCont(ovC);
+              }
+            )
+          }
+        }
+
+
+        this.form = this.fb.group({
+          oldAssetType: [_master.oldAssetType, Validators.required],
+          masterStyle: [_master.masterStyle, Validators.required],
+          newAssetType: [_master.newAssetType, Validators.required],
+          masterSize: [_master.masterSize, Validators.required],
+          oldDescription: [_master.oldDescription, Validators.required],
+          newDescription: [_master.newDescription, Validators.required],
+          unitMeasurement: [_master.unitMeasurement, Validators.required],
+          rev: [_master.rev, Validators.required],
+          replacementCost: [_master.replacementCost, Validators.required],
+          lifeMonths: [_master.lifeMonths, Validators.required],
+          overhaulLife: [_master.overhaulLife, Validators.required],
+          ovTitle: [_overhaul ? _overhaul.ovTitle ? _overhaul.ovTitle : '' : "", Validators.required],
+          ovStretch: [_overhaul ? _overhaul.ovStretch ? _overhaul.ovStretch : '' : "", Validators.required],
+          overhaulMaintenances: this.fb.array([]),
+          overhaulLabors: this.fb.array([]),
+          overhaulContractors: this.fb.array([]),
+          events: _events?this.fb.array([]).patchValue(_events):this.fb.array([]),
+        });
+
+        this.isLoading = false;
+      }
+    )
+  }
+
+  resetForm() {
     this.form.reset();
   }
 
@@ -69,31 +150,25 @@ export class CreateMasterFormComponent implements OnInit {
       "overhaulLife": f.overhaulLife
     };
 
-    let overhaulMaintenances = f.overhaulMaintenances;
-
-    let overhaulLabours = f.overhaulLabors;
-
-    let overhaulContractors = f.overhaulConts;
-
-    let events = f.events;
-
     let completeMaster = {
 
       master: master,
-      overHaul: {
+      overhaul: {
         ovTitle: f.ovTitle,
         ovStretch: f.ovStretch,
-        overhaulMaintenances: overhaulMaintenances, //maintenance array
-        overhaulLabours: overhaulLabours,             //labors array
-        OverhaulContractors: overhaulContractors   //contractors array
+        overhaulMaintenance: f.overhaulMaintenances, //maintenance array
+        overhaulLabours: f.overhaulLabors,             //labors array
+        overhaulContractors: f.overhaulContractors   //contractors array
       },
-      events: events, //events array
+      events: f.events, //events array
 
     }
 
+    // console.log("this is complete Master:",completeMaster);
+
     this.masterService.postCompleteMaster(completeMaster).subscribe(
-      (res:any)=>{
-        console.log(res);
+      (res: any) => {
+        console.log(res.message);
       }
     );
 
@@ -101,118 +176,138 @@ export class CreateMasterFormComponent implements OnInit {
 
 
   events(): FormArray {
-    return <FormArray>this.form.get('events');
+    return this.form.get('events') as FormArray
   }
 
-  maintenances(index:any): FormArray {
+  maintenances(index: any): FormArray {
     return <FormArray>this.events()
-    .at(index)
-    .get('eventMaintenance');
+      .at(index)
+      .get('eventMaintenance');
   }
 
   overhaulMaintenances(): FormArray {
     return this.form.get('overhaulMaintenances') as FormArray;
   }
 
-  labors(index:any): FormArray {
+  labors(index: any): FormArray {
     return this.events()
-    .at(index)
-    .get('eventLabours') as FormArray;
+      .at(index)
+      .get('eventLabours') as FormArray;
   }
 
   overhaulLabors(): FormArray {
     return this.form.get('overhaulLabors') as FormArray;
   }
 
-  conts(index:any): FormArray {
+  conts(index: any): FormArray {
     return this.events()
-    .at(index)
-    .get('eventContractors') as FormArray;
+      .at(index)
+      .get('eventContractors') as FormArray;
   }
 
   overhaulConts(): FormArray {
-    return this.form.get('overhaulConts') as FormArray;
+    return this.form.get('overhaulContractors') as FormArray;
   }
 
-  newEvent() {
+  newEvent(event?: any) {
     return this.fb.group({
-      eventTitle: '',
-      eventOccurence:'',
-      eventStretch: '',
-      eventMaintenance:this.fb.array([]),
-      eventLabours:this.fb.array([]),
+      evTitle: [event ? event.evTitle : '', Validators.required],
+      evOccurence: [event ? event.evOccurence : '', Validators.required],
+      evStretch: [event ? event.evStretch : '', Validators.required],
+      eventMaintenance: this.fb.array([]),
+      eventLabours: this.fb.array([]),
       eventContractors: this.fb.array([])
     });
   }
 
-  newMaintenance() {
+  newMaintenance(maintenance?: any) {
     return this.fb.group({
-      evMaintenance: '',
-      evCost: '',
+      evMaintenance: maintenance ? maintenance.evMaintenance : '',
+      evCost: maintenance ? maintenance.evCost : '',
     });
   }
 
-  newOverhaulMaintenance() {
+  newOverhaulMaintenance(ovM?: any) {
     return this.fb.group({
-      ohMaintenance: '',
-      ohCost: '',
+      ohMaintenance: ovM ? ovM.ohMaintenance : '',
+      ohCost: ovM ? ovM.ohCost : '',
     });
   }
 
-  newLabor(): FormGroup {
+  newLabor(evLabour?: any): FormGroup {
     return this.fb.group({
-      evLabour: '',
-      evHour: '',
+      evLabour: evLabour ? evLabour.evLabour : '',
+      evHour: evLabour ? evLabour.evHour : '',
     });
   }
 
-  newOverhaulLabor(): FormGroup {
+  newOverhaulLabor(ovL?: any): FormGroup {
     return this.fb.group({
-      ohLabour: '',
-      ohHour: '',
+      ohLabour: ovL ? ovL.ohLabour : '',
+      ohHour: ovL ? ovL.ohHour : '',
     });
   }
 
-  newCont() {
+  newCont(evContractor?: any) {
     return this.fb.group({
-      evContractor: '',
-      evCost: '',
+      evContractor: evContractor ? evContractor.evContractor : '',
+      evCost: evContractor ? evContractor.evCost : '',
     });
   }
 
-  newOverhaulCont() {
+  newOverhaulCont(ovC?: any) {
     return this.fb.group({
-      ohLabour:"",
-      ohHour: ''
+      ohLabour: ovC ? ovC.ohLabour : "",
+      ohHour: ovC ? ovC.ohHour : ''
     });
   }
 
-  addEvent() {
-    this.events().push(this.newEvent());
+  addEvent(event?: any) {
+    this.events().push(this.newEvent(event));
+    let eventIndex = (<FormArray>this.form.get('events')).length - 1;
+
+    if (event) {
+      if (!!event.eventMaintenance) {
+        event.eventMaintenance.forEach((evMaintenance: any) => {
+          this.addMaintenance(eventIndex, evMaintenance)
+        });
+      }
+      if (event.eventLabours) {
+        event.eventLabours.forEach((evLabour: any) => {
+          this.addLabor(eventIndex, evLabour);
+        });
+      }
+      if (event.eventContractors) {
+        event.eventContractors.forEach((evContractor: any) => {
+          this.addCont(eventIndex, evContractor)
+        });
+      }
+    }
+
   }
 
-  addMaintenance(index:any) {
-    this.maintenances(index).push(this.newMaintenance());
+  addMaintenance(index: any, maintenance?: any) {
+    this.maintenances(index).push(this.newMaintenance(maintenance));
   }
 
-  addOverhaulMaintenance() {
-    this.overhaulMaintenances().push(this.newOverhaulMaintenance());
+  addOverhaulMaintenance(ovM?: any) {
+    this.overhaulMaintenances().push(this.newOverhaulMaintenance(ovM));
   }
 
-  addLabor(index:any) {
-    this.labors(index).push(this.newLabor());
+  addLabor(index: any, evLabour?: any) {
+    this.labors(index).push(this.newLabor(evLabour));
   }
 
-  addOverhaulLabor() {
-    this.overhaulLabors().push(this.newOverhaulLabor());
+  addOverhaulLabor(ovL?: any) {
+    this.overhaulLabors().push(this.newOverhaulLabor(ovL));
   }
 
-  addCont(index:any) {
-    this.conts(index).push(this.newCont());
+  addCont(index: any, evContractor?: any) {
+    this.conts(index).push(this.newCont(evContractor));
   }
 
-  addOverhaulCont() {
-    this.overhaulConts().push(this.newOverhaulCont());
+  addOverhaulCont(ovC?: any) {
+    this.overhaulConts().push(this.newOverhaulCont(ovC));
   }
 
   removeEvent(index: number) {
