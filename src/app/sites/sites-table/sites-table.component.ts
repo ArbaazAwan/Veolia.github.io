@@ -8,7 +8,7 @@ import { SiteService } from '../site.service';
 })
 export class SitesTableComponent implements OnInit {
   constructor(private siteService: SiteService) {}
-
+  p: number = 1;
   searchText: string = '';
   @Input() isLoading: boolean = false;
   @Input() sites: any[] = [];

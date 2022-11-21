@@ -13,12 +13,12 @@ export class UserstableComponent implements OnInit {
   @Output() deleteUserEvent = new EventEmitter();
   @Output() editUserEvent = new EventEmitter();
   @Output() changeUserPasswordEvent = new EventEmitter();
-
+  p: number = 1;
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
-  changeUserPassword(userId:any){
+  changeUserPassword(userId: any) {
     this.changeUserPasswordEvent.emit(userId);
   }
 

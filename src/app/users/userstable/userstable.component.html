@@ -70,7 +70,7 @@
               <tbody>
                 <tr
                   *ngFor="
-                    let user of users | searchFilter: searchText;
+                    let user of users | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }  
                     let i = index
                   "
                 >
@@ -158,6 +158,7 @@
                 </tr>
               </tbody>
             </table>
+            <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>

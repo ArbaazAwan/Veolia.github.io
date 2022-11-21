@@ -9,6 +9,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserformComponent } from './userform/userform.component';
 import { MatSelectModule } from '@angular/material/select';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [UsersComponent, UserstableComponent, UserformComponent],
@@ -21,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
     PipesModule,
     NgbModule,
     MatSelectModule,
+    NgxPaginationModule,
   ],
 })
 export class UsersModule {}

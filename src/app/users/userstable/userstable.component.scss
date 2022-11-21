@@ -2,3 +2,16 @@
   max-height: 45px;
   max-width: 91.969px;
 }
+
+
+.user-pagination ::ng-deep .ngx-pagination .current {
+  background: #ec407a;
+  font-family: "Roboto";
+  text-decoration: none !important;
+  color:white;
+}
+
+.user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+  font-family: "Roboto";
+  text-decoration: none !important;
+}
