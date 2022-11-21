@@ -274,8 +274,8 @@
                       <table formArrayName="overhaulMaintenances">
                         <tr *ngFor="
                             let overhaulMaintenance of overhaulMaintenances().controls;
-                            let i = index
-                          " [formGroupName]="i">
+                            let iov = index
+                          " [formGroupName]="iov">
                           <td>
                             <label class="form-label">Maintenance</label>
                             <input class="form-control" type="text" formControlName="ohMaintenance"
@@ -286,7 +286,7 @@
                             <input class="form-control" type="text" formControlName="ohCost" placeholder="enter cost" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulMaintenance(i)" class="btn btn-sm bg-gradient-danger mx-2">
+                            <button (click)="removeOverhaulMaintenance(iov)" class="btn btn-sm bg-gradient-danger mx-2">
                               Remove
                             </button>
                           </td>
@@ -422,7 +422,7 @@
                                 placeholder="Enter Cost" />
                             </td>
                             <td>
-                              <button (click)="removeMaintenance(im)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeMaintenance(i,im)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
@@ -451,7 +451,7 @@
                                 placeholder="Enter Hours" />
                             </td>
                             <td>
-                              <button (click)="removeLabor(il)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeLabor(i,il)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
@@ -481,7 +481,7 @@
                                 placeholder="Enter Cost" />
                             </td>
                             <td>
-                              <button (click)="removeCont(ic)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                              <button (click)="removeCont(i,ic)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                                 Remove
                               </button>
                             </td>
