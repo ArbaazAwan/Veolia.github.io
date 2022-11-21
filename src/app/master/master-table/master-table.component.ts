@@ -75,6 +75,7 @@ export class MasterTableComponent implements OnInit {
       }
     )
   }
+
   editMaster(masterId: any) {
     localStorage.setItem('masterId',masterId);
   }
@@ -87,5 +88,7 @@ export class MasterTableComponent implements OnInit {
     }
     );
   }
+
+
 
 }

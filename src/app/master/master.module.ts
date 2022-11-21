@@ -37,6 +37,7 @@ import { UpdateMasterFormComponent } from './update-master-form/update-master-fo
     TreeTableModule,
     HttpClientModule,
     PipesModule
+    
   ],
   exports:[
     MasterComponent,
