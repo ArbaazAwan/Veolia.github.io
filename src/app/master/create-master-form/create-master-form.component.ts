@@ -114,7 +114,7 @@ export class CreateMasterFormComponent implements OnInit {
           overhaulMaintenances: this.fb.array([]),
           overhaulLabors: this.fb.array([]),
           overhaulContractors: this.fb.array([]),
-          events: _events?this.fb.array([]).patchValue(_events):this.fb.array([]),
+          events:this.fb.array([]),
         });
 
         this.isLoading = false;
