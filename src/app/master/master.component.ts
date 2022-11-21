@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MasterService } from './master.service';
 
 @Component({
   selector: 'app-master',
@@ -9,16 +10,18 @@ export class MasterComponent implements OnInit {
 
   eventEvalTableShow: boolean = false;
   viewMaster:any;
+  isLoading:boolean = false;
 
-  constructor() {}
+  constructor(private masterService:MasterService) {}
 
   ngOnInit(): void {}
 
-  onViewMaster(id:any){
-
-    // this.masterService.getMasterById(id).subscribe((el: any) => {
-    //   this.viewMaster = el[0]
-    // });
+  onViewMaster(masterId:any){
+    this.isLoading = true;
+    this.masterService.getMasterById(masterId).subscribe((el: any) => {
+      this.viewMaster = el[0]
+      this.isLoading = false;
+    });
   }
 
 }
