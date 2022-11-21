@@ -1,16 +1,18 @@
-<button type="button" class="btn bg-gradient-primary mx-5 text-right" data-bs-toggle="modal"
-  data-bs-target="#modal-form-create">
-  Insert Record
-</button>
-
-<!-- <div class="float-end">
-  <input type="file" class="btn bg-gradient-primary mx-5" (change)="readExcel($event)">
-</div> -->
-
-<!-- table here -->
-<div class="container-fluid py-4">
-  <app-master-table (viewMasterEvent)="onViewMaster($event)"></app-master-table>
-</div>
+    <button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
+      data-bs-target="#modal-form-create"> 
+      Insert Record
+    </button>
+    <app-import-excel></app-import-excel>
+    <!-- table here -->
+    <div class="container-fluid py-4">
+      <app-master-table 
+      [masters]="masters"
+      [isLoading]="isLoading"
+      (deleteMasterEvent)="onDeleteMaster($event)"
+      (editMasterEvent)="onEditMaster($event)"
+      (viewMasterEvent)="onViewMaster($event)"
+      ></app-master-table>
+    </div>
 
 <!-- Edit form here -->
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
