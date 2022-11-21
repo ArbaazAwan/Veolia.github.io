@@ -17,8 +17,8 @@ export class MasterTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMasters();
-    this.sortedMasters = this.masters.slice();
   }
+  
   sortAssets(sort: any) {
     const data = this.masters.slice();
     if (!sort.active || sort.direction === '') {
@@ -71,6 +71,7 @@ export class MasterTableComponent implements OnInit {
       (masters:any)=>{
         this.masters = masters;
         this.isLoading = false;
+        this.sortedMasters = this.masters.slice();
       }
     )
   }
