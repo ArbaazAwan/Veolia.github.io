@@ -20,6 +20,8 @@ export class MasterTableComponent implements OnInit {
   sortedMasters: any[] = [];
   masters: any[] = [];
   isLoading: boolean = false;
+  p: number = 1;
+
   @Output() viewMasterEvent = new EventEmitter();
   // @ViewChild(CreateMasterFormComponent)
   // public CreateMasterFormComponent: CreateMasterFormComponent;
