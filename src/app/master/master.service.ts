@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,8 +21,15 @@ export class MasterService {
     "Access-Control-Allow-Headers": "'*'"
   });
 
+  private masterId = new BehaviorSubject(null);
+  currentMasterId = this.masterId.asObservable();
+
 
   constructor(private http: HttpClient) { }
+
+  setMasterId(masterId: any) {
+    this.masterId.next(masterId);
+    }
 
   getMasters() {
     return this.http.get(this.MASTER_URL, { headers: this.headers });

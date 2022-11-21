@@ -83,8 +83,7 @@ export class MasterTableComponent implements OnInit {
     });
   }
   editMaster(masterId: any) {
-    localStorage.setItem('masterId', masterId);
-    // this.createMasterFormComponent.initializeForm();
+    this.masterService.setMasterId(masterId);
   }
 
   deleteMaster(id: any) {
