@@ -303,24 +303,24 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().removeAt(index);
   }
 
-  removeMaintenance(index: number) {
-    this.maintenances(index).removeAt(index);
+  removeMaintenance(eventIndex:any, index: number) {
+    this.maintenances(eventIndex).removeAt(index);
   }
 
   removeOverhaulMaintenance(index: number) {
     this.overhaulMaintenances().removeAt(index);
   }
 
-  removeLabor(i: number) {
-    this.labors(i).removeAt(i);
+  removeLabor(eventIndex:any,i: number) {
+    this.labors(eventIndex).removeAt(i);
   }
 
   removeOverhaulLabor(i: number) {
     this.overhaulLabors().removeAt(i);
   }
 
-  removeCont(i: number) {
-    this.conts(i).removeAt(i);
+  removeCont(eventIndex:any,i: number) {
+    this.conts(eventIndex).removeAt(i);
   }
 
   removeOverhaulCont(i: number) {

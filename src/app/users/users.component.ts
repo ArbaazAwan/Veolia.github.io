@@ -19,7 +19,7 @@ type UserType = 'admin' | 'user';
 })
 export class UsersComponent implements OnInit {
   form!: FormGroup;
-  pForm!:FormGroup;
+  pForm!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
   isLoading: boolean = false;
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initializeForm();
@@ -63,20 +63,24 @@ export class UsersComponent implements OnInit {
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       password: [
-        null,
-        Validators.compose([Validators.required, this.patternValidator()]),
+        null,Validators.compose([Validators.required, this.patternValidator()]),
       ],
     });
-    this.pForm = this.formBuilder.group({
-      password: ['',Validators.compose([Validators.required, this.patternValidator()])],
-      confirmPassword: ['',Validators.compose([Validators.required, this.patternValidator()])],
-    },
-    {
-      validators: [Validation.match("password", "confirmPassword")]
-    }
-    )
+    this.pForm = this.formBuilder.group(
+      {
+        username: [''],
+        password: [
+          '',Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+        confirmPassword: [
+          '',Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+      },
+      {
+        validators: [Validation.match('password', 'confirmPassword')],
+      }
+    );
   }
-
   getUsers() {
     this.isLoading = true;
     this.userService.getUsers().subscribe((res: any) => {
@@ -85,16 +89,23 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  submitPassword(){
-    if(!this.pForm.value.password  == this.pForm.value.confirmPassword)
-    {
+  submitPassword() {
+    if (!this.pForm.value.password == this.pForm.value.confirmPassword) {
       return;
     }
-    this.userService.changeUserPassword(this.pForm.value.password).subscribe(
-      (res:any)=>{
+
+    // this.onChangePassword.
+
+    const PasswordPayload = {
+      username: this.currentUser.userName,
+      password: this.pForm.value.password,
+    };
+
+    this.userService
+      .changeUserPassword(PasswordPayload)
+      .subscribe((res: any) => {
         console.log(res);
-      }
-    )
+      });
   }
 
   submitForm() {
@@ -121,13 +132,21 @@ export class UsersComponent implements OnInit {
     this.formReset();
   }
 
-  onChangePassword(id:any){
-    this.userService.getUserById(id).subscribe(
-      (res:any)=>{
-        let { userName } = res[0];
+  onChangePassword(id: any) {
+    this.userService.getUserById(id).subscribe((el: any) => {
+      const [_user] = el;
 
-      }
-    )
+      this.currentUser = _user;
+
+      this.pForm = this.formBuilder.group({
+        username: new FormControl({
+          value: _user.userName,
+          disabled: true,
+        }),
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      });
+    });
   }
 
   onUpdateUser() {

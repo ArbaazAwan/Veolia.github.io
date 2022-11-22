@@ -24,7 +24,7 @@
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
-                  Actions
+                  &nbsp;Actions
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="masterId">
                   Id
@@ -66,10 +66,10 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let master of sortedMasters | searchFilter: assetSearchText
+                  let master of sortedMasters | searchFilter: assetSearchText  |  paginate: { itemsPerPage: 10, currentPage: p }
                 ">
                 <td>
-                  <div class="d-flex py-1">
+                  <div class="d-flex mt-2 mx-2">
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
                         <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
@@ -193,6 +193,7 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>
