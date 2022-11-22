@@ -10,21 +10,38 @@ import { NodeService } from './node.service';
 })
 export class ViewMasterTableComponent implements OnInit {
 
-  constructor(private masterService:MasterService, private nodeService:NodeService) {
-   }
+  constructor(private masterService:MasterService, private nodeService:NodeService) {}
+
+   @Input() eventEvalTableShow!:boolean;
+
+   completeMaster:any;
+   master:any = {};
+   overhaul:any = {};
+   events:any[] = [];
+   cols: any[]=[];
    asset:any;
    files1!: TreeNode[];
-   @Input() eventEvalTableShow!:boolean;
-   @Input() master:any={}
-    cols!: any[];
-
-  events:any[] = [];
+   isLoading:boolean = false;
 
   ngOnInit(): void {
-    
+
     this.nodeService.getFilesystem().then(files => this.files1 = files);
 
-        this.cols = [
+    this.masterService.currentMasterId.subscribe(
+      (el:any)=>{
+        if(el)
+        {
+          this.getCompleteMasterById(el);
+          this.initializeCols();
+        }
+      }
+    )
+
+
+  }
+
+  initializeCols(){
+     this.cols = [
             { field: 'desc', header: '' },
             { field: 'oh', header: 'OverHaul'},
             { field: 'ev1', header: 'Event1' },
@@ -39,14 +56,34 @@ export class ViewMasterTableComponent implements OnInit {
         ];
   }
 
-  getEvents(){
-    this.masterService.getEventsByMasterId(this.master.masterId).subscribe(
-      (res:any)=>{
-        this.events = res;
-        console.log('these are events:',this.events);
+  getCompleteMasterById(masterId:any)
+  {
+    this.isLoading = true;
+    this.masterService.getCompleteMasterById(masterId) //hard coded id
+    .subscribe(
+      (el:any)=>{
+
+        console.log("complete master:",el);
+
+        this.completeMaster = el;
+        this.master = this.completeMaster.master;
+        this.events = this.completeMaster.events;
+        this.overhaul = this.completeMaster.overhaul;
+
+        this.isLoading = false;
+        this.masterService.setMasterId(null);
       }
     )
   }
+
+  // getEvents(){
+  //   this.masterService.getEventsByMasterId(this.master.masterId).subscribe(
+  //     (res:any)=>{
+  //       this.events = res;
+  //       console.log('these are events:',this.events);
+  //     }
+  //   )
+  // }
 
 
 

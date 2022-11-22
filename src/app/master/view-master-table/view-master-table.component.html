@@ -1,1388 +1,976 @@
 <!-- Details Above Event -->
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <div class="card py-2">
-                  <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                      <p class="text-white text-bold text-capitalize ps-4">Assets Details</p>
-                    </div>
-                  </div>
-                  <div class="card-body px-0 pb-2">
-                    <div class="table-blocked">
-
-                      <!-- Asset Detail here -->
-                      <div class="row mx-4">
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Master ID: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.masterId}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Old Asset Type: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.oldAssetType}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">New Asset Type: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.newAssetType}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Master Style: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.masterStyle}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Master Size: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.masterSize}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Old Description: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.oldDescription}}</span>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="row mx-4">
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">New Description: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.newDescription}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Unit Measurement: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.unitMeasurement}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Rev: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.rev}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Replacement Cost: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.replacementCost | currency}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Life Months: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm"> {{master?.lifeMonths}}</span>
-                          </span>
-                        </div>
-
-                        <div class="col-md-2">
-                          <span>
-                            <label class="text-bold">Overhaul Life: &nbsp;</label>
-                            <span class="mb-0 opacity-8 text-sm">{{master?.overhaulLife / 100 | percent}}</span>
-                          </span>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                    <!-- Tabs here -->
-
-                    <div class="card mx-4">
-                      <mat-tab-group mat-align-tabs="left">
-                        <mat-tab label="All">
-                          <div class="table-responsive overflow-hidden">
-                            <p-treeTable [value]="files1" [columns]="cols" class="table">
-                              <ng-template pTemplate="header" let-columns>
-                                <tr>
-                                  <th *ngFor="let col of columns" class="">{{col.header}}</th>
-                                </tr>
-                              </ng-template>
-                              <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-                                <tr>
-                                  <td *ngFor="let col of columns; let i = index">
-                                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
-                                    <span [ngClass]="{'text-bold': i === 0}">{{rowData[col.field]}}</span>
-                                  </td>
-                                </tr>
-                              </ng-template>
-                            </p-treeTable>
-                          </div>
-
-                        </mat-tab>
-
-                        <mat-tab label="Overhaul">
-
-                          <table class="table table-striped">
-                            <tbody>
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Maintenance Items</label>
-                                </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                              </tr>
-                              <tr colspan="1">
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Event Title: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Regular Checkup</p>
-                                </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Perform Every (MOs): &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">12</p>
-                                </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Stretch for Partial Loading:
-                                      &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Yes</p>
-                                </td>
-                                </span>
-                                </td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Material 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 3</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 4</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 5</label>
-                                </th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 3</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 4</label>
-                                </th>
-                                <th></th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td></td>
-                              </tr>
-
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 3</label>
-                                </th>
-                                <th></th>
-                                <th></th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-
-                        </mat-tab>
-
-                        <mat-tab *ngFor="let event of events" label={{event.eventTitle}}>
-                          <table class="table table-striped">
-                            <tbody>
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Maintenance Items</label>
-                                </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                              </tr>
-                              <tr colspan="1">
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Event Title: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Regular Checkup</p>
-                                </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Perform Every (MOs): &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">12</p>
-                                </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Stretch for Partial Loading:
-                                      &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Yes</p>
-                                </td>
-                                </span>
-                                </td>
-                                <td></td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Material 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 3</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 4</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Material 5</label>
-                                </th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Maintainence</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Cost: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">500</p>
-                                  </td>
-                                </span>
-                                </td>
-                              </tr>
-
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 3</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Labor 4</label>
-                                </th>
-                                <th></th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Level: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Skilled</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">5</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td></td>
-                              </tr>
-
-                              <tr>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 1</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 2</label>
-                                </th>
-                                <th>
-                                  <label class="text-bold mt-2">Shop/Contractor 3</label>
-                                </th>
-                                <th></th>
-                                <th></th>
-                              </tr>
-
-                              <tr>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-                                <td>
-                                  <span>
-                                    <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
-                                <td>
-                                  <p class="mb-0 text-sm">Contractor</p>
-                                </td>
-                                </span>
-
-                                <br />
-
-                                <span>
-                                  <label for="cost" class="form-label text-bold">Amount: &nbsp;
-                                  </label>
-                                  <td>
-                                    <p class="mb-0 text-sm">45</p>
-                                  </td>
-                                </span>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </mat-tab>
-
-                      </mat-tab-group>
-                    </div>
-                    <!-- Event Evaluation Overview -->
-
-                    <div class="card m-4" *ngIf="eventEvalTableShow">
-                      <div style="width:100%;overflow-x:scroll;" class="table-responsive">
-                        <table class="table  tabel-fluid">
-                          <tbody>
-
-                            <!-- header list  -->
-                            <tr class="bg-light">
-                              <th>
-                                <h6 class="form-label text-bold m-2">Event Evaluation Overview:</h6>
-
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">OverHaul</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 1</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 2</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 3</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 4</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 5</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 6</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 7</label>
-                              </th>
-                              <th>
-                                <label class="text-bold mt-2">Event 8</label>
-                              </th>
-
-                            </tr>
-
-                            <!-- event material cost -->
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold ">Event Material Cost</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Outside SVC Cost</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">500</p>
-                              </td>
-                              </span>
-                              </td>
-
-
-                            </tr>
-
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - Unskilled</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - Skilled</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - Technical</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - D</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - E</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td class="bg-light">
-                                <label class="text-bold">Event Labor Cost - F</label>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                              <td>
-                                <span>
-                              <td>
-                                <p class="mb-0 text-sm">5</p>
-                              </td>
-                              </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card py-2">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <p class="text-white text-bold text-capitalize ps-4">Assets Details</p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center" *ngIf="isLoading">
+          <div class="spinner-border"></div>
+        </div>
+        <div class="card-body px-0 pb-2" *ngIf="!isLoading">
+          <div class="table-blocked">
+
+            <!-- Asset Detail here -->
+            <div class="row mx-4">
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Master ID: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.masterId}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Old Asset Type: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.oldAssetType}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">New Asset Type: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.newAssetType}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Master Style: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.masterStyle}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Master Size: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.masterSize}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Old Description: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.oldDescription}}</span>
+                </span>
               </div>
             </div>
+
+            <div class="row mx-4">
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">New Description: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.newDescription}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Unit Measurement: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.unitMeasurement}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Rev: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.rev}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Replacement Cost: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.replacementCost }}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Life Months: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm"> {{master?.lifeMonths}}</span>
+                </span>
+              </div>
+
+              <div class="col-md-2">
+                <span>
+                  <label class="text-bold">Overhaul Life: &nbsp;</label>
+                  <span class="mb-0 opacity-8 text-sm">{{master?.overhaulLife}}</span>
+                </span>
+              </div>
+
+            </div>
+
           </div>
+
+          <!-- Tabs here -->
+
+          <div class="card mx-4">
+            <mat-tab-group mat-align-tabs="left">
+              <mat-tab label="All">
+                <div class="table-responsive overflow-hidden">
+                  <p-treeTable [value]="files1" [columns]="cols" class="table">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns" class="">{{col.header}}</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                      <tr>
+                        <td *ngFor="let col of columns; let i = index">
+                          <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                          <span [ngClass]="{'text-bold': i === 0}">{{rowData[col.field]}}</span>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-treeTable>
+                </div>
+
+              </mat-tab>
+
+              <mat-tab label="Overhaul">
+
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th>
+                        <label class="text-bold mt-2">Maintenance Items</label>
+                      </th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <tr colspan="1">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Overhaul Title: &nbsp;</label>
+                      <td>
+                        <p class="mb-0 text-sm">{{overhaul.ovTitle}}</p>
+                      </td>
+                      </span>
+                      </td>
+
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Overhaul Stretch &nbsp;</label>
+                            <td>
+                              <p class="mb-0 text-sm">{{overhaul.ovStretch}}</p>
+                            </td>
+                        </span>
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr *ngFor="let ovM of overhaul.overhaulMaintenance let i = index">
+                      <th>
+                        <label class="text-bold mt-2">Material {{i+1}}</label>
+                      </th>
+                    </tr>
+
+                    <tr *ngFor="let ovM of overhaul.overhaulMaintenance">
+                      <td>
+                          <span>
+                            <label for="Labor1" class="form-label text-bold">Maintenance &nbsp;</label>
+                        <td>
+                          <p class="mb-0 text-sm">{{ovM.ohMaintenance}}</p>
+                        </td>
+                        </span>
+
+                        <br />
+
+                          <span>
+                            <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                            <td>
+                              <p class="mb-0 text-sm">{{ovM.ohCost}}</p>
+                            </td>
+                          </span>
+                      </td>
+                      <!-- <td></td>
+                      <td></td>
+                      <td></td> -->
+                    </tr>
+
+                    <tr *ngFor="let ovL of overhaul.overhaulLabour let iL = index">
+                      <th>
+                        <label class="text-bold mt-2">Labor {{iL+1}}</label>
+                      </th>
+                      <!-- <th>
+                        <label class="text-bold mt-2">Labor 2</label>
+                      </th>
+                      <th>
+                        <label class="text-bold mt-2">Labor 3</label>
+                      </th>
+                      <th>
+                        <label class="text-bold mt-2">Labor 4</label>
+                      </th>
+                      <th></th> -->
+                    </tr>
+
+                    <tr *ngFor="let ovL of overhaul.overhaulLabours">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Overhaul Labour: &nbsp;</label>
+                      <td>
+                        <p class="mb-0 text-sm">{{ovL.ohLabour}}</p>
+                      </td>
+                      </span>
+
+                      <br />
+
+                      <span>
+                        <label for="cost" class="form-label text-bold">Hours: &nbsp;
+                        </label>
+                        <td>
+                          <p class="mb-0 text-sm">{{ovL.ohHour}}</p>
+                        </td>
+                      </span>
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let ovC of overhaul.overhaulContractors let i = index">
+                      <th>
+                        <label class="text-bold mt-2">Shop/Contractor {{i+1}}</label>
+                      </th>
+                    </tr>
+
+                    <tr *ngFor="let ovC of overhaul.OverhaulContractors">
+                      <td>
+                          <span>
+                            <label for="Labor1" class="form-label text-bold">Labor: &nbsp;</label>
+                        <td>
+                          <p class="mb-0 text-sm">{{ovC.ohLabour}}</p>
+                        </td>
+                        </span>
+
+                        <br />
+
+                        <span>
+                          <label for="cost" class="form-label text-bold">Hours: &nbsp;
+                          </label>
+                          <td>
+                            <p class="mb-0 text-sm">{{ovC.ohHour}}</p>
+                          </td>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </mat-tab>
+
+              <mat-tab *ngFor="let event of events let i = index" label="Event {{i+1}}" >
+                <table class="table table-striped">
+                  <tbody>
+                    <tr></tr>
+                    <tr colspan="1">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Event Title: &nbsp;</label>
+                            <td>
+                              <p class="mb-0 text-sm">{{event.evTitle}}</p>
+                            </td>
+                        </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Occurence: &nbsp;</label>
+                            <td>
+                              <p class="mb-0 text-sm">{{event.evOccurence}}</p>
+                            </td>
+                        </span>
+                      </td>
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Stretch: &nbsp;</label>
+                            <td>
+                              <p class="mb-0 text-sm">{{event.evStretch}}</p>
+                            </td>
+                        </span>
+                      </td>
+                    </tr>
+                    <tr *ngFor="let evM of event.eventMaintenance let im = index">
+                      <th>
+                        <label class="text-bold mt-2">Material {{im+1}}</label>
+                      </th>
+                    </tr>
+                    <tr *ngFor="let evM of event.eventMaintenance">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Description: &nbsp;</label>
+                          <td>
+                            <p class="mb-0 text-sm">{{evM.evMaintenance}}</p>
+                          </td>
+                        </span>
+                        <br />
+                        <span>
+                          <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                          <td>
+                            <p class="mb-0 text-sm">{{evM.evCost}}</p>
+                          </td>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let evL of event.eventLabours let il = index">
+                      <th>
+                        <label class="text-bold mt-2">Labor {{il+1}}</label>
+                      </th>
+                    </tr>
+
+                    <tr *ngFor="let evL of event.eventLabours">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Labor: &nbsp;</label>
+                          <td>
+                            <p class="mb-0 text-sm">{{evL.evLabour}}</p>
+                          </td>
+                        </span>
+                      <br />
+                        <span>
+                          <label for="cost" class="form-label text-bold">Hours: &nbsp;</label>
+                          <td>
+                            <p class="mb-0 text-sm">{{evL.evHour}}</p>
+                          </td>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr *ngFor="let evC of event.eventContractors let ic = index">
+                      <th>
+                        <label class="text-bold mt-2">Shop/Contractor {{i+1}}</label>
+                      </th>
+                    </tr>
+
+                    <tr *ngFor="let evC of event.eventContractors">
+                      <td>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Contractor: &nbsp;</label>
+                          <td>
+                            <p class="mb-0 text-sm">{{evC.evContractor}}</p>
+                          </td>
+                        </span>
+                      <br />
+                      <span>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;
+                        </label>
+                        <td>
+                          <p class="mb-0 text-sm">{{evC.evCost}}</p>
+                        </td>
+                      </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+          <!-- Event Evaluation Overview -->
+
+          <div class="card m-4" *ngIf="eventEvalTableShow">
+            <div style="width:100%;overflow-x:scroll;" class="table-responsive">
+              <table class="table  tabel-fluid">
+                <tbody>
+
+                  <!-- header list  -->
+                  <tr class="bg-light">
+                    <th>
+                      <h6 class="form-label text-bold m-2">Event Evaluation Overview:</h6>
+
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">OverHaul</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 1</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 2</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 3</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 4</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 5</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 6</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 7</label>
+                    </th>
+                    <th>
+                      <label class="text-bold mt-2">Event 8</label>
+                    </th>
+
+                  </tr>
+
+                  <!-- event material cost -->
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold ">Event Material Cost</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Outside SVC Cost</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">500</p>
+                    </td>
+                    </span>
+                    </td>
+
+
+                  </tr>
+
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - Unskilled</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - Skilled</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - Technical</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - D</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - E</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Event Labor Cost - F</label>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                    <td>
+                      <span>
+                    <td>
+                      <p class="mb-0 text-sm">5</p>
+                    </td>
+                    </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

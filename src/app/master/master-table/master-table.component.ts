@@ -73,7 +73,7 @@ export class MasterTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
   viewMaster(masterId: any) {
-    this.viewMasterEvent.emit(masterId);
+    this.masterService.setMasterId(masterId);
   }
 
   getMasters() {
