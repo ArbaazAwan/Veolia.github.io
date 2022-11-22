@@ -5,10 +5,13 @@
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">
             Assets Table
-          </p> 
+          </p>
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" *ngIf="isLoading"></div>
+        </div>
         <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search assets</mat-label>
@@ -16,41 +19,41 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive">
+        <div class="p-0 table-responsive" *ngIf="!isLoading">
           <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="id">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="masterId">
                   Id
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitDesc">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldAssetType">
                   Old Asset Type
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="appDesc">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newAssetType">
                   New Asset Type
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
                   Master Style
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
                   Master Size
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
                   Old Description
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
                   New Description
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeasurement">
                   Unit Measurement
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
                   Rev
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replCost">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replacementCost">
                   Replacement Cost
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMOs">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMonths">
                   Life Months
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
@@ -63,7 +66,7 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let master of masters | searchFilter: assetSearchText
+                  let master of sortedMasters | searchFilter: assetSearchText  |  paginate: { itemsPerPage: 10, currentPage: p }
                 ">
                 <td>
                   <div class="d-flex px-3 py-1">
@@ -131,7 +134,7 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.replacementCost | currency }}</p>
+                      <p class="mb-0 text-sm">{{ master.replacementCost }}</p>
                     </div>
                   </div>
                 </td>
@@ -168,7 +171,7 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form">
+                            data-bs-target="#modal-form-create">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
@@ -189,6 +192,7 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

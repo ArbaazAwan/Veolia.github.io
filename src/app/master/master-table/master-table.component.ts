@@ -1,26 +1,35 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { CreateMasterFormComponent } from '../create-master-form/create-master-form.component';
 import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-master-table',
   templateUrl: './master-table.component.html',
-  styleUrls: ['./master-table.component.scss']
+  styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-
-  constructor(private masterService:MasterService) { }
+  constructor(private masterService: MasterService) {}
   assetSearchText: string = '';
-  sortedMasters!: any[];
-  @Input() isLoading: boolean = false;
-  @Input() masters: any[] = [];
-  @Output() deleteMasterEvent = new EventEmitter();
-  @Output() editMasterEvent = new EventEmitter();
+  sortedMasters: any[] = [];
+  masters: any[] = [];
+  isLoading: boolean = false;
+  p: number = 1;
+
   @Output() viewMasterEvent = new EventEmitter();
+  // @ViewChild(CreateMasterFormComponent)
+  // public CreateMasterFormComponent: CreateMasterFormComponent;
 
   ngOnInit(): void {
-    // this.assets = this.masterService.loadAssets(); //loading the assets
-    this.sortedMasters = this.masters.slice();
+    this.getMasters();
   }
+
   sortAssets(sort: any) {
     const data = this.masters.slice();
     if (!sort.active || sort.direction === '') {
@@ -63,15 +72,25 @@ export class MasterTableComponent implements OnInit {
   compare(a: number | string, b: number | string, isAsc: boolean): any {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-  viewMaster(masterId:any){
+  viewMaster(masterId: any) {
     this.viewMasterEvent.emit(masterId);
   }
-  editMaster(masterid: any) {
-    this.editMasterEvent.emit(masterid);
+
+  getMasters() {
+    this.isLoading = true;
+    this.masterService.getMasters().subscribe((masters: any) => {
+      this.masters = masters;
+      this.isLoading = false;
+      this.sortedMasters = this.masters.slice();
+    });
+  }
+  editMaster(masterId: any) {
+    this.masterService.setMasterId(masterId);
   }
 
   deleteMaster(id: any) {
-    this.deleteMasterEvent.emit(id);
+    this.masterService.deleteMaster(id).subscribe((res: any) => {
+      console.log(res.message);
+    });
   }
-
 }
