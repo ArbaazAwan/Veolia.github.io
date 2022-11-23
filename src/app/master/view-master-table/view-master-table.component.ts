@@ -17,15 +17,13 @@ export class ViewMasterTableComponent implements OnInit {
    completeMaster:any;
    master:any = {};
    overhaul:any = {};
-   events:any[] = [];
+   events!:any[] ;
    cols: any[]=[];
    asset:any;
-   files1!: TreeNode[];
+   files!: TreeNode[];
    isLoading:boolean = false;
 
   ngOnInit(): void {
-
-    this.nodeService.getFilesystem().then(files => this.files1 = files);
 
     this.masterService.currentMasterId.subscribe(
       (el:any)=>{
@@ -36,7 +34,6 @@ export class ViewMasterTableComponent implements OnInit {
         }
       }
     )
-
 
   }
 
@@ -63,28 +60,31 @@ export class ViewMasterTableComponent implements OnInit {
     .subscribe(
       (el:any)=>{
 
-        console.log("complete master:",el);
+        // console.log("complete master:",el);
 
         this.completeMaster = el;
-        this.master = this.completeMaster.master;
-        this.events = this.completeMaster.events;
-        this.overhaul = this.completeMaster.overhaul;
+        this.files = this.nodeService.getFilesystem(this.completeMaster); //initializing nodes
+
+        // console.log("files:",this.files);
+
+        if(this.completeMaster){
+
+          if(this.completeMaster.master)
+          this.master = this.completeMaster.master;
+
+          if(this.completeMaster.events)
+          this.events = this.completeMaster.events;
+
+          if(this.completeMaster.overhaul)
+          this.overhaul = this.completeMaster.overhaul;
+
+        }
 
         this.isLoading = false;
         this.masterService.setMasterId(null);
       }
     )
   }
-
-  // getEvents(){
-  //   this.masterService.getEventsByMasterId(this.master.masterId).subscribe(
-  //     (res:any)=>{
-  //       this.events = res;
-  //       console.log('these are events:',this.events);
-  //     }
-  //   )
-  // }
-
 
 
 }
