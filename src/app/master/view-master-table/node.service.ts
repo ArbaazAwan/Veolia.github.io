@@ -6,6 +6,7 @@ import { TreeNode } from 'primeng/api';
 })
 export class NodeService {
   constructor(private http: HttpClient) { }
+  data!: TreeNode[];
 
   getFilesystem(completeMaster: any) {
 
@@ -110,87 +111,12 @@ export class NodeService {
     }
     // console.log("stretches data:",stretches);
 
-    // events loops____________________________________________________________________________
-
-    for (let ie = 0; ie < events.length; ie++) {
-
-      // event maintenance
-
-      for (let i = 0; i < events[ie].eventMaintenance.length; i++) {
-        evMaintenancesI['ev' + (i + 1)] = events[ie].eventMaintenance[i].evMaintenance;
-      }
-      console.log("event maintenance item:",evMaintenancesI);
-
-
-      for (let i = 0; i < events[ie].eventMaintenance.length; i++) {
-        evMaintenancesC['ev' + (i + 1)] = events[ie].eventMaintenance[i].evCost;
-      }
-      // console.log("event maintenance", evMaintenancesI);
-
-      // event labors
-
-      for (let i = 0; i < events[ie].eventLabours.length; i++) {
-        evLaborsL['ev' + (i + 1)] = events[ie].eventLabours[i].evLabour;
-      }
-
-      for (let i = 0; i < events[ie].eventLabours.length; i++) {
-        evLaborsH['ev' + (i + 1)] = events[ie].eventLabours[i].evHour;
-      }
-
-      //event contractors
-
-
-      for (let i = 0; i < events[ie].eventContractors.length; i++) {
-        evContractorsL['ev' + (i + 1)] = events[ie].eventContractors[i].evContractor;
-      }
-
-      for (let i = 0; i < events[ie].eventContractors.length; i++) {
-        evContractorsH['ev' + (i + 1)] = events[ie].eventContractors[i].evCost;
-      }
-    }
-    //_____________________________________________________________________________________
 
     // console.log("event maintenances:",evMaintenancesI, evMaintenancesC);
 
 
 
-    // overhaul loops______________________________________________________________________
-
-    // overhaul maintenances
-
-
-    for (let i = 0; i < overhaul.overhaulMaintenance.length; i++) {
-      evMaintenancesI['oh'] =
-        overhaul.overhaulMaintenance[i].ohMaintenance;
-    }
-
-    for (let i = 0; i < overhaul.overhaulMaintenance.length; i++) {
-      evMaintenancesC['oh'] = overhaul.overhaulMaintenance[i].ohCost;
-    }
-
-    // overhaul labors
-
-    for (let i = 0; i < overhaul.overhaulLabours.length; i++) {
-      evLaborsL['oh'] = overhaul.overhaulLabours[i].ohLabour;
-    }
-
-    for (let i = 0; i < overhaul.overhaulLabours.length; i++) {
-      evLaborsH['oh'] = overhaul.overhaulLabours[i].ohHour;
-    }
-
-    // overhaul contractors
-
-    for (let i = 0; i < overhaul.overhaulContractors.length; i++) {
-      evContractorsL['oh'] = overhaul.overhaulContractors[i].ohLabour;
-    }
-
-    for (let i = 0; i < overhaul.overhaulContractors.length; i++) {
-      evContractorsH['oh'] = overhaul.overhaulContractors[i].ohHour;
-    }
-
-    //_________________________________________________________________________________
-
-    var data: TreeNode[] = [
+    this.data = [
       {
         data: titles,
       },
@@ -204,44 +130,115 @@ export class NodeService {
         data: {
           desc: 'Material',
         },
-        children: [
-          {
-            data: evMaintenancesI,
-          },
-          {
-            data: evMaintenancesC,
-          },
-        ],
+        children: []
       },
       {
         data: {
           desc: 'Labor',
         },
-        children: [
-          {
-            data: evLaborsL,
-          },
-          {
-            data: evLaborsH,
-          },
-        ],
+        children: [],
       },
       {
         data: {
           desc: 'Contractor',
         },
-        children: [
-          {
-            data: evContractorsL,
-          },
-          {
-            data: evContractorsH,
-          },
-        ],
+        children: [],
       },
 
     ];
 
-    return data;
+    // overhaul loops______________________________________________________________________
+
+    // overhaul maintenances
+
+    var mIObject:any
+    var mCObject:any
+    var lObject:any
+    var lHCObject:any
+    var cObject:any
+    var cHObject:any
+    for (let i = 0; i < overhaul.overhaulMaintenance.length; i++) {
+
+      mIObject = {
+          oh: overhaul.overhaulMaintenance[i].ohMaintenance
+      }
+      //pushing first field
+      this.data[3].children?.push({data:mIObject});
+
+      mCObject = {
+          oh: overhaul.overhaulMaintenance[i].ohCost
+      }
+      //pushing second field
+      this.data[3].children?.push({data: mCObject});
+    }
+
+    // overhaul labors
+
+
+    for (let i = 0; i < overhaul.overhaulLabours.length; i++) {
+      // evLaborsL['oh'] = overhaul.overhaulLabours[i].ohLabour;
+      lObject = {
+          oh : overhaul.overhaulLabours[i].ohLabour
+      }
+      this.data[4].children?.push({data:lObject});
+
+      lHCObject = {
+          oh: overhaul.overhaulLabours[i].ohHour
+      }
+      this.data[4].children?.push({data:lHCObject});
+    }
+
+    // overhaul contractors
+
+
+    for (let i = 0; i < overhaul.overhaulContractors.length; i++) {
+      cObject = {
+          oh: overhaul.overhaulContractors[i].ohLabour
+      }
+      this.data[5].children?.push({data:cObject});
+
+      cHObject = {
+          oh : overhaul.overhaulContractors[i].ohHour
+      }
+      this.data[5].children?.push({data:cHObject});
+
+    }
+
+    //_________________________________________________________________________________
+
+        // events loops____________________________________________________________________________
+
+        for (let ie = 0; ie < events.length; ie++) {
+
+          // event maintenance
+
+          for (let i = 0; i < events[ie].eventMaintenance.length; i++) {
+            mIObject['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evMaintenance
+            mCObject['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evCost
+          }
+          this.data[3].children?.push({data : mIObject});
+          this.data[3].children?.push({data: mCObject});
+
+          // event labors
+
+          for (let i = 0; i < events[ie].eventLabours.length; i++) {
+            evLaborsL['ev' + (ie + 1)] = events[ie].eventLabours[i].evLabour;
+            evLaborsH['ev' + (ie + 1)] = events[ie].eventLabours[i].evHour;
+          }
+          this.data[4].children?.push({data:evLaborsL});
+          this.data[4].children?.push({data:evLaborsH});
+
+          //event contractors
+
+          for (let i = 0; i < events[ie].eventContractors.length; i++) {
+            evContractorsL['ev' + (i + 1)] = events[ie].eventContractors[i].evContractor;
+            evContractorsH['ev' + (i + 1)] = events[ie].eventContractors[i].evCost;
+          }
+          this.data[5].children?.push({data:evContractorsL});
+          this.data[5].children?.push({data:evContractorsH});
+        }
+        //_____________________________________________________________________________________
+
+    return this.data;
   }
 }
