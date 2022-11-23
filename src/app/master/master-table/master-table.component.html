@@ -19,10 +19,13 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive" *ngIf="!isLoading">
+        <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
           <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
+                  &nbsp;Actions
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="masterId">
                   Id
                 </th>
@@ -59,15 +62,44 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
                   Overhaul Life
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
-                  Actions
-                </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="
                   let master of sortedMasters | searchFilter: assetSearchText  |  paginate: { itemsPerPage: 10, currentPage: p }
                 ">
+                <td>
+                  <div class="d-flex mt-2 mx-2">
+                    <div class="d-flex flex-column">
+                      <div ngbDropdown>
+                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                          Actions
+                        </button>
+                        <div ngbDropdownMenu="gfg">
+                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" data-bs-target="#modal-form-view"
+                            (click)="viewMaster(master.masterId)">
+                            <i class="material-icons">visibility</i>
+                            &nbsp;View
+                          </button>
+                          <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
+                            data-bs-target="#modal-form-create">
+                            <i class="material-icons">edit</i>&nbsp;
+                            Edit
+                          </button>
+                          <button
+                          ngbDropdownItem
+                          class="text-danger"
+                          (click)="deleteMaster(master.masterId)"
+                        >
+                          <i class="material-icons">delete</i>&nbsp;
+                          Delete
+                        </button>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
                 <td>
                   <div class="d-flex px-3 py-1">
                     <div class="d-flex flex-column">
@@ -157,38 +189,7 @@
                     </div>
                   </div>
                 </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" data-bs-target="#modal-form-view"
-                            (click)="viewMaster(master.masterId)">
-                            <i class="material-icons">visibility</i>
-                            &nbsp;View
-                          </button>
-                          <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create">
-                            <i class="material-icons">edit</i>&nbsp;
-                            Edit
-                          </button>
-                          <button
-                          ngbDropdownItem
-                          class="text-danger"
-                          (click)="deleteMaster(master.masterId)"
-                        >
-                          <i class="material-icons">delete</i>&nbsp;
-                          Delete
-                        </button>
 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
               </tr>
             </tbody>
           </table>

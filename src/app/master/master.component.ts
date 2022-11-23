@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MasterService } from './master.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-master',
@@ -7,9 +8,9 @@ import { MasterService } from './master.service';
   styleUrls: ['./master.component.scss'],
 })
 export class MasterComponent implements OnInit {
-
   eventEvalTableShow: boolean = false;
-  viewMaster:any;
+  viewMaster: any;
+  excelData: any;
   isLoading:boolean = false;
 
   constructor(private masterService:MasterService) {}

@@ -84,6 +84,7 @@ export class MasterTableComponent implements OnInit {
       this.sortedMasters = this.masters.slice();
     });
   }
+
   editMaster(masterId: any) {
     this.masterService.setMasterId(masterId);
   }

@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
   selectedClient: any;
   selectedSite: any;
 
+  
   clients!: any[];
   sites!: any[];
   filteredSites: any[] = [];

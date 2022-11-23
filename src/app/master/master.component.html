@@ -1,19 +1,28 @@
-    <button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form-create">
-      Insert Record
-    </button>
-    <!-- table here -->
-    <div class="container-fluid py-4">
-      <app-master-table
-      (viewMasterEvent)="onViewMaster($event)"
-      ></app-master-table>
-    </div>
+<button
+  type="button"
+  class="btn bg-gradient-primary mx-4 text-right"
+  data-bs-toggle="modal"
+  data-bs-target="#modal-form-create"
+>
+  Insert Record
+</button>
+<app-import-excel></app-import-excel>
+<!-- table here -->
+<div class="container-fluid py-4">
+  <app-master-table (viewMasterEvent)="onViewMaster($event)"></app-master-table>
+</div>
 
-    <!-- Create form here -->
-    <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
-      aria-hidden="true">
-      <app-create-master-form></app-create-master-form>
-    </div>
+<!-- Create form here -->
+<div
+  class="modal fade"
+  id="modal-form-create"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-form"
+  aria-hidden="true"
+>
+  <app-create-master-form></app-create-master-form>
+</div>
 
     <!-- View Table Modal -->
     <div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view"
@@ -45,4 +54,6 @@
         </div>
       </div>
     </div>
-    <!-- ----- -->
+  </div>
+</div>
+<!-- ----- -->

@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserformComponent } from './userform/userform.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {ListboxModule} from 'primeng/listbox';
 
 @NgModule({
   declarations: [UsersComponent, UserstableComponent, UserformComponent],
@@ -23,6 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgbModule,
     MatSelectModule,
     NgxPaginationModule,
+    ListboxModule
   ],
 })
 export class UsersModule {}

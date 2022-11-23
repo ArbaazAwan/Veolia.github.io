@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import Validation from '../utils/validation';
 import { UserService } from './user.service';
+import { ClientService } from '../clients/client.service';
+import { PrimeNGConfig, SelectItemGroup } from 'primeng/api';
 
 type UserType = 'admin' | 'user';
 
@@ -19,8 +21,11 @@ type UserType = 'admin' | 'user';
 })
 export class UsersComponent implements OnInit {
   form!: FormGroup;
-  pForm!:FormGroup;
-  clientsArray: any[] = [];
+  pForm!: FormGroup;
+  clientsArray:any [] = [];
+  selectedClients:any[] = [];
+  userId:any;
+  clientIds:string='';
   title: string = 'Clients';
   isLoading: boolean = false;
   users: any[] = [];
@@ -32,12 +37,15 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private clientService: ClientService,
+    private primengConfig: PrimeNGConfig
   ) {}
 
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
+    this.primengConfig.ripple = true;
   }
 
   patternValidator(): ValidatorFn {
@@ -67,14 +75,22 @@ export class UsersComponent implements OnInit {
         Validators.compose([Validators.required, this.patternValidator()]),
       ],
     });
-    this.pForm = this.formBuilder.group({
-      password: ['',Validators.compose([Validators.required, this.patternValidator()])],
-      confirmPassword: ['',Validators.compose([Validators.required, this.patternValidator()])],
-    },
-    {
-      validators: [Validation.match("password", "confirmPassword")]
-    }
-    )
+    this.pForm = this.formBuilder.group(
+      {
+        username: [''],
+        password: [
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+        confirmPassword: [
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+      },
+      {
+        validators: [Validation.match('password', 'confirmPassword')],
+      }
+    );
   }
 
   getUsers() {
@@ -85,16 +101,23 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  submitPassword(){
-    if(!this.pForm.value.password  == this.pForm.value.confirmPassword)
-    {
+  submitPassword() {
+    if (!this.pForm.value.password == this.pForm.value.confirmPassword) {
       return;
     }
-    this.userService.changeUserPassword(this.pForm.value.password).subscribe(
-      (res:any)=>{
+
+    // this.onChangePassword.
+
+    const PasswordPayload = {
+      username: this.currentUser.userName,
+      password: this.pForm.value.password,
+    };
+
+    this.userService
+      .changeUserPassword(PasswordPayload)
+      .subscribe((res: any) => {
         console.log(res);
-      }
-    )
+      });
   }
 
   submitForm() {
@@ -121,13 +144,21 @@ export class UsersComponent implements OnInit {
     this.formReset();
   }
 
-  onChangePassword(id:any){
-    this.userService.getUserById(id).subscribe(
-      (res:any)=>{
-        let { userName } = res[0];
+  onChangePassword(id: any) {
+    this.userService.getUserById(id).subscribe((el: any) => {
+      const [_user] = el;
 
-      }
-    )
+      this.currentUser = _user;
+
+      this.pForm = this.formBuilder.group({
+        username: new FormControl({
+          value: _user.userName,
+          disabled: true,
+        }),
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      });
+    });
   }
 
   onUpdateUser() {
@@ -191,4 +222,36 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
+
+  getClientsByUserID(userId:any) {
+    this.userId = userId;
+    this.clientService.getClients().subscribe((res:  any) => {
+      this.clientsArray = res;
+      console.log(this.clientsArray)
+    });
+    
+  }
+
+  submitSelectedClients(){
+    
+    this.selectedClients.forEach((client:any)=>{
+      this.clientIds =  this.clientIds + client.clientId + ","
+    });
+    this.assignClientsByUserId(this.clientIds);
+    this.selectedClients = [];
+    this.clientIds = '';
+  }
+
+  assignClientsByUserId(clientIds:string){
+    const payload = {
+      "userId": this.userId,
+      "clientId": clientIds  
+    }
+
+    this.userService.assignClientsByUserId(payload).subscribe((res: any)=>{
+      console.log(res);
+    })
+  }
+
+
 }
