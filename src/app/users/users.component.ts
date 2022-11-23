@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import Validation from '../utils/validation';
 import { UserService } from './user.service';
+import { ClientService } from '../clients/client.service';
+import { PrimeNGConfig, SelectItemGroup } from 'primeng/api';
 
 type UserType = 'admin' | 'user';
 
@@ -20,7 +22,10 @@ type UserType = 'admin' | 'user';
 export class UsersComponent implements OnInit {
   form!: FormGroup;
   pForm!: FormGroup;
-  clientsArray: any[] = [];
+  clientsArray:any [] = [];
+  selectedClients:any[] = [];
+  userId:any;
+  clientIds:string='';
   title: string = 'Clients';
   isLoading: boolean = false;
   users: any[] = [];
@@ -32,12 +37,15 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private clientService: ClientService,
+    private primengConfig: PrimeNGConfig
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
+    this.primengConfig.ripple = true;
   }
 
   patternValidator(): ValidatorFn {
@@ -63,17 +71,20 @@ export class UsersComponent implements OnInit {
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       password: [
-        null,Validators.compose([Validators.required, this.patternValidator()]),
+        null,
+        Validators.compose([Validators.required, this.patternValidator()]),
       ],
     });
     this.pForm = this.formBuilder.group(
       {
         username: [''],
         password: [
-          '',Validators.compose([Validators.required, this.patternValidator()]),
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
         ],
         confirmPassword: [
-          '',Validators.compose([Validators.required, this.patternValidator()]),
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
         ],
       },
       {
@@ -81,6 +92,7 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+
   getUsers() {
     this.isLoading = true;
     this.userService.getUsers().subscribe((res: any) => {
@@ -210,4 +222,36 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
+
+  getClientsByUserID(userId:any) {
+    this.userId = userId;
+    this.clientService.getClients().subscribe((res:  any) => {
+      this.clientsArray = res;
+      console.log(this.clientsArray)
+    });
+    
+  }
+
+  submitSelectedClients(){
+    
+    this.selectedClients.forEach((client:any)=>{
+      this.clientIds =  this.clientIds + client.clientId + ","
+    });
+    this.assignClientsByUserId(this.clientIds);
+    this.selectedClients = [];
+    this.clientIds = '';
+  }
+
+  assignClientsByUserId(clientIds:string){
+    const payload = {
+      "userId": this.userId,
+      "clientId": clientIds  
+    }
+
+    this.userService.assignClientsByUserId(payload).subscribe((res: any)=>{
+      console.log(res);
+    })
+  }
+
+
 }
