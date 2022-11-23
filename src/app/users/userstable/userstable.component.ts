@@ -32,6 +32,6 @@ export class UserstableComponent implements OnInit {
   }
 
   assignClient(userId:any){
-    this.assignClientEvent.emit(userId)
+    this.userService.setUserId(userId);
   }
 }

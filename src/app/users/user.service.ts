@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,6 +21,12 @@ export class UserService {
   });
 
   constructor(private http: HttpClient) {}
+  private userId = new BehaviorSubject (null);
+  currentUserId = this.userId.asObservable();
+
+  setUserId(userId:any){
+    this.userId.next(userId)
+  }
 
   getUsers() {
     return this.http.get(this.USER_URL, { headers: this.headers });

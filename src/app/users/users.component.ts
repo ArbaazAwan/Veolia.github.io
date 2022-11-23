@@ -10,7 +10,7 @@ import {
 import Validation from '../utils/validation';
 import { UserService } from './user.service';
 import { ClientService } from '../clients/client.service';
-import { PrimeNGConfig, SelectItemGroup } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
 
 type UserType = 'admin' | 'user';
 
@@ -45,6 +45,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
+    this.getUserId();
     this.primengConfig.ripple = true;
   }
 
@@ -223,17 +224,36 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getClientsByUserID(userId:any) {
-    this.userId = userId;
-    this.clientService.getClients().subscribe((res:  any) => {
-      this.clientsArray = res;
-      console.log(this.clientsArray)
-    });
-    
+  getUserId() {
+    this.userService.currentUserId.subscribe(
+      (userId:any)=>{
+        console.log("userId",userId);
+        if(userId){
+          this.clientService.getClients().subscribe((res:  any) => {
+            this.clientsArray = res;
+
+            this.userService.getClientsByUserId(userId).subscribe(
+            (userClients:any)=>{
+              userClients.forEach((userClient:any) => {
+                this.clientsArray.forEach(
+                  (client:any)=>{
+                    if(userClient.clientId == client.clientId)
+                      this.selectedClients.push(client)
+                  });
+              });
+            });
+          });
+        }
+        this.userService.setUserId(null);
+      });
+
+
+
+
   }
 
   submitSelectedClients(){
-    
+
     this.selectedClients.forEach((client:any)=>{
       this.clientIds =  this.clientIds + client.clientId + ","
     });
@@ -245,7 +265,7 @@ export class UsersComponent implements OnInit {
   assignClientsByUserId(clientIds:string){
     const payload = {
       "userId": this.userId,
-      "clientId": clientIds  
+      "clientId": clientIds
     }
 
     this.userService.assignClientsByUserId(payload).subscribe((res: any)=>{
