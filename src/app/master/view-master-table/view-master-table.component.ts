@@ -30,27 +30,10 @@ export class ViewMasterTableComponent implements OnInit {
         if(el)
         {
           this.getCompleteMasterById(el);
-          this.initializeCols();
         }
       }
     )
 
-  }
-
-  initializeCols(){
-     this.cols = [
-            { field: 'desc', header: '' },
-            { field: 'oh', header: 'OverHaul'},
-            { field: 'ev1', header: 'Event1' },
-            { field: 'ev2', header: 'Event2' },
-            { field: 'ev3', header: 'Event3' },
-            { field: 'ev4', header: 'Event4' },
-            { field: 'ev5', header: 'Event5' },
-            { field: 'ev6', header: 'Event6' },
-            { field: 'ev7', header: 'Event7' },
-            { field: 'ev8', header: 'Event8' },
-
-        ];
   }
 
   getCompleteMasterById(masterId:any)
@@ -73,7 +56,18 @@ export class ViewMasterTableComponent implements OnInit {
           this.master = this.completeMaster.master;
 
           if(this.completeMaster.events)
-          this.events = this.completeMaster.events;
+          {
+            this.events = this.completeMaster.events;
+            this.cols = [
+              { field: 'desc', header: '' },
+              { field: 'oh', header: 'OverHaul'}
+          ];
+
+          for(let i = 0; i<this.events?.length; i++){
+            let obj = { field: 'ev'+ (i+1), header: 'Event ' + (i+1)}
+            this.cols.push(obj);
+          }
+          }
 
           if(this.completeMaster.overhaul)
           this.overhaul = this.completeMaster.overhaul;
