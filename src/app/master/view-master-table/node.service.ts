@@ -86,8 +86,6 @@ export class NodeService {
       this.eventContractors = events[index].eventContractors;
     }
 
-    console.log("overhaul labor",overhaul?.overhaulLabour);
-
 
     for (
       let mainIndex = 0;
