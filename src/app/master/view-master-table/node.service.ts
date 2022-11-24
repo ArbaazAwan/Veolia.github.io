@@ -160,15 +160,13 @@ export class NodeService {
     for (let i = 0; i < overhaul.overhaulMaintenance.length; i++) {
 
       mIObject = {
-        desc: "Item",
-        oh: overhaul.overhaulMaintenance[i].ohMaintenance
+          oh: overhaul.overhaulMaintenance[i].ohMaintenance
       }
       //pushing first field
       this.data[3].children?.push({data:mIObject});
 
       mCObject = {
-        desc: "Cost",
-        oh: overhaul.overhaulMaintenance[i].ohCost
+          oh: overhaul.overhaulMaintenance[i].ohCost
       }
       //pushing second field
       this.data[3].children?.push({data: mCObject});
@@ -180,14 +178,12 @@ export class NodeService {
     for (let i = 0; i < overhaul.overhaulLabours.length; i++) {
       // evLaborsL['oh'] = overhaul.overhaulLabours[i].ohLabour;
       lObject = {
-        desc: "Level",
-        oh : overhaul.overhaulLabours[i].ohLabour
+          oh : overhaul.overhaulLabours[i].ohLabour
       }
       this.data[4].children?.push({data:lObject});
 
       lHCObject = {
-        desc:"Hours",
-        oh: overhaul.overhaulLabours[i].ohHour
+          oh: overhaul.overhaulLabours[i].ohHour
       }
       this.data[4].children?.push({data:lHCObject});
     }
@@ -197,13 +193,11 @@ export class NodeService {
 
     for (let i = 0; i < overhaul.overhaulContractors.length; i++) {
       cObject = {
-        desc:"Labor",
-        oh: overhaul.overhaulContractors[i].ohLabour
+          oh: overhaul.overhaulContractors[i].ohLabour
       }
       this.data[5].children?.push({data:cObject});
 
       cHObject = {
-          desc: "Hours",
           oh : overhaul.overhaulContractors[i].ohHour
       }
       this.data[5].children?.push({data:cHObject});
@@ -217,80 +211,34 @@ export class NodeService {
         for (let ie = 0; ie < events.length; ie++) {
 
           // event maintenance
-          let evMI:any ={};
-          let evMC:any ={};
 
           for (let i = 0; i < events[ie].eventMaintenance.length; i++) {
-            evMI['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evMaintenance;
-
-            if(this.data[3].children?.at(i)?.data){
-              // console.log("childern data:",this.data[3].children?.at(i)?.data );
-              Object.assign(this.data[3].children?.at(i)?.data,evMI);
-            }
-            else{
-              this.data[3].children?.push(evMI);
-            }
-
-            evMC['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evCost;
-
-            if(this.data[3].children?.at(i)?.data){
-              Object.assign(this.data[3].children?.at(i)?.data,evMC);
-            }
-            else{
-              this.data[3].children?.push(evMC);
-            }
-
+            mIObject['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evMaintenance
+            mCObject['ev' + (ie + 1)] = events[ie].eventMaintenance[i].evCost
           }
+          this.data[3].children?.push({data : mIObject});
+          this.data[3].children?.push({data: mCObject});
 
           // event labors
-          let evL:any = {};
-          let evLH:any = {};
 
           for (let i = 0; i < events[ie].eventLabours.length; i++) {
-
-            evL['ev' + (ie + 1)] = events[ie].eventLabours[i].evLabour;
-            if(this.data[4].children?.at(i)?.data){
-              Object.assign(this.data[4].children?.at(i)?.data,evL);
-            }
-            else{
-              this.data[4].children?.push(evL);
-            }
-
-            evLH['ev' + (ie + 1)] = events[ie].eventLabours[i].evHour;
-            if(this.data[4].children?.at(i)?.data){
-              Object.assign(this.data[4].children?.at(i)?.data,evLH);
-            }
-            else{
-              this.data[4].children?.push(evLH);
-            }
+            evLaborsL['ev' + (ie + 1)] = events[ie].eventLabours[i].evLabour;
+            evLaborsH['ev' + (ie + 1)] = events[ie].eventLabours[i].evHour;
           }
+          this.data[4].children?.push({data:evLaborsL});
+          this.data[4].children?.push({data:evLaborsH});
 
-          // event contractors
-
-          let evCL:any = {};
-          let evCC:any = {};
+          //event contractors
 
           for (let i = 0; i < events[ie].eventContractors.length; i++) {
-            evCL['ev' + (ie + 1)] = events[ie].eventContractors[i].evContractor;
-            if(this.data[5].children?.at(i)?.data){
-              Object.assign(this.data[5].children?.at(i)?.data,evCL);
-            }
-            else{
-              this.data[5].children?.push(evCL);
-            }
-
-            evCC['ev' + (ie + 1)] = events[ie].eventContractors[i].evCost;
-            if(this.data[5].children?.at(i)?.data){
-              Object.assign(this.data[5].children?.at(i)?.data,evCC);
-            }
-            else{
-              this.data[5].children?.push(evCC);
-            }
+            evContractorsL['ev' + (i + 1)] = events[ie].eventContractors[i].evContractor;
+            evContractorsH['ev' + (i + 1)] = events[ie].eventContractors[i].evCost;
           }
+          this.data[5].children?.push({data:evContractorsL});
+          this.data[5].children?.push({data:evContractorsH});
         }
         //_____________________________________________________________________________________
 
-        console.log("this is data:",this.data);
     return this.data;
   }
 }
