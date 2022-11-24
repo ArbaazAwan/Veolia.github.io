@@ -80,8 +80,8 @@ export class MasterTableComponent implements OnInit {
     this.isLoading = true;
     this.masterService.getMasters().subscribe((masters: any) => {
       this.masters = masters;
+      this.sortAssets({active:"masterId",direction:'desc'});
       this.isLoading = false;
-      this.sortedMasters = this.masters.slice();
     });
   }
 
