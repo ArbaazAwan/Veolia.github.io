@@ -336,28 +336,34 @@
             <p class="mb-0">Select Clients to assign</p>
           </div>
           <div class="card-body">
-              <div class="row">
+            <div class="row">
 
-                <p-listbox [options]="clientsArray" [(ngModel)]="selectedClients"  [metaKeySelection]="false"
+
+              <div *ngFor="let client of allclientIdArr">
+                <input type="checkbox" [checked]="preSelectedClientsIdArr.includes(client)">
+                {{client.clientId}}
+              </div>
+              <!-- <p-listbox [options]="clientsArray" [(ngModel)]="selectedClients"  binary="true"[metaKeySelection]="false"
                   [checkbox]="true" [filter]="false" [multiple]="true" optionLabel="name"
-                  [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}">
+                  [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}" >
                   <ng-template let-client pTemplate="item">
-                    <div class="country-item">
+                    <div>
                       <div>{{client.clientName}} </div>
                     </div>
                   </ng-template>
-                </p-listbox>
+                </p-listbox> -->
 
-                <div class="text-center mt-2">
-                  <button type="submit" (click)="submitSelectedClients()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
-                    Submit
-                  </button>
-                  <button (click)="formReset()" type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-secondary m-2">
-                    Cancel
-                  </button>
-                </div>
+              <div class="text-center mt-2">
+                <button type="submit" (click)="submitSelectedClients()" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2">
+                  Submit
+                </button>
+                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-secondary m-2">
+                  Cancel
+                </button>
               </div>
+            </div>
           </div>
         </div>
       </div>
