@@ -22,10 +22,14 @@ type UserType = 'admin' | 'user';
 export class UsersComponent implements OnInit {
   form!: FormGroup;
   pForm!: FormGroup;
-  clientsArray:any [] = [];
-  selectedClients:any[] = [];
-  userId:any;
-  clientIds:string='';
+  clientsArray: any[] = [];
+  allclientIdArr: any[] = [];
+  preSelectedClients: any[] = [];
+  preSelectedClientsIdArr: any[] = [];
+  selectedClients: any[] = [];
+  clientIdArr: any[] = [];
+  userId: any;
+  clientIds: string = '';
   title: string = 'Clients';
   isLoading: boolean = false;
   users: any[] = [];
@@ -40,16 +44,19 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private clientService: ClientService,
     private primengConfig: PrimeNGConfig
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
     this.userService.currentUserId.subscribe(
-      (userId:any)=>{
-        console.log("userId",userId);
-        if(userId)
+      (userId: any) => {
+        // console.log("userId",userId);
+        if (userId) {
           this.getUserId(userId);
+          this.userId = userId;
+        }
+
       });
     //
     this.primengConfig.ripple = true;
@@ -123,7 +130,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(PasswordPayload)
       .subscribe((res: any) => {
-        console.log(res);
+        // console.log(res);
       });
   }
 
@@ -230,46 +237,72 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getUserId(userId:any) {
+  getUserId(userId: any) {
 
-        if(userId){
-          this.clientService.getClients().subscribe((res:  any) => {
-            this.clientsArray = res;
+    if (userId) {
+      this.clientService.getClients().subscribe((res: any) => {
+        this.clientsArray = res;
 
-            this.userService.getClientsByUserId(userId).subscribe(
-            (userClients:any)=>{
-              console.log("this is userClients:",userClients);
-              userClients.forEach((userClient:any) => {
-                this.clientsArray.forEach(
-                  (client:any)=>{
-                    if(userClient.clientId == client.clientId)
-                      this.selectedClients.push(client)
-                  });
-              });
+        this.clientsArray.forEach((client: any) => {
+          this.allclientIdArr.push(client.clientId).toString();
+        });
+        console.log(this.allclientIdArr);
+        this.userService.getClientsByUserId(userId).subscribe(
+          (userClients: any) => {
+            this.preSelectedClients = userClients.message;
+            this.preSelectedClients.forEach((client: any) => {
+              this.preSelectedClientsIdArr.push(client.clientId);
             });
+            console.log(this.preSelectedClientsIdArr);
+
+            // if (userClients.length == 0) {
+            //   console.log(this.error);
+            // }
+            // else {
+            //   userClients.message.forEach((userClient: any) => {
+            //     this.clientsArray.forEach(
+            //       (client: any) => {
+            //         let matchingClients:any =[];
+            //         if(userClient.userId == this.userId)
+            //           {
+            //             matchingClients.push(userClient)
+            //           }
+            //           matchingClients.forEach((mclient:any) => {
+            //             if (mclient.clientId == client.clientId)
+            //               this.selectedClients.push(client)
+            //           });
+            //       });
+            //   });
+            // }
+
           });
-        }
-        // this.userService.setUserId(null);
+      });
+    }
+    // this.userService.setUserId(null);
 
   }
 
-  submitSelectedClients(){
+  submitSelectedClients() {
 
-    this.selectedClients.forEach((client:any)=>{
-      this.clientIds =  this.clientIds + client.clientId + ","
+    this.preSelectedClients.forEach((client: any) => {
+      this.clientIdArr.push(client.clientId);
     });
-    this.assignClientsByUserId(this.clientIds);
+    this.clientIds = this.clientIdArr.join(',');
+    console.log(this.userId);
+
+
+    this.assignClientsByUserId();
     this.selectedClients = [];
     this.clientIds = '';
   }
 
-  assignClientsByUserId(clientIds:string){
+  assignClientsByUserId() {
     const payload = {
       "userId": this.userId,
-      "clientId": clientIds
+      "clientId": this.clientIds
     }
 
-    this.userService.assignClientsByUserId(payload).subscribe((res: any)=>{
+    this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
       console.log(res);
     })
   }

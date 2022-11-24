@@ -12,21 +12,25 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NavbarModule } from "../navbar/navbar.module";
+import { FooterModule } from "../footer/footer.module";
 @NgModule({
-  declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatExpansionModule,
-    SitesModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    PipesModule,
-    MatInputModule,
-    MatIconModule,
-    NgxPaginationModule,
-  ],
-  exports: [ClientsComponent, ClientsListComponent],
+    declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
+    exports: [ClientsComponent, ClientsListComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatExpansionModule,
+        SitesModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        PipesModule,
+        MatInputModule,
+        MatIconModule,
+        NgxPaginationModule,
+        NavbarModule,
+        FooterModule
+    ]
 })
 export class ClientsModule {}
