@@ -45,7 +45,13 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
-    this.getUserId();
+    this.userService.currentUserId.subscribe(
+      (userId:any)=>{
+        console.log("userId",userId);
+        if(userId)
+          this.getUserId(userId);
+      });
+    //
     this.primengConfig.ripple = true;
   }
 
@@ -224,16 +230,15 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getUserId() {
-    this.userService.currentUserId.subscribe(
-      (userId:any)=>{
-        console.log("userId",userId);
+  getUserId(userId:any) {
+
         if(userId){
           this.clientService.getClients().subscribe((res:  any) => {
             this.clientsArray = res;
 
             this.userService.getClientsByUserId(userId).subscribe(
             (userClients:any)=>{
+              console.log("this is userClients:",userClients);
               userClients.forEach((userClient:any) => {
                 this.clientsArray.forEach(
                   (client:any)=>{
@@ -244,11 +249,7 @@ export class UsersComponent implements OnInit {
             });
           });
         }
-        this.userService.setUserId(null);
-      });
-
-
-
+        // this.userService.setUserId(null);
 
   }
 
