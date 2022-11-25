@@ -87,6 +87,7 @@ export class MasterTableComponent implements OnInit {
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
       console.log(res.message);
+      window.location.reload();
     });
   }
 }

@@ -163,6 +163,7 @@ export class CreateMasterFormComponent implements OnInit {
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
         console.log(res.message);
+        window.location.reload();
       });
   }
 
