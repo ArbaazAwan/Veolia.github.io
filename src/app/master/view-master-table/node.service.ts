@@ -8,8 +8,8 @@ export class NodeService {
   constructor(private http: HttpClient) {}
   data!: TreeNode[];
   eventMaintenance: any = [];
-  eventLabours:any = [];
-  eventContractors:any = [];
+  eventLabours: any = [];
+  eventContractors: any = [];
 
   getFilesystem(completeMaster: any) {
     var events = completeMaster.events;
@@ -31,14 +31,8 @@ export class NodeService {
     //___________________________________________
 
     for (let i = 0; i < events.length; i++) {
-      titles['ev' + (i + 1)] = events[i].evTitle; //adding event titles
-    }
-
-    for (let i = 0; i < events.length; i++) {
+      titles['ev' + (i + 1)] = events[i].evTitle;
       occurences['ev' + (i + 1)] = events[i].evOccurence;
-    }
-
-    for (let i = 0; i < events.length; i++) {
       stretches['ev' + (i + 1)] = events[i].evStretch;
     }
 
@@ -72,20 +66,11 @@ export class NodeService {
       },
     ];
 
-
-
     for (let index = 0; index < events.length; index++) {
-      this.eventMaintenance = events[index].eventMaintenance;
+      this.eventMaintenance.push(events[index].eventMaintenance);
+      this.eventLabours.push(events[index].eventLabours);
+      this.eventContractors.push(events[index].eventContractors);
     }
-
-    for (let index = 0; index < events.length; index++) {
-      this.eventLabours = events[index].eventLabours;
-    }
-
-    for (let index = 0; index < events.length; index++) {
-      this.eventContractors = events[index].eventContractors;
-    }
-
 
     for (
       let mainIndex = 0;
@@ -93,10 +78,10 @@ export class NodeService {
       mainIndex++
     ) {
       var objI: any = {
-        desc:"Item"
+        desc: 'Item',
       };
       var objC: any = {
-        desc:"Cost"
+        desc: 'Cost',
       };
       for (let index = 0; index < events.length; index++) {
         objI['ev' + (index + 1)] =
@@ -110,16 +95,12 @@ export class NodeService {
       this.data[3].children?.push({ data: objC });
     }
 
-    for (
-      let mainIndex = 0;
-      mainIndex < this.eventLabours.length;
-      mainIndex++
-    ) {
+    for (let mainIndex = 0; mainIndex < this.eventLabours.length; mainIndex++) {
       var objL: any = {
-        desc:"Labor"
+        desc: 'Labor',
       };
       var objH: any = {
-        desc:"Hour"
+        desc: 'Hour',
       };
       for (let index = 0; index < events.length; index++) {
         objL['ev' + (index + 1)] =
@@ -139,10 +120,10 @@ export class NodeService {
       mainIndex++
     ) {
       var objCC: any = {
-        desc:"Labor"
+        desc: 'Labor',
       };
       var objCL: any = {
-        desc:"Hour"
+        desc: 'Hour',
       };
       for (let index = 0; index < events.length; index++) {
         objCC['ev' + (index + 1)] =
