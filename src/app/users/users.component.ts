@@ -49,16 +49,6 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
-    this.userService.currentUserId.subscribe(
-      (userId: any) => {
-        // console.log("userId",userId);
-        if (userId) {
-          this.getUserId(userId);
-          this.userId = userId;
-        }
-
-      });
-    //
     this.primengConfig.ripple = true;
   }
 
@@ -130,7 +120,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(PasswordPayload)
       .subscribe((res: any) => {
-        // console.log(res);
+        console.log(res);
       });
   }
 
@@ -237,75 +227,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  getUserId(userId: any) {
-
-    if (userId) {
-      this.clientService.getClients().subscribe((res: any) => {
-        this.clientsArray = res;
-
-        this.clientsArray.forEach((client: any) => {
-          this.allclientIdArr.push(client.clientId).toString();
-        });
-        console.log(this.allclientIdArr);
-        this.userService.getClientsByUserId(userId).subscribe(
-          (userClients: any) => {
-            this.preSelectedClients = userClients.message;
-            this.preSelectedClients.forEach((client: any) => {
-              this.preSelectedClientsIdArr.push(client.clientId);
-            });
-            console.log(this.preSelectedClientsIdArr);
-
-            // if (userClients.length == 0) {
-            //   console.log(this.error);
-            // }
-            // else {
-            //   userClients.message.forEach((userClient: any) => {
-            //     this.clientsArray.forEach(
-            //       (client: any) => {
-            //         let matchingClients:any =[];
-            //         if(userClient.userId == this.userId)
-            //           {
-            //             matchingClients.push(userClient)
-            //           }
-            //           matchingClients.forEach((mclient:any) => {
-            //             if (mclient.clientId == client.clientId)
-            //               this.selectedClients.push(client)
-            //           });
-            //       });
-            //   });
-            // }
-
-          });
-      });
-    }
-    // this.userService.setUserId(null);
-
-  }
-
-  submitSelectedClients() {
-
-    this.preSelectedClients.forEach((client: any) => {
-      this.clientIdArr.push(client.clientId);
-    });
-    this.clientIds = this.clientIdArr.join(',');
-    console.log(this.userId);
-
-
-    this.assignClientsByUserId();
-    this.selectedClients = [];
-    this.clientIds = '';
-  }
-
-  assignClientsByUserId() {
-    const payload = {
-      "userId": this.userId,
-      "clientId": this.clientIds
-    }
-
-    this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
-      console.log(res);
-    })
-  }
 
 
 }
