@@ -13,6 +13,7 @@ export class UserstableComponent implements OnInit {
   @Output() deleteUserEvent = new EventEmitter();
   @Output() editUserEvent = new EventEmitter();
   @Output() changeUserPasswordEvent = new EventEmitter();
+  @Output() assignClientEvent = new EventEmitter();
   p: number = 1;
   constructor(private userService: UserService) {}
 
@@ -28,5 +29,9 @@ export class UserstableComponent implements OnInit {
 
   deleteUser(id: any) {
     this.deleteUserEvent.emit(id);
+  }
+
+  assignClient(userId:any){
+    this.userService.setUserId(userId);
   }
 }

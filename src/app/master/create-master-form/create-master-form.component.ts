@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -26,18 +25,11 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService.currentMasterId.subscribe(
 
       (masterId: any) => {
-
-        this.editMasterId = masterId;
-
-        if (this.editMasterId) {
-          this.populateEditMasterForm(this.editMasterId);
+        if (masterId) {
+          this.populateEditMasterForm(masterId);
         }
-
-
       }
     )
-
-
   }
 
 
@@ -64,6 +56,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   populateEditMasterForm(masterId:any){
+    this.editMasterId = masterId;
     this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
 
@@ -131,9 +124,11 @@ export class CreateMasterFormComponent implements OnInit {
 
   postformMaster() {
 
-    if (this.masterService.currentMasterId) {
-      this.masterService.deleteMaster(this.masterService.currentMasterId);
-    }
+      this.masterService.deleteMaster(this.editMasterId).subscribe(
+        (res:any)=>{
+          console.log(res);
+        }
+      )
 
     let f = this.form.value;
 
@@ -168,8 +163,13 @@ export class CreateMasterFormComponent implements OnInit {
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
         console.log(res.message);
+        window.location.reload();
       });
   }
+
+
+
+
 
   events(): FormArray {
     return this.form.get('events') as FormArray;

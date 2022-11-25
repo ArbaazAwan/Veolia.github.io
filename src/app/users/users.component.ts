@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import Validation from '../utils/validation';
 import { UserService } from './user.service';
+import { ClientService } from '../clients/client.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 type UserType = 'admin' | 'user';
 
@@ -19,8 +21,15 @@ type UserType = 'admin' | 'user';
 })
 export class UsersComponent implements OnInit {
   form!: FormGroup;
-  pForm!:FormGroup;
+  pForm!: FormGroup;
   clientsArray: any[] = [];
+  allclientIdArr: any[] = [];
+  preSelectedClients: any[] = [];
+  preSelectedClientsIdArr: any[] = [];
+  selectedClients: any[] = [];
+  clientIdArr: any[] = [];
+  userId: any;
+  clientIds: string = '';
   title: string = 'Clients';
   isLoading: boolean = false;
   users: any[] = [];
@@ -32,12 +41,25 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private clientService: ClientService,
+    private primengConfig: PrimeNGConfig
+  ) { }
 
   ngOnInit() {
     this.initializeForm();
     this.getUsers();
+    this.userService.currentUserId.subscribe(
+      (userId: any) => {
+        // console.log("userId",userId);
+        if (userId) {
+          this.getUserId(userId);
+          this.userId = userId;
+        }
+
+      });
+    //
+    this.primengConfig.ripple = true;
   }
 
   patternValidator(): ValidatorFn {
@@ -67,14 +89,22 @@ export class UsersComponent implements OnInit {
         Validators.compose([Validators.required, this.patternValidator()]),
       ],
     });
-    this.pForm = this.formBuilder.group({
-      password: ['',Validators.compose([Validators.required, this.patternValidator()])],
-      confirmPassword: ['',Validators.compose([Validators.required, this.patternValidator()])],
-    },
-    {
-      validators: [Validation.match("password", "confirmPassword")]
-    }
-    )
+    this.pForm = this.formBuilder.group(
+      {
+        username: [''],
+        password: [
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+        confirmPassword: [
+          '',
+          Validators.compose([Validators.required, this.patternValidator()]),
+        ],
+      },
+      {
+        validators: [Validation.match('password', 'confirmPassword')],
+      }
+    );
   }
 
   getUsers() {
@@ -85,16 +115,23 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  submitPassword(){
-    if(!this.pForm.value.password  == this.pForm.value.confirmPassword)
-    {
+  submitPassword() {
+    if (!this.pForm.value.password == this.pForm.value.confirmPassword) {
       return;
     }
-    this.userService.changeUserPassword(this.pForm.value.password).subscribe(
-      (res:any)=>{
-        console.log(res);
-      }
-    )
+
+    // this.onChangePassword.
+
+    const PasswordPayload = {
+      username: this.currentUser.userName,
+      password: this.pForm.value.password,
+    };
+
+    this.userService
+      .changeUserPassword(PasswordPayload)
+      .subscribe((res: any) => {
+        // console.log(res);
+      });
   }
 
   submitForm() {
@@ -121,13 +158,21 @@ export class UsersComponent implements OnInit {
     this.formReset();
   }
 
-  onChangePassword(id:any){
-    this.userService.getUserById(id).subscribe(
-      (res:any)=>{
-        let { userName } = res[0];
+  onChangePassword(id: any) {
+    this.userService.getUserById(id).subscribe((el: any) => {
+      const [_user] = el;
 
-      }
-    )
+      this.currentUser = _user;
+
+      this.pForm = this.formBuilder.group({
+        username: new FormControl({
+          value: _user.userName,
+          disabled: true,
+        }),
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      });
+    });
   }
 
   onUpdateUser() {
@@ -191,4 +236,76 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
+
+  getUserId(userId: any) {
+
+    if (userId) {
+      this.clientService.getClients().subscribe((res: any) => {
+        this.clientsArray = res;
+
+        this.clientsArray.forEach((client: any) => {
+          this.allclientIdArr.push(client.clientId).toString();
+        });
+        console.log(this.allclientIdArr);
+        this.userService.getClientsByUserId(userId).subscribe(
+          (userClients: any) => {
+            this.preSelectedClients = userClients.message;
+            this.preSelectedClients.forEach((client: any) => {
+              this.preSelectedClientsIdArr.push(client.clientId);
+            });
+            console.log(this.preSelectedClientsIdArr);
+
+            // if (userClients.length == 0) {
+            //   console.log(this.error);
+            // }
+            // else {
+            //   userClients.message.forEach((userClient: any) => {
+            //     this.clientsArray.forEach(
+            //       (client: any) => {
+            //         let matchingClients:any =[];
+            //         if(userClient.userId == this.userId)
+            //           {
+            //             matchingClients.push(userClient)
+            //           }
+            //           matchingClients.forEach((mclient:any) => {
+            //             if (mclient.clientId == client.clientId)
+            //               this.selectedClients.push(client)
+            //           });
+            //       });
+            //   });
+            // }
+
+          });
+      });
+    }
+    // this.userService.setUserId(null);
+
+  }
+
+  submitSelectedClients() {
+
+    this.preSelectedClients.forEach((client: any) => {
+      this.clientIdArr.push(client.clientId);
+    });
+    this.clientIds = this.clientIdArr.join(',');
+    console.log(this.userId);
+
+
+    this.assignClientsByUserId();
+    this.selectedClients = [];
+    this.clientIds = '';
+  }
+
+  assignClientsByUserId() {
+    const payload = {
+      "userId": this.userId,
+      "clientId": this.clientIds
+    }
+
+    this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
+      console.log(res);
+    })
+  }
+
+
 }

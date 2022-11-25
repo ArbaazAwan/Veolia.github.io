@@ -229,7 +229,6 @@
   </div>
 </div>
 
-
 <!-- set password form here -->
 <div class="modal fade" id="modal-form-pass" tabindex="-1" role="dialog" aria-labelledby="modal-form-pass"
   aria-hidden="true">
@@ -252,18 +251,23 @@
             <form [formGroup]="pForm" (ngSubmit)="submitPassword()" role="form">
               <div class="row">
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Username</mat-label>
+                  <input formControlName="username" matInput type="text" [disabled]="true" />
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Password</mat-label>
                   <input formControlName="password" matInput type="password" required minlength="8" [ngClass]="
                       (pForm.controls['password'].dirty ||
-                      pForm.controls['password'].touched) &&
+                        pForm.controls['password'].touched) &&
                       pForm.hasError('required', 'password') == true
                         ? 'border-danger'
                         : ''
                     " />
 
                   <small class="text-danger float-end" *ngIf="
-                  pForm.controls['password'].errors &&
-                  pForm.controls['password'].errors['invalidPassword']
+                      pForm.controls['password'].errors &&
+                      pForm.controls['password'].errors['invalidPassword']
                     ">
                     Password should have minimum 8 characters, at least 1
                     uppercase letter, and 1 special character
@@ -272,18 +276,19 @@
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Confirm Password</mat-label>
-                  <input formControlName="confirmPassword" matInput type="password" required minlength="8"
-                    [ngClass]="
+                  <input formControlName="confirmPassword" matInput type="password" required minlength="8" [ngClass]="
                       (pForm.controls['confirmPassword'].dirty ||
-                      pForm.controls['confirmPassword'].touched) &&
+                        pForm.controls['confirmPassword'].touched) &&
                       pForm.hasError('required', 'confirmPassword') == true
                         ? 'border-danger'
                         : ''
                     " />
                   <small class="text-danger float-end" *ngIf="
-                    pForm.controls['confirmPassword'].errors &&
-                    pForm.controls['confirmPassword'].errors['invalidPassword']
-                      ">
+                      pForm.controls['confirmPassword'].errors &&
+                      pForm.controls['confirmPassword'].errors[
+                        'invalidPassword'
+                      ]
+                    ">
                     Password should have minimum 8 characters, at least 1
                     uppercase letter, and 1 special character
                   </small>
@@ -291,7 +296,6 @@
                   <small class="text-danger float-end" *ngIf="pForm.controls['confirmPassword'].errors?.['matching']">
                     Confirm Password does not match
                   </small>
-
                 </mat-form-field>
 
                 <div class="text-center mt-2">
@@ -306,6 +310,60 @@
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- assign client form here -->
+<div class="modal fade" id="modal-assign-client" tabindex="-1" role="dialog" aria-labelledby="modal-assign-client"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              Assign Client
+              <span class="text-right float-end">
+                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Select Clients to assign</p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+
+
+              <div *ngFor="let client of allclientIdArr">
+                <input type="checkbox" [checked]="preSelectedClientsIdArr.includes(client)">
+                {{client.clientId}}
+              </div>
+              <!-- <p-listbox [options]="clientsArray" [(ngModel)]="selectedClients"  binary="true"[metaKeySelection]="false"
+                  [checkbox]="true" [filter]="false" [multiple]="true" optionLabel="name"
+                  [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}" >
+                  <ng-template let-client pTemplate="item">
+                    <div>
+                      <div>{{client.clientName}} </div>
+                    </div>
+                  </ng-template>
+                </p-listbox> -->
+
+              <div class="text-center mt-2">
+                <button type="submit" (click)="submitSelectedClients()" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2">
+                  Submit
+                </button>
+                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-secondary m-2">
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

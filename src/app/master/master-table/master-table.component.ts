@@ -1,12 +1,9 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
-import { CreateMasterFormComponent } from '../create-master-form/create-master-form.component';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -23,8 +20,6 @@ export class MasterTableComponent implements OnInit {
   p: number = 1;
 
   @Output() viewMasterEvent = new EventEmitter();
-  // @ViewChild(CreateMasterFormComponent)
-  // public CreateMasterFormComponent: CreateMasterFormComponent;
 
   ngOnInit(): void {
     this.getMasters();
@@ -73,17 +68,18 @@ export class MasterTableComponent implements OnInit {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
   viewMaster(masterId: any) {
-    this.viewMasterEvent.emit(masterId);
+    this.masterService.setMasterId(masterId);
   }
 
   getMasters() {
     this.isLoading = true;
     this.masterService.getMasters().subscribe((masters: any) => {
       this.masters = masters;
+      this.sortAssets({active:"masterId",direction:'desc'});
       this.isLoading = false;
-      this.sortedMasters = this.masters.slice();
     });
   }
+
   editMaster(masterId: any) {
     this.masterService.setMasterId(masterId);
   }
@@ -91,6 +87,7 @@ export class MasterTableComponent implements OnInit {
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
       console.log(res.message);
+      window.location.reload();
     });
   }
 }
