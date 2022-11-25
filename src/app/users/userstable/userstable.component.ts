@@ -72,7 +72,6 @@ export class UserstableComponent implements OnInit {
             clientId : client.clientId,
             clientName : client.clientName
           }
-          // console.log("uc",c);
           this.clients.push(c)
 
         })
@@ -85,7 +84,6 @@ export class UserstableComponent implements OnInit {
             clientId :  Number(uc.clientId),
             clientName : uc.clientName
           }
-          console.log("c",c);
           this.selectedClients.push(c);
         });
       });
