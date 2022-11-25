@@ -1,12 +1,9 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
-  ViewChild,
 } from '@angular/core';
-import { CreateMasterFormComponent } from '../create-master-form/create-master-form.component';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -23,8 +20,6 @@ export class MasterTableComponent implements OnInit {
   p: number = 1;
 
   @Output() viewMasterEvent = new EventEmitter();
-  // @ViewChild(CreateMasterFormComponent)
-  // public CreateMasterFormComponent: CreateMasterFormComponent;
 
   ngOnInit(): void {
     this.getMasters();
