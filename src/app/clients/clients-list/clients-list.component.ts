@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
-import { ClientService } from '../client.service';
+import { UserService } from 'src/app/users/user.service';
 
 @Component({
   selector: 'app-clients-list',
@@ -9,7 +7,7 @@ import { ClientService } from '../client.service';
   styleUrls: ['./clients-list.component.scss'],
 })
 export class ClientsListComponent implements OnInit {
-  constructor(private clientService: ClientService) {}
+  constructor(private userService: UserService) {}
 
   clients!: any[];
   isLoading: boolean = false;
@@ -17,10 +15,20 @@ export class ClientsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.clientService.getClients().subscribe((res: any) => {
-      this.clients = res;
-      this.isLoading = false;
-    });
+
+    let userEmail = localStorage.getItem('user_email');
+     this.userService.getUserByEmail(userEmail).subscribe(
+      (users:any)=>{
+        let userId:string = users[0].userId;
+        console.log("userId",userId);
+        this.userService.getClientsByUserId(userId).subscribe((res: any) => {
+          this.clients = res.userClients;
+          this.isLoading = false;
+        });
+      }
+    )
+
+
   }
 
 }

@@ -15,7 +15,6 @@ export class UserstableComponent implements OnInit {
   @Output() editUserEvent = new EventEmitter();
   @Output() changeUserPasswordEvent = new EventEmitter();
 
-
   p: number = 1;
   clients:any = [];
   selectedClients:any = [];
@@ -57,10 +56,6 @@ export class UserstableComponent implements OnInit {
 
   }
 
-  formReset(){
-
-  }
-
   onAssignClient(userId:any){
     this.userId = userId;
 
@@ -72,7 +67,6 @@ export class UserstableComponent implements OnInit {
             clientId : client.clientId,
             clientName : client.clientName
           }
-          // console.log("uc",c);
           this.clients.push(c)
 
         })
@@ -85,7 +79,6 @@ export class UserstableComponent implements OnInit {
             clientId :  Number(uc.clientId),
             clientName : uc.clientName
           }
-          console.log("c",c);
           this.selectedClients.push(c);
         });
       });
