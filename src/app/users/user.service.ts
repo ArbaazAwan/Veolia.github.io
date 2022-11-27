@@ -38,8 +38,8 @@ export class UserService {
   getUserByClientId(id: string) {
     return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
   }
-  getClientsByUserId(userId: any) {
-    return this.http.post(this.CLIENTS_BY_USER_ID_URL, {"userId":userId}, { headers: this.postHeaders });
+  getClientsByUserId(body: any) {
+    return this.http.post(this.CLIENTS_BY_USER_ID_URL, {"userId":body}, { headers: this.postHeaders });
   }
   assignClientsByUserId(body: any) {
     return this.http.post(this.ASSIGN_CLIENTS_URL, body, { headers: this.postHeaders });
