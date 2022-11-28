@@ -43,7 +43,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Style</mat-label>
+                  <mat-label class="text-bold">Master Style</mat-label>
                   <input formControlName="masterStyle" matInput type="text" [ngClass]="
                     (form.controls['masterStyle'].dirty ||
                       form.controls['masterStyle'].touched) &&
@@ -56,7 +56,7 @@
                       form.controls['masterStyle'].touched) &&
                     form.hasError('required', 'masterStyle')
                   ">
-                    Style is required
+                    master style is required
                   </small>
                 </mat-form-field>
 
@@ -79,7 +79,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Size</mat-label>
+                  <mat-label class="text-bold">Master Size</mat-label>
                   <input formControlName="masterSize" matInput type="text" [ngClass]="
                     (form.controls['masterSize'].dirty ||
                       form.controls['masterSize'].touched) &&
@@ -92,7 +92,7 @@
                       form.controls['masterSize'].touched) &&
                     form.hasError('required', 'masterSize')
                   ">
-                    Size is required
+                    master size is required
                   </small>
                 </mat-form-field>
 
@@ -286,8 +286,7 @@
                             <input class="form-control" type="text" formControlName="ohCost" placeholder="enter cost" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulMaintenance(iov)"
-                              class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                            <button (click)="removeOverhaulMaintenance(iov)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                               Remove
                             </button>
                           </td>
@@ -306,16 +305,9 @@
                             let overhaulLabor of overhaulLabors().controls;
                             let i = index" [formGroupName]="i">
                           <td>
-                            <label>Select Labor Type</label>
-                            <select [(value)]="selected">
-                              <option value="None">None</option>
-                              <option value="Unskilled">Unskilled</option>
-                              <option value="Basic-Skilled">Basic-Skilled</option>
-                              <option value="Technical">Technical</option>
-                              <option value="Specialized">Specialized</option>
-                              <option value="Certified">Certified</option>
-                              <option value="Supervisory">Supervisory</option>
-                            </select>
+                            <label class="form-label">Overhaul Labour</label>
+                            <input class="form-control" type="text" formControlName="ohLabour"
+                              placeholder="enter labour" />
                           </td>
                           <td>
                             <label class="form-label">Hours</label>
@@ -377,10 +369,8 @@
 
                 <div formArrayName="events">
 
-                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i"
-                    label="{{'Event ' + (i+1)}}">
-                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end"
-                      (click)="removeEvent(i)">
+                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="{{'Event ' + (i+1)}}">
+                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end" (click)="removeEvent(i)">
                       Remove Event
                     </button>
                     <table class="table">
@@ -451,16 +441,9 @@
                             let il = index
                           " [formGroupName]="il">
                             <td>
-                              <label>Select Labor Type</label>
-                              <select [(value)]="selected">
-                                <option value="None">None</option>
-                                <option value="Unskilled">Unskilled</option>
-                                <option value="Basic-Skilled">Basic-Skilled</option>
-                                <option value="Technical">Technical</option>
-                                <option value="Specialized">Specialized</option>
-                                <option value="Certified">Certified</option>
-                                <option value="Supervisory">Supervisory</option>
-                              </select>
+                              <label for="level" class="form-label">Labor</label>
+                              <input type="text" formControlName="evLabour" class="form-control"
+                                placeholder="Enter Labour" />
                             </td>
                             <td>
                               <label class="form-label" for="hrs">Hours</label>
