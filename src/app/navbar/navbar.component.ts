@@ -13,7 +13,6 @@ import { UserService } from '../users/user.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
-    private userService: UserService,
     private clientService: ClientService,
     private siteService: SiteService,
     private authService: AuthService,
