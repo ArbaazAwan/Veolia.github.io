@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs'
-import { map, startWith } from 'rxjs/operators'
-import { ProcessModalComponent } from '../process-modal/process-modal.component';
-import { UnitService } from './unit.service';
-import { TableUtil } from './unitServices/tableUtil';
+import { FormControl } from '@angular/forms'
+import { MasterService } from '../master/master.service';
 
 @Component({
   selector: 'app-unit',
@@ -16,39 +11,51 @@ export class UnitComponent implements OnInit {
 
   searchText = '';
   title = 'Unit';
-  options !: string[];
-  filteredOptions!: string[];
+  masters:any = [];
+  filteredMasters:any = [];
   formGroup!: any;
-  sampleVariable:any;
+  siteId:any = localStorage.getItem('siteId');
   eventEvalTableShow:boolean = true;
+  asset:FormControl = new FormControl("");
+  masterId:any = null;
 
-  constructor(public modalService: NgbModal, private service : UnitService, private fb : FormBuilder){}
+  constructor(private masterService:MasterService){}
 
   ngOnInit(){
     this.initForm();
-    this.getNames();
+    this.getMastersBySiteId(this.siteId);
   }
 
   initForm(){
-    this.formGroup = this.fb.group({
-      'asset' : ['']
-    })
-    this.formGroup.get('asset').valueChanges.subscribe((response: any) => {
+    this.asset.valueChanges.subscribe((response: any) => {
       this.filterData(response);
     })
   }
 
-  filterData(enteredData: string){
-    this.filteredOptions = this.options.filter(item => {
-      return item.toLowerCase().indexOf(enteredData.toLowerCase()) > -1
-    })
+  filterData(enteredData: any){
+    this.filteredMasters = this.masters.filter((master:any) => {
+      return master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1
+      || master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1
+    });
   }
 
-  getNames(){
-    this.service.getData().subscribe(response => {
-      this.options = response;
-      this.filteredOptions = response;
-    })
+
+  getMastersBySiteId(siteId:any){
+    this.masterService.getMastersBySiteId(siteId).subscribe(
+      (res:any)=>{
+        if(res.masters)
+          this.masters = res.masters;
+      }
+    )
+  }
+
+  getSelectedMaster(master:any){
+    this.masterId = master.masterId;
+    this.masterService.setMasterId(master.masterId);
+  }
+
+  getDisplayText(master:any){
+    return master?.oldAssetType + " | " + master?.newAssetType;
   }
 
   processModel(){
