@@ -17,7 +17,7 @@
           <div class="table-blocked">
             <!-- Asset Detail here -->
             <div class="row mx-4">
-              <div class="row">
+              <div class="row py-2">
                 <div class="col-md-4">
                   <span>
                     <label class="text-bold">Master ID: &nbsp;</label>
@@ -37,7 +37,7 @@
                   </span>
                 </div>
               </div>
-              <div class="row">
+              <div class="row py-2">
                 <div class="col-md-4">
                   <span>
                     <label class="text-bold">Master Style: &nbsp;</label>
@@ -57,7 +57,7 @@
                   </span>
                 </div>
               </div>
-              <div class="row">
+              <div class="row py-2">
                 <div class="col-md-4">
                   <span>
                     <label class="text-bold">New Description: &nbsp;</label>
@@ -77,7 +77,7 @@
                   </span>
                 </div>
               </div>
-              <div class="row">
+              <div class="row py-2">
                 <div class="col-md-4">
                   <span>
                     <label class="text-bold">Replacement Cost: &nbsp;</label>
@@ -148,7 +148,7 @@
                 <!-- Overhaul maintenances -->
                 <div class="container-fluid">
                   <div class="row py-2">
-                    <div class="col-md-3 py-2" *ngFor=" let ovM of overhaul.overhaulMaintenance let i = index">
+                    <div class="col-md-3 " *ngFor=" let ovM of overhaul.overhaulMaintenance let i = index">
                       <label class="mb-0 text-bold">Material {{ i + 1 }}</label>
                       <hr>
                       <div>
@@ -228,7 +228,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- Event maintenances -->
                 <div class="container-fluid">
                   <div class="row py-2">

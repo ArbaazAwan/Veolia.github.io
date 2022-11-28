@@ -2,9 +2,7 @@
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div
-          class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
-        >
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Clients Table</p>
         </div>
       </div>
@@ -12,11 +10,7 @@
       <!-- Summary table -->
       <div class="card-body px-0">
         <div class="flex-end px-3 col-md-3">
-          <mat-form-field
-            class="example-form-field"
-            appearance="outline"
-            class="text-xs"
-          >
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Clients</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
@@ -26,35 +20,22 @@
           <div class="d-flex justify-content-center">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
-          <table
-            class="table table-blocked table-hover mx-3 mb-0"
-            *ngIf="!isLoading"
-          >
+          <table class="table table-blocked table-hover mx-3 mb-0" *ngIf="!isLoading">
             <thead>
               <tr>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Client id
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Client Name
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Contract Years
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Client Created
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Client Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -63,12 +44,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="
+              <tr *ngFor="
                   let client of clients | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p };
                   let i = index
-                "
-              >
+                ">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
@@ -111,27 +90,15 @@
                         <div class="d-flex py-1">
                           <div class="d-flex flex-column">
                             <div ngbDropdown container="body" class="fix-size">
-                              <button
-                                class="btn btn-sm bg-gradient-primary"
-                                id="gfg"
-                                ngbDropdownToggle
-                              >
+                              <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
                                 Actions
                               </button>
                               <div ngbDropdownMenu="gfg">
-                                <button
-                                  ngbDropdownItem
-                                  (click)="editClient(client.clientId)"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#edit-modal-form"
-                                >
+                                <button ngbDropdownItem (click)="editClient(client.clientId)" data-bs-toggle="modal"
+                                  data-bs-target="#edit-modal-form">
                                   <i class="material-icons">edit</i>&nbsp; Edit
                                 </button>
-                                <button
-                                  ngbDropdownItem
-                                  class="text-danger"
-                                  (click)="deleteClient(client.clientId)"
-                                >
+                                <button ngbDropdownItem class="text-danger" (click)="deleteClient(client.clientId)">
                                   <i class="material-icons">delete</i>&nbsp;
                                   Delete
                                 </button>

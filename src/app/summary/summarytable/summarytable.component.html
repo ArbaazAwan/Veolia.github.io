@@ -2,9 +2,7 @@
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div
-          class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
-        >
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Record Table</p>
         </div>
       </div>
@@ -12,124 +10,79 @@
       <!-- Summary table -->
       <div class="card-body px-0 pb-2">
         <div class="flex-end px-3 col-md-3">
-          <mat-form-field
-            class="example-form-field"
-            appearance="outline"
-            class="text-xs"
-          >
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search assets</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive">
+        <div class="p-0 table-responsive overflow-y-hidden">
           <div class="d-flex justify-content-center">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
 
-          <table
-            *ngIf="!isLoading"
-            class="table table-blocked table-hover mx-3 mb-0"
-          >
+          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0">
             <thead>
               <tr>
                 <th class="px-2 pb-1 text-sm">
-                  <mat-checkbox
-                    class="example-margin"
-                    [indeterminate]="someComplete()"
-                    (change)="setAll($event.checked)"
-                  >
+                  <mat-checkbox class="example-margin" [indeterminate]="someComplete()"
+                    (change)="setAll($event.checked)">
                   </mat-checkbox>
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   ID
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Unit
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   App Description
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Asset Type
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Summary Style
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Summary Size
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Duty Application
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Quality
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Quantity
                 </th>
 
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Summary Load
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Life
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Installment Date
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Created Date
                 </th>
 
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Summary Status
                 </th>
 
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-5"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-5">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="let summary of summaryData | searchFilter: searchText"
-              >
+              <tr *ngFor="let summary of summaryData | searchFilter: searchText">
                 <td class="pt-3">
-                  <mat-checkbox
-                    class="example-margin"
-                    (ngModelChange)="updateAllComplete()"
-                  >
+                  <mat-checkbox class="example-margin" (ngModelChange)="updateAllComplete()">
                   </mat-checkbox>
                 </td>
                 <td>
@@ -245,29 +198,16 @@
                   <div class="d-flex py-1 ps-3">
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
-                        <button
-                          class="btn btn-sm bg-gradient-primary"
-                          id="gfg"
-                          ngbDropdownToggle
-                        >
+                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg">
-                          <button
-                            ngbDropdownItem
-                            class=""
-                            data-bs-toggle="modal"
-                            data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)"
-                          >
+                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
+                            (click)="editSummary(summary.summaryId)">
                             <i class="material-icons">edit</i>&nbsp;Edit
                           </button>
 
-                          <button
-                            ngbDropdownItem
-                            class="text-danger"
-                            (click)="deleteSummary(summary.summaryId)"
-                          >
+                          <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
                             <i class="material-icons">delete</i>&nbsp; Delete
                           </button>
                         </div>
