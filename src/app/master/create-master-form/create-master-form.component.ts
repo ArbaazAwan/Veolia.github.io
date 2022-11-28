@@ -15,7 +15,7 @@ import { MasterService } from '../master.service';
 export class CreateMasterFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private masterService: MasterService) { }
 
-  selected = 'None';
+  selected : any = 'None';
   editMasterId: any;
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
