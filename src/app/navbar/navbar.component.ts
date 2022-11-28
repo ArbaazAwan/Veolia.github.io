@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +13,18 @@ import { SiteService } from '../sites/site.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
+    private userService: UserService,
     private clientService: ClientService,
     private siteService: SiteService,
     private authService: AuthService
   ) {}
 
+  user: any;
+  userEmail: string | null;
   isLoadingClient: boolean = false;
   isLoadingSite: boolean = false;
-
   selectedClient: any;
   selectedSite: any;
-
   clients!: any[];
   sites!: any[];
   filteredSites: any[] = [];
@@ -36,6 +38,12 @@ export class NavbarComponent implements OnInit {
     this.selectedSite = localStorage.getItem('siteId');
     if (this.selectedClient) {
       this.populateSites(this.selectedClient);
+    }
+    this.userEmail = localStorage.getItem('user_email');
+    if (this.userEmail) {
+      this.userService.getUserByEmail(this.userEmail).subscribe((res: any) => {
+        this.user = res[0];
+      });
     }
   }
 
