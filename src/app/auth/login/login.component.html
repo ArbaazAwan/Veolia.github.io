@@ -20,7 +20,6 @@
                   <mat-icon matSuffix>email</mat-icon>
                   <small class="text-danger float-end"
                     *ngIf="(form.controls['email'].dirty || form.controls['email'].touched) && form.hasError('required','email')">
-                    email is required
                   </small>
                 </mat-form-field>
 
@@ -34,7 +33,6 @@
                   </mat-icon>
                   <small class="text-danger text-xxs float-end"
                     *ngIf="(form.controls['password'].dirty || form.controls['password'].touched) && form.hasError('required','password')">
-                    password is required
                   </small>
                 </mat-form-field>
                 <div class="text-left">
@@ -45,15 +43,15 @@
                 <div class="text-center">
                   <button [disabled]="form.invalid || isLoading" type="submit"
                     class="btn bg-gradient-primary w-100 my-4 mb-2">
-                    <span *ngIf="!this.isLoading">SignIn</span>
+                    <span *ngIf="!this.isLoading">Sign In</span>
                     <div class="spinner-border spinner-border-sm text-light" role="status" *ngIf="this.isLoading">
                     </div>
                   </button>
                 </div>
-                <p class="mt-4 text-sm text-center">
+                <!-- <p class="mt-4 text-sm text-center">
                   Don't have an account?
                   <a class="text-primary text-gradient font-weight-bold">Sign up</a>
-                </p>
+                </p> -->
               </form>
             </div>
           </div>
