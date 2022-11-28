@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private clientService: ClientService,
     private siteService: SiteService,
-    private authService:AuthService
+    private authService: AuthService
   ) {}
 
   isLoadingClient: boolean = false;
@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   selectedClient: any;
   selectedSite: any;
 
-  
   clients!: any[];
   sites!: any[];
   filteredSites: any[] = [];
@@ -35,6 +34,9 @@ export class NavbarComponent implements OnInit {
     this.populateClients();
     this.selectedClient = localStorage.getItem('clientId');
     this.selectedSite = localStorage.getItem('siteId');
+    if (this.selectedClient) {
+      this.populateSites(this.selectedClient);
+    }
   }
 
   populateClients() {
@@ -73,7 +75,7 @@ export class NavbarComponent implements OnInit {
   onSiteSelect(selectedClient: any) {
     localStorage.setItem('siteId', selectedClient.value);
   }
-  
+
   logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);

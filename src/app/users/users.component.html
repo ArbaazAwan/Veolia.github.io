@@ -5,7 +5,7 @@
       Create User
     </button>
   </div>
-  <!-- <app-userform></app-userform> -->
+<!-- user table -->
   <div class="mt-6">
     <app-userstable [isLoading]="isLoading" [users]="users" [searchText]="searchText"
       (deleteUserEvent)="onDeleteUser($event)" (editUserEvent)="onEditUser($event)"
@@ -310,60 +310,6 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- assign client form here -->
-<div class="modal fade" id="modal-assign-client" tabindex="-1" role="dialog" aria-labelledby="modal-assign-client"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-body p-0">
-        <div class="card card-plain">
-          <div class="card-header pb-0 text-left">
-            <h5 class="">
-              Assign Client
-              <span class="text-right float-end">
-                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                  <i class="material-icons" style="font-size: 30px">close</i>
-                </button>
-              </span>
-            </h5>
-            <p class="mb-0">Select Clients to assign</p>
-          </div>
-          <div class="card-body">
-            <div class="row">
-
-
-              <div *ngFor="let client of allclientIdArr">
-                <input type="checkbox" [checked]="preSelectedClientsIdArr.includes(client)">
-                {{client.clientId}}
-              </div>
-              <!-- <p-listbox [options]="clientsArray" [(ngModel)]="selectedClients"  binary="true"[metaKeySelection]="false"
-                  [checkbox]="true" [filter]="false" [multiple]="true" optionLabel="name"
-                  [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}" >
-                  <ng-template let-client pTemplate="item">
-                    <div>
-                      <div>{{client.clientName}} </div>
-                    </div>
-                  </ng-template>
-                </p-listbox> -->
-
-              <div class="text-center mt-2">
-                <button type="submit" (click)="submitSelectedClients()" data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2">
-                  Submit
-                </button>
-                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-dark m-2">
-                  Cancel
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
