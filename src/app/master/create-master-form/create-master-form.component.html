@@ -441,9 +441,18 @@
                             let il = index
                           " [formGroupName]="il">
                             <td>
-                              <label for="level" class="form-label">Labor</label>
-                              <input type="text" formControlName="evLabour" class="form-control"
-                                placeholder="Enter Labour" />
+                              <mat-form-field>
+                                <mat-label>Select Labor Type</mat-label>
+                                <mat-select [(value)]="selected">
+                                  <mat-option value="None">None</mat-option>
+                                  <mat-option value="Unskilled">Unskilled</mat-option>
+                                  <mat-option value="Basic-Skilled">Basic-Skilled</mat-option>
+                                  <mat-option value="Technical">Technical</mat-option>
+                                  <mat-option value="Specialized">Specialized</mat-option>
+                                  <mat-option value="Certified">Certified</mat-option>
+                                  <mat-option value="Supervisory">Supervisory</mat-option>
+                                </mat-select>
+                              </mat-form-field>
                             </td>
                             <td>
                               <label class="form-label" for="hrs">Hours</label>

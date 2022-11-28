@@ -15,6 +15,7 @@ import { MasterService } from '../master.service';
 export class CreateMasterFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private masterService: MasterService) { }
 
+  selected = 'None';
   editMasterId: any;
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
@@ -112,7 +113,6 @@ export class CreateMasterFormComponent implements OnInit {
     });
   }
 
-
   resetForm() {
     this.form = this.initialForm();
   }
@@ -166,10 +166,6 @@ export class CreateMasterFormComponent implements OnInit {
         window.location.reload();
       });
   }
-
-
-
-
 
   events(): FormArray {
     return this.form.get('events') as FormArray;
