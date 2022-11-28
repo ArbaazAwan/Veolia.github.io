@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   selectedClient: any;
   selectedSite: any;
 
-
   clients!: any[];
   sites!: any[];
   filteredSites: any[] = [];
@@ -48,21 +47,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  populateSites(clientId: any) {
+  populateSites(client: any) {
     this.isLoadingSite = true;
-    this.siteService.getSiteByClientId(clientId).subscribe((res: any) => {
+    this.siteService.getSiteByClientId(client).subscribe((res: any) => {
       this.sites = res;
       this.isLoadingSite = false;
     });
   }
 
-  onClientSelect(selectedClientId: any) {
-    localStorage.setItem('clientId', selectedClientId.value);
-    this.populateSites(selectedClientId.value);
+  onClientSelect(selectedClient: any) {
+    localStorage.setItem('clientId', selectedClient.value);
   }
 
-  onSiteSelect(selectedClientId: any) {
-    localStorage.setItem('siteId', selectedClientId.value);
+  onSiteSelect(selectedClient: any) {
+    localStorage.setItem('siteId', selectedClient.value);
     window.location.reload();
   }
 

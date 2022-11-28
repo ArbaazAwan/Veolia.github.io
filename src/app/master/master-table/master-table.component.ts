@@ -77,7 +77,7 @@ export class MasterTableComponent implements OnInit {
   getMasters(siteId:any) {
     this.isLoading = true;
     this.masterService.getMastersBySiteId(siteId).subscribe((masters: any) => {
-      this.masters = masters;
+      this.masters = masters.masters;
       this.sortAssets({active:"masterId",direction:'desc'});
       this.isLoading = false;
     });
