@@ -49,8 +49,9 @@ export class NavbarComponent implements OnInit {
 
   populateClients() {
     this.isLoadingClient = true;
+    console.log(this.user);
     if (localStorage.getItem('role')?.toLocaleLowerCase() == 'user') {
-      var email = localStorage.getItem('email');
+      var email = localStorage.getItem('user_email');
       this.userService.getUserByEmail(email).subscribe((users: any) => {
         let userId: string = users[0].userId;
         this.userService.getClientsByUserId(userId).subscribe({
