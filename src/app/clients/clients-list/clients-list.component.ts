@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/auth.service';
+import { UserService } from 'src/app/users/user.service';
 import { ClientService } from '../client.service';
 
 @Component({
@@ -9,18 +8,40 @@ import { ClientService } from '../client.service';
   styleUrls: ['./clients-list.component.scss'],
 })
 export class ClientsListComponent implements OnInit {
-  constructor(private clientService: ClientService) {}
+  constructor(
+    private userService: UserService,
+    private clientService: ClientService
+  ) {}
 
   clients!: any[];
   isLoading: boolean = false;
   panelOpenState: boolean = false;
+  noclients: boolean = false;
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.clientService.getClients().subscribe((res: any) => {
-      this.clients = res;
-      this.isLoading = false;
+
+    let userEmail = localStorage.getItem('user_email');
+    this.userService.getUserByEmail(userEmail).subscribe((users: any) => {
+      let userId: string = users[0].userId;
+      if (users[0].role.toLowerCase() == 'user') {
+        this.userService.getClientsByUserId(userId).subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.clients = response.userClients;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            this.noclients = true;
+            this.isLoading = false;
+          },
+        });
+      } else {
+        this.clientService.getClients().subscribe((res: any) => {
+          this.clients = res;
+          this.isLoading = false;
+        });
+      }
     });
   }
-
 }
