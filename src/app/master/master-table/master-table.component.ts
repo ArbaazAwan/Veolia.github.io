@@ -18,11 +18,14 @@ export class MasterTableComponent implements OnInit {
   masters: any[] = [];
   isLoading: boolean = false;
   p: number = 1;
+  siteId = localStorage.getItem('siteId');
 
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.getMasters();
+
+    if(this.siteId)
+      this.getMasters(this.siteId);
   }
 
   sortAssets(sort: any) {
@@ -71,10 +74,10 @@ export class MasterTableComponent implements OnInit {
     this.masterService.setMasterId(masterId);
   }
 
-  getMasters() {
+  getMasters(siteId:any) {
     this.isLoading = true;
-    this.masterService.getMasters().subscribe((masters: any) => {
-      this.masters = masters;
+    this.masterService.getMastersBySiteId(siteId).subscribe((masters: any) => {
+      this.masters = masters.masters;
       this.sortAssets({active:"masterId",direction:'desc'});
       this.isLoading = false;
     });
@@ -100,9 +103,9 @@ export class MasterTableComponent implements OnInit {
           })
       }
     });
-    
-    
+
+
 
   }
-  
+
 }

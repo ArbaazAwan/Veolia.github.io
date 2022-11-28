@@ -55,25 +55,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  selectEvent(item: any) {
-    this.populateClients();
-    // do something with selected item
-  }
-
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
-
-  onFocused(e: any) {
-    // do something
-  }
   onClientSelect(selectedClient: any) {
     localStorage.setItem('clientId', selectedClient.value);
   }
 
   onSiteSelect(selectedClient: any) {
     localStorage.setItem('siteId', selectedClient.value);
+    window.location.reload();
   }
 
   logOut() {

@@ -35,6 +35,10 @@ export class MasterService {
     return this.http.get(this.MASTER_URL, { headers: this.headers });
   }
 
+  getMastersBySiteId(id:any){
+    return this.http.get(this.BASE_URL+ "master-site-id/" +id, { headers:this.headers });
+  }
+
   getCompleteMasterById(id:any){
     return this.http.get(this.BASE_URL + "get-complete-master/" + id, { headers: this.headers })
   }

@@ -15,7 +15,6 @@ export class UserstableComponent implements OnInit {
   @Output() editUserEvent = new EventEmitter();
   @Output() changeUserPasswordEvent = new EventEmitter();
 
-
   p: number = 1;
   clients:any = [];
   selectedClients:any = [];
@@ -54,10 +53,6 @@ export class UserstableComponent implements OnInit {
        console.log(res);
       })
       this.selectedClients = [];
-
-  }
-
-  formReset(){
 
   }
 
