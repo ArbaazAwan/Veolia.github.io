@@ -36,6 +36,8 @@ export class UnitComponent implements OnInit {
     this.filteredMasters = this.masters.filter((master:any) => {
       return master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1
       || master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1
+      || master?.masterSize.toLowerCase().indexOf(enteredData) > -1
+      || master?.masterStyle.toLowerCase().indexOf(enteredData) > -1
     });
   }
 
@@ -55,7 +57,16 @@ export class UnitComponent implements OnInit {
   }
 
   getDisplayText(master:any){
-    return master?.oldAssetType + " | " + master?.newAssetType;
+    if(master)
+    {
+      return master.oldAssetType + " | " + master?.newAssetType
+      + ", " + master?.masterStyle + ", " + master?.masterSize
+    }
+    else{
+      return '';
+    }
+
+
   }
 
   processModel(){

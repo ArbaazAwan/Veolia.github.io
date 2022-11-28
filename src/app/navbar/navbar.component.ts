@@ -20,10 +20,10 @@ export class NavbarComponent implements OnInit {
   isLoadingClient: boolean = false;
   isLoadingSite: boolean = false;
 
-  selectedClient: any;
-  selectedSite: any;
+  selectedClientId: any = localStorage.getItem('clientId');
+  selectedSiteId: any = localStorage.getItem('siteId');
 
-  
+
   clients!: any[];
   sites!: any[];
   filteredSites: any[] = [];
@@ -33,8 +33,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateClients();
-    this.selectedClient = localStorage.getItem('clientId');
-    this.selectedSite = localStorage.getItem('siteId');
+    this.selectedClientId = localStorage.getItem('clientId');
+    this.selectedSiteId = localStorage.getItem('siteId');
+    if(this.selectedClientId)
+    this.populateSites(this.selectedClientId);
   }
 
   populateClients() {
@@ -45,35 +47,24 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  populateSites(client: any) {
+  populateSites(clientId: any) {
     this.isLoadingSite = true;
-    this.siteService.getSiteByClientId(client).subscribe((res: any) => {
+    this.siteService.getSiteByClientId(clientId).subscribe((res: any) => {
       this.sites = res;
       this.isLoadingSite = false;
     });
   }
 
-  selectEvent(item: any) {
-    this.populateClients();
-    // do something with selected item
+  onClientSelect(selectedClientId: any) {
+    localStorage.setItem('clientId', selectedClientId.value);
+    this.populateSites(selectedClientId.value);
   }
 
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
+  onSiteSelect(selectedClientId: any) {
+    localStorage.setItem('siteId', selectedClientId.value);
+    window.location.reload();
   }
 
-  onFocused(e: any) {
-    // do something
-  }
-  onClientSelect(selectedClient: any) {
-    localStorage.setItem('clientId', selectedClient.value);
-  }
-
-  onSiteSelect(selectedClient: any) {
-    localStorage.setItem('siteId', selectedClient.value);
-  }
-  
   logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);
