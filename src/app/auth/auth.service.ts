@@ -9,10 +9,7 @@ import { UserService } from '../users/user.service';
   providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private http: HttpClient, private userService:UserService)
-  {
-
+  constructor(private http: HttpClient, private userService: UserService) {
     const token = localStorage.getItem('login_auth');
     this._isLoggedIn$.next(!!token);
   }
@@ -43,21 +40,20 @@ export class AuthService {
       );
   }
 
-    initializeRole(){
-     this.userService.getUserByEmail(this.email).pipe(
-      tap((res:any)=>{
-        if(res[0].role == 'admin')
-          this._isAdmin$.next(true);
-      }))
+  initializeRole() {
+    this.userService.getUserByEmail(this.email).pipe(
+      tap((res: any) => {
+        if (res[0].role == 'admin') this._isAdmin$.next(true);
+      })
+    );
   }
 
-  logout()
-  {
-
+  logout() {
     localStorage.removeItem('clientId');
     localStorage.removeItem('siteId');
     localStorage.removeItem('user_email');
     localStorage.removeItem('login_auth');
+    sessionStorage.clear();
     this._isAdmin$.next(false);
   }
 }
