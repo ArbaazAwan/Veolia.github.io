@@ -90,4 +90,19 @@ export class MasterTableComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  onDuplicate(masterId: any) {
+    this.masterService.getCompleteMasterById(masterId).subscribe((res:any)=>{
+      if(res){
+        this.masterService.postCompleteMaster(res).subscribe(
+          (result:any)=>{
+            window.location.reload();
+          })
+      }
+    });
+    
+    
+
+  }
+  
 }

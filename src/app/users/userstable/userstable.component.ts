@@ -82,15 +82,5 @@ export class UserstableComponent implements OnInit {
           this.selectedClients.push(c);
         });
       });
-
-
-
   }
-
-
-
-
-
-
-
 }

@@ -1,4 +1,6 @@
 <div class="upload">
-    <input class="form-control" type="file" 
+    <input class="form-control" #fileUpload type="file" accept=".xlsx" 
             (change)="readExcel($event)">
+            
 </div>
+<div *ngIf="error" class="mat-error upload"  role="alert">{{error}}</div>
