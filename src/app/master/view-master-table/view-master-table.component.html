@@ -18,7 +18,7 @@
             <!-- Asset Detail here -->
             <div class="row mx-4">
               <div class="row">
-                  <div class="col-md-4">
+                <div class="col-md-4">
                   <span>
                     <label class="text-bold">Master ID: &nbsp;</label>
                     <span class="mb-0 opacity-8 text-sm">{{master?.masterId}}</span>
@@ -130,230 +130,164 @@
               <!-- overhaul tab -->
               <mat-tab label="Overhaul">
 
-                <table class="table table-responsive table-hover">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">
-                        <label class="text-bold mt-2">Overhaul Title</label>
-                        <p class="mb-0 text-sm">{{ overhaul.ovTitle }}</p>
-                      </th>
-                      <th scope="col">
-                        <label class="text-bold mt-2">Overhaul Stretch</label>
-                        <p class="mb-0 text-sm">{{ overhaul.ovStretch }}</p>
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
+                <!-- Overhaul basic data -->
+                <div class="container-fluid">
+                  <div class="row py-4">
+                    <div class="col-md-3">
+                      <label class="text-bold mt-2">Overhaul Title: </label>
+                      <span class="m-1 text-sm">&nbsp;{{ overhaul.ovTitle }}</span>
+                    </div>
 
-                  <table class="table table-responsive table-hover">
-                    <thead class="bg-light">
-                      <tr>
-                        <th scope="col" *ngFor="
-                        let ovM of overhaul.overhaulMaintenance
-                        let i = index
-                      ">
-                          <label class="text-bold mt-2">Material {{ i + 1 }}</label>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-body">
-                      <tr>
-                        <td scope="row" *ngFor="let ovM of overhaul.overhaulMaintenance">
-                          <span>
-                            <label for="Labor1" class="form-label text-bold">Maintenance &nbsp;</label>
-                            <td>
-                              <p class="mb-0 text-sm">{{ ovM.ohMaintenance }}</p>
-                            </td>
-                          </span>
-                          <br />
-                          <span>
-                            <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                            <td>
-                              <p class="mb-0 text-sm">{{ ovM.ohCost }}</p>
-                            </td>
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <div class="col-md-3">
+                      <label class="text-bold mt-2">Overhaul Stretch: </label>
+                      <span class="m-1 text-sm">&nbsp;{{ overhaul.ovStretch }}</span>
+                    </div>
+                  </div>
+                </div>
 
-
-                <table class="table table-responsive table-hover">
-                  <thead class="bg-light">
-                    <tr>
-                      <th scope="col" *ngFor="
-                          let ovL of overhaul.overhaulLabours;
-                          let iL = index
-                        ">
-                        <label class="text-bold mt-2">Labor {{ iL + 1 }}</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row" *ngFor="let ovL of overhaul.overhaulLabours">
+                <!-- Overhaul maintenances -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor=" let ovM of overhaul.overhaulMaintenance let i = index">
+                      <label class="mb-0 text-bold">Material {{ i + 1 }}</label>
+                      <hr>
+                      <div>
                         <span>
-                          <label for="Labor1" class="form-label text-bold">Labor: &nbsp;</label>
-                      <td>
-                        <p class="mb-0 text-sm">{{ ovL.ohLabour }}</p>
-                      </td>
-                      </span>
-                      <br />
-                      <span>
-                        <label for="cost" class="form-label text-bold">Hours: &nbsp;</label>
-                        <td>
-                          <p class="mb-0 text-sm">{{ ovL.ohHour }}</p>
-                        </td>
-                      </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ ovM.ohMaintenance }}</span>
+                        </span>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ ovM.ohCost }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <table class="table table-responsive table-hover">
-                  <thead class="bg-light">
-                    <tr>
-                      <th scope="col" *ngFor="
-                          let ovC of overhaul.overhaulContractors;
-                          let i = index
-                        ">
-                        <label class="text-bold mt-2">Shop/Contractor {{ i + 1 }}</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="row" *ngFor="let ovC of overhaul.overhaulContractors">
+                <!-- Overhaul labour -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor=" let ovL of overhaul.overhaulLabours let iL = index">
+                      <label class="text-bold">Labor {{ iL + 1 }}</label>
+                      <hr>
+                      <div>
                         <span>
-                          <label for="Labor1" class="form-label text-bold">Labor: &nbsp;</label>
-                      <td>
-                        <p class="mb-0 text-sm">{{ ovC.ohLabour }}</p>
-                      </td>
-                      </span>
-                      <br />
-                      <span>
-                        <label for="cost" class="form-label text-bold">Hours: &nbsp;
-                        </label>
-                        <td>
-                          <p class="mb-0 text-sm">{{ ovC.ohHour }}</p>
-                        </td>
-                      </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ ovL.ohLabour }}</span>
+                        </span>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ ovL.ohHour }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
+                <!-- Overhaul shop/contractor -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor=" let ovC of overhaul.overhaulContractors; let i = index">
+                      <label class="text-bold">Shop/Contractor {{ i + 1 }}</label>
+                      <hr>
+                      <div>
+                        <span>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ ovC.ohLabour }}</span>
+                        </span>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ ovC.ohHour }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               </mat-tab>
 
               <!-- events tabs -->
               <mat-tab *ngFor="let event of events; let i = index" label="Event {{ i + 1 }}">
 
-                <table class="table table-responsive table-hover">
-                  <thead class="">
-                    <tr>
-                      <th scope="col">
-                        <label class="text-bold mt-2">Event Title</label>
-                        <p class="mb-0 text-sm">{{ event.evTitle }}</p>
-                      </th>
-                      <th scope="col">
-                        <label class="text-bold mt-2">Occurence</label>
-                        <p class="mb-0 text-sm">{{ event.evOccurence }}</p>
-                      </th>
-                      <th scope="col">
-                        <label class="text-bold mt-2">Stretch</label>
-                        <p class="mb-0 text-sm">{{ event.evStretch }}</p>
-                      </th>
-                    </tr>
-                  </thead>
-                </table>
+                <!-- Event basic data -->
+                <div class="container-fluid">
+                  <div class="row py-4">
+                    <div class="col-md-3">
+                      <label class="text-bold mt-2">Event Title: </label>
+                      <span class="m-1 text-sm">&nbsp;{{ event.evTitle }}</span>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="text-bold mt-2">Occurence: </label>
+                      <span class="m-1 text-sm">&nbsp;{{ event.evOccurence }}</span>
+                    </div>
 
-                <table class="table table-responsive table-hover">
-                  <thead class="bg-light">
-                    <tr>
-                      <th scope="col" *ngFor="let evM of event.eventMaintenance; let im = index">
-                        <label class="text-bold mt-2">Material {{ im + 1 }}</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-body">
-                    <tr>
-                      <td scope="row" *ngFor="let evM of event.eventMaintenance">
+                    <div class="col-md-3">
+                      <label class="text-bold mt-2">Overhaul Stretch: </label>
+                      <span class="m-1 text-sm">&nbsp;{{ event.evStretch }}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Event maintenances -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor="let evM of event.eventMaintenance; let im = index">
+                      <label class="mb-0 text-bold">Material {{ i + 1 }}</label>
+                      <hr>
+                      <div>
                         <span>
-                          <label for="Labor1" class="form-label text-bold">Maintenance &nbsp;</label>
-                          <td >
-                            <p class="mb-0 text-sm">{{ evM.evMaintenance }}</p>
-                          </td>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ evM.evMaintenance }}</span>
                         </span>
-                        <br />
-                        <span>
-                          <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                          <td>
-                            <p class="mb-0 text-sm">{{ evM.evCost }}</p>
-                          </td>
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ evM.evCost }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <table class="table table-responsive table-hover">
-                  <thead class="bg-light">
-                    <tr>
-                      <th scope="col" *ngFor="let evL of event.eventLabours; let il = index">
-                        <label class="text-bold mt-2">Labor {{ il + 1 }}</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-body">
-                    <tr>
-                      <td scope="row" *ngFor="let evL of event.eventLabours">
+                <!-- Event labour -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor=" let evL of event.eventLabours; let il = index">
+                      <label class="text-bold">Labor {{ il + 1 }}</label>
+                      <hr>
+                      <div>
                         <span>
-                          <label for="Labor1" class="form-label text-bold">Labor &nbsp;</label>
-                          <td >
-                            <p class="mb-0 text-sm">{{ evL.evLabour }}</p>
-                          </td>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ evL.evLabour }}</span>
                         </span>
-                        <br />
-                        <span>
-                          <label for="cost" class="form-label text-bold">Hours &nbsp;</label>
-                          <td>
-                            <p class="mb-0 text-sm">{{ evL.evHour }}</p>
-                          </td>
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ evL.evHour }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                <table class="table table-responsive table-hover">
-                  <thead class="bg-light">
-                    <tr>
-                      <th scope="col" *ngFor="let evC of event.eventContractors; let ic = index">
-                        <label class="text-bold mt-2">Shop/Contractor {{ i + 1 }}</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-body">
-                    <tr>
-                      <td scope="row" *ngFor="let evC of event.eventContractors">
+                <!-- Overhaul shop/contractor -->
+                <div class="container-fluid">
+                  <div class="row py-2">
+                    <div class="col-md-3 py-2" *ngFor=" let evC of event.eventContractors; let ic = index">
+                      <label class="text-bold">Shop/Contractor {{ i + 1 }}</label>
+                      <hr>
+                      <div>
                         <span>
-                          <label for="Labor1" class="form-label text-bold">Contractor &nbsp;</label>
-                          <td >
-                            <p class="mb-0 text-sm">{{ evC.evContractor }}</p>
-                          </td>
+                          <label for="Labor1" class="form-label text-bold">Maintenance: &nbsp;</label>
+                          <span class="mb-0 text-sm">{{ evC.evContractor }}</span>
                         </span>
-                        <br />
-                        <span>
-                          <label for="cost" class="form-label text-bold">Cost &nbsp;</label>
-                          <td>
-                            <p class="mb-0 text-sm">{{ evC.evCost }}</p>
-                          </td>
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                      </div>
+                      <div>
+                        <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
+                        <span class="mb-0 text-sm">{{ evC.evCost }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               </mat-tab>
             </mat-tab-group>
