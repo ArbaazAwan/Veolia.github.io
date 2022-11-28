@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private clientService: ClientService,
     private siteService: SiteService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   isLoadingClient: boolean = false;
@@ -41,10 +43,27 @@ export class NavbarComponent implements OnInit {
 
   populateClients() {
     this.isLoadingClient = true;
-    this.clientService.getClients().subscribe((res: any) => {
-      this.clients = res;
-      this.isLoadingClient = false;
-    });
+    if (localStorage.getItem('role')?.toLocaleLowerCase() == 'user') {
+      var email = localStorage.getItem('email');
+      this.userService.getUserByEmail(email).subscribe((users: any) => {
+        let userId: string = users[0].userId;
+        this.userService.getClientsByUserId(userId).subscribe({
+          next: (response: any) => {
+            console.log(response);
+            this.clients = response.userClients;
+            this.isLoadingClient = false;
+          },
+          error: (error) => {
+            this.isLoadingClient = false;
+          },
+        });
+      });
+    } else {
+      this.clientService.getClients().subscribe((res: any) => {
+        this.clients = res;
+        this.isLoadingClient = false;
+      });
+    }
   }
 
   populateSites(client: any) {
