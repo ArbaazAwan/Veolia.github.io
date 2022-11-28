@@ -10,6 +10,7 @@ import { MasterService } from '../master.service';
 export class ImportExcelComponent implements OnInit {
   excelData: any;
   error: any;
+  isLoading: any = false;
 
   constructor(private masterService: MasterService) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
@@ -17,6 +18,7 @@ export class ImportExcelComponent implements OnInit {
   ngOnInit(): void {}
 
   readExcel(event: any) {
+    this.isLoading = true;
     let file = event.target.files[0];
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
@@ -52,6 +54,9 @@ export class ImportExcelComponent implements OnInit {
             .postCompleteMaster(completeMaster)
             .subscribe((res: any) => {
               console.log(res.message);
+              if (res.message) {
+                this.isLoading = false;
+              }
               window.location.reload();
             });
         }

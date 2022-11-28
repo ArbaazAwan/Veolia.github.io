@@ -14,14 +14,14 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private clientService: ClientService,
     private siteService: SiteService,
-    private authService:AuthService
+    private authService: AuthService
   ) {}
 
   isLoadingClient: boolean = false;
   isLoadingSite: boolean = false;
 
-  selectedClientId: any = localStorage.getItem('clientId');
-  selectedSiteId: any = localStorage.getItem('siteId');
+  selectedClient: any;
+  selectedSite: any;
 
 
   clients!: any[];
@@ -33,10 +33,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateClients();
-    this.selectedClientId = localStorage.getItem('clientId');
-    this.selectedSiteId = localStorage.getItem('siteId');
-    if(this.selectedClientId)
-    this.populateSites(this.selectedClientId);
+    this.selectedClient = localStorage.getItem('clientId');
+    this.selectedSite = localStorage.getItem('siteId');
+    if (this.selectedClient) {
+      this.populateSites(this.selectedClient);
+    }
   }
 
   populateClients() {
