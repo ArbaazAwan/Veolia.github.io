@@ -82,7 +82,8 @@
                   <td>
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ user.userStatus }}</p>
+                        <p class="mb-0 text-sm" *ngIf="user.userStatus == true">Active</p>
+                        <p class="mb-0 text-sm" *ngIf="user.userStatus == false">Inactive</p>
                       </div>
                     </div>
                   </td>
