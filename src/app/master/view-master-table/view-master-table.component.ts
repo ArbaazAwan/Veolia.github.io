@@ -23,6 +23,24 @@ export class ViewMasterTableComponent implements OnInit {
    files!: TreeNode[];
    isLoading:boolean = false;
 
+   ovMaterialsCost:number = 0;
+   ovContractorsHours:number = 0;
+   ovLaborBasicSkilled:number = 0;
+   ovLaborUnskilled:number = 0;
+   ovLaborTechnical:number = 0;
+   ovLaborSpecialized:number = 0;
+   ovLaborCertified:number = 0;
+   ovLaborSupervisory:number = 0;
+
+   evMaterialsCost:number[] = [];
+   evContractorsHours:number[] = [];
+   evLaborBasicSkilled:number[] = [];
+   evLaborUnskilled:number[] = [];
+   evLaborTechnical:number[] = [];
+   evLaborSpecialized:number[] = [];
+   evLaborCertified:number[] = [];
+   evLaborSupervisory:number[] = [];
+
   ngOnInit(): void {
 
     this.masterService.currentMasterId.subscribe(
@@ -61,7 +79,11 @@ export class ViewMasterTableComponent implements OnInit {
             this.cols = [
               { field: 'desc', header: '' },
               { field: 'oh', header: 'OverHaul'}
-          ];
+            ];
+
+            for(let i = 0; i<this.events.length; i++){
+              this.events[i].eventMaintenance
+            }
 
           for(let i = 0; i<this.events?.length; i++){
             let obj = { field: 'ev'+ (i+1), header: 'Event ' + (i+1)}
@@ -70,14 +92,65 @@ export class ViewMasterTableComponent implements OnInit {
           }
 
           if(this.completeMaster.overhaul)
-          this.overhaul = this.completeMaster.overhaul;
+          {
+            console.log("completeMaster",this.completeMaster);
+            this.overhaul = this.completeMaster.overhaul;
 
+            this.calculatingOhMaterialCosts(this.overhaul);
+            this.calculatingOhConts(this.overhaul);
+            this.calculatingohLabors(this.overhaul);
+
+          }
         }
 
         this.isLoading = false;
         this.masterService.setMasterId(null);
       }
     )
+  }
+
+  calculatingOhMaterialCosts(overhaul:any){
+    overhaul.overhaulMaintenance.forEach(
+      (el:any)=>{
+        this.ovMaterialsCost += Number(el.ohCost);
+      }
+    )
+  }
+
+  calculatingOhConts(overhaul:any){
+    overhaul.overhaulContractors.forEach(
+      (res:any)=>{
+        this.ovContractorsHours += Number(res.ohHour);
+      }
+    )
+  }
+
+  calculatingohLabors(overhaul:any){
+    overhaul.overhaulLabours.forEach((res:any)=>{
+      switch(res.ohLabour?.toLowerCase())
+      {
+        case 'basic skilled':
+          this.ovLaborBasicSkilled+= Number(res.ohHour);
+          break;
+        case 'unskilled':
+          this.ovLaborUnskilled+= Number(res.ohHour);
+          break;
+        case 'technical':
+          this.ovLaborTechnical+= Number(res.ohHour);
+          break;
+        case 'specialized':
+          this.ovLaborSpecialized+= Number(res.ohHour);
+          break;
+        case 'certified':
+          this.ovLaborCertified+= Number(res.ohHour);
+          break;
+        case 'supervisory':
+          this.ovLaborSupervisory+= Number(res.ohHour);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
 

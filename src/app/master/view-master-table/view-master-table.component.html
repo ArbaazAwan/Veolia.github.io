@@ -362,7 +362,7 @@
 
           <div class="card m-4" *ngIf="eventEvalTableShow">
             <div style="width: 100%; overflow-x: scroll" class="table-responsive">
-              <table class="table tabel-fluid">
+              <table class="table tabel-responsive">
                 <tbody>
                   <!-- header list  -->
                   <tr class="bg-light">
@@ -379,559 +379,87 @@
                     </th>
                   </tr>
 
-                  <!-- event material cost -->
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Material Cost</label>
+                      <label class="text-bold">Total Material Cost</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
+                      <p class="mb-0 text-sm">{{ovMaterialsCost}}</p>
                     </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{event.eventMaintenance[i]?.evCost}}</p>
                     </td>
                   </tr>
 
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Outside SVC Cost</label>
+                      <label class="text-bold">Total Outside SVC Cost</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">500</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovContractorsHours}}</p>
                     </td>
                   </tr>
 
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - Unskilled</label>
+                      <label class="text-bold">Total Labor Cost - Unskilled</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborUnskilled}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - Skilled</label>
+                      <label class="text-bold">Total Labor Cost - Basic Skilled</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborBasicSkilled}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - Technical</label>
+                      <label class="text-bold">Total Labor Cost - Technical</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborTechnical}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - D</label>
+                      <label class="text-bold">Total Labor Cost - Technical</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborTechnical}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - E</label>
+                      <label class="text-bold">Total Labor Cost - Specialized</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborSpecialized}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
-                      <label class="text-bold">Event Labor Cost - F</label>
+                      <label class="text-bold">Total Labor Cost - Certified</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
+                      <p class="mb-0 text-sm">{{ovLaborCertified}}</p>
                     </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                  </tr>
+                  <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Total Labor Cost - Supervisory</label>
                     </td>
                     <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
-                    </td>
-                    <td>
-                      <span>
-                    <td>
-                      <p class="mb-0 text-sm">5</p>
-                    </td>
-                    </span>
+                      <p class="mb-0 text-sm">{{ovLaborSupervisory}}</p>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
         </div>
       </div>
     </div>
