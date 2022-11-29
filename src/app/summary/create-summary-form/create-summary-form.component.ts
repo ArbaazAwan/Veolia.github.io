@@ -37,7 +37,6 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getMastersBySiteId(this.siteId);
 
     this.asset.valueChanges.subscribe((response: any) => {
-      console.log("initializeForm response",response);
         this.filterData(response)
       });
   }
@@ -74,7 +73,8 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   getDisplayText(master:any){
-    if(master)
+    if(master.oldAssetType || master.newAssetType
+     || master.masterStyle || master.masterSize)
     {
       return master.oldAssetType + " | " + master?.newAssetType
       + ", " + master?.masterStyle + ", " + master?.masterSize
@@ -102,9 +102,9 @@ export class CreateSummaryFormComponent implements OnInit {
       summaryStyle: '',
       discription: '',
       quality: '',
-      quantity: '',
-      load: '',
-      life: '',
+      quantity: null,
+      load: null,
+      life: null,
       installmentDate: [new Date(), Validators.required],
     });
   }
