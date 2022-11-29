@@ -296,7 +296,7 @@
 
           <div class="card m-4" *ngIf="eventEvalTableShow">
             <div style="width: 100%; overflow-x: scroll" class="table-responsive">
-              <table class="table tabel-responsive">
+              <table class="table tabel-responsive table-hover">
                 <tbody>
                   <!-- header list  -->
                   <tr class="bg-light">
@@ -321,7 +321,7 @@
                       <p class="mb-0 text-sm">{{ovMaterialsCost}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{event.eventMaintenance[i]?.evCost}}</p>
+                      <p class="mb-0 text-sm">{{evMaterialsCost[i]}}</p>
                     </td>
                   </tr>
 
@@ -332,6 +332,9 @@
                     <td>
                       <p class="mb-0 text-sm">{{ovContractorsHours}}</p>
                     </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evContractorsCost[i]}}</p>
+                    </td>
                   </tr>
 
                   <tr>
@@ -341,6 +344,9 @@
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborUnskilled}}</p>
                     </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborUnskilled[i]}}</p>
+                    </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
@@ -349,13 +355,8 @@
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborBasicSkilled}}</p>
                     </td>
-                  </tr>
-                  <tr>
-                    <td class="bg-light">
-                      <label class="text-bold">Total Labor Cost - Technical</label>
-                    </td>
-                    <td>
-                      <p class="mb-0 text-sm">{{ovLaborTechnical}}</p>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborBasicSkilled[i]}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -365,13 +366,27 @@
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborTechnical}}</p>
                     </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborTechnical[i]}}</p>
+                    </td>
                   </tr>
+                  <!-- <tr>
+                    <td class="bg-light">
+                      <label class="text-bold">Total Labor Cost - Technical</label>
+                    </td>
+                    <td>
+                      <p class="mb-0 text-sm">{{ovLaborTechnical}}</p>
+                    </td>
+                  </tr> -->
                   <tr>
                     <td class="bg-light">
                       <label class="text-bold">Total Labor Cost - Specialized</label>
                     </td>
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborSpecialized}}</p>
+                    </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborSpecialized[i]}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -381,6 +396,9 @@
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborCertified}}</p>
                     </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborCertified[i]}}</p>
+                    </td>
                   </tr>
                   <tr>
                     <td class="bg-light">
@@ -388,6 +406,9 @@
                     </td>
                     <td>
                       <p class="mb-0 text-sm">{{ovLaborSupervisory}}</p>
+                    </td>
+                    <td *ngFor="let event of events let i = index">
+                      <p class="mb-0 text-sm">{{evLaborSupervisory[i]}}</p>
                     </td>
                   </tr>
                 </tbody>
