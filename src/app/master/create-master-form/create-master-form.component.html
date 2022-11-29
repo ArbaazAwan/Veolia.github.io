@@ -25,7 +25,7 @@
               <div class="col-md-6">
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Old AssetType</mat-label>
+                  <mat-label class="text-bold">AssetType</mat-label>
                   <input formControlName="oldAssetType" matInput type="text" [ngClass]="
                     (form.controls['oldAssetType'].dirty ||
                       form.controls['oldAssetType'].touched) &&
@@ -38,7 +38,7 @@
                       form.controls['oldAssetType'].touched) &&
                     form.hasError('required', 'oldAssetType')
                   ">
-                    old assetType is required
+                    AssetType is required
                   </small>
                 </mat-form-field>
 
@@ -97,7 +97,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Old Description</mat-label>
+                  <mat-label class="text-bold">Description</mat-label>
                   <input formControlName="oldDescription" matInput type="text" [ngClass]="
                     (form.controls['oldDescription'].dirty ||
                       form.controls['oldDescription'].touched) &&
@@ -110,7 +110,7 @@
                       form.controls['oldDescription'].touched) &&
                     form.hasError('required', 'oldDescription')
                   ">
-                    old description is required
+                    Description is required
                   </small>
                 </mat-form-field>
 
@@ -500,7 +500,7 @@
               <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                 Create
               </button>
-              <button (click)="resetForm()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-secondary m-2">
+              <button (click)="resetForm()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                 Cancel
               </button>
             </div>

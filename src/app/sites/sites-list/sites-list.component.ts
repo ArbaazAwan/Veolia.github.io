@@ -27,8 +27,7 @@ export class SitesListComponent implements OnInit {
     this.siteService.getSiteById(siteId).subscribe((res: any) => {
       localStorage.setItem('clientId', res[0].clientId);
       localStorage.setItem('siteId', event.target.id);
+      this.router.navigate(['/dashboard']);
     });
-    // this.router.navigate(['/dashboard']);
-    this.router.navigateByUrl('/dashboard', { skipLocationChange: true });
   }
 }
