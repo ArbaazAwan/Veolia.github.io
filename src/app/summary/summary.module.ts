@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { CreateSummaryFormComponent } from './create-summary-form/create-summary-form.component';
 import { SummaryViewdetailsTableComponent } from './summary-viewdetails-table/summary-viewdetails-table.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     PipesModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatAutocompleteModule
   ],
 })
 export class SummaryModule {}

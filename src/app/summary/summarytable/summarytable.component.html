@@ -29,6 +29,9 @@
                     (change)="setAll($event.checked)">
                   </mat-checkbox>
                 </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Actions
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   ID
                 </th>
@@ -72,10 +75,6 @@
 
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Summary Status
-                </th>
-
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-5">
-                  Actions
                 </th>
               </tr>
             </thead>
@@ -225,27 +224,6 @@
                       <p class="mb-0 text-sm">
                         {{ summary.summaryStatus }}
                       </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1 ps-3">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)">
-                            <i class="material-icons">edit</i>&nbsp;Edit
-                          </button>
-
-                          <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
-                            <i class="material-icons">delete</i>&nbsp; Delete
-                          </button>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </td>

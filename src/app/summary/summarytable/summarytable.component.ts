@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { SummaryService } from '../summary.service';
 
 export interface Task {
   name: string;
@@ -22,13 +23,19 @@ export class SummarytableComponent implements OnInit {
 
   @Input() summaryArray!: any[];
   @Input() isLoading: boolean = false;
-  @Input() summaryData: any[] = [];
+  summaryData: any[] = [];
   @Output() deleteSummaryEvent = new EventEmitter();
   @Output() eidtSummaryEvent = new EventEmitter();
 
-  constructor() {}
+  constructor(private summaryService:SummaryService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.summaryService.getSummary().subscribe(
+    (res:any)=>{
+      this.summaryData = res;
+    }
+    )
+  }
 
   updateAllComplete() {
     this.allComplete =
@@ -69,12 +76,13 @@ export class SummarytableComponent implements OnInit {
   }
 
   deleteSummary(id: any) {
-    console.log(id, 'deleteSummary');
-    this.deleteSummaryEvent.emit(id);
+    this.summaryService.deleteSummary(id).subscribe(
+      (res:any)=>{}
+    )
   }
 
   editSummary(id: any) {
-    this.eidtSummaryEvent.emit(id);
+    this.summaryService.setSummaryId(id);
   }
 }
 
