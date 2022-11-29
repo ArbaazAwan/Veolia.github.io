@@ -56,7 +56,6 @@ export class NavbarComponent implements OnInit {
         let userId: string = users[0].userId;
         this.userService.getClientsByUserId(userId).subscribe({
           next: (response: any) => {
-            console.log(response);
             this.clients = response.userClients;
             this.isLoadingClient = false;
           },
