@@ -53,6 +53,7 @@ export class UserService {
     });
   }
   updateUser(id: any, data: any) {
+    console.log("UpdateUser:" ,data);
     return this.http.put(this.USER_URL + id, data, {
       headers: this.postHeaders,
     });
