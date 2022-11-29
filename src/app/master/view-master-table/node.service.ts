@@ -83,6 +83,10 @@ export class NodeService {
       var objC: any = {
         desc: 'Cost',
       };
+      if(events.length<=0){ //if no events then add only overhaul maintenance
+        objI['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohMaintenance;
+        objC['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohCost;
+      }
       for (let index = 0; index < events.length; index++) {
         objI['ev' + (index + 1)] =
           events[index].eventMaintenance[mainIndex]?.evMaintenance;
@@ -102,6 +106,10 @@ export class NodeService {
       var objH: any = {
         desc: 'Hour',
       };
+      if(events.length<=0){ //if no events then add only overhaul labors
+        objL['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohLabour;
+        objH['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohHour;
+      }
       for (let index = 0; index < events.length; index++) {
         objL['ev' + (index + 1)] =
           events[index].eventLabours[mainIndex]?.evLabour;
@@ -125,6 +133,10 @@ export class NodeService {
       var objCL: any = {
         desc: 'Hour',
       };
+      if(events.length<=0){
+        objCC['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohLabour;
+        objCL['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohHour;
+      }
       for (let index = 0; index < events.length; index++) {
         objCC['ev' + (index + 1)] =
           events[index].eventContractors[mainIndex]?.evContractor;
