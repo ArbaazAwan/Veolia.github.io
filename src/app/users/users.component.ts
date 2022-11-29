@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
   currentUser: any = {};
   isEditFormLoading: boolean = true;
   searchText: string = '';
-  role: UserType = 'admin';
+  role: UserType = 'user';
 
   constructor(
     private formBuilder: FormBuilder,
