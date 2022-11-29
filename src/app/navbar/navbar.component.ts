@@ -13,10 +13,10 @@ import { UserService } from '../users/user.service';
 export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
-    private userService: UserService,
     private clientService: ClientService,
     private siteService: SiteService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   user: any;
@@ -49,10 +49,27 @@ export class NavbarComponent implements OnInit {
 
   populateClients() {
     this.isLoadingClient = true;
-    this.clientService.getClients().subscribe((res: any) => {
-      this.clients = res;
-      this.isLoadingClient = false;
-    });
+    console.log(this.user);
+    if (localStorage.getItem('role')?.toLocaleLowerCase() == 'user') {
+      var email = localStorage.getItem('user_email');
+      this.userService.getUserByEmail(email).subscribe((users: any) => {
+        let userId: string = users[0].userId;
+        this.userService.getClientsByUserId(userId).subscribe({
+          next: (response: any) => {
+            this.clients = response.userClients;
+            this.isLoadingClient = false;
+          },
+          error: (error) => {
+            this.isLoadingClient = false;
+          },
+        });
+      });
+    } else {
+      this.clientService.getClients().subscribe((res: any) => {
+        this.clients = res;
+        this.isLoadingClient = false;
+      });
+    }
   }
 
   populateSites(client: any) {
@@ -63,25 +80,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  selectEvent(item: any) {
-    this.populateClients();
-    // do something with selected item
-  }
-
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-  }
-
-  onFocused(e: any) {
-    // do something
-  }
   onClientSelect(selectedClient: any) {
     localStorage.setItem('clientId', selectedClient.value);
   }
 
   onSiteSelect(selectedClient: any) {
     localStorage.setItem('siteId', selectedClient.value);
+    window.location.reload();
   }
 
   logOut() {

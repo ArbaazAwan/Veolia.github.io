@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -18,11 +13,13 @@ export class MasterTableComponent implements OnInit {
   masters: any[] = [];
   isLoading: boolean = false;
   p: number = 1;
+  siteId = localStorage.getItem('siteId');
+  message: any;
 
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.getMasters();
+    if (this.siteId) this.getMasters(this.siteId);
   }
 
   sortAssets(sort: any) {
@@ -71,12 +68,17 @@ export class MasterTableComponent implements OnInit {
     this.masterService.setMasterId(masterId);
   }
 
-  getMasters() {
+  getMasters(siteId: any) {
     this.isLoading = true;
-    this.masterService.getMasters().subscribe((masters: any) => {
-      this.masters = masters;
-      this.sortAssets({active:"masterId",direction:'desc'});
-      this.isLoading = false;
+    this.masterService.getMastersBySiteId(siteId).subscribe({
+      next: (masters: any) => {
+        this.masters = masters.masters;
+        this.sortAssets({ active: 'masterId', direction: 'desc' });
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.isLoading = false;
+      },
     });
   }
 
@@ -92,17 +94,12 @@ export class MasterTableComponent implements OnInit {
   }
 
   onDuplicate(masterId: any) {
-    this.masterService.getCompleteMasterById(masterId).subscribe((res:any)=>{
-      if(res){
-        this.masterService.postCompleteMaster(res).subscribe(
-          (result:any)=>{
-            window.location.reload();
-          })
+    this.masterService.getCompleteMasterById(masterId).subscribe((res: any) => {
+      if (res) {
+        this.masterService.postCompleteMaster(res).subscribe((result: any) => {
+          window.location.reload();
+        });
       }
     });
-    
-    
-
   }
-  
 }

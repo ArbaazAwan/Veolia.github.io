@@ -13,6 +13,8 @@
           <div class="card-body pt-4 p-3">
 
             <mat-accordion>
+              <div *ngIf="clients;">
+                
               <mat-expansion-panel class="py-1" *ngFor="let client of clients" (opened)="panelOpenState = true"
                 (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
@@ -34,6 +36,10 @@
                 <!-- collapsable data here -->
                 <app-sites-list [clientId]="client.clientId"></app-sites-list>
               </mat-expansion-panel>
+              </div>
+              <div [hidden]="!noclients">
+                No Clients Assigned. Please contact Administrator to assign the clients.
+                </div>
             </mat-accordion>
           </div>
         </div>

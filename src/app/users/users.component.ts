@@ -81,7 +81,10 @@ export class UsersComponent implements OnInit {
     });
     this.pForm = this.formBuilder.group(
       {
-        username: [''],
+        username: [{
+          value: '',
+          disabled: true,
+        }],
         password: [
           '',
           Validators.compose([Validators.required, this.patternValidator()]),

@@ -49,7 +49,7 @@
             <h5 class="">
               Summary
               <span class="text-right float-end">
-                <button #modalClose data-bs-dismiss="modal"
+                <button #modalClose data-bs-dismiss="modal" (click)="resetForm()"
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
@@ -89,7 +89,7 @@
                       <option [ngValue]="null" [disabled]="true">
                         --Select asset type
                       </option>
-                      <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType">
+                      <option class="dropdown-item" *ngFor="let assetType of assetTypes" [value]="assetType">
                         {{ assetType.name }}
                       </option>
                     </select>
@@ -111,10 +111,10 @@
                           ? 'border-danger'
                           : ''
                       " (change)="onSizeSelect(selectedSize)">
-                      <option [ngValue]="null" [disabled]="true">
+                      <option [value]="null" [disabled]="true">
                         --Select Size
                       </option>
-                      <option *ngFor="let size of selectedSizes" [ngValue]="size">
+                      <option *ngFor="let size of selectedSizes" [value]="size">
                         {{ size.name }}
                       </option>
                     </select>
@@ -138,10 +138,10 @@
                           ? 'border-danger'
                           : ''
                       " (change)="onDiscriptionSelect(selectedDiscription)">
-                      <option [ngValue]="null" [disabled]="true">
+                      <option [value]="null" [disabled]="true">
                         --Select Description
                       </option>
-                      <option *ngFor="let el of selectedDiscriptions" [ngValue]="el">
+                      <option *ngFor="let el of selectedDiscriptions" [value]="el">
                         {{ el.discription }}
                       </option>
                     </select>
@@ -210,7 +210,7 @@
                       <option [ngValue]="null" [disabled]="true">
                         --Select Quality
                       </option>
-                      <option *ngFor="let quality of selectedQualities" [ngValue]="quality">
+                      <option *ngFor="let quality of selectedQualities" [value]="quality">
                         {{ quality.name }}
                       </option>
                     </select>

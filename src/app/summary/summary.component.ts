@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
@@ -126,9 +127,8 @@ export class SummaryComponent implements OnInit {
   }
 
   initializeForm() {
-    this.form = this.fb.group({
+    return this.form = this.fb.group({
       unit: ['', Validators.required],
-      // subApp: ['', Validators.required],
       assetType: ['', Validators.required],
       size: ['', Validators.required],
       summaryStyle: ['', Validators.required],
@@ -257,21 +257,25 @@ export class SummaryComponent implements OnInit {
         quantity,
         installmentDate,
       } = this.currentSummary[0];
+      this.selectedAssetType = assetType;
+      this.selectedDiscription = discription;
+      this.selectedQuality = quality;
 
-      // this.form = this.fb.group({
-      //   unit: [unit, Validators.required],
-      //   assetType: [assetType, Validators.required],
-      //   size: ['', Validators.required],
-      //   style: [summaryStyle, Validators.required],
-      //   discription: [discription, Validators.required],
-      //   quality: [quality, Validators.required],
-      //   quantity: [quantity, Validators.required],
-      //   load: [summaryload, Validators.required],
-      //   life: [life, Validators.required],
-      //   installmentDate: [installmentDate, Validators.required],
-      //   summarySize: [summarySize, Validators.required],
-      // });
+      console.log('current summary', this.currentSummary[0]);
 
+      let c =  this.initializeForm().controls;
+
+      c.unit.setValue(unit)
+      c.assetType.setValue(assetType)
+      c.size.setValue("")
+      c.summaryStyle.setValue(summaryStyle)
+      c.discription.setValue(discription)
+      c.quality.setValue(quality)
+      c.quantity.setValue(quantity)
+      c.load.setValue('')
+      c.life.setValue(life)
+      c.installmentDate.setValue(installmentDate);
+      
       this.isEditFormLoading = false;
     });
   }
