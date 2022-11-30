@@ -83,20 +83,29 @@ export class NodeService {
       var objC: any = {
         desc: 'Cost',
       };
-      if(events.length<=0){ //if no events then add only overhaul maintenance
+      if (events.length <= 0) {
+        //if no events then add only overhaul maintenance
         objI['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohMaintenance;
         objC['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohCost;
       }
       for (let index = 0; index < events.length; index++) {
-        objI['ev' + (index + 1)] =
-          events[index].eventMaintenance[mainIndex]?.evMaintenance;
-        objC['ev' + (index + 1)] =
-          events[index].eventMaintenance[mainIndex]?.evCost;
-        objI['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohMaintenance;
-        objC['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohCost;
+        if (
+          events[index].eventMaintenance[mainIndex]?.evMaintenance != undefined
+        )
+          objI['ev' + (index + 1)] =
+            events[index].eventMaintenance[mainIndex].evMaintenance;
+        if (events[index].eventMaintenance[mainIndex]?.evCost != undefined)
+          objC['ev' + (index + 1)] =
+            events[index].eventMaintenance[mainIndex].evCost;
+        if (overhaul.overhaulMaintenance[mainIndex]?.ohMaintenance != undefined)
+          objI['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohMaintenance;
+        if (overhaul.overhaulMaintenance[mainIndex]?.ohCost != undefined)
+          objC['oh'] = overhaul.overhaulMaintenance[mainIndex]?.ohCost;
       }
-      this.data[3].children?.push({ data: objI });
-      this.data[3].children?.push({ data: objC });
+      var mainSize = Object.keys(objI).length;
+      if (mainSize > 1) this.data[3].children?.push({ data: objI });
+      var costSize = Object.keys(objI).length;
+      if (costSize > 1) this.data[3].children?.push({ data: objC });
     }
 
     for (let mainIndex = 0; mainIndex < this.eventLabours.length; mainIndex++) {
@@ -106,20 +115,27 @@ export class NodeService {
       var objH: any = {
         desc: 'Hour',
       };
-      if(events.length<=0){ //if no events then add only overhaul labors
+      if (events.length <= 0) {
+        //if no events then add only overhaul labors
         objL['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohLabour;
         objH['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohHour;
       }
       for (let index = 0; index < events.length; index++) {
-        objL['ev' + (index + 1)] =
-          events[index].eventLabours[mainIndex]?.evLabour;
-        objH['ev' + (index + 1)] =
-          events[index].eventLabours[mainIndex]?.evHour;
-        objL['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohLabour;
-        objH['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohHour;
+        if (events[index].eventLabours[mainIndex]?.evLabour != undefined)
+          objL['ev' + (index + 1)] =
+            events[index].eventLabours[mainIndex]?.evLabour;
+        if (events[index].eventLabours[mainIndex]?.evHour != undefined)
+          objH['ev' + (index + 1)] =
+            events[index].eventLabours[mainIndex]?.evHour;
+        if (overhaul?.overhaulLabours[mainIndex]?.ohLabour != undefined)
+          objL['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohLabour;
+        if (overhaul?.overhaulLabours[mainIndex]?.ohHour != undefined)
+          objH['oh'] = overhaul?.overhaulLabours[mainIndex]?.ohHour;
       }
-      this.data[4].children?.push({ data: objL });
-      this.data[4].children?.push({ data: objH });
+      var labSize = Object.keys(objL).length;
+      var hourSize = Object.keys(objH).length;
+      if (labSize > 1) this.data[4].children?.push({ data: objL });
+      if (hourSize > 1) this.data[4].children?.push({ data: objH });
     }
 
     for (
@@ -133,22 +149,29 @@ export class NodeService {
       var objCL: any = {
         desc: 'Hour',
       };
-      if(events.length<=0){
+      if (events.length <= 0) {
         objCC['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohLabour;
         objCL['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohHour;
       }
       for (let index = 0; index < events.length; index++) {
-        objCC['ev' + (index + 1)] =
-          events[index].eventContractors[mainIndex]?.evContractor;
-        objCL['ev' + (index + 1)] =
-          events[index].eventContractors[mainIndex]?.evCost;
-        objCC['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohLabour;
-        objCL['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohHour;
+        if (
+          events[index].eventContractors[mainIndex]?.evContractor != undefined
+        )
+          objCC['ev' + (index + 1)] =
+            events[index].eventContractors[mainIndex]?.evContractor;
+        if (events[index].eventContractors[mainIndex]?.evCost != undefined)
+          objCL['ev' + (index + 1)] =
+            events[index].eventContractors[mainIndex]?.evCost;
+        if (overhaul?.overhaulContractors[mainIndex]?.ohLabour != undefined)
+          objCC['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohLabour;
+        if (overhaul?.overhaulContractors[mainIndex]?.ohHour != undefined)
+          objCL['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohHour;
       }
-      this.data[5].children?.push({ data: objCC });
-      this.data[5].children?.push({ data: objCL });
+      var contSize = Object.keys(objCC).length;
+      var contcostSize = Object.keys(objCL).length;
+      if (contSize > 1) this.data[5].children?.push({ data: objCC });
+      if (contcostSize > 1) this.data[5].children?.push({ data: objCL });
     }
-
     return this.data;
   }
 }
