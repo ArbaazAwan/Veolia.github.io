@@ -38,7 +38,6 @@ export class UsersComponent implements OnInit {
   isEditFormLoading: boolean = true;
   searchText: string = '';
   role: UserType = 'user';
-  sortedUsers: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,7 +50,6 @@ export class UsersComponent implements OnInit {
     this.initializeForm();
     this.getUsers();
     this.primengConfig.ripple = true;
-    // this.sortAssets({ active: 'userId', direction: 'desc' })
   }
 
   patternValidator(): ValidatorFn {
@@ -232,33 +230,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  sortAssets(sort: any) {
-    const data = this.users.slice();
-    console.log(this.users);
-    if (!sort.active || sort.direction === '') {
-      return;
-    }
 
-    this.sortedUsers = data.sort((a:any, b:any) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'userId':
-          return this.compare(a.userId, b.userId, isAsc);
-        case 'userName':
-          return this.compare(a.userName, b.userName, isAsc);
-        case 'userEmail':
-          return this.compare(a.userEmail, b.userEmail, isAsc);
-        case 'role':
-          return this.compare(a.role, b.role, isAsc);
-        case 'userStatus':
-          return this.compare(a.userStatus, b.userStatus, isAsc);
-        default:
-          return 0;
-      }
-    });
-  }
-  compare(a: number | string, b: number | string, isAsc: boolean): any {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
 
 }

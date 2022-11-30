@@ -25,7 +25,7 @@
             </div>
 
             <table class="table table-responsive table-blocked table-hover mx-3" *ngIf="!isLoading" 
-            matSort (matSortChange)="sortedAssets($event)">
+            matSort (matSortChange)="sortAssets($event)">
               <thead>
                 <tr>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="userId">
@@ -51,7 +51,7 @@
               </thead>
               <tbody>
                 <tr class="table-responsive" *ngFor="
-                    let user of sortedAssets | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }
+                    let user of sortedUsers | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }
                     let i = index
                   ">
                   <td>
@@ -97,7 +97,7 @@
                         <div class="d-flex">
                           <div class="d-flex flex-column">
                             <div ngbDropdown container="body" class="fix-size">
-                              <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                              <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                                 Actions
                               </button>
                               <div ngbDropdownMenu="gfg">
