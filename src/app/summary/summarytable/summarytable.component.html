@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mx-1">
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -6,254 +6,215 @@
           <p class="text-white text-capitalize text-bold ps-3">Record Table</p>
         </div>
       </div>
-
       <!-- Summary table -->
-      <div class="card-body px-0 pb-2">
-        <div class="flex-end px-3 col-md-3">
-          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-            <mat-label>Search assets</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText" />
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-        </div>
-        <div class="p-0 table-responsive overflow-y-hidden">
+        <div class="card-body px-0">
           <div class="d-flex justify-content-center">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
+          <div class="flex-end px-3 col-md-3">
+            <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+              <mat-label>Search assets</mat-label>
+              <input matInput type="text" [(ngModel)]="searchText" />
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
+            <table *ngIf="!isLoading" class="table table-blocked table-hover mb-0" mat-sort>
+              <thead>
+                <tr>
+                  <th class="px-2 pb-1 text-sm">
+                    <mat-checkbox class="example-margin">
+                    </mat-checkbox>
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Actions
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    ID
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Unit
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    App Description
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Asset Type
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Summary Style
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Summary Size
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Duty Application
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Quality
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Quantity
+                  </th>
 
-          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0">
-            <thead>
-              <tr>
-                <th class="px-2 pb-1 text-sm">
-                  <mat-checkbox class="example-margin" [indeterminate]="someComplete()"
-                    (change)="setAll($event.checked)">
-                  </mat-checkbox>
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  ID
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Unit
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  App Description
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Asset Type
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Summary Style
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Summary Size
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Duty Application
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Quality
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Quantity
-                </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Summary Load
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Life
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Installation Date
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Created Date
+                  </th>
 
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Summary Load
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Life
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Installation Date
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Created Date
-                </th>
-
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Summary Status
-                </th>
-
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-5">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let summary of summaryData | searchFilter: searchText">
-                <td class="pt-3">
-                  <mat-checkbox class="example-margin" (ngModelChange)="updateAllComplete()">
-                  </mat-checkbox>
-                </td>
-                <td>
-                  <div class="d-flex py-1 ps-3">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
-                        <button
-                          class="btn btn-sm bg-gradient-primary"
-                          id="gfg"
-                          ngbDropdownToggle
-                        >
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg">
-                          <button
-                            ngbDropdownItem
-                            class=""
-                            data-bs-toggle="modal"
-                            data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)"
-                          >
-                            <i class="material-icons">edit</i>&nbsp;Edit
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                    Summary Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let summary of summaryData | searchFilter: searchText">
+                  <td class="pt-3">
+                    <mat-checkbox class=""></mat-checkbox>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1 ps-3">
+                      <div class="d-flex flex-column">
+                        <div ngbDropdown>
+                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                            Actions
                           </button>
+                          <div ngbDropdownMenu="gfg">
+                            <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
+                              (click)="editSummary(summary.summaryId)">
+                              <i class="material-icons">edit</i>&nbsp;Edit
+                            </button>
 
-                          <button
-                            ngbDropdownItem
-                            class="text-danger"
-                            (click)="deleteSummary(summary.summaryId)"
-                          >
-                            <i class="material-icons">delete</i>&nbsp; Delete
-                          </button>
+                            <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
+                              <i class="material-icons">delete</i>&nbsp; Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryId }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.unit }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.appDescription }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.assetType }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryStyle }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summarySize }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.dutyApplication }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.quality }}</p>
-                    </div>
-                  </div>
-                </td>
-
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.quantity }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.summaryload / 100 | percent }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.life / 100 | percent }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.installmentDate | date: "mediumDate" }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.dateCreated | date: "mediumDate" }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.summaryStatus }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1 ps-3">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)">
-                            <i class="material-icons">edit</i>&nbsp;Edit
-                          </button>
-
-                          <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
-                            <i class="material-icons">delete</i>&nbsp; Delete
-                          </button>
-                        </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summaryId }}</p>
                       </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.unit }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.appDescription }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.assetType }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summaryStyle }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summarySize }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.dutyApplication }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.quality }}</p>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.quantity }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ summary.summaryload / 100 | percent }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ summary.life / 100 | percent }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ summary.installmentDate | date: "mediumDate" }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ summary.dateCreated | date: "mediumDate" }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ summary.summaryStatus }}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
