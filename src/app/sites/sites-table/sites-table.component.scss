@@ -2,6 +2,18 @@
   max-height: 45px;
   max-width: 91.969px;
 }
+table {
+  table-layout: fixed;
+}
+
+th{
+  white-space: normal !important; 
+  word-wrap: break-word;
+}
+td{
+  white-space: normal !important; 
+  word-wrap: break-word;
+}
 
 .site-pagination ::ng-deep .ngx-pagination .current {
   background: #ec407a;

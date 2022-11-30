@@ -11,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { SiteFormComponent } from './site-form/site-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSortModule} from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatInputModule,
     MatIconModule,
     NgxPaginationModule,
+    MatSortModule,
   ],
   exports: [SitesListComponent],
 })

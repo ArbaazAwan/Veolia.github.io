@@ -18,27 +18,30 @@
             </mat-form-field>
           </div>
 
-          <div class="table-responsive overflow-hidden">
+
+          <div class="table-responsive overflow-y-hidden">
             <div class="d-flex justify-content-center">
               <div class="spinner-border" *ngIf="isLoading"></div>
             </div>
-            <table class="table table-blocked table-hover mx-3" *ngIf="!isLoading">
+
+            <table class="table table-responsive table-blocked table-hover mx-3" *ngIf="!isLoading" 
+            matSort (matSortChange)="sortedAssets($event)">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    userId
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="userId">
+                    user Id
                   </th>
 
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="userName">
                     UserName
                   </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="userEmail">
                     user Email
                   </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="role">
                     Role
                   </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="userStatus">
                     Status
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
@@ -47,8 +50,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="
-                    let user of users | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }
+                <tr class="table-responsive" *ngFor="
+                    let user of sortedAssets | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }
                     let i = index
                   ">
                   <td>
@@ -59,28 +62,28 @@
                     </div>
                   </td>
                   <td>
-                    <div class="d-flex py-1">
+                    <div class=" d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{ user.userName }}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div class="d-flex py-1">
+                    <div class=" d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{ user.userEmail }}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div class="d-flex py-1">
+                    <div class=" d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{ user.role }}</p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <div class="d-flex py-1">
+                    <div class=" d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm" *ngIf="user.userStatus == true">Active</p>
                         <p class="mb-0 text-sm" *ngIf="user.userStatus == false">Inactive</p>
@@ -89,9 +92,9 @@
                   </td>
 
                   <td>
-                    <div class="d-flex py-1">
+                    <div class=" d-flex">
                       <div class="d-flex flex-column">
-                        <div class="d-flex py-1">
+                        <div class="d-flex">
                           <div class="d-flex flex-column">
                             <div ngbDropdown container="body" class="fix-size">
                               <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
@@ -153,23 +156,21 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <p-listbox [options]="clients" [(ngModel)]="selectedClients"  binary="true"[metaKeySelection]="false"
-                  [checkbox]="true" [filter]="false" [multiple]="true" optionLabel="name"
-                  [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}" >
-                  <ng-template let-client pTemplate="item">
-                    <div>
-                      <div>{{client.clientName}} </div>
-                    </div>
-                  </ng-template>
-                </p-listbox>
+              <p-listbox [options]="clients" [(ngModel)]="selectedClients" binary="true" [metaKeySelection]="false"
+                [checkbox]="true" [filter]="false" [multiple]="true" optionLabel="name"
+                [listStyle]="{'max-height':'500px'}" [style]="{'width':'28rem'}">
+                <ng-template let-client pTemplate="item">
+                  <div>
+                    <div>{{client.clientName}} </div>
+                  </div>
+                </ng-template>
+              </p-listbox>
 
               <div class="text-center mt-2">
-                <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2">
+                <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
                   Submit
                 </button>
-                <button type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-dark m-2">
+                <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
               </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { input } from 'aws-amplify';
 import { ClientService } from 'src/app/clients/client.service';
 import { UserService } from '../user.service';
 
@@ -9,8 +10,9 @@ import { UserService } from '../user.service';
 })
 export class UserstableComponent implements OnInit {
   @Input() isLoading: boolean = false;
-  @Input() users: any[] = [];
+  @Input() users: any = [];
   @Input() searchText: string = '';
+  @Input() sortedAssets: any = []; 
   @Output() deleteUserEvent = new EventEmitter();
   @Output() editUserEvent = new EventEmitter();
   @Output() changeUserPasswordEvent = new EventEmitter();
@@ -19,10 +21,15 @@ export class UserstableComponent implements OnInit {
   clients:any = [];
   selectedClients:any = [];
   userId:any;
+  
 
   constructor(private userService: UserService, private clientService:ClientService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.getUsers();
+    
+
+  }
 
   changeUserPassword(userId: any) {
     this.changeUserPasswordEvent.emit(userId);
@@ -83,4 +90,18 @@ export class UserstableComponent implements OnInit {
         });
       });
   }
+
+  // getUsers() {
+  //   this.isLoading = true;
+  //   this.userService.getUsers().subscribe({
+  //     next: (users: any) => {
+  //       this.users = users.users;
+  //       this.sortAssets({ active: 'userId', direction: 'desc' });
+  //       this.isLoading = false;
+  //     },
+  //     error: (error) => {
+  //       this.isLoading = false;
+  //     },
+  //   });
+  // }
 }
