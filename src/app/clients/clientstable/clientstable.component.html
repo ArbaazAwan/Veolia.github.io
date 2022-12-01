@@ -47,7 +47,7 @@
             <tbody>
               <tr *ngFor="
                   let client of sortedClients | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p };
-                  let i = index
+                  let i = index;
                 ">
                 <td>
                   <div class="d-flex py-1">

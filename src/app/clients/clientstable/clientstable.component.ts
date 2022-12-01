@@ -13,12 +13,14 @@ export class ClientstableComponent implements OnInit {
 
   searchText: string = '';
   sortedClients: any = [];
-  @Input() clients: any[] = [];
+  @Input() clients: any = [];
   @Input() isLoading: boolean = false;
   @Output() deleteClientEvent = new EventEmitter();
   @Output() editClientEvent = new EventEmitter();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sortAssets({ active: 'clientId', direction: 'desc' });
+  }
 
   editClient(id: any) {
     this.editClientEvent.emit(id);
@@ -34,7 +36,7 @@ export class ClientstableComponent implements OnInit {
       return;
     }
 
-    this.sortedClients = data.sort((a, b) => {
+    this.sortedClients = data.sort((a:any, b:any) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'clientId':
