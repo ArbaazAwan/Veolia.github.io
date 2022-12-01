@@ -120,7 +120,7 @@ export class ViewMasterTableComponent implements OnInit {
               });
               this.evLaborBasicSkilled.push(evLaborB);
               this.evLaborUnskilled.push(evLaborU);
-              this.evLaborCertified.push(evLaborS);
+              this.evLaborCertified.push(evLaborC);
               this.evLaborSpecialized.push(evLaborS);
               this.evLaborSupervisory.push(evLaborSu);
               this.evLaborTechnical.push(evLaborT);

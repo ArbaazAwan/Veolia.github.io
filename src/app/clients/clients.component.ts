@@ -30,9 +30,6 @@ export class ClientsComponent implements OnInit {
     id: null,
     name: '',
   };
-  // clients!: any[];
-
-  onClientSelect(selectedClient: any) {}
 
   resetForm() {
     this.form.reset();
@@ -73,7 +70,6 @@ export class ClientsComponent implements OnInit {
       const [_client] = el;
 
       this.currentClient = _client;
-      console.log(_client);
       this.form = this.fb.group({
         clientName: [_client.clientName, Validators.required],
         contractYears: [_client.contractYears, Validators.required],

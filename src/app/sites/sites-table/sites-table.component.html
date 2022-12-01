@@ -2,9 +2,7 @@
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div
-          class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
-        >
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Sites Table</p>
         </div>
       </div>
@@ -12,11 +10,7 @@
       <!-- Summary table -->
       <div class="card-body px-0">
         <div class="flex-end px-3 col-md-3">
-          <mat-form-field
-            class="example-form-field"
-            appearance="outline"
-            class="text-xs"
-          >
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Sites</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
@@ -27,39 +21,30 @@
           <div class="d-flex justify-content-center">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
-          <table
-            class="table table-blocked table-hover mx-3 mb-0"
-            *ngIf="!isLoading"
-          >
+          <table class="table table-blocked table-hover mx-3 mb-0" *ngIf="!isLoading" matSort
+            (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="siteId">
                   site Id
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="siteName">
                   Site Name
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientName">
                   Client Name
                 </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                >
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterId">
                   Site Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
-                  Edit
+                  Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let site of sites | searchFilter: searchText  |  paginate: { itemsPerPage: 5, currentPage: p }">
+              <tr
+                *ngFor="let site of sortedSites | searchFilter: searchText  |  paginate: { itemsPerPage: 5, currentPage: p }">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
@@ -84,45 +69,30 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ site.siteStatus }}</p>
+                      <p class="mb-0 text-sm" *ngIf="site.siteStatus == true">Active</p>
+                      <p class="mb-0 text-sm" *ngIf="site.siteStatus == false">Inactive</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex py-1 ps-3">
+                  <div class="d-flex ps-3">
                     <div class="d-flex flex-column">
                       <div>
                         <div class="d-flex flex-column">
                           <div>
-                            <div class="d-flex py-1">
+                            <div class="d-flex">
                               <div class="d-flex flex-column">
-                                <div
-                                  ngbDropdown
-                                  container="body"
-                                  class="fix-size"
-                                >
-                                  <button
-                                    class="btn btn-sm bg-gradient-primary"
-                                    id="gfg"
-                                    ngbDropdownToggle
-                                  >
+                                <div ngbDropdown container="body" class="fix-size">
+                                  <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                                     Actions
                                   </button>
                                   <div ngbDropdownMenu="gfg">
-                                    <button
-                                      ngbDropdownItem
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#edit-modal-form"
-                                      (click)="editSite(site.siteId)"
-                                    >
+                                    <button ngbDropdownItem data-bs-toggle="modal" data-bs-target="#edit-modal-form"
+                                      (click)="editSite(site.siteId)">
                                       <i class="material-icons">edit</i>&nbsp;
                                       Edit
                                     </button>
-                                    <button
-                                      ngbDropdownItem
-                                      class="text-danger"
-                                      (click)="deleteSite(site.siteId)"
-                                    >
+                                    <button ngbDropdownItem class="text-danger" (click)="deleteSite(site.siteId)">
                                       <i class="material-icons">delete</i>&nbsp;
                                       Delete
                                     </button>

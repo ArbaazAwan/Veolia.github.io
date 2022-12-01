@@ -11,6 +11,7 @@
   </div>
 
   <app-sites-table
+    *ngIf="sites.length>0"
     [sites]="sites"
     [isLoading]="isLoading"
     (deleteSiteEvent)="onDeleteSite($event)"

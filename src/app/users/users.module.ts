@@ -11,6 +11,8 @@ import { UserformComponent } from './userform/userform.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {ListboxModule} from 'primeng/listbox';
+import {MatSortModule} from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [UsersComponent, UserstableComponent, UserformComponent],
@@ -24,7 +26,8 @@ import {ListboxModule} from 'primeng/listbox';
     NgbModule,
     MatSelectModule,
     NgxPaginationModule,
-    ListboxModule
+    ListboxModule,
+    MatSortModule,
   ],
 })
 export class UsersModule {}

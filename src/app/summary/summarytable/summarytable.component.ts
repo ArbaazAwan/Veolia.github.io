@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { SummaryService } from '../summary.service';
 
@@ -35,11 +35,11 @@ export class SummarytableComponent implements OnInit {
     )
   }
 
-
-
   deleteSummary(id: any) {
     this.summaryService.deleteSummary(id).subscribe(
-      (res:any)=>{}
+      (res:any)=>{
+        window.location.reload();
+      }
     )
   }
 
@@ -48,6 +48,3 @@ export class SummarytableComponent implements OnInit {
   }
 }
 
-function output() {
-  throw new Error('Function not implemented.');
-}

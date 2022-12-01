@@ -134,28 +134,59 @@ export class CreateSummaryFormComponent implements OnInit {
           installmentDate,
         } = this.form.getRawValue();
 
-        const summaryPayload = {
-          siteId: this.siteId,
-          masterId: this.asset.value.masterId,
-          unit:unit,
-          assetType: assetType,
-          summarySize: size,
-          dutyApplication: discription,
-          appDescription: discription,
-          quality: quality,
-          summaryload: load,
-          summaryStyle:summaryStyle,
-          life:life,
-          quantity: quantity,
-          installmentDate:installmentDate
-        };
+        this.summaryService.currentSummaryId.subscribe(
+          (summaryId:any)=>{
+            if(summaryId){
+              const updateSummaryPayload = {
+                siteId: this.siteId,
+                masterId: this.asset.value.masterId,
+                unit:unit,
+                assetType: assetType,
+                summarySize: size,
+                summaryStatus:true,
+                dutyApplication: discription,
+                appDescription: discription,
+                quality: quality,
+                summaryload: load,
+                summaryStyle:summaryStyle,
+                life:life,
+                quantity: quantity,
+                installmentDate:installmentDate
+              };
 
-        this.summaryService.postSummary(summaryPayload).subscribe(
-         (res:any)=>{
-          console.log(res);
-          window.location.reload();
-         }
-        );
+              this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
+                (res:any)=>{
+                  console.log(res);
+                  window.location.reload();
+                }
+              )
+            }
+            else{
+              const summaryPayload = {
+                siteId: this.siteId,
+                masterId: this.asset.value.masterId,
+                unit:unit,
+                assetType: assetType,
+                summarySize: size,
+                dutyApplication: discription,
+                appDescription: discription,
+                quality: quality,
+                summaryload: load,
+                summaryStyle:summaryStyle,
+                life:life,
+                quantity: quantity,
+                installmentDate:installmentDate
+              };
+
+              this.summaryService.postSummary(summaryPayload).subscribe(
+               (res:any)=>{
+                console.log(res);
+                window.location.reload();
+               }
+              );
+            }
+          }
+        )
 
         this.resetForm();
       }
