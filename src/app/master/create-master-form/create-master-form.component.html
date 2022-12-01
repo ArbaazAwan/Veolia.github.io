@@ -43,21 +43,8 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Master Style</mat-label>
-                  <input formControlName="masterStyle" matInput type="text" [ngClass]="
-                    (form.controls['masterStyle'].dirty ||
-                      form.controls['masterStyle'].touched) &&
-                    form.hasError('required', 'masterStyle') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['masterStyle'].dirty ||
-                      form.controls['masterStyle'].touched) &&
-                    form.hasError('required', 'masterStyle')
-                  ">
-                    master style is required
-                  </small>
+                  <mat-label class="text-bold">Style</mat-label>
+                  <input formControlName="masterStyle" matInput type="text" >
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
@@ -79,57 +66,18 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Master Size</mat-label>
-                  <input formControlName="masterSize" matInput type="text" [ngClass]="
-                    (form.controls['masterSize'].dirty ||
-                      form.controls['masterSize'].touched) &&
-                    form.hasError('required', 'masterSize') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['masterSize'].dirty ||
-                      form.controls['masterSize'].touched) &&
-                    form.hasError('required', 'masterSize')
-                  ">
-                    master size is required
-                  </small>
+                  <mat-label class="text-bold">Size</mat-label>
+                  <input formControlName="masterSize" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Description</mat-label>
-                  <input formControlName="oldDescription" matInput type="text" [ngClass]="
-                    (form.controls['oldDescription'].dirty ||
-                      form.controls['oldDescription'].touched) &&
-                    form.hasError('required', 'oldDescription') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['oldDescription'].dirty ||
-                      form.controls['oldDescription'].touched) &&
-                    form.hasError('required', 'oldDescription')
-                  ">
-                    Description is required
-                  </small>
+                  <input formControlName="oldDescription" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">New Description</mat-label>
-                  <input formControlName="newDescription" matInput type="text" [ngClass]="
-                    (form.controls['newDescription'].dirty ||
-                      form.controls['newDescription'].touched) &&
-                    form.hasError('required', 'newDescription') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['newDescription'].dirty ||
-                      form.controls['newDescription'].touched) &&
-                    form.hasError('required', 'newDescription')
-                  ">
-                    new description is required
-                  </small>
+                  <input formControlName="newDescription" matInput type="text">
                 </mat-form-field>
               </div>
 
@@ -137,92 +85,27 @@
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Unit Measurement</mat-label>
-                  <input formControlName="unitMeasurement" matInput type="text" [ngClass]="
-                    (form.controls['unitMeasurement'].dirty ||
-                      form.controls['unitMeasurement'].touched) &&
-                    form.hasError('required', 'unitMeasurement') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['unitMeasurement'].dirty ||
-                      form.controls['unitMeasurement'].touched) &&
-                    form.hasError('required', 'unitMeasurement')
-                  ">
-                    unit measurement is required
-                  </small>
+                  <input formControlName="unitMeasurement" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Rev</mat-label>
-                  <input formControlName="rev" matInput type="text" [ngClass]="
-                    (form.controls['rev'].dirty ||
-                      form.controls['rev'].touched) &&
-                    form.hasError('required', 'rev') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['rev'].dirty ||
-                      form.controls['rev'].touched) &&
-                    form.hasError('required', 'rev')
-                  ">
-                    rev is required
-                  </small>
+                  <input formControlName="rev" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Replacement Cost</mat-label>
-                  <input formControlName="replacementCost" matInput type="text" [ngClass]="
-                    (form.controls['replacementCost'].dirty ||
-                      form.controls['replacementCost'].touched) &&
-                    form.hasError('required', 'replacementCost') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['replacementCost'].dirty ||
-                      form.controls['replacementCost'].touched) &&
-                    form.hasError('required', 'replacementCost')
-                  ">
-                    replacement cost is required
-                  </small>
+                  <input formControlName="replacementCost" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Life Months</mat-label>
-                  <input formControlName="lifeMonths" matInput type="text" [ngClass]="
-                    (form.controls['lifeMonths'].dirty ||
-                      form.controls['lifeMonths'].touched) &&
-                    form.hasError('required', 'lifeMonths') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['lifeMonths'].dirty ||
-                      form.controls['lifeMonths'].touched) &&
-                    form.hasError('required', 'lifeMonths')
-                  ">
-                    life months is required
-                  </small>
+                  <input formControlName="lifeMonths" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Overhaul Life</mat-label>
-                  <input formControlName="overhaulLife" matInput type="text" [ngClass]="
-                    (form.controls['overhaulLife'].dirty ||
-                      form.controls['overhaulLife'].touched) &&
-                    form.hasError('required', 'overhaulLife') == true
-                      ? 'border-danger'
-                      : ''
-                  " />
-                  <small class="text-danger float-end" *ngIf="
-                    (form.controls['overhaulLife'].dirty ||
-                      form.controls['overhaulLife'].touched) &&
-                    form.hasError('required', 'overhaulLife')
-                  ">
-                    overhaul life is required
-                  </small>
+                  <input formControlName="overhaulLife" matInput type="text">
                 </mat-form-field>
 
               </div>
@@ -237,27 +120,13 @@
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                           <mat-label class="text-bold">Overhaul Title</mat-label>
-                          <input matInput type="text" formControlName="ovTitle" [ngClass]="
-                          (form.controls['ovTitle'].dirty || form.controls['ovTitle'].touched) &&
-                          form.hasError('required', 'ovTitle') == true ? 'border-danger': ''" />
-                          <small class="text-danger float-end" *ngIf="(form.controls['ovTitle'].dirty ||
-                              form.controls['ovTitle'].touched) &&
-                                form.hasError('required', 'ovTitle')">
-                            overhaul title is required
-                          </small>
+                          <input matInput type="text" formControlName="ovTitle">
                         </mat-form-field>
                       </td>
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                           <mat-label class="text-bold">Strch</mat-label>
-                          <input matInput type="text" formControlName="ovStretch" [ngClass]="
-                          (form.controls['ovStretch'].dirty || form.controls['ovStretch'].touched) &&
-                          form.hasError('required', 'ovStretch') == true ? 'border-danger': ''" />
-                          <small class="text-danger float-end" *ngIf="(form.controls['ovStretch'].dirty ||
-                              form.controls['ovStretch'].touched) &&
-                                form.hasError('required', 'ovStretch')">
-                            overhaul stretch is required
-                          </small>
+                          <input matInput type="text" formControlName="ovStretch">
                         </mat-form-field>
                       </td>
                     </tr>

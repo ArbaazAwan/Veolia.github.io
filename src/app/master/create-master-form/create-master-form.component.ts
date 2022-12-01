@@ -32,22 +32,21 @@ export class CreateMasterFormComponent implements OnInit {
     )
   }
 
-
   initialForm() {
     return this.form = this.fb.group({
       oldAssetType: ['', Validators.required],
-      masterStyle: ['', Validators.required],
+      masterStyle: [''],
       newAssetType: ['', Validators.required],
-      masterSize: ['', Validators.required],
-      oldDescription: ['', Validators.required],
-      newDescription: ['', Validators.required],
-      unitMeasurement: ['', Validators.required],
-      rev: ['', Validators.required],
-      replacementCost: ['', Validators.required],
-      lifeMonths: ['', Validators.required],
-      overhaulLife: ['', Validators.required],
-      ovTitle: ['', Validators.required],
-      ovStretch: ['', Validators.required],
+      masterSize: [''],
+      oldDescription: [''],
+      newDescription: [''],
+      unitMeasurement: [''],
+      rev: [''],
+      replacementCost: [''],
+      lifeMonths: [''],
+      overhaulLife: [''],
+      ovTitle: [''],
+      ovStretch: [''],
       events: this.fb.array([]),
       overhaulMaintenances: this.fb.array([]),
       overhaulLabors: this.fb.array([]),

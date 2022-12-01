@@ -33,6 +33,7 @@ export class ClientsComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    
   }
 
   getClient() {
@@ -41,6 +42,7 @@ export class ClientsComponent implements OnInit {
       this.clients = res;
       this.isLoading = false;
     });
+    
   }
 
   onSubmit() {
@@ -48,10 +50,10 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
-        this.getClient();
+        window.location.reload();
       },
       error: (err: any) => {
-        this.getClient();
+        window.location.reload();
         this.error = err;
       },
     });
@@ -85,9 +87,9 @@ export class ClientsComponent implements OnInit {
       this.clientService
         .updateClient(this.currentClient, this.form.value)
         .subscribe({
-          next: (_) => this.getClient(),
+          next: (_) => window.location.reload(),
           error: (err) => {
-            this.getClient();
+            window.location.reload();
             this.error = err;
           },
         });
@@ -98,5 +100,6 @@ export class ClientsComponent implements OnInit {
     this.clients = this.clients.filter(({ clientId }) => clientId != id);
 
     this.clientService.deleteClient(id);
+    
   }
 }

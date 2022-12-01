@@ -44,7 +44,7 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private clientService: ClientService,
     private primengConfig: PrimeNGConfig
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -81,10 +81,12 @@ export class UsersComponent implements OnInit {
     });
     this.pForm = this.formBuilder.group(
       {
-        username: [{
-          value: '',
-          disabled: true,
-        }],
+        username: [
+          {
+            value: '',
+            disabled: true,
+          },
+        ],
         password: [
           '',
           Validators.compose([Validators.required, this.patternValidator()]),
@@ -113,8 +115,6 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    // this.onChangePassword.
-
     const PasswordPayload = {
       username: this.currentUser.userName,
       password: this.pForm.value.password,
@@ -140,10 +140,10 @@ export class UsersComponent implements OnInit {
 
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
-        this.getUsers();
+        window.location.reload();
       },
       error: (err) => {
-        this.getUsers();
+        window.location.reload();
         this.error = err;
       },
     });
@@ -182,9 +182,9 @@ export class UsersComponent implements OnInit {
       this.userService
         .updateUser(this.currentUser.userId, updatePayload)
         .subscribe({
-          next: (_) => this.getUsers(),
+          next: (_) => window.location.reload(),
           error: (err) => {
-            this.getUsers();
+            window.location.reload();
             this.error = err;
           },
         });
@@ -229,7 +229,4 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
-
-
-
 }

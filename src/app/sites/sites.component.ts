@@ -39,7 +39,6 @@ export class SitesComponent implements OnInit {
     this.siteService.getSites().subscribe((res: any) => {
       this.sites = res;
       this.isLoading = false;
-      console.log(this.sites);
     });
   }
 
@@ -54,10 +53,10 @@ export class SitesComponent implements OnInit {
     if (this.form.invalid) return alert('invalid form');
     const clientID = localStorage.getItem('clientId');
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
-      next: (_) => this.getSites(),
+      next: (_) => window.location.reload(),
       error: (e) => {
         this.error = e;
-        this.getSites();
+        window.location.reload();
       },
     });
     this.resetForm();
@@ -84,10 +83,10 @@ export class SitesComponent implements OnInit {
       this.isLoading = true;
       this.siteService.updateSite(this.currentSite, this.form.value).subscribe({
         next: (_) => {
-          this.getSites();
+          window.location.reload();
         },
         error: (err) => {
-          this.getSites();
+          window.location.reload();
           this.error = err;
         },
       });
@@ -97,5 +96,6 @@ export class SitesComponent implements OnInit {
   onDeleteSite(id: any) {
     this.sites = this.sites.filter(({ siteId }) => siteId != id);
     this.siteService.deleteSite(id);
+    window.location.reload();
   }
 }
