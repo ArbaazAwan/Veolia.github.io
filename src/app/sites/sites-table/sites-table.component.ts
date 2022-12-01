@@ -17,7 +17,9 @@ export class SitesTableComponent implements OnInit {
   @Output() deleteSiteEvent = new EventEmitter();
   @Output() editSiteEvent = new EventEmitter();
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sortAssets({active:'siteId',direction:'desc'});
+  }
 
   editSite(id: any) {
     this.editSiteEvent.emit(id);

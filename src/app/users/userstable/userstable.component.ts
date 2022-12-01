@@ -24,11 +24,9 @@ export class UserstableComponent implements OnInit {
   constructor(private userService: UserService, private clientService:ClientService) {}
 
   ngOnInit(): void {
-    // this.getUsers();
 
-    
-      // this.sortAssets({ active: 'userId', direction: 'desc' }) 
-  
+      this.sortAssets({ active: 'userId', direction: 'desc' })
+
   }
 
   changeUserPassword(userId: any) {
@@ -117,17 +115,4 @@ export class UserstableComponent implements OnInit {
   compare(a: number | string, b: number | string, isAsc: boolean): any {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-  // getUsers() {
-  //   this.isLoading = true;
-  //   this.userService.getUsers().subscribe({
-  //     next: (users: any) => {
-  //       this.users = users.users;
-  //       this.sortAssets({ active: 'userId', direction: 'desc' });
-  //       this.isLoading = false;
-  //     },
-  //     error: (error) => {
-  //       this.isLoading = false;
-  //     },
-  //   });
-  // }
 }

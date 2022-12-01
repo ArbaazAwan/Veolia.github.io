@@ -7,7 +7,7 @@
   </div>
 <!-- user table -->
   <div class="mt-6">
-    <app-userstable [isLoading]="isLoading" [users]="users" [searchText]="searchText"
+    <app-userstable [isLoading]="isLoading" *ngIf="users.length>0" [users]="users" [searchText]="searchText"
       (deleteUserEvent)="onDeleteUser($event)" (editUserEvent)="onEditUser($event)"
       (changeUserPasswordEvent)="onChangePassword($event)"></app-userstable>
   </div>
