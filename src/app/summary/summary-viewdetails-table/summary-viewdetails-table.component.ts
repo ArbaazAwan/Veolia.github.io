@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MasterService } from 'src/app/master/master.service';
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -6,11 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./summary-viewdetails-table.component.scss'],
 })
 export class SummaryViewdetailsTableComponent implements OnInit {
+  @Input() summaryArray:any;
   assetTableHeaders: string[] = [];
   assetTableNumbers: string[] = [];
   submitted: boolean = false;
 
-  constructor() {}
+  constructor(private masterService:MasterService) {}
 
   ngOnInit(): void {
     for (let i = 1; i <= 50; i++) {
@@ -23,4 +25,10 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       this.assetTableNumbers.push(a);
     }
   }
+
+  
+
+
+
+
 }

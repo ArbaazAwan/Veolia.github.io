@@ -218,3 +218,9 @@
     </div>
   </div>
 </div>
+
+  <!-- asset detail table modal -->
+  <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table"
+    aria-hidden="true">
+    <app-summary-viewdetails-table *ngIf="summaryData.length!=0" [summaryArray]="summaryData"></app-summary-viewdetails-table>
+  </div>

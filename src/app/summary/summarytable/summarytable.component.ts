@@ -35,8 +35,6 @@ export class SummarytableComponent implements OnInit {
     )
   }
 
-
-
   deleteSummary(id: any) {
     this.summaryService.deleteSummary(id).subscribe(
       (res:any)=>{
