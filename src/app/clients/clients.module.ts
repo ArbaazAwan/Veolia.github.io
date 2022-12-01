@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NavbarModule } from "../navbar/navbar.module";
 import { FooterModule } from "../footer/footer.module";
+import {MatSortModule} from '@angular/material/sort';
+
 @NgModule({
     declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
     exports: [ClientsComponent, ClientsListComponent],
@@ -30,7 +32,8 @@ import { FooterModule } from "../footer/footer.module";
         MatIconModule,
         NgxPaginationModule,
         NavbarModule,
-        FooterModule
+        FooterModule,
+        MatSortModule
     ]
 })
 export class ClientsModule {}

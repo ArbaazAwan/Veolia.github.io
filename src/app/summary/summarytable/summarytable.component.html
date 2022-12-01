@@ -84,7 +84,7 @@
                     <div class="d-flex py-1 ps-3">
                       <div class="d-flex flex-column">
                         <div ngbDropdown>
-                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                             Actions
                           </button>
                           <div ngbDropdownMenu="gfg">
@@ -204,8 +204,11 @@
                   <td>
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">
-                          {{ summary.summaryStatus }}
+                        <p class="mb-0 text-sm" *ngIf="summary.summaryStatus == true">
+                          Active
+                      </p>
+                      <p class="mb-0 text-sm" *ngIf="summary.summaryStatus == false">
+                        Inactive
                         </p>
                       </div>
                     </div>

@@ -9,7 +9,7 @@ import { UserService } from '../user.service';
 })
 export class UserstableComponent implements OnInit {
   @Input() isLoading: boolean = false;
-  @Input() users: any[] = [];
+  @Input() users: any = [];
   @Input() searchText: string = '';
   @Output() deleteUserEvent = new EventEmitter();
   @Output() editUserEvent = new EventEmitter();
@@ -19,10 +19,17 @@ export class UserstableComponent implements OnInit {
   clients:any = [];
   selectedClients:any = [];
   userId:any;
+  sortedUsers: any = [];
 
   constructor(private userService: UserService, private clientService:ClientService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.getUsers();
+
+    
+      // this.sortAssets({ active: 'userId', direction: 'desc' }) 
+  
+  }
 
   changeUserPassword(userId: any) {
     this.changeUserPasswordEvent.emit(userId);
@@ -83,4 +90,44 @@ export class UserstableComponent implements OnInit {
         });
       });
   }
+  sortAssets(sort: any) {
+    const data = this.users.slice();
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+
+    this.sortedUsers = data.sort((a:any, b:any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'userId':
+          return this.compare(a.userId, b.userId, isAsc);
+        case 'userName':
+          return this.compare(a.userName, b.userName, isAsc);
+        case 'userEmail':
+          return this.compare(a.userEmail, b.userEmail, isAsc);
+        case 'role':
+          return this.compare(a.role, b.role, isAsc);
+        case 'userStatus':
+          return this.compare(a.userStatus, b.userStatus, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+  compare(a: number | string, b: number | string, isAsc: boolean): any {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+  // getUsers() {
+  //   this.isLoading = true;
+  //   this.userService.getUsers().subscribe({
+  //     next: (users: any) => {
+  //       this.users = users.users;
+  //       this.sortAssets({ active: 'userId', direction: 'desc' });
+  //       this.isLoading = false;
+  //     },
+  //     error: (error) => {
+  //       this.isLoading = false;
+  //     },
+  //   });
+  // }
 }

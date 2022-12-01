@@ -36,11 +36,6 @@ import { IsAdminGuard } from './auth/is-admin.guard';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
-      {
-        path: 'clientslist',
-        component: ClientsListComponent,
-        canActivate: [IsAuthenticatedGuard],
-      },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: '',
@@ -57,6 +52,7 @@ import { IsAdminGuard } from './auth/is-admin.guard';
           { path: 'dropdown', component: DropdownComponent },
           { path: 'unit', component: UnitComponent },
           { path: 'summary', component: SummaryComponent },
+          {path: 'clientslist', component: ClientsListComponent},
         ],
         canActivate: [IsAuthenticatedGuard],
       },
