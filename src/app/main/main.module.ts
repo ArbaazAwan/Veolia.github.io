@@ -39,7 +39,7 @@ import { ClientsModule } from '../clients/clients.module';
     PermissionModule,
     SummaryModule,
     ProfileModule,
-    ClientsModule,
+    ClientsModule
   ]
 })
 export class MainModule { }

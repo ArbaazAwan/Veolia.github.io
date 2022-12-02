@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   FormControl,
   FormBuilder,
@@ -43,7 +44,8 @@ export class UsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private clientService: ClientService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -137,17 +139,19 @@ export class UsersComponent implements OnInit {
       role: this.role,
       userStatus: true,
     };
-
+ console.log(userPayload);
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
+        this.userService.openSnackBar('User Created', 'close');
         window.location.reload();
+        
       },
       error: (err) => {
+        this.error = err.message;
+        this.userService.openSnackBar(this.error, 'close');
         window.location.reload();
-        this.error = err;
       },
-    });
-
+    });    
     this.formReset();
   }
 
@@ -182,10 +186,14 @@ export class UsersComponent implements OnInit {
       this.userService
         .updateUser(this.currentUser.userId, updatePayload)
         .subscribe({
-          next: (_) => window.location.reload(),
+          next: (_) => {
+            this.userService.openSnackBar('User Updated', 'close');
+            window.location.reload();    
+          },
           error: (err) => {
+            this.error = err.message;
+            this.userService.openSnackBar(this.error, 'close');
             window.location.reload();
-            this.error = err;
           },
         });
     }
@@ -229,4 +237,8 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
+
+  // openSnackBar(message:string, action: string){
+  //   this.userService.openSnackBar(message,action);
+  // }
 }

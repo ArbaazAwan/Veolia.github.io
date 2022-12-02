@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class SitesComponent implements OnInit {
     name: '',
   };
 
-  constructor(private fb: FormBuilder, private siteService: SiteService) {}
+  constructor(private fb: FormBuilder, private siteService: SiteService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -53,9 +54,13 @@ export class SitesComponent implements OnInit {
     if (this.form.invalid) return alert('invalid form');
     const clientID = localStorage.getItem('clientId');
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
-      next: (_) => window.location.reload(),
+      next: (_) => {
+        this.userService.openSnackBar('Site Created', 'close');
+        window.location.reload();
+      },
       error: (e) => {
-        this.error = e;
+        this.error = e.message;
+        this.userService.openSnackBar(this.error, 'close');
         window.location.reload();
       },
     });
