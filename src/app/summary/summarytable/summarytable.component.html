@@ -22,10 +22,10 @@
             <table *ngIf="!isLoading" class="table table-blocked table-hover mb-0" mat-sort>
               <thead>
                 <tr>
-                  <th class="px-2 pb-1 text-sm">
+                  <!-- <th class="px-2 pb-1 text-sm">
                     <mat-checkbox class="example-margin">
                     </mat-checkbox>
-                  </th>
+                  </th> -->
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
                     Actions
                   </th>
@@ -77,9 +77,9 @@
               </thead>
               <tbody>
                 <tr *ngFor="let summary of summaryData | searchFilter: searchText">
-                  <td class="pt-3">
+                  <!-- <td class="pt-3">
                     <mat-checkbox class=""></mat-checkbox>
-                  </td>
+                  </td> -->
                   <td>
                     <div class="d-flex py-1 ps-3">
                       <div class="d-flex flex-column">
