@@ -13,7 +13,7 @@
           </div>
           <div class="flex-end px-3 col-md-3">
             <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-              <mat-label>Search assets</mat-label>
+              <mat-label>Search Assets</mat-label>
               <input matInput type="text" [(ngModel)]="searchText" />
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
@@ -78,7 +78,7 @@
               <tbody>
                 <tr *ngFor="let summary of summaryData | searchFilter: searchText">
                   <td class="pt-3">
-                    <mat-checkbox class=""></mat-checkbox>
+                    <mat-checkbox class="mb-0"></mat-checkbox>
                   </td>
                   <td>
                     <div class="d-flex py-1 ps-3">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   FormControl,
   FormBuilder,
@@ -43,8 +44,9 @@ export class UsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private clientService: ClientService,
-    private primengConfig: PrimeNGConfig
-  ) { }
+    private primengConfig: PrimeNGConfig,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -81,10 +83,12 @@ export class UsersComponent implements OnInit {
     });
     this.pForm = this.formBuilder.group(
       {
-        username: [{
-          value: '',
-          disabled: true,
-        }],
+        username: [
+          {
+            value: '',
+            disabled: true,
+          },
+        ],
         password: [
           '',
           Validators.compose([Validators.required, this.patternValidator()]),
@@ -113,8 +117,6 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    // this.onChangePassword.
-
     const PasswordPayload = {
       username: this.currentUser.userName,
       password: this.pForm.value.password,
@@ -137,17 +139,19 @@ export class UsersComponent implements OnInit {
       role: this.role,
       userStatus: true,
     };
-
+ console.log(userPayload);
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
-        this.getUsers();
+        this.userService.openSnackBar('User Created', 'close');
+        window.location.reload();
+        
       },
       error: (err) => {
-        this.getUsers();
-        this.error = err;
+        this.error = err.message;
+        this.userService.openSnackBar(this.error, 'close');
+        window.location.reload();
       },
-    });
-
+    });    
     this.formReset();
   }
 
@@ -182,10 +186,14 @@ export class UsersComponent implements OnInit {
       this.userService
         .updateUser(this.currentUser.userId, updatePayload)
         .subscribe({
-          next: (_) => this.getUsers(),
+          next: (_) => {
+            this.userService.openSnackBar('User Updated', 'close');
+            window.location.reload();    
+          },
           error: (err) => {
-            this.getUsers();
-            this.error = err;
+            this.error = err.message;
+            this.userService.openSnackBar(this.error, 'close');
+            window.location.reload();
           },
         });
     }
@@ -230,6 +238,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-
-
+  // openSnackBar(message:string, action: string){
+  //   this.userService.openSnackBar(message,action);
+  // }
 }
