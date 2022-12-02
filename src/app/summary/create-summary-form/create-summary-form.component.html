@@ -1,240 +1,228 @@
-<div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
-  <div class="modal-content">
-    <div class="modal-body p-0">
-      <div class="card card-plain">
-        <div class="card-header pb-0 text-left">
-          <h5 class="">
-            Summary
-            <span class="text-right float-end">
-              <button #modalClose data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                <i class="material-icons" style="font-size: 30px">close</i>
-              </button>
-            </span>
-          </h5>
-          <p class="mb-0">Enter Equipment Details</p>
-        </div>
-        <div class="card-body">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="row">
-              <div class="col-md-6">
-                <mat-form-field class="example-form-field text-xs" appearance="outline">
-                  <mat-label class="text-bold">Unit or Equipment Functional Description</mat-label>
-                  <input formControlName="unitName" matInput type="text" [ngClass]="
-                      (form.controls['unitName'].dirty ||
-                        form.controls['unitName'].touched) &&
-                      form.hasError('required', 'unitName') == true
-                        ? 'border-danger'
-                        : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
-                      (form.controls['unitName'].dirty ||
-                        form.controls['unitName'].touched) &&
-                      form.hasError('required', 'unitName')
-                    ">
-                    Unit or Equipment Functional Description is required
-                  </small>
-                </mat-form-field>
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              Summary
+              <span class="text-right float-end">
+                <button #modalClose data-bs-dismiss="modal" (click)="resetForm()"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter Equipment Details</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form">
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline" style="font-size: 80%">
+                    <mat-label>Unit or Equipment Functional Description</mat-label>
+                    <input
+                      [formControl]="asset"
+                      matInput
+                      type="text"
+                      [matAutocomplete]="auto"
+                      [ngClass]="
+                        (asset.dirty ||
+                          asset.touched) &&
+                        asset.hasError('required', 'unit') == true
+                          ? 'border-danger': ''"
+                    />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['unit'].dirty ||
+                          form.controls['unit'].touched) &&
+                        form.hasError('required', 'unit')
+                      ">
+                      unit is required
+                    </small>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onAssetChange($event.option.value)' [displayWith]="getDisplayText">
+                      <mat-option *ngFor="let master of filteredMasters" [value]="master">
+                        {{master.oldAssetType}}  | {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
 
-                <div class="input-group input-group-outline text-xs text-center font-weight-bold mb-4">
-                  <select formControlName="assetType" class="form-select" name="assetType" [ngClass]="
-                      (form.controls['assetType'].dirty ||
-                        form.controls['assetType'].touched) &&
-                      form.hasError('required', 'assetType') == true
-                        ? 'border-danger'
-                        : ''
-                    " [(ngModel)]="selectedAssetType.id" (change)="onAssetTypeSelect(selectedAssetType)">
-                    <option [ngValue]="null" [disabled]="true">
-                      --Select asset type
-                    </option>
-                    <option class="dropdown-item" *ngFor="let assetType of assetTypes" [ngValue]="assetType.id">
-                      {{ assetType.name }}
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <small class="text-danger" *ngIf="
-                      (form.controls['assetType'].dirty ||
-                        form.controls['assetType'].touched) &&
-                      form.hasError('required', 'assetType')
-                    ">
-                    *quantity is required
-                  </small>
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Asset Type</mat-label>
+                    <input formControlName="assetType" matInput type="text" [ngClass]="
+                        (form.controls['assetType'].dirty ||
+                          form.controls['assetType'].touched) &&
+                        form.hasError('required', 'assetType') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['assetType'].dirty ||
+                          form.controls['assetType'].touched) &&
+                        form.hasError('required', 'assetType')
+                      ">
+                      assetType is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Size</mat-label>
+                    <input formControlName="size" matInput type="text" [ngClass]="
+                        (form.controls['size'].dirty ||
+                          form.controls['size'].touched) &&
+                        form.hasError('required', 'size') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['size'].dirty ||
+                          form.controls['size'].touched) &&
+                        form.hasError('required', 'size')
+                      ">
+                      size is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Discription</mat-label>
+                    <input formControlName="discription" matInput type="text" [ngClass]="
+                        (form.controls['discription'].dirty ||
+                          form.controls['discription'].touched) &&
+                        form.hasError('required', 'discription') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['discription'].dirty ||
+                          form.controls['discription'].touched) &&
+                        form.hasError('required', 'discription')
+                      ">
+                      discription is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Summary Style</mat-label>
+                    <input formControlName="summaryStyle" matInput type="text" [ngClass]="
+                        (form.controls['summaryStyle'].dirty ||
+                          form.controls['summaryStyle'].touched) &&
+                        form.hasError('required', 'summaryStyle') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['summaryStyle'].dirty ||
+                          form.controls['summaryStyle'].touched) &&
+                        form.hasError('required', 'summaryStyle')
+                      ">
+                     style is required
+                    </small>
+                  </mat-form-field>
+
                 </div>
 
-                <div class="input-group input-group-outline text-xs text-center font-weight-bold my-4">
-                  <select formControlName="size" class="form-select" name="size" [(ngModel)]="selectedSize.app_id"
-                    [ngClass]="
-                      (form.controls['size'].dirty ||
-                        form.controls['size'].touched) &&
-                      form.hasError('required', 'size') == true
-                        ? 'border-danger'
-                        : ''
-                    " (change)="onSizeSelect(selectedSize)">
-                    <option [ngValue]="null" [disabled]="true">
-                      --Select Size
-                    </option>
-                    <option *ngFor="let size of selectedSizes" [ngValue]="size.app_id">
-                      {{ size.desc }}
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <small class="text-danger" *ngIf="
-                      (form.controls['size'].dirty ||
-                        form.controls['size'].touched) &&
-                      form.hasError('required', 'size')
-                    ">
-                    size is required
-                  </small>
-                </div>
+                <div class="col-md-6">
 
-                <div class="input-group input-group-outline text-xs text-center font-weight-bold my-4">
-                  <select formControlName="app" class="form-select" name="app" [(ngModel)]="selectedApp.id" [ngClass]="
-                      (form.controls['app'].dirty ||
-                        form.controls['app'].touched) &&
-                      form.hasError('required', 'app') == true
-                        ? 'border-danger'
-                        : ''
-                    " (change)="onAppSelect(selectedApp)">
-                    <option [ngValue]="null" [disabled]="true">
-                      --Select Application/Duty
-                    </option>
-                    <option *ngFor="let app of selectedApps" [ngValue]="app.id">
-                      {{ app.desc }}
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <small class="text-danger" *ngIf="
-                      (form.controls['app'].dirty ||
-                        form.controls['app'].touched) &&
-                      form.hasError('required', 'app')
-                    ">
-                    app is required
-                  </small>
-                </div>
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Quality</mat-label>
+                    <input formControlName="quality" matInput type="text" [ngClass]="
+                        (form.controls['quality'].dirty ||
+                          form.controls['quality'].touched) &&
+                        form.hasError('required', 'quality') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['quality'].dirty ||
+                          form.controls['quality'].touched) &&
+                        form.hasError('required', 'quality')
+                      ">
+                      quality is required
+                    </small>
+                  </mat-form-field>
 
-                <div class="input-group input-group-outline text-xs text-center font-weight-bold my-4">
-                  <select formControlName="subApp" class="form-select" name="subApp" [ngClass]="
-                      (form.controls['subApp'].dirty ||
-                        form.controls['subApp'].touched) &&
-                      form.hasError('required', 'subApp') == true
-                        ? 'border-danger'
-                        : ''
-                    " [(ngModel)]="selectedSubApp.quality_id" (change)="onSubAppSelect(selectedSubApp)">
-                    <option [ngValue]="null" [disabled]="true">
-                      --Select Sub Application/Duty
-                    </option>
-                    <option *ngFor="let subApp of selectedSubApps" [ngValue]="subApp.quality_id">
-                      {{ subApp.desc }}
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <small class="text-danger" *ngIf="
-                      (form.controls['subApp'].dirty ||
-                        form.controls['subApp'].touched) &&
-                      form.hasError('required', 'subApp')
-                    ">
-                    subApp is required
-                  </small>
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Quantity</mat-label>
+                    <input formControlName="quantity" matInput type="number" [ngClass]="
+                        (form.controls['quantity'].dirty ||
+                          form.controls['quantity'].touched) &&
+                        form.hasError('required', 'quantity') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['quantity'].dirty ||
+                          form.controls['quantity'].touched) &&
+                        form.hasError('required', 'quantity')
+                      ">
+                      quantity is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Load %</mat-label>
+                    <input formControlName="load" matInput type="number" [ngClass]="
+                        (form.controls['load'].dirty ||
+                          form.controls['load'].touched) &&
+                        form.hasError('required', 'load') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['load'].dirty ||
+                          form.controls['load'].touched) &&
+                        form.hasError('required', 'load')
+                      ">
+                      load  is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="text-xs" appearance="outline">
+                    <mat-label class="text-bold">Life %</mat-label>
+                    <input formControlName="life" matInput type="number" [ngClass]="
+                        (form.controls['life'].dirty ||
+                          form.controls['life'].touched) &&
+                        form.hasError('required', 'life') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['life'].dirty ||
+                          form.controls['life'].touched) &&
+                        form.hasError('required', 'life')
+                      ">
+                      life is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="text-xs">
+                    <mat-label>Installation Date</mat-label>
+                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['installmentDate'].dirty ||
+                          form.controls['installmentDate'].touched) &&
+                        form.hasError('required', 'installmentDate')
+                      ">
+                      date is required
+                    </small>
+                  </mat-form-field>
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <div class="input-group input-group-outline text-xs text-center font-weight-bold my-1">
-                  <select formControlName="quality" class="form-select" name="quality" [ngClass]="
-                      (form.controls['quality'].dirty ||
-                        form.controls['quality'].touched) &&
-                      form.hasError('required', 'quality') == true
-                        ? 'border-danger'
-                        : ''
-                    " [ngModel]="selectedQuality.id">
-                    <option [ngValue]="null" [disabled]="true">
-                      --Select Quality
-                    </option>
-                    <option *ngFor="let quality of selectedQualities" [ngValue]="quality.id">
-                      {{ quality.desc }}
-                    </option>
-                  </select>
-                </div>
-                <div>
-                  <small class="text-danger" *ngIf="
-                      (form.controls['quality'].dirty ||
-                        form.controls['quality'].touched) &&
-                      form.hasError('required', 'quality')
-                    ">
-                    quality is required
-                  </small>
-                </div>
-
-                <mat-form-field class="example-form-field text-xs mt-3" appearance="outline">
-                  <mat-label class="text-bold">Quantity</mat-label>
-                  <input formControlName="quantity" matInput type="text" [ngClass]="
-                      (form.controls['quantity'].dirty ||
-                        form.controls['quantity'].touched) &&
-                      form.hasError('required', 'quantity') == true
-                        ? 'border-danger'
-                        : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
-                      (form.controls['quantity'].dirty ||
-                        form.controls['quantity'].touched) &&
-                      form.hasError('required', 'quantity')
-                    ">
-                    Quantity is required
-                  </small>
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs" appearance="outline">
-                  <mat-label class="text-bold">Load %</mat-label>
-                  <input formControlName="load" matInput type="text" [ngClass]="
-                      (form.controls['load'].dirty ||
-                        form.controls['load'].touched) &&
-                      form.hasError('required', 'load') == true
-                        ? 'border-danger'
-                        : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
-                      (form.controls['load'].dirty ||
-                        form.controls['load'].touched) &&
-                      form.hasError('required', 'load')
-                    ">
-                    Load % is required
-                  </small>
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs" appearance="outline">
-                  <mat-label class="text-bold">Life %</mat-label>
-                  <input formControlName="life" matInput type="text" [ngClass]="
-                      (form.controls['life'].dirty ||
-                        form.controls['life'].touched) &&
-                      form.hasError('required', 'life') == true
-                        ? 'border-danger'
-                        : ''
-                    " />
-                  <small class="text-danger float-end" *ngIf="
-                      (form.controls['life'].dirty ||
-                        form.controls['life'].touched) &&
-                      form.hasError('required', 'life')
-                    ">
-                    Life % is required
-                  </small>
-                </mat-form-field>
+              <div class="text-center mt-4">
+                <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                  Submit
+                </button>
+                <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2"
+                  (click)="resetForm()">
+                  Cancel
+                </button>
               </div>
-            </div>
-
-            <div class="text-center mt-4">
-              <button type="submit" class="btn bg-gradient-primary m-2">
-                Create
-              </button>
-              <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2" (click)="onCancel()">
-                Cancel
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>

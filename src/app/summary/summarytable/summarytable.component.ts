@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { SummaryService } from '../summary.service';
 
 export interface Task {
   name: string;
@@ -15,69 +16,35 @@ export interface Task {
   styleUrls: ['./summarytable.component.scss'],
 })
 export class SummarytableComponent implements OnInit {
-  allComplete: boolean = false;
-  completed: boolean = false;
+
   selectedAssets: any[] = [];
   searchText: string = '';
 
-  @Input() summaryArray!: any[];
   @Input() isLoading: boolean = false;
-  @Input() summaryData: any[] = [];
-  @Output() deleteSummaryEvent = new EventEmitter();
-  @Output() eidtSummaryEvent = new EventEmitter();
+  summaryData: any[] = [];
 
-  constructor() {}
+  selection = new SelectionModel(true,[]);
 
-  ngOnInit(): void {}
+  constructor(private summaryService:SummaryService) {}
 
-  updateAllComplete() {
-    this.allComplete =
-      this.summaryArray != null && this.summaryArray.every((t) => t.isChecked);
-  }
-  someComplete(): boolean {
-    if (this.summaryArray == null) {
-      return false;
+  ngOnInit(): void {
+    this.summaryService.getSummary().subscribe(
+    (res:any)=>{
+      this.summaryData = res;
     }
-    return (
-      this.summaryArray.filter((t) => t.completed).length > 0 &&
-      !this.allComplete
-    );
-  }
-
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.summaryArray == null) {
-      return;
-    }
-    this.summaryArray.forEach((t) => (t.completed = completed));
-  }
-
-  selection = new SelectionModel<any>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.summaryArray.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected()
-      ? this.selection.clear()
-      : this.summaryArray.forEach((row) => this.selection.select(row));
+    )
   }
 
   deleteSummary(id: any) {
-    console.log(id, 'deleteSummary');
-    this.deleteSummaryEvent.emit(id);
+    this.summaryService.deleteSummary(id).subscribe(
+      (res:any)=>{
+        window.location.reload();
+      }
+    )
   }
 
   editSummary(id: any) {
-    this.eidtSummaryEvent.emit(id);
+    this.summaryService.setSummaryId(id);
   }
 }
 
-function output() {
-  throw new Error('Function not implemented.');
-}

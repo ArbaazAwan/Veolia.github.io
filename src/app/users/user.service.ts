@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +21,7 @@ export class UserService {
     // "Access-Control-Allow-Headers": "'*'"
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
   private userId = new BehaviorSubject (null);
   currentUserId = this.userId.asObservable();
 
@@ -70,5 +71,12 @@ export class UserService {
       .subscribe((res) => {
         console.log(res, 'deleted');
       });
+  }
+  openSnackBar(message:string, action: string){
+    let snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+
+    snackBarRef.onAction().subscribe(()=>{
+      window.location.reload();
+    });
   }
 }

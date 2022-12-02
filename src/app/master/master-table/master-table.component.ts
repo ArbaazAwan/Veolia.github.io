@@ -55,7 +55,6 @@ export class MasterTableComponent implements OnInit {
           return this.compare(a.lifeMonths, b.lifeMonths, isAsc);
         case 'OHLife':
           return this.compare(a.overhaulLife, b.overhaulLife, isAsc);
-
         default:
           return 0;
       }

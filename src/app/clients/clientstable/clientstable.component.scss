@@ -1,6 +1,18 @@
 .fix-size {
-  max-height: 45px;
+  max-height: 25px;
   max-width: 91.969px;
+}
+table {
+  table-layout: fixed;
+}
+
+th{
+  white-space: normal !important; 
+  word-wrap: break-word;
+}
+td{
+  white-space: normal !important; 
+  word-wrap: break-word;
 }
 
 .user-pagination ::ng-deep .ngx-pagination .current {

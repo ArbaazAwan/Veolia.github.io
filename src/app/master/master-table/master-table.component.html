@@ -14,13 +14,13 @@
         </div>
         <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-            <mat-label>Search assets</mat-label>
+            <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
-          <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
+          <table class="table table-blocked table-hover mb-0" ng-focus="table" matSort (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
@@ -66,13 +66,13 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 10, currentPage: p }
+                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 20, currentPage: p }
                 ">
                 <td>
-                  <div class="d-flex mt-2 mx-2">
+                  <div class="d-flex mx-2">
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg">

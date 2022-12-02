@@ -30,12 +30,10 @@ export class ClientsComponent implements OnInit {
     id: null,
     name: '',
   };
-  // clients!: any[];
-
-  onClientSelect(selectedClient: any) {}
 
   resetForm() {
     this.form.reset();
+    
   }
 
   getClient() {
@@ -44,6 +42,7 @@ export class ClientsComponent implements OnInit {
       this.clients = res;
       this.isLoading = false;
     });
+    
   }
 
   onSubmit() {
@@ -51,10 +50,10 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
-        this.getClient();
+        window.location.reload();
       },
       error: (err: any) => {
-        this.getClient();
+        window.location.reload();
         this.error = err;
       },
     });
@@ -73,7 +72,6 @@ export class ClientsComponent implements OnInit {
       const [_client] = el;
 
       this.currentClient = _client;
-      console.log(_client);
       this.form = this.fb.group({
         clientName: [_client.clientName, Validators.required],
         contractYears: [_client.contractYears, Validators.required],
@@ -89,9 +87,9 @@ export class ClientsComponent implements OnInit {
       this.clientService
         .updateClient(this.currentClient, this.form.value)
         .subscribe({
-          next: (_) => this.getClient(),
+          next: (_) => window.location.reload(),
           error: (err) => {
-            this.getClient();
+            window.location.reload();
             this.error = err;
           },
         });
@@ -102,5 +100,6 @@ export class ClientsComponent implements OnInit {
     this.clients = this.clients.filter(({ clientId }) => clientId != id);
 
     this.clientService.deleteClient(id);
+    
   }
 }

@@ -48,6 +48,12 @@ export class AuthService {
     );
   }
 
+  autoLogout(expirationDate:number){
+    setTimeout(()=>{
+      this.logout();
+    },expirationDate);
+  }
+
   logout() {
     localStorage.removeItem('clientId');
     localStorage.removeItem('siteId');
