@@ -107,7 +107,7 @@
               <!-- all tab -->
               <mat-tab label="All">
                 <div class="card">
-                  <p-treeTable [value]="files" [columns]="cols" class="table">
+                  <p-treeTable id="detailsTable" [value]="files" [columns]="cols" class="table">
                     <ng-template pTemplate="header" let-columns>
                       <tr>
                         <th *ngFor="let col of columns" class="">
@@ -118,7 +118,7 @@
                     <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
                       <tr>
                         <td *ngFor="let col of columns; let i = index">
-                          <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                          <p-treeTableToggler  [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
                           <span [ngClass]="{ 'text-bold': i === 0 }">{{rowData[col.field]}}</span>
                         </td>
                       </tr>
