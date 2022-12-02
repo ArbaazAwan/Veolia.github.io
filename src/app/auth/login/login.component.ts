@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
       .userLogin(this.form.value.email, this.form.value.password)
       .subscribe(
         (response: any) => {
-          localStorage.setItem('login_auth', response.token);
+          // localStorage.setItem('login_auth', response.token);
+          sessionStorage.setItem('login_auth', response.token);
           localStorage.setItem('user_email', this.form.value.email);
           this.userService.getUserByEmail(this.form.value.email).subscribe({
             next: (response: any) => {

@@ -27,7 +27,6 @@ export class ClientsListComponent implements OnInit {
       if (users[0].role.toLowerCase() == 'user') {
         this.userService.getClientsByUserId(userId).subscribe({
           next: (response: any) => {
-            console.log(response);
             this.clients = response.userClients;
             this.isLoading = false;
           },
