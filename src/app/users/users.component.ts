@@ -143,13 +143,13 @@ export class UsersComponent implements OnInit {
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
         this.userService.openSnackBar('User Created', 'close');
-        window.location.reload();
+        this.getUsers();
         
       },
       error: (err) => {
         this.error = err.message;
         this.userService.openSnackBar(this.error, 'close');
-        window.location.reload();
+        this.getUsers();
       },
     });    
     this.formReset();
@@ -188,12 +188,12 @@ export class UsersComponent implements OnInit {
         .subscribe({
           next: (_) => {
             this.userService.openSnackBar('User Updated', 'close');
-            window.location.reload();    
+            this.getUsers();   
           },
           error: (err) => {
             this.error = err.message;
             this.userService.openSnackBar(this.error, 'close');
-            window.location.reload();
+            this.getUsers();
           },
         });
     }
@@ -209,6 +209,7 @@ export class UsersComponent implements OnInit {
   onDeleteUser(user: any) {
     this.users = this.users.filter(({ userId }) => userId != user.userId);
     this.userService.deleteUser(user.userId, user.userName);
+    this.userService.openSnackBar('User Deleted', 'close');
   }
 
   onEditUser(id: any) {

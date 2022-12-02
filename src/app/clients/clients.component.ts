@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
 @Component({
   selector: 'app-clients',
@@ -7,7 +8,7 @@ import { ClientService } from './client.service';
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService) {}
+  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService) {}
   form!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
@@ -33,7 +34,6 @@ export class ClientsComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
-    
   }
 
   getClient() {
@@ -42,7 +42,6 @@ export class ClientsComponent implements OnInit {
       this.clients = res;
       this.isLoading = false;
     });
-    
   }
 
   onSubmit() {
@@ -50,7 +49,8 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
-        window.location.reload();
+        this.userService.openSnackBar('Client Created', 'close');
+        this.getClient();
       },
       error: (err: any) => {
         window.location.reload();
@@ -87,10 +87,14 @@ export class ClientsComponent implements OnInit {
       this.clientService
         .updateClient(this.currentClient, this.form.value)
         .subscribe({
-          next: (_) => window.location.reload(),
+          next: (_) => {
+            this.userService.openSnackBar('Client Updated', 'close');
+            this.getClient();
+          },
           error: (err) => {
-            window.location.reload();
-            this.error = err;
+            this.error = err.message;
+            this.userService.openSnackBar(this.error, 'close');
+            this.getClient();
           },
         });
     }
@@ -100,6 +104,5 @@ export class ClientsComponent implements OnInit {
     this.clients = this.clients.filter(({ clientId }) => clientId != id);
 
     this.clientService.deleteClient(id);
-    
   }
 }

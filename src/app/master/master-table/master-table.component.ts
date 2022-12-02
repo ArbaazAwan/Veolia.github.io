@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService) {}
+  constructor(private masterService: MasterService, private userService: UserService) {}
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
@@ -87,8 +88,7 @@ export class MasterTableComponent implements OnInit {
 
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
-      console.log(res.message);
-      window.location.reload();
+     this.userService.openSnackBar('Master Deleted', 'close');
     });
   }
 

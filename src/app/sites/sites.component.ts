@@ -56,12 +56,12 @@ export class SitesComponent implements OnInit {
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
       next: (_) => {
         this.userService.openSnackBar('Site Created', 'close');
-        window.location.reload();
+        this.getSites();
       },
       error: (e) => {
         this.error = e.message;
         this.userService.openSnackBar(this.error, 'close');
-        window.location.reload();
+        this.getSites();
       },
     });
     this.resetForm();
@@ -88,11 +88,13 @@ export class SitesComponent implements OnInit {
       this.isLoading = true;
       this.siteService.updateSite(this.currentSite, this.form.value).subscribe({
         next: (_) => {
-          window.location.reload();
+          this.userService.openSnackBar('Site Updated', 'close');
+          this.getSites();
         },
         error: (err) => {
-          window.location.reload();
-          this.error = err;
+          this.error = err.message;
+          this.userService.openSnackBar(this.error, 'close');
+          this.getSites();
         },
       });
     }
@@ -101,6 +103,6 @@ export class SitesComponent implements OnInit {
   onDeleteSite(id: any) {
     this.sites = this.sites.filter(({ siteId }) => siteId != id);
     this.siteService.deleteSite(id);
-    window.location.reload();
+    this.userService.openSnackBar('Site Deleted', 'close');
   }
 }

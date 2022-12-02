@@ -48,10 +48,10 @@ export class AuthService {
     );
   }
 
-  autoLogout(expirationDate:number){
+  autoLogout(){
     setTimeout(()=>{
       this.logout();
-    },expirationDate);
+    },3000);
   }
 
   logout() {
