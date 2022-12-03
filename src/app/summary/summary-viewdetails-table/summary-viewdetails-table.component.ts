@@ -12,14 +12,25 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   assetTableHeaders: string[] = [];
   assetTableNumbers: string[] = [];
   submitted: boolean = false;
-  totalEventsCosts: number = 0;
-  yearlyCosts:number[] =[];
-  clientContractYears:number =0;
+  eventsCosts: number[] = [];
+  yearsArray:any = new Array(50);
+  yearsCosts:any = new Array(50);
+
+  clientContractYears:number = 0;
   clientId:any = localStorage.getItem('clientId');
 
   constructor(private masterService:MasterService, private clientService:ClientService) {}
 
+
+
   ngOnInit(): void {
+
+    for(let i= 0; i< this.yearsArray.length; i++){
+      let events:number[] = [];
+      this.yearsArray[i] = { events };
+      this.yearsCosts[i] = 0;                 //initializing yearly costs with 0
+    }
+
     for (let i = 1; i <= 50; i++) {
       let a = 'Year ' + i.toString();
       this.assetTableHeaders.push(a);
@@ -31,19 +42,27 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     }
     this.getContractYears();
 
-    this.getMaster(3127); //hardcoded value
+    this.getMaster(3141); //hardcoded value
 
   }
+
 
   getMaster(masterId:any){
     this.masterService.getCompleteMasterById(masterId).subscribe(
       (master:any)=>{
-        // console.log("master:",master);
 
         let events = master.events;
-        var occuredArray:any =[];
+        let replacementCost = master.master.replacementCost;
+        let lifeMonths = master.master.lifeMonths;
+        let overhaulLife = master.master.overhaulLife;
+        console.log("master", master);
 
-        for (let i = 0; i < events?.length; i++) {
+        console.log("lifeMonths",lifeMonths);
+        let lifePerc = 100/100;
+        let replacementCostYear = Math.ceil((Number(lifeMonths)*lifePerc)/12);
+        console.log("replacementcostyear", replacementCostYear);
+
+        for (let i = 0; i < events?.length; i++) {   //calculating events costs and storing them in array
           let totalCostM: number = 0;
           events[i].eventMaintenance?.forEach((evM: any) => {
             totalCostM += Number(evM.evCost);
@@ -53,38 +72,37 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           events[i].eventContractors?.forEach((evC: any) => {
             totalCostC += Number(evC.evCost);
           });
-          let occured = 12/(Number(events[i].evOccurence))
-          occuredArray.push(occured);
-          console.log("occured:",occured);
 
-
-          this.totalEventsCosts += totalCostM + totalCostC;
-
+          this.eventsCosts.push(totalCostM + totalCostC);
           // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
         }
 
-        for(let i = 1; i<=50; i++){   // hardcoded 50 years
-
-          let yearCost = 0;
-
-          if(i == 1)
+        for(let i =0; i<events.length; i++){ //adding occured events in a year to yearsArray
+          for (let m = 0; m < 600; m++)
           {
-            yearCost = Math.round(this.totalEventsCosts + Number(master.master.replacementCost)); // (lifemos/12, 0) then ReplCost+Yearcost but we are considering year 1
-          }
-          else{
-            yearCost = Math.round(this.totalEventsCosts);
-          }
-          for(let ie = 0; ie<occuredArray.length; ie++){
 
-            if(occuredArray[ie] != 0){
-              yearCost = yearCost * occuredArray[ie];
+            if (m % events[i].evOccurence === 0){
+              this.yearsArray[m/12].events.push(i);
             }
-            occuredArray[ie] += occuredArray[ie];        //occured = occured + occured
-          }
+            if(m % overhaulLife == 0){
+              this.yearsArray[m/12]
+            }
 
-          this.yearlyCosts.push(yearCost);
-          console.log("Year "+i, yearCost);
+          }
         }
+
+
+        for(let y=0; y < 50; y++){ //calculating yearly costs
+
+          this.yearsArray[y].events.forEach((eventIndex:any)=>{
+            this.yearsCosts[y]+= this.eventsCosts[eventIndex];
+          })
+          if (y % replacementCostYear === 0){
+            this.yearsCosts[y]  += Number(replacementCost);
+          }
+          console.log("year"+(y+1)+" cost", this.yearsCosts[y]);
+        }
+
 
 
       }
@@ -105,3 +123,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
 
 }
+
+export class YearEvents{
+  events:number[]
+}
+
