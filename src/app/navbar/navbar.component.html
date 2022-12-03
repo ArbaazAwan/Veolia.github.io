@@ -1,9 +1,15 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-  data-scroll="true">
+<nav
+  class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+  id="navbarBlur"
+  data-scroll="true"
+>
   <div class="container-fluid py-1">
-    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1" id="navbar">
-      <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        <div class="row float-end text-xs">
+    <div
+      class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1"
+      id="navbar"
+    >
+      <div class="ms-md-auto pe-md-3 d-flex align-items-center" [ngClass]="href == '/clientslist' ? 'addpadding' : '' " >
+        <div class="row float-end text-xs" *ngIf="href != '/clientslist'">
           <div class="col-sm-6 mt-3">
             <mat-form-field appearance="outline">
               <mat-label *ngIf="isLoadingClient">
@@ -13,13 +19,23 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
-              <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
-                (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)"
-                [disabled]="isLoadingClient">
-                <mat-option *ngFor="let client of clients" value={{client.clientId}}>
+              <mat-select
+                [(ngModel)]="selectedClient"
+                [(value)]="selectedClient"
+                matInput
+                type="text"
+                (valueChange)="populateSites($event)"
+                (selectionChange)="onClientSelect($event)"
+                [disabled]="isLoadingClient"
+              >
+                <mat-option
+                  *ngFor="let client of clients"
+                  value="{{ client.clientId }}"
+                >
                   {{ client.clientName }}
                 </mat-option>
               </mat-select>
+
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
           </div>
@@ -32,12 +48,22 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingSite">Select Site</mat-label>
-              <mat-select [(ngModel)]="selectedSite" [(value)]="selectedSite" matInput type="text"
-                (selectionChange)="onSiteSelect($event)" [disabled]="isLoadingSite">
-                <mat-option *ngFor="let site of sites" value={{site.siteId}}>
+              <mat-select
+                [(ngModel)]="selectedSite"
+                [(value)]="selectedSite"
+                matInput
+                type="text"
+                (selectionChange)="onSiteSelect($event)"
+                [disabled]="isLoadingSite"
+              >
+                <mat-option
+                  *ngFor="let site of sites"
+                  value="{{ site.siteId }}"
+                >
                   {{ site.siteName }}
                 </mat-option>
               </mat-select>
+
               <mat-icon matSuffix>business</mat-icon>
             </mat-form-field>
           </div>
@@ -47,7 +73,7 @@
       <div class="d-flex">
         <div ngbDropdown class="d-inline-block">
           <div class="font-weight-bold" id="gfg" ngbDropdownToggle>
-            <span class="mx-1 mb-2">{{user?.userName}}</span>
+            <span class="mx-1 mb-2">{{ user?.userName }}</span>
           </div>
           <div ngbDropdownMenu="gfg" class="">
             <button ngbDropdownItem routerLink="/profile">

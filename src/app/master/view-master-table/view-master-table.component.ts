@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { MasterService } from '../master.service';
 import { NodeService } from './node.service';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-view-master-table',
   templateUrl: './view-master-table.component.html',
@@ -144,6 +144,18 @@ export class ViewMasterTableComponent implements OnInit {
         this.isLoading = false;
         this.masterService.setMasterId(null);
       });
+  }
+
+  exportToExcel(tableId: string, name?: string) {
+    let timeSpan = new Date().toISOString();
+    let prefix = name || 'ExportResult';
+    let fileName = `${prefix}-${timeSpan}`;
+    let targetTableElm = document.getElementById(tableId);
+    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
+      sheet: prefix,
+    });
+
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 
   calculatingOhMaterialCosts(overhaul: any) {

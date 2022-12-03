@@ -51,7 +51,7 @@
               </thead>
               <tbody>
                 <tr class="table-responsive" *ngFor="
-                    let user of sortedUsers | searchFilter: searchText |  paginate: { itemsPerPage: 5, currentPage: p }
+                    let user of sortedUsers | searchFilter: searchText |  paginate: { itemsPerPage: 20, currentPage: p }
                     let i = index
                   ">
                   <td>
@@ -71,7 +71,7 @@
                   <td>
                     <div class=" d-flex py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ user.userEmail }}</p>
+                        <p class="mb-0 text-sm text-pre-wrap">{{ user.userEmail }}</p>
                       </div>
                     </div>
                   </td>
@@ -91,7 +91,7 @@
                     </div>
                   </td>
 
-                  <td>
+                  <td class="mb-0">
                     <div class=" d-flex">
                       <div class="d-flex flex-column">
                         <div class="d-flex">

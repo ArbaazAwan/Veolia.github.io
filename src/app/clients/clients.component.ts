@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
 @Component({
   selector: 'app-clients',
@@ -7,7 +8,7 @@ import { ClientService } from './client.service';
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService) {}
+  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService) {}
   form!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
@@ -48,10 +49,11 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
+        this.userService.openSnackBar('Client Created', 'close');
         this.getClient();
       },
       error: (err: any) => {
-        this.getClient();
+        window.location.reload();
         this.error = err;
       },
     });
@@ -85,10 +87,14 @@ export class ClientsComponent implements OnInit {
       this.clientService
         .updateClient(this.currentClient, this.form.value)
         .subscribe({
-          next: (_) => this.getClient(),
-          error: (err) => {
+          next: (_) => {
+            this.userService.openSnackBar('Client Updated', 'close');
             this.getClient();
-            this.error = err;
+          },
+          error: (err) => {
+            this.error = err.message;
+            this.userService.openSnackBar(this.error, 'close');
+            this.getClient();
           },
         });
     }

@@ -24,6 +24,7 @@ import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
 import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
 import { IsAdminGuard } from './auth/is-admin.guard';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [AppComponent, Error404Component],
@@ -52,7 +53,7 @@ import { IsAdminGuard } from './auth/is-admin.guard';
           { path: 'dropdown', component: DropdownComponent },
           { path: 'unit', component: UnitComponent },
           { path: 'summary', component: SummaryComponent },
-          {path: 'clientslist', component: ClientsListComponent},
+          { path: 'clientslist', component: ClientsListComponent },
         ],
         canActivate: [IsAuthenticatedGuard],
       },
@@ -61,7 +62,7 @@ import { IsAdminGuard } from './auth/is-admin.guard';
     NgbModule,
   ],
 
-  providers: [],
+  providers: [BnNgIdleService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

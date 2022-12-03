@@ -14,13 +14,14 @@
         </div>
         <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-            <mat-label>Search assets</mat-label>
+            <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
-          <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
+          <table class="table table-blocked table-hover mb-0" ng-focus="table" matSort
+            (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
@@ -36,7 +37,7 @@
                   New Asset Type
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
-                 Style
+                  Style
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
                   Size
@@ -66,7 +67,7 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 10, currentPage: p }
+                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 20, currentPage: p }
                 ">
                 <td>
                   <div class="d-flex mx-2">
@@ -76,8 +77,8 @@
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" data-bs-target="#modal-form-view"
-                            (click)="viewMaster(master.masterId)">
+                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal"
+                            data-bs-target="#modal-form-view" (click)="viewMaster(master.masterId)">
                             <i class="material-icons">visibility</i>
                             &nbsp;View
                           </button>
@@ -90,14 +91,10 @@
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
-                          <button
-                          ngbDropdownItem
-                          class="text-danger"
-                          (click)="deleteMaster(master.masterId)"
-                        >
-                          <i class="material-icons">delete</i>&nbsp;
-                          Delete
-                        </button>
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)">
+                            <i class="material-icons">delete</i>&nbsp;
+                            Delete
+                          </button>
 
                         </div>
                       </div>

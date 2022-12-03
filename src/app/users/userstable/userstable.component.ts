@@ -16,17 +16,18 @@ export class UserstableComponent implements OnInit {
   @Output() changeUserPasswordEvent = new EventEmitter();
 
   p: number = 1;
-  clients:any = [];
-  selectedClients:any = [];
-  userId:any;
+  clients: any = [];
+  selectedClients: any = [];
+  userId: any;
   sortedUsers: any = [];
 
-  constructor(private userService: UserService, private clientService:ClientService) {}
+  constructor(
+    private userService: UserService,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
-
-      this.sortAssets({ active: 'userId', direction: 'desc' })
-
+    this.sortAssets({ active: 'userId', direction: 'desc' });
   }
 
   changeUserPassword(userId: any) {
@@ -41,52 +42,49 @@ export class UserstableComponent implements OnInit {
     this.deleteUserEvent.emit(id);
   }
 
-  onSubmit(){
-    let clientIds:any = [];
-    this.selectedClients.forEach((sClient:any) => {
+  onSubmit() {
+    let clientIds: any = [];
+    this.selectedClients.forEach((sClient: any) => {
       clientIds.push(sClient.clientId);
     });
 
-    let clientIdsPayload =  clientIds.join(',');
+    let clientIdsPayload = clientIds.join(',');
 
     let payload = {
-      "userId": this.userId,
-      "clientId": clientIdsPayload
-    }
+      userId: this.userId,
+      clientId: clientIdsPayload,
+    };
 
-       this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
-       console.log(res);
-      })
-      this.selectedClients = [];
-
+    this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
+      console.log(res);
+    });
+    this.selectedClients = [];
   }
 
-  onAssignClient(userId:any){
+  onAssignClient(userId: any) {
     this.userId = userId;
 
-    this.clientService.getClients().subscribe((clients:any)=>
-    {
+    this.clientService.getClients().subscribe((clients: any) => {
       this.clients = [];
-        clients.forEach((client:any)=>{
-          let c = {
-            clientId : client.clientId,
-            clientName : client.clientName
-          }
-          this.clients.push(c)
-
-        })
+      clients.forEach((client: any) => {
+        let c = {
+          clientId: client.clientId,
+          clientName: client.clientName,
+        };
+        this.clients.push(c);
       });
+    });
 
-    this.userService.getClientsByUserId(userId).subscribe((res:any)=>{
+    this.userService.getClientsByUserId(userId).subscribe((res: any) => {
       this.selectedClients = [];
-        res.userClients.forEach((uc:any) => {
-          let c = {
-            clientId :  Number(uc.clientId),
-            clientName : uc.clientName
-          }
-          this.selectedClients.push(c);
-        });
+      res.userClients.forEach((uc: any) => {
+        let c = {
+          clientId: Number(uc.clientId),
+          clientName: uc.clientName,
+        };
+        this.selectedClients.push(c);
       });
+    });
   }
   sortAssets(sort: any) {
     const data = this.users.slice();
@@ -94,7 +92,7 @@ export class UserstableComponent implements OnInit {
       return;
     }
 
-    this.sortedUsers = data.sort((a:any, b:any) => {
+    this.sortedUsers = data.sort((a: any, b: any) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'userId':

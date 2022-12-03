@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class SitesComponent implements OnInit {
     name: '',
   };
 
-  constructor(private fb: FormBuilder, private siteService: SiteService) {}
+  constructor(private fb: FormBuilder, private siteService: SiteService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -39,7 +40,6 @@ export class SitesComponent implements OnInit {
     this.siteService.getSites().subscribe((res: any) => {
       this.sites = res;
       this.isLoading = false;
-      console.log(this.sites);
     });
   }
 
@@ -54,9 +54,13 @@ export class SitesComponent implements OnInit {
     if (this.form.invalid) return alert('invalid form');
     const clientID = localStorage.getItem('clientId');
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
-      next: (_) => this.getSites(),
+      next: (_) => {
+        this.userService.openSnackBar('Site Created', 'close');
+        this.getSites();
+      },
       error: (e) => {
-        this.error = e;
+        this.error = e.message;
+        this.userService.openSnackBar(this.error, 'close');
         this.getSites();
       },
     });
@@ -84,11 +88,13 @@ export class SitesComponent implements OnInit {
       this.isLoading = true;
       this.siteService.updateSite(this.currentSite, this.form.value).subscribe({
         next: (_) => {
+          this.userService.openSnackBar('Site Updated', 'close');
           this.getSites();
         },
         error: (err) => {
+          this.error = err.message;
+          this.userService.openSnackBar(this.error, 'close');
           this.getSites();
-          this.error = err;
         },
       });
     }
@@ -97,5 +103,6 @@ export class SitesComponent implements OnInit {
   onDeleteSite(id: any) {
     this.sites = this.sites.filter(({ siteId }) => siteId != id);
     this.siteService.deleteSite(id);
+    this.userService.openSnackBar('Site Deleted', 'close');
   }
 }
