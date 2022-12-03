@@ -50,18 +50,21 @@ export class NodeService {
         data: {
           desc: 'Material',
         },
+        expanded: true,
         children: [],
       },
       {
         data: {
           desc: 'Labor',
         },
+        expanded: true,
         children: [],
       },
       {
         data: {
           desc: 'Contractor',
         },
+        expanded: true,
         children: [],
       },
     ];

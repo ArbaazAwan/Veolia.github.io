@@ -31,8 +31,10 @@ export class NavbarComponent implements OnInit {
   filteredClients: any[] = [];
 
   keyword: string = 'name';
+  href: string = '';
 
   ngOnInit(): void {
+    this.href = this.router.url;
     this.populateClients();
     this.selectedClient = localStorage.getItem('clientId');
     this.selectedSite = localStorage.getItem('siteId');
