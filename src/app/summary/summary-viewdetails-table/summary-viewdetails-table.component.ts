@@ -13,6 +13,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   assetTableNumbers: string[] = [];
   submitted: boolean = false;
   eventsCosts: number[] = [];
+  overhaulCost:number = 0;
   yearsArray:any = new Array(50);
   yearsCosts:any = new Array(50);
 
@@ -52,9 +53,10 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       (master:any)=>{
 
         let events = master.events;
+        let overhaul = master.overhaul;
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
-        let overhaulLife = master.master.overhaulLife;
+        let overhaulLife = Number(master.master.overhaulLife);
         console.log("master", master);
 
         console.log("lifeMonths",lifeMonths);
@@ -77,6 +79,17 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
         }
 
+        if(overhaul){  //calculating overhaul cost
+          overhaul.overhaulMaintenance.forEach(
+            (ohM:any)=>{
+              this.overhaulCost +=  Number(ohM.ohCost)
+            });
+          overhaul.overhaulContractors.forEach(
+            (ohC:any)=>{
+              this.overhaulCost += Number(ohC.ohHour)
+            });
+        }
+
         for(let i =0; i<events.length; i++){ //adding occured events in a year to yearsArray
           for (let m = 0; m < 600; m++)
           {
@@ -84,10 +97,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             if (m % events[i].evOccurence === 0){
               this.yearsArray[m/12].events.push(i);
             }
-            if(m % overhaulLife == 0){
-              this.yearsArray[m/12]
-            }
 
+          }
+        }
+
+        for (let m = 0; m < 600; m++){ //adding overhaul cost to the year
+          if(m % overhaulLife == 0){
+            this.yearsCosts[Math.floor(m/12)] += this.overhaulCost;
+            // console.log("overhaul year cost",this.yearsCosts)
           }
         }
 
