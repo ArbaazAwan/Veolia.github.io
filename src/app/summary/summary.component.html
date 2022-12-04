@@ -8,11 +8,9 @@
 
   <div class="float-end">
     <button type="button" class="btn bg-gradient-primary text-right mx-2" data-bs-toggle="modal"
+      [disabled]="summaryData.length == 0"
       data-bs-target="#detail-table">
       View More Info
-    </button>
-    <button type="button" class="btn bg-gradient-primary text-right mx-2">
-      Export Summary
     </button>
   </div>
 

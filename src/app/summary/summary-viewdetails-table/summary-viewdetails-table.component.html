@@ -6,8 +6,7 @@
           <h5 class="">
             Summary
             <span class="text-right float-end">
-              <button data-bs-dismiss="modal"
-                class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+              <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                 <i class="material-icons" style="font-size: 30px">close</i>
               </button>
             </span>
@@ -15,110 +14,38 @@
           <p class="mb-0">Equipment Details</p>
         </div>
 
-        <div class="card m-4">
-          <div style="width: 100%;" class="table-responsive overflow-hidden">
-            <table class="table tabel-fluid">
-              <tbody>
-                <!-- header list  -->
-                <tr class="bg-light">
-                  <th>
-                    <h6 class="form-label text-bold m-2">
-                      Unit or Equipment Functional Description
-                    </h6>
-                  </th>
-                  <th>
-                    <label class="text-bold mt-2">Average Year</label>
-                  </th>
-                  <th *ngFor="let header of assetTableHeaders">
-                    <label class="form-label text-bold mt-2">{{header}}</label>
-                  </th>
-                </tr>
-
-                <!-- event material cost -->
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 1 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 2 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 3 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 4 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 5 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 6 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 7 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Back Flow Preventor, Allard
-                    </label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="bg-light">
-                    <label class="text-bold">Aer Tank 8 Diffusers</label>
-                  </td>
-                  <td *ngFor="let number of assetTableNumbers">
-                    <p class="mb-0 text-sm">{{ number }}</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="card-body  table-responsive m-4">
+          <table class="table table-hover">
+            <thead>
+              <!-- header list  -->
+              <tr class="bg-light">
+                <th>
+                  <h6 class="form-label text-bold m-2">
+                    Unit or Equipment Functional Description
+                  </h6>
+                </th>
+                <th>
+                  <label class="text-bold mt-2">Average Year</label>
+                </th>
+                <th *ngFor="let header of assetTableHeaders">
+                  <p class="form-label text-bold mt-2">{{header}}</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let summary of summaryArray let i = index;">
+                <td class="bg-light">
+                  <label class="text-bold">{{summary.unit}}</label>
+                </td>
+                <td>
+                  <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
+                </td>
+                <td *ngFor="let yearlyCost of yearsCostsViewTable[i]">
+                  <p class="mb-0 text-sm">{{ yearlyCost }}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
