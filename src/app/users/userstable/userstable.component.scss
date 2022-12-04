@@ -15,7 +15,10 @@ td{
   white-space: normal !important; 
   overflow-wrap: break-word;
 }
-
+p {
+  word-break: break-all;
+  white-space: normal;
+}
 .user-pagination ::ng-deep .ngx-pagination .current {
   background: #ec407a;
   font-family: "Roboto";

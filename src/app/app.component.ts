@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { BnNgIdleService } from 'bn-ng-idle';
 import { Router } from '@angular/router';
+import { BnNgIdleService } from 'bn-ng-idle';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
