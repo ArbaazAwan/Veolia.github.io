@@ -107,7 +107,7 @@
               <!-- all tab -->
               <mat-tab label="All">
                 <div class="card">
-                  <p-treeTable [value]="files" [columns]="cols" class="table-responsive">
+                  <p-treeTable [value]="files" id="treetable" [columns]="cols" class="table-responsive">
                     <ng-template pTemplate="header" let-columns>
                       <tr>
                         <th *ngFor="let col of columns" class="">

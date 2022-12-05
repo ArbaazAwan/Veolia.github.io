@@ -150,7 +150,7 @@ export class ViewMasterTableComponent implements OnInit {
     let timeSpan = new Date().toISOString();
     let prefix = name || 'ExportResult';
     let fileName = `${prefix}-${timeSpan}`;
-    let targetTableElm = document.getElementById(tableId);
+    let targetTableElm = document.getElementById('treetable');
     let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
       sheet: prefix,
     });
