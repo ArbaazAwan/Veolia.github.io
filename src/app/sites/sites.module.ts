@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SiteFormComponent } from './site-form/site-form.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {MatSortModule} from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatIconModule,
     NgxPaginationModule,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   exports: [SitesListComponent],
 })

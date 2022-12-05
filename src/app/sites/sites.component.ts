@@ -105,4 +105,6 @@ export class SitesComponent implements OnInit {
     this.siteService.deleteSite(id);
     this.userService.openSnackBar('Site Deleted', 'close');
   }
+
+  
 }
