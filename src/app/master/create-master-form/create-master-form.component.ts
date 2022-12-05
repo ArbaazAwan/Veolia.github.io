@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
@@ -12,6 +13,7 @@ export class CreateMasterFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private masterService: MasterService,
+    private summaryService:SummaryService,
     private userService: UserService
   ) {}
 
@@ -130,6 +132,14 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService.deleteMaster(this.editMasterId).subscribe((res: any) => {
       console.log(res);
     });
+
+    this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
+      next:(summaries:any)=>{
+        summaries.forEach((summary:any) => {
+          
+        });
+      }
+    })
 
     let f = this.form.value;
 

@@ -19,19 +19,43 @@ export class SummarytableComponent implements OnInit {
 
   selectedAssets: any[] = [];
   searchText: string = '';
+  siteId:any = localStorage.getItem("siteId");
 
   @Input() isLoading: boolean = false;
-  summaryData: any[] = [];
+  summaryData: any = [];
 
   selection = new SelectionModel(true,[]);
 
   constructor(private summaryService:SummaryService) {}
 
   ngOnInit(): void {
-    this.summaryService.getSummary().subscribe(
-    (res:any)=>{
-      this.summaryData = res;
+
+    // this.getSummariesBySiteId(this.siteId);
+
+    this.summaryService.getSummary().subscribe({
+      next:(summaries)=>{
+        this.summaryData = summaries;
+      },
+      error:(err)=>{
+        console.log("error occured in getSummary");
+      }
+    })
+
+  }
+
+  getSummariesBySiteId(siteId:any){
+    this.summaryService.getSummariesBySiteId(siteId).subscribe({
+      next: (summaries)=>{
+
+        console.log("summaries", summaries);
+
+        this.summaryData = summaries;
+      },
+      error:(_)=>{
+        console.log("error occured in getSummariesBySiteId");
+      }
     }
+
     )
   }
 
