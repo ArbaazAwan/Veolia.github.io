@@ -56,24 +56,15 @@
                   </small>
                 </mat-form-field>
 
-                <!-- <mat-form-field appearance="outline">
-                  <mat-label *ngIf="isLoading">
-                    <div class="select-placeholder-container">
-                      <span>Loading...</span>
-                      <mat-spinner class="spinner" diameter="20"></mat-spinner>
-                    </div>
-                  </mat-label>
-                  <mat-label *ngIf="!isLoading">Select Client</mat-label>
-                  <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
-                    (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)"
-                    [disabled]="isLoading">
-                    <mat-option *ngFor="let client of clients" value="{{ client.clientId }}">
-                      {{ client.clientName }}
-                    </mat-option>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Status</mat-label>
+
+                  <mat-select [(value)]="siteStatus" placeholder="Mode">
+                    <mat-option value="true">Active</mat-option>
+                    <mat-option value="false">Inactive</mat-option>
                   </mat-select>
-    
-                  <mat-icon matSuffix>people</mat-icon>
-                </mat-form-field> -->
+
+                </mat-form-field>
                 
               </div>
               <div class="text-center mt-4">

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
+
+type ClientType = 'true' | 'false';
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -17,11 +20,13 @@ export class ClientsComponent implements OnInit {
   error: any = {};
   currentClient: any = {};
   isEditFormLoading: boolean = true;
+  clientStatus : ClientType;
 
   ngOnInit(): void {
     this.form = this.fb.group({
       clientName: ['', Validators.required],
       contractYears: ['', Validators.required],
+      clientStatus: ['', Validators.required],
     });
 
     this.getClient();
@@ -75,6 +80,7 @@ export class ClientsComponent implements OnInit {
       this.form = this.fb.group({
         clientName: [_client.clientName, Validators.required],
         contractYears: [_client.contractYears, Validators.required],
+        clientStatus : [_client.clientStatus],
       });
 
       this.isEditFormLoading = false;
@@ -84,8 +90,8 @@ export class ClientsComponent implements OnInit {
   onUpdateClient() {
     if (this.currentClient.clientId) {
       this.isLoading = true;
-      this.clientService
-        .updateClient(this.currentClient, this.form.value)
+      console.log(this.form.value);
+      this.clientService.updateClient(this.currentClient, this.form.value)
         .subscribe({
           next: (_) => {
             this.userService.openSnackBar('Client Updated', 'close');
