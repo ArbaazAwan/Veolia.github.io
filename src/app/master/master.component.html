@@ -1,50 +1,45 @@
-<button
-  type="button"
-  class="btn bg-gradient-primary mx-4 text-right"
-  data-bs-toggle="modal"
-  data-bs-target="#modal-form-create"
->
+<button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
+  data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
   Insert Record
 </button>
-<app-import-excel></app-import-excel>
+<app-import-excel *ngIf="role == 'admin'"></app-import-excel>
 <!-- table here -->
 <div class="container-fluid py-4">
   <app-master-table (viewMasterEvent)="onViewMaster($event)"></app-master-table>
 </div>
 
 <!-- Create form here -->
-<div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+  aria-hidden="true">
   <app-create-master-form></app-create-master-form>
 </div>
 
 <!-- View Table Modal -->
-    <div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view"
-      aria-hidden="true">
-      <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="card card-plain">
-              <div class="card-header pb-0">
-                <div class="text-left">
-                  <h5 class="">
-                    Master
-                    <span class="float-end">
-                      <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="material-icons" style="font-size: 30px">close</i>
-                      </button>
-                    </span>
-                  </h5>
-                  <p class="mb-0">Master Details</p>
-                </div>
-              </div>
-              <div class="card-body">
-                <app-view-master-table
-                [eventEvalTableShow]="eventEvalTableShow"
-                ></app-view-master-table>
-              </div>
+<div class="modal fade" id="modal-form-view" tabindex="-1" role="dialog" aria-labelledby="modal-form-view"
+  aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0">
+            <div class="text-left">
+              <h5 class="">
+                Master
+                <span class="float-end">
+                  <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                    <i class="material-icons" style="font-size: 30px">close</i>
+                  </button>
+                </span>
+              </h5>
+              <p class="mb-0">Master Details</p>
             </div>
+          </div>
+          <div class="card-body">
+            <app-view-master-table [eventEvalTableShow]="eventEvalTableShow"></app-view-master-table>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 <!-- ----- -->
