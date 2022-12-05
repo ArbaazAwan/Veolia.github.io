@@ -48,11 +48,11 @@ export class AuthService {
     );
   }
 
-  autoLogout(){
-    setTimeout(()=>{
-      this.logout();
-    },3000);
-  }
+  // autoLogout(){
+  //   setTimeout(()=>{
+  //     this.logout();
+  //   },3000);
+  // }
 
   logout() {
     localStorage.removeItem('clientId');

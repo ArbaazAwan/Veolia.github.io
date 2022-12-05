@@ -1,35 +1,20 @@
 <div class="container-fluid py-1">
   <div class="float-start">
-    <button
-      type="button"
-      class="btn bg-gradient-primary mx-2 text-right"
-      data-bs-toggle="modal"
-      data-bs-target="#modal-form"
-    >
+    <button type="button" class="btn bg-gradient-primary mx-2 text-right" data-bs-toggle="modal"
+      data-bs-target="#modal-form">
       Add site
     </button>
   </div>
 
-  <app-sites-table
-    *ngIf="sites.length>0"
-    [sites]="sites"
-    [isLoading]="isLoading"
-    (deleteSiteEvent)="onDeleteSite($event)"
-    (editSiteEvent)="onEditSite($event)"
-  ></app-sites-table>
+  <app-sites-table *ngIf="sites.length>0" [sites]="sites" [isLoading]="isLoading"
+    (deleteSiteEvent)="onDeleteSite($event)" (editSiteEvent)="onEditSite($event)"></app-sites-table>
 
   <!-- <app-site-form></app-site-form> -->
 </div>
 
 <!-- Edit Form -->
-<div
-  class="modal fade"
-  id="edit-modal-form"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="modal-form"
-  aria-hidden="true"
->
+<div class="modal fade" id="edit-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -38,12 +23,8 @@
             <h5 class="">
               Site
               <span class="text-right float-end">
-                <button
-                  type="button"
-                  (click)="resetForm()"
-                  data-bs-dismiss="modal"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-                >
+                <button type="button" (click)="resetForm()" data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -57,52 +38,50 @@
 
             <form [formGroup]="form" *ngIf="!isEditFormLoading">
               <div class="row">
-                <mat-form-field
-                  class="example-form-field text-xs my-1"
-                  appearance="outline"
-                >
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
-                  <input
-                    formControlName="siteName"
-                    matInput
-                    type="text"
-                    [ngClass]="
+                  <input formControlName="siteName" matInput type="text" [ngClass]="
                       (form.controls['siteName'].dirty ||
                         form.controls['siteName'].touched) &&
                       form.hasError('required', 'siteName') == true
                         ? 'border-danger'
                         : ''
-                    "
-                  />
-                  <small
-                    class="text-danger float-end"
-                    *ngIf="
+                    " />
+                  <small class="text-danger float-end" *ngIf="
                       (form.controls['siteName'].dirty ||
                         form.controls['siteName'].touched) &&
                       form.hasError('required', 'siteName')
-                    "
-                  >
+                    ">
                     Site Name is required
                   </small>
                 </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline">
+                  <mat-label *ngIf="isLoading">
+                    <div class="select-placeholder-container">
+                      <span>Loading...</span>
+                      <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                    </div>
+                  </mat-label>
+                  <mat-label *ngIf="!isLoading">Select Client</mat-label>
+                  <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
+                    (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)"
+                    [disabled]="isLoading">
+                    <mat-option *ngFor="let client of clients" value="{{ client.clientId }}">
+                      {{ client.clientName }}
+                    </mat-option>
+                  </mat-select>
+    
+                  <mat-icon matSuffix>people</mat-icon>
+                </mat-form-field> -->
+                
               </div>
               <div class="text-center mt-4">
-                <button
-                  type="submit"
-                  (click)="onUpdateSite()"
-                  type="button"
-                  data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2"
-                  [disabled]="isEditFormLoading"
-                >
+                <button type="submit" (click)="onUpdateSite()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2" [disabled]="isEditFormLoading">
                   Update
                 </button>
-                <button
-                  type="button"
-                  (click)="resetForm()"
-                  data-bs-dismiss="modal"
-                  class="btn bg-gradient-dark m-2"
-                >
+                <button type="button" (click)="resetForm()" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
               </div>
@@ -115,14 +94,7 @@
 </div>
 
 <!-- sites form here -->
-<div
-  class="modal fade"
-  id="modal-form"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="modal-form"
-  aria-hidden="true"
->
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -131,11 +103,8 @@
             <h5 class="">
               Site
               <span class="text-right float-end">
-                <button
-                  type="button"
-                  data-bs-dismiss="modal"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button"
-                >
+                <button type="button" data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -145,51 +114,30 @@
           <div class="card-body">
             <form [formGroup]="form">
               <div class="row">
-                <mat-form-field
-                  class="example-form-field text-xs my-1"
-                  appearance="outline"
-                >
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
-                  <input
-                    formControlName="siteName"
-                    matInput
-                    type="text"
-                    [ngClass]="
+                  <input formControlName="siteName" matInput type="text" [ngClass]="
                       (form.controls['siteName'].dirty ||
                         form.controls['siteName'].touched) &&
                       form.hasError('required', 'siteName') == true
                         ? 'border-danger'
                         : ''
-                    "
-                  />
-                  <small
-                    class="text-danger float-end"
-                    *ngIf="
+                    " />
+                  <small class="text-danger float-end" *ngIf="
                       (form.controls['siteName'].dirty ||
                         form.controls['siteName'].touched) &&
                       form.hasError('required', 'siteName')
-                    "
-                  >
+                    ">
                     Site Name is required
                   </small>
                 </mat-form-field>
               </div>
               <div class="text-center mt-4">
-                <button
-                  type="submit"
-                  (click)="onSubmit()"
-                  type="button"
-                  data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2"
-                >
+                <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-primary m-2">
                   Create
                 </button>
-                <button
-                  type="button"
-                  (click)="resetForm()"
-                  data-bs-dismiss="modal"
-                  class="btn bg-gradient-dark m-2"
-                >
+                <button type="button" (click)="resetForm()" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
               </div>
