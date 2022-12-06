@@ -32,14 +32,14 @@ export class SummarytableComponent implements OnInit {
 
     // this.getSummariesBySiteId(this.siteId);
 
-    this.summaryService.getSummary().subscribe({
-      next:(summaries)=>{
-        this.summaryData = summaries;
-      },
-      error:(err)=>{
-        console.log("error occured in getSummary");
-      }
-    })
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
+        next:(res:any)=>{
+          this.summaryData = res.summary;
+        },
+        error:(err)=>{
+          console.log("error occured in getSummary");
+        }
+      })
 
   }
 
@@ -60,12 +60,15 @@ export class SummarytableComponent implements OnInit {
   }
 
   deleteSummary(id: any) {
-    this.summaryService.deleteSummary(id).subscribe(
-      (res:any)=>{
+    this.summaryService.deleteSummary(id).subscribe({
+      next:(res)=>{
+        window.location.reload();
+      },
+      error:()=>{
         window.location.reload();
       }
-    )
-  }
+    })
+    }
 
   editSummary(id: any) {
     this.summaryService.setSummaryId(id);
