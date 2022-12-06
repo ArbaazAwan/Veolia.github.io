@@ -51,7 +51,7 @@
               </thead>
               <tbody>
                 <tr class="table-responsive" *ngFor="
-                    let user of sortedUsers | searchFilter: searchText |  paginate: { itemsPerPage: 20, currentPage: p }
+                    let user of sortedUsers | searchFilter: searchText |  paginate: { itemsPerPage: 50, currentPage: p }
                     let i = index
                   ">
                   <td>
@@ -100,7 +100,7 @@
                               <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                                 Actions
                               </button>
-                              <div ngbDropdownMenu="gfg">
+                              <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
                                 <button ngbDropdownItem data-bs-toggle="modal" data-bs-target="#modal-assign-client"
                                   (click)="onAssignClient(user.userId)">
                                   <i class="material-icons">people</i>&nbsp; Assign Client

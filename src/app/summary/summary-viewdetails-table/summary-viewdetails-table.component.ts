@@ -140,7 +140,3 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     });
   }
 }
-
-export class YearEvents {
-  events: number[];
-}

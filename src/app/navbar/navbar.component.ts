@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     private clientService: ClientService,
     private siteService: SiteService,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   user: any;
