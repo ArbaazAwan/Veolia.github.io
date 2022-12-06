@@ -67,7 +67,7 @@
             </thead>
             <tbody>
               <tr *ngFor="
-                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 20, currentPage: p }
+                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 50, currentPage: p }
                 ">
                 <td>
                   <div class="d-flex mx-2">
@@ -76,18 +76,18 @@
                         <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
-                        <div ngbDropdownMenu="gfg">
+                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
                           <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-view" (click)="viewMaster(master.masterId)">
+                            data-bs-target="#modal-form-view">
                             <i class="material-icons">visibility</i>
                             &nbsp;View
                           </button>
-                          <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
+                          <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
                             data-bs-target="#modal-form-create">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem class="" (click)="onDuplicate(master.masterId)">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
@@ -184,7 +184,7 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ master.overhaulLife }}%
+                        {{ master.overhaulLife }}
                       </p>
                     </div>
                   </div>
