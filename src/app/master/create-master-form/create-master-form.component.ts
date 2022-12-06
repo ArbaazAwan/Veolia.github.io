@@ -135,8 +135,9 @@ export class CreateMasterFormComponent implements OnInit {
 
     this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
       next:(summaries:any)=>{
+        console.log("summaries", summaries);
         summaries.forEach((summary:any) => {
-          
+
         });
       }
     })
