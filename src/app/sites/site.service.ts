@@ -22,7 +22,7 @@ export class SiteService {
     return this.http.get(this.SITE_URL, { headers: this.headers });
   }
 
-  getSiteById(id: string) {
+  getSiteById(id: any) {
     return this.http.get(this.SITE_URL + id, { headers: this.postHeaders });
   }
 
