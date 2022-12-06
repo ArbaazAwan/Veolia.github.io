@@ -30,6 +30,7 @@
                 <th *ngFor="let header of assetTableHeaders">
                   <p class="form-label text-bold mt-2">{{header}}</p>
                 </th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -38,7 +39,7 @@
                   <label class="text-bold">{{summary.unit}}</label>
                 </td>
                 <td>
-                  <!-- <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p> -->
+                  <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
                 </td>
                 <td *ngFor="let yearlyCost of yearsCostsViewTable[i] let y = index">
                   <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) }}</p>

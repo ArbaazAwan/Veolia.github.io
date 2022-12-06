@@ -13,6 +13,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   assetTableNumbers: string[] = [];
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
+  averagesOfYears: any = [];
 
   clientContractYears: number = 0;
   clientId: any = localStorage.getItem('clientId');
@@ -20,7 +21,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   constructor(
     private masterService: MasterService,
     private clientService: ClientService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     for (let i = 1; i <= 50; i++) {
@@ -28,18 +29,11 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       this.assetTableHeaders.push(a);
     }
 
-    for (let i = 0; i < 50; i++) {
-      let a = '500';
-      this.assetTableNumbers.push(a);
-    }
     this.getContractYears();
-    for (let index = 0; index < 10; index++) {
-      this.getMaster(3143);
-    }
-    console.log(this.yearsCostsViewTable);
+    this.summaryArray.forEach((summary:any) => {
+      this.getMaster(summary.masterId);
+    });
 
-
-    //hardcoded value
   }
 
   getMaster(masterId: any) {
@@ -47,7 +41,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
     var yearsArray: any = new Array(51);
-    var yearsCosts: any = new Array(51);
+    var yearsCosts: any = [];
 
     for (let i = 0; i < yearsArray.length; i++) {
       let events: number[] = [];
@@ -127,8 +121,17 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             yearsCosts[y] += Number(replacementCost);
           }
         }
+
+        let totalCost = 0;
+        yearsCosts.forEach((cost: any) => {
+          totalCost += cost;
+        });
+        let averageCost = totalCost/50;
+        this.averagesOfYears.push(Math.floor(averageCost));
+
+        this.yearsCostsViewTable.push(yearsCosts);
       });
-    this.yearsCostsViewTable.push(yearsCosts);
+
   }
 
   getContractYears() {
