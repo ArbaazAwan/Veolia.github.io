@@ -90,7 +90,6 @@ export class ClientsComponent implements OnInit {
   onUpdateClient() {
     if (this.currentClient.clientId) {
       this.isLoading = true;
-      console.log(this.form.value);
       this.clientService.updateClient(this.currentClient, this.form.value)
         .subscribe({
           next: (_) => {
