@@ -169,13 +169,12 @@ export class CreateMasterFormComponent implements OnInit {
       },
       events: f.events, //events array
     };
-    console.log("form value", this.form.value);
 
-    // this.masterService
-    //   .postCompleteMaster(completeMaster)
-    //   .subscribe((res: any) => {
-    //     this.userService.openSnackBar('Master Created/Edited', 'close');
-    //   });
+    this.masterService
+      .postCompleteMaster(completeMaster)
+      .subscribe((res: any) => {
+        this.userService.openSnackBar('Master Created/Edited', 'close');
+      });
   }
 
   events(): FormArray {
