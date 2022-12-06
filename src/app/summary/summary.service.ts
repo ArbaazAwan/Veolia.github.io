@@ -55,8 +55,8 @@ export class SummaryService {
     return this.http.put(this.URL+summaryId,payLoad,{ headers:this.postHeaders } );
   }
 
-  updateSummaryMasterId(summaryId:any, masterId:any){
-    return this.http.put(this.UPDATE_SUMMARY_MASTERID + summaryId, { masterId: masterId });
+  updateSummaryMasterId(oldMasterId:any, newMasterId:any){
+    return this.http.put(this.UPDATE_SUMMARY_MASTERID + oldMasterId, { masterId: newMasterId }, {headers: this.postHeaders});
   }
 
   updateClient(_client: any, data: any) {
