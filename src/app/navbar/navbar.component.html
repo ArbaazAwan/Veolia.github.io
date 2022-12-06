@@ -5,7 +5,7 @@
       <div class="ms-md-auto pe-md-3 d-flex align-items-center" [ngClass]="href == '/clientslist' ? 'addpadding' : '' ">
         <div class="row float-end text-xs">
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
               <mat-label *ngIf="isLoadingClient">
                 <div class="select-placeholder-container">
                   <span>Loading...</span>
@@ -25,7 +25,7 @@
             </mat-form-field>
           </div>
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
               <mat-label *ngIf="isLoadingSite">
                 <div class="select-placeholder-container">
                   <span>Loading...</span>
