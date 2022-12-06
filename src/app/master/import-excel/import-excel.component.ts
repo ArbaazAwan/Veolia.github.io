@@ -18,7 +18,9 @@ export class ImportExcelComponent implements OnInit {
   constructor(private masterService: MasterService,private siteService:SiteService) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSiteStatus();
+  }
 
   getSiteStatus(){
     this.siteService.getSiteById(this.siteId).subscribe({
