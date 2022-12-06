@@ -17,7 +17,7 @@ export class MasterTableComponent implements OnInit {
   p: number = 1;
   siteId = localStorage.getItem('siteId');
   message: any;
-  siteStatus:boolean = true;
+  siteStatus:boolean=false;
 
   @Output() viewMasterEvent = new EventEmitter();
 

@@ -84,7 +84,7 @@
                     <div class="d-flex py-1 ps-3">
                       <div class="d-flex flex-column">
                         <div ngbDropdown>
-                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
+                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
                             Actions
                           </button>
                           <div ngbDropdownMenu="gfg">

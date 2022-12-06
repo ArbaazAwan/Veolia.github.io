@@ -1,10 +1,12 @@
 <div class="upload">
   <input
+    id="input"
     class="form-control"
     #fileUpload
     type="file"
     accept=".xlsx"
     (change)="readExcel($event)"
+    [disabled]="!siteStatus"
   />
 </div>
 <div class="upload">
