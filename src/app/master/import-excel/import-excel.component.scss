@@ -5,3 +5,7 @@
     height: fit-content;
     padding-right: 30px;
 }
+
+#input[disabled] {
+    cursor: not-allowed;
+}

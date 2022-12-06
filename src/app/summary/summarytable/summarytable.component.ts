@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { SiteService } from 'src/app/sites/site.service';
 import { SummaryService } from '../summary.service';
 
 export interface Task {
@@ -20,16 +21,17 @@ export class SummarytableComponent implements OnInit {
   selectedAssets: any[] = [];
   searchText: string = '';
   siteId:any = localStorage.getItem("siteId");
+  siteStatus:boolean=false;
 
   @Input() isLoading: boolean = false;
   summaryData: any = [];
 
   selection = new SelectionModel(true,[]);
 
-  constructor(private summaryService:SummaryService) {}
+  constructor(private summaryService:SummaryService, private siteService:SiteService) {}
 
   ngOnInit(): void {
-
+    this.getSiteStatus();
     // this.getSummariesBySiteId(this.siteId);
 
     this.summaryService.getSummary().subscribe({
@@ -41,6 +43,17 @@ export class SummarytableComponent implements OnInit {
       }
     })
 
+  }
+
+  getSiteStatus(){
+    this.siteService.getSiteById(this.siteId).subscribe({
+      next:(site:any)=>{
+        this.siteStatus = site[0].siteStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getSiteStatus", err);
+      }
+    })
   }
 
   getSummariesBySiteId(siteId:any){
