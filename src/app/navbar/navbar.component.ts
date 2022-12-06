@@ -94,4 +94,8 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  isClientListRoute() {
+    return this.router.url === '/clientslist';
+  }
 }

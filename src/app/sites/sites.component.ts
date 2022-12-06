@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 
+type SiteType = 'true' | 'false';
+
 @Component({
   selector: 'app-sites',
   templateUrl: './sites.component.html',
@@ -19,6 +21,8 @@ export class SitesComponent implements OnInit {
   currentSite: any = {};
   isEditFormLoading: boolean = true;
   selectedClientId: number = 1;
+
+  siteStatus : SiteType;
 
   selectedsite: any = {
     id: null,
@@ -77,6 +81,7 @@ export class SitesComponent implements OnInit {
       console.log(_site);
       this.form = this.fb.group({
         siteName: [_site.siteName, Validators.required],
+        siteStatus : [_site.siteStatus],
       });
 
       this.isEditFormLoading = false;
