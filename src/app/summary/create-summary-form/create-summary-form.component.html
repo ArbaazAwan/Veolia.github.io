@@ -83,20 +83,20 @@
                   </mat-form-field>
 
                   <mat-form-field class="example-form-field text-xs" appearance="outline">
-                    <mat-label class="text-bold">Discription</mat-label>
-                    <input formControlName="discription" matInput type="text" [ngClass]="
-                        (form.controls['discription'].dirty ||
-                          form.controls['discription'].touched) &&
-                        form.hasError('required', 'discription') == true
+                    <mat-label class="text-bold">Application Description</mat-label>
+                    <input formControlName="description" matInput type="text" [ngClass]="
+                        (form.controls['description'].dirty ||
+                          form.controls['description'].touched) &&
+                        form.hasError('required', 'description') == true
                           ? 'border-danger'
                           : ''
                       " />
                     <small class="text-danger float-end" *ngIf="
-                        (form.controls['discription'].dirty ||
-                          form.controls['discription'].touched) &&
-                        form.hasError('required', 'discription')
+                        (form.controls['description'].dirty ||
+                          form.controls['description'].touched) &&
+                        form.hasError('required', 'description')
                       ">
-                      discription is required
+                      app description is required
                     </small>
                   </mat-form-field>
 
