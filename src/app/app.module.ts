@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Error404Component } from './errors/404.component';
@@ -23,12 +23,11 @@ import { SitesComponent } from './sites/sites.component';
 import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
 import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
+import { IsAdminGuard } from './auth/is-admin.guard';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    Error404Component,
-  ],
+  declarations: [AppComponent, Error404Component],
   imports: [
     AuthModule,
     MainModule,
@@ -36,29 +35,34 @@ import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: 'login', component:LoginComponent },
-      { path: 'registration', component:RegistrationComponent },
-      { path: 'clientslist', component:ClientsListComponent, canActivate:[IsAuthenticatedGuard] },
-      { path: '', redirectTo:'login', pathMatch:'full' },
-      { path:'', component:MainComponent,children:[
-          { path: 'clients', component:ClientsComponent },
-          { path: 'sites', component:SitesComponent },
-          { path: 'users', component:UsersComponent },
-          { path: 'profile',component:ProfileComponent },
-          { path: 'dashboard', component:DashboardComponent },
-          { path: 'master', component:MasterComponent },
-          { path: 'model', component:ModelComponent },
-          { path:'dropdown',component:DropdownComponent },
-          { path: 'unit', component:UnitComponent },
-          { path: 'summary', component:SummaryComponent },
-          { path: 'permission',component:PermissionComponent },
-      ],canActivate:[IsAuthenticatedGuard]},
-      { path: '**', component:Error404Component }
+      { path: 'login', component: LoginComponent },
+      { path: 'registration', component: RegistrationComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      {
+        path: '',
+        component: MainComponent,
+        children: [
+          { path: 'clients', component: ClientsComponent },
+          { path: 'sites', component: SitesComponent },
+          { path: 'users', component: UsersComponent },
+          { path: 'permission', component: PermissionComponent },
+          { path: 'profile', component: ProfileComponent },
+          { path: 'dashboard', component: DashboardComponent },
+          { path: 'master', component: MasterComponent },
+          { path: 'model', component: ModelComponent },
+          { path: 'dropdown', component: DropdownComponent },
+          { path: 'unit', component: UnitComponent },
+          { path: 'summary', component: SummaryComponent },
+          { path: 'clientslist', component: ClientsListComponent },
+        ],
+        canActivate: [IsAuthenticatedGuard],
+      },
+      { path: '**', component: Error404Component },
     ]),
     NgbModule,
   ],
 
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [BnNgIdleService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

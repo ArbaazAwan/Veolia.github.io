@@ -1,49 +1,46 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/users/user.service';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-clients-list',
   templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.scss']
+  styleUrls: ['./clients-list.component.scss'],
 })
 export class ClientsListComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private clientService: ClientService
+  ) {}
 
-  constructor() { }
-
-  clientsArray!:any[];
-  panelOpenState:boolean= false;
+  clients!: any[];
+  isLoading: boolean = false;
+  panelOpenState: boolean = false;
+  noclients: boolean = false;
 
   ngOnInit(): void {
-    this.clientsArray = [
-      {
-        id:'1',
-        name:'Client 1',
-        companyName:'Company1',
-        email:'email1@example.com'
-      },
-      {
-        id:'2',
-        name:'Client 2',
-        companyName:'Company2',
-        email:'email2@example.com'
-      },
-      {
-        id:'3',
-        name:'Client 3',
-        companyName:'Company3',
-        email:'email3@example.com'
-      },
-      {
-        id:'4',
-        name:'Client 4',
-        companyName:'Company4',
-        email:'email4@example.com'
-      },
-      {
-        id:'5',
-        name:'Client 5',
-        companyName:'Company5',
-        email:'email5@example.com'
-      },
-    ]
+    this.isLoading = true;
+
+    let userEmail = localStorage.getItem('user_email');
+    this.userService.getUserByEmail(userEmail).subscribe((users: any) => {
+      let userId: string = users[0].userId;
+      if (users[0].role.toLowerCase() == 'user') {
+        this.userService.getClientsByUserId(userId).subscribe({
+          next: (response: any) => {
+            this.clients = response.userClients;
+            this.isLoading = false;
+          },
+          error: (error) => {
+            this.noclients = true;
+            this.isLoading = false;
+          },
+        });
+      } else {
+        this.clientService.getClients().subscribe((res: any) => {
+          this.clients = res;
+          this.isLoading = false;
+        });
+      }
+    });
   }
 }

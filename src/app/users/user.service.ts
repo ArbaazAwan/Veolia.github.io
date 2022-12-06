@@ -1,69 +1,82 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUser } from '../data-models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  USER_URL: string = environment.baseUrl + 'user/';
+  CLIENTS_BY_USER_ID_URL: string = environment.baseUrl + 'getclientsbyuserid/';
+  ASSIGN_CLIENTS_URL: string = environment.baseUrl + 'assignClients/';
+  CREATE_USER_URL: string = environment.baseUrl + 'signup/';
+  users: any[] = [];
 
-  getUsersUrl:string = 'http://127.0.0.1:3000/user';
-  getUserByIdUrl:string = 'http://127.0.0.1:3000/user/';
-  postUserUrl:string = 'http://127.0.0.1:3000/user';
-  updateUserUrl:string = 'http://127.0.0.1:3000/user/';
-  deleteUserUrl:string = 'http://127.0.0.1:3000/user/';
-
-  users:IUser[]=[];
-
-  headers = new HttpHeaders({
+  headers = new HttpHeaders({});
+  postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': "'*'"
+    // "Access-Control-Allow-Headers": "'*'"
   });
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  private userId = new BehaviorSubject (null);
+  currentUserId = this.userId.asObservable();
 
-  getUsers()
-  {
-    this.http.get(this.getUsersUrl,{headers:this.headers})
-    .subscribe((res:any)=>{
-        console.log(res);
+  setUserId(userId:any){
+    this.userId.next(userId)
+  }
+
+  getUsers() {
+    return this.http.get(this.USER_URL, { headers: this.headers });
+  }
+
+  getUserById(id: string) {
+    return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
+  }
+  getUserByClientId(id: string) {
+    return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
+  }
+  getClientsByUserId(body: any) {
+    return this.http.post(this.CLIENTS_BY_USER_ID_URL, {"userId":body}, { headers: this.postHeaders });
+  }
+  assignClientsByUserId(body: any) {
+    return this.http.post(this.ASSIGN_CLIENTS_URL, body, { headers: this.postHeaders });
+  }
+  getUserByEmail(email:any) {
+    return this.http.get(this.USER_URL + "email/"+ email, { headers: this.headers });
+  }
+  postUser(user: any) {
+    return this.http.post(this.CREATE_USER_URL, user, {
+      headers: this.postHeaders,
+    });
+  }
+  updateUser(id: any, data: any) {
+    return this.http.put(this.USER_URL + id, data, {
+      headers: this.postHeaders,
+    });
+  }
+  changeUserPassword(data:any){
+    return this.http.put(this.USER_URL + "password",data,{headers:this.postHeaders});
+  }
+  deleteUser(id: any, username: string) {
+    this.http
+      .delete(this.USER_URL + id, {
+        body: {
+          username
+        },
+      })
+      .subscribe((res) => {
+        console.log(res, 'deleted');
       });
   }
+  openSnackBar(message:string, action: string){
+    let snackBarRef = this.snackBar.open(message, action, {duration: 5000});
 
-  getUserById(id:string){
-    this.http.get(this.getUserByIdUrl+id)
-    .subscribe((res:any)=>{
-      console.log(res);
-    })
+    snackBarRef.afterDismissed().subscribe(()=>{
+      window.location.reload();
+    });
   }
-
-  postUser(user:any){
-    this.http.post(this.postUserUrl,
-      {userId:user.userId,userName:user.userName,userEmail:user.userEmail,role:user.role,userStatus:user.userStatus},
-      {headers:this.headers}).subscribe(
-        (res)=>{
-          console.log(res);
-        }
-      )
-  }
-
-  updateUser(id:string,user:any){
-    this.http.put(this.updateUserUrl+id,
-      {userId:user.userId,userName:user.userName,userEmail:user.userEmail,role:user.role,userStatus:user.userStatus},
-      {headers:this.headers}).subscribe(
-        (res)=>{
-          console.log(res);
-        }
-      )
-  }
-
-  deleteUser(id:string)
-  {
-    this.http.delete(this.deleteUserUrl+id).subscribe(
-      (res)=>{
-        console.log(res);
-      }
-    )
-  }
-
 }

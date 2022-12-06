@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { SummaryService } from '../summary.service';
 
 export interface Task {
   name: string;
@@ -12,57 +13,62 @@ export interface Task {
 @Component({
   selector: 'app-summarytable',
   templateUrl: './summarytable.component.html',
-  styleUrls: ['./summarytable.component.scss']
+  styleUrls: ['./summarytable.component.scss'],
 })
 export class SummarytableComponent implements OnInit {
 
-  constructor() { }
+  selectedAssets: any[] = [];
+  searchText: string = '';
+  siteId:any = localStorage.getItem("siteId");
 
-  @Input() summaryArray!:any[];
-  allComplete: boolean = false;
-  completed: boolean = false;
-  selectedAssets:any[]=[];
-  searchText:string = '';
+  @Input() isLoading: boolean = false;
+  summaryData: any = [];
+
+  selection = new SelectionModel(true,[]);
+
+  constructor(private summaryService:SummaryService) {}
 
   ngOnInit(): void {
+
+    // this.getSummariesBySiteId(this.siteId);
+
+    this.summaryService.getSummary().subscribe({
+      next:(summaries)=>{
+        this.summaryData = summaries;
+      },
+      error:(err)=>{
+        console.log("error occured in getSummary");
+      }
+    })
+
   }
 
+  getSummariesBySiteId(siteId:any){
+    this.summaryService.getSummariesBySiteId(siteId).subscribe({
+      next: (summaries)=>{
 
-  updateAllComplete() {
-    this.allComplete = this.summaryArray != null && this.summaryArray.every(t => t.isChecked);
-  }
-  someComplete(): boolean {
-    if (this.summaryArray == null) {
-      return false;
+        console.log("summaries", summaries);
+
+        this.summaryData = summaries;
+      },
+      error:(_)=>{
+        console.log("error occured in getSummariesBySiteId");
+      }
     }
-    return this.summaryArray.filter(t => t.completed).length > 0 && !this.allComplete;
+
+    )
   }
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.summaryArray == null) {
-      return;
-    }
-    this.summaryArray.forEach(t => (t.completed = completed));
+  deleteSummary(id: any) {
+    this.summaryService.deleteSummary(id).subscribe(
+      (res:any)=>{
+        window.location.reload();
+      }
+    )
   }
 
-  selection = new SelectionModel<any>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.summaryArray.length;
-    return numSelected === numRows;
+  editSummary(id: any) {
+    this.summaryService.setSummaryId(id);
   }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.summaryArray.forEach(row => this.selection.select(row));
-  }
-}
-function output() {
-  throw new Error('Function not implemented.');
 }
 

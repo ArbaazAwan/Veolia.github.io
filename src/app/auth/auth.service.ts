@@ -1,34 +1,65 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { environment } from 'src/environments/environment';
+import { UserService } from '../users/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     const token = localStorage.getItem('login_auth');
     this._isLoggedIn$.next(!!token);
   }
 
-  url: string = 'http://127.0.0.1:3000/login';
+  email = localStorage.getItem('user_email');
+  CLIENT_URL: string = environment.baseUrl + 'login';
+
   headers = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
   });
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
+  private _isAdmin$ = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this._isAdmin$.asObservable();
+
   userLogin(email: string, password: string) {
-    this.http
+    return this.http
       .post(
-        this.url,
+        this.CLIENT_URL,
         { email: email, password: password },
         { headers: this.headers }
       )
-      .subscribe((response: any) => {
-        this._isLoggedIn$.next(true);
+      .pipe(
+        tap((res: any) => {
+          this._isLoggedIn$.next(true);
+        })
+      );
+  }
 
-        localStorage.setItem('login_auth',response.token);
-      });
+  initializeRole() {
+    this.userService.getUserByEmail(this.email).pipe(
+      tap((res: any) => {
+        if (res[0].role == 'admin') this._isAdmin$.next(true);
+      })
+    );
+  }
+
+  autoLogout(){
+    setTimeout(()=>{
+      this.logout();
+    },3000);
+  }
+
+  logout() {
+    localStorage.removeItem('clientId');
+    localStorage.removeItem('siteId');
+    localStorage.removeItem('user_email');
+    localStorage.removeItem('login_auth');
+    sessionStorage.clear();
+    this._isAdmin$.next(false);
   }
 }

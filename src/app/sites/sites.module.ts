@@ -10,7 +10,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { SiteFormComponent } from './site-form/site-form.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -28,10 +29,10 @@ import { SiteFormComponent } from './site-form/site-form.component';
     NgbModule,
     PipesModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    NgxPaginationModule,
+    MatSortModule,
   ],
-  exports:[
-    SitesListComponent,
-  ]
+  exports: [SitesListComponent],
 })
-export class SitesModule { }
+export class SitesModule {}

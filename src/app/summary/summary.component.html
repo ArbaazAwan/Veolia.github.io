@@ -1,34 +1,26 @@
-  <div class="container-fluid py-1">
-    <div class="float-start">
-      <button type="button" class="btn bg-gradient-primary mx-2 text-right"
-        data-bs-toggle="modal" data-bs-target="#modal-form">
-        Create Record
-      </button>
-    </div>
-
-    <div class="float-end">
-      <button type="button" class="btn bg-gradient-primary text-right mx-2"
-        data-bs-toggle="modal" data-bs-target="#detail-table">
-        View More Info
-      </button>
-      <button type="button" class="btn bg-gradient-primary text-right mx-2">
-        Export Summary
-      </button>
-    </div>
-
-
-    <!-- asset detail table modal -->
-    <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table"
-      aria-hidden="true">
-      <app-summary-viewdetails-table></app-summary-viewdetails-table>
-    </div>
-
-    <!-- summary modal form -->
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-      <app-create-summary-form></app-create-summary-form>
-    </div>
-
-    <div class="mt-6">
-      <app-summarytable></app-summarytable>
-    </div>
+<div class="container-fluid py-1">
+  <div class="float-start">
+    <button type="button" class="btn bg-gradient-primary mx-2 text-right" data-bs-toggle="modal"
+      data-bs-target="#modal-form">
+      Create Record
+    </button>
   </div>
+
+  <div class="float-end">
+    <button type="button" class="btn bg-gradient-primary text-right mx-2" data-bs-toggle="modal"
+      [disabled]="summaryData.length == 0"
+      data-bs-target="#detail-table">
+      View More Info
+    </button>
+  </div>
+
+  <div class="mt-6">
+    <app-summarytable [isLoading]="isLoading"></app-summarytable>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <app-create-summary-form></app-create-summary-form>
+</div>
+

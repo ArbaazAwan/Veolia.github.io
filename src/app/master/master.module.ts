@@ -14,7 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MasterTableComponent } from './master-table/master-table.component';
 import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
-import { UpdateMasterFormComponent } from './update-master-form/update-master-form.component';
+import { ImportExcelComponent } from './import-excel/import-excel.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { UpdateMasterFormComponent } from './update-master-form/update-master-fo
     ViewMasterTableComponent,
     MasterTableComponent,
     CreateMasterFormComponent,
-    UpdateMasterFormComponent,
+    ImportExcelComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +37,8 @@ import { UpdateMasterFormComponent } from './update-master-form/update-master-fo
     NgbModule,
     TreeTableModule,
     HttpClientModule,
-    PipesModule
+    PipesModule,
+    NgxPaginationModule
   ],
   exports:[
     MasterComponent,

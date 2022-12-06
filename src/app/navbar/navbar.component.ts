@@ -1,67 +1,97 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { ClientService } from '../clients/client.service';
+import { SiteService } from '../sites/site.service';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private clientService: ClientService,
+    private siteService: SiteService,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
-  constructor(private router:Router) { }
+  user: any;
+  userEmail: string | null;
+  isLoadingClient: boolean = false;
+  isLoadingSite: boolean = false;
+  selectedClient: any;
+  selectedSite: any;
+  clients!: any[];
+  sites!: any[];
+  filteredSites: any[] = [];
+  filteredClients: any[] = [];
 
-  @Input() title:string='';
+  keyword: string = 'name';
+  href: string = '';
 
-  selectedClient: any={
-    name:''
-  };
-  clients!:any[];
-  selectedSite:any={
-    name:''
-  };
-  sites!:any[];
-  filteredSites:any[]=[];
-  filteredClients:any[]=[];
-  keyword:string='name'
   ngOnInit(): void {
-    this.clients= [
-      { name: "Client 1"},
-      { name: "Client 2"},
-      { name: "Client 3"},
-      { name: "Client 4"},
-    ];
-    this.sites = [
-      { name: "Site 1" },
-      { name: "Site 2" },
-      { name: "Site 3" },
-      { name: "Site 4" },
-      { name: "Site 5" },
-    ];
+    this.href = this.router.url;
+    this.populateClients();
+    this.selectedClient = localStorage.getItem('clientId');
+    this.selectedSite = localStorage.getItem('siteId');
+    if (this.selectedClient) {
+      this.populateSites(this.selectedClient);
+    }
+    this.userEmail = localStorage.getItem('user_email');
+    if (this.userEmail) {
+      this.userService.getUserByEmail(this.userEmail).subscribe((res: any) => {
+        this.user = res[0];
+      });
+    }
   }
 
-  selectEvent(item:any) {
-    // do something with selected item
+  populateClients() {
+    this.isLoadingClient = true;
+    if (localStorage.getItem('role')?.toLocaleLowerCase() == 'user') {
+      var email = localStorage.getItem('user_email');
+      this.userService.getUserByEmail(email).subscribe((users: any) => {
+        let userId: string = users[0].userId;
+        this.userService.getClientsByUserId(userId).subscribe({
+          next: (response: any) => {
+            this.clients = response.userClients;
+            this.isLoadingClient = false;
+          },
+          error: (error) => {
+            this.isLoadingClient = false;
+          },
+        });
+      });
+    } else {
+      this.clientService.getClients().subscribe((res: any) => {
+        this.clients = res;
+        this.isLoadingClient = false;
+      });
+    }
   }
 
-  onChangeSearch(search: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
+  populateSites(client: any) {
+    this.isLoadingSite = true;
+    this.siteService.getSiteByClientId(client).subscribe((res: any) => {
+      this.sites = res;
+      this.isLoadingSite = false;
+    });
   }
 
-  onFocused(e:any) {
-    // do something
-  }
-  onClientSelect(selectedClient:any){
-
+  onClientSelect(selectedClient: any) {
+    localStorage.setItem('clientId', selectedClient.value);
   }
 
-  onSiteSelect(selectedClient:any){
-
+  onSiteSelect(selectedClient: any) {
+    localStorage.setItem('siteId', selectedClient.value);
+    window.location.reload();
   }
-  logOut(){
-    localStorage.removeItem('login_auth');
+
+  logOut() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
-
-
 }

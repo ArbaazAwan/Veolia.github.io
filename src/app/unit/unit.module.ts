@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { MasterModule } from '../master/master.module';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     MatInputModule,
     MasterModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
 
 
   ],

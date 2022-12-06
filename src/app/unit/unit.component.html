@@ -1,19 +1,18 @@
   <div class="row">
-    <form [formGroup]="formGroup">
       <div class="content col-12" role="main">
-        <mat-form-field appearance="outline" class="mx-3" style="font-size: 80%">
+        <mat-form-field appearance="outline" class="mx-3 col-md-6" style="font-size: 80%">
           <mat-label
             > Search Assets
           </mat-label>
           <input
-            formControlName="asset"
+            [formControl]="asset"
             matInput
             type="text"
             [matAutocomplete]="auto"
           />
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let item of filteredOptions" [value]="item">
-              {{ item }}
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getSelectedMaster($event.option.value)' [displayWith]="getDisplayText">
+            <mat-option *ngFor="let master of filteredMasters" [value]="master">
+              {{master.oldAssetType}}  | {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
             </mat-option>
           </mat-autocomplete>
           <mat-icon matSuffix>search</mat-icon>
@@ -25,6 +24,5 @@
         </button>
         </span>
       </div>
-    </form>
   </div>
-  <app-view-master-table [eventEvalTableShow]="eventEvalTableShow"></app-view-master-table>
+  <app-view-master-table [eventEvalTableShow]="eventEvalTableShow" ></app-view-master-table>

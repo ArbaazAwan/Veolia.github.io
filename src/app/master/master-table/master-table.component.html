@@ -5,145 +5,194 @@
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">
             Assets Table
-          </p> 
+          </p>
         </div>
       </div>
       <div class="card-body px-0">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" *ngIf="isLoading"></div>
+        </div>
         <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-            <mat-label>Search assets</mat-label>
+            <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive overflow-hidden ">
-          <table class="table table-blocked table-hover mb-0" matSort (matSortChange)="sortAssets($event)">
+        <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
+          <table class="table table-blocked table-hover mb-0" ng-focus="table" matSort
+            (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="id">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
+                  &nbsp;Actions
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder" mat-sort-header="masterId">
                   Id
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitDesc">
-                  Unit Desc
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldAssetType">
+                  Asset Type
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="appDesc">
-                  AppDesc
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newAssetType">
+                  New Asset Type
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeas">
-                  UnitMeas
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
+                  Style
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
+                  Size
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
+                  Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
+                  New Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeasurement">
+                  Unit Measurement
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
                   Rev
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replCost">
-                  Repl Cost
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replacementCost">
+                  Replacement Cost
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMOs">
-                  Lifemos
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="lifeMonths">
+                  Life Months
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
-                  OH Life
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3">
-                  Actions
+                  Overhaul Life
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="
-                  let asset of sortedAssets | searchFilter: assetSearchText
+                  let master of sortedMasters| searchFilter: assetSearchText  |  paginate: { itemsPerPage: 20, currentPage: p }
                 ">
                 <td>
-                  <div class="d-flex px-3 py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.id }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.unitDesc }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.appDesc }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.unitMeas }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.rev | currency }}</p>
-                    </div>
-                  </div>
-                </td>
-
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ asset.replCost | currency }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ asset.lifeMOs }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ asset.OHLife / 100 | percent }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
+                  <div class="d-flex mx-2">
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form-view"
-                            (click)="viewAsset(asset)">
+                          <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal"
+                            data-bs-target="#modal-form-view" (click)="viewMaster(master.masterId)">
                             <i class="material-icons">visibility</i>
                             &nbsp;View
                           </button>
-                          <button ngbDropdownItem class="" (click)="editAsset(asset)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form">
+                          <button ngbDropdownItem class="" (click)="editMaster(master.masterId)" data-bs-toggle="modal"
+                            data-bs-target="#modal-form-create">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem class="">
-                            <i class="material-icons">content_copy</i>&nbsp;
+                          <button ngbDropdownItem class="" (click)="onDuplicate(master.masterId)">
+                            <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)">
+                            <i class="material-icons">delete</i>&nbsp;
+                            Delete
+                          </button>
+
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex px-3 py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.masterId }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.oldAssetType }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.newAssetType }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.masterStyle }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.masterSize }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.unitMeasurement }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.rev }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.replacementCost }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ master.lifeMonths }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ master.overhaulLife }}%
+                      </p>
                     </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

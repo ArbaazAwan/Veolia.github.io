@@ -1,76 +1,298 @@
-  <div class="container-fluid py-1">
-    <div class="float-start">
-      <button (click)="formReset();"type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right"
-      data-bs-toggle="modal" data-bs-target="#modal-form">
-        Create User
-      </button>
-    </div>
-<!-- create user form -->
-    <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-          <div class="modal-content">
-            <div class="modal-body p-0">
-              <div class="card card-plain">
-                <div class="card-header pb-0 text-left">
-                  <h5 class="">User
-                    <span class="text-right float-end">
-                      <button data-bs-dismiss="modal"
-                        class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="material-icons" style="font-size: 30px">close</i>
-                      </button>
-                    </span>
-                  </h5>
-                  <p class="mb-0">Enter User Details</p>
-                </div>
-                <div class="card-body">
-                  <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
-                    <div class="row">
-                        <div class="my-1">
-                          <label class="form-label text-bold">Name</label>
-                          <div class="input-group input-group-outline">
-                            <input type="text" formControlName="name" class="form-control" placeholder="Please Enter Name" />
-                          </div>
-                        </div>
-                        <div class="my-1">
-                          <label class="form-label text-bold">Email</label>
-                          <div class="input-group input-group-outline">
-                            <input type="email" formControlName="email" class="form-control" placeholder="Please Enter email"
-                               />
-                          </div>
-                        </div>
-                        <div class="my-1">
-                          <label class="form-label text-bold">Role</label>
-                          <div class="input-group input-group-outline">
-                            <input type="text" formControlName="role" class="form-control" placeholder="Please Enter User Role"
-                             />
-                          </div>
-                        </div>
-                        <div class="my-1">
-                          <label class="form-label text-bold">Status</label>
-                          <div class="input-group input-group-outline">
-                            <input type="text" formControlName="status" class="form-control" placeholder="Please Enter User Status"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    <div class="text-center mt-2">
-                      <button type="submit" data-bs-dismiss="modal"
-                        class="btn bg-gradient-primary m-2">
-                        Create
-                      </button>
-                      <button (click)="formReset();" type="button" data-bs-dismiss="modal"
-                        class="btn bg-gradient-secondary m-2">
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+<div class="container-fluid py-1">
+  <div class="float-start">
+    <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
+      data-bs-target="#modal-form">
+      Create User
+    </button>
+  </div>
+<!-- user table -->
+  <div class="mt-6">
+    <app-userstable [isLoading]="isLoading" *ngIf="users.length>0" [users]="users" [searchText]="searchText"
+      (deleteUserEvent)="onDeleteUser($event)" (editUserEvent)="onEditUser($event)"
+      (changeUserPasswordEvent)="onChangePassword($event)"></app-userstable>
+  </div>
+</div>
+
+<!-- edit user form -->
+<div class="modal fade" id="edit-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              User
+              <span class="text-right float-end">
+                <button (click)="formReset()" data-bs-dismiss="modal"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter User Details</p>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" *ngIf="isEditFormLoading"></div>
             </div>
+
+            <form [formGroup]="form" (ngSubmit)="onUpdateUser()" *ngIf="!isEditFormLoading" role="form">
+              <div class="row">
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Username</mat-label>
+                  <input formControlName="username" matInput type="text" [disabled]="true" [ngClass]="
+                      (form.controls['username'].dirty ||
+                        form.controls['username'].touched) &&
+                      form.hasError('required', 'username') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['username'].dirty ||
+                        form.controls['username'].touched) &&
+                      form.hasError('required', 'email')
+                    ">
+                    Username is required
+                  </small>
+                </mat-form-field>
+                <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+                  <mat-label class="text-bold">Email</mat-label>
+                  <input required formControlName="email" matInput type="email" [ngClass]="
+                      (form.controls['email'].dirty ||
+                        form.controls['email'].touched) &&
+                      form.hasError('required', 'email') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['email'].dirty ||
+                        form.controls['email'].touched) &&
+                      form.hasError('required', 'email')
+                    ">
+                    Email is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Role</mat-label>
+
+                  <mat-select [(value)]="role" placeholder="Mode">
+                    <mat-option value="admin">Admin</mat-option>
+                    <mat-option value="user">User</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+              <div class="text-center mt-2">
+                <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2"
+                  [disabled]="isEditFormLoading">
+                  Update
+                </button>
+                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-dark m-2">
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-    <div class="mt-6">
-      <app-userstable [userArray]="userArray"></app-userstable>
     </div>
   </div>
+</div>
+
+<!-- create user form -->
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              User
+              <span class="text-right float-end">
+                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter User Details</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+              <div class="row">
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Username</mat-label>
+                  <input formControlName="username" matInput type="text" required [ngClass]="
+                      (form.controls['username'].dirty ||
+                        form.controls['username'].touched) &&
+                      form.hasError('required', 'username') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['username'].dirty ||
+                        form.controls['username'].touched) &&
+                      form.hasError('required', 'username')
+                    ">
+                    Username is required
+                  </small>
+                </mat-form-field>
+                <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+                  <mat-label class="text-bold">Email</mat-label>
+                  <input formControlName="email" matInput type="email" required [ngClass]="
+                      (form.controls['email'].dirty ||
+                        form.controls['email'].touched) &&
+                      form.hasError('required', 'email') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['email'].dirty ||
+                        form.controls['email'].touched) &&
+                      form.hasError('required', 'email')
+                    ">
+                    Email is required
+                  </small>
+                </mat-form-field>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Password</mat-label>
+                  <input formControlName="password" matInput type="password" required minlength="8" [ngClass]="
+                      (form.controls['password'].dirty ||
+                        form.controls['password'].touched) &&
+                      form.hasError('required', 'password') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['password'].dirty ||
+                        form.controls['password'].touched) &&
+                      form.hasError('required', 'password')
+                    ">
+                    Password is required
+                  </small>
+
+                  <small class="text-danger float-end" *ngIf="
+                      form.controls['password'].errors &&
+                      form.controls['password'].errors['invalidPassword']
+                    ">
+                    Password should have minimum 8 characters, at least 1
+                    uppercase letter, and 1 special character
+                  </small>
+                </mat-form-field>
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Role</mat-label>
+
+                  <mat-select [(value)]="role">
+                    <mat-option value="admin">Admin</mat-option>
+                    <mat-option value="user">User</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+              </div>
+              <div class="text-center mt-2">
+                <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2"
+                  [disabled]="form.invalid">
+                  Create
+                </button>
+                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
+                  class="btn bg-gradient-dark m-2">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- set password form here -->
+<div class="modal fade" id="modal-form-pass" tabindex="-1" role="dialog" aria-labelledby="modal-form-pass"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              Set Password
+              <span class="text-right float-end">
+                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter User Password</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="pForm" (ngSubmit)="submitPassword()" role="form">
+              <div class="row">
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Username</mat-label>
+                  <input formControlName="username" matInput type="text"/>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Password</mat-label>
+                  <input formControlName="password" matInput type="password" required minlength="8" [ngClass]="
+                      (pForm.controls['password'].dirty ||
+                        pForm.controls['password'].touched) &&
+                      pForm.hasError('required', 'password') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+
+                  <small class="text-danger float-end" *ngIf="
+                      pForm.controls['password'].errors &&
+                      pForm.controls['password'].errors['invalidPassword']
+                    ">
+                    Password should have minimum 8 characters, at least 1
+                    uppercase letter, and 1 special character
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Confirm Password</mat-label>
+                  <input formControlName="confirmPassword" matInput type="password" required minlength="8" [ngClass]="
+                      (pForm.controls['confirmPassword'].dirty ||
+                        pForm.controls['confirmPassword'].touched) &&
+                      pForm.hasError('required', 'confirmPassword') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      pForm.controls['confirmPassword'].errors &&
+                      pForm.controls['confirmPassword'].errors[
+                        'invalidPassword'
+                      ]
+                    ">
+                    Password should have minimum 8 characters, at least 1
+                    uppercase letter, and 1 special character
+                  </small>
+
+                  <small class="text-danger float-end" *ngIf="pForm.controls['confirmPassword'].errors?.['matching']">
+                    Confirm Password does not match
+                  </small>
+                </mat-form-field>
+
+                <div class="text-center mt-2">
+                  <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2"
+                    [disabled]="pForm.invalid">
+                    Save
+                  </button>
+                  <button (click)="formReset()" type="button" data-bs-dismiss="modal"
+                    class="btn bg-gradient-dark m-2">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

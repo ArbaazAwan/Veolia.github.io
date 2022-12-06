@@ -1,43 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SiteService } from '../site.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sites-list',
   templateUrl: './sites-list.component.html',
-  styleUrls: ['./sites-list.component.scss']
+  styleUrls: ['./sites-list.component.scss'],
 })
 export class SitesListComponent implements OnInit {
+  @Input() clientId: any;
+  constructor(private siteService: SiteService, private router: Router) {}
 
-  constructor() { }
-
-  sitesList!:any[];
+  sitesList!: any[];
+  isLoading: boolean = false;
 
   ngOnInit(): void {
-    this.sitesList=[
-      {
-        siteName:'Site 1',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'ABC',
-        phone:'123456',
-        email:'abc@xyz.com'
-      },
-      {
-        siteName:'Site 2',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'BCD',
-        phone:'123456',
-        email:'abc@xyz.com'
-      },
-      {
-        siteName:'Site 3',
-        address:'abc street xyz city',
-        siteClient:'Client1',
-        siteContactPerson:'CDE',
-        phone:'123456',
-        email:'abc@xyz.com'
-      }
-    ]
+    this.isLoading = true;
+    this.siteService.getSiteByClientId(this.clientId).subscribe((res: any) => {
+      this.isLoading = false;
+      this.sitesList = res;
+    });
   }
 
+  setclient(event: any) {
+    const siteId: string = event.target.id;
+    this.siteService.getSiteById(siteId).subscribe((res: any) => {
+      localStorage.setItem('clientId', res[0].clientId);
+      localStorage.setItem('siteId', event.target.id);
+      this.router.navigate(['/dashboard']);
+    });
+  }
 }

@@ -12,87 +12,95 @@
         <div class="flex-end px-3 col-md-3">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Clients</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText">
+            <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive overflow-hidden">
-          <table class="table table-blocked table-hover mx-3 mb-0 ">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" *ngIf="isLoading"></div>
+          </div>
+          <table class="table table-blocked table-hover mx-3 mb-0" *ngIf="!isLoading" matSort
+            (matSortChange)="sortAssets($event)">
             <thead>
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  id
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientId">
+                  Client id
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientName">
                   Client Name
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Company Name
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="contractYears">
+                  Contract Years
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Address
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientCreated">
+                  Client Created
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Email
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientStatus">
+                  Client Status
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
-                  Edit
+                  Actions
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let client of clientsArray|searchFilter:searchText">
+              <tr *ngFor="
+                  let client of sortedClients | searchFilter: searchText |  paginate: { itemsPerPage: 10, currentPage: p };
+                  let i = index;
+                ">
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">123456</p>
+                      <p class="mb-0 text-sm">{{ client.clientId }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientName}}</p>
+                      <p class="mb-0 text-sm">{{ client.clientName }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientCompanyName}}</p>
+                      <p class="mb-0 text-sm">{{ client.contractYears }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientAddress}}</p>
+                      <p class="mb-0 text-sm">{{ client.clientCreated | date: "mediumDate"}}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{client.clientEmail}}</p>
+                      <p class="mb-0 text-sm" *ngIf="client.clientStatus == true">Active</p>
+                      <p class="mb-0 text-sm" *ngIf="client.clientStatus == false">Inactive</p>
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex py-1 ps-3">
+                  <div class="d-flex ps-3">
                     <div class="d-flex flex-column">
                       <div>
-                        <div class="d-flex py-1">
+                        <div class="d-flex">
                           <div class="d-flex flex-column">
-                            <div ngbDropdown>
-                              <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                            <div ngbDropdown container="body" class="fix-size">
+                              <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                                 Actions
                               </button>
                               <div ngbDropdownMenu="gfg">
-                                <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form">
-                                  <i class="material-icons">edit</i>&nbsp;
-                                  Edit
+                                <button ngbDropdownItem (click)="editClient(client.clientId)" data-bs-toggle="modal"
+                                  data-bs-target="#edit-modal-form">
+                                  <i class="material-icons">edit</i>&nbsp; Edit
                                 </button>
-                                <button ngbDropdownItem class="text-danger">
+                                <button ngbDropdownItem class="text-danger" (click)="deleteClient(client.clientId)">
                                   <i class="material-icons">delete</i>&nbsp;
                                   Delete
                                 </button>
@@ -107,6 +115,7 @@
               </tr>
             </tbody>
           </table>
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>
     </div>

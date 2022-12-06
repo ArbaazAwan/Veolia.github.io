@@ -1,33 +1,35 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SiteService } from '../site.service';
 
 @Component({
   selector: 'app-site-form',
   templateUrl: './site-form.component.html',
-  styleUrls: ['./site-form.component.scss']
+  styleUrls: ['./site-form.component.scss'],
 })
 export class SiteFormComponent implements OnInit {
+  constructor(private fb: FormBuilder, private siteService: SiteService) {}
 
-  @Input() sitesArray!:any[];
-  constructor(private fb:FormBuilder) { }
+  form!: FormGroup;
+  selectedClientId: number = 1;
 
-  form!:FormGroup;
   ngOnInit(): void {
-    this.form = this.fb.group({
-      siteName:['', Validators.required],
-      siteCompanyName:['', Validators.required],
-      siteAddress:['', Validators.required],
-      siteEmail:['', Validators.required],
-    })
+    // this.form = this.fb.group({
+    //   siteName: [null, Validators.required],
+    // });
   }
 
-  resetForm(){
+  resetForm() {
     this.form.reset();
   }
 
-  onSubmit(){
-    this.sitesArray.push(this.form.value);
-    this.resetForm();
+  onSubmit() {
+    // if (this.form.invalid) return alert('invalid form');
+    // this.siteService
+    //   .postSite(this.form.value.siteName, this.selectedClientId)
+    //   .subscribe
+    //   //validations here
+    //   ();
+    // this.resetForm();
   }
-
 }
