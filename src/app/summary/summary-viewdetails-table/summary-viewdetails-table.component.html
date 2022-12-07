@@ -15,7 +15,7 @@
         </div>
         <div class="container-fluid ">
           <div class="float-end">
-              <button type="button" class="btn bg-gradient-primary text-right m-2">
+              <button type="button" (click)="exportToExcel('summaryYears')" class="btn bg-gradient-primary text-right m-2">
                 Export Summary
               </button>
           </div>
@@ -23,7 +23,7 @@
 
 
         <div class="card-body  table-responsive m-4">
-          <table class="table table-hover">
+          <table class="table table-hover" id="summaryTable">
             <thead>
               <!-- header list  -->
               <tr class="bg-light">

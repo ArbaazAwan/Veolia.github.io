@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -138,5 +140,17 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.clientService.getClientById(this.clientId).subscribe((client: any) => {
       this.clientContractYears = client[0].contractYears;
     });
+  }
+
+  exportToExcel( name?: string) {
+    let timeSpan = new Date().toISOString();
+    let prefix = name || 'ExportResult';
+    let fileName = `${prefix}-${timeSpan}`;
+    let targetTableElm = document.getElementById('summaryTable');
+    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
+      sheet: prefix,
+    });
+
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 }
