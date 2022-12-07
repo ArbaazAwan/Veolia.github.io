@@ -26,13 +26,6 @@
                       type="text"
                       [matAutocomplete]="auto"
                     />
-                    <!-- <small class="text-danger float-end" *ngIf="
-                        (form.controls['unit'].dirty ||
-                          form.controls['unit'].touched) &&
-                        form.hasError('required', 'unit')
-                      ">
-                      unit is required
-                    </small> -->
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onAssetChange($event.option.value)' [displayWith]="getDisplayText">
                       <mat-option *ngFor="let master of filteredMasters" [value]="master">
                         {{master.oldAssetType}}  - {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}

@@ -38,11 +38,12 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getMastersBySiteId(this.siteId);
 
     this.asset.valueChanges.subscribe((value: any) => {
-        this.filterData(value.toLowerCase())
+        this.filterData(value)
       });
   }
 
   filterData(enteredData: any){
+    enteredData = enteredData.toString().toLowerCase();
     this.filteredMasters = this.masters.filter((master:any) => {
       return master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1
       || master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1
