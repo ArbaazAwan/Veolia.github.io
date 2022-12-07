@@ -49,6 +49,10 @@ export class MasterTableComponent implements OnInit {
           return this.compare(a.newDescription, b.newDescription, isAsc);
         case 'unitMeasurement':
           return this.compare(a.unitMeasurement, b.unitMeasurement, isAsc);
+        case 'dutyApplication':
+          return this.compare(a.dutyApplication, b.dutyApplication, isAsc);
+        case 'quality':
+          return this.compare(a.quality, b.quality, isAsc);
         case 'rev':
           return this.compare(a.rev, b.rev, isAsc);
         case 'replacementCost':

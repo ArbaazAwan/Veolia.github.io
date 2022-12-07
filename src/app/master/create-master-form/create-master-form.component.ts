@@ -67,27 +67,17 @@ export class CreateMasterFormComponent implements OnInit {
       c.masterStyle.setValue(_master.masterStyle ? _master.masterStyle : '');
       c.newAssetType.setValue(_master.newAssetType ? _master.newAssetType : '');
       c.masterSize.setValue(_master.masterSize ? _master.masterSize : '');
-      c.oldDescription.setValue(
-        _master.oldDescription ? _master.oldDescription : ''
-      );
-      c.newDescription.setValue(
-        _master.newDescription ? _master.newDescription : ''
-      );
-      c.unitMeasurement.setValue(
-        _master.unitMeasurement ? _master.unitMeasurement : ''
-      );
+      c.oldDescription.setValue(_master.oldDescription ? _master.oldDescription : '');
+      c.newDescription.setValue(_master.newDescription ? _master.newDescription : '');
+      c.dutyApplication.setValue(_master.dutyApplication ? _master.dutyApplication : '');
+      c.quality.setValue(_master.quality ? _master.quality : '');
+      c.unitMeasurement.setValue(_master.unitMeasurement ? _master.unitMeasurement : '');
       c.rev.setValue(_master.rev ? _master.rev : '');
-      c.replacementCost.setValue(
-        _master.replacementCost ? _master.replacementCost : ''
-      );
+      c.replacementCost.setValue(_master.replacementCost ? _master.replacementCost : '');
       c.lifeMonths.setValue(_master.lifeMonths ? _master.lifeMonths : '');
       c.overhaulLife.setValue(_master.overhaulLife ? _master.overhaulLife : '');
-      c.ovTitle.setValue(
-        _overhaul ? (_overhaul.ovTitle ? _overhaul.ovTitle : '') : ''
-      );
-      c.ovStretch.setValue(
-        _overhaul ? (_overhaul.ovStretch ? _overhaul.ovStretch : '') : ''
-      );
+      c.ovTitle.setValue(_overhaul ? (_overhaul.ovTitle ? _overhaul.ovTitle : '') : '');
+      c.ovStretch.setValue(_overhaul ? (_overhaul.ovStretch ? _overhaul.ovStretch : '') : '');
 
       const _events = _masterComplete.events;
 
@@ -143,6 +133,8 @@ export class CreateMasterFormComponent implements OnInit {
       masterSize: f.masterSize,
       oldDescription: f.oldDescription,
       newDescription: f.newDescription,
+      dutyApplication: f.dutyApplication,
+      quality: f.quality,
       unitMeasurement: f.unitMeasurement,
       rev: f.rev,
       replacementCost: f.replacementCost,
@@ -165,7 +157,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
-        this.userService.openSnackBar('Master Created/Edited', 'close');
+        this.userService.openSnackBar('Master is Created/Edited', 'close');
       });
   }
 

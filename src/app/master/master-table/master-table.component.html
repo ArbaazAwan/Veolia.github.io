@@ -33,8 +33,14 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldAssetType">
                   Asset Type
                 </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
+                  Description
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newAssetType">
                   New Asset Type
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
+                  New Description
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
                   Style
@@ -42,17 +48,14 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
                   Size
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
-                  Description
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
+                  Duty / Application
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
-                  New Description
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
+                  quality
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeasurement">
                   Unit Measurement
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
-                  Rev
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replacementCost">
                   Replacement Cost
@@ -62,6 +65,9 @@
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
                   Overhaul Life
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
+                  Rev
                 </th>
               </tr>
             </thead>
@@ -118,7 +124,21 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ master.newAssetType }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
                     </div>
                   </div>
                 </td>
@@ -139,14 +159,14 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                      <p class="mb-0 text-sm">{{ master.dutyApplication }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
+                      <p class="mb-0 text-sm">{{ master.quality }}</p>
                     </div>
                   </div>
                 </td>
@@ -154,13 +174,6 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ master.unitMeasurement }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.rev }}</p>
                     </div>
                   </div>
                 </td>
@@ -184,8 +197,15 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ master.overhaulLife }}
+                        {{ master.overhaulLife/100 | percent }}
                       </p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.rev }}</p>
                     </div>
                   </div>
                 </td>
