@@ -15,6 +15,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NavbarModule } from "../navbar/navbar.module";
 import { FooterModule } from "../footer/footer.module";
 import {MatSortModule} from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
     declarations: [ClientsComponent, ClientsListComponent, ClientstableComponent],
@@ -33,7 +35,8 @@ import {MatSortModule} from '@angular/material/sort';
         NgxPaginationModule,
         NavbarModule,
         FooterModule,
-        MatSortModule
+        MatSortModule,
+        MatSelectModule
     ]
 })
 export class ClientsModule {}

@@ -15,6 +15,7 @@ export class MasterComponent implements OnInit {
   excelData: any;
   isLoading:boolean = false;
   siteStatus:boolean=false;
+  role: any = localStorage.getItem('role');
 
   constructor(private masterService:MasterService,  private siteService:SiteService) {}
 
