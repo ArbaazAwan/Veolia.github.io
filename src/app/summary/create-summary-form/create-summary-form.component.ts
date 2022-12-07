@@ -24,6 +24,7 @@ export class CreateSummaryFormComponent implements OnInit {
   submitted: boolean = false;
   siteId:any = localStorage.getItem('siteId');
   asset:FormControl = new FormControl(['', Validators.required]);
+  masterId:any;
 
   ngOnInit(): void {
 
@@ -52,12 +53,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
   onAssetChange(master:any){
 
-  //     "masterId": 3096,
-  //     "siteId": "37",
-  //     "replacementCost": "150000",
-  //     "lifeMonths": "300",
-  //     "overhaulLife": "84",
-
     let unit =  this.getDisplayText(master);
 
     let c =  this.getForm().controls;
@@ -65,11 +60,12 @@ export class CreateSummaryFormComponent implements OnInit {
     c.assetType.setValue(master.oldAssetType + ',' + master.newAssetType)
     c.size.setValue(master.masterSize)
     c.summaryStyle.setValue(master.masterStyle)
-    c.discription.setValue(master.oldDescription + ',' + master.newDescription)
+    c.description.setValue(master.oldDescription + ',' + master.newDescription)
     c.quality.setValue(null)
     c.quantity.setValue(null)
     c.load.setValue(null)
     c.life.setValue(null)
+    this.masterId = master.masterId;
   }
 
   getDisplayText(master:any){
@@ -100,7 +96,7 @@ export class CreateSummaryFormComponent implements OnInit {
       assetType: '',
       size: '',
       summaryStyle: '',
-      discription: '',
+      description: '',
       quality: '',
       quantity: null,
       load: null,
@@ -125,7 +121,7 @@ export class CreateSummaryFormComponent implements OnInit {
           unit,
           assetType,
           size,
-          discription,
+          description,
           quality,
           load,
           quantity,
@@ -136,16 +132,18 @@ export class CreateSummaryFormComponent implements OnInit {
 
         this.summaryService.currentSummaryId.subscribe(
           (summaryId:any)=>{
-            if(summaryId){
+            console.log("asset", this.asset);
+            if(summaryId)
+            {
               const updateSummaryPayload = {
                 siteId: this.siteId,
-                masterId: this.asset.value.masterId,
+                masterId: this.masterId,
                 unit:unit,
                 assetType: assetType,
                 summarySize: size,
                 summaryStatus:true,
-                dutyApplication: discription,
-                appDescription: discription,
+                dutyApplication: description,
+                appDescription: description,
                 quality: quality,
                 summaryload: load,
                 summaryStyle:summaryStyle,
@@ -153,6 +151,8 @@ export class CreateSummaryFormComponent implements OnInit {
                 quantity: quantity,
                 installmentDate:installmentDate
               };
+
+              this.asset.setValue(unit)
 
               this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
                 (res:any)=>{
@@ -161,15 +161,17 @@ export class CreateSummaryFormComponent implements OnInit {
                 }
               )
             }
-            else{
-              const summaryPayload = {
+            else
+            {
+              console.log("asset in create:", this.asset);
+              const createSummaryPayload = {
                 siteId: this.siteId,
-                masterId: this.asset.value.masterId,
+                masterId: this.masterId,
                 unit:unit,
                 assetType: assetType,
                 summarySize: size,
-                dutyApplication: discription,
-                appDescription: discription,
+                dutyApplication: description,
+                appDescription: description,
                 quality: quality,
                 summaryload: load,
                 summaryStyle:summaryStyle,
@@ -178,7 +180,9 @@ export class CreateSummaryFormComponent implements OnInit {
                 installmentDate:installmentDate
               };
 
-              this.summaryService.postSummary(summaryPayload).subscribe(
+              console.log("create summary payload:",createSummaryPayload);
+
+              this.summaryService.postSummary(createSummaryPayload).subscribe(
                (res:any)=>{
                 console.log(res);
                 window.location.reload();
@@ -203,10 +207,11 @@ export class CreateSummaryFormComponent implements OnInit {
       let summary = el[0];
       const {
         unit,
+        masterId,
         assetType,
         summaryload,
         summarySize,
-        discription,
+        description,
         quality,
         summaryStyle,
         life,
@@ -219,12 +224,13 @@ export class CreateSummaryFormComponent implements OnInit {
       c.assetType.setValue(assetType)
       c.size.setValue(summarySize)
       c.summaryStyle.setValue(summaryStyle)
-      c.discription.setValue(discription)
+      c.description.setValue(description)
       c.quality.setValue(quality)
       c.quantity.setValue(quantity)
       c.load.setValue(summaryload)
       c.life.setValue(life)
       c.installmentDate.setValue(installmentDate);
+      this.masterId = masterId;
 
     });
   }

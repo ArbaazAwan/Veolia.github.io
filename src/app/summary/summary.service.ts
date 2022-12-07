@@ -10,6 +10,9 @@ export class SummaryService {
   constructor(private http: HttpClient) {}
 
   URL: string = environment.baseUrl + 'summary/';
+  SUMMARY_BY_SITE_ID:string = environment.baseUrl + 'summary-site-id/';
+  SUMMARY_MASTER_ID:string = environment.baseUrl + 'summary-master-id/';
+  UPDATE_SUMMARY_MASTERID:string = environment.baseUrl + 'summary-masterid/';
   URL_MASTER: string = environment.baseUrl + 'master/';
 
   headers = new HttpHeaders({});
@@ -32,6 +35,14 @@ export class SummaryService {
     return this.http.get(this.URL, { headers: this.headers });
   }
 
+  getSummariesBySiteId(siteId:any){
+    return this.http.get(this.SUMMARY_BY_SITE_ID + siteId, { headers: this.headers } );
+  }
+
+  getSummariesByMasterId(masterId:any){
+    return this.http.get(this.SUMMARY_MASTER_ID + masterId, { headers: this.headers });
+  }
+
   getSummaryById(id: string) {
     return this.http.get(this.URL + id, { headers: this.postHeaders });
   }
@@ -42,6 +53,10 @@ export class SummaryService {
 
   updateSummary(payLoad:any,summaryId:any){
     return this.http.put(this.URL+summaryId,payLoad,{ headers:this.postHeaders } );
+  }
+
+  updateSummaryMasterId(oldMasterId:any, newMasterId:any){
+    return this.http.put(this.UPDATE_SUMMARY_MASTERID + oldMasterId, { masterId: newMasterId }, {headers: this.postHeaders});
   }
 
   updateClient(_client: any, data: any) {

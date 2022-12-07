@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { SiteService } from '../sites/site.service';
 import { SummaryService } from './summary.service';
 
 @Component({
@@ -21,6 +22,8 @@ export class SummaryComponent implements OnInit {
   error: any = {};
   isEditFormLoading: boolean = true;
   isMasterLoading: boolean = true;
+  siteStatus:boolean=false;
+  siteId = localStorage.getItem('siteId');
 
   summarySelect = {
     assetTypes: [],
@@ -30,11 +33,23 @@ export class SummaryComponent implements OnInit {
   };
 
   constructor(
-    private summaryService: SummaryService
+    private summaryService: SummaryService, private siteService:SiteService
   ) {}
 
   ngOnInit(): void {
+    this.getSiteStatus();
     this.getSummary();
+  }
+
+  getSiteStatus(){
+    this.siteService.getSiteById(this.siteId).subscribe({
+      next:(site:any)=>{
+        this.siteStatus = site[0].siteStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getSiteStatus", err);
+      }
+    })
   }
 
   getSummary() {

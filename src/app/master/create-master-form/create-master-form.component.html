@@ -111,6 +111,7 @@
               </div>
             </div>
 
+            <!-- overhaul and event tabs -->
             <div class="card card-plain mx-4">
               <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
 
@@ -125,7 +126,7 @@
                       </td>
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                          <mat-label class="text-bold">Strch</mat-label>
+                          <mat-label class="text-bold">Stretch</mat-label>
                           <input matInput type="text" formControlName="ovStretch">
                         </mat-form-field>
                       </td>
@@ -175,9 +176,21 @@
                             let i = index" [formGroupName]="i">
                           <td>
                             <label class="form-label">Overhaul Labour</label>
-                            <input class="form-control" type="text" formControlName="ohLabour"
-                              placeholder="enter labour" />
+                            <!-- <input class="form-control" type="text" formControlName="ohLabour"
+                              placeholder="enter labour" /> -->
+                              <span>
+                                <select  name="" id="labour" class="form-control form-select" formControlName="ohLabour">
+                                  <option value="unskilled">unskilled</option>
+                                  <option value="basic skilled">basic skilled</option>
+                                  <option value="technical">technical</option>
+                                  <option value="specialized">specialized</option>
+                                  <option value="certified">certified</option>
+                                  <option value="supervisory">supervisory</option>
+                              </select>
+                              </span>
+
                           </td>
+                          &nbsp;
                           <td>
                             <label class="form-label">Hours</label>
                             <input class="form-control" type="text" formControlName="ohHour"
@@ -311,12 +324,23 @@
                           " [formGroupName]="il">
                             <td>
                               <label for="level" class="form-label">Labor</label>
-                              <input type="text" formControlName="evLabour" class="form-control"
-                                placeholder="Enter Labour" />
+                              <!-- <input type="text" formControlName="evLabour" class="form-control"
+                                placeholder="Enter Labour" /> -->
+                                <span>
+                                  <select  name="" id="labour" class="form-control form-select" formControlName="evLabour">
+                                    <option value="unskilled">unskilled</option>
+                                    <option value="basic skilled">basic skilled</option>
+                                    <option value="technical">technical</option>
+                                    <option value="specialized">specialized</option>
+                                    <option value="certified">certified</option>
+                                    <option value="supervisory">supervisory</option>
+                                </select>
+                                </span>
                             </td>
+                            &nbsp;
                             <td>
                               <label class="form-label" for="hrs">Hours</label>
-                              <input type="text" formControlName="evHour" class="form-control"
+                              <input type="number" formControlName="evHour" class="form-control"
                                 placeholder="Enter Hours" />
                             </td>
                             <td>

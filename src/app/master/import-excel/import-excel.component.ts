@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { SiteService } from 'src/app/sites/site.service';
 import * as XLSX from 'xlsx';
 import { MasterService } from '../master.service';
 
@@ -11,11 +12,26 @@ export class ImportExcelComponent implements OnInit {
   excelData: any;
   error: any;
   isLoading: any = false;
+  siteStatus:boolean=false;
+  siteId = localStorage.getItem('siteId');
 
-  constructor(private masterService: MasterService) {}
+  constructor(private masterService: MasterService,private siteService:SiteService) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSiteStatus();
+  }
+
+  getSiteStatus(){
+    this.siteService.getSiteById(this.siteId).subscribe({
+      next:(site:any)=>{
+        this.siteStatus = site[0].siteStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getSiteStatus", err);
+      }
+    })
+  }
 
   readExcel(event: any) {
     this.isLoading = true;
