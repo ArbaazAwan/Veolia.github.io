@@ -28,8 +28,8 @@ export class UnitComponent implements OnInit {
   }
 
   initForm() {
-    this.asset.valueChanges.subscribe((response: any) => {
-      this.filterData(response);
+    this.asset.valueChanges.subscribe((value: any) => {
+      this.filterData(value.toLowerCase());
     });
   }
 
@@ -59,7 +59,7 @@ export class UnitComponent implements OnInit {
     if (master) {
       return (
         master.oldAssetType +
-        ' | ' +
+        ' - ' +
         master?.newAssetType +
         ', ' +
         master?.masterStyle +
