@@ -28,12 +28,13 @@ export class UnitComponent implements OnInit {
   }
 
   initForm() {
-    this.asset.valueChanges.subscribe((response: any) => {
-      this.filterData(response);
+    this.asset.valueChanges.subscribe((value: any) => {
+      this.filterData(value);
     });
   }
 
   filterData(enteredData: any) {
+    enteredData = enteredData.toString().toLowerCase();
     this.filteredMasters = this.masters.filter((master: any) => {
       return (
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
@@ -59,7 +60,7 @@ export class UnitComponent implements OnInit {
     if (master) {
       return (
         master.oldAssetType +
-        ' | ' +
+        ' - ' +
         master?.newAssetType +
         ', ' +
         master?.masterStyle +

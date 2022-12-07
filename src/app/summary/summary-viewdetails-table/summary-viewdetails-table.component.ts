@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
+import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -14,6 +16,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
+  totalYearsCosts: any = [];
+  totalAverageYearsCost:number = 0;
 
   clientContractYears: number = 0;
   clientId: any = localStorage.getItem('clientId');
@@ -47,6 +51,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       let events: number[] = [];
       yearsArray[i] = { events };
       yearsCosts[i] = 0; //initializing yearly costs with 0
+      this.totalYearsCosts[i] = 0;
     }
 
     this.masterService
@@ -120,14 +125,19 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (y % replacementCostYear === 0 || y == 1) {
             yearsCosts[y] += Number(replacementCost);
           }
+          //calculating totalYearsCosts
+          this.totalYearsCosts[y] += yearsCosts[y];
         }
 
+        //calculating averages
         let totalCost = 0;
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
         let averageCost = totalCost/50;
         this.averagesOfYears.push(Math.floor(averageCost));
+
+        this.totalAverageYearsCost += Math.floor(averageCost);
 
         this.yearsCostsViewTable.push(yearsCosts);
       });
@@ -136,7 +146,19 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
   getContractYears() {
     this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0].contractYears;
+      this.clientContractYears = client[0]?.contractYears;
     });
+  }
+
+  exportToExcel( name?: string) {
+    let timeSpan = new Date().toISOString();
+    let prefix = name || 'ExportResult';
+    let fileName = `${prefix}-${timeSpan}`;
+    let targetTableElm = document.getElementById('summaryTable');
+    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
+      sheet: prefix,
+    });
+
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 }

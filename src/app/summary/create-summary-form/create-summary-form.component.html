@@ -25,22 +25,10 @@
                       matInput
                       type="text"
                       [matAutocomplete]="auto"
-                      [ngClass]="
-                        (asset.dirty ||
-                          asset.touched) &&
-                        asset.hasError('required', 'unit') == true
-                          ? 'border-danger': ''"
                     />
-                    <small class="text-danger float-end" *ngIf="
-                        (form.controls['unit'].dirty ||
-                          form.controls['unit'].touched) &&
-                        form.hasError('required', 'unit')
-                      ">
-                      unit is required
-                    </small>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onAssetChange($event.option.value)' [displayWith]="getDisplayText">
                       <mat-option *ngFor="let master of filteredMasters" [value]="master">
-                        {{master.oldAssetType}}  | {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
+                        {{master.oldAssetType}}  - {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
                       </mat-option>
                     </mat-autocomplete>
                     <mat-icon matSuffix>search</mat-icon>

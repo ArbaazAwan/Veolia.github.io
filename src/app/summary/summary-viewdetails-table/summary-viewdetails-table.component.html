@@ -15,7 +15,7 @@
         </div>
         <div class="container-fluid ">
           <div class="float-end">
-              <button type="button" class="btn bg-gradient-primary text-right m-2">
+              <button type="button" (click)="exportToExcel('summaryYears')" class="btn bg-gradient-primary text-right m-2">
                 Export Summary
               </button>
           </div>
@@ -23,23 +23,34 @@
 
 
         <div class="card-body  table-responsive m-4">
-          <table class="table table-hover">
+          <table class="table table-hover" id="summaryTable">
             <thead>
               <!-- header list  -->
               <tr class="bg-light">
-                <th>
+                <th class="px-2">
                   <label class="text-bold mt-2">Unit or Equipment Functional Description</label>
                 </th>
-                <th>
+                <th class="px-2">
                   <label class="text-bold mt-2">Average Year</label>
                 </th>
-                <th *ngFor="let header of assetTableHeaders">
+                <th *ngFor="let header of assetTableHeaders" class="px-2">
                   <p class="form-label text-bold mt-2">{{header}}</p>
                 </th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="bg-light">
+                  <label class="text-bold">Total</label>
+                </td>
+                <td>
+                  <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                </td>
+                <td *ngFor="let yearlyCost of totalYearsCosts let y = index">
+                  <p class="mb-0 text-sm">{{ totalYearsCosts.at(y+1) }}</p>
+                </td>
+              </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
                 <td class="bg-light">
                   <label class="text-bold">{{summary.unit}}</label>
