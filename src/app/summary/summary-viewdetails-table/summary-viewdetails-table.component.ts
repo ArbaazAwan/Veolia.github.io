@@ -16,6 +16,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
+  totalYearsCosts: any = [];
+  totalAverageYearsCost:number = 0;
 
   clientContractYears: number = 0;
   clientId: any = localStorage.getItem('clientId');
@@ -49,6 +51,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       let events: number[] = [];
       yearsArray[i] = { events };
       yearsCosts[i] = 0; //initializing yearly costs with 0
+      this.totalYearsCosts[i] = 0;
     }
 
     this.masterService
@@ -122,14 +125,19 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (y % replacementCostYear === 0 || y == 1) {
             yearsCosts[y] += Number(replacementCost);
           }
+          //calculating totalYearsCosts
+          this.totalYearsCosts[y] += yearsCosts[y];
         }
 
+        //calculating averages
         let totalCost = 0;
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
         let averageCost = totalCost/50;
         this.averagesOfYears.push(Math.floor(averageCost));
+
+        this.totalAverageYearsCost += Math.floor(averageCost);
 
         this.yearsCostsViewTable.push(yearsCosts);
       });
@@ -138,7 +146,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
   getContractYears() {
     this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0].contractYears;
+      this.clientContractYears = client[0]?.contractYears;
     });
   }
 

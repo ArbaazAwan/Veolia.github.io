@@ -40,6 +40,17 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="bg-light">
+                  <label class="text-bold">Total</label>
+                </td>
+                <td>
+                  <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                </td>
+                <td *ngFor="let yearlyCost of totalYearsCosts let y = index">
+                  <p class="mb-0 text-sm">{{ totalYearsCosts.at(y+1) }}</p>
+                </td>
+              </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
                 <td class="bg-light">
                   <label class="text-bold">{{summary.unit}}</label>
