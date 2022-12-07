@@ -172,8 +172,6 @@ export class CreateMasterFormComponent implements OnInit {
           next: (res: any) => {
             if(res.summary.length!=0)
             {
-              console.log('oldMaster ID',this.editMasterId);
-              console.log("newMaster ID", newMasterId);
               //updating the summary's masterId
               this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
                 next: (res) => {
