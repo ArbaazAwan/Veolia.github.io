@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
+import { SiteService } from '../sites/site.service';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService, private siteService: SiteService,) {}
   form!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
@@ -17,6 +18,7 @@ export class ClientsComponent implements OnInit {
   error: any = {};
   currentClient: any = {};
   isEditFormLoading: boolean = true;
+  clientSite:any=[];
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -25,6 +27,7 @@ export class ClientsComponent implements OnInit {
     });
 
     this.getClient();
+  
   }
 
   selectedClient: any = {
@@ -101,8 +104,24 @@ export class ClientsComponent implements OnInit {
   }
 
   onDeleteClient(id: any) {
-    this.clients = this.clients.filter(({ clientId }) => clientId != id);
+    // let x = 0;
+    this.siteService.getSiteByClientId(id).subscribe(
+      (res:any)=>{
+        console.log(" res",res);
+        let sitesCount =  res.length
+        if (sitesCount>0) {
+          this.userService.openSnackBar('The client cannot be deleted until all the associated Sites are deleted or detached from the Client.', 'close');
+        }else{
+          this.clients = this.clients.filter(({ clientId }) => clientId != id);
+    
+          this.clientService.deleteClient(id);
+    
+        }
+      }
+    )
+    // console.log(x);
+   
 
-    this.clientService.deleteClient(id);
+
   }
 }
