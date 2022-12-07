@@ -45,14 +45,14 @@ export class SiteService {
     );
   }
 
-  updateSite(_site: any, data: any) {
+  updateSite(siteId: any, data: any) {
     return this.http.put(
-      this.SITE_URL + _site.siteId,
+      this.SITE_URL + siteId,
       {
         siteName: data.siteName,
-        siteStatus: _site.siteStatus,
+        siteStatus: data.siteStatus,
       },
-      { headers: this.headers }
+      { headers: this.postHeaders }
     );
   }
 

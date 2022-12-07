@@ -36,6 +36,8 @@ export class CreateMasterFormComponent implements OnInit {
       masterSize: [''],
       oldDescription: [''],
       newDescription: [''],
+      dutyApplication: [''],
+      quality: [''],
       unitMeasurement: [''],
       rev: [''],
       replacementCost: [''],

@@ -54,12 +54,12 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
-        this.userService.openSnackBar('Client Created', 'close');
+        this.userService.openSnackBar('New Client is Created Successfully!', 'close');
         this.getClient();
       },
       error: (err: any) => {
-        window.location.reload();
-        this.error = err;
+        this.error = err.message;
+        this.userService.openSnackBar(this.error, 'close');
       },
     });
 
@@ -94,7 +94,7 @@ export class ClientsComponent implements OnInit {
       this.clientService.updateClient(this.currentClient, this.form.value)
         .subscribe({
           next: (_) => {
-            this.userService.openSnackBar('Client Updated', 'close');
+            this.userService.openSnackBar('Client is Updated Successfully!', 'close');
             this.getClient();
           },
           error: (err) => {
@@ -107,7 +107,14 @@ export class ClientsComponent implements OnInit {
   }
 
   onDeleteClient(id: any) {
+
+    // if () {
+      
+    // }
+
+
     this.clients = this.clients.filter(({ clientId }) => clientId != id);
+    this.userService.openSnackBar('Client Record is Deleted.', 'close');
 
     this.clientService.deleteClient(id);
   }

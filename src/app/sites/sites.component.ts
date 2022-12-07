@@ -78,7 +78,7 @@ export class SitesComponent implements OnInit {
       const [_site] = el;
 
       this.currentSite = _site;
-      console.log(_site);
+      console.log(_site.siteStatus);
       this.form = this.fb.group({
         siteName: [_site.siteName, Validators.required],
         siteStatus : [_site.siteStatus],
@@ -91,9 +91,9 @@ export class SitesComponent implements OnInit {
   onUpdateSite() {
     if (this.currentSite.siteId) {
       this.isLoading = true;
-      this.siteService.updateSite(this.currentSite, this.form.value).subscribe({
+      this.siteService.updateSite(this.currentSite.siteId, this.form.value).subscribe({
         next: (_) => {
-          this.userService.openSnackBar('Site Updated', 'close');
+          this.userService.openSnackBar('The site is updated successfully!', 'close');
           this.getSites();
         },
         error: (err) => {
@@ -108,7 +108,7 @@ export class SitesComponent implements OnInit {
   onDeleteSite(id: any) {
     this.sites = this.sites.filter(({ siteId }) => siteId != id);
     this.siteService.deleteSite(id);
-    this.userService.openSnackBar('Site Deleted', 'close');
+    this.userService.openSnackBar('The site is deleted successfully', 'close');
   }
 
   
