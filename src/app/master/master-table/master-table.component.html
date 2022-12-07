@@ -19,7 +19,7 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
+        <div class="p-0 table-responsive custom-table" *ngIf="!isLoading" >
           <table class="table table-blocked table-hover mb-0" ng-focus="table" matSort
             (matSortChange)="sortAssets($event)">
             <thead>
@@ -71,12 +71,13 @@
                 ">
                 <td>
                   <div class="d-flex mx-2">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
+                    <div class="d-flex flex-column" >
+                      <div ngbDropdown > 
                         <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
-                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
+                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute;
+    z-index: 10000;">
                           <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" 
                             data-bs-target="#modal-form-view">
                             <i class="material-icons">visibility</i>
@@ -192,8 +193,9 @@
               </tr>
             </tbody>
           </table>
-          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
+          
         </div>
+        <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>
