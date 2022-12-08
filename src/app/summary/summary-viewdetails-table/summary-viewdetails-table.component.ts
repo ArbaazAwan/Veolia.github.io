@@ -35,12 +35,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
     this.getContractYears();
     this.summaryArray.forEach((summary:any) => {
-      this.getMaster(summary.masterId);
+      this.getMaster(summary.masterId, summary.unit);
     });
 
   }
 
-  getMaster(masterId: any) {
+  getMaster(masterId: any, summaryUnit:any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -138,6 +138,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
+        yearsCosts[0] = summaryUnit;
 
         this.yearsCostsViewTable.push(yearsCosts);
       });

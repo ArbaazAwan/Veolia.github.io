@@ -53,7 +53,7 @@
               </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
                 <td class="bg-light">
-                  <label class="text-bold">{{summary.unit}}</label>
+                  <label class="text-bold">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
                 <td>
                   <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>

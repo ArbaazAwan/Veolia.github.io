@@ -103,7 +103,6 @@ export class MasterTableComponent implements OnInit {
 
   editMaster(masterId: any) {
     this.masterService.setMasterId(masterId);
-    this.userService.openSnackBar('Master Record is Edited.', 'close');
   }
 
   deleteMaster(id: any) {
