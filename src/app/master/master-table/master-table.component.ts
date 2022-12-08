@@ -23,6 +23,7 @@ export class MasterTableComponent implements OnInit {
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
+    console.log(this.getDisplayText)
     this.getSiteStatus();
     if (this.siteId) this.getMasters(this.siteId);
   }
@@ -36,6 +37,22 @@ export class MasterTableComponent implements OnInit {
         console.log("error occured in getSiteStatus", err);
       }
     })
+  }
+
+  getDisplayText(master: any) {
+    if (master) {
+      return (
+        master.oldAssetType +
+        ' | ' +
+        master?.newAssetType +
+        ', ' +
+        master?.masterStyle +
+        ', ' +
+        master?.masterSize
+      );
+    } else {
+      return '';
+    }
   }
 
   sortAssets(sort: any) {
