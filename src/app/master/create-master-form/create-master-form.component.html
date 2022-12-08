@@ -92,7 +92,7 @@
                     new assetType is required
                   </small>
                 </mat-form-field>
-                
+
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">New Description</mat-label>
                   <input formControlName="newDescription" matInput type="text">
@@ -107,17 +107,17 @@
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Replacement Cost</mat-label>
-                  <input formControlName="replacementCost" matInput type="text">
+                  <input formControlName="replacementCost" matInput type="number">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Life Months</mat-label>
-                  <input formControlName="lifeMonths" matInput type="text">
+                  <input formControlName="lifeMonths" matInput type="number">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Overhaul Life</mat-label>
-                  <input formControlName="overhaulLife" matInput type="text">
+                  <input formControlName="overhaulLife" matInput type="number">
                 </mat-form-field>
 
               </div>
@@ -139,7 +139,10 @@
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                           <mat-label class="text-bold">Stretch</mat-label>
-                          <input matInput type="text" formControlName="ovStretch">
+                          <mat-select  matInput type="text" formControlName="ovStretch">
+                            <mat-option  value="yes">Yes</mat-option>
+                            <mat-option  value="no">No</mat-option>
+                          </mat-select>
                         </mat-form-field>
                       </td>
                     </tr>
@@ -165,7 +168,7 @@
                           </td>
                           <td>
                             <label class="form-label">Cost</label>
-                            <input class="form-control" type="text" formControlName="ohCost" placeholder="enter cost" />
+                            <input class="form-control" type="number" formControlName="ohCost" placeholder="enter cost" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulMaintenance(iov)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
@@ -205,7 +208,7 @@
                           &nbsp;
                           <td>
                             <label class="form-label">Hours</label>
-                            <input class="form-control" type="text" formControlName="ohHour"
+                            <input class="form-control" type="number" formControlName="ohHour"
                               placeholder="enter hours" />
                           </td>
                           <td>
@@ -236,7 +239,7 @@
                           </td>
                           <td>
                             <label class="form-label">Overhaul Hour</label>
-                            <input class="form-control" type="text" formControlName="ohHour"
+                            <input class="form-control" type="number" formControlName="ohHour"
                               placeholder="enter hours" />
                           </td>
                           <td>
@@ -279,14 +282,17 @@
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Event Occurence</mat-label>
-                            <input matInput type="text" formControlName="evOccurence" />
+                            <input matInput type="text" formControlName="evOccurence" type="number"/>
                           </mat-form-field>
 
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                            <mat-label class="text-bold">Event Stretch</mat-label>
-                            <input matInput type="text" formControlName="evStretch" />
+                            <mat-label class="text-bold">Stretch</mat-label>
+                            <mat-select  matInput type="text" formControlName="evStretch">
+                              <mat-option  value="yes">Yes</mat-option>
+                              <mat-option  value="no">No</mat-option>
+                            </mat-select>
                           </mat-form-field>
                         </td>
                       </tr>
@@ -312,7 +318,7 @@
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="evCost" class="form-control"
+                              <input type="number" formControlName="evCost" class="form-control"
                                 placeholder="Enter Cost" />
                             </td>
                             <td>
@@ -382,7 +388,7 @@
                             </td>
                             <td>
                               <label for="cost" class="form-label">Cost</label>
-                              <input type="text" formControlName="evCost" class="form-control"
+                              <input type="number" formControlName="evCost" class="form-control"
                                 placeholder="Enter Cost" />
                             </td>
                             <td>

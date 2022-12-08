@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -234,6 +234,10 @@ export class CreateSummaryFormComponent implements OnInit {
       this.masterId = masterId;
 
     });
+  }
+
+  onDateChange(date:Date){
+    console.log("date", date);
   }
 
   resetForm() {

@@ -31,6 +31,7 @@ export class ClientsComponent implements OnInit {
     });
 
     this.getClient();
+
   }
 
   selectedClient: any = {
@@ -126,16 +127,4 @@ export class ClientsComponent implements OnInit {
     )
   }
 
-  // onDeleteClient(id: any) {
-
-  //   // if () {
-      
-  //   // }
-
-
-  //   this.clients = this.clients.filter(({ clientId }) => clientId != id);
-  //   this.userService.openSnackBar('Client Record is Deleted.', 'close');
-
-  //   this.clientService.deleteClient(id);
-  // }
 }

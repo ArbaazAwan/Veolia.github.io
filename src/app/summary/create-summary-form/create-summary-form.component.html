@@ -164,6 +164,21 @@
                     </small>
                   </mat-form-field>
 
+                  <mat-form-field appearance="outline" class="text-xs">
+                    <mat-label>Installation Date</mat-label>
+                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" (dateChange)="onDateChange($event.value)"/>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['installmentDate'].dirty ||
+                          form.controls['installmentDate'].touched) &&
+                        form.hasError('required', 'installmentDate')
+                      ">
+                      date is required
+                    </small>
+                  </mat-form-field>
+
                   <mat-form-field class="text-xs" appearance="outline">
                     <mat-label class="text-bold">Life %</mat-label>
                     <input formControlName="life" matInput type="number" [ngClass]="
@@ -179,21 +194,6 @@
                         form.hasError('required', 'life')
                       ">
                       life is required
-                    </small>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="text-xs">
-                    <mat-label>Installation Date</mat-label>
-                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" />
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <small class="text-danger float-end" *ngIf="
-                        (form.controls['installmentDate'].dirty ||
-                          form.controls['installmentDate'].touched) &&
-                        form.hasError('required', 'installmentDate')
-                      ">
-                      date is required
                     </small>
                   </mat-form-field>
                 </div>
