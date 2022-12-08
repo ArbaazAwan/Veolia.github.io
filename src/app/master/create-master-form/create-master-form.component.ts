@@ -19,12 +19,15 @@ export class CreateMasterFormComponent implements OnInit {
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
+  masterId: any;
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
+      console.log('master Id', masterId)
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
+
     });
   }
 
@@ -157,7 +160,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
-        this.userService.openSnackBar('Master is Created/Edited', 'close');
+        // this.userService.openSnackBar('Master is Created/Edited', 'close');
       });
   }
 

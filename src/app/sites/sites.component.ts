@@ -88,11 +88,10 @@ export class SitesComponent implements OnInit {
       const [_site] = el;
 
       this.currentSite = _site;
-      console.log(_site.siteStatus);
       this.form = this.fb.group({
         selectedClient: [_site.selectedClient, Validators.required],
         siteName: [_site.siteName, Validators.required],
-        siteStatus: [_site.siteStatus],
+        siteStatus: [_site.siteStatus, Validators.required]
       });
 
       this.isEditFormLoading = false;
@@ -102,19 +101,20 @@ export class SitesComponent implements OnInit {
   onUpdateSite() {
     if (this.currentSite.siteId) {
       this.isLoading = true;
+      console.log( 'form value on update site', this.form.value)
       this.siteService
         .updateSite(this.currentSite.siteId, this.form.value)
         .subscribe({
           next: (_) => {
-            this.userService.openSnackBar(
-              'Site is Updated Successfully!',
-              'close'
-            );
+            // this.userService.openSnackBar(
+            //   'Site is Updated Successfully!',
+            //   'close'
+            // );
             this.getSites();
           },
           error: (err) => {
             this.error = err.message;
-            this.userService.openSnackBar(this.error, 'close');
+            // this.userService.openSnackBar(this.error, 'close');
             this.getSites();
           },
         });

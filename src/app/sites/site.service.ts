@@ -40,17 +40,18 @@ export class SiteService {
         siteName: siteName,
       },
       {
-        headers: this.postHeaders,
+        headers: this.postHeaders
       }
     );
   }
 
   updateSite(siteId: any, data: any) {
+    console.log('Site data in service passed in headers',data);
     return this.http.put(
       this.SITE_URL + siteId,
       {
         siteName: data.siteName,
-        siteStatus: data.siteStatus,
+        siteStatus: data.siteStatus
       },
       { headers: this.postHeaders }
     );
