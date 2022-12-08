@@ -56,8 +56,6 @@ export class SitesComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
-  // sites!: any[];
   onsiteSelect(selectedsite: any) {}
 
   resetForm() {
@@ -66,7 +64,8 @@ export class SitesComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
-    const clientID = localStorage.getItem('clientId');
+    const clientID = this.form.value.selectedClient;
+    console.log(clientID);
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
       next: (res) => {
         this.userService.openSnackBar(
@@ -110,15 +109,15 @@ export class SitesComponent implements OnInit {
         .updateSite(this.currentSite.siteId, this.form.value)
         .subscribe({
           next: (_) => {
-            // this.userService.openSnackBar(
-            //   'Site is Updated Successfully!',
-            //   'close'
-            // );
+            this.userService.openSnackBar(
+              'Site is Updated Successfully!',
+              'close'
+            );
             this.getSites();
           },
           error: (err) => {
             this.error = err.message;
-            // this.userService.openSnackBar(this.error, 'close');
+            this.userService.openSnackBar(this.error, 'close');
             this.getSites();
           },
         });

@@ -38,6 +38,7 @@
 
             <form [formGroup]="form" *ngIf="!isEditFormLoading">
               <div class="row">
+                
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
                   <input formControlName="siteName" matInput type="text" [ngClass]="
@@ -113,23 +114,6 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-                <!-- <mat-form-field appearance="outline">
-                  <mat-label *ngIf="isLoadingClient">
-                    <div class="select-placeholder-container">
-                      <span>Loading...</span>
-                      <mat-spinner class="spinner" diameter="20"></mat-spinner>
-                    </div>
-                  </mat-label>
-                  <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
-                  <mat-select formControlName="selectedClient" [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
-                    [disabled]="isLoadingClient">
-                    <mat-option *ngFor="let client of clients" value="{{ client.clientId }}">
-                      {{ client.clientName }}
-                    </mat-option>
-                  </mat-select>
-    
-                  <mat-icon matSuffix>people</mat-icon>
-                </mat-form-field> -->
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
