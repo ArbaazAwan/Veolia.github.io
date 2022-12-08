@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -18,6 +18,7 @@ export class CreateSummaryFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private summaryService: SummaryService, private masterService: MasterService) {
     this.getForm();
   }
+  @ViewChild('modalClose') modalClose:ElementRef;
   form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
@@ -114,8 +115,8 @@ export class CreateSummaryFormComponent implements OnInit {
       quality: '',
       quantity: null,
       load: null,
-      life: null,
-      installmentDate: [new Date(), Validators.required],
+      life: [null,Validators.required],
+      installmentDate: [null, Validators.required],
     });
   }
 
@@ -205,8 +206,7 @@ export class CreateSummaryFormComponent implements OnInit {
           }
         }
       )
-
-      this.resetForm();
+        this.modalClose.nativeElement.click();
     }
     else {
       this.validateAllFormFields(this.form);
