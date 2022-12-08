@@ -35,12 +35,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
     this.getContractYears();
     this.summaryArray.forEach((summary:any) => {
-      this.getMaster(summary.masterId, summary.unit);
+      this.getMaster(summary.masterId, summary);
     });
 
   }
 
-  getMaster(masterId: any, summaryUnit:any) {
+  getMaster(masterId: any, summary:any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -66,7 +66,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         // console.log('master', master);
 
         // console.log('lifeMonths', lifeMonths);
-        let lifePerc = 100 / 100;
+        let lifePerc = summary.life / 100;
         let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
         // console.log('replacementcostyear', replacementCostYear);
 
@@ -109,7 +109,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           //adding overhaul cost to the year
           if (m != 0) {
             if (m % overhaulLife == 0) {
-              yearsCosts[Math.floor(m / 12)] += overhaulCost;
+              yearsCosts[Math.ceil(m / 12)] += overhaulCost;
               // console.log("overhaul year cost",yearsCosts)
             }
           }
@@ -136,7 +136,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
-        yearsCosts[0] = summaryUnit;
+        yearsCosts[0] = summary.unit;
 
         this.yearsCostsViewTable.push(yearsCosts);
       });
