@@ -125,7 +125,7 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(PasswordPayload)
       .subscribe((res: any) => {
-        console.log(res);
+        this.userService.openSnackBar('Password is Updated Successfully!', 'close');
       });
   }
 
@@ -142,7 +142,7 @@ export class UsersComponent implements OnInit {
     console.log(userPayload);
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
-        this.userService.openSnackBar('The user is created successfully!', 'close');
+        this.userService.openSnackBar('New User is Created Successfully!', 'close');
         this.getUsers();
       },
       error: (err) => {
@@ -179,7 +179,7 @@ export class UsersComponent implements OnInit {
   onDeleteUser(user: any) {
     this.users = this.users.filter(({ userId }) => userId != user.userId);
     this.userService.deleteUser(user.userId, user.userName);
-    this.userService.openSnackBar('The user is deleted successfully!', 'close');
+    this.userService.openSnackBar('User Record is Deleted Successfully!', 'close');
   }
 
   onEditUser(id: any) {

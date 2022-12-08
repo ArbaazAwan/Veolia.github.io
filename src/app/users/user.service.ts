@@ -73,7 +73,7 @@ export class UserService {
       });
   }
   openSnackBar(message:string, action: string){
-    let snackBarRef = this.snackBar.open(message, action, {duration: 1000});
+    let snackBarRef = this.snackBar.open(message, action, {duration: 3000});
 
     snackBarRef.afterDismissed().subscribe(()=>{
       window.location.reload();

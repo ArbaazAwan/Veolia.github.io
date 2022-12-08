@@ -92,6 +92,7 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this.authService.logout();
+    this.userService.openSnackBar('You are Successfully Logged Out.', 'close');
     this.router.navigate(['/login']);
   }
 

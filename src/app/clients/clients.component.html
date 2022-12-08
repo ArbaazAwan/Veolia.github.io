@@ -76,9 +76,9 @@
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Status</mat-label>
 
-                  <mat-select [(value)]="clientStatus" placeholder="Mode">
-                    <mat-option value="true">Active</mat-option>
-                    <mat-option value="false">Inactive</mat-option>
+                  <mat-select formControlName="clientStatus" [(value)]="clientStatus" placeholder="Mode">
+                    <mat-option [value]='true'>Active</mat-option>
+                    <mat-option [value]='false'>Inactive</mat-option>
                   </mat-select>
 
                 </mat-form-field>

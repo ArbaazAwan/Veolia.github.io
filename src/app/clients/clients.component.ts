@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SiteService } from '../sites/site.service';
 import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
 
@@ -11,7 +12,7 @@ type ClientType = 'true' | 'false';
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService, private siteService: SiteService) {}
   form!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
@@ -106,16 +107,36 @@ export class ClientsComponent implements OnInit {
     }
   }
 
+
   onDeleteClient(id: any) {
 
-    // if () {
-      
-    // }
+    this.siteService.getSiteByClientId(id).subscribe(
+      (res:any)=>{
+        let sitesCount =  res.length
+        if (sitesCount>0) {
+          this.userService.openSnackBar('The client cannot be deleted until all the associated Sites are deleted or detached from the Client.', 'close');
+        }
+        else{
 
+          this.clients = this.clients.filter(({ clientId }) => clientId != id);
+          this.clientService.deleteClient(id);
+          this.userService.openSnackBar('Client Record Deleted Successfully!', 'close');
 
-    this.clients = this.clients.filter(({ clientId }) => clientId != id);
-    this.userService.openSnackBar('Client Record is Deleted.', 'close');
-
-    this.clientService.deleteClient(id);
+        }
+      }
+    )
   }
+
+  // onDeleteClient(id: any) {
+
+  //   // if () {
+      
+  //   // }
+
+
+  //   this.clients = this.clients.filter(({ clientId }) => clientId != id);
+  //   this.userService.openSnackBar('Client Record is Deleted.', 'close');
+
+  //   this.clientService.deleteClient(id);
+  // }
 }
