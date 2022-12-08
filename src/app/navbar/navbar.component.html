@@ -52,10 +52,10 @@
           </div>
         </div>
       </div>
-      <span><i class="material-icons mt-1">person</i></span>
-        <div ngbDropdown class="d-inline-block">
+      <span><i class="material-icons">person</i></span>
+        <div ngbDropdown class="d-inline-block pointer ">
           <div class="font-weight-bold" id="gfg" ngbDropdownToggle>
-            <span class="mx-1 mb-2 pointer">{{ user?.userName }}</span>
+            <span class="mx-1 mb-2 capitalize-first">{{ user?.userName }}</span>
           </div>
           <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
             <button ngbDropdownItem routerLink="/profile">
