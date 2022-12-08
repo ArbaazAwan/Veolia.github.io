@@ -14,3 +14,15 @@
   font-family: "Roboto";
   text-decoration: none !important;
 }
+
+.custom-table {
+  min-height: 400px;
+}
+
+.card .card-body {
+  padding: 0 !important;
+}
+
+.pagination-div {
+  display:flex; padding-top: 2%;
+}

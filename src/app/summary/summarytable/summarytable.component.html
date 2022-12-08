@@ -22,10 +22,10 @@
             <table *ngIf="!isLoading" class="table table-blocked table-hover mb-0" mat-sort>
               <thead>
                 <tr>
-                  <th class="px-2 pb-1 text-sm">
+                  <!-- <th class="px-2 pb-1 text-sm">
                     <mat-checkbox class="example-margin">
                     </mat-checkbox>
-                  </th>
+                  </th> -->
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
                     Actions
                   </th>
@@ -42,13 +42,13 @@
                     Asset Type
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Summary Style
+                    Style
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Summary Size
+                    Size
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Duty Application
+                    Duty/Application
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                     Quality
@@ -58,10 +58,10 @@
                   </th>
 
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Summary Load
+                    Load%
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Life
+                    Life%
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                     Installation Date
@@ -71,20 +71,20 @@
                   </th>
 
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                    Summary Status
+                    Status
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let summary of summaryData | searchFilter: searchText">
-                  <td class="pt-3">
-                    <mat-checkbox class="mb-0"></mat-checkbox>
-                  </td>
+                  <!-- <td class="pt-3">
+                    <mat-checkbox class=""></mat-checkbox>
+                  </td> -->
                   <td>
                     <div class="d-flex py-1 ps-3">
                       <div class="d-flex flex-column">
                         <div ngbDropdown>
-                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
+                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
                             Actions
                           </button>
                           <div ngbDropdownMenu="gfg">

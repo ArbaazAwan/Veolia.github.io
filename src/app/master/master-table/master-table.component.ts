@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { SiteService } from 'src/app/sites/site.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
@@ -8,7 +9,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService) {}
+  constructor(private masterService: MasterService, private userService: UserService, private siteService:SiteService) {}
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
@@ -16,12 +17,25 @@ export class MasterTableComponent implements OnInit {
   p: number = 1;
   siteId = localStorage.getItem('siteId');
   message: any;
+  siteStatus:boolean=false;
   role: any = localStorage.getItem('role');
 
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
+    this.getSiteStatus();
     if (this.siteId) this.getMasters(this.siteId);
+  }
+
+  getSiteStatus(){
+    this.siteService.getSiteById(this.siteId).subscribe({
+      next:(site:any)=>{
+        this.siteStatus = site[0].siteStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getSiteStatus", err);
+      }
+    })
   }
 
   sortAssets(sort: any) {

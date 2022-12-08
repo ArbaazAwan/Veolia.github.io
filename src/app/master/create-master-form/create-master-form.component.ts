@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
@@ -12,8 +13,9 @@ export class CreateMasterFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private masterService: MasterService,
+    private summaryService: SummaryService,
     private userService: UserService
-  ) {}
+  ) { }
 
   editMasterId: any;
   form: FormGroup = this.initialForm();
@@ -126,7 +128,7 @@ export class CreateMasterFormComponent implements OnInit {
       console.log(res);
     });
 
-    let f = this.form.value;
+    let f = this.form.getRawValue();
 
     const master = {
       siteId: this.siteId,
@@ -160,8 +162,34 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
-        // this.userService.openSnackBar('Master is Created/Edited', 'close');
+        let newMasterId = res.message;
+
+        //getting all the summaries by masterId
+        this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
+          next: (res: any) => {
+            if(res.summary.length!=0)
+            {
+              //updating the summary's masterId
+              this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
+                next: (res) => {
+                  this.userService.openSnackBar('Master Created/Edited', 'close');
+                },
+                error: (err) => {
+                  console.log("error occured in updateSummaryMasterId", err);
+                }
+              });
+
+            }
+          },
+          error: (err:any) => {
+            console.log("error occured in getSummariesByMasterId", err);
+          }
+        })
+
       });
+
+
+
   }
 
   events(): FormArray {

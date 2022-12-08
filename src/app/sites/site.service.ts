@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SiteService {
   sites: any[] = [];
-  SITE_URL: string = environment.baseUrl + 'site/';
+  SITE_URL: string = environment.baseUrl + 'site/';  
 
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
@@ -18,11 +18,22 @@ export class SiteService {
 
   constructor(private http: HttpClient) {}
 
+  //  getSiteStatus(siteId:any)
+  // {
+   
+  //    let status =  this.getSiteById(siteId).subscribe(
+  //     (res:any)=>{
+  //       return  res[0].siteStatus;
+  //     }
+  //    );
+  //    return status;
+  // }
+
   getSites() {
     return this.http.get(this.SITE_URL, { headers: this.headers });
   }
 
-  getSiteById(id: string) {
+  getSiteById(id: any) {
     return this.http.get(this.SITE_URL + id, { headers: this.postHeaders });
   }
 
