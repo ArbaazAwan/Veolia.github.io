@@ -42,7 +42,7 @@ export class SitesComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       siteName: ['', Validators.required],
-      selectedClient: ['',Validators.required],
+      selectedClient: ['', Validators.required],
     });
 
     this.getSites();
@@ -56,8 +56,6 @@ export class SitesComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
-  // sites!: any[];
   onsiteSelect(selectedsite: any) {}
 
   resetForm() {
@@ -66,10 +64,15 @@ export class SitesComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
-    const clientID = localStorage.getItem('clientId');
+    const clientID = this.form.value.selectedClient;
+    console.log(clientID);
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
-      next: (_) => {
-        this.userService.openSnackBar('New Site is Created Successfully!', 'close');
+      next: (res) => {
+        this.userService.openSnackBar(
+          'New Site is Created Successfully!',
+          'close'
+        );
+        console.log(res);
         this.getSites();
       },
       error: (e) => {
@@ -89,9 +92,9 @@ export class SitesComponent implements OnInit {
 
       this.currentSite = _site;
       this.form = this.fb.group({
-        selectedClient: [_site.selectedClient, Validators.required],
+        selectedClient: [_site.selectedClient],
         siteName: [_site.siteName, Validators.required],
-        siteStatus: [_site.siteStatus, Validators.required]
+        siteStatus: [_site.siteStatus, Validators.required],
       });
 
       this.isEditFormLoading = false;
@@ -101,20 +104,20 @@ export class SitesComponent implements OnInit {
   onUpdateSite() {
     if (this.currentSite.siteId) {
       this.isLoading = true;
-      console.log( 'form value on update site', this.form.value)
+      console.log('form value on update site', this.form.value);
       this.siteService
         .updateSite(this.currentSite.siteId, this.form.value)
         .subscribe({
           next: (_) => {
-            // this.userService.openSnackBar(
-            //   'Site is Updated Successfully!',
-            //   'close'
-            // );
+            this.userService.openSnackBar(
+              'Site is Updated Successfully!',
+              'close'
+            );
             this.getSites();
           },
           error: (err) => {
             this.error = err.message;
-            // this.userService.openSnackBar(this.error, 'close');
+            this.userService.openSnackBar(this.error, 'close');
             this.getSites();
           },
         });
@@ -132,26 +135,8 @@ export class SitesComponent implements OnInit {
   }
 
   populateClients() {
-    this.isLoadingClient = true;
-    if (localStorage.getItem('role')?.toLocaleLowerCase() == 'user') {
-      var email = localStorage.getItem('user_email');
-      this.userService.getUserByEmail(email).subscribe((users: any) => {
-        let userId: string = users[0].userId;
-        this.userService.getClientsByUserId(userId).subscribe({
-          next: (response: any) => {
-            this.clients = response.userClients;
-            this.isLoadingClient = false;
-          },
-          error: (error) => {
-            this.isLoadingClient = false;
-          },
-        });
-      });
-    } else {
-      this.clientService.getClients().subscribe((res: any) => {
-        this.clients = res;
-        this.isLoadingClient = false;
-      });
-    }
+    this.clientService.getClients().subscribe((res: any) => {
+      this.clients = res;
+    });
   }
 }
