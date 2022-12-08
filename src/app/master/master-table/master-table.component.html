@@ -12,7 +12,7 @@
         <div class="d-flex justify-content-center">
           <div class="spinner-border" *ngIf="isLoading"></div>
         </div>
-        <div class="flex-end px-3 col-md-3">
+        <div class="flex-end px-3 col-md-3 mt-4">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
@@ -82,8 +82,7 @@
                         <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
-                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute;
-    z-index: 10000;">
+                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute; z-index: 10000;">
                           <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" 
                             data-bs-target="#modal-form-view">
                             <i class="material-icons">visibility</i>
