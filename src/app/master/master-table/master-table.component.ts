@@ -18,6 +18,7 @@ export class MasterTableComponent implements OnInit {
   siteId = localStorage.getItem('siteId');
   message: any;
   siteStatus:boolean=false;
+  role: any = localStorage.getItem('role');
 
   @Output() viewMasterEvent = new EventEmitter();
 
@@ -62,6 +63,10 @@ export class MasterTableComponent implements OnInit {
           return this.compare(a.newDescription, b.newDescription, isAsc);
         case 'unitMeasurement':
           return this.compare(a.unitMeasurement, b.unitMeasurement, isAsc);
+        case 'dutyApplication':
+          return this.compare(a.dutyApplication, b.dutyApplication, isAsc);
+        case 'quality':
+          return this.compare(a.quality, b.quality, isAsc);
         case 'rev':
           return this.compare(a.rev, b.rev, isAsc);
         case 'replacementCost':
@@ -98,11 +103,12 @@ export class MasterTableComponent implements OnInit {
 
   editMaster(masterId: any) {
     this.masterService.setMasterId(masterId);
+    this.userService.openSnackBar('Master Record is Edited.', 'close');
   }
 
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
-     this.userService.openSnackBar('Master Deleted', 'close');
+     this.userService.openSnackBar('Selected Record is Deleted from Master.', 'close');
     });
   }
 
@@ -110,7 +116,7 @@ export class MasterTableComponent implements OnInit {
     this.masterService.getCompleteMasterById(masterId).subscribe((res: any) => {
       if (res) {
         this.masterService.postCompleteMaster(res).subscribe((result: any) => {
-          window.location.reload();
+          this.userService.openSnackBar('Duplicate Record is Created.', 'close');
         });
       }
     });

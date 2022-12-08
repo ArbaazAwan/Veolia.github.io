@@ -5,7 +5,7 @@
       <div class="ms-md-auto pe-md-3 d-flex align-items-center" [ngClass]="href == '/clientslist' ? 'addpadding' : '' ">
         <div class="row float-end text-xs">
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
               <mat-label *ngIf="isLoadingClient">
                 <div class="select-placeholder-container">
                   <span>Loading...</span>
@@ -23,9 +23,13 @@
 
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
+            <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedClient == undefined">
+              Please select a client!
+            </div>
           </div>
+          
           <div class="col-sm-6 mt-3">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
               <mat-label *ngIf="isLoadingSite">
                 <div class="select-placeholder-container">
                   <span>Loading...</span>
@@ -39,14 +43,16 @@
                   {{ site.siteName }}
                 </mat-option>
               </mat-select>
-
               <mat-icon matSuffix>business</mat-icon>
             </mat-form-field>
+
+            <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedSite == undefined">
+              Please select a site!
+            </div>
           </div>
         </div>
       </div>
       <span><i class="material-icons mt-1">person</i></span>
-      <!-- <div class="d-flex"> -->
         <div ngbDropdown class="d-inline-block">
           <div class="font-weight-bold" id="gfg" ngbDropdownToggle>
             <span class="mx-1 mb-2 pointer">{{ user?.userName }}</span>
@@ -60,7 +66,6 @@
             </button>
           </div>
         </div>
-      <!-- </div> -->
     </div>
   </div>
 </nav>

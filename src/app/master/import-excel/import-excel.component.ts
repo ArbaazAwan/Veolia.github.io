@@ -12,25 +12,28 @@ export class ImportExcelComponent implements OnInit {
   excelData: any;
   error: any;
   isLoading: any = false;
-  siteStatus:boolean=false;
+  siteStatus: boolean = false;
   siteId = localStorage.getItem('siteId');
 
-  constructor(private masterService: MasterService,private siteService:SiteService) {}
+  constructor(
+    private masterService: MasterService,
+    private siteService: SiteService
+  ) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
 
   ngOnInit(): void {
     this.getSiteStatus();
   }
 
-  getSiteStatus(){
+  getSiteStatus() {
     this.siteService.getSiteById(this.siteId).subscribe({
-      next:(site:any)=>{
+      next: (site: any) => {
         this.siteStatus = site[0].siteStatus;
       },
-      error:(err)=>{
-        console.log("error occured in getSiteStatus", err);
-      }
-    })
+      error: (err) => {
+        console.log('error occured in getSiteStatus', err);
+      },
+    });
   }
 
   readExcel(event: any) {
@@ -41,7 +44,6 @@ export class ImportExcelComponent implements OnInit {
     fileReader.onload = (e) => {
       var workbook = XLSX.read(fileReader.result, { type: 'binary' });
       this.excelData = XLSX.utils.sheet_to_json(workbook.Sheets['master']);
-      console.log(this.excelData.length > 0);
       if (this.excelData.length > 0) {
         // console.log(this.excelData);
         for (let index = 0; index < this.excelData.length; index++) {
@@ -57,6 +59,8 @@ export class ImportExcelComponent implements OnInit {
             replacementCost: data.ReplCost,
             lifeMonths: data.Lifemos,
             overhaulLife: data.OHLife,
+            dutyApplication: data.DutyApplication,
+            quality: data.Quality,
           };
           const events = this.createEventsArray(data);
           const overhaul = this.createOverhaulArray(data);
