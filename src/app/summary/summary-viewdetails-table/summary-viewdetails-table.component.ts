@@ -67,9 +67,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         // console.log('lifeMonths', lifeMonths);
         let lifePerc = 100 / 100;
-        let replacementCostYear = Math.ceil(
-          (Number(lifeMonths) * lifePerc) / 12
-        );
+        let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
         // console.log('replacementcostyear', replacementCostYear);
 
         for (let i = 0; i < events?.length; i++) {
@@ -102,7 +100,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           //adding occured events in a year to yearsArray
           for (let m = 1; m <= 600; m++) {
             if (m % Number(events[i].evOccurence) === 0) {
-              yearsArray[m / 12]?.events?.push(i);
+              yearsArray[Math.ceil(m / 12)]?.events?.push(i);
             }
           }
         }
