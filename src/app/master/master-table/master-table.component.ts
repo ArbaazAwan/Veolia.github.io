@@ -37,6 +37,22 @@ export class MasterTableComponent implements OnInit {
     })
   }
 
+  getDisplayText(master: any) {
+    if (master) {
+      return (
+        master.oldAssetType +
+        ' | ' +
+        master?.newAssetType +
+        ', ' +
+        master?.masterStyle +
+        ', ' +
+        master?.masterSize
+      );
+    } else {
+      return '';
+    }
+  }
+
   sortAssets(sort: any) {
     const data = this.masters.slice();
     if (!sort.active || sort.direction === '') {
