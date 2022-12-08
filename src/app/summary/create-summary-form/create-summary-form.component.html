@@ -166,7 +166,7 @@
 
                   <mat-form-field appearance="outline" class="text-xs">
                     <mat-label>Installation Date</mat-label>
-                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" (dateChange)="onDateChange($event.value)"/>
+                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" (dateChange)="onInstallmentChange($event.value)"/>
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -200,7 +200,7 @@
               </div>
 
               <div class="text-center mt-4">
-                <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                <button type="submit" (click)="onSubmit()" class="btn bg-gradient-primary m-2">
                   Submit
                 </button>
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2"

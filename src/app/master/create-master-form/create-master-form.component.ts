@@ -165,26 +165,31 @@ export class CreateMasterFormComponent implements OnInit {
         let newMasterId = res.message;
 
         //getting all the summaries by masterId
-        this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
-          next: (res: any) => {
-            if(res.summary.length!=0)
-            {
-              //updating the summary's masterId
-              this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
-                next: (res) => {
-                  this.userService.openSnackBar('Master Created/Edited', 'close');
-                },
-                error: (err) => {
-                  console.log("error occured in updateSummaryMasterId", err);
-                }
-              });
-
+        if(this.editMasterId){
+            this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
+            next: (res: any) => {
+              if(res.summary.length!=0)
+              {
+                //updating the summary's masterId
+                this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
+                  next: (res) => {
+                    this.userService.openSnackBar('Master Edited', 'close');
+                  },
+                  error: (err) => {
+                    console.log("error occured in updateSummaryMasterId", err);
+                  }
+                });
+              }
+            },
+            error: (err:any) => {
+              console.log("error occured in getSummariesByMasterId", err);
             }
-          },
-          error: (err:any) => {
-            console.log("error occured in getSummariesByMasterId", err);
-          }
-        })
+          })
+        }
+        else{
+          this.userService.openSnackBar('Master Created', 'close');
+        }
+
 
       });
 
