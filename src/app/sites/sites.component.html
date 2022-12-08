@@ -1,7 +1,7 @@
 <div class="container-fluid py-1">
   <div class="float-start">
     <button type="button" class="btn bg-gradient-primary mx-2 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form">
+      data-bs-target="#modal-form" (click)="populateClients()">
       Add site
     </button>
   </div>
@@ -105,15 +105,14 @@
             <form [formGroup]="form">
               <div class="row">
 
-                <!-- <mat-form-field appearance="fill">
+                <mat-form-field>
                   <mat-label>Select Clients</mat-label>
-                  <mat-select [formControl]="selectedClient" name="food">
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let client of clients" [value]="client.value">
+                  <mat-select formControlName="selectedClient">
+                    <mat-option *ngFor="let client of clients" [value]="client.clientId">
                       {{ client.clientName }}
                     </mat-option>
                   </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
                 <!-- <mat-form-field appearance="outline">
                   <mat-label *ngIf="isLoadingClient">
                     <div class="select-placeholder-container">
