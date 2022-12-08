@@ -56,7 +56,7 @@ export class UserstableComponent implements OnInit {
     };
 
     this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
-      console.log(res);
+      this.userService.openSnackBar('Client Assigned to User Successfully!', 'close');
     });
     this.selectedClients = [];
   }

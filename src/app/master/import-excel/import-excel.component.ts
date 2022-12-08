@@ -41,7 +41,6 @@ export class ImportExcelComponent implements OnInit {
     fileReader.onload = (e) => {
       var workbook = XLSX.read(fileReader.result, { type: 'binary' });
       this.excelData = XLSX.utils.sheet_to_json(workbook.Sheets['master']);
-      console.log(this.excelData.length > 0);
       if (this.excelData.length > 0) {
         // console.log(this.excelData);
         for (let index = 0; index < this.excelData.length; index++) {
