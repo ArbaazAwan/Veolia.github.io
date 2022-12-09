@@ -89,6 +89,24 @@
                   </mat-form-field>
 
                   <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Duty/Application</mat-label>
+                    <input formControlName="dutyApplication" matInput type="text" [ngClass]="
+                        (form.controls['dutyApplication'].dirty ||
+                          form.controls['dutyApplication'].touched) &&
+                        form.hasError('required', 'dutyApplication') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['dutyApplication'].dirty ||
+                          form.controls['dutyApplication'].touched) &&
+                        form.hasError('required', 'dutyApplication')
+                      ">
+                      duty/application is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
                     <mat-label class="text-bold">Summary Style</mat-label>
                     <input formControlName="summaryStyle" matInput type="text" [ngClass]="
                         (form.controls['summaryStyle'].dirty ||
