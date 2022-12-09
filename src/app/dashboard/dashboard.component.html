@@ -1,13 +1,16 @@
 <div class="container-fluid py-4">
 <div class="row mb-4">
   <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-    <mat-label class="text-bold">New AssetType</mat-label>
-    <input formControlName="newAssetType" matInput type="number" />
+    <mat-label class="text-bold">Contigency%</mat-label>
+    <input [formControl]='contigency' matInput type="number" />
   </mat-form-field>
 </div>
   <div class="row">
     <div class="col-md-12">
-      <app-price-year-line-chart></app-price-year-line-chart>
+      <app-price-year-line-chart
+      [years]="years"
+      [prices]="prices"
+      ></app-price-year-line-chart>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-price-year-line-chart',
@@ -9,19 +9,16 @@ export class PriceYearLineChartComponent implements OnInit {
   constructor() {}
   data: any;
   basicOptions: any;
+  @Input() years: string[] = [];
+  @Input() prices: number[] = [];
 
   ngOnInit(): void {
-    let years: string[] = [];
-    let prices: number[] = [];
 
-    function getRandomInt(max: number) {
-      // return Math.floor(Math.random() * max);
-    }
+    this.graphOptions();
+    this.graphData(this.years, this.prices);
+  }
 
-    for (let i = 1; i <= 50; i++) {
-      years.push('Year ' + i.toString());
-      // prices.push(getRandomInt(500));
-    }
+  graphOptions(){
     this.basicOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -46,6 +43,9 @@ export class PriceYearLineChartComponent implements OnInit {
         },
       },
     };
+  }
+
+  graphData(years:any, prices:any){
     this.data = {
       labels: years,
       datasets: [
