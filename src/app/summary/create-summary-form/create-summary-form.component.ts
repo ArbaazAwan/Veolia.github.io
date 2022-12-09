@@ -60,13 +60,16 @@ export class CreateSummaryFormComponent implements OnInit {
     this.selectedMaster = master;
     let unit = this.getDisplayText(master);
 
+    console.log("master", master);
+
     let c = this.getForm().controls;
     c.unit.setValue(unit);
     c.assetType.setValue(master.oldAssetType ? master.oldAssetType : '' + ' - ' + master.newAssetType ? master.newAssetType : '')
     c.size.setValue(master.masterSize)
     c.summaryStyle.setValue(master.masterStyle)
     c.description.setValue(master.oldDescription ? master.oldDescription : '' + ',' + master.newDescription ? master.newDescription : '')
-    c.quality.setValue(null)
+    c.dutyApplication.setValue(master.dutyApplication)
+    c.quality.setValue(master.quality)
     c.quantity.setValue(null)
     c.load.setValue(null)
     c.life.setValue(null)
@@ -112,6 +115,7 @@ export class CreateSummaryFormComponent implements OnInit {
       size: '',
       summaryStyle: '',
       description: '',
+      dutyApplication:'',
       quality: '',
       quantity: null,
       load: null,
@@ -137,6 +141,7 @@ export class CreateSummaryFormComponent implements OnInit {
         assetType,
         size,
         description,
+        dutyApplication,
         quality,
         load,
         quantity,
@@ -157,7 +162,7 @@ export class CreateSummaryFormComponent implements OnInit {
               assetType: assetType,
               summarySize: size,
               summaryStatus:true,
-              dutyApplication: description,
+              dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
@@ -185,7 +190,7 @@ export class CreateSummaryFormComponent implements OnInit {
               unit:unit,
               assetType: assetType,
               summarySize: size,
-              dutyApplication: description,
+              dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
@@ -226,6 +231,7 @@ export class CreateSummaryFormComponent implements OnInit {
         summaryload,
         summarySize,
         description,
+        dutyApplication,
         quality,
         summaryStyle,
         life,
@@ -239,6 +245,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.size.setValue(summarySize)
       c.summaryStyle.setValue(summaryStyle)
       c.description.setValue(description)
+      c.dutyApplication.setValue(dutyApplication)
       c.quality.setValue(quality)
       c.quantity.setValue(quantity)
       c.load.setValue(summaryload)
