@@ -96,9 +96,17 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         for (let i = 0; i < events.length; i++) {
           //adding occured events in a year to yearsArray
-          for (let m = 1; m <= 600; m++) {
+          // checking if life months equals to months so that we can start counting again
+          let j = 0;
+          for (let m = 0; m < 600; m++) {
             if (m % Number(events[i].evOccurence) === 0) {
-              yearsArray[Math.ceil(m / 12)]?.events?.push(i);
+              yearsArray[Math.ceil(j / 12)]?.events?.push(i);
+            }
+            if (m == lifeMonths) m = 0;
+            j++;
+            //  checking if years becomes 50
+            if (j == 600) {
+              break;
             }
           }
         }
