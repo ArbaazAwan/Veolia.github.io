@@ -3,7 +3,6 @@ import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
 import * as XLSX from 'xlsx';
 
-
 @Component({
   selector: 'app-summary-viewdetails-table',
   templateUrl: './summary-viewdetails-table.component.html',
@@ -17,7 +16,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
-  totalAverageYearsCost:number = 0;
+  totalAverageYearsCost: number = 0;
 
   clientContractYears: number = 0;
   clientId: any = localStorage.getItem('clientId');
@@ -25,7 +24,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   constructor(
     private masterService: MasterService,
     private clientService: ClientService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     for (let i = 1; i <= 50; i++) {
@@ -34,14 +33,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     }
 
     this.getContractYears();
-    this.summaryArray.forEach((summary:any) => {
+    this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
-
   }
 
-  getMaster(masterId: any, summary:any) {
-
+  getMaster(masterId: any, summary: any) {
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
     var yearsArray: any = new Array(51);
@@ -57,7 +54,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.masterService
       .getCompleteMasterById(masterId)
       .subscribe((master: any) => {
-
         let events = master.events;
         let overhaul = master.overhaul;
         let replacementCost = master.master.replacementCost;
@@ -67,7 +63,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         // console.log('lifeMonths', lifeMonths);
         let lifePerc = summary.life / 100;
-        let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
+        let replacementCostYear = Math.ceil(
+          (Number(lifeMonths) * lifePerc) / 12
+        );
         // console.log('replacementcostyear', replacementCostYear);
 
         for (let i = 0; i < events?.length; i++) {
@@ -104,14 +102,21 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             }
           }
         }
-
+        let i = 0;
         for (let m = 0; m < 600; m++) {
           //adding overhaul cost to the year
+          // checking if life months equals to months so that we can start counting again
+          if (m == lifeMonths) m = 0;
           if (m != 0) {
             if (m % overhaulLife == 0) {
-              yearsCosts[Math.ceil(m / 12)] += overhaulCost;
-              // console.log("overhaul year cost",yearsCosts)
+              yearsCosts[Math.ceil(i / 12)] += overhaulCost;
+              // console.log('overhaul year cost', yearsCosts);
             }
+          }
+          i++;
+          //  checking if years becomes 50
+          if (i == 600) {
+            break;
           }
         }
 
@@ -132,7 +137,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
-        let averageCost = totalCost/50;
+        let averageCost = totalCost / 50;
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
@@ -140,7 +145,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         this.yearsCostsViewTable.push(yearsCosts);
       });
-
   }
 
   getContractYears() {
@@ -149,7 +153,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     });
   }
 
-  exportToExcel( name?: string) {
+  exportToExcel(name?: string) {
     let timeSpan = new Date().toISOString();
     let prefix = name || 'ExportResult';
     let fileName = `${prefix}-${timeSpan}`;

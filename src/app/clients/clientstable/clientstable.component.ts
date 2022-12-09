@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 import { ClientService } from '../client.service';
 
 @Component({
@@ -22,6 +29,10 @@ export class ClientstableComponent implements OnInit {
     this.sortAssets({ active: 'clientId', direction: 'desc' });
   }
 
+  ngOnChanges() {
+    this.sortAssets({ active: 'clientId', direction: 'desc' });
+  }
+
   editClient(id: any) {
     this.editClientEvent.emit(id);
   }
@@ -36,7 +47,7 @@ export class ClientstableComponent implements OnInit {
       return;
     }
 
-    this.sortedClients = data.sort((a:any, b:any) => {
+    this.sortedClients = data.sort((a: any, b: any) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'clientId':
