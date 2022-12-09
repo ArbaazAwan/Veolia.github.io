@@ -86,15 +86,15 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" [disabled]="!siteStatus">
+                            data-bs-target="#modal-form-create" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" [disabled]="!siteStatus">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
-                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)" [disabled]="!siteStatus">
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">delete</i>&nbsp;
                             Delete
                           </button>

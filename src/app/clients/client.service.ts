@@ -19,7 +19,7 @@ export class ClientService {
     return this.http.get(this.CLIENT_URL, { headers: this.headers });
   }
 
-  getClientById(id: string) {
+  getClientById(id: string|any) {
     return this.http.get(this.CLIENT_URL + id, { headers: this.postHeaders });
   }
 

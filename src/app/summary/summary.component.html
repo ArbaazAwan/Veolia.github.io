@@ -1,7 +1,7 @@
 <div class="container-fluid py-1">
   <div class="float-start">
     <button type="button" class="btn bg-gradient-primary mx-2 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form" [disabled]="!siteStatus">
+      data-bs-target="#modal-form" *ngIf="siteStatus && clientStatus">
       Create Record
     </button>
   </div>
