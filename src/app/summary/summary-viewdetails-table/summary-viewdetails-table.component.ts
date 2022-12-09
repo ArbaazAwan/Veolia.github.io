@@ -128,13 +128,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
         }
 
-        for (let y = 1; y <= 50; y++) {
+        for (let y = 1; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
             yearsCosts[y] += eventsCosts[eventIndex];
           });
-          if (y % replacementCostYear === 0 || y == 1) {
-            yearsCosts[y] += Number(replacementCost);
+          if (y == 1) yearsCosts[y] += Number(replacementCost);
+          if (y % replacementCostYear === 0) {
+            yearsCosts[y + 1] += Number(replacementCost);
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[y] += yearsCosts[y];
