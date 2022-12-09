@@ -25,7 +25,6 @@ export class CreateMasterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
-      console.log('master Id', masterId)
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
@@ -164,7 +163,8 @@ export class CreateMasterFormComponent implements OnInit {
       .subscribe((res: any) => {
         let newMasterId = res.message;
 
-        //getting all the summaries by masterId
+        if (this.editMasterId) {
+                  //getting all the summaries by masterId
         this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
           next: (res: any) => {
             if(res.summary.length!=0)
@@ -172,7 +172,7 @@ export class CreateMasterFormComponent implements OnInit {
               //updating the summary's masterId
               this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
                 next: (res) => {
-                  this.userService.openSnackBar('Master Created/Edited', 'close');
+                  this.userService.openSnackBar('Master Record is Edited', 'close');
                 },
                 error: (err) => {
                   console.log("error occured in updateSummaryMasterId", err);
@@ -185,6 +185,11 @@ export class CreateMasterFormComponent implements OnInit {
             console.log("error occured in getSummariesByMasterId", err);
           }
         })
+        }
+
+        else{
+          this.userService.openSnackBar('Master Record is Created', 'close');
+        }
 
       });
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -15,22 +15,24 @@ import { SummaryService } from '../summary.service';
 })
 export class CreateSummaryFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private summaryService:SummaryService, private masterService:MasterService) {
+  constructor(private fb: FormBuilder, private summaryService: SummaryService, private masterService: MasterService) {
     this.getForm();
   }
+  @ViewChild('modalClose') modalClose:ElementRef;
   form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
+  selectedMaster: any;
   submitted: boolean = false;
-  siteId:any = localStorage.getItem('siteId');
-  asset:FormControl = new FormControl(['', Validators.required]);
-  masterId:any;
+  siteId: any = localStorage.getItem('siteId');
+  asset: FormControl = new FormControl(['', Validators.required]);
+  masterId: any;
 
   ngOnInit(): void {
 
     this.summaryService.currentSummaryId.subscribe(
-      (summaryId:any)=>{
-        if(summaryId){
+      (summaryId: any) => {
+        if (summaryId) {
           this.onEditSummary(summaryId);
         }
       }
@@ -38,56 +40,71 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getMastersBySiteId(this.siteId);
 
     this.asset.valueChanges.subscribe((value: any) => {
-        this.filterData(value)
-      });
+      this.filterData(value)
+    });
+
   }
 
-  filterData(enteredData: any){
+  filterData(enteredData: any) {
     enteredData = enteredData.toString().toLowerCase();
-    this.filteredMasters = this.masters.filter((master:any) => {
+    this.filteredMasters = this.masters.filter((master: any) => {
       return master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1
-      || master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1
-      || master?.masterSize.toLowerCase().indexOf(enteredData) > -1
-      || master?.masterStyle.toLowerCase().indexOf(enteredData) > -1
+        || master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1
+        || master?.masterSize.toLowerCase().indexOf(enteredData) > -1
+        || master?.masterStyle.toLowerCase().indexOf(enteredData) > -1
     });
   }
 
-  onAssetChange(master:any){
+  onAssetChange(master: any) {
 
-    let unit =  this.getDisplayText(master);
+    this.selectedMaster = master;
+    let unit = this.getDisplayText(master);
 
-    let c =  this.getForm().controls;
+    console.log("master", master);
+
+    let c = this.getForm().controls;
     c.unit.setValue(unit);
-    c.assetType.setValue(master.oldAssetType?master.oldAssetType:'' + ' - ' + master.newAssetType?master.newAssetType:'')
+    c.assetType.setValue(master.oldAssetType ? master.oldAssetType : '' + ' - ' + master.newAssetType ? master.newAssetType : '')
     c.size.setValue(master.masterSize)
     c.summaryStyle.setValue(master.masterStyle)
-    c.description.setValue(master.oldDescription?master.oldDescription:'' + ',' + master.newDescription?master.newDescription:'')
-    c.quality.setValue(null)
+    c.description.setValue(master.oldDescription ? master.oldDescription : '' + ',' + master.newDescription ? master.newDescription : '')
+    c.dutyApplication.setValue(master.dutyApplication)
+    c.quality.setValue(master.quality)
     c.quantity.setValue(null)
     c.load.setValue(null)
     c.life.setValue(null)
     this.masterId = master.masterId;
   }
 
-  getDisplayText(master:any){
-    if(master.oldAssetType || master.newAssetType
-     || master.masterStyle || master.masterSize)
-    {
+  onInstallmentChange(installmentDate: Date) {
+
+    let currentYear = Number(new Date().getFullYear());
+    let installationYear = Number(installmentDate.getFullYear());
+    let yearsPassed = currentYear - installationYear;
+    let totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
+    let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+    this.form.get('life')?.setValue(lifePerc);
+
+  }
+
+  getDisplayText(master: any) {
+    if (master.oldAssetType || master.newAssetType
+      || master.masterStyle || master.masterSize) {
       return master.oldAssetType + " - " + master?.newAssetType
-      + ", " + master?.masterStyle + ", " + master?.masterSize
+        + ", " + master?.masterStyle + ", " + master?.masterSize
     }
-    else{
+    else {
       return '';
     }
   }
 
-  getMastersBySiteId(siteId:any){
-    if(siteId){
+  getMastersBySiteId(siteId: any) {
+    if (siteId) {
       this.masterService.getMastersBySiteId(siteId).subscribe(
-      (res:any)=>{
-        if(res.masters)
-          this.masters = res.masters;
-      })
+        (res: any) => {
+          if (res.masters)
+            this.masters = res.masters;
+        })
     }
   }
 
@@ -98,11 +115,12 @@ export class CreateSummaryFormComponent implements OnInit {
       size: '',
       summaryStyle: '',
       description: '',
+      dutyApplication:'',
       quality: '',
       quantity: null,
       load: null,
-      life: null,
-      installmentDate: [new Date(), Validators.required],
+      life: [null,Validators.required],
+      installmentDate: [null, Validators.required],
     });
   }
 
@@ -117,93 +135,93 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onSubmit() {
-      if (this.form.valid) {
-        const {
-          unit,
-          assetType,
-          size,
-          description,
-          quality,
-          load,
-          quantity,
-          life,
-          summaryStyle,
-          installmentDate,
-        } = this.form.getRawValue();
+    if (this.form.valid) {
+      const {
+        unit,
+        assetType,
+        size,
+        description,
+        dutyApplication,
+        quality,
+        load,
+        quantity,
+        life,
+        summaryStyle,
+        installmentDate,
+      } = this.form.getRawValue();
 
-        this.summaryService.currentSummaryId.subscribe(
-          (summaryId:any)=>{
-            // console.log("asset", this.asset);
-            if(summaryId)
-            {
-              const updateSummaryPayload = {
-                siteId: this.siteId,
-                masterId: this.masterId,
-                unit:unit,
-                assetType: assetType,
-                summarySize: size,
-                summaryStatus:true,
-                dutyApplication: description,
-                appDescription: description,
-                quality: quality,
-                summaryload: load,
-                summaryStyle:summaryStyle,
-                life:life,
-                quantity: quantity,
-                installmentDate:installmentDate
-              };
+      this.summaryService.currentSummaryId.subscribe(
+        (summaryId:any)=>{
+          // console.log("asset", this.asset);
+          if(summaryId)
+          {
+            const updateSummaryPayload = {
+              siteId: this.siteId,
+              masterId: this.masterId,
+              unit:unit,
+              assetType: assetType,
+              summarySize: size,
+              summaryStatus:true,
+              dutyApplication: dutyApplication,
+              appDescription: description,
+              quality: quality,
+              summaryload: load,
+              summaryStyle:summaryStyle,
+              life:life,
+              quantity: quantity,
+              installmentDate:installmentDate
+            };
 
-              this.asset.setValue(unit)
+            this.asset.setValue(unit)
 
-              this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
-                (res:any)=>{
-                  console.log(res);
-                  window.location.reload();
-                }
-              )
-            }
-            else
-            {
-              // console.log("asset in create:", this.asset);
-              const createSummaryPayload = {
-                siteId: this.siteId,
-                masterId: this.masterId,
-                unit:unit,
-                assetType: assetType,
-                summarySize: size,
-                dutyApplication: description,
-                appDescription: description,
-                quality: quality,
-                summaryload: load,
-                summaryStyle:summaryStyle,
-                life:life,
-                quantity: quantity,
-                installmentDate:installmentDate
-              };
-
-              // console.log("create summary payload:",createSummaryPayload);
-
-              this.summaryService.postSummary(createSummaryPayload).subscribe(
-               (res:any)=>{
+            this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
+              (res:any)=>{
                 console.log(res);
                 window.location.reload();
-               }
-              );
-            }
+              }
+            )
           }
-        )
+          else
+          {
+            // console.log("asset in create:", this.asset);
+            const createSummaryPayload = {
+              siteId: this.siteId,
+              masterId: this.masterId,
+              unit:unit,
+              assetType: assetType,
+              summarySize: size,
+              dutyApplication: dutyApplication,
+              appDescription: description,
+              quality: quality,
+              summaryload: load,
+              summaryStyle:summaryStyle,
+              life:life,
+              quantity: quantity,
+              installmentDate:installmentDate
+            };
 
-        this.resetForm();
-      }
-       else {
-        this.validateAllFormFields(this.form);
+            // console.log("create summary payload:",createSummaryPayload);
+
+            this.summaryService.postSummary(createSummaryPayload).subscribe(
+             (res:any)=>{
+              console.log(res);
+              window.location.reload();
+             }
+            );
+          }
+        }
+      )
+        this.modalClose.nativeElement.click();
+    }
+    else {
+      this.validateAllFormFields(this.form);
     }
   }
 
-  onEditSummary(id:any) {
+  onEditSummary(id: any) {
 
 
-    this.summaryService.getSummaryById(id).subscribe((el:any) => {
+    this.summaryService.getSummaryById(id).subscribe((el: any) => {
 
       let summary = el[0];
       const {
@@ -213,6 +231,7 @@ export class CreateSummaryFormComponent implements OnInit {
         summaryload,
         summarySize,
         description,
+        dutyApplication,
         quality,
         summaryStyle,
         life,
@@ -220,12 +239,13 @@ export class CreateSummaryFormComponent implements OnInit {
         installmentDate,
       } = summary
 
-      let c =  this.getForm().controls;
+      let c = this.getForm().controls;
       c.unit.setValue(unit)
       c.assetType.setValue(assetType)
       c.size.setValue(summarySize)
       c.summaryStyle.setValue(summaryStyle)
       c.description.setValue(description)
+      c.dutyApplication.setValue(dutyApplication)
       c.quality.setValue(quality)
       c.quantity.setValue(quantity)
       c.load.setValue(summaryload)
@@ -234,10 +254,6 @@ export class CreateSummaryFormComponent implements OnInit {
       this.masterId = masterId;
 
     });
-  }
-
-  onDateChange(date:Date){
-    console.log("date", date);
   }
 
   resetForm() {

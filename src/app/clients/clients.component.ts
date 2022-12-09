@@ -98,7 +98,7 @@ export class ClientsComponent implements OnInit {
       this.form = this.fb.group({
         clientName: [_client.clientName, Validators.required],
         contractYears: [_client.contractYears, Validators.required],
-        clientStatus: [_client.clientStatus],
+        clientStatus: [_client.clientStatus, Validators.required],
       });
 
       this.isEditFormLoading = false;
