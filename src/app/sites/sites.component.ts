@@ -40,9 +40,18 @@ export class SitesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (
+      !localStorage.getItem('firstReload') ||
+      localStorage.getItem('firstReload') == 'true'
+    ) {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
     this.form = this.fb.group({
       siteName: ['', Validators.required],
-      selectedClient: ['',Validators.required],
+      selectedClient: ['', Validators.required],
     });
 
     this.getSites();
@@ -69,7 +78,10 @@ export class SitesComponent implements OnInit {
     const clientID = localStorage.getItem('clientId');
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
       next: (_) => {
-        this.userService.openSnackBar('New Site is Created Successfully!', 'close');
+        this.userService.openSnackBar(
+          'New Site is Created Successfully!',
+          'close'
+        );
         this.getSites();
       },
       error: (e) => {
@@ -91,7 +103,7 @@ export class SitesComponent implements OnInit {
       this.form = this.fb.group({
         selectedClient: [_site.selectedClient, Validators.required],
         siteName: [_site.siteName, Validators.required],
-        siteStatus: [_site.siteStatus, Validators.required]
+        siteStatus: [_site.siteStatus, Validators.required],
       });
 
       this.isEditFormLoading = false;
@@ -101,7 +113,7 @@ export class SitesComponent implements OnInit {
   onUpdateSite() {
     if (this.currentSite.siteId) {
       this.isLoading = true;
-      console.log( 'form value on update site', this.form.value)
+      console.log('form value on update site', this.form.value);
       this.siteService
         .updateSite(this.currentSite.siteId, this.form.value)
         .subscribe({
