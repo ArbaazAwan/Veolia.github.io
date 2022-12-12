@@ -11,21 +11,17 @@
           <div class="d-flex justify-content-center">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
-          <div class="flex-end px-3 col-md-3">
+          <div class="flex-end px-3 col-md-3 pt-3">
             <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
               <mat-label>Search Assets</mat-label>
               <input matInput type="text" [(ngModel)]="searchText" />
               <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
-          <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
-            <table *ngIf="!isLoading" class="table table-blocked table-hover mb-0" mat-sort>
+          <div class="p-0 table-responsive " *ngIf="!isLoading">
+            <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0" mat-sort>
               <thead>
                 <tr>
-                  <!-- <th class="px-2 pb-1 text-sm">
-                    <mat-checkbox class="example-margin">
-                    </mat-checkbox>
-                  </th> -->
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
                     Actions
                   </th>
@@ -76,18 +72,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let summary of summaryData | searchFilter: searchText">
+                <tr *ngFor="let summary of summaryData | searchFilter: searchText | paginate : { itemsPerPage: 50, currentPage: p };">
                   <!-- <td class="pt-3">
                     <mat-checkbox class=""></mat-checkbox>
                   </td> -->
                   <td>
                     <div class="d-flex py-1 ps-3">
                       <div class="d-flex flex-column">
-                        <div ngbDropdown>
-                          <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
+                        <div ngbDropdown container="body" class="fix-size">
+                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
                             Actions
                           </button>
-                          <div ngbDropdownMenu="gfg">
+                          <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
                             <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
                               (click)="editSummary(summary.summaryId)">
                               <i class="material-icons">edit</i>&nbsp;Edit
@@ -216,6 +212,9 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="col-md-12 pagination-div">
+            <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
     </div>

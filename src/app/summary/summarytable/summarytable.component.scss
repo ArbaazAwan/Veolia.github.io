@@ -5,3 +5,26 @@ td{
     word-wrap: break-word;
   
   }
+  .user-pagination ::ng-deep .ngx-pagination .current {
+    background: #ec407a;
+    font-family: "Roboto";
+    text-decoration: none !important;
+    color:white;
+  }
+  
+  .user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+    font-family: "Roboto";
+    text-decoration: none !important;
+  }
+  
+  .table-responsive{height:400px;overflow:scroll;} 
+  
+  thead tr:nth-child(1) th{background: white; position: sticky;top: 0;z-index: 10;}
+  
+  .card .card-body {
+    padding: 0 !important;
+  }
+  
+  .pagination-div {
+    display:flex; padding-top: 2%;
+  }
