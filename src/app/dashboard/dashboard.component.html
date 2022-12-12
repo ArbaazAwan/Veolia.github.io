@@ -1,5 +1,4 @@
 <div class="container-fluid py-4">
-
   <div class="row mb-4">
     <div class="col-xl-4 col-sm-6 mb-xl-0">
       <div class="card mb-4">
@@ -77,6 +76,86 @@
                 <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
               </mat-form-field>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card my-1">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <p class="text-white text-capitalize text-bold ps-3">
+              Details
+            </p>
+          </div>
+        </div>
+        <div class="card-body px-0">
+          <div class="p-0 table-responsive custom-table">
+            <table class="table table-blocked table-hover mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Unit or Equipment Functional Description
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Average Year
+                  </th>
+                  <th *ngFor="let header of years" class="text-uppercase text-bold text-xs font-weight-bolder">
+                    {{header}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">Total</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let yearlyCost of prices let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ prices.at(y) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngFor="let summary of yearsCostsViewTable let i = index;">
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(0)}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let yearlyCost of prices let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
