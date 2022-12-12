@@ -1,13 +1,85 @@
 <div class="container-fluid py-4">
-<div class="row mb-4">
-  <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-    <mat-label class="text-bold">Contigency%</mat-label>
-    <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()"/>
-  </mat-form-field>
-</div>
+
+  <div class="row mb-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0">
+      <div class="card mb-4">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">show_chart</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years</p>
+            <h4 class="mb-0">{{average}}</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer px-3 py-0">
+          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+            <mat-label class="text-bold">Enter Average Years</mat-label>
+            <input [(ngModel)]='averageYears' matInput type="number" (change)="onAverageYearsChange()" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_up</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost</p>
+            <h4 class="mb-0">{{maxYearCost}}</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-danger text-sm font-weight-bolder"> {{maxYear}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_down</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost</p>
+            <h4 class="mb-0">{{minYearCost}}</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-success text-sm font-weight-bolder"> {{minYear}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
-      <app-price-year-line-chart></app-price-year-line-chart>
+      <div class="card z-index-2">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+          <div class="bg-gradient-primary shadow-success border-radius-lg py-5 pe-1">
+            <app-price-year-line-chart></app-price-year-line-chart>
+          </div>
+        </div>
+        <div class="card-body py-2">
+          <div class="row">
+            <div class="col-md-9">
+              <h6 class="mb-0"> Price-Year Chart</h6>
+              <p class="text-sm">Total Cost in Each Year</p>
+            </div>
+            <div class="col-md-3 float-end">
+              <mat-form-field class="example-form-field text-xxs w-100" appearance="outline">
+                <mat-label class="text-bold">Enter Contigency%</mat-label>
+                <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

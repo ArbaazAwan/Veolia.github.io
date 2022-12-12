@@ -13,12 +13,18 @@ export class DashboardComponent implements OnInit {
   clientId: any;
   clientContractYears: any = 0;
   contigency: number = 0;
+  averageYears!:number;
+  average:number =0;
 
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
   displayTotalYearsCosts:any = [];
   totalAverageYearsCost: number = 0;
+  maxYearCost:number =0;
+  minYearCost:number =0;
+  maxYear:string = '';
+  minYear:string = '';
 
 
   constructor(private clientService: ClientService, private summaryCalculationsService: SummaryCalculationsService) { }
@@ -60,7 +66,6 @@ export class DashboardComponent implements OnInit {
     this.averagesOfYears = v.averagesOfYears;
     this.totalYearsCosts = v.totalYearsCosts;
     this.totalAverageYearsCost = v.totalAverageYearsCost;
-
   }
 
   onContigencyChange() {
@@ -72,10 +77,23 @@ export class DashboardComponent implements OnInit {
       this.prices[i-1] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
     }
     this.summaryCalculationsService.setPricesYears(this.prices, this.years);
+    this.maxYearCost = Math.max(...this.prices);
+    this.minYearCost = Math.min(...this.prices);
+    this.maxYear = this.prices.indexOf(this.maxYearCost)+1;
+    this.minYear = this.prices.indexOf(this.minYearCost)+1;
   }
 
   percentage(num: number, per: number) {
     return (num / 100) * per;
+  }
+
+  onAverageYearsChange(){
+    this.average=0;
+    let v =0;
+    for(let i =0;i <this.averageYears; i++){
+      v += this.totalYearsCosts[i+1];
+    }
+    this.average = Math.floor(v/this.averageYears);
   }
 
 }
