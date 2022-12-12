@@ -1,8 +1,17 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-  data-scroll="true">
+<nav
+  class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+  id="navbarBlur"
+  data-scroll="true"
+>
   <div class="container-fluid py-1">
-    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1" id="navbar">
-      <div class="ms-md-auto pe-md-3 d-flex align-items-center" [ngClass]="href == '/clientslist' ? 'addpadding' : '' ">
+    <div
+      class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1"
+      id="navbar"
+    >
+      <div
+        class="ms-md-auto pe-md-3 d-flex align-items-center"
+        [ngClass]="href == '/clientslist' ? 'addpadding' : ''"
+      >
         <div class="row float-end text-xs">
           <div class="col-sm-6 mt-3">
             <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
@@ -13,21 +22,35 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
-              <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
-                (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)"
-                [disabled]="isLoadingClient">
-                <mat-option *ngFor="let client of clients" value="{{ client.clientId }}">
+              <mat-select
+                [(ngModel)]="selectedClient"
+                [(value)]="selectedClient"
+                matInput
+                type="text"
+                (valueChange)="populateSites($event)"
+                (selectionChange)="onClientSelect($event)"
+                [disabled]="isLoadingClient"
+              >
+                <mat-option
+                  *ngFor="let client of clients"
+                  value="{{ client.clientId }}"
+                >
                   {{ client.clientName }}
                 </mat-option>
               </mat-select>
 
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
-            <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedClient == undefined">
+            <mat-error
+              *ngIf="!isClientListRoute() && selectedClient == undefined"
+            >
+              <strong>Please select a site!</strong>
+            </mat-error>
+            <!-- <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedClient == undefined">
               Please select a client!
-            </div>
+            </div> -->
           </div>
-          
+
           <div class="col-sm-6 mt-3">
             <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
               <mat-label *ngIf="isLoadingSite">
@@ -37,35 +60,49 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingSite">Select Site</mat-label>
-              <mat-select [(ngModel)]="selectedSite" [(value)]="selectedSite" matInput type="text"
-                (selectionChange)="onSiteSelect($event)" [disabled]="isLoadingSite">
-                <mat-option *ngFor="let site of sites" value="{{ site.siteId }}">
+              <mat-select
+                [(ngModel)]="selectedSite"
+                [(value)]="selectedSite"
+                matInput
+                type="text"
+                (selectionChange)="onSiteSelect($event)"
+                [disabled]="isLoadingSite"
+              >
+                <mat-option
+                  *ngFor="let site of sites"
+                  value="{{ site.siteId }}"
+                >
                   {{ site.siteName }}
                 </mat-option>
               </mat-select>
               <mat-icon matSuffix>business</mat-icon>
             </mat-form-field>
+            <mat-error
+              *ngIf="!isClientListRoute() && selectedClient == undefined"
+            >
+              <strong>Please select a client!</strong>
+            </mat-error>
 
-            <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedSite == undefined">
+            <!-- <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedSite == undefined">
               Please select a site!
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
-      <span><i class="material-icons mt-1">person</i></span>
-        <div ngbDropdown class="d-inline-block">
-          <div class="font-weight-bold" id="gfg" ngbDropdownToggle>
-            <span class="mx-1 mb-2 pointer">{{ user?.userName }}</span>
-          </div>
-          <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
-            <button ngbDropdownItem routerLink="/profile">
-              <i class="material-icons">person</i>&nbsp;Profile
-            </button>
-            <button ngbDropdownItem (click)="logOut()">
-              <i class="material-icons">logout</i>&nbsp;Logout
-            </button>
-          </div>
+      <span><i class="material-icons">person</i></span>
+      <div ngbDropdown class="d-inline-block pointer">
+        <div class="font-weight-bold" id="gfg" ngbDropdownToggle>
+          <span class="mx-1 mb-2 capitalize-first">{{ user?.userName }}</span>
         </div>
+        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
+          <button ngbDropdownItem routerLink="/profile">
+            <i class="material-icons">person</i>&nbsp;Profile
+          </button>
+          <button ngbDropdownItem (click)="logOut()">
+            <i class="material-icons">logout</i>&nbsp;Logout
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
