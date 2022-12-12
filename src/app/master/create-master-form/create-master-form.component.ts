@@ -25,7 +25,6 @@ export class CreateMasterFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
-      console.log('master Id', masterId)
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
@@ -35,6 +34,7 @@ export class CreateMasterFormComponent implements OnInit {
 
   initialForm() {
     return (this.form = this.fb.group({
+      masterId:[{ value: '', disabled: true }],
       oldAssetType: ['', Validators.required],
       masterStyle: [''],
       newAssetType: ['', Validators.required],
@@ -68,6 +68,7 @@ export class CreateMasterFormComponent implements OnInit {
       const _overhaul = _masterComplete.overhaul;
 
       let c = this.initialForm().controls;
+      c.masterId.setValue(_master.masterId);
       c.oldAssetType.setValue(_master.oldAssetType ? _master.oldAssetType : '');
       c.masterStyle.setValue(_master.masterStyle ? _master.masterStyle : '');
       c.newAssetType.setValue(_master.newAssetType ? _master.newAssetType : '');

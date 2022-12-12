@@ -1,45 +1,48 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ClientService } from 'src/app/clients/client.service';
-import { MasterService } from 'src/app/master/master.service';
-import * as XLSX from 'xlsx';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MasterService } from '../master/master.service';
+import { SummaryService } from './summary.service';
 
-
-@Component({
-  selector: 'app-summary-viewdetails-table',
-  templateUrl: './summary-viewdetails-table.component.html',
-  styleUrls: ['./summary-viewdetails-table.component.scss'],
+@Injectable({
+  providedIn: 'root'
 })
-export class SummaryViewdetailsTableComponent implements OnInit {
-  @Input() summaryArray: any;
-  assetTableHeaders: string[] = [];
-  submitted: boolean = false;
+export class SummaryCalculationsService {
+
+  siteId:any = localStorage.getItem("siteId");
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
   totalAverageYearsCost:number = 0;
+  summaryArray:any =[];
 
-  clientContractYears: number = 0;
-  clientId: any = localStorage.getItem('clientId');
+  constructor(private masterService:MasterService, private summaryService:SummaryService) {
+      this.getCalculations();
+   }
 
-  constructor(
-    private masterService: MasterService,
-    private clientService: ClientService
-  ) { }
 
-  ngOnInit(): void {
-    for (let i = 1; i <= 50; i++) {
-      let a = 'Year ' + i.toString();
-      this.assetTableHeaders.push(a);
-    }
-
-    this.getContractYears();
-    this.summaryArray.forEach((summary:any) => {
-      this.getMaster(summary.masterId, summary);
-    });
-
+   getCalculations(){
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
+      (summaries:any)=>
+      {
+        this.summaryArray = summaries.summary;
+        this.summaryArray.forEach((summary:any) => {
+        this.getMaster(summary.masterId, summary);
+        });
+      }
+    )
   }
 
-  getMaster(masterId: any, summary:any) {
+  values(){
+    return {
+      yearsCostsViewTable:this.yearsCostsViewTable,
+      averagesOfYears:this.averagesOfYears,
+      totalYearsCosts:this.totalYearsCosts,
+      totalAverageYearsCost:this.totalAverageYearsCost,
+      summaryArray:this.summaryArray
+    }
+  }
+
+   getMaster(masterId: any, summary:any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -140,23 +143,5 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.yearsCostsViewTable.push(yearsCosts);
       });
 
-  }
-
-  getContractYears() {
-    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0]?.contractYears;
-    });
-  }
-
-  exportToExcel( name?: string) {
-    let timeSpan = new Date().toISOString();
-    let prefix = name || 'ExportResult';
-    let fileName = `${prefix}-${timeSpan}`;
-    let targetTableElm = document.getElementById('summaryTable');
-    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
-      sheet: prefix,
-    });
-
-    XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 }

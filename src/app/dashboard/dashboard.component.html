@@ -2,7 +2,7 @@
 <div class="row mb-4">
   <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
     <mat-label class="text-bold">Contigency%</mat-label>
-    <input [formControl]='contigency' matInput type="number" />
+    <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()"/>
   </mat-form-field>
 </div>
   <div class="row">

@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-price-year-line-chart',
   templateUrl: './price-year-line-chart.component.html',
   styleUrls: ['./price-year-line-chart.component.scss'],
 })
-export class PriceYearLineChartComponent implements OnInit {
-  constructor() {}
+export class PriceYearLineChartComponent implements OnInit, OnChanges{
+  constructor() { }
   data: any;
   basicOptions: any;
   @Input() years: string[] = [];
@@ -16,6 +16,10 @@ export class PriceYearLineChartComponent implements OnInit {
 
     this.graphOptions();
     this.graphData(this.years, this.prices);
+  }
+
+  ngOnChanges(): void {
+    // this.prices = [...this.prices];
   }
 
   graphOptions(){
@@ -45,7 +49,7 @@ export class PriceYearLineChartComponent implements OnInit {
     };
   }
 
-  graphData(years:any, prices:any){
+  graphData(years: any, prices: any) {
     this.data = {
       labels: years,
       datasets: [
@@ -54,7 +58,7 @@ export class PriceYearLineChartComponent implements OnInit {
           data: prices,
           tension: 0.4,
           borderWidth: 0.8,
-          pointRadius: 5,
+          pointRadius: 7,
           pointBackgroundColor: 'rgba(255, 255, 255, .8)',
           pointBorderColor: 'transparent',
           borderColor: 'rgba(255, 255, 255, .8)',
