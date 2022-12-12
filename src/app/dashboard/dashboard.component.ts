@@ -30,36 +30,15 @@ export class DashboardComponent implements OnInit {
 
       this.assignValues();
 
-      this.onContigencyChange();
+      //getting clients contract years
+      this.clientService.getClientById(this.clientId).subscribe((client: any) => {
+        this.clientContractYears = client[0]?.contractYears;
+        this.onContigencyChange(); //for first the time values
+      });
 
     }, 2000);
 
     this.reloadCheck();
-  }
-
-  assignValues() {
-    let v = this.summaryCalculationsService.values();
-    this.yearsCostsViewTable = v.yearsCostsViewTable;
-    this.averagesOfYears = v.averagesOfYears;
-    this.totalYearsCosts = v.totalYearsCosts;
-    this.totalAverageYearsCost = v.totalAverageYearsCost;
-
-  }
-
-  onContigencyChange() {
-    // console.log("value change", this.contigency);
-    this.displayTotalYearsCosts = [];
-
-    for (let i = 0; i < this.totalYearsCosts.length; i++) {
-      // displaycost = cost + contigency%
-      this.displayTotalYearsCosts[i] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
-    }
-    this.getContractYears();
-    console.log("prices", this.prices);
-  }
-
-  percentage(num: number, per: number) {
-    return (num / 100) * per;
   }
 
   reloadCheck() {
@@ -75,17 +54,28 @@ export class DashboardComponent implements OnInit {
     this.clientId = localStorage.getItem('clientId');
   }
 
-  getYearsPrices() {
-    for (let i = 1; i <= Number(this.clientContractYears); i++) {
-      this.years.push('Year ' + i.toString());
-      this.prices[i - 1] = this.displayTotalYearsCosts[i];
-    }
+  assignValues() {
+    let v = this.summaryCalculationsService.values();
+    this.yearsCostsViewTable = v.yearsCostsViewTable;
+    this.averagesOfYears = v.averagesOfYears;
+    this.totalYearsCosts = v.totalYearsCosts;
+    this.totalAverageYearsCost = v.totalAverageYearsCost;
+
   }
 
-  getContractYears() {
-    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0]?.contractYears;
-      this.getYearsPrices();
-    });
+  onContigencyChange() {
+    this.prices = [];
+    this.years = [];
+    for (let i = 1; i <= Number(this.clientContractYears); i++) {
+      this.years.push('Year ' + i.toString());
+      // displaycost = cost + contigency%
+      this.prices[i-1] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
+    }
+    this.summaryCalculationsService.setPricesYears(this.prices, this.years);
   }
+
+  percentage(num: number, per: number) {
+    return (num / 100) * per;
+  }
+
 }

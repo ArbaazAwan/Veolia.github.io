@@ -1,26 +1,26 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { SummaryCalculationsService } from 'src/app/summary/summary-calculations.service';
 
 @Component({
   selector: 'app-price-year-line-chart',
   templateUrl: './price-year-line-chart.component.html',
   styleUrls: ['./price-year-line-chart.component.scss'],
 })
-export class PriceYearLineChartComponent implements OnInit, OnChanges{
-  constructor() { }
+export class PriceYearLineChartComponent implements OnInit{
+  constructor(private calculationService:SummaryCalculationsService ) { }
   data: any;
   basicOptions: any;
-  @Input() years: string[] = [];
-  @Input() prices: number[] = [];
 
   ngOnInit(): void {
 
     this.graphOptions();
-    this.graphData(this.years, this.prices);
+    this.calculationService.currentPricesYears.subscribe(
+      (value:any)=>{
+        this.graphData(value.years, value.prices);
+      });
+
   }
 
-  ngOnChanges(): void {
-    // this.prices = [...this.prices];
-  }
 
   graphOptions(){
     this.basicOptions = {

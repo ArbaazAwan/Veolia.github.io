@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MasterService } from '../master/master.service';
 import { SummaryService } from './summary.service';
 
@@ -8,41 +8,49 @@ import { SummaryService } from './summary.service';
 })
 export class SummaryCalculationsService {
 
-  siteId:any = localStorage.getItem("siteId");
+  siteId: any = localStorage.getItem("siteId");
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
-  totalAverageYearsCost:number = 0;
-  summaryArray:any =[];
+  totalAverageYearsCost: number = 0;
+  summaryArray: any = [];
+  private pricesYears = new BehaviorSubject(new Object({}));
+  currentPricesYears = this.pricesYears.asObservable();
 
-  constructor(private masterService:MasterService, private summaryService:SummaryService) {
-      this.getCalculations();
-   }
+  constructor(private masterService: MasterService, private summaryService: SummaryService) {
+    this.getCalculations();
+  }
+
+  setPricesYears(prices: any, years: any) {
+    this.pricesYears.next({
+      prices: prices,
+      years: years
+    });
+  }
 
 
-   getCalculations(){
+  getCalculations() {
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
-      (summaries:any)=>
-      {
+      (summaries: any) => {
         this.summaryArray = summaries.summary;
-        this.summaryArray.forEach((summary:any) => {
-        this.getMaster(summary.masterId, summary);
+        this.summaryArray.forEach((summary: any) => {
+          this.getMaster(summary.masterId, summary);
         });
       }
     )
   }
 
-  values(){
+  values() {
     return {
-      yearsCostsViewTable:this.yearsCostsViewTable,
-      averagesOfYears:this.averagesOfYears,
-      totalYearsCosts:this.totalYearsCosts,
-      totalAverageYearsCost:this.totalAverageYearsCost,
-      summaryArray:this.summaryArray
+      yearsCostsViewTable: this.yearsCostsViewTable,
+      averagesOfYears: this.averagesOfYears,
+      totalYearsCosts: this.totalYearsCosts,
+      totalAverageYearsCost: this.totalAverageYearsCost,
+      summaryArray: this.summaryArray
     }
   }
 
-   getMaster(masterId: any, summary:any) {
+  getMaster(masterId: any, summary: any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -134,7 +142,7 @@ export class SummaryCalculationsService {
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
-        let averageCost = totalCost/50;
+        let averageCost = totalCost / 50;
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
