@@ -174,7 +174,7 @@ export class CreateMasterFormComponent implements OnInit {
               //updating the summary's masterId
               this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
                 next: (res) => {
-                  this.userService.openSnackBar('Master Record is Edited', 'close');
+                  this.masterService.openSnackBar('Master Record is Edited', 'close');
                 },
                 error: (err) => {
                   console.log("error occured in updateSummaryMasterId", err);
@@ -190,7 +190,7 @@ export class CreateMasterFormComponent implements OnInit {
         }
 
         else{
-          this.userService.openSnackBar('Master Record is Created', 'close');
+          this.masterService.openSnackBar('Master Record is Created', 'close');
         }
 
       });
