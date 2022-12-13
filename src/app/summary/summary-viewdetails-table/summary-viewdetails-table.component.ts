@@ -36,6 +36,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
+
+    console.log(this.summaryArray);
   }
 
   getMaster(masterId: any, summary: any) {

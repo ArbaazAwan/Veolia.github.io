@@ -94,7 +94,7 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" *ngIf="role == 'admin' || !siteStatus">
+                            data-bs-target="#modal-form-create" *ngIf="role == 'admin' && siteStatus">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>

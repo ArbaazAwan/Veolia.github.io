@@ -51,8 +51,8 @@
                 <td class="bg-light">
                   <label class="text-bold Data-Wrap">Total</label>
                 </td>
-                <td></td>
-                <td></td>
+                <td>-</td>
+                <td>-</td>
                 <td>
                   <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost}}</p>
                 </td>
@@ -64,8 +64,8 @@
                 <td class="bg-light Data-Wrap">
                   <label class="text-bold ">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
-                <td></td>
-                <td></td>
+                <td>{{summary.life / 100 | percent}}</td>
+                <td>{{summary.installmentDate | date:'mediumDate'}}</td>
                 <td>
                   <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
                 </td>
