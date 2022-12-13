@@ -4,12 +4,14 @@
       <div class="card mb-4">
         <div class="card-header p-3 pt-2">
           <div
-            class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            class="icon icon-md icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">show_chart</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years</p>
-            <h4 class="mb-0">{{average}}</h4>
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span class="text-bold text-lg">{{average}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years + Contigency <span class="text-bold text-lg">{{averageC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -24,10 +26,10 @@
     <div class="col-xl-3 col-sm-6">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+          <div class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">add</i>
           </div>
-          <div class="text-end pt-1">
+          <div class="text-end pt-1 pb-2">
             <p class="text-sm mb-0 text-capitalize">Contigency</p>
             <h4 class="mb-0">{{contigency}}%</h4>
           </div>
@@ -44,12 +46,14 @@
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+          <div class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">trending_up</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost</p>
-            <h4 class="mb-0">{{maxYearCost}}</h4>
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost + Contigency <span class="text-bold text-lg">{{maxYearCostC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -61,12 +65,14 @@
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+          <div class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">trending_down</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost</p>
-            <h4 class="mb-0">{{minYearCost}}</h4>
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg"> {{minYearCost}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost + Contigency<span class="text-bold text-lg"> {{minYearCostC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -89,9 +95,6 @@
             <div class="col-md-9">
               <h6 class="mb-0"> Price-Year Chart</h6>
               <p class="text-sm">Total Cost in Each Year</p>
-            </div>
-            <div class="col-md-3 float-end">
-
             </div>
           </div>
         </div>
@@ -140,10 +143,33 @@
                       </div>
                     </div>
                   </td>
-                  <td *ngFor="let yearlyCost of prices let y = index">
+                  <td *ngFor="let price of prices let y = index">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{ prices.at(y) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">Total with Contigency</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{totalAverageYearsCostC}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let priceC of pricesC let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ pricesC.at(y) }}</p>
                       </div>
                     </div>
                   </td>

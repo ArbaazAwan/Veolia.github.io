@@ -16,7 +16,7 @@ export class PriceYearLineChartComponent implements OnInit{
     this.graphOptions();
     this.calculationService.currentPricesYears.subscribe(
       (value:any)=>{
-        this.graphData(value.years, value.prices);
+        this.graphData(value.years, value.prices, value.pricesC);
       });
 
   }
@@ -49,12 +49,12 @@ export class PriceYearLineChartComponent implements OnInit{
     };
   }
 
-  graphData(years: any, prices: any) {
+  graphData(years: any, prices: any, pricesC:any) {
     this.data = {
       labels: years,
       datasets: [
         {
-          label: 'Price',
+          label: 'Cost',
           data: prices,
           tension: 0.4,
           borderWidth: 0.8,
@@ -66,6 +66,20 @@ export class PriceYearLineChartComponent implements OnInit{
           fill: true,
           maxBarThickness: 6,
         },
+        {
+          label: 'Cost with Contigency',
+          data: pricesC,
+          tension: 0.4,
+          borderWidth: 0.8,
+          pointRadius: 7,
+          pointBackgroundColor: 'rgb(41,131,235, .8)',
+          pointBorderColor: 'transparent',
+          borderColor: 'rgb(41,131,235, .8)',
+          backgroundColor: 'transparent',
+          fill: true,
+          maxBarThickness: 6,
+        },
+
       ],
     };
   }

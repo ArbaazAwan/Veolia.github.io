@@ -10,21 +10,27 @@ import { SummaryCalculationsService } from '../summary/summary-calculations.serv
 export class DashboardComponent implements OnInit {
   years: any = [];
   prices: any = [];
+  pricesC: any = []; //prices with contigency
   clientId: any;
   clientContractYears: any = 0;
   contigency: number = 0;
-  averageYears!:number;
-  average:number =0;
+  averageYears!: number;
+  averageC: number = 0;
+  average: number = 0;
 
   yearsCostsViewTable: any[] = [];
+  yearsCostsViewTableC: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
-  displayTotalYearsCosts:any = [];
+  displayTotalYearsCosts: any = [];
   totalAverageYearsCost: number = 0;
-  maxYearCost:number =0;
-  minYearCost:number =0;
-  maxYear:string = '';
-  minYear:string = '';
+  totalAverageYearsCostC: number = 0;
+  maxYearCostC: number = 0;
+  minYearCostC: number = 0;
+  maxYearCost: number = 0;
+  minYearCost: number = 0;
+  maxYear: string = '';
+  minYear: string = '';
 
 
   constructor(private clientService: ClientService, private summaryCalculationsService: SummaryCalculationsService) { }
@@ -39,6 +45,7 @@ export class DashboardComponent implements OnInit {
       //getting clients contract years
       this.clientService.getClientById(this.clientId).subscribe((client: any) => {
         this.clientContractYears = client[0]?.contractYears;
+        this.pricesWithoutContigency();
         this.onContigencyChange(); //for first the time values
       });
 
@@ -68,32 +75,58 @@ export class DashboardComponent implements OnInit {
     this.totalAverageYearsCost = v.totalAverageYearsCost;
   }
 
-  onContigencyChange() {
+  pricesWithoutContigency() {
     this.prices = [];
     this.years = [];
     for (let i = 1; i <= Number(this.clientContractYears); i++) {
       this.years.push('Year ' + i.toString());
-      // displaycost = cost + contigency%
-      this.prices[i-1] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
+      this.prices[i - 1] = this.totalYearsCosts[i];
     }
-    this.summaryCalculationsService.setPricesYears(this.prices, this.years);
+    this.summaryCalculationsService.setPricesYears(this.prices, this.pricesC, this.years);
     this.maxYearCost = Math.max(...this.prices);
     this.minYearCost = Math.min(...this.prices);
-    this.maxYear = this.prices.indexOf(this.maxYearCost)+1;
-    this.minYear = this.prices.indexOf(this.minYearCost)+1;
+    this.maxYear = this.prices.indexOf(this.maxYearCost) + 1;
+    this.minYear = this.prices.indexOf(this.minYearCost) + 1;
+  }
+
+  onContigencyChange() {
+    this.pricesC = [];
+    this.years = [];
+    for (let i = 1; i <= Number(this.clientContractYears); i++) {
+      this.years.push('Year ' + i.toString());
+      // displaycost = cost + contigency%
+      this.pricesC[i - 1] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
+    }
+    this.summaryCalculationsService.setPricesYears(this.prices,this.pricesC, this.years);
+    this.maxYearCostC = Math.max(...this.pricesC);
+    this.minYearCostC = Math.min(...this.pricesC);
+    this.maxYear = this.pricesC.indexOf(this.maxYearCostC) + 1;
+    this.minYear = this.pricesC.indexOf(this.minYearCostC) + 1;
+
+    this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost,this.contigency));
+
+    for(let i = 0; i< this.yearsCostsViewTable.length; i++){
+     this.yearsCostsViewTableC[i] = this.yearsCostsViewTable[i]?.at(0) + this.percentage(this.yearsCostsViewTable[i]?.at(0),this.contigency);
+    }
+
+    this.onAverageYearsChange();
   }
 
   percentage(num: number, per: number) {
     return (num / 100) * per;
   }
 
-  onAverageYearsChange(){
-    this.average=0;
-    let v =0;
-    for(let i =0;i <this.averageYears; i++){
+  onAverageYearsChange() {
+    this.averageC = 0;
+    this.average = 0;
+    let vc = 0;
+    let v = 0;
+    for (let i = 0; i < this.averageYears; i++) {
+      vc += this.totalYearsCosts[i+1] + this.percentage(this.totalYearsCosts[i+1], this.contigency);
       v += this.totalYearsCosts[i+1];
     }
-    this.average = Math.floor(v/this.averageYears);
+    this.averageC = Math.floor(vc / this.averageYears);
+    this.average = Math.floor(v / this.averageYears);
   }
 
 }
