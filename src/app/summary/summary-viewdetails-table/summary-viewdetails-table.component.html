@@ -28,8 +28,15 @@
               <!-- header list  -->
               <tr class="bg-light">
                 <th class="px-2">
-                  <label class="text-bold mt-2">Unit or Equipment Functional Description</label>
+                  <label class="text-bold mt-2 Data-Wrap">Unit or Equipment Functional Description</label>
                 </th>
+                <th class="px-2">
+                  <label class="text-bold mt-2">Life %</label>
+                </th>
+                <th class="px-2">
+                  <label class="text-bold mt-2">Installation Date</label>
+                </th>
+
                 <th class="px-2">
                   <label class="text-bold mt-2">Average Year</label>
                 </th>
@@ -42,19 +49,23 @@
             <tbody>
               <tr>
                 <td class="bg-light">
-                  <label class="text-bold">Total</label>
+                  <label class="text-bold Data-Wrap">Total</label>
                 </td>
+                <td></td>
+                <td></td>
                 <td>
-                  <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                  <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost}}</p>
                 </td>
                 <td *ngFor="let yearlyCost of totalYearsCosts let y = index">
-                  <p class="mb-0 text-sm">{{ totalYearsCosts.at(y+1) }}</p>
+                  <p class="mb-0 text-sm text-bold">{{ totalYearsCosts.at(y+1) }}</p>
                 </td>
               </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
-                <td class="bg-light">
-                  <label class="text-bold">{{yearsCostsViewTable[i]?.at(0)}}</label>
+                <td class="bg-light Data-Wrap">
+                  <label class="text-bold ">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                   <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
                 </td>
