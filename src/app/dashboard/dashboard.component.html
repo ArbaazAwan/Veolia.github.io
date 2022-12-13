@@ -8,10 +8,12 @@
             <i class="material-icons opacity-10">show_chart</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span class="text-bold text-lg">{{average}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span
+                class="text-bold text-lg">{{average}}</span></p>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years + Contigency <span class="text-bold text-lg">{{averageC}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years + Contigency <span
+                class="text-bold text-lg">{{averageC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -26,7 +28,8 @@
     <div class="col-xl-3 col-sm-6">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+          <div
+            class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">add</i>
           </div>
           <div class="text-end pt-1 pb-2">
@@ -46,14 +49,17 @@
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+          <div
+            class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">trending_up</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span>
+            </p>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost + Contigency <span class="text-bold text-lg">{{maxYearCostC}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost + Contigency <span
+                class="text-bold text-lg">{{maxYearCostC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -65,14 +71,17 @@
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
-          <div class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+          <div
+            class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">trending_down</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg"> {{minYearCost}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg">
+                {{minYearCost}}</span></p>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost + Contigency<span class="text-bold text-lg"> {{minYearCostC}}</span></p>
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost + Contigency<span class="text-bold text-lg">
+                {{minYearCostC}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -112,8 +121,17 @@
           </div>
         </div>
         <div class="card-body px-0">
+          <div class="row">
+            <div class="text-end">
+              <button type="button" (click)="exportToExcel('dashboard-details-table')"
+                class="btn bg-gradient-primary btn-sm text-right mx-3">
+                Export Table
+              </button>
+            </div>
+          </div>
+
           <div class="p-0 table-responsive custom-table">
-            <table class="table table-blocked table-hover mb-0">
+            <table class="table table-blocked table-hover mb-0" id="dashboard-details-table">
               <thead>
                 <tr>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -128,7 +146,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr >
+                <tr>
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">

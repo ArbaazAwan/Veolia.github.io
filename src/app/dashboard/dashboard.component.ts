@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../clients/client.service';
 import { SummaryCalculationsService } from '../summary/summary-calculations.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,8 +38,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-
-      console.log("calculations", this.summaryCalculationsService.values());
 
       this.assignValues();
 
@@ -103,8 +102,10 @@ export class DashboardComponent implements OnInit {
     this.maxYear = this.pricesC.indexOf(this.maxYearCostC) + 1;
     this.minYear = this.pricesC.indexOf(this.minYearCostC) + 1;
 
+    //getting total average cost with contigency
     this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost,this.contigency));
 
+    // yearsCostsViewTableC to display totals with contigency
     for(let i = 0; i< this.yearsCostsViewTable.length; i++){
      this.yearsCostsViewTableC[i] = this.yearsCostsViewTable[i]?.at(0) + this.percentage(this.yearsCostsViewTable[i]?.at(0),this.contigency);
     }
@@ -127,6 +128,18 @@ export class DashboardComponent implements OnInit {
     }
     this.averageC = Math.floor(vc / this.averageYears);
     this.average = Math.floor(v / this.averageYears);
+  }
+
+  exportToExcel(name?: string) {
+    let timeSpan = new Date().toISOString();
+    let prefix = name || 'ExportResult';
+    let fileName = `${prefix}-${timeSpan}`;
+    let targetTableElm = document.getElementById('dashboard-details-table');
+    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{
+      sheet: prefix,
+    });
+
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
 
 }
