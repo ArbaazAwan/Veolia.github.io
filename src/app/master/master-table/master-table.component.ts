@@ -9,7 +9,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService, private siteService:SiteService) {}
+  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService) { }
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
@@ -17,23 +17,23 @@ export class MasterTableComponent implements OnInit {
   p: number = 1;
   siteId = localStorage.getItem('siteId');
   message: any;
-  siteStatus:boolean=false;
+  siteStatus: boolean = false;
   role: any = localStorage.getItem('role');
 
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    console.log(this.getDisplayText)
     this.getSiteStatus();
-    if (this.siteId) this.getMasters(this.siteId);
+    this.getMasters(this.siteId);
+
   }
 
-  getSiteStatus(){
+  getSiteStatus() {
     this.siteService.getSiteById(this.siteId).subscribe({
-      next:(site:any)=>{
+      next: (site: any) => {
         this.siteStatus = site[0].siteStatus;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log("error occured in getSiteStatus", err);
       }
     })
@@ -105,17 +105,21 @@ export class MasterTableComponent implements OnInit {
   }
 
   getMasters(siteId: any) {
-    this.isLoading = true;
-    this.masterService.getMastersBySiteId(siteId).subscribe({
-      next: (masters: any) => {
-        this.masters = masters.masters;
-        this.sortAssets({ active: 'masterId', direction: 'desc' });
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-      },
-    });
+    
+    if (this.siteId) {
+      this.isLoading = true;
+      this.masterService.getMastersBySiteId(siteId).subscribe({
+        next: (masters: any) => {
+          this.masters = masters.masters;
+          this.sortAssets({ active: 'masterId', direction: 'desc' });
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.isLoading = false;
+        },
+      });
+    }
+
   }
 
   editMaster(masterId: any) {
@@ -124,7 +128,7 @@ export class MasterTableComponent implements OnInit {
 
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
-     this.userService.openSnackBar('Selected Record is Deleted from Master.', 'close');
+      this.userService.openSnackBar('Selected Record is Deleted from Master.', 'close');
     });
   }
 
