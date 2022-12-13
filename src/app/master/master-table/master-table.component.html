@@ -81,8 +81,8 @@
                 <td>
                   <div class="d-flex mx-2">
                     <div class="d-flex flex-column" >
-                      <div ngbDropdown > 
-                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
+                      <div ngbDropdown> 
+                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute; z-index: 10000;">

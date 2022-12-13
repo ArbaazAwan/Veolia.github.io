@@ -128,7 +128,7 @@ export class MasterTableComponent implements OnInit {
 
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
-      this.userService.openSnackBar('Selected Record is Deleted from Master.', 'close');
+      this.masterService.openSnackBar('Selected Record is Deleted from Master.', 'close');
     });
   }
 
@@ -136,7 +136,7 @@ export class MasterTableComponent implements OnInit {
     this.masterService.getCompleteMasterById(masterId).subscribe((res: any) => {
       if (res) {
         this.masterService.postCompleteMaster(res).subscribe((result: any) => {
-          this.userService.openSnackBar('Duplicate Record is Created.', 'close');
+          this.masterService.openSnackBar('Duplicate Record is Created.', 'close');
         });
       }
     });

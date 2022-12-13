@@ -16,6 +16,7 @@ import { MasterTableComponent } from './master-table/master-table.component';
 import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
 import { ImportExcelComponent } from './import-excel/import-excel.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TreeTableModule,
     HttpClientModule,
     PipesModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSnackBarModule
   ],
   exports:[
     MasterComponent,

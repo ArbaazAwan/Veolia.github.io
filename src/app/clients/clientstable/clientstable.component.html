@@ -2,9 +2,7 @@
   <div class="col-12">
     <div class="card my-4">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div
-          class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3"
-        >
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Clients Table</p>
         </div>
       </div>
@@ -12,11 +10,7 @@
       <!-- Summary table -->
       <div class="card-body px-0">
         <div class="flex-end px-3 col-md-3 pt-3">
-          <mat-form-field
-            class="example-form-field"
-            appearance="outline"
-            class="text-xs"
-          >
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Clients</mat-label>
             <input matInput type="text" [(ngModel)]="searchText" />
             <mat-icon matSuffix>search</mat-icon>
@@ -27,159 +21,114 @@
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
           <div class="table-responsive">
-          <table
-            class="table table-blocked table-hover mx-3 mb-0 "
-            *ngIf="!isLoading"
-            matSort
-            (matSortChange)="sortAssets($event)"
-          >
-            <thead>
-              <tr>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="clientId"
-                >
-                  Client id
-                </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="clientName"
-                >
-                  Client Name
-                </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="contractYears"
-                >
-                  Contract Years
-                </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="clientCreated"
-                >
-                  Client Created
-                </th>
-                <th
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="clientStatus"
-                >
-                  Client Status
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="
+            <table class="table table-blocked table-hover mx-3 mb-0 " *ngIf="!isLoading" matSort
+              (matSortChange)="sortAssets($event)">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientId">
+                    Client id
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientName">
+                    Client Name
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="contractYears">
+                    Contract Years
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientCreated">
+                    Client Created
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientStatus">
+                    Client Status
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="
                   let client of sortedClients
                     | searchFilter : searchText
                     | paginate : { itemsPerPage: 20, currentPage: p };
                   let i = index
-                "
-              >
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ client.clientId }}</p>
+                ">
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ client.clientId }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ client.clientName }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ client.clientName }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ client.contractYears }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ client.contractYears }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ client.clientCreated | date : "mediumDate" }}
-                      </p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">
+                          {{ client.clientCreated | date : "mediumDate" }}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p
-                        class="mb-0 text-sm"
-                        *ngIf="client.clientStatus == true"
-                      >
-                        Active
-                      </p>
-                      <p
-                        class="mb-0 text-sm"
-                        *ngIf="client.clientStatus == false"
-                      >
-                        Inactive
-                      </p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm" *ngIf="client.clientStatus == true">
+                          Active
+                        </p>
+                        <p class="mb-0 text-sm" *ngIf="client.clientStatus == false">
+                          Inactive
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex ps-3">
-                    <div class="d-flex flex-column">
-                      <div>
-                        <div class="d-flex">
-                          <div class="d-flex flex-column">
-                            <div ngbDropdown container="body" class="fix-size">
-                              <button
-                                class="btn btn-sm bg-gradient-primary"
-                                id="gfg"
-                                ngbDropdownToggle
-                              >
-                                Actions
-                              </button>
-                              <div
-                                ngbDropdownMenu="gfg"
-                                style="margin-top: 0 !important"
-                              >
-                                <button
-                                  ngbDropdownItem
-                                  (click)="editClient(client.clientId)"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#edit-modal-form"
-                                >
-                                  <i class="material-icons">edit</i>&nbsp; Edit
+                  </td>
+                  <td>
+                    <div class="d-flex ps-3">
+                      <div class="d-flex flex-column">
+                        <div>
+                          <div class="d-flex">
+                            <div class="d-flex flex-column">
+                              <div ngbDropdown container="body" class="fix-size">
+                                <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle>
+                                  Actions
                                 </button>
-                                <button
-                                  ngbDropdownItem
-                                  class="text-danger"
-                                  (click)="deleteClient(client.clientId)"
-                                >
-                                  <i class="material-icons">delete</i>&nbsp;
-                                  Delete
-                                </button>
+                                <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
+                                  <button ngbDropdownItem (click)="editClient(client.clientId)" data-bs-toggle="modal"
+                                    data-bs-target="#edit-modal-form">
+                                    <i class="material-icons">edit</i>&nbsp; Edit
+                                  </button>
+                                  <button ngbDropdownItem class="text-danger" (click)="deleteClient(client.clientId)">
+                                    <i class="material-icons">delete</i>&nbsp;
+                                    Delete
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="col-md-12 pagination-div">
-            <pagination-controls
-              class="user-pagination"
-              (pageChange)="p = $event"
-            ></pagination-controls>
-          </div>
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
+        </div>
       </div>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class MasterService {
   currentMasterId = this.masterId.asObservable();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   setMasterId(masterId: any) {
     this.masterId.next(masterId);
@@ -77,6 +78,14 @@ export class MasterService {
   deleteMaster(id: any) {
     return this.http
       .delete(this.MASTER_URL + id)
+  }
+
+  openSnackBar(message: string, action: string) {
+    let snackBarRef = this.snackBar.open(message, action, { duration: 3000 });
+
+    snackBarRef.afterDismissed().subscribe(() => {
+      window.location.reload();
+    });
   }
 
 }

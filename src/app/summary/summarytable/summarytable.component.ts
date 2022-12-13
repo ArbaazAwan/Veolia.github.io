@@ -22,6 +22,7 @@ export class SummarytableComponent implements OnInit {
   searchText: string = '';
   siteId:any = localStorage.getItem("siteId");
   siteStatus:boolean=false;
+  p: number = 1;
 
   @Input() isLoading: boolean = false;
   summaryData: any = [];
