@@ -43,9 +43,42 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Master Id</mat-label>
+                  <input formControlName="masterId" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">App Description</mat-label>
+                  <input formControlName="oldDescription" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Style</mat-label>
                   <input formControlName="masterStyle" matInput type="text" >
                 </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Size</mat-label>
+                  <input formControlName="masterSize" matInput type="text">
+                </mat-form-field>
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Duty / Application</mat-label>
+                  <input formControlName="dutyApplication" matInput type="text">
+                </mat-form-field>
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Quality</mat-label>
+                  <input formControlName="quality" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
+                  <mat-label class="text-bold">Unit Measurement</mat-label>
+                  <input formControlName="unitMeasurement" matInput type="text">
+                </mat-form-field>
+
+
+              </div>
+
+              <div class="col-md-6">
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">New AssetType</mat-label>
@@ -66,27 +99,11 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Size</mat-label>
-                  <input formControlName="masterSize" matInput type="text">
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Description</mat-label>
-                  <input formControlName="oldDescription" matInput type="text">
-                </mat-form-field>
-
-                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">New Description</mat-label>
                   <input formControlName="newDescription" matInput type="text">
                 </mat-form-field>
-              </div>
 
-              <div class="col-md-6">
 
-                <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
-                  <mat-label class="text-bold">Unit Measurement</mat-label>
-                  <input formControlName="unitMeasurement" matInput type="text">
-                </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Rev</mat-label>
@@ -110,7 +127,7 @@
 
               </div>
             </div>
-            
+
             <!-- overhaul and event tabs -->
             <div class="card card-plain mx-4">
               <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
@@ -126,11 +143,10 @@
                       </td>
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                          <mat-label class="text-bold">Strch</mat-label>
-                          <!-- <input matInput type="text" formControlName="ovStretch"> -->
+                          <mat-label class="text-bold">Stretch</mat-label>
                           <mat-select  matInput type="text" formControlName="ovStretch">
-                            <mat-option  [value]="true">Yes</mat-option>
-                            <mat-option  [value]="false">No</mat-option>
+                            <mat-option  value="yes">Yes</mat-option>
+                            <mat-option  value="no">No</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </td>
@@ -180,19 +196,17 @@
                             let i = index" [formGroupName]="i">
                           <td>
                             <label class="form-label">Overhaul Labour</label>
-                            <!-- <input class="form-control" type="text" formControlName="ohLabour"
-                              placeholder="enter labour" /> -->
                               <span>
                                 <select  name="" id="labour" class="form-control form-select" formControlName="ohLabour">
-                                  <option value="unskilled">unskilled</option>
-                                  <option value="basic skilled">basic skilled</option>
-                                  <option value="technical">technical</option>
-                                  <option value="specialized">specialized</option>
-                                  <option value="certified">certified</option>
-                                  <option value="supervisory">supervisory</option>
+                                  <option value="unskilled">Unskilled</option>
+                                  <option value="basic skilled">Basic Skilled</option>
+                                  <option value="technical">Technical</option>
+                                  <option value="specialized">Specialized</option>
+                                  <option value="certified">Certified</option>
+                                  <option value="supervisory">Supervisory</option>
                               </select>
                               </span>
- 
+
                           </td>
                           &nbsp;
                           <td>
@@ -277,11 +291,10 @@
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                            <mat-label class="text-bold">Event Stretch</mat-label>
-                            <!-- <input matInput type="text" formControlName="evStretch" /> -->
+                            <mat-label class="text-bold">Stretch</mat-label>
                             <mat-select  matInput type="text" formControlName="evStretch">
-                              <mat-option  [value]="true">Yes</mat-option>
-                              <mat-option  [value]="false">No</mat-option>
+                              <mat-option  value="yes">Yes</mat-option>
+                              <mat-option  value="no">No</mat-option>
                             </mat-select>
                           </mat-form-field>
                         </td>
@@ -335,7 +348,7 @@
                               <!-- <input type="text" formControlName="evLabour" class="form-control"
                                 placeholder="Enter Labour" /> -->
                                 <span>
-                                  <select  name="" id="labour" class="form-control form-select" formControlName="ohLabour">
+                                  <select  name="" id="labour" class="form-control form-select" formControlName="evLabour">
                                     <option value="unskilled">unskilled</option>
                                     <option value="basic skilled">basic skilled</option>
                                     <option value="technical">technical</option>

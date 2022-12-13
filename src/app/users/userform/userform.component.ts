@@ -17,6 +17,15 @@ export class UserformComponent implements OnInit {
   userArray: any[] = [];
 
   ngOnInit() {
+    if (
+      !localStorage.getItem('firstReload') ||
+      localStorage.getItem('firstReload') == 'true'
+    ) {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
     this.initializeForm();
   }
 

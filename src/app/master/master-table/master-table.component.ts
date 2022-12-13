@@ -10,7 +10,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService, private siteService:SiteService,private clientService:ClientService) {}
+  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService) { }
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
@@ -18,7 +18,8 @@ export class MasterTableComponent implements OnInit {
   p: number|any = 1;
   siteId = localStorage.getItem('siteId');
   message: any;
-  siteStatus:boolean=false;
+  siteStatus: boolean = false;
+  role: any = localStorage.getItem('role');
   clientId=localStorage.getItem('clientId');
   clientStatus:boolean=false;
 
@@ -30,12 +31,12 @@ export class MasterTableComponent implements OnInit {
     this.getClientStatus();
   }
 
-  getSiteStatus(){
+  getSiteStatus() {
     this.siteService.getSiteById(this.siteId).subscribe({
-      next:(site:any)=>{
+      next: (site: any) => {
         this.siteStatus = site[0].siteStatus;
       },
-      error:(err)=>{
+      error: (err) => {
         console.log("error occured in getSiteStatus", err);
       }
     })
@@ -97,6 +98,10 @@ export class MasterTableComponent implements OnInit {
           return this.compare(a.newDescription, b.newDescription, isAsc);
         case 'unitMeasurement':
           return this.compare(a.unitMeasurement, b.unitMeasurement, isAsc);
+        case 'dutyApplication':
+          return this.compare(a.dutyApplication, b.dutyApplication, isAsc);
+        case 'quality':
+          return this.compare(a.quality, b.quality, isAsc);
         case 'rev':
           return this.compare(a.rev, b.rev, isAsc);
         case 'replacementCost':
@@ -118,17 +123,21 @@ export class MasterTableComponent implements OnInit {
   }
 
   getMasters(siteId: any) {
-    this.isLoading = true;
-    this.masterService.getMastersBySiteId(siteId).subscribe({
-      next: (masters: any) => {
-        this.masters = masters.masters;
-        this.sortAssets({ active: 'masterId', direction: 'desc' });
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-      },
-    });
+    
+    if (this.siteId) {
+      this.isLoading = true;
+      this.masterService.getMastersBySiteId(siteId).subscribe({
+        next: (masters: any) => {
+          this.masters = masters.masters;
+          this.sortAssets({ active: 'masterId', direction: 'desc' });
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.isLoading = false;
+        },
+      });
+    }
+
   }
 
   editMaster(masterId: any) {
@@ -137,7 +146,7 @@ export class MasterTableComponent implements OnInit {
 
   deleteMaster(id: any) {
     this.masterService.deleteMaster(id).subscribe((res: any) => {
-     this.userService.openSnackBar('Master Deleted', 'close');
+      this.userService.openSnackBar('Selected Record is Deleted from Master.', 'close');
     });
   }
 
@@ -145,7 +154,7 @@ export class MasterTableComponent implements OnInit {
     this.masterService.getCompleteMasterById(masterId).subscribe((res: any) => {
       if (res) {
         this.masterService.postCompleteMaster(res).subscribe((result: any) => {
-          window.location.reload();
+          this.userService.openSnackBar('Duplicate Record is Created.', 'close');
         });
       }
     });

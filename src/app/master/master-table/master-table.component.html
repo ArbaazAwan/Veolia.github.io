@@ -12,14 +12,14 @@
         <div class="d-flex justify-content-center">
           <div class="spinner-border" *ngIf="isLoading"></div>
         </div>
-        <div class="flex-end px-3 col-md-3">
+        <div class="flex-end px-3 col-md-3 mt-4">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <div class="p-0 table-responsive overflow-y-hidden" *ngIf="!isLoading">
+        <div class="p-0 table-responsive custom-table" *ngIf="!isLoading" >
           <table class="table table-blocked table-hover mb-0" ng-focus="table" matSort
             (matSortChange)="sortAssets($event)">
             <thead>
@@ -36,8 +36,14 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldAssetType">
                   Asset Type
                 </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
+                  App Description
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newAssetType">
                   New Asset Type
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
+                  New Description
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
                   Style
@@ -45,17 +51,14 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterSize">
                   Size
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
-                  Description
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="dutyApplication">
+                  Duty / Application
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
-                  New Description
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quality">
+                  quality
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unitMeasurement">
                   Unit Measurement
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
-                  Rev
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="replacementCost">
                   Replacement Cost
@@ -66,6 +69,9 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="OHLife">
                   Overhaul Life
                 </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="rev">
+                  Rev
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -74,12 +80,12 @@
                 ">
                 <td>
                   <div class="d-flex mx-2">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
+                    <div class="d-flex flex-column" >
+                      <div ngbDropdown > 
                         <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
-                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
+                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute; z-index: 10000;">
                           <button ngbDropdownItem (click)="viewMaster(master.masterId)" data-bs-toggle="modal" 
                             data-bs-target="#modal-form-view">
                             <i class="material-icons">visibility</i>
@@ -128,7 +134,21 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ master.newAssetType }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
                     </div>
                   </div>
                 </td>
@@ -149,14 +169,14 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.oldDescription }}</p>
+                      <p class="mb-0 text-sm">{{ master.dutyApplication }}</p>
                     </div>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.newDescription }}</p>
+                      <p class="mb-0 text-sm">{{ master.quality }}</p>
                     </div>
                   </div>
                 </td>
@@ -164,13 +184,6 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ master.unitMeasurement }}</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.rev }}</p>
                     </div>
                   </div>
                 </td>
@@ -194,14 +207,23 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ master.overhaulLife }}
+                        {{ master.overhaulLife/100 | percent }}
                       </p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ master.rev }}</p>
                     </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="col-md-12 pagination-div" >
           <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
         </div>
       </div>

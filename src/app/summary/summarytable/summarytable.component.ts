@@ -140,12 +140,15 @@ export class SummarytableComponent implements OnInit {
   }
 
   deleteSummary(id: any) {
-    this.summaryService.deleteSummary(id).subscribe(
-      (res:any)=>{
+    this.summaryService.deleteSummary(id).subscribe({
+      next:(res)=>{
+        window.location.reload();
+      },
+      error:()=>{
         window.location.reload();
       }
-    )
-  }
+    })
+    }
 
   editSummary(id: any) {
     this.summaryService.setSummaryId(id);

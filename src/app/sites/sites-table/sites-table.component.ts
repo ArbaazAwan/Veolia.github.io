@@ -10,15 +10,19 @@ export class SitesTableComponent implements OnInit {
   constructor(private siteService: SiteService) {}
   p: number = 1;
   searchText: string = '';
-  sortedSites : any = [];
+  sortedSites: any = [];
   @Input() isLoading: boolean = false;
   @Input() sites: any[] = [];
 
   @Output() deleteSiteEvent = new EventEmitter();
   @Output() editSiteEvent = new EventEmitter();
 
+  ngOnChanges() {
+    this.sortAssets({ active: 'siteId', direction: 'desc' });
+  }
+
   ngOnInit(): void {
-    this.sortAssets({active:'siteId',direction:'desc'});
+    this.sortAssets({ active: 'siteId', direction: 'desc' });
   }
 
   editSite(id: any) {

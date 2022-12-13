@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
@@ -13,31 +13,36 @@ export class CreateMasterFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private masterService: MasterService,
-    private summaryService:SummaryService,
+    private summaryService: SummaryService,
     private userService: UserService
-  ) {}
+  ) { }
 
   editMasterId: any;
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
+  masterId: any;
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
+
     });
   }
 
   initialForm() {
     return (this.form = this.fb.group({
+      masterId:[{ value: '', disabled: true }],
       oldAssetType: ['', Validators.required],
       masterStyle: [''],
       newAssetType: ['', Validators.required],
       masterSize: [''],
       oldDescription: [''],
       newDescription: [''],
+      dutyApplication: [''],
+      quality: [''],
       unitMeasurement: [''],
       rev: [''],
       replacementCost: [''],
@@ -63,31 +68,22 @@ export class CreateMasterFormComponent implements OnInit {
       const _overhaul = _masterComplete.overhaul;
 
       let c = this.initialForm().controls;
+      c.masterId.setValue(_master.masterId);
       c.oldAssetType.setValue(_master.oldAssetType ? _master.oldAssetType : '');
       c.masterStyle.setValue(_master.masterStyle ? _master.masterStyle : '');
       c.newAssetType.setValue(_master.newAssetType ? _master.newAssetType : '');
       c.masterSize.setValue(_master.masterSize ? _master.masterSize : '');
-      c.oldDescription.setValue(
-        _master.oldDescription ? _master.oldDescription : ''
-      );
-      c.newDescription.setValue(
-        _master.newDescription ? _master.newDescription : ''
-      );
-      c.unitMeasurement.setValue(
-        _master.unitMeasurement ? _master.unitMeasurement : ''
-      );
+      c.oldDescription.setValue(_master.oldDescription ? _master.oldDescription : '');
+      c.newDescription.setValue(_master.newDescription ? _master.newDescription : '');
+      c.dutyApplication.setValue(_master.dutyApplication ? _master.dutyApplication : '');
+      c.quality.setValue(_master.quality ? _master.quality : '');
+      c.unitMeasurement.setValue(_master.unitMeasurement ? _master.unitMeasurement : '');
       c.rev.setValue(_master.rev ? _master.rev : '');
-      c.replacementCost.setValue(
-        _master.replacementCost ? _master.replacementCost : ''
-      );
+      c.replacementCost.setValue(_master.replacementCost ? _master.replacementCost : '');
       c.lifeMonths.setValue(_master.lifeMonths ? _master.lifeMonths : '');
       c.overhaulLife.setValue(_master.overhaulLife ? _master.overhaulLife : '');
-      c.ovTitle.setValue(
-        _overhaul ? (_overhaul.ovTitle ? _overhaul.ovTitle : '') : ''
-      );
-      c.ovStretch.setValue(
-        _overhaul ? (_overhaul.ovStretch ? _overhaul.ovStretch : '') : ''
-      );
+      c.ovTitle.setValue(_overhaul ? (_overhaul.ovTitle ? _overhaul.ovTitle : '') : '');
+      c.ovStretch.setValue(_overhaul ? (_overhaul.ovStretch ? _overhaul.ovStretch : '') : '');
 
       const _events = _masterComplete.events;
 
@@ -133,15 +129,7 @@ export class CreateMasterFormComponent implements OnInit {
       console.log(res);
     });
 
-    this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
-      next:(summaries:any)=>{
-        summaries.forEach((summary:any) => {
-          
-        });
-      }
-    })
-
-    let f = this.form.value;
+    let f = this.form.getRawValue();
 
     const master = {
       siteId: this.siteId,
@@ -151,6 +139,8 @@ export class CreateMasterFormComponent implements OnInit {
       masterSize: f.masterSize,
       oldDescription: f.oldDescription,
       newDescription: f.newDescription,
+      dutyApplication: f.dutyApplication,
+      quality: f.quality,
       unitMeasurement: f.unitMeasurement,
       rev: f.rev,
       replacementCost: f.replacementCost,
@@ -173,8 +163,40 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
-        this.userService.openSnackBar('Master Created/Edited', 'close');
+        let newMasterId = res.message;
+
+        if (this.editMasterId) {
+                  //getting all the summaries by masterId
+        this.summaryService.getSummariesByMasterId(this.editMasterId).subscribe({
+          next: (res: any) => {
+            if(res.summary.length!=0)
+            {
+              //updating the summary's masterId
+              this.summaryService.updateSummaryMasterId(this.editMasterId, newMasterId).subscribe({
+                next: (res) => {
+                  this.userService.openSnackBar('Master Record is Edited', 'close');
+                },
+                error: (err) => {
+                  console.log("error occured in updateSummaryMasterId", err);
+                }
+              });
+
+            }
+          },
+          error: (err:any) => {
+            console.log("error occured in getSummariesByMasterId", err);
+          }
+        })
+        }
+
+        else{
+          this.userService.openSnackBar('Master Record is Created', 'close');
+        }
+
       });
+
+
+
   }
 
   events(): FormArray {

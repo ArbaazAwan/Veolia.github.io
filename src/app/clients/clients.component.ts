@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SiteService } from '../sites/site.service';
 import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
-import { SiteService } from '../sites/site.service';
+
+type ClientType = 'true' | 'false';
+
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService, private siteService: SiteService,) {}
+  constructor(
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    private userService: UserService,
+    private siteService: SiteService
+  ) {}
   form!: FormGroup;
   clientsArray: any[] = [];
   title: string = 'Clients';
@@ -18,16 +26,25 @@ export class ClientsComponent implements OnInit {
   error: any = {};
   currentClient: any = {};
   isEditFormLoading: boolean = true;
-  clientSite:any=[];
+  clientStatus: ClientType;
 
   ngOnInit(): void {
+    if (
+      !localStorage.getItem('firstReload') ||
+      localStorage.getItem('firstReload') == 'true'
+    ) {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
     this.form = this.fb.group({
       clientName: ['', Validators.required],
       contractYears: ['', Validators.required],
+      clientStatus: ['', Validators.required],
     });
 
     this.getClient();
-  
   }
 
   selectedClient: any = {
@@ -52,12 +69,15 @@ export class ClientsComponent implements OnInit {
 
     this.clientService.postClient(this.form.value).subscribe({
       next: (_) => {
-        this.userService.openSnackBar('Client Created', 'close');
+        this.userService.openSnackBar(
+          'New Client is Created Successfully!',
+          'close'
+        );
         this.getClient();
       },
       error: (err: any) => {
-        window.location.reload();
-        this.error = err;
+        this.error = err.message;
+        this.userService.openSnackBar(this.error, 'close');
       },
     });
 
@@ -78,6 +98,7 @@ export class ClientsComponent implements OnInit {
       this.form = this.fb.group({
         clientName: [_client.clientName, Validators.required],
         contractYears: [_client.contractYears, Validators.required],
+        clientStatus: [_client.clientStatus, Validators.required],
       });
 
       this.isEditFormLoading = false;
@@ -91,7 +112,10 @@ export class ClientsComponent implements OnInit {
         .updateClient(this.currentClient, this.form.value)
         .subscribe({
           next: (_) => {
-            this.userService.openSnackBar('Client Updated', 'close');
+            this.userService.openSnackBar(
+              'Client is Updated Successfully!',
+              'close'
+            );
             this.getClient();
           },
           error: (err) => {
@@ -104,24 +128,21 @@ export class ClientsComponent implements OnInit {
   }
 
   onDeleteClient(id: any) {
-    // let x = 0;
-    this.siteService.getSiteByClientId(id).subscribe(
-      (res:any)=>{
-        console.log(" res",res);
-        let sitesCount =  res.length
-        if (sitesCount>0) {
-          this.userService.openSnackBar('The client cannot be deleted until all the associated Sites are deleted or detached from the Client.', 'close');
-        }else{
-          this.clients = this.clients.filter(({ clientId }) => clientId != id);
-    
-          this.clientService.deleteClient(id);
-    
-        }
+    this.siteService.getSiteByClientId(id).subscribe((res: any) => {
+      let sitesCount = res.length;
+      if (sitesCount > 0) {
+        this.userService.openSnackBar(
+          'The client cannot be deleted until all the associated Sites are deleted or detached from the Client.',
+          'close'
+        );
+      } else {
+        this.clients = this.clients.filter(({ clientId }) => clientId != id);
+        this.clientService.deleteClient(id);
+        this.userService.openSnackBar(
+          'Client Record Deleted Successfully!',
+          'close'
+        );
       }
-    )
-    // console.log(x);
-   
-
-
+    });
   }
 }

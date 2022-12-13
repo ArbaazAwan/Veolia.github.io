@@ -39,7 +39,7 @@ export class ClientService {
       this.CLIENT_URL + _client.clientId,
       {
         clientName: data.clientName,
-        clientStatus: _client.clientStatus,
+        clientStatus: data.clientStatus,
         contractYears: data.contractYears,
       },
       { headers: this.postHeaders }

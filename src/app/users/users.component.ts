@@ -125,7 +125,10 @@ export class UsersComponent implements OnInit {
     this.userService
       .changeUserPassword(PasswordPayload)
       .subscribe((res: any) => {
-        console.log(res);
+        this.userService.openSnackBar(
+          'Password is Updated Successfully!',
+          'close'
+        );
       });
   }
 
@@ -139,19 +142,21 @@ export class UsersComponent implements OnInit {
       role: this.role,
       userStatus: true,
     };
- console.log(userPayload);
+    console.log(userPayload);
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
-        this.userService.openSnackBar('User Created', 'close');
+        this.userService.openSnackBar(
+          'New User is Created Successfully!',
+          'close'
+        );
         this.getUsers();
-        
       },
       error: (err) => {
         this.error = err.message;
         this.userService.openSnackBar(this.error, 'close');
         this.getUsers();
       },
-    });    
+    });
     this.formReset();
   }
 
@@ -172,35 +177,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  onUpdateUser() {
-    if (this.currentUser.userId) {
-      this.isLoading = true;
-      const { email } = this.form.value;
-      const updatePayload = {
-        username: this.currentUser.userName,
-        email,
-        role: this.role,
-        userStatus: this.currentUser.userStatus,
-      };
-
-      this.userService
-        .updateUser(this.currentUser.userId, updatePayload)
-        .subscribe({
-          next: (_) => {
-            this.userService.openSnackBar('User Updated', 'close');
-            this.getUsers();   
-          },
-          error: (err) => {
-            this.error = err.message;
-            this.userService.openSnackBar(this.error, 'close');
-            this.getUsers();
-          },
-        });
-    }
-
-    this.initializeForm();
-  }
-
   formReset() {
     this.form.reset();
     this.pForm.reset();
@@ -209,7 +185,10 @@ export class UsersComponent implements OnInit {
   onDeleteUser(user: any) {
     this.users = this.users.filter(({ userId }) => userId != user.userId);
     this.userService.deleteUser(user.userId, user.userName);
-    this.userService.openSnackBar('User Deleted', 'close');
+    this.userService.openSnackBar(
+      'User Record is Deleted Successfully!',
+      'close'
+    );
   }
 
   onEditUser(id: any) {
@@ -238,8 +217,31 @@ export class UsersComponent implements OnInit {
       this.isEditFormLoading = false;
     });
   }
+  onUpdateUser() {
+    if (this.currentUser.userId) {
+      this.isLoading = true;
+      const { email } = this.form.value;
+      const updatePayload = {
+        username: this.currentUser.userName,
+        email,
+        role: this.role,
+        userStatus: this.currentUser.userStatus,
+      };
 
-  // openSnackBar(message:string, action: string){
-  //   this.userService.openSnackBar(message,action);
-  // }
+      this.userService
+        .updateUser(this.currentUser.userId, updatePayload)
+        .subscribe({
+          next: (res: any) => {
+            this.userService.openSnackBar(res.message, 'close');
+            this.getUsers();
+          },
+          error: (err) => {
+            this.userService.openSnackBar(err.error.message.message, 'close');
+            this.getUsers();
+          },
+        });
+    }
+
+    this.initializeForm();
+  }
 }

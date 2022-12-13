@@ -25,22 +25,10 @@
                       matInput
                       type="text"
                       [matAutocomplete]="auto"
-                      [ngClass]="
-                        (asset.dirty ||
-                          asset.touched) &&
-                        asset.hasError('required', 'unit') == true
-                          ? 'border-danger': ''"
                     />
-                    <small class="text-danger float-end" *ngIf="
-                        (form.controls['unit'].dirty ||
-                          form.controls['unit'].touched) &&
-                        form.hasError('required', 'unit')
-                      ">
-                      unit is required
-                    </small>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onAssetChange($event.option.value)' [displayWith]="getDisplayText">
                       <mat-option *ngFor="let master of filteredMasters" [value]="master">
-                        {{master.oldAssetType}}  | {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
+                        {{master.oldAssetType}}  - {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
                       </mat-option>
                     </mat-autocomplete>
                     <mat-icon matSuffix>search</mat-icon>
@@ -83,20 +71,38 @@
                   </mat-form-field>
 
                   <mat-form-field class="example-form-field text-xs" appearance="outline">
-                    <mat-label class="text-bold">Discription</mat-label>
-                    <input formControlName="discription" matInput type="text" [ngClass]="
-                        (form.controls['discription'].dirty ||
-                          form.controls['discription'].touched) &&
-                        form.hasError('required', 'discription') == true
+                    <mat-label class="text-bold">Application Description</mat-label>
+                    <input formControlName="description" matInput type="text" [ngClass]="
+                        (form.controls['description'].dirty ||
+                          form.controls['description'].touched) &&
+                        form.hasError('required', 'description') == true
                           ? 'border-danger'
                           : ''
                       " />
                     <small class="text-danger float-end" *ngIf="
-                        (form.controls['discription'].dirty ||
-                          form.controls['discription'].touched) &&
-                        form.hasError('required', 'discription')
+                        (form.controls['description'].dirty ||
+                          form.controls['description'].touched) &&
+                        form.hasError('required', 'description')
                       ">
-                      discription is required
+                      app description is required
+                    </small>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-form-field text-xs" appearance="outline">
+                    <mat-label class="text-bold">Duty/Application</mat-label>
+                    <input formControlName="dutyApplication" matInput type="text" [ngClass]="
+                        (form.controls['dutyApplication'].dirty ||
+                          form.controls['dutyApplication'].touched) &&
+                        form.hasError('required', 'dutyApplication') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['dutyApplication'].dirty ||
+                          form.controls['dutyApplication'].touched) &&
+                        form.hasError('required', 'dutyApplication')
+                      ">
+                      duty/application is required
                     </small>
                   </mat-form-field>
 
@@ -176,6 +182,21 @@
                     </small>
                   </mat-form-field>
 
+                  <mat-form-field appearance="outline" class="text-xs">
+                    <mat-label>Installation Date</mat-label>
+                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" (dateChange)="onInstallmentChange($event.value)"/>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <small class="text-danger float-end" *ngIf="
+                        (form.controls['installmentDate'].dirty ||
+                          form.controls['installmentDate'].touched) &&
+                        form.hasError('required', 'installmentDate')
+                      ">
+                      date is required
+                    </small>
+                  </mat-form-field>
+
                   <mat-form-field class="text-xs" appearance="outline">
                     <mat-label class="text-bold">Life %</mat-label>
                     <input formControlName="life" matInput type="number" [ngClass]="
@@ -193,26 +214,11 @@
                       life is required
                     </small>
                   </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="text-xs">
-                    <mat-label>Installation Date</mat-label>
-                    <input formControlName="installmentDate" matInput [matDatepicker]="picker" />
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <small class="text-danger float-end" *ngIf="
-                        (form.controls['installmentDate'].dirty ||
-                          form.controls['installmentDate'].touched) &&
-                        form.hasError('required', 'installmentDate')
-                      ">
-                      date is required
-                    </small>
-                  </mat-form-field>
                 </div>
               </div>
 
               <div class="text-center mt-4">
-                <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+                <button type="submit" (click)="onSubmit()" class="btn bg-gradient-primary m-2">
                   Submit
                 </button>
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2"

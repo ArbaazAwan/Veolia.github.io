@@ -1,7 +1,207 @@
- <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-md-12">
-            <app-price-year-line-chart></app-price-year-line-chart>
+<div class="container-fluid py-4">
+  <div class="row mb-4">
+    <div class="col-xl-3 col-sm-6 mb-xl-0">
+      <div class="card mb-4">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">show_chart</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span class="text-bold text-lg">{{average}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years + Contigency <span class="text-bold text-lg">{{averageC}}</span></p>
+          </div>
         </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer px-3 py-0">
+          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+            <mat-label class="text-bold">Enter Average Years</mat-label>
+            <input [(ngModel)]='averageYears' matInput type="number" (change)="onAverageYearsChange()" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">add</i>
+          </div>
+          <div class="text-end pt-1 pb-2">
+            <p class="text-sm mb-0 text-capitalize">Contigency</p>
+            <h4 class="mb-0">{{contigency}}%</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer px-3 py-0">
+          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+            <mat-label class="text-bold">Enter Contigency%</mat-label>
+            <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_up</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost + Contigency <span class="text-bold text-lg">{{maxYearCostC}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-danger text-sm font-weight-bolder"> {{maxYear}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_down</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg"> {{minYearCost}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost + Contigency<span class="text-bold text-lg"> {{minYearCostC}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-success text-sm font-weight-bolder"> {{minYear}}</span></p>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card z-index-2">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+          <div class="bg-gradient-primary shadow-success border-radius-lg py-5 pe-1">
+            <app-price-year-line-chart></app-price-year-line-chart>
+          </div>
+        </div>
+        <div class="card-body py-2">
+          <div class="row">
+            <div class="col-md-9">
+              <h6 class="mb-0"> Price-Year Chart</h6>
+              <p class="text-sm">Total Cost in Each Year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <div class="card my-1">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <p class="text-white text-capitalize text-bold ps-3">
+              Details
+            </p>
+          </div>
+        </div>
+        <div class="card-body px-0">
+          <div class="p-0 table-responsive custom-table">
+            <table class="table table-blocked table-hover mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Unit or Equipment Functional Description
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Average Year
+                  </th>
+                  <th *ngFor="let header of years" class="text-uppercase text-bold text-xs font-weight-bolder">
+                    {{header}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">Total</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let price of prices let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ prices.at(y) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">Total with Contigency</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{totalAverageYearsCostC}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let priceC of pricesC let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ pricesC.at(y) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngFor="let summary of yearsCostsViewTable let i = index;">
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">{{yearsCostsViewTable[i]?.at(0)}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td *ngFor="let yearlyCost of prices let y = index">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) }}</p>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

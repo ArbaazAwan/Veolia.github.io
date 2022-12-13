@@ -8,7 +8,7 @@
 }
 
 .addpadding {
-  padding-top:0px;
+  padding-top:60px;
 }
 
 .pointer{
@@ -18,4 +18,12 @@
 .noMargin{
   padding-top: 0 !important;
   margin-top: 0 !important;
+}
+
+.capitalize-first {
+  display:inline-block;
+  text-transform: lowercase;
+}
+.capitalize-first::first-letter {
+  text-transform: uppercase;
 }

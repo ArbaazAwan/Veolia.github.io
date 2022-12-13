@@ -17,16 +17,16 @@ export class UserService {
   headers = new HttpHeaders({});
   postHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': "'*'"
+    'Access-Control-Allow-Origin': "'*'",
     // "Access-Control-Allow-Headers": "'*'"
   });
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
-  private userId = new BehaviorSubject (null);
+  private userId = new BehaviorSubject(null);
   currentUserId = this.userId.asObservable();
 
-  setUserId(userId:any){
-    this.userId.next(userId)
+  setUserId(userId: any) {
+    this.userId.next(userId);
   }
 
   getUsers() {
@@ -40,13 +40,21 @@ export class UserService {
     return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
   }
   getClientsByUserId(body: any) {
-    return this.http.post(this.CLIENTS_BY_USER_ID_URL, {"userId":body}, { headers: this.postHeaders });
+    return this.http.post(
+      this.CLIENTS_BY_USER_ID_URL,
+      { userId: body },
+      { headers: this.postHeaders }
+    );
   }
   assignClientsByUserId(body: any) {
-    return this.http.post(this.ASSIGN_CLIENTS_URL, body, { headers: this.postHeaders });
+    return this.http.post(this.ASSIGN_CLIENTS_URL, body, {
+      headers: this.postHeaders,
+    });
   }
-  getUserByEmail(email:any) {
-    return this.http.get(this.USER_URL + "email/"+ email, { headers: this.headers });
+  getUserByEmail(email: any) {
+    return this.http.get(this.USER_URL + 'email/' + email, {
+      headers: this.headers,
+    });
   }
   postUser(user: any) {
     return this.http.post(this.CREATE_USER_URL, user, {
@@ -58,25 +66,27 @@ export class UserService {
       headers: this.postHeaders,
     });
   }
-  changeUserPassword(data:any){
-    return this.http.put(this.USER_URL + "password",data,{headers:this.postHeaders});
+  changeUserPassword(data: any) {
+    return this.http.put(this.USER_URL + 'password', data, {
+      headers: this.postHeaders,
+    });
   }
   deleteUser(id: any, username: string) {
     this.http
       .delete(this.USER_URL + id, {
         body: {
-          username
+          username,
         },
       })
       .subscribe((res) => {
         console.log(res, 'deleted');
       });
   }
-  openSnackBar(message:string, action: string){
-    let snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+  openSnackBar(message: string, action: string) {
+    let snackBarRef = this.snackBar.open(message, action, { duration: 3000 });
 
-    snackBarRef.afterDismissed().subscribe(()=>{
-      window.location.reload();
+    snackBarRef.afterDismissed().subscribe(() => {
+      // window.location.reload();
     });
   }
 }

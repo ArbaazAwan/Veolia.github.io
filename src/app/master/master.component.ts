@@ -18,6 +18,7 @@ export class MasterComponent implements OnInit {
   isLoading:boolean = false;
   siteStatus:boolean=false;
   clientStatus:boolean=false;
+  role: any = localStorage.getItem('role');
 
   constructor(private masterService:MasterService,  private siteService:SiteService, private clientService: ClientService) {}
 

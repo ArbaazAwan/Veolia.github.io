@@ -30,6 +30,10 @@ export class UserstableComponent implements OnInit {
     this.sortAssets({ active: 'userId', direction: 'desc' });
   }
 
+  ngOnChanges() {
+    this.sortAssets({ active: 'userId', direction: 'desc' });
+  }
+
   changeUserPassword(userId: any) {
     this.changeUserPasswordEvent.emit(userId);
   }
@@ -56,7 +60,10 @@ export class UserstableComponent implements OnInit {
     };
 
     this.userService.assignClientsByUserId(payload).subscribe((res: any) => {
-      console.log(res);
+      this.userService.openSnackBar(
+        'Client Assigned to User Successfully!',
+        'close'
+      );
     });
     this.selectedClients = [];
   }
