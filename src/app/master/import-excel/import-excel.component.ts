@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SiteService } from 'src/app/sites/site.service';
 import * as XLSX from 'xlsx';
 import { MasterService } from '../master.service';
@@ -17,7 +18,8 @@ export class ImportExcelComponent implements OnInit {
 
   constructor(
     private masterService: MasterService,
-    private siteService: SiteService
+    private siteService: SiteService,
+    private snackBar: MatSnackBar,
   ) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
 
@@ -73,16 +75,14 @@ export class ImportExcelComponent implements OnInit {
           this.masterService
             .postCompleteMaster(completeMaster)
             .subscribe((res: any) => {
-              console.log(res.message);
               if (res.message) {
                 this.isLoading = false;
               }
-              window.location.reload();
+              this.masterService.openSnackBar('Master record is uploaded successfully', 'close');
             });
         }
       } else {
         this.error = 'Excel sheet not supported.';
-        // const element = document.getElementById('file-upload') as HTMLElement;
         this.myInputVariable.nativeElement.value = '';
       }
     };
