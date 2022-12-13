@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { SummaryCalculationsService } from 'src/app/summary/summary-calculations.service';
 
 @Component({
   selector: 'app-price-year-line-chart',
   templateUrl: './price-year-line-chart.component.html',
   styleUrls: ['./price-year-line-chart.component.scss'],
 })
-export class PriceYearLineChartComponent implements OnInit {
-  constructor() {}
+export class PriceYearLineChartComponent implements OnInit{
+  constructor(private calculationService:SummaryCalculationsService ) { }
   data: any;
   basicOptions: any;
 
   ngOnInit(): void {
-    let years: string[] = [];
-    let prices: number[] = [];
 
-    function getRandomInt(max: number) {
-      // return Math.floor(Math.random() * max);
-    }
+    this.graphOptions();
+    this.calculationService.currentPricesYears.subscribe(
+      (value:any)=>{
+        this.graphData(value.years, value.prices);
+      });
 
-    for (let i = 1; i <= 50; i++) {
-      years.push('Year ' + i.toString());
-      // prices.push(getRandomInt(500));
-    }
+  }
+
+
+  graphOptions(){
     this.basicOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -46,6 +47,9 @@ export class PriceYearLineChartComponent implements OnInit {
         },
       },
     };
+  }
+
+  graphData(years: any, prices: any) {
     this.data = {
       labels: years,
       datasets: [
@@ -54,7 +58,7 @@ export class PriceYearLineChartComponent implements OnInit {
           data: prices,
           tension: 0.4,
           borderWidth: 0.8,
-          pointRadius: 5,
+          pointRadius: 7,
           pointBackgroundColor: 'rgba(255, 255, 255, .8)',
           pointBorderColor: 'transparent',
           borderColor: 'rgba(255, 255, 255, .8)',

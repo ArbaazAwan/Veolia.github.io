@@ -12,7 +12,6 @@ import { formatDate } from '@angular/common';
 export class SummaryViewdetailsTableComponent implements OnInit {
   @Input() summaryArray: any;
   assetTableHeaders: string[] = [];
-  assetTableNumbers: string[] = [];
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
