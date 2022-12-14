@@ -224,13 +224,14 @@ export class CreateSummaryFormComponent implements OnInit {
     this.summaryService.getSummaryById(id).subscribe((el: any) => {
 
       let summary = el[0];
+      console.log("summary", summary)
       const {
         unit,
         masterId,
         assetType,
         summaryload,
         summarySize,
-        description,
+        appDescription,
         dutyApplication,
         quality,
         summaryStyle,
@@ -244,7 +245,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.assetType.setValue(assetType)
       c.size.setValue(summarySize)
       c.summaryStyle.setValue(summaryStyle)
-      c.description.setValue(description)
+      c.description.setValue(appDescription)
       c.dutyApplication.setValue(dutyApplication)
       c.quality.setValue(quality)
       c.quantity.setValue(quantity)
