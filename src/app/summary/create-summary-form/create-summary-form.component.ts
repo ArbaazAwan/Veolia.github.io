@@ -59,9 +59,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
     this.selectedMaster = master;
     let unit = this.getDisplayText(master);
-
-    console.log("master", master);
-
     let c = this.getForm().controls;
     c.unit.setValue(unit);
     c.assetType.setValue(master.oldAssetType ? master.oldAssetType : '' + ' - ' + master.newAssetType ? master.newAssetType : '')
@@ -152,7 +149,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
       this.summaryService.currentSummaryId.subscribe(
         (summaryId:any)=>{
-          // console.log("asset", this.asset);
           if(summaryId)
           {
             const updateSummaryPayload = {
@@ -176,14 +172,12 @@ export class CreateSummaryFormComponent implements OnInit {
 
             this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
               (res:any)=>{
-                console.log(res);
                 window.location.reload();
               }
             )
           }
           else
           {
-            // console.log("asset in create:", this.asset);
             const createSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
@@ -200,11 +194,9 @@ export class CreateSummaryFormComponent implements OnInit {
               installmentDate:installmentDate
             };
 
-            // console.log("create summary payload:",createSummaryPayload);
 
             this.summaryService.postSummary(createSummaryPayload).subscribe(
              (res:any)=>{
-              console.log(res);
               window.location.reload();
              }
             );

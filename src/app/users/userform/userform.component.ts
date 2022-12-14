@@ -45,7 +45,6 @@ export class UserformComponent implements OnInit {
       role: this.form.value.role,
     };
     this.userService.postUser(user).subscribe((res: any) => {
-      console.log(res);
     });
   }
 
