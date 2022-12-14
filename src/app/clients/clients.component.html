@@ -57,7 +57,7 @@
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Contract Years</mat-label>
-                  <input formControlName="contractYears" matInput type="text" [ngClass]="
+                  <input formControlName="contractYears" matInput type="number" [ngClass]="
                       (form.controls['contractYears'].dirty ||
                         form.controls['contractYears'].touched) &&
                       form.hasError('required', 'contractYears') == true
@@ -143,7 +143,7 @@
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Contract Years</mat-label>
-                  <input formControlName="contractYears" matInput type="text" [ngClass]="
+                  <input formControlName="contractYears" matInput type="number" [ngClass]="
                       (form.controls['contractYears'].dirty ||
                         form.controls['contractYears'].touched) &&
                       form.hasError('required', 'contractYears') == true
@@ -160,7 +160,7 @@
                 </mat-form-field>
               </div>
               <div class="text-center mt-4">
-                <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
+                <button type="submit" [disabled]="form.valid" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-primary m-2">
                   Create
                 </button>

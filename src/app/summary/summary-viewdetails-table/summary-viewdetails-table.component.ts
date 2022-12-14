@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
 import * as XLSX from 'xlsx';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -58,14 +59,19 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
         let overhaulLife = Number(master.master.overhaulLife);
-        // console.log('master', master);
 
-        // console.log('lifeMonths', lifeMonths);
         let lifePerc = summary.life / 100;
         let replacementCostYear = Math.ceil(
           (Number(lifeMonths) * lifePerc) / 12
         );
-        // console.log('replacementcostyear', replacementCostYear);
+
+        let currentYear = Number(new Date().getFullYear());
+        let installationYear = Number(
+          new Date(
+            formatDate(summary.installmentDate, 'yyyy-MM-dd', 'en-US')
+          ).getFullYear()
+        );
+        let cycYear = Number(currentYear - installationYear);
 
         for (let i = 0; i < events?.length; i++) {
           //calculating events costs and storing them in array
@@ -127,14 +133,25 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
         }
 
-        for (let y = 1; y < 50; y++) {
+        if (cycYear > 0) {
+          for (let index = 0; index < cycYear; index++) {
+            yearsArray[index].events.forEach((eventIndex: any) => {
+              yearsCosts[index] += eventsCosts[eventIndex];
+            });
+            if (index == cycYear - 1)
+              yearsCosts[index + 1] += Number(replacementCost);
+            this.totalYearsCosts[index] += yearsCosts[index];
+          }
+        }
+
+        for (let y = cycYear; y <= 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
             yearsCosts[y] += eventsCosts[eventIndex];
           });
-          if (y == 1) yearsCosts[y] += Number(replacementCost);
           if (y % replacementCostYear === 0) {
-            yearsCosts[y + 1] += Number(replacementCost);
+            console.log(replacementCost);
+            yearsCosts[y + cycYear] += Number(replacementCost);
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[y] += yearsCosts[y];

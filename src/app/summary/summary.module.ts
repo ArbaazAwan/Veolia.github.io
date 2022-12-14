@@ -14,6 +14,8 @@ import { CreateSummaryFormComponent } from './create-summary-form/create-summary
 import { SummaryViewdetailsTableComponent } from './summary-viewdetails-table/summary-viewdetails-table.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     PipesModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxPaginationModule
   ],
 })
 export class SummaryModule {}
