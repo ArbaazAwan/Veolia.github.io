@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   average: number = 0;
 
   yearsCostsViewTable: any[] = [];
-  yearsCostsViewTableC: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
   displayTotalYearsCosts: any = [];
@@ -45,6 +44,7 @@ export class DashboardComponent implements OnInit {
       this.clientService.getClientById(this.clientId).subscribe((client: any) => {
         this.clientContractYears = client[0]?.contractYears;
         this.pricesWithoutContigency();
+        this.onAverageYearsChange();
         this.onContigencyChange(); //for first the time values
       });
 
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
     for (let i = 1; i <= Number(this.clientContractYears); i++) {
       this.years.push('Year ' + i.toString());
       // displaycost = cost + contigency%
-      this.pricesC[i - 1] = this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency);
+      this.pricesC[i - 1] = Math.floor(this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency));
     }
     this.summaryCalculationsService.setPricesYears(this.prices,this.pricesC, this.years);
     this.maxYearCostC = Math.max(...this.pricesC);
@@ -104,11 +104,6 @@ export class DashboardComponent implements OnInit {
 
     //getting total average cost with contigency
     this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost,this.contigency));
-
-    // yearsCostsViewTableC to display totals with contigency
-    for(let i = 0; i< this.yearsCostsViewTable.length; i++){
-     this.yearsCostsViewTableC[i] = this.yearsCostsViewTable[i]?.at(0) + this.percentage(this.yearsCostsViewTable[i]?.at(0),this.contigency);
-    }
 
     this.onAverageYearsChange();
   }
