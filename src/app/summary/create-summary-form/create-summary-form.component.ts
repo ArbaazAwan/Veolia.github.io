@@ -18,7 +18,7 @@ export class CreateSummaryFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private summaryService: SummaryService, private masterService: MasterService) {
     this.getForm();
   }
-  @ViewChild('modalClose') modalClose:ElementRef;
+  @ViewChild('modalClose') modalClose: ElementRef;
   form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
@@ -60,8 +60,6 @@ export class CreateSummaryFormComponent implements OnInit {
     this.selectedMaster = master;
     let unit = this.getDisplayText(master);
 
-    console.log("master", master);
-
     let c = this.getForm().controls;
     c.unit.setValue(unit);
     c.assetType.setValue(master.oldAssetType ? master.oldAssetType : '' + ' - ' + master.newAssetType ? master.newAssetType : '')
@@ -81,9 +79,21 @@ export class CreateSummaryFormComponent implements OnInit {
     let currentYear = Number(new Date().getFullYear());
     let installationYear = Number(installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
-    let totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-    let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
-    this.form.get('life')?.setValue(lifePerc);
+    let totalYears = 0;
+    if (this.selectedMaster?.lifeMonths) {
+      totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
+    }
+    else {
+      this.masterService.getMasterById(this.masterId).subscribe(
+        (res: any) => {
+          let master = res[0];
+          totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+          let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+          this.form.get('life')?.setValue(lifePerc);
+        }
+      )
+    }
+
 
   }
 
@@ -115,11 +125,11 @@ export class CreateSummaryFormComponent implements OnInit {
       size: '',
       summaryStyle: '',
       description: '',
-      dutyApplication:'',
+      dutyApplication: '',
       quality: '',
       quantity: null,
       load: null,
-      life: [null,Validators.required],
+      life: [null, Validators.required],
       installmentDate: [null, Validators.required],
     });
   }
@@ -151,67 +161,61 @@ export class CreateSummaryFormComponent implements OnInit {
       } = this.form.getRawValue();
 
       this.summaryService.currentSummaryId.subscribe(
-        (summaryId:any)=>{
-          // console.log("asset", this.asset);
-          if(summaryId)
-          {
+        (summaryId: any) => {
+          if (summaryId) {
             const updateSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
-              unit:unit,
+              unit: unit,
               assetType: assetType,
               summarySize: size,
-              summaryStatus:true,
+              summaryStatus: true,
               dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
-              summaryStyle:summaryStyle,
-              life:life,
+              summaryStyle: summaryStyle,
+              life: life,
               quantity: quantity,
-              installmentDate:installmentDate
+              installmentDate: installmentDate
             };
 
             this.asset.setValue(unit)
 
-            this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
-              (res:any)=>{
+            this.summaryService.updateSummary(updateSummaryPayload, summaryId).subscribe(
+              (res: any) => {
                 console.log(res);
                 window.location.reload();
               }
             )
           }
-          else
-          {
-            // console.log("asset in create:", this.asset);
+          else {
             const createSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
-              unit:unit,
+              unit: unit,
               assetType: assetType,
               summarySize: size,
               dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
-              summaryStyle:summaryStyle,
-              life:life,
+              summaryStyle: summaryStyle,
+              life: life,
               quantity: quantity,
-              installmentDate:installmentDate
+              installmentDate: installmentDate
             };
 
-            // console.log("create summary payload:",createSummaryPayload);
-
             this.summaryService.postSummary(createSummaryPayload).subscribe(
-             (res:any)=>{
-              console.log(res);
-              window.location.reload();
-             }
+              (res: any) => {
+                console.log(res);
+                window.location.reload();
+              }
             );
           }
         }
       )
-        this.modalClose.nativeElement.click();
+      this.modalClose.nativeElement.click();
     }
     else {
       this.validateAllFormFields(this.form);
@@ -224,7 +228,6 @@ export class CreateSummaryFormComponent implements OnInit {
     this.summaryService.getSummaryById(id).subscribe((el: any) => {
 
       let summary = el[0];
-      console.log("summary", summary)
       const {
         unit,
         masterId,
