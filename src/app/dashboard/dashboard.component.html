@@ -1,6 +1,73 @@
 <div class="container-fluid py-4">
   <div class="row mb-4">
-    <div class="col-xl-3 col-sm-6 mb-xl-0">
+    <div class="col-xl-4 col-sm-6 mb-xl-0">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">add</i>
+          </div>
+          <div class="text-end pt-1 pb-2">
+            <p class="text-sm mb-0 text-capitalize">Contigency</p>
+            <h4 class="mb-0">{{contigency}}%</h4>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer px-3 py-0">
+          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+            <mat-label class="text-bold">Enter Contigency%</mat-label>
+            <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_up</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span>
+            </p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contigency <span
+                class="text-bold text-lg">{{maxYearCostC}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-danger text-sm font-weight-bolder"> {{maxYear}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_down</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg">
+                {{minYearCost}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contigency<span class="text-bold text-lg">
+                {{minYearCostC}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0">Year <span class="text-success text-sm font-weight-bolder"> {{minYear}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-6">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card mb-4">
         <div class="card-header p-3 pt-2">
           <div
@@ -25,68 +92,49 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
           <div
-            class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-            <i class="material-icons opacity-10">add</i>
+            class="icon icon-md icon-shape max-card shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">keyboard_arrow_right</i>
           </div>
-          <div class="text-end pt-1 pb-2">
-            <p class="text-sm mb-0 text-capitalize">Contigency</p>
-            <h4 class="mb-0">{{contigency}}%</h4>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">upper Limit
+              <span class="text-bold text-lg">{{upperLimit}}</span>
+            </p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
-        <div class="card-footer px-3 py-0">
+        <div class="card-footer p-3">
           <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
-            <mat-label class="text-bold">Enter Contigency%</mat-label>
-            <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+            <mat-label class="text-bold">upper Limit</mat-label>
+            <input matInput [(ngModel)]="upperLimit" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
     </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
           <div
-            class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-            <i class="material-icons opacity-10">trending_up</i>
+            class="icon icon-md icon-shape min-card shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">keyboard_arrow_left</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost}}</span>
+            <p class="text-sm mb-0 text-capitalize">Lower Limit
+              <span class="text-bold text-lg">
+                {{lowerLimit}}
+              </span>
             </p>
           </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contigency <span
-                class="text-bold text-lg">{{maxYearCostC}}</span></p>
-          </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0">Year <span class="text-danger text-sm font-weight-bolder"> {{maxYear}}</span></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header p-3 pt-2">
-          <div
-            class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-            <i class="material-icons opacity-10">trending_down</i>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg">
-                {{minYearCost}}</span></p>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contigency<span class="text-bold text-lg">
-                {{minYearCostC}}</span></p>
-          </div>
-        </div>
-        <hr class="dark horizontal my-0">
-        <div class="card-footer p-3">
-          <p class="mb-0">Year <span class="text-success text-sm font-weight-bolder"> {{minYear}}</span></p>
+          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+            <mat-label class="text-bold">Lower Limit</mat-label>
+            <input matInput [(ngModel)]="lowerLimit" type="number" (change)="onLimitChange()" />
+          </mat-form-field>
         </div>
       </div>
     </div>

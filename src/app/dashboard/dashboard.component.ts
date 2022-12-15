@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
   minYearCost: number = 0;
   maxYear: string = '';
   minYear: string = '';
+  upperLimit:number;
+  lowerLimit:number;
 
 
   constructor(private clientService: ClientService, private summaryCalculationsService: SummaryCalculationsService) { }
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit {
         this.onContigencyChange(); //for first the time values
       });
 
-    }, 2000);
+    }, 3000);
 
     this.reloadCheck();
   }
@@ -106,6 +108,10 @@ export class DashboardComponent implements OnInit {
     this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost,this.contigency));
 
     this.onAverageYearsChange();
+  }
+
+  onLimitChange(){
+    console.log("limit is changed")
   }
 
   percentage(num: number, per: number) {
