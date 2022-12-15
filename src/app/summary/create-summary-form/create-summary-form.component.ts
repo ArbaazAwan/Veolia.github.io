@@ -18,7 +18,7 @@ export class CreateSummaryFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private summaryService: SummaryService, private masterService: MasterService) {
     this.getForm();
   }
-  @ViewChild('modalClose') modalClose:ElementRef;
+  @ViewChild('modalClose') modalClose: ElementRef;
   form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
@@ -78,9 +78,21 @@ export class CreateSummaryFormComponent implements OnInit {
     let currentYear = Number(new Date().getFullYear());
     let installationYear = Number(installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
-    let totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-    let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
-    this.form.get('life')?.setValue(lifePerc);
+    let totalYears = 0;
+    if (this.selectedMaster?.lifeMonths) {
+      totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
+    }
+    else {
+      this.masterService.getMasterById(this.masterId).subscribe(
+        (res: any) => {
+          let master = res[0];
+          totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+          let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+          this.form.get('life')?.setValue(lifePerc);
+        }
+      )
+    }
+
 
   }
 
@@ -112,11 +124,11 @@ export class CreateSummaryFormComponent implements OnInit {
       size: '',
       summaryStyle: '',
       description: '',
-      dutyApplication:'',
+      dutyApplication: '',
       quality: '',
       quantity: null,
       load: null,
-      life: [null,Validators.required],
+      life: [null, Validators.required],
       installmentDate: [null, Validators.required],
     });
   }
@@ -154,18 +166,18 @@ export class CreateSummaryFormComponent implements OnInit {
             const updateSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
-              unit:unit,
+              unit: unit,
               assetType: assetType,
               summarySize: size,
-              summaryStatus:true,
+              summaryStatus: true,
               dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
-              summaryStyle:summaryStyle,
-              life:life,
+              summaryStyle: summaryStyle,
+              life: life,
               quantity: quantity,
-              installmentDate:installmentDate
+              installmentDate: installmentDate
             };
 
             this.asset.setValue(unit)
@@ -181,17 +193,17 @@ export class CreateSummaryFormComponent implements OnInit {
             const createSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
-              unit:unit,
+              unit: unit,
               assetType: assetType,
               summarySize: size,
               dutyApplication: dutyApplication,
               appDescription: description,
               quality: quality,
               summaryload: load,
-              summaryStyle:summaryStyle,
-              life:life,
+              summaryStyle: summaryStyle,
+              life: life,
               quantity: quantity,
-              installmentDate:installmentDate
+              installmentDate: installmentDate
             };
 
 
@@ -203,7 +215,7 @@ export class CreateSummaryFormComponent implements OnInit {
           }
         }
       )
-        this.modalClose.nativeElement.click();
+      this.modalClose.nativeElement.click();
     }
     else {
       this.validateAllFormFields(this.form);
@@ -222,7 +234,7 @@ export class CreateSummaryFormComponent implements OnInit {
         assetType,
         summaryload,
         summarySize,
-        description,
+        appDescription,
         dutyApplication,
         quality,
         summaryStyle,
@@ -236,7 +248,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.assetType.setValue(assetType)
       c.size.setValue(summarySize)
       c.summaryStyle.setValue(summaryStyle)
-      c.description.setValue(description)
+      c.description.setValue(appDescription)
       c.dutyApplication.setValue(dutyApplication)
       c.quality.setValue(quality)
       c.quantity.setValue(quantity)
