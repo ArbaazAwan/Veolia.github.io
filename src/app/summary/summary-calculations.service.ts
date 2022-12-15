@@ -21,9 +21,10 @@ export class SummaryCalculationsService {
     this.getCalculations();
   }
 
-  setPricesYears(prices: any, years: any) {
+  setPricesYears(prices: any, pricesC:any, years: any) {
     this.pricesYears.next({
       prices: prices,
+      pricesC : pricesC,
       years: years
     });
   }
