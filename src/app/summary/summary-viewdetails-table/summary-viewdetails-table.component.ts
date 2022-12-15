@@ -150,7 +150,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             yearsCosts[y] += eventsCosts[eventIndex];
           });
           if (y % replacementCostYear === 0) {
-            console.log(replacementCost);
             yearsCosts[y + cycYear] += Number(replacementCost);
           }
           //calculating totalYearsCosts
