@@ -92,15 +92,15 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" *ngIf="role == 'admin' || !siteStatus">
+                            data-bs-target="#modal-form-create" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin' || !siteStatus">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
-                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)" *ngIf="role == 'admin' || !siteStatus">
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)" *ngIf="siteStatus && clientStatus">
                             <i class="material-icons">delete</i>&nbsp;
                             Delete
                           </button>
@@ -118,7 +118,7 @@
                   </div>
                 </td>
                 <td>
-                  <div class="d-flex px-3 py-1">
+                  <div class="d-flex px-3 py-1" id="unit">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">{{ getDisplayText(master)}}</p>
                     </div>

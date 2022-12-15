@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ClientService } from 'src/app/clients/client.service';
 import { SiteService } from 'src/app/sites/site.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
@@ -9,23 +10,25 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService) { }
+  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService, private clientService:ClientService) { }
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
   isLoading: boolean = false;
-  p: number = 1;
+  p: number|any = 1;
   siteId = localStorage.getItem('siteId');
   message: any;
   siteStatus: boolean = false;
   role: any = localStorage.getItem('role');
+  clientId=localStorage.getItem('clientId');
+  clientStatus:boolean=false;
 
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
     this.getSiteStatus();
-    this.getMasters(this.siteId);
-
+    if (this.siteId) this.getMasters(this.siteId);
+    this.getClientStatus();
   }
 
   getSiteStatus() {
@@ -39,16 +42,31 @@ export class MasterTableComponent implements OnInit {
     })
   }
 
+  getClientStatus(){
+    this.clientService.getClientById(this.clientId).subscribe({
+      next:(client:any)=>{
+        this.clientStatus = client[0].clientStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getclientStatus", err);
+      }
+    })
+  }
+
   getDisplayText(master: any) {
     if (master) {
       return (
         master.oldAssetType +
-        ' | ' +
+        ' - ' +
         master?.newAssetType +
         ', ' +
         master?.masterStyle +
         ', ' +
-        master?.masterSize
+        master?.masterSize +
+        ', '+
+        master.quality +
+        ', '+
+         master.dutyApplication
       );
     } else {
       return '';

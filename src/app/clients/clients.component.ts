@@ -12,8 +12,17 @@ type ClientType = 'true' | 'false';
   styleUrls: ['./clients.component.scss'],
 })
 export class ClientsComponent implements OnInit {
-  constructor(private fb: FormBuilder, private clientService: ClientService, private userService: UserService, private siteService: SiteService) {}
-  form!: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private clientService: ClientService,
+    private userService: UserService,
+    private siteService: SiteService
+  ) { }
+  form: FormGroup = this.fb.group({
+    clientName: '',
+    clientStatus: '',
+    contractYears: ''
+  })
   clientsArray: any[] = [];
   title: string = 'Clients';
   isLoading: boolean = false;
@@ -21,9 +30,21 @@ export class ClientsComponent implements OnInit {
   error: any = {};
   currentClient: any = {};
   isEditFormLoading: boolean = true;
-  clientStatus : ClientType;
+  clientStatus: ClientType;
+  clientId = localStorage.getItem('clientId');
+  siteStatus: boolean = false;
 
   ngOnInit(): void {
+    // this.onUpdateClient()
+    if (
+      !localStorage.getItem('firstReload') ||
+      localStorage.getItem('firstReload') == 'true'
+    ) {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
     this.form = this.fb.group({
       clientName: ['', Validators.required],
       contractYears: ['', Validators.required],
@@ -94,6 +115,28 @@ export class ClientsComponent implements OnInit {
   }
 
   onUpdateClient() {
+    if (this.form.value.clientStatus===false) {
+      console.log("form status of client",this.form.value.clientStatus)
+      this.siteService.getSiteByClientId(this.clientId).subscribe(
+        (sites: any) => {
+          console.log("response of sites",sites)
+          sites.forEach((site: any) => {
+            let data = {
+              siteName: site.siteName,
+              siteStatus: false
+            }
+            this.siteService.updateSite(site.siteId, data).subscribe(
+              (res: any) => {
+                console.log(res.message);
+              }
+            )
+          });
+        }
+      )
+    }
+
+
+
     if (this.currentClient.clientId) {
       this.isLoading = true;
       this.clientService.updateClient(this.currentClient, this.form.value)

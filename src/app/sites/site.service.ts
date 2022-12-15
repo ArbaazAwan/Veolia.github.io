@@ -37,7 +37,7 @@ export class SiteService {
     return this.http.get(this.SITE_URL + id, { headers: this.postHeaders });
   }
 
-  getSiteByClientId(id: string) {
+  getSiteByClientId(id: string|any) {
     return this.http
       .get(this.SITE_URL + 'client/' + id)
       .pipe(tap((res: any) => {}));
