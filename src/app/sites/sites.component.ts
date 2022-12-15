@@ -74,7 +74,6 @@ export class SitesComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
     const clientID = this.form.value.selectedClient;
-    console.log(clientID);
     this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
       next: (res) => {
         this.userService.openSnackBar(
@@ -112,7 +111,6 @@ export class SitesComponent implements OnInit {
   onUpdateSite() {
     if (this.currentSite.siteId) {
       this.isLoading = true;
-      console.log('form value on update site', this.form.value);
       this.siteService
         .updateSite(this.currentSite.siteId, this.form.value)
         .subscribe({
