@@ -10,7 +10,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService) { }
+  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService, private clientService:ClientService) { }
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];

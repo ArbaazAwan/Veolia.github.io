@@ -40,16 +40,7 @@ export class ImportExcelComponent implements OnInit {
     });
   }
 
-  getClientStatus(){
-    this.clientService.getClientById(this.clientId).subscribe({
-      next:(client:any)=>{
-        this.clientStatus = client[0].clientStatus;
-      },
-      error:(err)=>{
-        console.log("error occured in getclientStatus", err);
-      }
-    })
-  }
+ 
 
   getClientStatus(){
     this.clientService.getClientById(this.clientId).subscribe({

@@ -17,8 +17,12 @@ export class ClientsComponent implements OnInit {
     private clientService: ClientService,
     private userService: UserService,
     private siteService: SiteService
-  ) {}
-  form!: FormGroup;
+  ) { }
+  form: FormGroup = this.fb.group({
+    clientName: '',
+    clientStatus: '',
+    contractYears: ''
+  })
   clientsArray: any[] = [];
   title: string = 'Clients';
   isLoading: boolean = false;
@@ -27,8 +31,11 @@ export class ClientsComponent implements OnInit {
   currentClient: any = {};
   isEditFormLoading: boolean = true;
   clientStatus: ClientType;
+  clientId = localStorage.getItem('clientId');
+  siteStatus: boolean = false;
 
   ngOnInit(): void {
+    // this.onUpdateClient()
     if (
       !localStorage.getItem('firstReload') ||
       localStorage.getItem('firstReload') == 'true'
@@ -106,6 +113,28 @@ export class ClientsComponent implements OnInit {
   }
 
   onUpdateClient() {
+    if (this.form.value.clientStatus===false) {
+      console.log("form status of client",this.form.value.clientStatus)
+      this.siteService.getSiteByClientId(this.clientId).subscribe(
+        (sites: any) => {
+          console.log("response of sites",sites)
+          sites.forEach((site: any) => {
+            let data = {
+              siteName: site.siteName,
+              siteStatus: false
+            }
+            this.siteService.updateSite(site.siteId, data).subscribe(
+              (res: any) => {
+                console.log(res.message);
+              }
+            )
+          });
+        }
+      )
+    }
+
+    
+
     if (this.currentClient.clientId) {
       this.isLoading = true;
       this.clientService
