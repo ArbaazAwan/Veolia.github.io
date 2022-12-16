@@ -64,13 +64,13 @@
                 <td class="bg-light Data-Wrap">
                   <label class="text-bold ">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
-                <td>{{summary.life / 100 | percent}}</td>
-                <td>{{summary.installmentDate | date:'mediumDate'}}</td>
+                <td><p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(1)}}</p></td>
+                <td><p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(2)| date:'mediumDate'}}</p></td>
                 <td>
                   <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
                 </td>
-                <td *ngFor="let yearlyCost of yearsCostsViewTable[i] let y = index">
-                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) }}</p>
+                <td *ngFor="let yearlyCost of yearsCostsViewTable[i]?.at(3) let y = index">
+                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(3).at(y+1) }}</p>
                 </td>
               </tr>
             </tbody>

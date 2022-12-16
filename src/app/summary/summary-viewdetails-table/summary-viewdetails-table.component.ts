@@ -25,7 +25,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   constructor(
     private masterService: MasterService,
     private clientService: ClientService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +45,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     var overhaulCost: number = 0;
     var yearsArray: any = new Array(51);
     var yearsCosts: any = [];
+    var summaryData: any = [];
 
     for (let i = 0; i < yearsArray.length; i++) {
       let events: number[] = [];
@@ -163,9 +164,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
-        yearsCosts[0] = summary.unit;
+        summaryData[0] = summary.unit;
+        summaryData[1] = summary.life;
+        summaryData[2] = summary.installmentDate;
+        summaryData[3] = yearsCosts;
 
-        this.yearsCostsViewTable.push(yearsCosts);
+        this.yearsCostsViewTable.push(summaryData);
       });
   }
 
