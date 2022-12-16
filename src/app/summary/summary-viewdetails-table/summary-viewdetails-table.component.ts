@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
 import * as XLSX from 'xlsx';
 import { formatDate } from '@angular/common';
+import { UserService } from 'src/app/users/user.service';
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -23,7 +24,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
   constructor(
     private masterService: MasterService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private userService: UserService,
   ) {}
 
   ngOnInit(): void {
@@ -183,5 +185,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     });
 
     XLSX.writeFile(wb, `${fileName}.xlsx`);
+    this.userService.openSnackBar('File is ready to export', 'close');
   }
 }
