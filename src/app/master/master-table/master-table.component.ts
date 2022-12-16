@@ -55,20 +55,11 @@ export class MasterTableComponent implements OnInit {
 
   getDisplayText(master: any) {
     if (master) {
-      return (
-        master.oldAssetType +
-        ' - ' +
-        master?.newAssetType +
-        ', ' +
-        master?.masterStyle +
-        ', ' +
-        master?.masterSize +
-        ', '+
-        master.quality +
-        ', '+
-         master.dutyApplication
-      );
-    } else {
+      return master.oldAssetType + " - " + master?.newAssetType
+        + ", " + master?.masterStyle + ", " + master?.masterSize
+        + ", " + master?.dutyApplication + ", " + master?.quality
+    }
+    else {
       return '';
     }
   }
@@ -123,7 +114,7 @@ export class MasterTableComponent implements OnInit {
   }
 
   getMasters(siteId: any) {
-    
+
     if (this.siteId) {
       this.isLoading = true;
       this.masterService.getMastersBySiteId(siteId).subscribe({
