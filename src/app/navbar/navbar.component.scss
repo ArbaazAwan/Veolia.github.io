@@ -28,3 +28,11 @@
 .capitalize-first::first-letter {
   text-transform: uppercase;
 }
+
+mat-error{
+  display: flex;
+  align-items: center;
+}
+.nav-text {
+  vertical-align: top;
+}
