@@ -23,12 +23,6 @@
             (matSortChange)="sortRecords($event)">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
-                    Actions
-                  <!-- <th class="px-2 pb-1 text-sm">
-                    <mat-checkbox class="example-margin">
-                    </mat-checkbox>
-                  </th> -->
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3" *ngIf="siteStatus && clientStatus">
                     &nbsp;Actions
                   </th>
@@ -88,7 +82,7 @@
                     <div class="d-flex mx-2">
                       <div class="d-flex flex-column">
                         <div ngbDropdown container="body" class="fix-size">
-                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
+                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle *ngIf="siteStatus && clientStatus">
                             Actions
                           </button>
                           <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
@@ -102,6 +96,7 @@
                               <i class="material-icons">delete</i>&nbsp; Delete
                             </button>
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>

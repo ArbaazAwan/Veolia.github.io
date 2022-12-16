@@ -15,8 +15,8 @@
         &nbsp;
         <div>
           <span class="col card-text text-bold">Site Status: </span> 
-          <span class="text-sm" *ngIf="site.siteStatus == true" >Active</span>
-          <span class="text-sm" *ngIf="site.siteStatus == false" >Inactive</span>
+          <span class="text-sm" *ngIf="site.siteStatus == true" ><i class=" small material-icons text-success">brightness_1</i> Active</span>
+          <span class="text-sm" *ngIf="site.siteStatus == false" ><i class=" small material-icons text-danger">brightness_1</i> Inactive</span>
         </div>
 
         <button type="button" (click)="setclient($event)" data-id={{site.siteId}}

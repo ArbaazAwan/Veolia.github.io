@@ -190,7 +190,7 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ master.replacementCost }}</p>
+                      <p class="mb-0 text-sm">{{ master.replacementCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </div>
                   </div>
                 </td>

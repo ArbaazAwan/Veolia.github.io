@@ -45,10 +45,10 @@
                   <label class="text-bold">Total</label>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{totalAverageYearsCost}}</p>
+                  <p class="mb-0 text-sm">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
                 <td *ngFor="let yearlyCost of totalYearsCosts let y = index">
-                  <p class="mb-0 text-sm">{{ totalYearsCosts.at(y+1) }}</p>
+                  <p class="mb-0 text-sm">{{ totalYearsCosts.at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
               </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
@@ -56,10 +56,10 @@
                   <label class="text-bold">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{averagesOfYears[i]}}</p>
+                  <p class="mb-0 text-sm">{{averagesOfYears[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
                 <td *ngFor="let yearlyCost of yearsCostsViewTable[i] let y = index">
-                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) }}</p>
+                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
               </tr>
             </tbody>
