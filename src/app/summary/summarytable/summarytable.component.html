@@ -82,7 +82,7 @@
                     <div class="d-flex mx-2">
                       <div class="d-flex flex-column">
                         <div ngbDropdown container="body" class="fix-size">
-                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle [disabled]="! siteStatus">
+                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle *ngIf="siteStatus && clientStatus">
                             Actions
                           </button>
                           <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
@@ -95,6 +95,7 @@
                               <i class="material-icons">delete</i>&nbsp; Delete
                             </button>
                           </div>
+                        </div>
                         </div>
                       </div>
                     </div>
