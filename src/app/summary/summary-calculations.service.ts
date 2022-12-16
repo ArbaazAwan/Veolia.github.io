@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { MasterService } from '../master/master.service';
 import { SummaryService } from './summary.service';
 
@@ -21,10 +21,10 @@ export class SummaryCalculationsService {
     this.getCalculations();
   }
 
-  setPricesYears(prices: any, pricesC:any, years: any) {
+  setPricesYears(prices: any, pricesC: any, years: any) {
     this.pricesYears.next({
       prices: prices,
-      pricesC : pricesC,
+      pricesC: pricesC,
       years: years
     });
   }
@@ -35,7 +35,12 @@ export class SummaryCalculationsService {
       (summaries: any) => {
         this.summaryArray = summaries.summary;
         this.summaryArray.forEach((summary: any) => {
-          this.getMaster(summary.masterId, summary);
+          let obj:any = this.getMaster(summary.masterId, summary);
+          this.averagesOfYears.push(Math.floor(obj.averageCost));
+
+          this.totalAverageYearsCost += Math.floor(obj.averageCost);
+
+          this.yearsCostsViewTable.push(obj.yearsCosts);
         });
       }
     )
@@ -65,92 +70,183 @@ export class SummaryCalculationsService {
       this.totalYearsCosts[i] = 0;
     }
 
-    this.masterService
-      .getCompleteMasterById(masterId)
-      .subscribe((master: any) => {
+    return this.masterService
+      .getCompleteMasterById(masterId).pipe(
+        map(
+          (master: any) => {
 
-        let events = master.events;
-        let overhaul = master.overhaul;
-        let replacementCost = master.master.replacementCost;
-        let lifeMonths = master.master.lifeMonths;
-        let overhaulLife = Number(master.master.overhaulLife);
-        // console.log('master', master);
+            let events = master.events;
+            let overhaul = master.overhaul;
+            let replacementCost = master.master.replacementCost;
+            let lifeMonths = master.master.lifeMonths;
+            let overhaulLife = Number(master.master.overhaulLife);
+            // console.log('master', master);
 
-        // console.log('lifeMonths', lifeMonths);
-        let lifePerc = summary.life / 100;
-        let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
-        // console.log('replacementcostyear', replacementCostYear);
+            // console.log('lifeMonths', lifeMonths);
+            let lifePerc = summary.life / 100;
+            let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
+            // console.log('replacementcostyear', replacementCostYear);
 
-        for (let i = 0; i < events?.length; i++) {
-          //calculating events costs and storing them in array
-          let totalCostM: number = 0;
-          events[i].eventMaintenance?.forEach((evM: any) => {
-            totalCostM += Number(evM.evCost);
-          });
+            for (let i = 0; i < events?.length; i++) {
+              //calculating events costs and storing them in array
+              let totalCostM: number = 0;
+              events[i].eventMaintenance?.forEach((evM: any) => {
+                totalCostM += Number(evM.evCost);
+              });
 
-          let totalCostC: number = 0;
-          events[i].eventContractors?.forEach((evC: any) => {
-            totalCostC += Number(evC.evCost);
-          });
+              let totalCostC: number = 0;
+              events[i].eventContractors?.forEach((evC: any) => {
+                totalCostC += Number(evC.evCost);
+              });
 
-          eventsCosts.push(totalCostM + totalCostC);
-          // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
-        }
+              eventsCosts.push(totalCostM + totalCostC);
+              // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
+            }
 
-        if (overhaul) {
-          //calculating overhaul cost
-          overhaul.overhaulMaintenance.forEach((ohM: any) => {
-            overhaulCost += Number(ohM.ohCost);
-          });
-          overhaul.overhaulContractors.forEach((ohC: any) => {
-            overhaulCost += Number(ohC.ohHour);
-          });
-        }
+            if (overhaul) {
+              //calculating overhaul cost
+              overhaul.overhaulMaintenance.forEach((ohM: any) => {
+                overhaulCost += Number(ohM.ohCost);
+              });
+              overhaul.overhaulContractors.forEach((ohC: any) => {
+                overhaulCost += Number(ohC.ohHour);
+              });
+            }
 
-        for (let i = 0; i < events.length; i++) {
-          //adding occured events in a year to yearsArray
-          for (let m = 1; m <= 600; m++) {
-            if (m % Number(events[i].evOccurence) === 0) {
-              yearsArray[Math.ceil(m / 12)]?.events?.push(i);
+            for (let i = 0; i < events.length; i++) {
+              //adding occured events in a year to yearsArray
+              for (let m = 1; m <= 600; m++) {
+                if (m % Number(events[i].evOccurence) === 0) {
+                  yearsArray[Math.ceil(m / 12)]?.events?.push(i);
+                }
+              }
+            }
+
+            for (let m = 0; m < 600; m++) {
+              //adding overhaul cost to the year
+              if (m != 0) {
+                if (m % overhaulLife == 0) {
+                  yearsCosts[Math.ceil(m / 12)] += overhaulCost;
+                  // console.log("overhaul year cost",yearsCosts)
+                }
+              }
+            }
+
+            for (let y = 1; y <= 50; y++) {
+              //calculating yearly costs
+              yearsArray[y].events.forEach((eventIndex: any) => {
+                yearsCosts[y] += eventsCosts[eventIndex];
+              });
+              if (y % replacementCostYear === 0 || y == 1) {
+                yearsCosts[y] += Number(replacementCost);
+              }
+              //calculating totalYearsCosts
+              this.totalYearsCosts[y] += yearsCosts[y];
+            }
+
+            //calculating averages
+            let totalCost = 0;
+            yearsCosts.forEach((cost: any) => {
+              totalCost += cost;
+            });
+            let averageCost = totalCost / 50;
+            yearsCosts[0] = summary.unit;
+
+            return {
+              averageCost: averageCost,
+              yearsCosts: yearsCosts
             }
           }
-        }
+        )
+      )
 
-        for (let m = 0; m < 600; m++) {
-          //adding overhaul cost to the year
-          if (m != 0) {
-            if (m % overhaulLife == 0) {
-              yearsCosts[Math.ceil(m / 12)] += overhaulCost;
-              // console.log("overhaul year cost",yearsCosts)
-            }
-          }
-        }
+    // this.masterService
+    //   .getCompleteMasterById(masterId)
+    //   .subscribe((master: any) =>
+    //   {
 
-        for (let y = 1; y <= 50; y++) {
-          //calculating yearly costs
-          yearsArray[y].events.forEach((eventIndex: any) => {
-            yearsCosts[y] += eventsCosts[eventIndex];
-          });
-          if (y % replacementCostYear === 0 || y == 1) {
-            yearsCosts[y] += Number(replacementCost);
-          }
-          //calculating totalYearsCosts
-          this.totalYearsCosts[y] += yearsCosts[y];
-        }
+    //     let events = master.events;
+    //     let overhaul = master.overhaul;
+    //     let replacementCost = master.master.replacementCost;
+    //     let lifeMonths = master.master.lifeMonths;
+    //     let overhaulLife = Number(master.master.overhaulLife);
+    //     // console.log('master', master);
 
-        //calculating averages
-        let totalCost = 0;
-        yearsCosts.forEach((cost: any) => {
-          totalCost += cost;
-        });
-        let averageCost = totalCost / 50;
-        this.averagesOfYears.push(Math.floor(averageCost));
+    //     // console.log('lifeMonths', lifeMonths);
+    //     let lifePerc = summary.life / 100;
+    //     let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
+    //     // console.log('replacementcostyear', replacementCostYear);
 
-        this.totalAverageYearsCost += Math.floor(averageCost);
-        yearsCosts[0] = summary.unit;
+    //     for (let i = 0; i < events?.length; i++) {
+    //       //calculating events costs and storing them in array
+    //       let totalCostM: number = 0;
+    //       events[i].eventMaintenance?.forEach((evM: any) => {
+    //         totalCostM += Number(evM.evCost);
+    //       });
 
-        this.yearsCostsViewTable.push(yearsCosts);
-      });
+    //       let totalCostC: number = 0;
+    //       events[i].eventContractors?.forEach((evC: any) => {
+    //         totalCostC += Number(evC.evCost);
+    //       });
+
+    //       eventsCosts.push(totalCostM + totalCostC);
+    //       // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
+    //     }
+
+    //     if (overhaul) {
+    //       //calculating overhaul cost
+    //       overhaul.overhaulMaintenance.forEach((ohM: any) => {
+    //         overhaulCost += Number(ohM.ohCost);
+    //       });
+    //       overhaul.overhaulContractors.forEach((ohC: any) => {
+    //         overhaulCost += Number(ohC.ohHour);
+    //       });
+    //     }
+
+    //     for (let i = 0; i < events.length; i++) {
+    //       //adding occured events in a year to yearsArray
+    //       for (let m = 1; m <= 600; m++) {
+    //         if (m % Number(events[i].evOccurence) === 0) {
+    //           yearsArray[Math.ceil(m / 12)]?.events?.push(i);
+    //         }
+    //       }
+    //     }
+
+    //     for (let m = 0; m < 600; m++) {
+    //       //adding overhaul cost to the year
+    //       if (m != 0) {
+    //         if (m % overhaulLife == 0) {
+    //           yearsCosts[Math.ceil(m / 12)] += overhaulCost;
+    //           // console.log("overhaul year cost",yearsCosts)
+    //         }
+    //       }
+    //     }
+
+    //     for (let y = 1; y <= 50; y++) {
+    //       //calculating yearly costs
+    //       yearsArray[y].events.forEach((eventIndex: any) => {
+    //         yearsCosts[y] += eventsCosts[eventIndex];
+    //       });
+    //       if (y % replacementCostYear === 0 || y == 1) {
+    //         yearsCosts[y] += Number(replacementCost);
+    //       }
+    //       //calculating totalYearsCosts
+    //       this.totalYearsCosts[y] += yearsCosts[y];
+    //     }
+
+    //     //calculating averages
+    //     let totalCost = 0;
+    //     yearsCosts.forEach((cost: any) => {
+    //       totalCost += cost;
+    //     });
+    //     let averageCost = totalCost / 50;
+    //     this.averagesOfYears.push(Math.floor(averageCost));
+
+    //     this.totalAverageYearsCost += Math.floor(averageCost);
+    //     yearsCosts[0] = summary.unit;
+
+    //     this.yearsCostsViewTable.push(yearsCosts);
+    //   });
 
   }
 }

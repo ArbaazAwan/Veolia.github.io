@@ -74,10 +74,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let summary of sortedSummary | searchFilter: searchText | paginate: { itemsPerPage: 50, currentPage: p }">
-
-                  <!-- <td class="pt-3">
-                    <mat-checkbox class=""></mat-checkbox>
-                  </td> -->
                   <td *ngIf="siteStatus && clientStatus">
                     <div class="d-flex mx-2">
                       <div class="d-flex flex-column">
@@ -95,7 +91,6 @@
                               <i class="material-icons">delete</i>&nbsp; Delete
                             </button>
                           </div>
-                        </div>
                         </div>
                       </div>
                     </div>
