@@ -36,6 +36,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
+
   }
 
   getMaster(masterId: any, summary: any) {
@@ -86,7 +87,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
 
           eventsCosts.push(totalCostM + totalCostC);
-          // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
         }
 
         if (overhaul) {
@@ -123,7 +123,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (m != 0) {
             if (m % overhaulLife == 0) {
               yearsCosts[Math.ceil(i / 12)] += overhaulCost;
-              // console.log('overhaul year cost', yearsCosts);
             }
           }
           i++;

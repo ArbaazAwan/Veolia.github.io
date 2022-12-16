@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../clients/client.service';
 import { SummaryCalculationsService } from '../summary/summary-calculations.service';
 import * as XLSX from 'xlsx';
+import { SummaryService } from '../summary/summary.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,28 +33,47 @@ export class DashboardComponent implements OnInit {
   minYearCost: number = 0;
   maxYear: string = '';
   minYear: string = '';
-  upperLimit:number;
-  lowerLimit:number;
+  upperLimit: number;
+  lowerLimit: number;
 
 
-  constructor(private clientService: ClientService, private summaryCalculationsService: SummaryCalculationsService) { }
+  constructor(private clientService: ClientService,
+     private summaryCalculationsService: SummaryCalculationsService,
+     private summaryService:SummaryService
+     ) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
 
-      this.assignValues();
+    this.summaryService.getSummary().subscribe(
+      (summaries:any)=>{
+        summaries.forEach((summary:any) => {
+          let obj:Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId,summary);
+          obj.subscribe(
+            (res:any)=>{
+              this.averagesOfYears.push(Math.floor(res.averageCost));
+              this.totalAverageYearsCost += Math.floor(res.averageCost);
+              this.yearsCostsViewTable.push(res.yearsCosts);
+              this.totalYearsCosts = res.totalYearsCosts;
+            }
+          )
+        });
 
-      //getting clients contract years
-      this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-        this.clientContractYears = client[0]?.contractYears;
-        this.pricesWithoutContigency();
-        this.onAverageYearsChange();
-        this.onContigencyChange(); //for first the time values
-      });
+      }
+    )
 
-    }, 3000);
+    this.onLimitChange();
 
     this.reloadCheck();
+  }
+
+  getSummaryValues() {
+    //getting clients contract years
+    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
+      this.clientContractYears = client[0]?.contractYears;
+      this.pricesWithoutContigency();
+      this.onAverageYearsChange();
+      this.onContigencyChange(); //for first the time values
+    });
   }
 
   reloadCheck() {
@@ -68,13 +89,6 @@ export class DashboardComponent implements OnInit {
     this.clientId = localStorage.getItem('clientId');
   }
 
-  assignValues() {
-    let v = this.summaryCalculationsService.values();
-    this.yearsCostsViewTable = v.yearsCostsViewTable;
-    this.averagesOfYears = v.averagesOfYears;
-    this.totalYearsCosts = v.totalYearsCosts;
-    this.totalAverageYearsCost = v.totalAverageYearsCost;
-  }
 
   pricesWithoutContigency() {
     this.prices = [];
@@ -98,20 +112,24 @@ export class DashboardComponent implements OnInit {
       // displaycost = cost + contigency%
       this.pricesC[i - 1] = Math.floor(this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency));
     }
-    this.summaryCalculationsService.setPricesYears(this.prices,this.pricesC, this.years);
+    this.summaryCalculationsService.setPricesYears(this.prices, this.pricesC, this.years);
     this.maxYearCostC = Math.max(...this.pricesC);
     this.minYearCostC = Math.min(...this.pricesC);
     this.maxYear = this.pricesC.indexOf(this.maxYearCostC) + 1;
     this.minYear = this.pricesC.indexOf(this.minYearCostC) + 1;
 
     //getting total average cost with contigency
-    this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost,this.contigency));
+    this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost, this.contigency));
 
     this.onAverageYearsChange();
   }
 
-  onLimitChange(){
-    console.log("limit is changed")
+  onLimitChange() {
+
+    setTimeout(() => {
+      this.getSummaryValues();
+    }, 3000);
+
   }
 
   percentage(num: number, per: number) {
@@ -124,8 +142,8 @@ export class DashboardComponent implements OnInit {
     let vc = 0;
     let v = 0;
     for (let i = 0; i < this.averageYears; i++) {
-      vc += this.totalYearsCosts[i+1] + this.percentage(this.totalYearsCosts[i+1], this.contigency);
-      v += this.totalYearsCosts[i+1];
+      vc += this.totalYearsCosts[i + 1] + this.percentage(this.totalYearsCosts[i + 1], this.contigency);
+      v += this.totalYearsCosts[i + 1];
     }
     this.averageC = Math.floor(vc / this.averageYears);
     this.average = Math.floor(v / this.averageYears);
