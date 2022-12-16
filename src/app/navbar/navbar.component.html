@@ -30,8 +30,9 @@
                 (valueChange)="populateSites($event)"
                 (selectionChange)="onClientSelect($event)"
                 [disabled]="isLoadingClient"
-              >
-                <mat-option
+                disableOptionCentering
+              >  
+                  <mat-option
                   *ngFor="let client of clients"
                   value="{{ client.clientId }}"
                 >
@@ -67,6 +68,7 @@
                 type="text"
                 (selectionChange)="onSiteSelect($event)"
                 [disabled]="isLoadingSite"
+                disableOptionCentering
               >
                 <mat-option
                   *ngFor="let site of sites"
