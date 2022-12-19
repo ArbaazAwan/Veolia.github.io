@@ -3,6 +3,7 @@ import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
 import * as XLSX from 'xlsx';
 import { formatDate } from '@angular/common';
+import { UserService } from 'src/app/users/user.service';
 
 @Component({
   selector: 'app-summary-viewdetails-table',
@@ -23,7 +24,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
   constructor(
     private masterService: MasterService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
-
   }
 
   getMaster(masterId: any, summary: any) {
@@ -44,6 +45,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     var overhaulCost: number = 0;
     var yearsArray: any = new Array(51);
     var yearsCosts: any = [];
+    var summaryData: any = [];
 
     for (let i = 0; i < yearsArray.length; i++) {
       let events: number[] = [];
@@ -62,9 +64,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         let overhaulLife = Number(master.master.overhaulLife);
 
         let lifePerc = summary.life / 100;
-        let replacementCostYear = Math.ceil(
-          (Number(lifeMonths) * lifePerc) / 12
-        );
+        let replacementCostYear = Math.floor(Number(lifeMonths) / 12);
 
         let currentYear = Number(new Date().getFullYear());
         let installationYear = Number(
@@ -73,6 +73,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           ).getFullYear()
         );
         let cycYear = Number(currentYear - installationYear);
+
+        let startYear = Math.ceil((Number(lifeMonths) * Number(lifePerc)) / 12);
+        // console.log(startYear);
 
         for (let i = 0; i < events?.length; i++) {
           //calculating events costs and storing them in array
@@ -132,27 +135,24 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
         }
 
-        if (cycYear > 0) {
-          for (let index = 0; index < cycYear; index++) {
-            yearsArray[index]?.events?.forEach((eventIndex: any) => {
-              yearsCosts[index] += eventsCosts[eventIndex];
-            });
-            if (index == cycYear - 1)
-              yearsCosts[index + 1] += Number(replacementCost);
-            this.totalYearsCosts[index] += yearsCosts[index];
-          }
-        }
+        let x = 1;
+        for (let y = startYear; y <= 50; y++) {
+          console.log('lifeMonths', Math.floor(lifeMonths / 12));
 
-        for (let y = cycYear; y <= 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
-            yearsCosts[y] += eventsCosts[eventIndex];
+            yearsCosts[x] += eventsCosts[eventIndex];
           });
           if (y % replacementCostYear === 0) {
-            yearsCosts[y + cycYear] += Number(replacementCost);
+            yearsCosts[x] += Number(replacementCost);
           }
           //calculating totalYearsCosts
-          this.totalYearsCosts[y] += yearsCosts[y];
+          this.totalYearsCosts[x] += yearsCosts[x];
+          if (Math.ceil(lifeMonths / 12) == y) y = 0;
+          x++;
+          if (x == 51) {
+            break;
+          }
         }
 
         //calculating averages
@@ -164,9 +164,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
-        yearsCosts[0] = summary.unit;
+        summaryData[0] = summary.unit;
+        summaryData[1] = summary.life;
+        summaryData[2] = summary.installmentDate;
+        summaryData[3] = yearsCosts;
 
-        this.yearsCostsViewTable.push(yearsCosts);
+        this.yearsCostsViewTable.push(summaryData);
       });
   }
 
@@ -186,5 +189,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     });
 
     XLSX.writeFile(wb, `${fileName}.xlsx`);
+    this.userService.openSnackBar('File is ready to export', 'close');
   }
 }

@@ -65,7 +65,6 @@ export class ImportExcelComponent implements OnInit {
       var workbook = XLSX.read(fileReader.result, { type: 'binary' });
       this.excelData = XLSX.utils.sheet_to_json(workbook.Sheets['master']);
       if (this.excelData.length > 0) {
-        // console.log(this.excelData);
         for (let index = 0; index < this.excelData.length; index++) {
           const data = this.excelData[index];
           const master = {
@@ -108,7 +107,6 @@ export class ImportExcelComponent implements OnInit {
 
   createEventsArray(masterData: any) {
     var eventsArray: any = [];
-
     const totalEvent = 8;
 
     for (let eventIndex = 0; eventIndex < totalEvent; eventIndex++) {
