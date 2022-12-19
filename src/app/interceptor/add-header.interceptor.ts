@@ -16,7 +16,9 @@ export class AddHeaderInterceptor implements HttpInterceptor {
 
     let jsonReq = request.clone({
       setHeaders: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': "'*'",
+        'Access-Control-Allow-Headers': "'*'",
       }
     })
 
