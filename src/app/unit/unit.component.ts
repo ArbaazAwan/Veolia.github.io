@@ -72,6 +72,6 @@ export class UnitComponent implements OnInit {
 
   processModel() {
     this.child.exportToExcel('detailsTable');
-    this.userService.openSnackBar('File export is completed', 'close');
+    this.userService.openSnackBar('File is ready to export', 'close');
   }
 }

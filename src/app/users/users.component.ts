@@ -152,7 +152,7 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => {
         this.error = err.message;
-          this.userService.openSnackBar('Username & Email ID already exists or values not entered correctly', 'close');
+          this.userService.openSnackBar('Username & Email ID already exists or values are not entered correctly', 'close');
           this.getUsers();
       },
     });
