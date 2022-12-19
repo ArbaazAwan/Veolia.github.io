@@ -22,7 +22,7 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getForm();
   }
   @ViewChild('modalClose') modalClose: ElementRef;
-  form!: FormGroup;
+  form!: FormGroup; 
   filteredMasters: any = [];
   masters: any = [];
   selectedMaster: any;
@@ -30,6 +30,7 @@ export class CreateSummaryFormComponent implements OnInit {
   siteId: any = localStorage.getItem('siteId');
   asset: FormControl = new FormControl(['', Validators.required]);
   masterId: any;
+  
 
   ngOnInit(): void {
     this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
@@ -82,7 +83,7 @@ export class CreateSummaryFormComponent implements OnInit {
     c.quantity.setValue(null);
     c.load.setValue(null);
     c.life.setValue(null);
-    this.masterId = master.masterId;
+    c.masterId.setValue(master.masterId);
   }
 
   onInstallmentChange(installmentDate: Date) {
@@ -128,6 +129,7 @@ export class CreateSummaryFormComponent implements OnInit {
   getForm() {
     return (this.form = this.fb.group({
       unit: '',
+      masterId: [{ value: '', disabled: true }],
       assetType: '',
       size: '',
       summaryStyle: '',
@@ -157,6 +159,7 @@ export class CreateSummaryFormComponent implements OnInit {
         unit,
         assetType,
         size,
+        masterId,
         description,
         dutyApplication,
         quality,
@@ -171,7 +174,7 @@ export class CreateSummaryFormComponent implements OnInit {
         if (summaryId) {
           const updateSummaryPayload = {
             siteId: this.siteId,
-            masterId: this.masterId,
+            masterId: masterId,
             unit: unit,
             assetType: assetType,
             summarySize: size,
@@ -196,7 +199,7 @@ export class CreateSummaryFormComponent implements OnInit {
         } else {
           const createSummaryPayload = {
             siteId: this.siteId,
-            masterId: this.masterId,
+            masterId: masterId,
             unit: unit,
             assetType: assetType,
             summarySize: size,
@@ -253,7 +256,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.load.setValue(summaryload);
       c.life.setValue(life);
       c.installmentDate.setValue(installmentDate);
-      this.masterId = masterId;
+      c.masterId.setValue(masterId);
     });
   }
 

@@ -31,6 +31,11 @@
                   <mat-icon matSuffix>search</mat-icon>
                 </mat-form-field>
 
+                <mat-form-field class="example-form-field text-sm" appearance="outline" disabled>
+                  <mat-label class="text-bold">Master Id</mat-label>
+                  <input formControlName="masterId" matInput type="text">
+                </mat-form-field>
+
                 <mat-form-field class="example-form-field text-sm" appearance="outline">
                   <mat-label class="text-bold">Asset Type</mat-label>
                   <input formControlName="assetType" matInput type="text" [ngClass]="
