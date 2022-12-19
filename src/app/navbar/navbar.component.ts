@@ -83,6 +83,7 @@ export class NavbarComponent implements OnInit {
 
   onClientSelect(selectedClient: any) {
     localStorage.setItem('clientId', selectedClient.value);
+    window.location.reload();
   }
 
   onSiteSelect(selectedClient: any) {

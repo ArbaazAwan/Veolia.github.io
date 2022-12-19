@@ -1,6 +1,6 @@
 <div class="row mx-1">
   <div class="col-12">
-    <div class="card my-4">
+    <div class="card my-1">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Record Table</p>
@@ -19,139 +19,138 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0" mat-sort>
+          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0"  matSort
+            (matSortChange)="sortRecords($event)">
             <thead>
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder">
-                  Actions
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3" *ngIf="siteStatus && clientStatus">
+                  &nbsp;Actions
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryId">
                   ID
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unit">
                   Unit
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="description">
                   App Description
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="assetType">
                   Asset Type
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="summaryStyle">
                   Style
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summarySize">
                   Size
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="dutyApplication">
                   Duty/Application
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quality">
                   Quality
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="quantity">
                   Quantity
                 </th>
 
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Load%
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Life%
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Installation Date
-                </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Created Date
-                </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryload">
+                    Load%
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="life">
+                    Life%
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="installationtDate">
+                    Installation Date
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="createdDate">
+                    Created Date
+                  </th>
 
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="let summary of summaryData | searchFilter: searchText | paginate : { itemsPerPage: 50, currentPage: p };">
-                <td>
-                  <div class="d-flex py-1 ps-3">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle
-                          [disabled]="! siteStatus">
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important; position: absolute; z-index: 10000;">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)">
-                            <i class="material-icons">edit</i>&nbsp;Edit
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryStatus">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let summary of sortedSummary | searchFilter: searchText | paginate: { itemsPerPage: 50, currentPage: p }">
+                  <td *ngIf="siteStatus && clientStatus">
+                    <div class="d-flex mx-2">
+                      <div class="d-flex flex-column">
+                        <div ngbDropdown container="body" class="fix-size">
+                          <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle *ngIf="siteStatus && clientStatus">
+                            Actions
                           </button>
+                          <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
+                            <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
+                              (click)="editSummary(summary.summaryId)">
+                              <i class="material-icons">edit</i>&nbsp;Edit
+                            </button>
 
-                          <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
-                            <i class="material-icons">delete</i>&nbsp; Delete
-                          </button>
+                            <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
+                              <i class="material-icons">delete</i>&nbsp; Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryId }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summaryId }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.unit }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1" id="unit">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.unit }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.appDescription }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.appDescription }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.assetType }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.assetType }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryStyle }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summaryStyle }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summarySize }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.summarySize }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.dutyApplication }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.dutyApplication }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.quality }}</p>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{ summary.quality }}</p>
+                      </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
                 <td>
                   <div class="d-flex py-1">

@@ -62,8 +62,8 @@ export class PriceYearLineChartComponent implements OnInit{
           pointBackgroundColor: 'rgba(255, 255, 255, .8)',
           pointBorderColor: 'transparent',
           borderColor: 'rgba(255, 255, 255, .8)',
-          backgroundColor: 'transparent',
-          fill: true,
+          backgroundColor: 'rgba(255, 255, 255)',
+          fill: false,
           maxBarThickness: 6,
         },
         {
@@ -75,8 +75,8 @@ export class PriceYearLineChartComponent implements OnInit{
           pointBackgroundColor: 'rgb(41,131,235, .8)',
           pointBorderColor: 'transparent',
           borderColor: 'rgb(41,131,235, .8)',
-          backgroundColor: 'transparent',
-          fill: true,
+          backgroundColor: 'rgb(41,131,235)',
+          fill: false,
           maxBarThickness: 6,
         },
 

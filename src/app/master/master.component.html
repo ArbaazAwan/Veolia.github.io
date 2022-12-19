@@ -1,5 +1,11 @@
-<button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
-  data-bs-target="#modal-form-create" *ngIf="role == 'admin'" [disabled]="!siteStatus">
+<button
+  type="button"
+  class="btn bg-gradient-primary mx-4 text-right"
+  data-bs-toggle="modal"
+  data-bs-target="#modal-form-create"
+  *ngIf="siteStatus && clientStatus"
+  
+>
   Insert Record
 </button>
 <app-import-excel *ngIf="role == 'admin'"></app-import-excel>

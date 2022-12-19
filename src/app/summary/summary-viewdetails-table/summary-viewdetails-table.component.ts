@@ -57,7 +57,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.masterService
       .getCompleteMasterById(masterId)
       .subscribe((master: any) => {
-        let events = master.events;
+        let events = master?.events;
         let overhaul = master.overhaul;
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
@@ -102,7 +102,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
         }
 
-        for (let i = 0; i < events.length; i++) {
+        for (let i = 0; i < events?.length; i++) {
           //adding occured events in a year to yearsArray
           // checking if life months equals to months so that we can start counting again
           let j = 0;

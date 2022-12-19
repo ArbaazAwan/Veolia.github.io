@@ -105,22 +105,14 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   getDisplayText(master: any) {
-    if (
-      master.oldAssetType ||
-      master.newAssetType ||
-      master.masterStyle ||
-      master.masterSize
-    ) {
-      return (
-        master.oldAssetType +
-        ' - ' +
-        master?.newAssetType +
-        ', ' +
-        master?.masterStyle +
-        ', ' +
-        master?.masterSize
-      );
-    } else {
+    if (master.oldAssetType || master.newAssetType
+      || master.masterStyle || master.masterSize
+      || master.dutyApplication || master.quality) {
+      return master.oldAssetType + " - " + master?.newAssetType
+        + ", " + master?.masterStyle + ", " + master?.masterSize
+        + ", " + master?.dutyApplication + ", " + master?.quality
+    }
+    else {
       return '';
     }
   }

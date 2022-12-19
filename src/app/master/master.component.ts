@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MasterService } from './master.service';
 import * as XLSX from 'xlsx';
 import { SiteService } from '../sites/site.service';
+import { ClientService } from '../clients/client.service';
 
 @Component({
   selector: 'app-master',
@@ -11,16 +12,21 @@ import { SiteService } from '../sites/site.service';
 export class MasterComponent implements OnInit {
   eventEvalTableShow: boolean = false;
   siteId = localStorage.getItem('siteId');
+  clientId:any=localStorage.getItem('clientId');
   viewMaster: any;
   excelData: any;
   isLoading:boolean = false;
   siteStatus:boolean=false;
+  clientStatus:boolean=false;
   role: any = localStorage.getItem('role');
 
-  constructor(private masterService:MasterService,  private siteService:SiteService) {}
+  constructor(private masterService:MasterService,  private siteService:SiteService, private clientService: ClientService) {}
 
   ngOnInit(): void {
+    
     this.getSiteStatus();
+    this.getClientStatus();
+  
   }
 
   getSiteStatus(){
@@ -30,6 +36,17 @@ export class MasterComponent implements OnInit {
       },
       error:(err)=>{
         console.log("error occured in getSiteStatus", err);
+      }
+    })
+  }
+
+  getClientStatus(){
+    this.clientService.getClientById(this.clientId).subscribe({
+      next:(client:any)=>{
+        this.clientStatus = client[0].clientStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getclientStatus", err);
       }
     })
   }

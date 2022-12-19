@@ -14,8 +14,8 @@ import { CreateSummaryFormComponent } from './create-summary-form/create-summary
 import { SummaryViewdetailsTableComponent } from './summary-viewdetails-table/summary-viewdetails-table.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSortModule } from '@angular/material/sort';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 
 
 @NgModule({
@@ -31,6 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatSortModule,
     MatInputModule,
     MatIconModule,
     NgbModule,

@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
 import { SummaryService } from './summary.service';
 
@@ -24,6 +25,8 @@ export class SummaryComponent implements OnInit {
   isMasterLoading: boolean = true;
   siteStatus:boolean=false;
   siteId = localStorage.getItem('siteId');
+  clientId=localStorage.getItem('clientId');
+  clientStatus:boolean=false;
 
   summarySelect = {
     assetTypes: [],
@@ -33,12 +36,13 @@ export class SummaryComponent implements OnInit {
   };
 
   constructor(
-    private summaryService: SummaryService, private siteService:SiteService
+    private summaryService: SummaryService, private siteService:SiteService, private clientService:ClientService
   ) {}
 
   ngOnInit(): void {
     this.getSiteStatus();
     this.getSummary();
+    this.getClientStatus();
   }
 
   getSiteStatus(){
@@ -48,6 +52,17 @@ export class SummaryComponent implements OnInit {
       },
       error:(err)=>{
         console.log("error occured in getSiteStatus", err);
+      }
+    })
+  }
+
+  getClientStatus(){
+    this.clientService.getClientById(this.clientId).subscribe({
+      next:(client:any)=>{
+        this.clientStatus = client[0].clientStatus;
+      },
+      error:(err)=>{
+        console.log("error occured in getclientStatus", err);
       }
     })
   }
