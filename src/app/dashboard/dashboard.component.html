@@ -76,11 +76,11 @@
           </div>
           <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span
-                class="text-bold text-lg">{{average}}</span></p>
+                class="text-bold text-lg">{{average | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
           <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years with Contigency <span
-                class="text-bold text-lg">{{averageC}}</span></p>
+                class="text-bold text-lg">{{averageC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
@@ -101,7 +101,7 @@
           </div>
           <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">upper Limit
-              <span class="text-bold text-lg">{{upperLimit}}</span>
+              <span class="text-bold text-lg">{{upperLimit | currency : "USD" : 'symbol' : '1.0-0'}}</span>
             </p>
           </div>
         </div>
@@ -124,7 +124,7 @@
           <div class="text-end pt-1">
             <p class="text-sm mb-0 text-capitalize">Lower Limit
               <span class="text-bold text-lg">
-                {{lowerLimit}}
+                {{lowerLimit | currency : "USD" : 'symbol' : '1.0-0'}}
               </span>
             </p>
           </div>
