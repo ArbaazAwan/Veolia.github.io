@@ -15,12 +15,12 @@ export class DashboardComponent implements OnInit {
   prices: any = [];
   pricesC: any = []; //prices with contigency
   clientId: any;
+  siteId:any;
   clientContractYears: any = 0;
   contigency: number = 0;
   averageYears!: number;
   averageC: number = 0;
   average: number = 0;
-
   yearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
@@ -43,27 +43,36 @@ export class DashboardComponent implements OnInit {
      ) { }
 
   ngOnInit(): void {
+    this.reloadCheck();
 
-    this.summaryService.getSummary().subscribe(
-      (summaries:any)=>{
+    this.getCalculationsBySummaries();
+  }
+
+  getCalculationsBySummaries(limit?:any){
+    this.yearsCostsViewTable = [];
+    this.totalAverageYearsCost = 0;
+    this.averagesOfYears = [];
+    this.totalYearsCosts = [];
+
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
+      (res:any)=>{
+        let summaries = res.summary
         summaries.forEach((summary:any) => {
-          let obj:Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId,summary);
+          let obj:Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId,summary, limit);
           obj.subscribe(
             (res:any)=>{
               this.averagesOfYears.push(Math.floor(res.averageCost));
               this.totalAverageYearsCost += Math.floor(res.averageCost);
               this.yearsCostsViewTable.push(res.yearsCosts);
               this.totalYearsCosts = res.totalYearsCosts;
+
+              this.getSummaryValues();
             }
           )
         });
 
       }
     )
-
-    this.onLimitChange();
-
-    this.reloadCheck();
   }
 
   getSummaryValues() {
@@ -87,6 +96,7 @@ export class DashboardComponent implements OnInit {
       localStorage.setItem('firstReload', 'true');
     }
     this.clientId = localStorage.getItem('clientId');
+    this.siteId = localStorage.getItem('siteId');
   }
 
 
@@ -126,9 +136,9 @@ export class DashboardComponent implements OnInit {
 
   onLimitChange() {
 
-    setTimeout(() => {
-      this.getSummaryValues();
-    }, 3000);
+  // this.summaryCalculationsService.setLimit(this.upperLimit, this.lowerLimit);
+
+  this.getCalculationsBySummaries({upperLimit:this.upperLimit, lowerLimit:this.lowerLimit});
 
   }
 

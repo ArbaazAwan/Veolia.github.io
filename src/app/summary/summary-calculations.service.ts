@@ -17,7 +17,10 @@ export class SummaryCalculationsService {
   private pricesYears = new BehaviorSubject(new Object({}));
   currentPricesYears = this.pricesYears.asObservable();
 
-  constructor(private masterService: MasterService, private summaryService: SummaryService) {}
+  private _limit = new BehaviorSubject(new Object({}));
+  limit$ = this._limit.asObservable();
+
+  constructor(private masterService: MasterService, private summaryService: SummaryService) { }
 
   setPricesYears(prices: any, pricesC: any, years: any) {
     this.pricesYears.next({
@@ -27,7 +30,11 @@ export class SummaryCalculationsService {
     });
   }
 
-  performCalculations(masterId: any, summary: any) {
+  setLimit(upperLimit: number, lowerLimit: number) {
+    this._limit.next({ upperLimit, lowerLimit });
+  }
+
+  performCalculations(masterId: any, summary: any, limit?: any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -111,9 +118,29 @@ export class SummaryCalculationsService {
               if (y % replacementCostYear === 0 || y == 1) {
                 yearsCosts[y] += Number(replacementCost);
               }
+
+              if (limit) {
+                if (limit.upperLimit && limit.lowerLimit) {
+                  console.log("upper", limit.upperLimit, "lower", limit.lowerLimit)
+                  if (yearsCosts[y] > limit.upperLimit || yearsCosts[y] < limit.lowerLimit) {
+                    yearsCosts[y] = 0;
+                  }
+                }
+                else if (limit.upperLimit) {
+                  if (yearsCosts[y] > limit.upperLimit) {
+                    yearsCosts[y] = 0
+                  }
+                }
+                else if (limit.lowerLimit) {
+                  if (yearsCosts[y] < limit.lowerLimit) {
+                    yearsCosts[y] = 0
+                  }
+                }
+              }
               //calculating totalYearsCosts
               this.totalYearsCosts[y] += yearsCosts[y];
             }
+
 
             //calculating averages
             let totalCost = 0;
@@ -124,7 +151,7 @@ export class SummaryCalculationsService {
             yearsCosts[0] = summary.unit;
 
             return {
-              totalYearsCosts : this.totalYearsCosts,
+              totalYearsCosts: this.totalYearsCosts,
               averageCost: averageCost,
               yearsCosts: yearsCosts,
             }
