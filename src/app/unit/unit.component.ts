@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MasterService } from '../master/master.service';
 import { ViewMasterTableComponent } from '../master/view-master-table/view-master-table.component';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-unit',
@@ -20,7 +21,7 @@ export class UnitComponent implements OnInit {
   asset: FormControl = new FormControl('');
   masterId: any = null;
 
-  constructor(private masterService: MasterService) {}
+  constructor(private masterService: MasterService, private userService: UserService) {}
 
   ngOnInit() {
     this.initForm();
@@ -57,22 +58,20 @@ export class UnitComponent implements OnInit {
   }
 
   getDisplayText(master: any) {
-    if (master) {
-      return (
-        master.oldAssetType +
-        ' - ' +
-        master?.newAssetType +
-        ', ' +
-        master?.masterStyle +
-        ', ' +
-        master?.masterSize
-      );
-    } else {
+    if (master.oldAssetType || master.newAssetType
+      || master.masterStyle || master.masterSize
+      || master.dutyApplication || master.quality) {
+      return master.oldAssetType + " - " + master?.newAssetType
+        + ", " + master?.masterStyle + ", " + master?.masterSize
+        + ", " + master?.dutyApplication + ", " + master?.quality
+    }
+    else {
       return '';
     }
   }
 
   processModel() {
     this.child.exportToExcel('detailsTable');
+    this.userService.openSnackBar('File export is completed', 'close');
   }
 }

@@ -59,7 +59,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
     this.selectedMaster = master;
     let unit = this.getDisplayText(master);
-
     let c = this.getForm().controls;
     c.unit.setValue(unit);
     c.assetType.setValue(master.oldAssetType ? master.oldAssetType : '' + ' - ' + master.newAssetType ? master.newAssetType : '')
@@ -99,9 +98,11 @@ export class CreateSummaryFormComponent implements OnInit {
 
   getDisplayText(master: any) {
     if (master.oldAssetType || master.newAssetType
-      || master.masterStyle || master.masterSize) {
+      || master.masterStyle || master.masterSize
+      || master.dutyApplication || master.quality) {
       return master.oldAssetType + " - " + master?.newAssetType
         + ", " + master?.masterStyle + ", " + master?.masterSize
+        + ", " + master?.dutyApplication + ", " + master?.quality
     }
     else {
       return '';
@@ -161,8 +162,9 @@ export class CreateSummaryFormComponent implements OnInit {
       } = this.form.getRawValue();
 
       this.summaryService.currentSummaryId.subscribe(
-        (summaryId: any) => {
-          if (summaryId) {
+        (summaryId:any)=>{
+          if(summaryId)
+          {
             const updateSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
@@ -182,14 +184,14 @@ export class CreateSummaryFormComponent implements OnInit {
 
             this.asset.setValue(unit)
 
-            this.summaryService.updateSummary(updateSummaryPayload, summaryId).subscribe(
-              (res: any) => {
-                console.log(res);
+            this.summaryService.updateSummary(updateSummaryPayload,summaryId).subscribe(
+              (res:any)=>{
                 window.location.reload();
               }
             )
           }
-          else {
+          else
+          {
             const createSummaryPayload = {
               siteId: this.siteId,
               masterId: this.masterId,
@@ -206,11 +208,11 @@ export class CreateSummaryFormComponent implements OnInit {
               installmentDate: installmentDate
             };
 
+
             this.summaryService.postSummary(createSummaryPayload).subscribe(
-              (res: any) => {
-                console.log(res);
-                window.location.reload();
-              }
+             (res:any)=>{
+              window.location.reload();
+             }
             );
           }
         }

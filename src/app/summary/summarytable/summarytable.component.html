@@ -7,52 +7,52 @@
         </div>
       </div>
       <!-- Summary table -->
-        <div class="card-body px-0">
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border" *ngIf="isLoading"></div>
-          </div>
-          <div class="flex-end px-3 col-md-3 pt-3">
-            <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
-              <mat-label>Search Assets</mat-label>
-              <input matInput type="text" [(ngModel)]="searchText" />
-              <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-          </div>
-          <div class="p-0 table-responsive " *ngIf="!isLoading">
-            <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0"  matSort
+      <div class="card-body px-0">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" *ngIf="isLoading"></div>
+        </div>
+        <div class="flex-end px-3 col-md-3 mt-3">
+          <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
+            <mat-label>Search Assets</mat-label>
+            <input matInput type="text" [(ngModel)]="searchText" />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
+          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0"  matSort
             (matSortChange)="sortRecords($event)">
-              <thead>
-                <tr>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3" *ngIf="siteStatus && clientStatus">
-                    &nbsp;Actions
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryId">
-                    ID
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unit">
-                    Unit
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="description">
-                    App Description
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="assetType">
-                    Asset Type
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="summaryStyle">
-                    Summary Style
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summarySize">
-                    Summary Size
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="dutyApplication">
-                    Duty Application
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quality">
-                    Quality
-                  </th>
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="quantity">
-                    Quantity
-                  </th>
+            <thead>
+              <tr>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3" *ngIf="siteStatus && clientStatus">
+                  &nbsp;Actions
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryId">
+                  ID
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unit">
+                  Unit
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="description">
+                  App Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="assetType">
+                  Asset Type
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="summaryStyle">
+                  Style
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summarySize">
+                  Size
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="dutyApplication">
+                  Duty/Application
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quality">
+                  Quality
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"  mat-sort-header="quantity">
+                  Quantity
+                </th>
 
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryload">
                     Load%
@@ -74,10 +74,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let summary of sortedSummary | searchFilter: searchText | paginate: { itemsPerPage: 50, currentPage: p }">
-
-                  <!-- <td class="pt-3">
-                    <mat-checkbox class=""></mat-checkbox>
-                  </td> -->
                   <td *ngIf="siteStatus && clientStatus">
                     <div class="d-flex mx-2">
                       <div class="d-flex flex-column">
@@ -85,7 +81,6 @@
                           <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle *ngIf="siteStatus && clientStatus">
                             Actions
                           </button>
-                          <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
                           <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
                             <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
                               (click)="editSummary(summary.summaryId)">
@@ -96,7 +91,6 @@
                               <i class="material-icons">delete</i>&nbsp; Delete
                             </button>
                           </div>
-                        </div>
                         </div>
                       </div>
                     </div>
@@ -158,76 +152,75 @@
                     </div>
                   </td>
 
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ summary.quantity }}</p>
-                      </div>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">{{ summary.quantity }}</p>
                     </div>
-                  </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">
-                          {{ summary.summaryload / 100 | percent }}
-                        </p>
-                      </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ summary.summaryload / 100 | percent }}
+                      </p>
                     </div>
-                  </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">
-                          {{ summary.life / 100 | percent }}
-                        </p>
-                      </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ summary.life / 100 | percent }}
+                      </p>
                     </div>
-                  </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">
-                          {{ summary.installmentDate | date: "mediumDate" }}
-                        </p>
-                      </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ summary.installmentDate | date: "mediumDate" }}
+                      </p>
                     </div>
-                  </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">
-                          {{ summary.dateCreated | date: "mediumDate" }}
-                        </p>
-                      </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm">
+                        {{ summary.dateCreated | date: "mediumDate" }}
+                      </p>
                     </div>
-                  </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm" *ngIf="summary.summaryStatus == true">
-                          Active
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm" *ngIf="summary.summaryStatus == true">
+                        Active
                       </p>
                       <p class="mb-0 text-sm" *ngIf="summary.summaryStatus == false">
                         Inactive
-                        </p>
-                      </div>
+                      </p>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
-          </div>
-          <div class="col-md-12 pagination-div">
-            <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
-          </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div class="col-md-12 pagination-div">
+          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-  <!-- asset detail table modal -->
-  <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table"
-    aria-hidden="true">
-    <app-summary-viewdetails-table *ngIf="summaryData.length!=0" [summaryArray]="summaryData"></app-summary-viewdetails-table>
-  </div>
+<!-- asset detail table modal -->
+<div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
+  <app-summary-viewdetails-table *ngIf="summaryData.length!=0"
+    [summaryArray]="summaryData"></app-summary-viewdetails-table>
+</div>

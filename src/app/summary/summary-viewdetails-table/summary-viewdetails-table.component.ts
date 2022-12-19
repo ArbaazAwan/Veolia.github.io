@@ -36,6 +36,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
+
   }
 
   getMaster(masterId: any, summary: any) {
@@ -54,7 +55,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.masterService
       .getCompleteMasterById(masterId)
       .subscribe((master: any) => {
-        let events = master.events;
+        let events = master?.events;
         let overhaul = master.overhaul;
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
@@ -86,7 +87,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
 
           eventsCosts.push(totalCostM + totalCostC);
-          // console.log("total cost for Event "+(i+1), totalCost + totalCostC);
         }
 
         if (overhaul) {
@@ -99,7 +99,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
         }
 
-        for (let i = 0; i < events.length; i++) {
+        for (let i = 0; i < events?.length; i++) {
           //adding occured events in a year to yearsArray
           // checking if life months equals to months so that we can start counting again
           let j = 0;
@@ -123,7 +123,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (m != 0) {
             if (m % overhaulLife == 0) {
               yearsCosts[Math.ceil(i / 12)] += overhaulCost;
-              // console.log('overhaul year cost', yearsCosts);
             }
           }
           i++;
@@ -135,7 +134,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         if (cycYear > 0) {
           for (let index = 0; index < cycYear; index++) {
-            yearsArray[index].events.forEach((eventIndex: any) => {
+            yearsArray[index]?.events?.forEach((eventIndex: any) => {
               yearsCosts[index] += eventsCosts[eventIndex];
             });
             if (index == cycYear - 1)
@@ -150,7 +149,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             yearsCosts[y] += eventsCosts[eventIndex];
           });
           if (y % replacementCostYear === 0) {
-            console.log(replacementCost);
             yearsCosts[y + cycYear] += Number(replacementCost);
           }
           //calculating totalYearsCosts

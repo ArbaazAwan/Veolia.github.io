@@ -258,7 +258,7 @@
                   <td *ngFor="let yearlyCost of prices let y = index">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i].at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>

@@ -42,9 +42,9 @@ export class SummarytableComponent implements OnInit {
     // this.getSummariesBySiteId(this.siteId);
     this.getClientStatus();
 
-    this.summaryService.getSummary().subscribe({
-      next:(summaries)=>{
-        this.summaryData = summaries;
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
+      next:(summaries:any)=>{
+        this.summaryData = summaries.summary;
         this.sortRecords({ active: 'summaryId', direction: 'desc'});
       },
       error:(err)=>{

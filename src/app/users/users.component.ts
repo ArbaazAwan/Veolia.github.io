@@ -142,7 +142,6 @@ export class UsersComponent implements OnInit {
       role: this.role,
       userStatus: true,
     };
-    console.log(userPayload);
     this.userService.postUser(userPayload).subscribe({
       next: (_: any) => {
         this.userService.openSnackBar(
@@ -153,8 +152,8 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => {
         this.error = err.message;
-        this.userService.openSnackBar(this.error, 'close');
-        this.getUsers();
+          this.userService.openSnackBar('Username & Email ID already exists or values not entered correctly', 'close');
+          this.getUsers();
       },
     });
     this.formReset();
