@@ -21,7 +21,7 @@ export class MasterService {
 
   setMasterId(masterId: any) {
     this.masterId.next(masterId);
-  }
+  } 
 
   getMasters() {
     return this.http.get(this.MASTER_URL);

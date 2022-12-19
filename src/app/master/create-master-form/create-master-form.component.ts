@@ -34,7 +34,7 @@ export class CreateMasterFormComponent implements OnInit {
       newAssetType: ['', Validators.required],
       masterSize: [''],
       oldDescription: [''],
-      newDescription: [''],
+      newDescription: [''], 
       dutyApplication: [''],
       quality: [''],
       unitMeasurement: [''],

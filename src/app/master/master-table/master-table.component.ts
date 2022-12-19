@@ -132,7 +132,7 @@ export class MasterTableComponent implements OnInit {
   }
 
   editMaster(masterId: any) {
-    this.masterService.setMasterId(masterId);
+    this.masterService.setMasterId(masterId); 
   }
 
   deleteMaster(id: any) {

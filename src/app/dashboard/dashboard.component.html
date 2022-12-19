@@ -14,7 +14,7 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer px-3 py-0">
-          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+          <mat-form-field class="text-xxs mb-0 w-100 mt-3" appearance="outline">
             <mat-label class="text-bold">Enter Contigency%</mat-label>
             <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
           </mat-form-field>
@@ -37,9 +37,9 @@
                 class="text-bold text-lg">{{maxYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
-        <hr class="dark horizontal my-0">
-        <div class="card-footer p-3">
-          <p class="mb-0 text-xs">Year <span class="text-danger font-weight-bolder"> {{maxYear}}</span></p>
+        <hr class="dark horizontal my-0 ">
+        <div class="card-footer p-3 ">
+          <p class="mb-0 text-xs mt-3 mb-2">Year <span class="text-danger font-weight-bolder "> {{maxYear}}</span></p>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
             <i class="material-icons opacity-10">trending_down</i>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg ">
                 {{minYearCost | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
           <div class="text-end pt-1">
@@ -61,31 +61,31 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0 text-xs">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
+          <p class="mb-0 text-xs  mt-3 mb-2">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
         </div>
       </div>
     </div>
   </div>
   <div class="row mb-6">
     <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-      <div class="card mb-4">
+      <div class="card">
         <div class="card-header p-3 pt-2">
           <div
             class="icon icon-md icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">show_chart</i>
           </div>
-          <div class="text-end pt-1">
+          <div class="text-end pt-1 pb-2">
             <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span
-                class="text-bold text-lg">{{average}}</span></p>
+                class="text-bold text-lg mb-0">{{average | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
-          <div class="text-end pt-1">
+          <div class="text-end">
             <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years with Contigency <span
-                class="text-bold text-lg">{{averageC}}</span></p>
+                class="text-bold text-lg">{{averageC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
-        <div class="card-footer px-3 py-0">
-          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+        <div class="card-footer  px-3 py-0">
+          <mat-form-field class="text-xxs mb-0  mt-3 w-100" appearance="outline">
             <mat-label class="text-bold">Enter Average Years</mat-label>
             <input [(ngModel)]='averageYears' matInput type="number" (change)="onAverageYearsChange()" />
           </mat-form-field>
@@ -94,21 +94,21 @@
     </div>
     <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
-        <div class="card-header p-3 pt-2">
+        <div class="card-header p-3 pt-3">
           <div
             class="icon icon-md icon-shape max-card shadow-success text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">keyboard_arrow_right</i>
           </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">upper Limit
-              <span class="text-bold text-lg">{{upperLimit}}</span>
+          <div class="text-end pt-1 pb-2">
+            <p class="text-sm mb-3 text-capitalize">upper Limit
+              <span class="text-bold text-lg mb-0">{{upperLimit | currency : "USD" : 'symbol' : '1.0-0'}}</span>
             </p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
-        <div class="card-footer p-3">
-          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
-            <mat-label class="text-bold">upper Limit</mat-label>
+        <div class="card-footer  px-3 py-0">
+          <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
+            <mat-label class="text-bold">Upper Limit</mat-label>
             <input matInput [(ngModel)]="upperLimit" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
@@ -116,22 +116,22 @@
     </div>
     <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
-        <div class="card-header p-3 pt-2">
+        <div class="card-header p-3 pt-3">
           <div
             class="icon icon-md icon-shape min-card shadow-success text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">keyboard_arrow_left</i>
           </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Lower Limit
-              <span class="text-bold text-lg">
-                {{lowerLimit}}
+          <div class="text-end pt-1 pb-2">
+            <p class="text-sm mb-3 text-capitalize">Lower Limit
+              <span class="text-bold text-lg mb-0">
+                {{lowerLimit | currency : "USD" : 'symbol' : '1.0-0'}}
               </span>
             </p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
-        <div class="card-footer p-3">
-          <mat-form-field class="text-xxs mb-0 w-100" appearance="outline">
+        <div class="card-footer  px-3 py-0">
+          <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Lower Limit</mat-label>
             <input matInput [(ngModel)]="lowerLimit" type="number" (change)="onLimitChange()" />
           </mat-form-field>

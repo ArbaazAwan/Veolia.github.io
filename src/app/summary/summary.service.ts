@@ -18,7 +18,7 @@ export class SummaryService {
   private summaryId = new BehaviorSubject(null);
   currentSummaryId = this.summaryId.asObservable();
 
-  setSummaryId(id:any){
+  setSummaryId(id:any){ 
     this.summaryId.next(id);
   }
 
