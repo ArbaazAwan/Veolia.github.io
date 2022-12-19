@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -8,19 +8,15 @@ import { environment } from 'src/environments/environment';
 export class ClientService {
   CLIENT_URL: string = environment.baseUrl + 'client/';
 
-  headers = new HttpHeaders({});
-  postHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-  });
 
   constructor(private http: HttpClient) {}
 
   getClients() {
-    return this.http.get(this.CLIENT_URL, { headers: this.headers });
+    return this.http.get(this.CLIENT_URL);
   }
 
   getClientById(id: string|any) {
-    return this.http.get(this.CLIENT_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.CLIENT_URL + id);
   }
 
   postClient(client: any) {
@@ -29,8 +25,7 @@ export class ClientService {
       {
         clientName: client.clientName,
         contractYears: client.contractYears,
-      },
-      { headers: this.postHeaders }
+      }
     );
   }
 
@@ -41,14 +36,13 @@ export class ClientService {
         clientName: data.clientName,
         clientStatus: data.clientStatus,
         contractYears: data.contractYears,
-      },
-      { headers: this.postHeaders }
+      }
     );
   }
 
   deleteClient(id: any) {
     this.http
-      .delete(this.CLIENT_URL + id, { headers: this.postHeaders })
+      .delete(this.CLIENT_URL + id)
       .subscribe((res) => {
         console.log(res);
       });
