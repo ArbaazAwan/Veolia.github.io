@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { SiteService } from 'src/app/sites/site.service';
@@ -19,6 +19,9 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
+  @Output() summaryEmitter:any = new EventEmitter();
+  @Input() isLoading: boolean = false;
+  
   selectedAssets: any[] = [];
   searchText: string = '';
   siteId:any = localStorage.getItem("siteId");
@@ -28,9 +31,6 @@ export class SummarytableComponent implements OnInit {
   clientStatus:boolean=false;
   sortedSummary: any[] = [];
   summary: any[] = [];
-
-
-  @Input() isLoading: boolean = false;
   summaryData: any = [];
 
   selection = new SelectionModel(true,[]);
@@ -45,6 +45,7 @@ export class SummarytableComponent implements OnInit {
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
       next:(summaries:any)=>{
         this.summaryData = summaries.summary;
+        this.summaryEmitter.emit(this.summaryData);
         this.sortRecords({ active: 'summaryId', direction: 'desc'});
       },
       error:(err)=>{
@@ -151,7 +152,7 @@ export class SummarytableComponent implements OnInit {
     }
 
   editSummary(id: any) {
-    this.summaryService.setSummaryId(id); 
+    this.summaryService.setSummaryId(id);
   }
 }
 

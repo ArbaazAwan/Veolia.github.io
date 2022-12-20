@@ -15,6 +15,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   assetTableHeaders: string[] = [];
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
+  sortedYearsCostsViewTable: any[] = [];
   averagesOfYears: any = [];
   totalYearsCosts: any = [];
   totalAverageYearsCost: number = 0;
@@ -26,7 +27,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     private masterService: MasterService,
     private clientService: ClientService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     for (let i = 1; i <= 50; i++) {
@@ -153,13 +154,43 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
+
         summaryData[0] = summary.unit;
-        summaryData[1] = summary.life;
-        summaryData[2] = summary.installmentDate;
-        summaryData[3] = yearsCosts;
+        summaryData[1] = summary.summaryId;
+        summaryData[2] = summary.dateCreated;
+        summaryData[3] = summary.installmentDate;
+        summaryData[4] = summary.life;
+        summaryData[5] = yearsCosts;
 
         this.yearsCostsViewTable.push(summaryData);
+
+        //sort if all the values are received
+        if(this.summaryArray.length == this.yearsCostsViewTable.length){
+          this.sortAssets({ active: 'summaryId', direction: 'desc' })
+        }
       });
+  }
+
+  sortAssets(sort: any) {
+    const data = this.yearsCostsViewTable.slice();
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+
+    this.sortedYearsCostsViewTable = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'summaryId':
+          return this.compare(a.at(1), b.at(1), isAsc);
+        case 'unit':
+          return this.compare(a.at(0), b.at(0), isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+  compare(a: number | string, b: number | string, isAsc: boolean): any {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   getContractYears() {

@@ -1,14 +1,7 @@
-import { query } from '@angular/animations';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
-import { SummaryService } from './summary.service';
 
 @Component({
   selector: 'app-summary',
@@ -16,7 +9,7 @@ import { SummaryService } from './summary.service';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  
+
   form!: FormGroup;
   isLoading: boolean = false;
   summaryData: any[] = [];
@@ -28,20 +21,10 @@ export class SummaryComponent implements OnInit {
   clientId=localStorage.getItem('clientId');
   clientStatus:boolean=false;
 
-  summarySelect = {
-    assetTypes: [],
-    sizes: [],
-    discription: [],
-    qualities: [],
-  };
-
-  constructor(
-    private summaryService: SummaryService, private siteService:SiteService, private clientService:ClientService
-  ) {}
+  constructor(private siteService:SiteService, private clientService:ClientService) {}
 
   ngOnInit(): void {
     this.getSiteStatus();
-    this.getSummary();
     this.getClientStatus();
   }
 
@@ -66,13 +49,8 @@ export class SummaryComponent implements OnInit {
       }
     })
   }
-
-  getSummary() {
-    this.isLoading = true;
-    this.summaryService.getSummary().subscribe((res: any) => {
-      this.summaryData = res;
-      this.isLoading = false;
-    });
+  getSummary(summaries:any){
+    this.summaryData = summaries;
   }
 
 }

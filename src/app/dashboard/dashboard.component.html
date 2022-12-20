@@ -14,9 +14,9 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer px-3 py-0">
-          <mat-form-field class="text-xxs mb-0 w-100 mt-3" appearance="outline">
+          <mat-form-field class="text-xs mb-0 w-100 mt-3" appearance="outline">
             <mat-label class="text-bold">Enter Contigency%</mat-label>
-            <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+            <input [(ngModel)]='contigency' min="0" max="100" oninput="validity.valid||(value='');" matInput type="number" id="1" (change)="onContigencyChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -28,7 +28,7 @@
             class="icon icon-md icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">show_chart</i>
           </div>
-          <div class="text-end pt-1 pb-2">
+          <div class="text-end  pb-2">
             <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span
                 class="text-bold text-lg mb-0">{{average | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
@@ -39,9 +39,9 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer  px-3 py-0">
-          <mat-form-field class="text-xxs mb-0  mt-3 w-100" appearance="outline">
-            <mat-label class="text-bold">Enter Average Years</mat-label>
-            <input [(ngModel)]='averageYears' matInput type="number" (change)="onAverageYearsChange()" />
+          <mat-form-field class="text-xs mb-0  mt-3 w-100" appearance="outline">
+            <mat-label class="text-bold" >Enter Average Years</mat-label>
+            <input [(ngModel)]='averageYears' min="1" max="50" oninput="validity.valid||(value='');"  matInput type="number" (change)="onAverageYearsChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -61,9 +61,9 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer  px-3 py-0">
-          <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
+          <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Upper Limit</mat-label>
-            <input matInput [(ngModel)]="upperLimit" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="upperLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -85,9 +85,9 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer  px-3 py-0">
-          <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
+          <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Lower Limit</mat-label>
-            <input matInput [(ngModel)]="lowerLimit" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="lowerLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -113,7 +113,7 @@
         </div>
         <hr class="dark horizontal my-0 ">
         <div class="card-footer p-3 ">
-          <p class="mb-0 text-xs mt-3 mb-2">Year <span class="text-danger font-weight-bolder "> {{maxYear}}</span></p>
+          <p class="mb-0 text-sm mt-3 mb-2">Year <span class="text-danger font-weight-bolder "> {{maxYear}}</span></p>
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer p-3">
-          <p class="mb-0 text-xs  mt-3 mb-2">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
+          <p class="mb-0 text-sm  mt-3 mb-2">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
         </div>
       </div>
     </div>
@@ -144,7 +144,7 @@
     <div class="col-md-12">
       <div class="card z-index-2">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-primary shadow-success border-radius-lg py-5 pe-1">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg py-5 pe-1">
             <app-price-year-line-chart></app-price-year-line-chart>
           </div>
         </div>
