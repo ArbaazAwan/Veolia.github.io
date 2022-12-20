@@ -38,7 +38,7 @@ export class CreateSummaryFormComponent implements OnInit {
         this.onEditSummary(summaryId);
       }
     });
-    this.getMastersBySiteId(this.siteId);
+    this.getMastersBySiteId(this.siteId); 
 
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);

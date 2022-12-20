@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
@@ -12,6 +12,7 @@ import { MasterService } from '../master.service';
 export class CreateMasterFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private masterService: MasterService) {}
 
+  @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
@@ -127,10 +128,31 @@ export class CreateMasterFormComponent implements OnInit {
     this.form = this.initialForm();
   }
 
-  onSubmit() {
-    this.postformMaster();
-    this.resetForm();
+  private validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsDirty({ onlySelf: true });
+      } else if (control instanceof FormGroup)
+        this.validateAllFormFields(control);
+    });
   }
+
+  onSubmit() {
+    if(this.form.valid){
+      this.postformMaster();
+      // this.resetForm();
+      this.modalClose.nativeElement.click();
+    }
+   
+    else{
+      this.validateAllFormFields(this.form);
+    
+    }
+    
+      
+    
+  } 
 
   postformMaster() {
     let f = this.form.getRawValue();
