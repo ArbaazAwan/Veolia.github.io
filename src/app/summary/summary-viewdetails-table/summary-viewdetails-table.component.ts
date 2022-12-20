@@ -57,14 +57,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.masterService
       .getCompleteMasterById(masterId)
       .subscribe((master: any) => {
-        let events = master?.events;
+        let events = master.events;
         let overhaul = master.overhaul;
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
         let overhaulLife = Number(master.master.overhaulLife);
 
         let lifePerc = summary.life / 100;
-        let replacementCostYear = Math.floor(Number(lifeMonths) / 12);
+        let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
 
         let currentYear = Number(new Date().getFullYear());
         let installationYear = Number(
@@ -102,43 +102,36 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
         }
 
-        for (let i = 0; i < events?.length; i++) {
+        console.log(lifeMonths / 12);
+
+        for (let i = 0; i < events.length; i++) {
           //adding occured events in a year to yearsArray
-          // checking if life months equals to months so that we can start counting again
-          let j = 0;
-          for (let m = 0; m < 600; m++) {
-            if (m % Number(events[i].evOccurence) === 0) {
-              yearsArray[Math.ceil(j / 12)]?.events?.push(i);
-            }
-            if (m == lifeMonths) m = 0;
-            j++;
-            //  checking if years becomes 50
-            if (j == 600) {
-              break;
+          for (let year = 1; year <= 50; year++) {
+            // if (Math.ceil(lifeMonths / 12) == year) year = 0;
+            if (year % (Number(events[i].evOccurence) / 12) === 0) {
+              yearsArray[year]?.events?.push(i);
             }
           }
         }
-        let i = 0;
-        for (let m = 0; m < 600; m++) {
-          //adding overhaul cost to the year
-          // checking if life months equals to months so that we can start counting again
-          if (m == lifeMonths) m = 0;
-          if (m != 0) {
-            if (m % overhaulLife == 0) {
-              yearsCosts[Math.ceil(i / 12)] += overhaulCost;
-            }
-          }
-          i++;
-          //  checking if years becomes 50
-          if (i == 600) {
-            break;
-          }
-        }
+        // let i = 0;
+        // for (let m = 0; m < 600; m++) {
+        //   //adding overhaul cost to the year
+        //   // checking if life months equals to months so that we can start counting again
+        //   if (m == lifeMonths) m = 0;
+        //   if (m % overhaulLife == 0) {
+        //     yearsCosts[Math.ceil(i / 12)] += overhaulCost;
+        //   }
+
+        //   i++;
+        //   //  checking if years becomes 50
+        //   if (i == 600) {
+        //     break;
+        //   }
+        // }
 
         let x = 1;
-        for (let y = startYear; y <= 50; y++) {
-          console.log('lifeMonths', Math.floor(lifeMonths / 12));
-
+        for (let y = startYear; y < 50; y++) {
+          if (Math.ceil(lifeMonths / 12) == y) y = 0;
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
             yearsCosts[x] += eventsCosts[eventIndex];
@@ -146,11 +139,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (y % replacementCostYear === 0) {
             yearsCosts[x] += Number(replacementCost);
           }
+          if (y % (overhaulLife / 12) == 0) {
+            yearsCosts[x] += overhaulCost;
+          }
           //calculating totalYearsCosts
           this.totalYearsCosts[x] += yearsCosts[x];
-          if (Math.ceil(lifeMonths / 12) == y) y = 0;
+
           x++;
-          if (x == 51) {
+          if (x == 50) {
             break;
           }
         }
