@@ -6,3 +6,10 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 30px;
   height: 30px;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

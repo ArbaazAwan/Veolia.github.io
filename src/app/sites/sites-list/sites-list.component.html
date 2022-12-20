@@ -4,7 +4,7 @@
   <div class="spinner-border" *ngIf="isLoading"></div>
 </div>
 <div class="row" *ngIf="!isLoading">
-  <div class="col-md-4" *ngFor="let site of sitesList">
+  <div class="col-md-4 mt-3" *ngFor="let site of sitesList">
     <div class="card" style="width: auto; height: auto;">
       <div class="card-header bg-gradient-primary pb-0 px-3">
         <h6 class="mb-4 text-white text-bold font-weight-bold text-lg">{{site.siteName}}</h6>
