@@ -102,14 +102,15 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           });
         }
 
-        console.log(lifeMonths / 12);
-
         for (let i = 0; i < events.length; i++) {
           //adding occured events in a year to yearsArray
-          for (let year = 1; year <= 50; year++) {
+          for (let year = 0; year <= 50; year++) {
             // if (Math.ceil(lifeMonths / 12) == year) year = 0;
             if (year % (Number(events[i].evOccurence) / 12) === 0) {
               yearsArray[year]?.events?.push(i);
+            }
+            if (year == 50) {
+              break;
             }
           }
         }
@@ -118,7 +119,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         //   //adding overhaul cost to the year
         //   // checking if life months equals to months so that we can start counting again
         //   if (m == lifeMonths) m = 0;
-        //   if (m % overhaulLife == 0) {
+        //   if (m % overhaulLife == 0 && m != 0) {
         //     yearsCosts[Math.ceil(i / 12)] += overhaulCost;
         //   }
 
@@ -128,10 +129,17 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         //     break;
         //   }
         // }
-
+        console.log('start year', startYear);
         let x = 1;
-        for (let y = startYear; y < 50; y++) {
-          if (Math.ceil(lifeMonths / 12) == y) y = 0;
+        var startIndex = 0;
+        if (startYear == 0) {
+          startIndex = 1;
+        } else {
+          startIndex = startYear;
+        }
+        console.log('startIndex', startIndex);
+        console.log('cycYear', cycYear);
+        for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
             yearsCosts[x] += eventsCosts[eventIndex];
@@ -144,9 +152,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[x] += yearsCosts[x];
-
+          if (y == cycYear + 1) y = 1;
           x++;
-          if (x == 50) {
+          if (x == 51) {
             break;
           }
         }
