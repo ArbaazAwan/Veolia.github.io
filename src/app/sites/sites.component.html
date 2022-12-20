@@ -6,6 +6,9 @@
     </button>
   </div>
 
+  <div class="d-flex justify-content-center mt-10" *ngIf="isLoading">
+    <div class="spinner-border" ></div>
+  </div>
   <app-sites-table *ngIf="sites.length>0" [sites]="sites" [isLoading]="isLoading"
     (deleteSiteEvent)="onDeleteSite($event)" (editSiteEvent)="onEditSite($event)"></app-sites-table>
 

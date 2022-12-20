@@ -6,6 +6,9 @@
     </button>
   </div>
 <!-- user table -->
+<div class="d-flex justify-content-center mt-10" *ngIf="isLoading">
+  <div class="spinner-border" ></div>
+</div>
   <div class="mt-6">
     <app-userstable [isLoading]="isLoading" *ngIf="users.length>0" [users]="users" [searchText]="searchText"
       (deleteUserEvent)="onDeleteUser($event)" (editUserEvent)="onEditUser($event)"
