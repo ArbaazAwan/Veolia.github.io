@@ -10,9 +10,9 @@
     <div class="spinner-border" ></div>
   </div>
   <app-sites-table *ngIf="sites.length>0" [sites]="sites" [isLoading]="isLoading"
-    (deleteSiteEvent)="onDeleteSite($event)" (editSiteEvent)="onEditSite($event)"></app-sites-table>
+    (deleteSiteEvent)="onDeleteSite($event)" (editSiteEvent)="onEditSite($event)">
+  </app-sites-table>
 
-  <!-- <app-site-form></app-site-form> -->
 </div>
 
 <!-- Edit Form -->
@@ -66,13 +66,12 @@
                     <mat-option [value]='true' >Active</mat-option>
                     <mat-option [value]='false' >Inactive</mat-option>
                   </mat-select>
-
                 </mat-form-field>
 
               </div>
               <div class="text-center mt-4">
                 <button type="submit" (click)="onUpdateSite()" type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-primary m-2" [disabled]="isEditFormLoading">
+                  class="btn bg-gradient-primary m-2" [disabled]="isEditFormLoading || form.invalid">
                   Update
                 </button>
                 <button type="button" (click)="resetForm()" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
@@ -137,7 +136,8 @@
                 </mat-form-field>
               </div>
               <div class="text-center mt-4">
-                <button type="submit" (click)="onSubmit()" type="button" data-bs-dismiss="modal"
+                <button type="submit" (click)="onSubmit()" [disabled]="form.invalid"
+                 type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-primary m-2">
                   Create
                 </button>

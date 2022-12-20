@@ -15,7 +15,11 @@ export class SitesComponent implements OnInit {
   @Input() title: string = 'Sites';
 
   sitesArray: any[] = [];
-  form!: FormGroup;
+  form: FormGroup = this.fb.group({
+    siteName: ['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    selectedClient: ['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    siteStatus: null
+  });
   isLoading: boolean = false;
   sites: any[] = [];
   error: any = {};
@@ -37,7 +41,7 @@ export class SitesComponent implements OnInit {
     private siteService: SiteService,
     private userService: UserService,
     private clientService: ClientService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (
@@ -49,10 +53,6 @@ export class SitesComponent implements OnInit {
     } else {
       localStorage.setItem('firstReload', 'true');
     }
-    this.form = this.fb.group({
-      siteName: ['', Validators.required],
-      selectedClient: ['', Validators.required],
-    });
 
     this.getSites();
     this.selectedClient = localStorage.getItem('clientId');
@@ -65,7 +65,6 @@ export class SitesComponent implements OnInit {
       this.isLoading = false;
     });
   }
-  onsiteSelect(selectedsite: any) {}
 
   resetForm() {
     this.form.reset();
@@ -98,11 +97,10 @@ export class SitesComponent implements OnInit {
       const [_site] = el;
 
       this.currentSite = _site;
-      this.form = this.fb.group({
-        selectedClient: [_site.selectedClient],
-        siteName: [_site.siteName, Validators.required],
-        siteStatus: [_site.siteStatus, Validators.required],
-      });
+      let c =  this.form.controls;
+      c['siteName'].setValue(_site.siteName);
+      c['siteStatus'].setValue(_site.siteStatus);
+      // c['selectedClient'].setValue(_site.selectedClient);
 
       this.isEditFormLoading = false;
     });
