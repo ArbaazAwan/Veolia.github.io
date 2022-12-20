@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { SiteService } from 'src/app/sites/site.service';
@@ -28,6 +28,7 @@ export class SummarytableComponent implements OnInit {
   clientStatus:boolean=false;
   sortedSummary: any[] = [];
   summary: any[] = [];
+  summaryEmitter:any = new EventEmitter();
 
 
   @Input() isLoading: boolean = false;
@@ -151,7 +152,7 @@ export class SummarytableComponent implements OnInit {
     }
 
   editSummary(id: any) {
-    this.summaryService.setSummaryId(id); 
+    this.summaryService.setSummaryId(id);
   }
 }
 

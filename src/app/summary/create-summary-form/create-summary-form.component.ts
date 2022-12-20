@@ -22,7 +22,7 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getForm();
   }
   @ViewChild('modalClose') modalClose: ElementRef;
-  form!: FormGroup; 
+  form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
   isLoading: boolean = false;
@@ -31,7 +31,8 @@ export class CreateSummaryFormComponent implements OnInit {
   siteId: any = localStorage.getItem('siteId');
   asset: FormControl = new FormControl(['', Validators.required]);
   masterId: any;
-  
+  lifeLoader:boolean = false;
+
 
   ngOnInit(): void {
     this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
@@ -88,6 +89,7 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onInstallmentChange(installmentDate: Date) {
+    this.lifeLoader = true;
     let currentYear = Number(new Date().getFullYear());
     let installationYear = Number(installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
@@ -96,12 +98,14 @@ export class CreateSummaryFormComponent implements OnInit {
       totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
       let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
       this.form.get('life')?.setValue(lifePerc);
+      this.lifeLoader = false;
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
         totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
         let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
         this.form.get('life')?.setValue(lifePerc);
+        this.lifeLoader = false;
       });
     }
   }

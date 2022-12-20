@@ -14,13 +14,6 @@ export class UserService {
   CREATE_USER_URL: string = environment.baseUrl + 'signup/';
   users: any[] = [];
 
-  headers = new HttpHeaders({});
-  postHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': "'*'",
-    // "Access-Control-Allow-Headers": "'*'"
-  });
-
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
   private userId = new BehaviorSubject(null);
   currentUserId = this.userId.asObservable();
@@ -30,46 +23,35 @@ export class UserService {
   }
 
   getUsers() {
-    return this.http.get(this.USER_URL, { headers: this.headers });
+    return this.http.get(this.USER_URL);
   }
 
   getUserById(id: string) {
-    return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.USER_URL + id);
   }
   getUserByClientId(id: string) {
-    return this.http.get(this.USER_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.USER_URL + id);
   }
   getClientsByUserId(body: any) {
     return this.http.post(
       this.CLIENTS_BY_USER_ID_URL,
-      { userId: body },
-      { headers: this.postHeaders }
+      { userId: body }
     );
   }
   assignClientsByUserId(body: any) {
-    return this.http.post(this.ASSIGN_CLIENTS_URL, body, {
-      headers: this.postHeaders,
-    });
+    return this.http.post(this.ASSIGN_CLIENTS_URL, body);
   }
   getUserByEmail(email: any) {
-    return this.http.get(this.USER_URL + 'email/' + email, {
-      headers: this.headers,
-    });
+    return this.http.get(this.USER_URL + 'email/' + email);
   }
   postUser(user: any) {
-    return this.http.post(this.CREATE_USER_URL, user, {
-      headers: this.postHeaders,
-    });
+    return this.http.post(this.CREATE_USER_URL, user);
   }
   updateUser(id: any, data: any) {
-    return this.http.put(this.USER_URL + id, data, {
-      headers: this.postHeaders,
-    });
+    return this.http.put(this.USER_URL + id, data);
   }
   changeUserPassword(data: any) {
-    return this.http.put(this.USER_URL + 'password', data, {
-      headers: this.postHeaders,
-    });
+    return this.http.put(this.USER_URL + 'password', data);
   }
   deleteUser(id: any, username: string) {
     this.http

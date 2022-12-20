@@ -14,13 +14,6 @@ export class MasterService {
   OVERHAUL_URL: string = this.BASE_URL + 'overhaul/master/';
   masters: any[] = [];
 
-  headers = new HttpHeaders({});
-  postHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': "'*'",
-    'Access-Control-Allow-Headers': "'*'",
-  });
-
   private masterId = new BehaviorSubject(null);
   currentMasterId = this.masterId.asObservable();
 
@@ -31,51 +24,41 @@ export class MasterService {
   } 
 
   getMasters() {
-    return this.http.get(this.MASTER_URL, { headers: this.headers });
+    return this.http.get(this.MASTER_URL);
   }
 
   getMastersBySiteId(id: any) {
-    return this.http.get(this.BASE_URL + 'master-site-id/' + id, {
-      headers: this.headers,
-    });
+    return this.http.get(this.BASE_URL + 'master-site-id/' + id);
   }
 
   getCompleteMasterById(id: any) {
-    return this.http.get(this.BASE_URL + 'get-complete-master/' + id, {
-      headers: this.headers,
-    });
+    return this.http.get(this.BASE_URL + 'get-complete-master/' + id);
   }
 
   getMasterById(id: string) {
-    return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.MASTER_URL + id);
   }
   getViewMasterById(id: string) {
-    return this.http.get(this.MASTER_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.MASTER_URL + id);
   }
 
   getEventsByMasterId(id: string) {
-    return this.http.get(this.EVENTS_URL + id, { headers: this.headers });
+    return this.http.get(this.EVENTS_URL + id);
   }
   getOverhaulByMasterId(id: string) {
-    return this.http.get(this.OVERHAUL_URL + id, { headers: this.headers });
+    return this.http.get(this.OVERHAUL_URL + id);
   }
 
   postMaster(master: any) {
-    return this.http.post(this.MASTER_URL, master, {
-      headers: this.postHeaders,
-    });
+    return this.http.post(this.MASTER_URL, master);
   }
 
   postCompleteMaster(data: any) {
-    return this.http.post(this.BASE_URL + 'complete-master', data, {
-      headers: this.postHeaders,
-    });
+    return this.http.post(this.BASE_URL + 'complete-master', data);
   }
 
   updateMaster(id: any) {
-    return this.http.put(this.MASTER_URL + id, {
-      headers: this.postHeaders,
-    });
+    return this.http.put(this.MASTER_URL + id, {});
   }
 
   deleteMaster(id: any) {
@@ -91,8 +74,6 @@ export class MasterService {
   }
 
   updateAssetId(data: any) {
-    return this.http.put(this.BASE_URL + 'updateAssetId', data, {
-      headers: this.postHeaders,
-    });
+    return this.http.put(this.BASE_URL + 'updateAssetId', data);
   }
 }

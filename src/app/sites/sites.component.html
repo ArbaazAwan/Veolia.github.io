@@ -41,7 +41,7 @@
 
             <form [formGroup]="form" *ngIf="!isEditFormLoading">
               <div class="row">
-                
+
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
                   <input formControlName="siteName" matInput type="text" [ngClass]="
@@ -68,7 +68,7 @@
                   </mat-select>
 
                 </mat-form-field>
-                
+
               </div>
               <div class="text-center mt-4">
                 <button type="submit" (click)="onUpdateSite()" type="button" data-bs-dismiss="modal"
@@ -109,7 +109,7 @@
             <form [formGroup]="form">
               <div class="row">
 
-                <mat-form-field>
+                <mat-form-field class="text-xs my-1" appearance="outline">
                   <mat-label>Select Clients</mat-label>
                   <mat-select formControlName="selectedClient">
                     <mat-option *ngFor="let client of clients" [value]="client.clientId">

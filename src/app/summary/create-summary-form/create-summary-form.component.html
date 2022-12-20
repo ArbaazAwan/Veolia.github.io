@@ -205,6 +205,11 @@
 
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Life %</mat-label>
+                  <mat-label *ngIf="lifeLoader" class="float-end mx-2">
+                    <div class="select-placeholder-container">
+                      <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                    </div>
+                  </mat-label>
                   <input formControlName="life" matInput type="number" [ngClass]="
                         (form.controls['life'].dirty ||
                           form.controls['life'].touched) &&

@@ -23,8 +23,9 @@ import { SitesComponent } from './sites/sites.component';
 import { MainComponent } from './main/main.component';
 import { MainModule } from './main/main.module';
 import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
-import { IsAdminGuard } from './auth/is-admin.guard';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AddHeaderInterceptor } from './interceptor/add-header.interceptor';
 
 @NgModule({
   declarations: [AppComponent, Error404Component],
@@ -62,7 +63,10 @@ import { BnNgIdleService } from 'bn-ng-idle';
     NgbModule,
   ],
 
-  providers: [BnNgIdleService],
+  providers: [
+    BnNgIdleService,
+    { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi:true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

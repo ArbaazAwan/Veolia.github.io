@@ -1,11 +1,5 @@
-import { query } from '@angular/animations';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
 import { SummaryService } from './summary.service';
@@ -16,7 +10,7 @@ import { SummaryService } from './summary.service';
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent implements OnInit {
-  
+
   form!: FormGroup;
   isLoading: boolean = false;
   summaryData: any[] = [];
@@ -41,7 +35,6 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSiteStatus();
-    this.getSummary();
     this.getClientStatus();
   }
 
@@ -65,14 +58,6 @@ export class SummaryComponent implements OnInit {
         console.log("error occured in getclientStatus", err);
       }
     })
-  }
-
-  getSummary() {
-    this.isLoading = true;
-    this.summaryService.getSummary().subscribe((res: any) => {
-      this.summaryData = res;
-      this.isLoading = false;
-    });
   }
 
 }

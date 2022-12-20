@@ -1,10 +1,10 @@
 <div class="container-fluid py-4">
   <div class="row mb-4">
-    <div class="col-xl-4 col-sm-6 mb-xl-0">
+    <div class="col-xl-3 col-sm-6 mb-xl-0">
       <div class="card">
         <div class="card-header p-3 pt-2">
           <div
-            class="icon icon-md   icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+            class="icon icon-md icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">add</i>
           </div>
           <div class="text-end pt-1 pb-2">
@@ -21,53 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header p-3 pt-2">
-          <div
-            class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-            <i class="material-icons opacity-10">trending_up</i>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost | currency : "USD" : 'symbol' : '1.0-0'}}</span>
-            </p>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contigency <span
-                class="text-bold text-lg">{{maxYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
-          </div>
-        </div>
-        <hr class="dark horizontal my-0 ">
-        <div class="card-footer p-3 ">
-          <p class="mb-0 text-xs mt-3 mb-2">Year <span class="text-danger font-weight-bolder "> {{maxYear}}</span></p>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header p-3 pt-2">
-          <div
-            class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-            <i class="material-icons opacity-10">trending_down</i>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg ">
-                {{minYearCost | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
-          </div>
-          <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contigency<span class="text-bold text-lg">
-                {{minYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
-          </div>
-        </div>
-        <hr class="dark horizontal my-0">
-        <div class="card-footer p-3">
-          <p class="mb-0 text-xs  mt-3 mb-2">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-6">
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-2">
           <div
@@ -92,11 +46,11 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-3">
           <div
-            class="icon icon-md icon-shape max-card shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            class="icon icon-md icon-shape max-card shadow-danger text-center border-radius-xl mt-n4 position-absolute">
             <i class="material-icons opacity-10">keyboard_arrow_right</i>
           </div>
           <div class="text-end pt-1 pb-2">
@@ -114,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-header p-3 pt-3">
           <div
@@ -139,11 +93,58 @@
       </div>
     </div>
   </div>
+  <div class="row mb-6">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_up</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost <span class="text-bold text-lg">{{maxYearCost |
+                currency : "USD" : 'symbol' : '1.0-0'}}</span>
+            </p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contigency <span
+                class="text-bold text-lg">{{maxYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0 ">
+        <div class="card-footer p-3 ">
+          <p class="mb-0 text-xs mt-3 mb-2">Year <span class="text-danger font-weight-bolder "> {{maxYear}}</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-header p-3 pt-2">
+          <div
+            class="icon icon-md icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+            <i class="material-icons opacity-10">trending_down</i>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost <span class="text-bold text-lg ">
+                {{minYearCost | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
+          </div>
+          <div class="text-end pt-1">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contigency<span class="text-bold text-lg">
+                {{minYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
+          </div>
+        </div>
+        <hr class="dark horizontal my-0">
+        <div class="card-footer p-3">
+          <p class="mb-0 text-xs  mt-3 mb-2">Year <span class="text-success font-weight-bolder"> {{minYear}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-12">
       <div class="card z-index-2">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-          <div class="bg-gradient-primary shadow-success border-radius-lg py-5 pe-1">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg py-5 pe-1">
             <app-price-year-line-chart></app-price-year-line-chart>
           </div>
         </div>
@@ -177,11 +178,10 @@
               </button>
             </div>
           </div>
-
           <div class="p-0 table-responsive custom-table">
             <table class="table table-blocked table-hover mb-0" id="dashboard-details-table">
               <thead>
-                <tr>
+                <tr class="bg-light">
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
                     Unit or Equipment Functional Description
                   </th>
@@ -194,7 +194,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr class="bg-light">
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
@@ -205,19 +205,19 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
                   <td *ngFor="let price of prices let y = index">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ prices.at(y) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm text-bold">{{ prices.at(y) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
                 </tr>
-                <tr>
+                <tr class="bg-light">
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
@@ -228,37 +228,38 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{totalAverageYearsCostC | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm text-bold">{{totalAverageYearsCostC | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
                   <td *ngFor="let priceC of pricesC let y = index">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ pricesC.at(y) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm text-bold">{{ pricesC.at(y) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
                 </tr>
                 <tr *ngFor="let summary of yearsCostsViewTable let i = index;">
-                  <td>
+                  <td class="bg-light">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-bold text-xs font-weight-bolder">{{yearsCostsViewTable[i]?.at(0)}}</p>
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td class="bg-light">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{averagesOfYears[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm text-bold">{{averagesOfYears[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
                   <td *ngFor="let yearlyCost of prices let y = index">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                        <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(y+1) | currency : "USD" : 'symbol' :
+                          '1.0-0'}}</p>
                       </div>
                     </div>
                   </td>
