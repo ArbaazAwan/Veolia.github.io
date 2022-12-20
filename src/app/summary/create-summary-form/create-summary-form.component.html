@@ -15,7 +15,10 @@
           <p class="mb-0">Enter Equipment Details</p>
         </div>
         <div class="card-body">
-          <form [formGroup]="form">
+          <div class="d-flex justify-content-center" *ngIf="isLoading">
+            <div class="spinner-border"></div>
+          </div>
+          <form [formGroup]="form" *ngIf="!isLoading">
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field appearance="outline" style="font-size: 88%">

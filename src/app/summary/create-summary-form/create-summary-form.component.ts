@@ -25,6 +25,7 @@ export class CreateSummaryFormComponent implements OnInit {
   form!: FormGroup; 
   filteredMasters: any = [];
   masters: any = [];
+  isLoading: boolean = false;
   selectedMaster: any;
   submitted: boolean = false;
   siteId: any = localStorage.getItem('siteId');
@@ -227,6 +228,7 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onEditSummary(id: any) {
+    this.isLoading=true;
     this.summaryService.getSummaryById(id).subscribe((el: any) => {
       let summary = el[0];
       const {
@@ -257,6 +259,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.life.setValue(life);
       c.installmentDate.setValue(installmentDate);
       c.masterId.setValue(masterId);
+      this.isLoading=false;
     });
   }
 

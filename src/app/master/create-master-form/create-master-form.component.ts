@@ -17,7 +17,7 @@ export class CreateMasterFormComponent implements OnInit {
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
-  masterId: any;
+  masterId: any; 
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
