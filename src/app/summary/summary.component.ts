@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ClientService } from '../clients/client.service';
 import { SiteService } from '../sites/site.service';
-import { SummaryService } from './summary.service';
 
 @Component({
   selector: 'app-summary',
@@ -21,13 +20,6 @@ export class SummaryComponent implements OnInit {
   siteId = localStorage.getItem('siteId');
   clientId=localStorage.getItem('clientId');
   clientStatus:boolean=false;
-
-  summarySelect = {
-    assetTypes: [],
-    sizes: [],
-    discription: [],
-    qualities: [],
-  };
 
   constructor(private siteService:SiteService, private clientService:ClientService) {}
 

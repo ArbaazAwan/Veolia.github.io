@@ -31,12 +31,17 @@
                   <label class="text-bold mt-2 Data-Wrap">Unit or Equipment Functional Description</label>
                 </th>
                 <th class="px-2">
-                  <label class="text-bold mt-2">Life %</label>
+                  <label class="text-bold mt-2">Summary ID</label>
+                </th>
+                <th class="px-2">
+                  <label class="text-bold mt-2">Date Created</label>
                 </th>
                 <th class="px-2">
                   <label class="text-bold mt-2">Installation Date</label>
                 </th>
-
+                <th class="px-2">
+                  <label class="text-bold mt-2">Life %</label>
+                </th>
                 <th class="px-2">
                   <label class="text-bold mt-2">Average Year</label>
                 </th>
@@ -53,6 +58,8 @@
                 </td>
                 <td>-</td>
                 <td>-</td>
+                <td>-</td>
+                <td>-</td>
                 <td>
                   <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
@@ -65,12 +72,17 @@
                   <label class="text-bold ">{{yearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
                 <td><p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(1)}}</p></td>
+
                 <td><p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(2)| date:'mediumDate'}}</p></td>
+                <td><p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(3)| date:'mediumDate'}}</p></td>
+                <td>
+                  <p class="mb-0 text-sm">{{yearsCostsViewTable[i]?.at(4)}}%</p>
+                </td>
                 <td>
                   <p class="mb-0 text-sm">{{averagesOfYears[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
-                <td *ngFor="let yearlyCost of yearsCostsViewTable[i]?.at(3) let y = index">
-                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(3).at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
+                <td *ngFor="let yearlyCost of yearsCostsViewTable[i]?.at(5) let y = index">
+                  <p class="mb-0 text-sm">{{ yearsCostsViewTable[i]?.at(5).at(y+1) | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                 </td>
               </tr>
             </tbody>

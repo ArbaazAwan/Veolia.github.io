@@ -163,10 +163,13 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.averagesOfYears.push(Math.floor(averageCost));
 
         this.totalAverageYearsCost += Math.floor(averageCost);
+
         summaryData[0] = summary.unit;
-        summaryData[1] = summary.life;
-        summaryData[2] = summary.installmentDate;
-        summaryData[3] = yearsCosts;
+        summaryData[1] = summary.summaryId;
+        summaryData[2] = summary.dateCreated;
+        summaryData[3] = summary.installmentDate;
+        summaryData[4] = summary.life;
+        summaryData[5] = yearsCosts;
 
         this.yearsCostsViewTable.push(summaryData);
       });
