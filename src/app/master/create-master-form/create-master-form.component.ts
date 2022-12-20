@@ -17,7 +17,7 @@ export class CreateMasterFormComponent implements OnInit {
   form: FormGroup = this.initialForm();
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
-  masterId: any; 
+  masterId: any;
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
@@ -32,10 +32,10 @@ export class CreateMasterFormComponent implements OnInit {
       masterId: [{ value: '', disabled: true }],
       oldAssetType: ['', Validators.required],
       masterStyle: [''],
-      newAssetType: ['', Validators.required],
+      newAssetType: [''],
       masterSize: [''],
       oldDescription: [''],
-      newDescription: [''], 
+      newDescription: [''],
       dutyApplication: [''],
       quality: [''],
       unitMeasurement: [''],
@@ -144,15 +144,15 @@ export class CreateMasterFormComponent implements OnInit {
       // this.resetForm();
       this.modalClose.nativeElement.click();
     }
-   
+
     else{
       this.validateAllFormFields(this.form);
-    
+
     }
-    
-      
-    
-  } 
+
+
+
+  }
 
   postformMaster() {
     let f = this.form.getRawValue();

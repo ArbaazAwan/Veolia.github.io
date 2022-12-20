@@ -1,6 +1,6 @@
 <div class="container-fluid py-1">
   <div class="float-start">
-    <button type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
+    <button (click)="onCreate()" type="button" class="btn bg-gradient-primary mx-2 mb-4 text-right" data-bs-toggle="modal"
       data-bs-target="#modal-form">
       Add Client
     </button>
@@ -15,7 +15,7 @@
 </div>
 
 <!-- Edit form -->
-<div class="modal fade" id="edit-modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
@@ -26,16 +26,16 @@
               Client
               <span class="text-right float-end">
                 <button type="button" data-bs-dismiss="modal"
-                  class="btn btn-link text-dark p-0 fixed-plugin-close-button" (click)="onClearForm()">
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button" (click)="resetForm()">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
             </h5>
-            <p class="mb-0">Update Client Details</p>
+            <p class="mb-0">Enter Client Details</p>
           </div>
           <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <div class="spinner-border" *ngIf="isEditFormLoading"></div>
+            <div class="d-flex justify-content-center" *ngIf="isEditFormLoading">
+              <div class="spinner-border"></div>
             </div>
 
             <form [formGroup]="form" *ngIf="!isEditFormLoading">
@@ -76,7 +76,7 @@
                   </small>
                 </mat-form-field>
 
-                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                <mat-form-field *ngIf="isEditForm" class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Status</mat-label>
 
                   <mat-select formControlName="clientStatus" [(value)]="clientStatus" placeholder="Mode">
@@ -89,10 +89,10 @@
               </div>
               <div class="text-center mt-4">
                 <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2"
-                  (click)="onUpdateClient()" [disabled]="isEditFormLoading">
-                  Update
+                  (click)="onSubmit()" [disabled]="isEditFormLoading || form.invalid">
+                  Submit
                 </button>
-                <button (click)="onClearForm()" type="button" data-bs-dismiss="modal"
+                <button (click)="resetForm()" type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
@@ -106,7 +106,7 @@
 </div>
 
 <!-- clients form here -->
-<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+<!-- <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -115,7 +115,7 @@
             <h5 class="">
               Client
               <span class="text-right float-end">
-                <button type="button" (click)="onClearForm()" data-bs-dismiss="modal"
+                <button type="button" (click)="resetForm()" data-bs-dismiss="modal"
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
@@ -167,7 +167,7 @@
                   class="btn bg-gradient-primary m-2">
                   Create
                 </button>
-                <button (click)="onClearForm()" type="button" data-bs-dismiss="modal"
+                <button (click)="resetForm()" type="button" data-bs-dismiss="modal"
                   class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
@@ -178,4 +178,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
