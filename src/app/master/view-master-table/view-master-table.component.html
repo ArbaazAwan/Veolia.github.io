@@ -10,7 +10,7 @@
             </p>
           </div>
         </div>
-        <div class="d-flex justify-content-center" *ngIf="isLoading">
+        <div class="d-flex justify-content-center my-6" *ngIf="isLoading">
           <div class="spinner-border"></div>
         </div>
         <div class="card-body px-0 pb-2" *ngIf="!isLoading">
@@ -161,7 +161,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ ovM.ohCost }}</span>
+                        <span class="mb-0 text-sm">{{ ovM.ohCost | currency : "USD" : 'symbol' : '1.0-0'}}</span>
                       </div>
                     </div>
                   </div>
@@ -181,7 +181,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ ovL.ohHour }}</span>
+                        <span class="mb-0 text-sm">{{ ovL.ohHour | currency : "USD" : 'symbol' : '1.0-0'}}</span>
                       </div>
                     </div>
                   </div>
@@ -201,7 +201,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ ovC.ohHour }}</span>
+                        <span class="mb-0 text-sm">{{ ovC.ohHour | currency : "USD" : 'symbol' : '1.0-0'}}</span>
                       </div>
                     </div>
                   </div>
@@ -210,7 +210,7 @@
               </mat-tab>
 
               <!-- events tabs -->
-              <mat-tab *ngFor="let event of events; let i = index" label="Event {{ i + 1 }}">
+              <mat-tab *ngFor="let event of events; let i = index" label="Event {{ i + 1  }}">
 
                 <!-- Event basic data -->
                 <div class="container-fluid">
@@ -245,7 +245,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ evM.evCost }}</span>
+                        <span class="mb-0 text-sm">{{ evM.evCost | currency : "USD" : 'symbol' : '1.0-0'}}</span>
                       </div>
                     </div>
                   </div>
@@ -265,7 +265,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ evL.evHour }}</span>
+                        <span class="mb-0 text-sm">{{ evL.evHour | currency : "USD" : 'symbol' : '1.0-0' }}</span>
                       </div>
                     </div>
                   </div>
@@ -285,7 +285,7 @@
                       </div>
                       <div>
                         <label for="cost" class="form-label text-bold">Cost: &nbsp;</label>
-                        <span class="mb-0 text-sm">{{ evC.evCost }}</span>
+                        <span class="mb-0 text-sm">{{ evC.evCost | currency : "USD" : 'symbol' : '1.0-0' }}</span>
                       </div>
                     </div>
                   </div>
@@ -323,7 +323,7 @@
                       <p class="mb-0 text-sm">{{ovMaterialsCost | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evMaterialsCost[i]}}</p>
+                      <p class="mb-0 text-sm">{{evMaterialsCost[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
 
@@ -335,7 +335,7 @@
                       <p class="mb-0 text-sm">{{ovContractorsHours | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evContractorsCost[i]}}</p>
+                      <p class="mb-0 text-sm">{{evContractorsCost[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
 
@@ -347,7 +347,7 @@
                       <p class="mb-0 text-sm">{{ovLaborUnskilled | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborUnskilled[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborUnskilled[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -358,7 +358,7 @@
                       <p class="mb-0 text-sm">{{ovLaborBasicSkilled | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborBasicSkilled[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborBasicSkilled[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -369,7 +369,7 @@
                       <p class="mb-0 text-sm">{{ovLaborTechnical | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborTechnical[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborTechnical[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -380,7 +380,7 @@
                       <p class="mb-0 text-sm">{{ovLaborSpecialized | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborSpecialized[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborSpecialized[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -391,7 +391,7 @@
                       <p class="mb-0 text-sm">{{ovLaborCertified | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborCertified[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborCertified[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                   <tr>
@@ -402,7 +402,7 @@
                       <p class="mb-0 text-sm">{{ovLaborSupervisory | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                     <td *ngFor="let event of events let i = index">
-                      <p class="mb-0 text-sm">{{evLaborSupervisory[i]}}</p>
+                      <p class="mb-0 text-sm">{{evLaborSupervisory[i] | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                     </td>
                   </tr>
                 </tbody>

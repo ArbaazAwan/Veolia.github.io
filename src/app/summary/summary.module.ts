@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatDatepickerModule,
     MatNativeDateModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
     NgxPaginationModule
   ],
 })

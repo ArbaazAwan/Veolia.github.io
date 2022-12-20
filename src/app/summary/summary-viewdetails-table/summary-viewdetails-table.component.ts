@@ -130,8 +130,13 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         // }
 
         let x = 1;
+<<<<<<< HEAD
         for (let y = startYear; y < 50; y++) {
           if (Math.ceil(lifeMonths / 12) == y) y = 0;
+=======
+        for (let y = startYear; y <= 50; y++) {
+
+>>>>>>> 5c091e048019bdf8f11168fe286d574e55e7bf73
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
             yearsCosts[x] += eventsCosts[eventIndex];

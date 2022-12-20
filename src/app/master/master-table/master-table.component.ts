@@ -75,6 +75,8 @@ export class MasterTableComponent implements OnInit {
       switch (sort.active) {
         case 'masterId':
           return this.compare(a.masterId, b.masterId, isAsc);
+          case 'unitDescription':
+          return this.compare(a.unitDescription, b.unitDescription, isAsc);
         case 'oldAssetType':
           return this.compare(a.oldAssetType, b.oldAssetType, isAsc);
         case 'newAssetType':
@@ -132,7 +134,7 @@ export class MasterTableComponent implements OnInit {
   }
 
   editMaster(masterId: any) {
-    this.masterService.setMasterId(masterId);
+    this.masterService.setMasterId(masterId); 
   }
 
   deleteMaster(id: any) {
