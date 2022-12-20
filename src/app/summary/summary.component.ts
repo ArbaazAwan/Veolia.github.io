@@ -29,9 +29,7 @@ export class SummaryComponent implements OnInit {
     qualities: [],
   };
 
-  constructor(
-    private summaryService: SummaryService, private siteService:SiteService, private clientService:ClientService
-  ) {}
+  constructor(private siteService:SiteService, private clientService:ClientService) {}
 
   ngOnInit(): void {
     this.getSiteStatus();
@@ -58,6 +56,9 @@ export class SummaryComponent implements OnInit {
         console.log("error occured in getclientStatus", err);
       }
     })
+  }
+  getSummary(summaries:any){
+    this.summaryData = summaries;
   }
 
 }
