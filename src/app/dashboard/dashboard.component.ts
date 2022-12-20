@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.reloadCheck();
 
-    this.getCalculationsBySummaries();
+    this.onLimitChange();
   }
 
   getCalculationsBySummaries(limit?:any){

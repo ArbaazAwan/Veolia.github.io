@@ -10,9 +10,9 @@
       </div>
       <div class="card-body px-0">
         <div class="d-flex justify-content-center">
-          <div class="spinner-border" *ngIf="isLoading"></div>
+          <div class="spinner-border mt-6" *ngIf="isLoading"></div>
         </div>
-        <div class="flex-end px-3 col-md-3 mt-4">
+        <div class="flex-end px-3 col-md-3 mt-4" *ngIf="!isLoading">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Assets</mat-label>
             <input matInput type="text" [(ngModel)]="assetSearchText">
@@ -83,7 +83,7 @@
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
                         <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle
-                          [disabled]="! siteStatus">
+                          >
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg"
@@ -209,7 +209,7 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm">
-                        {{ master.overhaulLife/100 | percent }}
+                        {{ master.overhaulLife }}
                       </p>
                     </div>
                   </div>

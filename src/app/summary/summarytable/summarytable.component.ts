@@ -151,7 +151,7 @@ export class SummarytableComponent implements OnInit {
     }
 
   editSummary(id: any) {
-    this.summaryService.setSummaryId(id);
+    this.summaryService.setSummaryId(id); 
   }
 }
 

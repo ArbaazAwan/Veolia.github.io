@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { MasterService } from '../master/master.service';
-import { SummaryService } from './summary.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class SummaryCalculationsService {
   private _limit = new BehaviorSubject(new Object({}));
   limit$ = this._limit.asObservable();
 
-  constructor(private masterService: MasterService, private summaryService: SummaryService) { }
+  constructor(private masterService: MasterService) { }
 
   setPricesYears(prices: any, pricesC: any, years: any) {
     this.pricesYears.next({

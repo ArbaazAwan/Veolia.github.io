@@ -25,11 +25,14 @@ export class CreateSummaryFormComponent implements OnInit {
   form!: FormGroup;
   filteredMasters: any = [];
   masters: any = [];
+  isLoading: boolean = false;
   selectedMaster: any;
   submitted: boolean = false;
   siteId: any = localStorage.getItem('siteId');
   asset: FormControl = new FormControl(['', Validators.required]);
   masterId: any;
+  lifeLoader:boolean = false;
+
 
   ngOnInit(): void {
     this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
@@ -37,7 +40,7 @@ export class CreateSummaryFormComponent implements OnInit {
         this.onEditSummary(summaryId);
       }
     });
-    this.getMastersBySiteId(this.siteId);
+    this.getMastersBySiteId(this.siteId); 
 
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
@@ -82,10 +85,11 @@ export class CreateSummaryFormComponent implements OnInit {
     c.quantity.setValue(null);
     c.load.setValue(null);
     c.life.setValue(null);
-    this.masterId = master.masterId;
+    c.masterId.setValue(master.masterId);
   }
 
   onInstallmentChange(installmentDate: Date) {
+    this.lifeLoader = true;
     let currentYear = Number(new Date().getFullYear());
     let installationYear = Number(installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
@@ -94,12 +98,14 @@ export class CreateSummaryFormComponent implements OnInit {
       totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
       let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
       this.form.get('life')?.setValue(lifePerc);
+      this.lifeLoader = false;
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
         totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
         let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
         this.form.get('life')?.setValue(lifePerc);
+        this.lifeLoader = false;
       });
     }
   }
@@ -128,6 +134,7 @@ export class CreateSummaryFormComponent implements OnInit {
   getForm() {
     return (this.form = this.fb.group({
       unit: '',
+      masterId: [{ value: '', disabled: true }],
       assetType: '',
       size: '',
       summaryStyle: '',
@@ -157,6 +164,7 @@ export class CreateSummaryFormComponent implements OnInit {
         unit,
         assetType,
         size,
+        masterId,
         description,
         dutyApplication,
         quality,
@@ -171,7 +179,7 @@ export class CreateSummaryFormComponent implements OnInit {
         if (summaryId) {
           const updateSummaryPayload = {
             siteId: this.siteId,
-            masterId: this.masterId,
+            masterId: masterId,
             unit: unit,
             assetType: assetType,
             summarySize: size,
@@ -196,7 +204,7 @@ export class CreateSummaryFormComponent implements OnInit {
         } else {
           const createSummaryPayload = {
             siteId: this.siteId,
-            masterId: this.masterId,
+            masterId: masterId,
             unit: unit,
             assetType: assetType,
             summarySize: size,
@@ -224,6 +232,7 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onEditSummary(id: any) {
+    this.isLoading=true;
     this.summaryService.getSummaryById(id).subscribe((el: any) => {
       let summary = el[0];
       const {
@@ -253,7 +262,8 @@ export class CreateSummaryFormComponent implements OnInit {
       c.load.setValue(summaryload);
       c.life.setValue(life);
       c.installmentDate.setValue(installmentDate);
-      this.masterId = masterId;
+      c.masterId.setValue(masterId);
+      this.isLoading=false;
     });
   }
 

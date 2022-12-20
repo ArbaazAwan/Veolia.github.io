@@ -7,7 +7,7 @@
             <h5 class="">
               Master Form
               <span class="text-right float-end">
-                <button (click)="resetForm()" data-bs-dismiss="modal"
+                <button (click)="resetForm()" data-bs-dismiss="modal" #modalClose
                   class="btn btn-link text-dark p-0 fixed-plugin-close-button mt-0">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
@@ -40,7 +40,7 @@
                   ">
                     AssetType is required
                   </small>
-                </mat-form-field>
+                </mat-form-field> 
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Master Id</mat-label>
@@ -409,7 +409,7 @@
 
             </div>
             <div class="text-center mb-4">
-              <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2">
+              <button type="submit"  class="btn bg-gradient-primary m-2">
                 Create
               </button>
               <button (click)="resetForm()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">

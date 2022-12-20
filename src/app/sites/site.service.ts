@@ -7,34 +7,16 @@ import { environment } from 'src/environments/environment';
 })
 export class SiteService {
   sites: any[] = [];
-  SITE_URL: string = environment.baseUrl + 'site/';  
-
-  headers = new HttpHeaders({});
-  postHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': '*',
-  });
+  SITE_URL: string = environment.baseUrl + 'site/';
 
   constructor(private http: HttpClient) {}
 
-  //  getSiteStatus(siteId:any)
-  // {
-   
-  //    let status =  this.getSiteById(siteId).subscribe(
-  //     (res:any)=>{
-  //       return  res[0].siteStatus;
-  //     }
-  //    );
-  //    return status;
-  // }
-
   getSites() {
-    return this.http.get(this.SITE_URL, { headers: this.headers });
+    return this.http.get(this.SITE_URL);
   }
 
   getSiteById(id: any) {
-    return this.http.get(this.SITE_URL + id, { headers: this.postHeaders });
+    return this.http.get(this.SITE_URL + id);
   }
 
   getSiteByClientId(id: string|any) {
@@ -49,9 +31,6 @@ export class SiteService {
       {
         clientId: selectedClientId,
         siteName: siteName,
-      },
-      {
-        headers: this.postHeaders
       }
     );
   }
@@ -63,8 +42,7 @@ export class SiteService {
       {
         siteName: data.siteName,
         siteStatus: data.siteStatus
-      },
-      { headers: this.postHeaders }
+      }
     );
   }
 
