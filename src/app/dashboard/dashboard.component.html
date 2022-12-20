@@ -16,7 +16,7 @@
         <div class="card-footer px-3 py-0">
           <mat-form-field class="text-xxs mb-0 w-100 mt-3" appearance="outline">
             <mat-label class="text-bold">Enter Contigency%</mat-label>
-            <input [(ngModel)]='contigency' matInput type="number" (change)="onContigencyChange()" />
+            <input [(ngModel)]='contigency' min="0" max="100" oninput="validity.valid||(value='');" matInput type="number" id="1" (change)="onContigencyChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -40,8 +40,8 @@
         <hr class="dark horizontal my-0">
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xxs mb-0  mt-3 w-100" appearance="outline">
-            <mat-label class="text-bold">Enter Average Years</mat-label>
-            <input [(ngModel)]='averageYears' matInput type="number" (change)="onAverageYearsChange()" />
+            <mat-label class="text-bold" >Enter Average Years</mat-label>
+            <input [(ngModel)]='averageYears' min="1" max="50" oninput="validity.valid||(value='');"  matInput type="number" (change)="onAverageYearsChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -63,7 +63,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Upper Limit</mat-label>
-            <input matInput [(ngModel)]="upperLimit" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="upperLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -87,7 +87,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xxs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Lower Limit</mat-label>
-            <input matInput [(ngModel)]="lowerLimit" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="lowerLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
