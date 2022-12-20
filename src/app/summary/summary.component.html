@@ -1,26 +1,17 @@
-<div class="container-fluid py-1">
-  <div class="float-start">
-    <button type="button" class="btn bg-gradient-primary mx-2 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form" *ngIf="siteStatus && clientStatus">
-      Create Record
-    </button>
-  </div>
+<button type="button" class="btn bg-gradient-primary text-right mx-4" data-bs-toggle="modal"
+  data-bs-target="#modal-form" *ngIf="siteStatus && clientStatus">
+  Create Record
+</button>
 
-  <div class="float-end">
-    <button type="button" class="btn bg-gradient-primary text-right mx-2" data-bs-toggle="modal"
-      [disabled]="summaryData.length == 0"
-      data-bs-target="#detail-table">
-      View More Info
-    </button>
-  </div>
+<button type="button" class="btn bg-gradient-primary text-right float-end mx-4" data-bs-toggle="modal"
+  [disabled]="summaryData.length <= 0" data-bs-target="#detail-table">
+  View More Info
+</button>
 
-  <div class="mt-6">
-    <app-summarytable [isLoading]="isLoading"></app-summarytable>
-  </div>
+<div class="container-fluid py-4">
+  <app-summarytable [isLoading]="isLoading"></app-summarytable>
 </div>
-
 
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
   <app-create-summary-form></app-create-summary-form>
 </div>
-
