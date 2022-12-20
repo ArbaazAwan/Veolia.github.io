@@ -147,6 +147,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onAverageYearsChange() {
+    
     this.averageC = 0;
     this.average = 0;
     let vc = 0;
