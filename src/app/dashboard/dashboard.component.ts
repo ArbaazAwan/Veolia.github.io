@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   prices: any = [];
   pricesC: any = []; //prices with contigency
   clientId: any;
-  siteId:any;
+  siteId: any;
   clientContractYears: any = 0;
   contigency: number = 0;
   averageYears!: number;
@@ -35,12 +35,13 @@ export class DashboardComponent implements OnInit {
   minYear: string = '';
   upperLimit: number;
   lowerLimit: number;
+  isLoading:boolean = false;
 
 
   constructor(private clientService: ClientService,
-     private summaryCalculationsService: SummaryCalculationsService,
-     private summaryService:SummaryService
-     ) { }
+    private summaryCalculationsService: SummaryCalculationsService,
+    private summaryService: SummaryService
+  ) { }
 
   ngOnInit(): void {
     this.reloadCheck();
@@ -48,31 +49,36 @@ export class DashboardComponent implements OnInit {
     this.onLimitChange();
   }
 
-  getCalculationsBySummaries(limit?:any){
+  getCalculationsBySummaries(limit?: any) {
+    this.isLoading = true;
     this.yearsCostsViewTable = [];
     this.totalAverageYearsCost = 0;
     this.averagesOfYears = [];
     this.totalYearsCosts = [];
 
+
+
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
-      (res:any)=>{
+      (res: any) => {
         let summaries = res.summary
-        summaries.forEach((summary:any) => {
-          let obj:Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId,summary, limit);
+        summaries.forEach((summary: any) => {
+          let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, limit);
           obj.subscribe(
-            (res:any)=>{
+            (res: any) => {
               this.averagesOfYears.push(Math.floor(res.averageCost));
               this.totalAverageYearsCost += Math.floor(res.averageCost);
               this.yearsCostsViewTable.push(res.yearsCosts);
               this.totalYearsCosts = res.totalYearsCosts;
 
               this.getSummaryValues();
+              this.isLoading = false;
             }
           )
         });
-
       }
     )
+
+
   }
 
   getSummaryValues() {
@@ -83,6 +89,7 @@ export class DashboardComponent implements OnInit {
       this.onAverageYearsChange();
       this.onContigencyChange(); //for first the time values
     });
+
   }
 
   reloadCheck() {
@@ -136,9 +143,7 @@ export class DashboardComponent implements OnInit {
 
   onLimitChange() {
 
-  // this.summaryCalculationsService.setLimit(this.upperLimit, this.lowerLimit);
-
-  this.getCalculationsBySummaries({upperLimit:this.upperLimit, lowerLimit:this.lowerLimit});
+    this.getCalculationsBySummaries({ upperLimit: this.upperLimit, lowerLimit: this.lowerLimit });
 
   }
 
@@ -147,7 +152,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onAverageYearsChange() {
-    
+
     this.averageC = 0;
     this.average = 0;
     let vc = 0;

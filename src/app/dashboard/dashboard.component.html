@@ -63,7 +63,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Upper Limit</mat-label>
-            <input matInput [(ngModel)]="upperLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="upperLimit" [disabled]="isLoading" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -87,7 +87,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Lower Limit</mat-label>
-            <input matInput [(ngModel)]="lowerLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="lowerLimit" [disabled]="isLoading" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>

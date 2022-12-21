@@ -100,9 +100,14 @@ export class SitesComponent implements OnInit {
       let c =  this.form.controls;
       c['siteName'].setValue(_site.siteName);
       c['siteStatus'].setValue(_site.siteStatus);
-      // c['selectedClient'].setValue(_site.selectedClient);
+      this.clientService.getClientById(_site.clientId).subscribe(
+        (res:any)=>{
+          c['selectedClient'].setValue(res[0].clientName);
+          c['selectedClient'].disable();
+          this.isEditFormLoading = false;
+        }
+      )
 
-      this.isEditFormLoading = false;
     });
   }
 
@@ -118,6 +123,7 @@ export class SitesComponent implements OnInit {
               'close'
             );
             this.getSites();
+            this.resetForm();
           },
           error: (err) => {
             this.error = err.message;
@@ -139,6 +145,7 @@ export class SitesComponent implements OnInit {
   }
 
   populateClients() {
+    this.form.controls['selectedClient'].enable();
     this.clientService.getClients().subscribe((res: any) => {
       this.clients = res;
     });
