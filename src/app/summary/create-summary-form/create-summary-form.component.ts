@@ -29,7 +29,7 @@ export class CreateSummaryFormComponent implements OnInit {
   selectedMaster: any;
   submitted: boolean = false;
   siteId: any = localStorage.getItem('siteId');
-  asset: FormControl = new FormControl(['', Validators.required]);
+  asset: FormControl = new FormControl(['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]]);
   masterId: any;
   lifeLoader:boolean = false;
 
@@ -143,8 +143,8 @@ export class CreateSummaryFormComponent implements OnInit {
       quality: '',
       quantity: null,
       load: null,
-      life: [null, Validators.required],
-      installmentDate: [null, Validators.required],
+      life: [null, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+      installmentDate: [null, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
     }));
   }
 
