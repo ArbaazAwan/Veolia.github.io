@@ -68,6 +68,8 @@ export class SitesComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    this.form.controls['selectedClient'].enable();
+
   }
 
   onSubmit() {
@@ -97,12 +99,19 @@ export class SitesComponent implements OnInit {
       const [_site] = el;
 
       this.currentSite = _site;
-      let c =  this.form.controls;
-      c['siteName'].setValue(_site.siteName);
-      c['siteStatus'].setValue(_site.siteStatus);
-      // c['selectedClient'].setValue(_site.selectedClient);
+      console.log('site',_site)
 
-      this.isEditFormLoading = false;
+      this.clientService.getClientById(_site.clientId).subscribe(
+        (res:any)=>{
+          console.log("client res", res)
+          let c =  this.form.controls;
+          c['siteName'].setValue(_site.siteName);
+          c['siteStatus'].setValue(_site.siteStatus);
+          c['selectedClient'].setValue(res[0].clientName)
+          c['selectedClient'].disable();
+          this.isEditFormLoading = false;
+        }
+      )
     });
   }
 

@@ -42,6 +42,11 @@
             <form [formGroup]="form" *ngIf="!isEditFormLoading">
               <div class="row">
 
+                <mat-form-field class="text-xs my-1" appearance="outline">
+                  <mat-label>Client Name</mat-label>
+                  <input formControlName="selectedClient" type="text" matInput >
+                </mat-form-field>
+
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
                   <input formControlName="siteName" matInput type="text" [ngClass]="
