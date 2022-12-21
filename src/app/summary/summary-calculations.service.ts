@@ -34,7 +34,7 @@ export class SummaryCalculationsService {
     this._limit.next({ upperLimit, lowerLimit });
   }
 
-  performCalculations(masterId: any, summary: any, limit?: any) {
+  performCalculations(masterId: any, summary: any,clientContractYears:any, limit?: any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -165,10 +165,11 @@ export class SummaryCalculationsService {
 
             //calculating averages
             let totalCost = 0;
-            yearsCosts.forEach((cost: any) => {
-              totalCost += cost;
-            });
-            let averageCost = totalCost / 50;
+
+            for(let i = 0; i< Number(clientContractYears); i++){
+              totalCost += yearsCosts[i+1];
+            }
+            let averageCost = totalCost / Number(clientContractYears);
             yearsCosts[0] = summary.unit;
 
             return {

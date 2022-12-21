@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   prices: any = [];
   pricesC: any = []; //prices with contigency
   clientId: any;
-  siteId:any;
+  siteId: any;
   clientContractYears: any = 0;
   contigency: number = 0;
   averageYears!: number;
@@ -38,9 +38,9 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(private clientService: ClientService,
-     private summaryCalculationsService: SummaryCalculationsService,
-     private summaryService:SummaryService
-     ) { }
+    private summaryCalculationsService: SummaryCalculationsService,
+    private summaryService: SummaryService
+  ) { }
 
   ngOnInit(): void {
     this.reloadCheck();
@@ -48,41 +48,43 @@ export class DashboardComponent implements OnInit {
     this.onLimitChange();
   }
 
-  getCalculationsBySummaries(limit?:any){
+  getCalculationsBySummaries(limit?: any) {
     this.yearsCostsViewTable = [];
     this.totalAverageYearsCost = 0;
     this.averagesOfYears = [];
     this.totalYearsCosts = [];
 
-    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
-      (res:any)=>{
-        let summaries = res.summary
-        summaries.forEach((summary:any) => {
-          let obj:Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId,summary, limit);
-          obj.subscribe(
-            (res:any)=>{
-              this.averagesOfYears.push(Math.floor(res.averageCost));
-              this.totalAverageYearsCost += Math.floor(res.averageCost);
-              this.yearsCostsViewTable.push(res.yearsCosts);
-              this.totalYearsCosts = res.totalYearsCosts;
+     //getting clients contract years
+     this.clientService.getClientById(this.clientId).subscribe((client: any) => {
+      this.clientContractYears = client[0]?.contractYears;
 
-              this.getSummaryValues();
-            }
-          )
-        });
+      this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
+        (res: any) => {
+          let summaries = res.summary
+          summaries.forEach((summary: any) => {
+            let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, this.clientContractYears, limit);
+            obj.subscribe(
+              (res: any) => {
+                  this.averagesOfYears.push(Math.floor(res.averageCost));
+                  this.totalAverageYearsCost += Math.floor(res.averageCost);
+                  this.yearsCostsViewTable.push(res.yearsCosts);
+                  this.totalYearsCosts = res.totalYearsCosts;
 
-      }
-    )
+                  this.getSummaryValues();
+              }
+            )
+          });
+        }
+      )
+
+    });
+
   }
 
   getSummaryValues() {
-    //getting clients contract years
-    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0]?.contractYears;
-      this.pricesWithoutContigency();
-      this.onAverageYearsChange();
-      this.onContigencyChange(); //for first the time values
-    });
+    this.pricesWithoutContigency();
+    this.onAverageYearsChange();
+    this.onContigencyChange(); //for first the time values
   }
 
   reloadCheck() {
@@ -136,9 +138,9 @@ export class DashboardComponent implements OnInit {
 
   onLimitChange() {
 
-  // this.summaryCalculationsService.setLimit(this.upperLimit, this.lowerLimit);
+    // this.summaryCalculationsService.setLimit(this.upperLimit, this.lowerLimit);
 
-  this.getCalculationsBySummaries({upperLimit:this.upperLimit, lowerLimit:this.lowerLimit});
+    this.getCalculationsBySummaries({ upperLimit: this.upperLimit, lowerLimit: this.lowerLimit });
 
   }
 
@@ -147,7 +149,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onAverageYearsChange() {
-    
+
     this.averageC = 0;
     this.average = 0;
     let vc = 0;
