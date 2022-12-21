@@ -16,7 +16,7 @@ export class SummaryComponent implements OnInit {
   error: any = {};
   isEditFormLoading: boolean = true;
   isMasterLoading: boolean = true;
-  siteStatus:boolean=false;
+  siteStatus:boolean=false; 
   siteId = localStorage.getItem('siteId');
   clientId=localStorage.getItem('clientId');
   clientStatus:boolean=false;
