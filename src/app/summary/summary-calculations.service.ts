@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { MasterService } from '../master/master.service';
+import { formatDate } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +63,17 @@ export class SummaryCalculationsService {
 
             // console.log('lifeMonths', lifeMonths);
             let lifePerc = summary.life / 100;
-            let replacementCostYear = Math.ceil((Number(lifeMonths) * lifePerc) / 12);
-            // console.log('replacementcostyear', replacementCostYear);
+            let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
+
+            let currentYear = Number(new Date().getFullYear());
+            let installationYear = Number(
+              new Date(
+                formatDate(summary.installmentDate, 'yyyy-MM-dd', 'en-US')
+              ).getFullYear()
+            );
+            let cycYear = Number(currentYear - installationYear);
+
+            let startYear = Math.ceil((Number(lifeMonths) * Number(lifePerc)) / 12);
 
             for (let i = 0; i < events?.length; i++) {
               //calculating events costs and storing them in array
@@ -92,53 +103,46 @@ export class SummaryCalculationsService {
 
             for (let i = 0; i < events.length; i++) {
               //adding occured events in a year to yearsArray
-              for (let m = 1; m <= 600; m++) {
-                if (m % Number(events[i].evOccurence) === 0) {
-                  yearsArray[Math.ceil(m / 12)]?.events?.push(i);
+              for (let year = 0; year <= 50; year++) {
+                if (year % (Number(events[i].evOccurence) / 12) === 0) {
+                  yearsArray[year]?.events?.push(i);
                 }
               }
             }
 
-            for (let m = 0; m < 600; m++) {
-              //adding overhaul cost to the year
-              if (m != 0) {
-                if (m % overhaulLife == 0) {
-                  yearsCosts[Math.ceil(m / 12)] += overhaulCost;
-                  // console.log("overhaul year cost",yearsCosts)
-                }
-              }
-            }
+            let x = 1;
+        var startIndex = 0;
+        // checking if the start year is 0 then we will start our startindex from 1 since we do not have values at 0 index
+        if (startYear == 0) {
+          startIndex = 1;
+        } else {
+          // else startindex will equal to start year
+          startIndex = startYear;
+        }
 
-            for (let y = 1; y <= 50; y++) {
-              //calculating yearly costs
-              yearsArray[y].events.forEach((eventIndex: any) => {
-                yearsCosts[y] += eventsCosts[eventIndex];
-              });
-              if (y % replacementCostYear === 0 || y == 1) {
-                yearsCosts[y] += Number(replacementCost);
-              }
-
-              if (limit) {
-                if (limit.upperLimit && limit.lowerLimit) {
-                  console.log("upper", limit.upperLimit, "lower", limit.lowerLimit)
-                  if (yearsCosts[y] > limit.upperLimit || yearsCosts[y] < limit.lowerLimit) {
-                    yearsCosts[y] = 0;
-                  }
-                }
-                else if (limit.upperLimit) {
-                  if (yearsCosts[y] > limit.upperLimit) {
-                    yearsCosts[y] = 0
-                  }
-                }
-                else if (limit.lowerLimit) {
-                  if (yearsCosts[y] < limit.lowerLimit) {
-                    yearsCosts[y] = 0
-                  }
-                }
-              }
-              //calculating totalYearsCosts
-              this.totalYearsCosts[y] += yearsCosts[y];
-            }
+        for (let y = startIndex; y < 50; y++) {
+          //calculating yearly costs
+          yearsArray[y].events.forEach((eventIndex: any) => {
+            yearsCosts[x] += eventsCosts[eventIndex];
+          });
+          // adding replacement cost checking replacement cost year
+          if (y % replacementCostYear === 0) {
+            yearsCosts[x] += Number(replacementCost);
+          }
+          // adding overhaul life with respect to years
+          if (y % (overhaulLife / 12) == 0) {
+            yearsCosts[x] += overhaulCost;
+          }
+          //calculating totalYearsCosts
+          this.totalYearsCosts[x] += yearsCosts[x];
+          // checking if year is equal to cyclic year plus 1 then we will repeat all the cost again
+          if (y == cycYear + 1) y = 1;
+          x++;
+          // to calculate values till 50 years since our x starts at 1
+          if (x == 51) {
+            break;
+          }
+        }
 
 
             //calculating averages
