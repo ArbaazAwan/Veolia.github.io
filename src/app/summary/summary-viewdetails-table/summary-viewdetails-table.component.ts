@@ -27,7 +27,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     private masterService: MasterService,
     private clientService: ClientService,
     private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     for (let i = 1; i <= 50; i++) {
@@ -137,7 +137,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           //calculating totalYearsCosts
           this.totalYearsCosts[x] += yearsCosts[x];
           // checking if year is equal to cyclic year plus 1 then we will repeat all the cost again
-          if (y == cycYear + 1) y = 1;
+          if (y == replacementCostYear + 1) {
+            y = 1;
+          }
           x++;
           // to calculate values till 50 years since our x starts at 1
           if (x == 51) {
@@ -165,8 +167,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         this.yearsCostsViewTable.push(summaryData);
 
         //sort if all the values are received
-        if(this.summaryArray.length == this.yearsCostsViewTable.length){
-          this.sortAssets({ active: 'summaryId', direction: 'desc' })
+        if (this.summaryArray.length == this.yearsCostsViewTable.length) {
+          this.sortAssets({ active: 'summaryId', direction: 'desc' });
         }
       });
   }
