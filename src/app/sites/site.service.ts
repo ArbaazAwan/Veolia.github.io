@@ -36,7 +36,6 @@ export class SiteService {
   }
 
   updateSite(siteId: any, data: any) {
-    console.log('Site data in service passed in headers',data);
     return this.http.put(
       this.SITE_URL + siteId,
       {
