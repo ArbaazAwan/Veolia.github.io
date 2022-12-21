@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
   minYear: string = '';
   upperLimit: number;
   lowerLimit: number;
+  isLoading:boolean = false;
 
 
   constructor(private clientService: ClientService,
@@ -49,42 +50,46 @@ export class DashboardComponent implements OnInit {
   }
 
   getCalculationsBySummaries(limit?: any) {
+    this.isLoading = true;
     this.yearsCostsViewTable = [];
     this.totalAverageYearsCost = 0;
     this.averagesOfYears = [];
     this.totalYearsCosts = [];
 
-     //getting clients contract years
-     this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0]?.contractYears;
 
-      this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
-        (res: any) => {
-          let summaries = res.summary
-          summaries.forEach((summary: any) => {
-            let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, this.clientContractYears, limit);
-            obj.subscribe(
-              (res: any) => {
-                  this.averagesOfYears.push(Math.floor(res.averageCost));
-                  this.totalAverageYearsCost += Math.floor(res.averageCost);
-                  this.yearsCostsViewTable.push(res.yearsCosts);
-                  this.totalYearsCosts = res.totalYearsCosts;
 
-                  this.getSummaryValues();
-              }
-            )
-          });
-        }
-      )
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
+      (res: any) => {
+        let summaries = res.summary
+        summaries.forEach((summary: any) => {
+          let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, limit);
+          obj.subscribe(
+            (res: any) => {
+              this.averagesOfYears.push(Math.floor(res.averageCost));
+              this.totalAverageYearsCost += Math.floor(res.averageCost);
+              this.yearsCostsViewTable.push(res.yearsCosts);
+              this.totalYearsCosts = res.totalYearsCosts;
 
-    });
+              this.getSummaryValues();
+              this.isLoading = false;
+            }
+          )
+        });
+      }
+    )
+
 
   }
 
   getSummaryValues() {
-    this.pricesWithoutContigency();
-    this.onAverageYearsChange();
-    this.onContigencyChange(); //for first the time values
+    //getting clients contract years
+    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
+      this.clientContractYears = client[0]?.contractYears;
+      this.pricesWithoutContigency();
+      this.onAverageYearsChange();
+      this.onContigencyChange(); //for first the time values
+    });
+
   }
 
   reloadCheck() {
@@ -137,8 +142,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onLimitChange() {
-
-    // this.summaryCalculationsService.setLimit(this.upperLimit, this.lowerLimit);
 
     this.getCalculationsBySummaries({ upperLimit: this.upperLimit, lowerLimit: this.lowerLimit });
 

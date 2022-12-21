@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { MasterService } from '../master/master.service';
 import { formatDate } from '@angular/common';
+import { ClientService } from '../clients/client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,17 @@ export class SummaryCalculationsService {
   totalYearsCosts: any = [];
   totalAverageYearsCost: number = 0;
   summaryArray: any = [];
+  clientId: any;
   private pricesYears = new BehaviorSubject(new Object({}));
   currentPricesYears = this.pricesYears.asObservable();
+  clientContractYears:any;
 
   private _limit = new BehaviorSubject(new Object({}));
   limit$ = this._limit.asObservable();
 
-  constructor(private masterService: MasterService) { }
+  constructor(private masterService: MasterService, private clientService: ClientService) {
+    this.getClientContractYears();
+  }
 
   setPricesYears(prices: any, pricesC: any, years: any) {
     this.pricesYears.next({
@@ -34,7 +39,7 @@ export class SummaryCalculationsService {
     this._limit.next({ upperLimit, lowerLimit });
   }
 
-  performCalculations(masterId: any, summary: any,clientContractYears:any, limit?: any) {
+  performCalculations(masterId: any, summary: any, limit?: any) {
 
     var eventsCosts: number[] = [];
     var overhaulCost: number = 0;
@@ -138,12 +143,10 @@ export class SummaryCalculationsService {
               }
             }
 
-            for(let y=1; y<=50; y++)
-            {
+            for (let y = 1; y <= 50; y++) {
               //check if the limits are applicable
               if (limit) {
                 if (limit.upperLimit && limit.lowerLimit) {
-                  console.log("upper", limit.upperLimit, "lower", limit.lowerLimit)
                   if (yearsCosts[y] > limit.upperLimit || yearsCosts[y] < limit.lowerLimit) {
                     yearsCosts[y] = 0;
                   }
@@ -166,10 +169,10 @@ export class SummaryCalculationsService {
             //calculating averages
             let totalCost = 0;
 
-            for(let i = 0; i< Number(clientContractYears); i++){
-              totalCost += yearsCosts[i+1];
+            for (let i = 0; i < Number(this.clientContractYears); i++) {
+              totalCost += yearsCosts[i + 1];
             }
-            let averageCost = totalCost / Number(clientContractYears);
+            let averageCost = totalCost / Number(this.clientContractYears);
             yearsCosts[0] = summary.unit;
 
             return {
@@ -182,4 +185,15 @@ export class SummaryCalculationsService {
       )
 
   }
+
+  getClientContractYears() {
+    this.clientId = localStorage.getItem('clientId');
+    this.clientService.getClientById(this.clientId).subscribe(
+      (res:any)=>{
+        this.clientContractYears =  res[0].contractYears;
+      }
+    )
+  }
 }
+
+
