@@ -4,6 +4,7 @@ import { SummaryCalculationsService } from '../summary/summary-calculations.serv
 import * as XLSX from 'xlsx';
 import { SummaryService } from '../summary/summary.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../users/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,17 +36,17 @@ export class DashboardComponent implements OnInit {
   minYear: string = '';
   upperLimit: number;
   lowerLimit: number;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
 
-
-  constructor(private clientService: ClientService,
+  constructor(
+    private clientService: ClientService,
     private summaryCalculationsService: SummaryCalculationsService,
-    private summaryService: SummaryService
-  ) { }
+    private summaryService: SummaryService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.reloadCheck();
-
     this.onLimitChange();
   }
 
@@ -55,16 +56,18 @@ export class DashboardComponent implements OnInit {
     this.totalAverageYearsCost = 0;
     this.averagesOfYears = [];
     this.totalYearsCosts = [];
-
-
-
-    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
-      (res: any) => {
-        let summaries = res.summary
-        summaries.forEach((summary: any) => {
-          let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, limit);
-          obj.subscribe(
-            (res: any) => {
+    if (this.siteId) {
+      this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
+        next: (res: any) => {
+          let summaries = res.summary;
+          summaries.forEach((summary: any) => {
+            let obj: Observable<any> =
+              this.summaryCalculationsService.performCalculations(
+                summary.masterId,
+                summary,
+                limit
+              );
+            obj.subscribe((res: any) => {
               this.averagesOfYears.push(Math.floor(res.averageCost));
               this.totalAverageYearsCost += Math.floor(res.averageCost);
               this.yearsCostsViewTable.push(res.yearsCosts);
@@ -72,24 +75,32 @@ export class DashboardComponent implements OnInit {
 
               this.getSummaryValues();
               this.isLoading = false;
-            }
-          )
-        });
-      }
-    )
-
-
+            });
+          });
+        },
+        error: (err) => {
+          this.userService.openSnackBar('No record found in Summary.', 'close');
+        },
+      });
+    } else {
+      this.userService.openSnackBar('Please select Site.', 'close');
+    }
   }
 
   getSummaryValues() {
     //getting clients contract years
-    this.clientService.getClientById(this.clientId).subscribe((client: any) => {
-      this.clientContractYears = client[0]?.contractYears;
-      this.pricesWithoutContigency();
-      this.onAverageYearsChange();
-      this.onContigencyChange(); //for first the time values
-    });
-
+    if (this.clientId) {
+      this.clientService
+        .getClientById(this.clientId)
+        .subscribe((client: any) => {
+          this.clientContractYears = client[0]?.contractYears;
+          this.pricesWithoutContigency();
+          this.onAverageYearsChange();
+          this.onContigencyChange(); //for first the time values
+        });
+    } else {
+      this.userService.openSnackBar('Please select Client.', 'close');
+    }
   }
 
   reloadCheck() {
@@ -106,7 +117,6 @@ export class DashboardComponent implements OnInit {
     this.siteId = localStorage.getItem('siteId');
   }
 
-
   pricesWithoutContigency() {
     this.prices = [];
     this.years = [];
@@ -114,7 +124,11 @@ export class DashboardComponent implements OnInit {
       this.years.push('Year ' + i.toString());
       this.prices[i - 1] = this.totalYearsCosts[i];
     }
-    this.summaryCalculationsService.setPricesYears(this.prices, this.pricesC, this.years);
+    this.summaryCalculationsService.setPricesYears(
+      this.prices,
+      this.pricesC,
+      this.years
+    );
     this.maxYearCost = Math.max(...this.prices);
     this.minYearCost = Math.min(...this.prices);
     this.maxYear = this.prices.indexOf(this.maxYearCost) + 1;
@@ -127,24 +141,35 @@ export class DashboardComponent implements OnInit {
     for (let i = 1; i <= Number(this.clientContractYears); i++) {
       this.years.push('Year ' + i.toString());
       // displaycost = cost + contigency%
-      this.pricesC[i - 1] = Math.floor(this.totalYearsCosts[i] + this.percentage(this.totalYearsCosts[i], this.contigency));
+      this.pricesC[i - 1] = Math.floor(
+        this.totalYearsCosts[i] +
+          this.percentage(this.totalYearsCosts[i], this.contigency)
+      );
     }
-    this.summaryCalculationsService.setPricesYears(this.prices, this.pricesC, this.years);
+    this.summaryCalculationsService.setPricesYears(
+      this.prices,
+      this.pricesC,
+      this.years
+    );
     this.maxYearCostC = Math.max(...this.pricesC);
     this.minYearCostC = Math.min(...this.pricesC);
     this.maxYear = this.pricesC.indexOf(this.maxYearCostC) + 1;
     this.minYear = this.pricesC.indexOf(this.minYearCostC) + 1;
 
     //getting total average cost with contigency
-    this.totalAverageYearsCostC = Math.floor(this.totalAverageYearsCost + this.percentage(this.totalAverageYearsCost, this.contigency));
+    this.totalAverageYearsCostC = Math.floor(
+      this.totalAverageYearsCost +
+        this.percentage(this.totalAverageYearsCost, this.contigency)
+    );
 
     this.onAverageYearsChange();
   }
 
   onLimitChange() {
-
-    this.getCalculationsBySummaries({ upperLimit: this.upperLimit, lowerLimit: this.lowerLimit });
-
+    this.getCalculationsBySummaries({
+      upperLimit: this.upperLimit,
+      lowerLimit: this.lowerLimit,
+    });
   }
 
   percentage(num: number, per: number) {
@@ -152,13 +177,14 @@ export class DashboardComponent implements OnInit {
   }
 
   onAverageYearsChange() {
-
     this.averageC = 0;
     this.average = 0;
     let vc = 0;
     let v = 0;
     for (let i = 0; i < this.averageYears; i++) {
-      vc += this.totalYearsCosts[i + 1] + this.percentage(this.totalYearsCosts[i + 1], this.contigency);
+      vc +=
+        this.totalYearsCosts[i + 1] +
+        this.percentage(this.totalYearsCosts[i + 1], this.contigency);
       v += this.totalYearsCosts[i + 1];
     }
     this.averageC = Math.floor(vc / this.averageYears);
@@ -176,5 +202,4 @@ export class DashboardComponent implements OnInit {
 
     XLSX.writeFile(wb, `${fileName}.xlsx`);
   }
-
 }
