@@ -38,7 +38,7 @@ export class SummaryComponent implements OnInit {
         this.siteStatus = site[0].siteStatus;
         if (this.siteStatus == false) {
           this.summaryService.openSnackBar(
-            'Site status is in-active. In order to insert records, please ask administrator to activate the site.',
+            'Site status is in-active. In order to insert records, please activate the site.',
             'close'
           );
         }
@@ -58,7 +58,7 @@ export class SummaryComponent implements OnInit {
         this.clientStatus = client[0].clientStatus;
         if (this.clientStatus == false) {
           this.summaryService.openSnackBar(
-            'Client status is in-active. In order to insert records, please ask administrator to activate the client.',
+            'Client status is in-active. In order to insert records, please activate the client.',
             'Close'
           );
         }
