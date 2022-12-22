@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { SiteService } from '../sites/site.service';
 import { UserService } from '../users/user.service';
 import { ClientService } from './client.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -15,12 +20,19 @@ export class ClientsComponent implements OnInit {
     private fb: FormBuilder,
     private clientService: ClientService,
     private userService: UserService,
-    private siteService: SiteService
-  ) { }
+    private siteService: SiteService,
+    private router: Router
+  ) {}
 
   form: FormGroup = this.fb.group({
-    clientName: [null, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-    contractYears: [null, [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+    clientName: [
+      null,
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
+    contractYears: [
+      null,
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
     clientStatus: [null],
   });
   clientsArray: any[] = [];
@@ -47,12 +59,20 @@ export class ClientsComponent implements OnInit {
     }
 
     this.getClients();
+    this.checkUserRole();
   }
 
   selectedClient: any = {
     id: null,
     name: '',
   };
+
+  checkUserRole() {
+    var userRole = localStorage.getItem('role');
+    if (userRole != 'admin') {
+      this.router.navigate(['/clientslist']);
+    }
+  }
 
   resetForm() {
     this.form.reset();
@@ -67,7 +87,6 @@ export class ClientsComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.form.valid) {
       if (this.currentClient.clientId) {
         this.UpdateClient();
@@ -76,7 +95,10 @@ export class ClientsComponent implements OnInit {
 
         this.clientService.postClient(this.form.value).subscribe({
           next: (_) => {
-            this.userService.openSnackBar('New Client is Created Successfully!', 'close');
+            this.userService.openSnackBar(
+              'New Client is Created Successfully!',
+              'Close'
+            );
             this.getClients();
           },
           error: (err: any) => {
@@ -84,15 +106,16 @@ export class ClientsComponent implements OnInit {
               this.error = err.message;
               this.userService.openSnackBar(this.error, 'close');
             }
-            this.userService.openSnackBar('Form not valid. Please populate all fields', 'close');
+            this.userService.openSnackBar(
+              'Form not valid. Please populate all fields',
+              'Close'
+            );
           },
         });
 
         this.resetForm();
       }
-
-    }
-    else {
+    } else {
       this.validateAllFormFields(this.form);
     }
     this.resetForm();
@@ -125,30 +148,33 @@ export class ClientsComponent implements OnInit {
   }
 
   UpdateClient() {
-
     if (this.form.value.clientStatus === false) {
-      this.siteService.getSiteByClientId(this.clientId).subscribe(
-        (sites: any) => {
+      this.siteService
+        .getSiteByClientId(this.clientId)
+        .subscribe((sites: any) => {
           sites.forEach((site: any) => {
             let data = {
               siteName: site.siteName,
-              siteStatus: false
-            }
-            this.siteService.updateSite(site.siteId, data).subscribe(
-              (res: any) => {
+              siteStatus: false,
+            };
+            this.siteService
+              .updateSite(site.siteId, data)
+              .subscribe((res: any) => {
                 console.log(res.message);
-              }
-            )
+              });
           });
-        }
-      )
+        });
     }
 
     this.isLoading = true;
-    this.clientService.updateClient(this.currentClient, this.form.value)
+    this.clientService
+      .updateClient(this.currentClient, this.form.value)
       .subscribe({
         next: (_) => {
-          this.userService.openSnackBar('Client is Updated Successfully!', 'close');
+          this.userService.openSnackBar(
+            'Client is Updated Successfully!',
+            'Close'
+          );
           this.getClients();
         },
         error: (err) => {
@@ -163,22 +189,22 @@ export class ClientsComponent implements OnInit {
     this.isEditForm = false;
   }
 
-
   onDeleteClient(id: any) {
-
-    this.siteService.getSiteByClientId(id).subscribe(
-      (res: any) => {
-        let sitesCount = res.length
-        if (sitesCount > 0) {
-          this.userService.openSnackBar('The client cannot be deleted until all the associated Sites are deleted or detached from the Client.', 'close');
-        }
-        else {
-          this.clients = this.clients.filter(({ clientId }) => clientId != id);
-          this.clientService.deleteClient(id);
-          this.userService.openSnackBar('Client Record Deleted Successfully!', 'close');
-        }
+    this.siteService.getSiteByClientId(id).subscribe((res: any) => {
+      let sitesCount = res.length;
+      if (sitesCount > 0) {
+        this.userService.openSnackBar(
+          'The client cannot be deleted until all the associated Sites are deleted or detached from the Client.',
+          'Close'
+        );
+      } else {
+        this.clients = this.clients.filter(({ clientId }) => clientId != id);
+        this.clientService.deleteClient(id);
+        this.userService.openSnackBar(
+          'Client Record Deleted Successfully!',
+          'Close'
+        );
       }
-    )
+    });
   }
-
 }

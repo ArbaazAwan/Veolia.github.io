@@ -79,11 +79,14 @@ export class DashboardComponent implements OnInit {
           });
         },
         error: (err) => {
-          this.userService.openSnackBar('No record found in Summary.', 'close');
+          this.userService.openSnackBar(
+            'No record found in Summary. Please insert records in summary to activate the Dashboard.',
+            'Close'
+          );
         },
       });
     } else {
-      this.userService.openSnackBar('Please select Site.', 'close');
+      this.userService.openSnackBar('Please select Site.', 'Close');
     }
   }
 
@@ -99,7 +102,7 @@ export class DashboardComponent implements OnInit {
           this.onContigencyChange(); //for first the time values
         });
     } else {
-      this.userService.openSnackBar('Please select Client.', 'close');
+      this.userService.openSnackBar('Please select Client.', 'Close');
     }
   }
 

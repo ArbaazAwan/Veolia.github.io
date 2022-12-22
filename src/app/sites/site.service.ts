@@ -19,30 +19,24 @@ export class SiteService {
     return this.http.get(this.SITE_URL + id);
   }
 
-  getSiteByClientId(id: string|any) {
+  getSiteByClientId(id: string | any) {
     return this.http
       .get(this.SITE_URL + 'client/' + id)
       .pipe(tap((res: any) => {}));
   }
 
   postSite(siteName: string, selectedClientId: any) {
-    return this.http.post(
-      this.SITE_URL,
-      {
-        clientId: selectedClientId,
-        siteName: siteName,
-      }
-    );
+    return this.http.post(this.SITE_URL, {
+      clientId: selectedClientId,
+      siteName: siteName,
+    });
   }
 
   updateSite(siteId: any, data: any) {
-    return this.http.put(
-      this.SITE_URL + siteId,
-      {
-        siteName: data.siteName,
-        siteStatus: data.siteStatus
-      }
-    );
+    return this.http.put(this.SITE_URL + siteId, {
+      siteName: data.siteName,
+      siteStatus: data.siteStatus,
+    });
   }
 
   deleteSite(id: any) {

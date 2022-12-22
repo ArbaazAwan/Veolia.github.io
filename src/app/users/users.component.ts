@@ -12,6 +12,7 @@ import Validation from '../utils/validation';
 import { UserService } from './user.service';
 import { ClientService } from '../clients/client.service';
 import { PrimeNGConfig } from 'primeng/api';
+import { Router } from '@angular/router';
 
 type UserType = 'admin' | 'user';
 
@@ -43,12 +44,12 @@ export class UsersComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private clientService: ClientService,
     private primengConfig: PrimeNGConfig,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.checkUserRole();
     this.initializeForm();
     this.getUsers();
     this.primengConfig.ripple = true;
@@ -152,8 +153,11 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => {
         this.error = err.message;
-          this.userService.openSnackBar('Username & Email ID already exists or values are not entered correctly', 'close');
-          this.getUsers();
+        this.userService.openSnackBar(
+          'Username & Email ID already exists or values are not entered correctly',
+          'Close'
+        );
+        this.getUsers();
       },
     });
     this.formReset();
@@ -186,7 +190,7 @@ export class UsersComponent implements OnInit {
     this.userService.deleteUser(user.userId, user.userName);
     this.userService.openSnackBar(
       'User Record is Deleted Successfully!',
-      'close'
+      'Close'
     );
   }
 
@@ -242,5 +246,12 @@ export class UsersComponent implements OnInit {
     }
 
     this.initializeForm();
+  }
+
+  checkUserRole() {
+    var userRole = localStorage.getItem('role');
+    if (userRole != 'admin') {
+      this.router.navigate(['/clientslist']);
+    }
   }
 }
