@@ -65,6 +65,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         let overhaulLife = Number(master.master.overhaulLife);
 
         let lifePerc = summary.life / 100;
+        let quantity = summary.quantity;
+        if (quantity) {
+          quantity = quantity;
+        } else {
+          quantity = 1;
+        }
         let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
 
         let currentYear = Number(new Date().getFullYear());
@@ -124,15 +130,15 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
-            yearsCosts[x] += eventsCosts[eventIndex];
+            yearsCosts[x] += eventsCosts[eventIndex] * Number(quantity);
           });
           // adding replacement cost checking replacement cost year
           if (y % replacementCostYear === 0) {
-            yearsCosts[x] += Number(replacementCost);
+            yearsCosts[x] += Number(replacementCost) * Number(quantity);
           }
           // adding overhaul life with respect to years
           if (y % (overhaulLife / 12) == 0) {
-            yearsCosts[x] += overhaulCost;
+            yearsCosts[x] += overhaulCost * Number(quantity);
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[x] += yearsCosts[x];
