@@ -1,8 +1,17 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-  data-scroll="true">
+<nav
+  class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+  id="navbarBlur"
+  data-scroll="true"
+>
   <div class="container-fluid py-1">
-    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1" id="navbar">
-      <div class="ms-md-auto pe-md-3 d-flex align-items-center" [ngClass]="href == '/clientslist' ? 'addpadding' : ''">
+    <div
+      class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-1"
+      id="navbar"
+    >
+      <div
+        class="ms-md-auto pe-md-3 d-flex align-items-center"
+        [ngClass]="href == '/clientslist' ? 'addpadding' : ''"
+      >
         <div class="row float-end text-xs">
           <div class="col-sm-6 mt-3">
             <mat-form-field appearance="outline" *ngIf="!isClientListRoute()">
@@ -13,10 +22,20 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingClient">Select Client</mat-label>
-              <mat-select [(ngModel)]="selectedClient" [(value)]="selectedClient" matInput type="text"
-                (valueChange)="populateSites($event)" (selectionChange)="onClientSelect($event)"
-                [disabled]="isLoadingClient" disableOptionCentering>
-                <mat-option *ngFor="let client of clients" value="{{ client.clientId }}">
+              <mat-select
+                [(ngModel)]="selectedClient"
+                [(value)]="selectedClient"
+                matInput
+                type="text"
+                (valueChange)="populateSites($event)"
+                (selectionChange)="onClientSelect($event)"
+                [disabled]="isLoadingClient"
+                disableOptionCentering
+              >
+                <mat-option
+                  *ngFor="let client of clients"
+                  value="{{ client.clientId }}"
+                >
                   {{ client.clientName }}
                 </mat-option>
               </mat-select>
@@ -24,17 +43,20 @@
               <mat-icon matSuffix>people</mat-icon>
             </mat-form-field>
             <div>
-              
-              
-                <mat-error class="text-warning" *ngIf="!isClientListRoute() && selectedClient == undefined">  
-                   <p class="text text-sm"><span><i class="material-icons mb-0">warning</i><span class="nav-text text-bold"> Please select a client!</span> </span></p>
-                </mat-error>
-              
+              <mat-error
+                class="text-warning"
+                *ngIf="!isClientListRoute() && selectedClient == undefined"
+              >
+                <p class="text text-sm">
+                  <span
+                    ><i class="material-icons mb-0">warning</i
+                    ><span class="nav-text text-bold">
+                      Please select a client!</span
+                    >
+                  </span>
+                </p>
+              </mat-error>
             </div>
-         
-            <!-- <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedClient == undefined">
-              Please select a client!
-            </div> -->
           </div>
 
           <div class="col-sm-6 mt-3">
@@ -46,23 +68,38 @@
                 </div>
               </mat-label>
               <mat-label *ngIf="!isLoadingSite">Select Site</mat-label>
-              <mat-select [(ngModel)]="selectedSite" [(value)]="selectedSite" matInput type="text"
-                (selectionChange)="onSiteSelect($event)" [disabled]="isLoadingSite" disableOptionCentering>
-                <mat-option *ngFor="let site of sites" value="{{ site.siteId }}">
+              <mat-select
+                [(ngModel)]="selectedSite"
+                [(value)]="selectedSite"
+                matInput
+                type="text"
+                (selectionChange)="onSiteSelect($event)"
+                [disabled]="isLoadingSite"
+                disableOptionCentering
+              >
+                <mat-option
+                  *ngFor="let site of sites"
+                  value="{{ site.siteId }}"
+                >
                   {{ site.siteName }}
                 </mat-option>
               </mat-select>
               <mat-icon matSuffix>business</mat-icon>
             </mat-form-field>
 
-            <mat-error class="text-warning" *ngIf="!isClientListRoute() && selectedClient == undefined" >
-              <p class="text text-sm"><span><i class="material-icons mb-0">warning</i><span class="nav-text text-bold"> Please select a client!</span> </span></p>
+            <mat-error
+              class="text-warning"
+              *ngIf="!isClientListRoute() && selectedSite == undefined"
+            >
+              <p class="text text-sm">
+                <span
+                  ><i class="material-icons mb-0">warning</i
+                  ><span class="nav-text text-bold">
+                    Please select a site!</span
+                  >
+                </span>
+              </p>
             </mat-error>
-    
-
-            <!-- <div class="alert alert-danger" role="alert" *ngIf="!isClientListRoute() && selectedSite == undefined">
-              Please select a site!
-            </div> -->
           </div>
         </div>
       </div>
