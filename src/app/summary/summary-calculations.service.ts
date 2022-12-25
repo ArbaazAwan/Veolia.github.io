@@ -179,6 +179,7 @@ export class SummaryCalculationsService {
               totalYearsCosts: this.totalYearsCosts,
               averageCost: averageCost,
               yearsCosts: yearsCosts,
+              life: summary.life
             }
           }
         )
