@@ -36,7 +36,8 @@ export class DashboardComponent implements OnInit {
   minYear: string = '';
   upperLimit: number;
   lowerLimit: number;
-  isLoading: boolean = false;
+  lifeArray:any = [];
+  isLoading:boolean = false;
 
   constructor(
     private clientService: ClientService,
@@ -56,21 +57,19 @@ export class DashboardComponent implements OnInit {
     this.totalAverageYearsCost = 0;
     this.averagesOfYears = [];
     this.totalYearsCosts = [];
-    if (this.siteId) {
-      this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
-        next: (res: any) => {
-          let summaries = res.summary;
-          summaries.forEach((summary: any) => {
-            let obj: Observable<any> =
-              this.summaryCalculationsService.performCalculations(
-                summary.masterId,
-                summary,
-                limit
-              );
-            obj.subscribe((res: any) => {
+    this.lifeArray = [];
+
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe(
+      (res: any) => {
+        let summaries = res.summary
+        summaries.forEach((summary: any) => {
+          let obj: Observable<any> = this.summaryCalculationsService.performCalculations(summary.masterId, summary, limit);
+          obj.subscribe(
+            (res: any) => {
               this.averagesOfYears.push(Math.floor(res.averageCost));
               this.totalAverageYearsCost += Math.floor(res.averageCost);
               this.yearsCostsViewTable.push(res.yearsCosts);
+              this.lifeArray.push(res.life);
               this.totalYearsCosts = res.totalYearsCosts;
 
               this.getSummaryValues();
