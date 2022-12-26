@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'veolia-angular';
 
   ngOnInit(): void {
-    this.bnIdle.startWatching(900).subscribe((isTimedOut: boolean) => {
+    this.bnIdle.startWatching(2600).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         localStorage.removeItem('clientId');
         localStorage.removeItem('siteId');
