@@ -134,6 +134,7 @@ export class SummaryCalculationsService {
               // checking if the month is equal to life month of asset to reset the months
               if (month == lifeMonths) month = 1;
               // we only need 50 years of forecast when index become 600 break the loop
+              monthIndex++;
               if (monthIndex == 600) {
                 break;
               }
@@ -221,8 +222,8 @@ export class SummaryCalculationsService {
               totalYearsCosts: this.totalYearsCosts,
               averageCost: averageCost,
               yearsCosts: yearsCosts,
-              life: summary.life
-            }
+              life: summary.life,
+            };
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[y] += yearsCosts[y];
