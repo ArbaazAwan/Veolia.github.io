@@ -31,8 +31,7 @@ export class CreateSummaryFormComponent implements OnInit {
   siteId: any = localStorage.getItem('siteId');
   asset: FormControl = new FormControl(['', Validators.required]);
   masterId: any;
-  lifeLoader:boolean = false;
-
+  lifeLoader: boolean = false;
 
   ngOnInit(): void {
     this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
@@ -40,7 +39,7 @@ export class CreateSummaryFormComponent implements OnInit {
         this.onEditSummary(summaryId);
       }
     });
-    this.getMastersBySiteId(this.siteId); 
+    this.getMastersBySiteId(this.siteId);
 
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
@@ -60,6 +59,8 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onAssetChange(master: any) {
+    let defaultQuantity = '1';
+    let defaultLoad = '100';
     this.selectedMaster = master;
     let unit = this.getDisplayText(master);
     let c = this.getForm().controls;
@@ -82,8 +83,8 @@ export class CreateSummaryFormComponent implements OnInit {
     );
     c.dutyApplication.setValue(master.dutyApplication);
     c.quality.setValue(master.quality);
-    c.quantity.setValue(null);
-    c.load.setValue(null);
+    c.quantity.setValue(defaultQuantity);
+    c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
   }
@@ -111,14 +112,28 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   getDisplayText(master: any) {
-    if (master.oldAssetType || master.newAssetType
-      || master.masterStyle || master.masterSize
-      || master.dutyApplication || master.quality) {
-      return master.oldAssetType + " - " + master?.newAssetType
-        + ", " + master?.masterStyle + ", " + master?.masterSize
-        + ", " + master?.dutyApplication + ", " + master?.quality
-    }
-    else {
+    if (
+      master.oldAssetType ||
+      master.newAssetType ||
+      master.masterStyle ||
+      master.masterSize ||
+      master.dutyApplication ||
+      master.quality
+    ) {
+      return (
+        master.oldAssetType +
+        ' - ' +
+        master?.newAssetType +
+        ', ' +
+        master?.masterStyle +
+        ', ' +
+        master?.masterSize +
+        ', ' +
+        master?.dutyApplication +
+        ', ' +
+        master?.quality
+      );
+    } else {
       return '';
     }
   }
@@ -141,8 +156,8 @@ export class CreateSummaryFormComponent implements OnInit {
       description: '',
       dutyApplication: '',
       quality: '',
-      quantity: null,
-      load: null,
+      quantity: '1',
+      load: '100',
       life: [null, Validators.required],
       installmentDate: [null, Validators.required],
     }));
@@ -232,7 +247,7 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   onEditSummary(id: any) {
-    this.isLoading=true;
+    this.isLoading = true;
     this.summaryService.getSummaryById(id).subscribe((el: any) => {
       let summary = el[0];
       const {
@@ -263,7 +278,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.life.setValue(life);
       c.installmentDate.setValue(installmentDate);
       c.masterId.setValue(masterId);
-      this.isLoading=false;
+      this.isLoading = false;
     });
   }
 
