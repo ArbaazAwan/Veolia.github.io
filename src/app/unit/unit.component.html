@@ -18,7 +18,7 @@
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
 
-        <span class="float-end my-3 mx-5">
+        <span *ngIf="masterId" class="float-end my-3 mx-5">
           <button type="button" (click)="processModel()" class="btn bg-gradient-primary text-right">
           Export Model
         </button>

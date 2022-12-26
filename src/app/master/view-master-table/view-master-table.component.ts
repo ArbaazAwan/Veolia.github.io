@@ -71,7 +71,7 @@ export class ViewMasterTableComponent implements OnInit {
             this.events = this.completeMaster.events;
             this.cols = [
               { field: 'desc', header: '' },
-              { field: 'oh', header: 'OverHaul' },
+              { field: 'oh', header: 'Overhaul' },
             ];
 
             for (let i = 0; i < this.events.length; i++) {
