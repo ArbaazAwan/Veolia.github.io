@@ -63,7 +63,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         let replacementCost = master.master.replacementCost;
         let lifeMonths = master.master.lifeMonths;
         let overhaulLife = Number(master.master.overhaulLife);
-
+        let load = 0;
         let lifePerc = summary.life / 100;
         let quantity = summary.quantity;
         if (quantity) {
@@ -73,13 +73,11 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         }
         let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
 
-        let currentYear = Number(new Date().getFullYear());
-        let installationYear = Number(
-          new Date(
-            formatDate(summary.installmentDate, 'yyyy-MM-dd', 'en-US')
-          ).getFullYear()
-        );
-        let cycYear = Number(currentYear - installationYear);
+        if (summary.summaryload) {
+          load = summary.summaryload / 100;
+        } else {
+          load = 100 / 100;
+        }
 
         let startYear = Math.ceil((Number(lifeMonths) * Number(lifePerc)) / 12);
 
@@ -107,12 +105,39 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             overhaulCost += Number(ohC.ohHour);
           });
         }
-
+        // initiating occurence in case of stretch
+        var occured = 0;
         for (let i = 0; i < events.length; i++) {
-          //adding occured events in a year to yearsArray
-          for (let year = 0; year <= 50; year++) {
-            if (year % (Number(events[i].evOccurence) / 12) === 0) {
-              yearsArray[year]?.events?.push(i);
+          // fetching stretch from every event
+          let stretch = events[i].evStretch.toLowerCase();
+          // initiating monthIndex to store every month cost
+          let monthIndex = 0;
+          // loop for months till 50 years
+          for (let month = 1; month <= 600; month++) {
+            // checking if the stretch is yes
+            if (stretch == 'yes') {
+              // fetch calculated occured months
+              occured = this.getOccurence(events[i].evOccurence, load, month);
+              // we only need occurence till the end life of the asset so we are checkin if the occurence is less than equal to life months of asset
+              if (occured <= lifeMonths) {
+                // taking ceil to store event cost in that particular year occurence
+                const year = Math.ceil(occured / 12);
+                yearsArray[year]?.events?.push(i);
+              }
+            } else {
+              // checking the occurence with respect to every event
+              if (month % events[i].evOccurence == 0) {
+                // taking ceil to store event cost in that particular year occurence
+                const year = Math.ceil(monthIndex / 12);
+                yearsArray[year]?.events?.push(i);
+              }
+              // checking if the month is equal to life month of asset to reset the months
+              if (month == lifeMonths) month = 1;
+              // we only need 50 years of forecast when index become 600 break the loop
+              monthIndex++;
+              if (monthIndex == 600) {
+                break;
+              }
             }
           }
         }
@@ -127,6 +152,8 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           startIndex = startYear;
         }
 
+        var ovOccured = 0;
+
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
@@ -137,14 +164,21 @@ export class SummaryViewdetailsTableComponent implements OnInit {
             yearsCosts[x] += Number(replacementCost) * Number(quantity);
           }
           // adding overhaul life with respect to years
-          if (y % (overhaulLife / 12) == 0) {
+          let ovStretch = master.overhaul.ovStretch;
+          if (ovStretch.toLowerCase() == 'yes') {
+            ovOccured = Math.ceil(overhaulLife / 12 / load);
+          } else {
+            ovOccured = Math.ceil(overhaulLife / 12);
+          }
+          // console.log('ovOccured', ovOccured);
+          if (y % ovOccured == 0) {
             yearsCosts[x] += overhaulCost * Number(quantity);
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[x] += yearsCosts[x];
           // checking if year is equal to cyclic year plus 1 then we will repeat all the cost again
-          if (y == replacementCostYear + 1) {
-            y = 1;
+          if (y == replacementCostYear) {
+            y = 0;
           }
           x++;
           // to calculate values till 50 years since our x starts at 1
@@ -167,8 +201,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         summaryData[2] = summary.dateCreated;
         summaryData[3] = summary.installmentDate;
         summaryData[4] = summary.life;
-        summaryData[5] = averageCost;
-        summaryData[6] = yearsCosts;
+        summaryData[5] = summary.summaryload;
+        summaryData[6] = averageCost;
+        summaryData[7] = yearsCosts;
 
         this.yearsCostsViewTable.push(summaryData);
 
@@ -177,6 +212,12 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           this.sortAssets({ active: 'summaryId', direction: 'desc' });
         }
       });
+  }
+
+  // function to return occurence
+  getOccurence(eventOccurence: any, load: any, month: any) {
+    let occured = Math.round((eventOccurence * month) / load);
+    return occured;
   }
 
   sortAssets(sort: any) {
