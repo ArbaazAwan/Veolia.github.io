@@ -240,22 +240,6 @@ export class SummaryCalculationsService {
               //calculating totalYearsCosts
               this.totalYearsCosts[y] += yearsCosts[y];
             }
-
-            //calculating averages
-            let totalCost = 0;
-
-            for (let i = 0; i < Number(this.clientContractYears); i++) {
-              totalCost += yearsCosts[i + 1];
-            }
-            let averageCost = totalCost / Number(this.clientContractYears);
-            yearsCosts[0] = summary.unit;
-
-            return {
-              totalYearsCosts: this.totalYearsCosts,
-              averageCost: averageCost,
-              yearsCosts: yearsCosts,
-              life: summary.life,
-            };
           }
           //calculating totalYearsCosts
           this.totalYearsCosts[y] += yearsCosts[y];
@@ -274,6 +258,7 @@ export class SummaryCalculationsService {
           totalYearsCosts: this.totalYearsCosts,
           averageCost: averageCost,
           yearsCosts: yearsCosts,
+          life: summary.life,
         };
       })
     );
