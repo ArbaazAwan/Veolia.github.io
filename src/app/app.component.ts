@@ -11,15 +11,15 @@ export class AppComponent {
   title = 'veolia-angular';
 
   ngOnInit(): void {
-    this.bnIdle.startWatching(2600).subscribe((isTimedOut: boolean) => {
-      if (isTimedOut) {
-        localStorage.removeItem('clientId');
-        localStorage.removeItem('siteId');
-        localStorage.removeItem('user_email');
-        localStorage.removeItem('login_auth');
-        sessionStorage.clear();
-        this.router.navigate(['/login']);
-      }
-    });
+    // this.bnIdle.startWatching(2600).subscribe((isTimedOut: boolean) => {
+    //   // if (isTimedOut) {
+    //   //   localStorage.removeItem('clientId');
+    //   //   localStorage.removeItem('siteId');
+    //   //   localStorage.removeItem('user_email');
+    //   //   localStorage.removeItem('login_auth');
+    //   //   sessionStorage.clear();
+    //   //   this.router.navigate(['/login']);
+    //   // }
+    // });
   }
 }

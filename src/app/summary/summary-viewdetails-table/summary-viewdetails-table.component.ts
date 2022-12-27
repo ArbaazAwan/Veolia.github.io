@@ -124,7 +124,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           // fetching stretch from every event
           let stretch = events[i].evStretch.toLowerCase();
           // initiating monthIndex to store every month cost
-          let monthIndex = 0;
+          let monthIndex = 1;
           // loop for months till 50 years
           for (let month = 1; month <= 600; month++) {
             // checking if the stretch is yes
@@ -155,7 +155,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
         }
 
-        let ovMonthIndex = 0;
+        let ovMonthIndex = 1;
         var ovOccured = 0;
         for (let month = 1; month <= 600; month++) {
           let ovStretch = master.overhaul.ovStretch;
