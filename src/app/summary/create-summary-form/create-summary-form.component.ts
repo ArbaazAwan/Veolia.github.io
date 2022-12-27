@@ -265,6 +265,8 @@ export class CreateSummaryFormComponent implements OnInit {
         installmentDate,
       } = summary;
 
+      this.masterId = masterId;
+
       let c = this.getForm().controls;
       c.unit.setValue(unit);
       c.assetType.setValue(assetType);
