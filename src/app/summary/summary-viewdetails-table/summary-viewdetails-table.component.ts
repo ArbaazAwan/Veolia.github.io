@@ -44,7 +44,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
   getMaster(masterId: any, summary: any) {
     var eventsCosts: number[] = [];
     var overhaulCosts: number[] = [];
-    var overhaulCost: number = 0;
     var yearsArray: any = new Array(51);
     var ovYearsArray: any = new Array(51);
     var yearsCosts: any = [];
@@ -121,7 +120,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         }
         // initiating occurence in case of stretch
         var occured = 0;
-        var ovOccured = 0;
         for (let i = 0; i < events.length; i++) {
           // fetching stretch from every event
           let stretch = events[i].evStretch.toLowerCase();
