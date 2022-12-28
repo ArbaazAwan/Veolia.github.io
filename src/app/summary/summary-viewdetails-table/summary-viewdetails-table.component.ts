@@ -79,7 +79,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         } else {
           quantity = 1;
         }
-        let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
+        let replacementCostYear = Math.round(Number(lifeMonths) / 12);
 
         if (summary.summaryload) {
           load = summary.summaryload / 100;
@@ -193,10 +193,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
+            console.log('year', y);
+            console.log('cost', eventsCosts[eventIndex]);
             yearsCosts[x] += eventsCosts[eventIndex] * Number(quantity);
           });
 
           ovYearsArray[y].overhaul.forEach((ovIndex: any) => {
+            console.log('year', y);
+            console.log('cost', overhaulCosts[ovIndex]);
             yearsCosts[x] += overhaulCosts[ovIndex] * Number(quantity);
           });
 
