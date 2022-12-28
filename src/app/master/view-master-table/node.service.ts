@@ -150,7 +150,7 @@ export class NodeService {
         desc: 'Labor',
       };
       var objCL: any = {
-        desc: 'Hour',
+        desc: 'Cost',
       };
       if (events.length <= 0) {
         objCC['oh'] = overhaul?.overhaulContractors[mainIndex]?.ohLabour;

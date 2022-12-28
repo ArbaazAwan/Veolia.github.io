@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     private clientService: ClientService,
     private siteService: SiteService,
     private authService: AuthService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   user: any;
@@ -83,6 +83,8 @@ export class NavbarComponent implements OnInit {
 
   onClientSelect(selectedClient: any) {
     localStorage.setItem('clientId', selectedClient.value);
+    localStorage.removeItem('siteId');
+    this.selectedSite = '';
     window.location.reload();
   }
 

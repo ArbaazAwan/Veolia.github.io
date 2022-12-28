@@ -16,14 +16,14 @@ export class ImportExcelComponent implements OnInit {
   isLoading: any = false;
   siteStatus: boolean = false;
   siteId = localStorage.getItem('siteId');
-  clientId=localStorage.getItem('clientId');
-  clientStatus:boolean=false;
+  clientId = localStorage.getItem('clientId');
+  clientStatus: boolean = false;
 
   constructor(
     private masterService: MasterService,
     private siteService: SiteService,
-    private clientService:ClientService,
-    private snackBar: MatSnackBar,
+    private clientService: ClientService,
+    private snackBar: MatSnackBar
   ) {}
   @ViewChild('fileUpload') myInputVariable: ElementRef;
 
@@ -43,17 +43,15 @@ export class ImportExcelComponent implements OnInit {
     });
   }
 
-
-
-  getClientStatus(){
+  getClientStatus() {
     this.clientService.getClientById(this.clientId).subscribe({
-      next:(client:any)=>{
+      next: (client: any) => {
         this.clientStatus = client[0].clientStatus;
       },
-      error:(err)=>{
-        console.log("error occured in getclientStatus", err);
-      }
-    })
+      error: (err) => {
+        console.log('error occured in getclientStatus', err);
+      },
+    });
   }
 
   readExcel(event: any) {
@@ -70,6 +68,7 @@ export class ImportExcelComponent implements OnInit {
           const master = {
             siteId: localStorage.getItem('siteId'),
             oldAssetType: data.AssetType,
+            newAssetType: data.NewAssetType,
             masterStyle: data.Style,
             masterSize: data.Size,
             oldDescription: data.AppDesc,
@@ -95,7 +94,10 @@ export class ImportExcelComponent implements OnInit {
               if (res.message) {
                 this.isLoading = false;
               }
-              this.masterService.openSnackBar('Master record is uploaded successfully', 'close');
+              this.masterService.openSnackBar(
+                'Master record is uploaded successfully',
+                'close'
+              );
             });
         }
       } else {

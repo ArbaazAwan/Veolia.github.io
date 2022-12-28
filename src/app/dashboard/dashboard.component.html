@@ -63,7 +63,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Upper Limit</mat-label>
-            <input matInput [(ngModel)]="upperLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="upperLimit" [disabled]="isLoading" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -87,7 +87,7 @@
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xs mb-0  mt-3  w-100" appearance="outline">
             <mat-label class="text-bold">Lower Limit</mat-label>
-            <input matInput [(ngModel)]="lowerLimit" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
+            <input matInput [(ngModel)]="lowerLimit" [disabled]="isLoading" min="0" oninput="validity.valid||(value='');" type="number" (change)="onLimitChange()" />
           </mat-form-field>
         </div>
       </div>
@@ -186,6 +186,9 @@
                     Unit or Equipment Functional Description
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                    Life %
+                  </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
                     Average Year
                   </th>
                   <th *ngFor="let header of years" class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -199,6 +202,13 @@
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-bold text-xs font-weight-bolder">Total</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm text-bold">-</p>
                       </div>
                     </div>
                   </td>
@@ -228,6 +238,13 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm text-bold">-</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
                         <p class="mb-0 text-sm text-bold">{{totalAverageYearsCostC | currency : "USD" : 'symbol' : '1.0-0'}}</p>
                       </div>
                     </div>
@@ -245,6 +262,13 @@
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-bold text-xs font-weight-bolder">{{yearsCostsViewTable[i]?.at(0)}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="bg-light">
+                    <div class="d-flex px-3 py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">{{lifeArray[i]}}%</p>
                       </div>
                     </div>
                   </td>

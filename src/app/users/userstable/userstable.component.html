@@ -62,12 +62,7 @@
                   >
                     Role
                   </th>
-                  <th
-                    class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                    mat-sort-header="userStatus"
-                  >
-                    Status
-                  </th>
+
                   <th
                     class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
                   >
@@ -114,22 +109,6 @@
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column">
-                        <p class="mb-0 text-sm" *ngIf="user.userStatus == true">
-                          <i class=" small material-icons text-success">brightness_1</i> Active
-                        </p>
-                        <p
-                          class="mb-0 text-sm"
-                          *ngIf="user.userStatus == false"
-                        >
-                        <i class=" small material-icons text-danger">brightness_1</i> Inactive
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-
                   <td class="mb-0">
                     <div class="d-flex">
                       <div class="d-flex flex-column">
@@ -242,7 +221,7 @@
                 [multiple]="true"
                 optionLabel="name"
                 [listStyle]="{ 'max-height': '500px' }"
-                [style]="{ width: '28rem' }"
+                [style]="{ width: 'auto' }"
               >
                 <ng-template let-client pTemplate="item">
                   <div>

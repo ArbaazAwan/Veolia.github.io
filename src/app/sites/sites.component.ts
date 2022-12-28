@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 import { ClientService } from '../clients/client.service';
+import { Router } from '@angular/router';
 
 type SiteType = 'true' | 'false';
 
@@ -16,9 +17,15 @@ export class SitesComponent implements OnInit {
 
   sitesArray: any[] = [];
   form: FormGroup = this.fb.group({
-    siteName: ['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-    selectedClient: ['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-    siteStatus: null
+    siteName: [
+      '',
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
+    selectedClient: [
+      '',
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
+    siteStatus: null,
   });
   isLoading: boolean = false;
   sites: any[] = [];
@@ -40,8 +47,9 @@ export class SitesComponent implements OnInit {
     private fb: FormBuilder,
     private siteService: SiteService,
     private userService: UserService,
-    private clientService: ClientService
-  ) { }
+    private clientService: ClientService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     if (
@@ -53,7 +61,7 @@ export class SitesComponent implements OnInit {
     } else {
       localStorage.setItem('firstReload', 'true');
     }
-
+    this.checkUserRole();
     this.getSites();
     this.selectedClient = localStorage.getItem('clientId');
   }
@@ -99,19 +107,14 @@ export class SitesComponent implements OnInit {
       const [_site] = el;
 
       this.currentSite = _site;
-      console.log('site',_site)
-
-      this.clientService.getClientById(_site.clientId).subscribe(
-        (res:any)=>{
-          console.log("client res", res)
-          let c =  this.form.controls;
-          c['siteName'].setValue(_site.siteName);
-          c['siteStatus'].setValue(_site.siteStatus);
-          c['selectedClient'].setValue(res[0].clientName)
-          c['selectedClient'].disable();
-          this.isEditFormLoading = false;
-        }
-      )
+      let c = this.form.controls;
+      c['siteName'].setValue(_site.siteName);
+      c['siteStatus'].setValue(_site.siteStatus);
+      this.clientService.getClientById(_site.clientId).subscribe((res: any) => {
+        c['selectedClient'].setValue(res[0].clientName);
+        c['selectedClient'].disable();
+        this.isEditFormLoading = false;
+      });
     });
   }
 
@@ -127,6 +130,7 @@ export class SitesComponent implements OnInit {
               'close'
             );
             this.getSites();
+            this.resetForm();
           },
           error: (err) => {
             this.error = err.message;
@@ -148,8 +152,16 @@ export class SitesComponent implements OnInit {
   }
 
   populateClients() {
+    this.form.controls['selectedClient'].enable();
     this.clientService.getClients().subscribe((res: any) => {
       this.clients = res;
     });
+  }
+
+  checkUserRole() {
+    var userRole = localStorage.getItem('role');
+    if (userRole != 'admin') {
+      this.router.navigate(['/clientslist']);
+    }
   }
 }

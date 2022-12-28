@@ -60,8 +60,8 @@ export class ViewMasterTableComponent implements OnInit {
 
         this.completeMaster = el;
         this.files = this.nodeService.getFilesystem(this.completeMaster); //initializing nodes
-
-        // console.log("files:",this.files);
+        this.files = this.nodeService.getFilesystem(this.completeMaster);
+        // console.log('files:', this.files);
 
         if (this.completeMaster) {
           if (this.completeMaster.master)
@@ -71,7 +71,7 @@ export class ViewMasterTableComponent implements OnInit {
             this.events = this.completeMaster.events;
             this.cols = [
               { field: 'desc', header: '' },
-              { field: 'oh', header: 'OverHaul' },
+              { field: 'oh', header: 'Overhaul' },
             ];
 
             for (let i = 0; i < this.events.length; i++) {
