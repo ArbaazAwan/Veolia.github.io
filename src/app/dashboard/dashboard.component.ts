@@ -70,8 +70,8 @@ export class DashboardComponent implements OnInit {
                 limit
               );
             obj.subscribe((res: any) => {
-              this.averagesOfYears.push(Math.floor(res.averageCost));
-              this.totalAverageYearsCost += Math.floor(res.averageCost);
+              this.averagesOfYears.push(Math.round(res.averageCost));
+              this.totalAverageYearsCost += Math.round(res.averageCost);
               this.yearsCostsViewTable.push(res.yearsCosts);
               this.lifeArray.push(res.life);
               this.totalYearsCosts = res.totalYearsCosts;
@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
     this.minYear = this.pricesC.indexOf(this.minYearCostC) + 1;
 
     //getting total average cost with contigency
-    this.totalAverageYearsCostC = Math.floor(
+    this.totalAverageYearsCostC = Math.round(
       this.totalAverageYearsCost +
         this.percentage(this.totalAverageYearsCost, this.contigency)
     );

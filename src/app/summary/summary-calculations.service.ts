@@ -221,18 +221,21 @@ export class SummaryCalculationsService {
         for (let y = 1; y <= 50; y++) {
           //check if the limits are applicable
           if (limit) {
-            if (limit.upperLimit && limit.lowerLimit) {
+            if (
+              limit.upperLimit != undefined &&
+              limit.lowerLimit != undefined
+            ) {
               if (
                 yearsCosts[y] > limit.upperLimit ||
                 yearsCosts[y] < limit.lowerLimit
               ) {
                 yearsCosts[y] = 0;
               }
-            } else if (limit.upperLimit) {
+            } else if (limit.upperLimit != undefined) {
               if (yearsCosts[y] > limit.upperLimit) {
                 yearsCosts[y] = 0;
               }
-            } else if (limit.lowerLimit) {
+            } else if (limit.lowerLimit != undefined) {
               if (yearsCosts[y] < limit.lowerLimit) {
                 yearsCosts[y] = 0;
               }
@@ -240,8 +243,6 @@ export class SummaryCalculationsService {
               this.totalYearsCosts[y] += yearsCosts[y];
             }
           }
-          //calculating totalYearsCosts
-          this.totalYearsCosts[y] += yearsCosts[y];
         }
 
         //calculating averages
@@ -250,9 +251,9 @@ export class SummaryCalculationsService {
         for (let i = 0; i < Number(this.clientContractYears); i++) {
           totalCost += yearsCosts[i + 1];
         }
-        let averageCost = Math.round(
-          totalCost / Number(this.clientContractYears)
-        );
+        let averageCost = 0;
+        averageCost = Math.round(totalCost / Number(this.clientContractYears));
+
         yearsCosts[0] = summary.unit;
 
         return {
