@@ -78,7 +78,7 @@ export class SummaryCalculationsService {
         } else {
           quantity = 1;
         }
-        let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
+        let replacementCostYear = Math.round(Number(lifeMonths) / 12);
 
         if (summary.summaryload) {
           load = summary.summaryload / 100;
@@ -161,7 +161,6 @@ export class SummaryCalculationsService {
           if (ovStretch == 'Yes') {
             ovOccured = this.getOccurence(overhaulLife, load, month);
             if (ovOccured <= lifeMonths) {
-              console.log('ovOccured', ovOccured);
               const year = Math.ceil(ovOccured / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }
@@ -251,7 +250,9 @@ export class SummaryCalculationsService {
         for (let i = 0; i < Number(this.clientContractYears); i++) {
           totalCost += yearsCosts[i + 1];
         }
-        let averageCost = totalCost / Number(this.clientContractYears);
+        let averageCost = Math.round(
+          totalCost / Number(this.clientContractYears)
+        );
         yearsCosts[0] = summary.unit;
 
         return {

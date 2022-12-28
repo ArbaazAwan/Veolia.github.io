@@ -193,14 +193,10 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
-            console.log('year', y);
-            console.log('cost', eventsCosts[eventIndex]);
             yearsCosts[x] += eventsCosts[eventIndex] * Number(quantity);
           });
 
           ovYearsArray[y].overhaul.forEach((ovIndex: any) => {
-            console.log('year', y);
-            console.log('cost', overhaulCosts[ovIndex]);
             yearsCosts[x] += overhaulCosts[ovIndex] * Number(quantity);
           });
 
@@ -227,9 +223,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
-        let averageCost = totalCost / 50;
+        let averageCost = Math.round(totalCost / 50);
 
-        this.totalAverageYearsCost += Math.floor(averageCost);
+        this.totalAverageYearsCost += Math.round(averageCost);
 
         summaryData[0] = summary.unit;
         summaryData[1] = summary.summaryId;
