@@ -97,14 +97,19 @@ export class CreateSummaryFormComponent implements OnInit {
     let totalYears = 0;
     if (this.selectedMaster?.lifeMonths) {
       totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-      let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+      let lifePerc = Math.round(
+        ((totalYears - yearsPassed) / totalYears) * 100
+      );
       this.form.get('life')?.setValue(lifePerc);
       this.lifeLoader = false;
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
         totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
-        let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+        let lifePerc = Math.round(
+          ((totalYears - yearsPassed) / totalYears) * 100
+        );
+        console.log(lifePerc);
         this.form.get('life')?.setValue(lifePerc);
         this.lifeLoader = false;
       });
