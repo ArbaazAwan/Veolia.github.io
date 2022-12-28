@@ -162,7 +162,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (ovStretch == 'Yes') {
             ovOccured = this.getOccurence(overhaulLife, load, month);
             if (ovOccured <= lifeMonths) {
-              console.log('ovOccured', ovOccured);
               const year = Math.ceil(ovOccured / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }

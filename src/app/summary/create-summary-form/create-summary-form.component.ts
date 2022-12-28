@@ -109,7 +109,6 @@ export class CreateSummaryFormComponent implements OnInit {
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
-        console.log(lifePerc);
         this.form.get('life')?.setValue(lifePerc);
         this.lifeLoader = false;
       });
