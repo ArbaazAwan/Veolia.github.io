@@ -205,8 +205,6 @@ export class SummaryCalculationsService {
           if (y % replacementCostYear === 0) {
             yearsCosts[x] += Number(replacementCost) * Number(quantity);
           }
-          //calculating totalYearsCosts
-          this.totalYearsCosts[x] += yearsCosts[x];
           // checking if year is equal to cyclic year plus 1 then we will repeat all the cost again
           if (y == replacementCostYear) {
             y = 0;
@@ -221,28 +219,25 @@ export class SummaryCalculationsService {
         for (let y = 1; y <= 50; y++) {
           //check if the limits are applicable
           if (limit) {
-            if (
-              limit.upperLimit != undefined &&
-              limit.lowerLimit != undefined
-            ) {
+            if (limit.upperLimit && limit.lowerLimit) {
               if (
                 yearsCosts[y] > limit.upperLimit ||
                 yearsCosts[y] < limit.lowerLimit
               ) {
                 yearsCosts[y] = 0;
               }
-            } else if (limit.upperLimit != undefined) {
+            } else if (limit.upperLimit) {
               if (yearsCosts[y] > limit.upperLimit) {
                 yearsCosts[y] = 0;
               }
-            } else if (limit.lowerLimit != undefined) {
+            } else if (limit.lowerLimit) {
               if (yearsCosts[y] < limit.lowerLimit) {
                 yearsCosts[y] = 0;
               }
-              //calculating totalYearsCosts
-              this.totalYearsCosts[y] += yearsCosts[y];
             }
           }
+          //calculating totalYearsCosts
+          this.totalYearsCosts[y] += yearsCosts[y];
         }
 
         //calculating averages
