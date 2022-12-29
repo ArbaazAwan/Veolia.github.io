@@ -290,5 +290,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    this.asset.setValue('');
   }
 }
