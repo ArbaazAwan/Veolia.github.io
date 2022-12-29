@@ -121,13 +121,13 @@ export class SummaryCalculationsService {
         var occured = 0;
         for (let i = 0; i < events.length; i++) {
           // fetching stretch from every event
-          let stretch = events[i].evStretch;
+          let stretch = events[i].evStretch.toLowerCase();
           // initiating monthIndex to store every month cost
-          let monthIndex = 0;
+          let monthIndex = 1;
           // loop for months till 50 years
           for (let month = 1; month <= 600; month++) {
             // checking if the stretch is yes
-            if (stretch == 'Yes') {
+            if (stretch == 'yes') {
               // fetch calculated occured months
               occured = this.getOccurence(events[i].evOccurence, load, month);
               // we only need occurence till the end life of the asset so we are checkin if the occurence is less than equal to life months of asset
@@ -154,7 +154,7 @@ export class SummaryCalculationsService {
           }
         }
 
-        let ovMonthIndex = 0;
+        let ovMonthIndex = 1;
         var ovOccured = 0;
         for (let month = 1; month <= 600; month++) {
           let ovStretch = master.overhaul.ovStretch;
@@ -189,8 +189,6 @@ export class SummaryCalculationsService {
           startIndex = startYear;
         }
 
-        var ovOccured = 0;
-
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
@@ -216,7 +214,7 @@ export class SummaryCalculationsService {
           }
         }
 
-        for (let y = 1; y <= 50; y++) {
+        for (let y = 1; y < 50; y++) {
           //check if the limits are applicable
           if (limit) {
             if (limit.upperLimit && limit.lowerLimit) {
