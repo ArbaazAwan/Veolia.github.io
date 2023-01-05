@@ -15,4 +15,16 @@ export class MainComponent implements OnInit {
   isClientListRoute() {
     return this.router.url === '/clientslist';
   }
+
+  onActivate(event: any) {
+    setTimeout(()=>{
+      window.scroll({ 
+            top: 0, 
+            left: 0, 
+            behavior: 'smooth' 
+     }),
+     1000
+    })
+    
+ }
 }

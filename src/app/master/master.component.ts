@@ -37,12 +37,6 @@ export class MasterComponent implements OnInit {
     this.siteService.getSiteById(this.siteId).subscribe({
       next: (site: any) => {
         this.siteStatus = site[0].siteStatus;
-        if (this.siteStatus == false) {
-          this.summaryService.openSnackBar(
-            'Site status is in-active. In order to insert records, please activate the site.',
-            'Close'
-          );
-        }
       },
       error: (err) => {
         console.log('error occured in getSiteStatus', err);
@@ -54,12 +48,6 @@ export class MasterComponent implements OnInit {
     this.clientService.getClientById(this.clientId).subscribe({
       next: (client: any) => {
         this.clientStatus = client[0].clientStatus;
-        if (this.clientStatus == false) {
-          this.summaryService.openSnackBar(
-            'Client status is in-active. In order to insert records, please activate the client.',
-            'Close'
-          );
-        }
       },
       error: (err) => {
         console.log('error occured in getclientStatus', err);

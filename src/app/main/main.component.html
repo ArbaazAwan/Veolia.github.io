@@ -12,5 +12,5 @@
 </aside>
 <main class="main-content d-flex flex-column overflow-hidden min-vh-100">
         <app-navbar></app-navbar>
-        <router-outlet></router-outlet>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
 </main>
