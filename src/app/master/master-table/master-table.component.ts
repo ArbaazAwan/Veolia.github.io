@@ -27,7 +27,7 @@ export class MasterTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSiteStatus();
-    if (this.siteId) this.getMasters(this.siteId);
+    this.getMasters();
     this.getClientStatus();
   }
 
@@ -115,26 +115,27 @@ export class MasterTableComponent implements OnInit {
     this.masterService.setMasterId(masterId);
   }
 
-  getMasters(siteId: any) {
-
-    if (this.siteId) {
+  getMasters()
+  {
       this.isLoading = true;
-      this.masterService.getMastersBySiteId(siteId).subscribe({
-        next: (masters: any) => {
-          this.masters = masters.masters;
+      this.masterService.getMasters().subscribe(
+      {
+        next: (res: any) => {
+          this.masters = res.masters;
           this.sortAssets({ active: 'masterId', direction: 'desc' });
           this.isLoading = false;
+
         },
         error: (error) => {
           this.isLoading = false;
+          this.masterService.openSnackBar('No record found in master table.', 'close');
         },
-      });
-    }
-
+      }
+      );
   }
 
   editMaster(masterId: any) {
-    this.masterService.setMasterId(masterId); 
+    this.masterService.setMasterId(masterId);
   }
 
   deleteMaster(id: any) {
