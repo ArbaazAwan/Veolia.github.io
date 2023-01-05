@@ -117,7 +117,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-sm" appearance="outline">
-                  <mat-label class="text-bold">Summary Style</mat-label>
+                  <mat-label class="text-bold">Style</mat-label>
                   <input formControlName="summaryStyle" matInput type="text" [ngClass]="
                         (form.controls['summaryStyle'].dirty ||
                           form.controls['summaryStyle'].touched) &&
@@ -233,17 +233,10 @@
 
                 <mat-form-field appearance="outline" class="text-sm">
                   <mat-label>new Date field</mat-label>
-                  <input formControlName="installmentDate" matInput [matDatepicker]="picker2" />
+                  <input matInput [matDatepicker]="picker2" />
                   <mat-hint>MM/DD/YYYY</mat-hint>
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
-                  <!-- <small class="text-danger float-end" *ngIf="
-                        (form.controls['installmentDate'].dirty ||
-                          form.controls['installmentDate'].touched) &&
-                        form.hasError('required', 'installmentDate')
-                      ">
-                    date is required
-                  </small> -->
                 </mat-form-field>
 
                 <mat-form-field class="text-sm" appearance="outline">
@@ -253,20 +246,7 @@
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
                   </mat-label>
-                  <input formControlName="life" matInput type="number" [ngClass]="
-                        (form.controls['life'].dirty ||
-                          form.controls['life'].touched) &&
-                        form.hasError('required', 'life') == true
-                          ? 'border-danger'
-                          : ''
-                      " />
-                  <!-- <small class="text-danger float-end" *ngIf="
-                        (form.controls['life'].dirty ||
-                          form.controls['life'].touched) &&
-                        form.hasError('required', 'life')
-                      ">
-                    life is required
-                  </small> -->
+                  <input matInput type="number" />
                 </mat-form-field>
               </div>
             </div>
