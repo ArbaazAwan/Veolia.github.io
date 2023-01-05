@@ -143,9 +143,18 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   getMasters() {
-      this.masterService.getMasters().subscribe((res: any) => {
-        this.masters = res;
-      });
+      this.masterService.getMasters().subscribe(
+        {
+          next:(res: any) => {
+            this.masters = res.masters;
+            if(this.masters.length<=0)
+              this.masterService.openSnackBar('No record found in master table', 'close');
+          },
+          error:(error)=>{
+            this.masterService.openSnackBar('Error occured in getMasters', 'close');
+          }
+        }
+      );
   }
 
   getForm() {
