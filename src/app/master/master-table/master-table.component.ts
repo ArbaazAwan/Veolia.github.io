@@ -122,17 +122,13 @@ export class MasterTableComponent implements OnInit {
       {
         next: (res: any) => {
           this.masters = res.masters;
-          if(this.masters.length<=0){
-            this.masterService.openSnackBar('No record found in master table.', 'close');
-          }
-          else{
-            this.sortAssets({ active: 'masterId', direction: 'desc' });
-          }
+          this.sortAssets({ active: 'masterId', direction: 'desc' });
           this.isLoading = false;
 
         },
         error: (error) => {
           this.isLoading = false;
+          this.masterService.openSnackBar('No record found in master table.', 'close');
         },
       }
       );

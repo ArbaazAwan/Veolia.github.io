@@ -51,12 +51,9 @@ export class UnitComponent implements OnInit {
       {
         next:(res: any) => {
           this.masters = res.masters;
-          if(this.masters.length<=0){
-            this.userService.openSnackBar('No record found in master table', 'close');
-          }
         },
         error:(error)=>{
-          this.userService.openSnackBar('Error occured in getMaster', 'close');
+          this.userService.openSnackBar('No record found in master table', 'close');
         }
       }
       );

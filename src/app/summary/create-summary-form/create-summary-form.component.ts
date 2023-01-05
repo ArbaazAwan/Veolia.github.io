@@ -69,8 +69,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldAssetType
         ? master.oldAssetType
         : '' + ' - ' + master.newAssetType
-        ? master.newAssetType
-        : ''
+          ? master.newAssetType
+          : ''
     );
     c.size.setValue(master.masterSize);
     c.summaryStyle.setValue(master.masterStyle);
@@ -78,8 +78,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldDescription
         ? master.oldDescription
         : '' + ',' + master.newDescription
-        ? master.newDescription
-        : ''
+          ? master.newDescription
+          : ''
     );
     c.dutyApplication.setValue(master.dutyApplication);
     c.quality.setValue(master.quality);
@@ -143,18 +143,16 @@ export class CreateSummaryFormComponent implements OnInit {
   }
 
   getMasters() {
-      this.masterService.getMasters().subscribe(
-        {
-          next:(res: any) => {
-            this.masters = res.masters;
-            if(this.masters.length<=0)
-              this.masterService.openSnackBar('No record found in master table', 'close');
-          },
-          error:(error)=>{
-            this.masterService.openSnackBar('Error occured in getMasters', 'close');
-          }
+    this.masterService.getMasters().subscribe(
+      {
+        next: (res: any) => {
+          this.masters = res.masters;
+        },
+        error: (error) => {
+          this.masterService.openSnackBar('No record found in master table', 'close');
         }
-      );
+      }
+    );
   }
 
   getForm() {
