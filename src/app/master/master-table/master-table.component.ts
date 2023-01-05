@@ -27,7 +27,7 @@ export class MasterTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSiteStatus();
-    if (this.siteId) this.getMasters(this.siteId);
+    this.getMasters();
     this.getClientStatus();
   }
 
@@ -115,26 +115,25 @@ export class MasterTableComponent implements OnInit {
     this.masterService.setMasterId(masterId);
   }
 
-  getMasters(siteId: any) {
+  getMasters() {
 
-    if (this.siteId) {
       this.isLoading = true;
-      this.masterService.getMastersBySiteId(siteId).subscribe({
+      this.masterService.getMasters().subscribe(
+        {
         next: (masters: any) => {
-          this.masters = masters.masters;
+          this.masters = masters;
           this.sortAssets({ active: 'masterId', direction: 'desc' });
           this.isLoading = false;
         },
         error: (error) => {
           this.isLoading = false;
         },
-      });
-    }
-
+      }
+      );
   }
 
   editMaster(masterId: any) {
-    this.masterService.setMasterId(masterId); 
+    this.masterService.setMasterId(masterId);
   }
 
   deleteMaster(id: any) {

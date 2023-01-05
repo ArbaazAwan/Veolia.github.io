@@ -25,7 +25,7 @@ export class UnitComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.getMastersBySiteId(this.siteId);
+    this.getMasters();
   }
 
   initForm() {
@@ -40,15 +40,15 @@ export class UnitComponent implements OnInit {
       return (
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterSize.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterStyle.toLowerCase().indexOf(enteredData) > -1
+        master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
       );
     });
   }
 
-  getMastersBySiteId(siteId: any) {
-    this.masterService.getMastersBySiteId(siteId).subscribe((res: any) => {
-      if (res.masters) this.masters = res.masters;
+  getMasters() {
+    this.masterService.getMasters().subscribe((res: any) => {
+      this.masters = res;
     });
   }
 
