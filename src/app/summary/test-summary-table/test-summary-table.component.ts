@@ -15,7 +15,10 @@ export class TestSummaryTableComponent implements OnInit {
   constructor(private summaryService: SummaryService) { }
 
   ngOnInit(): void {
+    this.getSummaries();
+  }
 
+  getSummaries(){
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
       next: (summaries: any) => {
         this.summaryData = summaries.summary;
@@ -55,6 +58,7 @@ export class TestSummaryTableComponent implements OnInit {
         next:(_)=>{
           this.summaryService.openSnackBar('Record updated successfully!', 'close');
           delete this.clonedSummaries[summary.summaryId];
+          this.getSummaries();
         },
         error:(_)=>{
           this.summaryService.openSnackBar('Error occured during update.', 'close')
@@ -69,6 +73,7 @@ export class TestSummaryTableComponent implements OnInit {
         next:(_)=>{
           delete this.clonedSummaries[summary.summaryId];
           this.summaryService.openSnackBar('Record deleted successfully!', 'close');
+          this.getSummaries();
         },
         error:(_)=>{
           this.summaryService.openSnackBar('Error occured during update.', 'close')
