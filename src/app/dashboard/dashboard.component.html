@@ -182,7 +182,7 @@
             <table class="table table-blocked table-hover mb-0" id="dashboard-details-table">
               <thead>
                 <tr class="bg-light">
-                  <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder Data-Wrap">
                     Unit or Equipment Functional Description
                   </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -201,7 +201,7 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-bold text-xs font-weight-bolder">Total</p>
+                        <p class="mb-0 text-bold text-xs font-weight-bolder Data-Wrap">Total</p>
                       </div>
                     </div>
                   </td>
@@ -231,7 +231,7 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-bold text-xs font-weight-bolder">Total with Contigency</p>
+                        <p class="mb-0 text-bold text-xs font-weight-bolder Data-Wrap">Total with Contigency</p>
                       </div>
                     </div>
                   </td>
@@ -258,7 +258,7 @@
                   </td>
                 </tr>
                 <tr *ngFor="let summary of yearsCostsViewTable let i = index;">
-                  <td class="bg-light">
+                  <td class="bg-light Data-Wrap">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-bold text-xs font-weight-bolder">{{yearsCostsViewTable[i]?.at(0)}}</p>
@@ -268,7 +268,7 @@
                   <td class="bg-light">
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-bold text-xs font-weight-bolder">{{lifeArray[i]}}%</p>
+                        <p class="mb-0 text-bold text-xs font-weight-bolder">{{lifeArray[i]}}</p>
                       </div>
                     </div>
                   </td>

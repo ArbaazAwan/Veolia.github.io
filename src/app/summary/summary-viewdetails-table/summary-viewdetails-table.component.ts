@@ -79,7 +79,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         } else {
           quantity = 1;
         }
-        let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
+        let replacementCostYear = Math.round(Number(lifeMonths) / 12);
 
         if (summary.summaryload) {
           load = summary.summaryload / 100;
@@ -162,7 +162,6 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           if (ovStretch == 'Yes') {
             ovOccured = this.getOccurence(overhaulLife, load, month);
             if (ovOccured <= lifeMonths) {
-              console.log('ovOccured', ovOccured);
               const year = Math.ceil(ovOccured / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }
@@ -224,9 +223,9 @@ export class SummaryViewdetailsTableComponent implements OnInit {
         yearsCosts.forEach((cost: any) => {
           totalCost += cost;
         });
-        let averageCost = totalCost / 50;
+        let averageCost = Math.round(totalCost / 50);
 
-        this.totalAverageYearsCost += Math.floor(averageCost);
+        this.totalAverageYearsCost += Math.round(averageCost);
 
         summaryData[0] = summary.unit;
         summaryData[1] = summary.summaryId;

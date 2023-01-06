@@ -39,7 +39,7 @@ export class CreateSummaryFormComponent implements OnInit {
         this.onEditSummary(summaryId);
       }
     });
-    this.getMastersBySiteId(this.siteId);
+    this.getMasters();
 
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
@@ -52,8 +52,8 @@ export class CreateSummaryFormComponent implements OnInit {
       return (
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterSize.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterStyle.toLowerCase().indexOf(enteredData) > -1
+        master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
       );
     });
   }
@@ -69,8 +69,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldAssetType
         ? master.oldAssetType
         : '' + ' - ' + master.newAssetType
-        ? master.newAssetType
-        : ''
+          ? master.newAssetType
+          : ''
     );
     c.size.setValue(master.masterSize);
     c.summaryStyle.setValue(master.masterStyle);
@@ -78,8 +78,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldDescription
         ? master.oldDescription
         : '' + ',' + master.newDescription
-        ? master.newDescription
-        : ''
+          ? master.newDescription
+          : ''
     );
     c.dutyApplication.setValue(master.dutyApplication);
     c.quality.setValue(master.quality);
@@ -97,14 +97,18 @@ export class CreateSummaryFormComponent implements OnInit {
     let totalYears = 0;
     if (this.selectedMaster?.lifeMonths) {
       totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-      let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+      let lifePerc = Math.round(
+        ((totalYears - yearsPassed) / totalYears) * 100
+      );
       this.form.get('life')?.setValue(lifePerc);
       this.lifeLoader = false;
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
         totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
-        let lifePerc = ((totalYears - yearsPassed) / totalYears) * 100;
+        let lifePerc = Math.round(
+          ((totalYears - yearsPassed) / totalYears) * 100
+        );
         this.form.get('life')?.setValue(lifePerc);
         this.lifeLoader = false;
       });
@@ -138,12 +142,17 @@ export class CreateSummaryFormComponent implements OnInit {
     }
   }
 
-  getMastersBySiteId(siteId: any) {
-    if (siteId) {
-      this.masterService.getMastersBySiteId(siteId).subscribe((res: any) => {
-        if (res.masters) this.masters = res.masters;
-      });
-    }
+  getMasters() {
+    this.masterService.getMasters().subscribe(
+      {
+        next: (res: any) => {
+          this.masters = res.masters;
+        },
+        error: (error) => {
+          this.masterService.openSnackBar('No record found in master table', 'close');
+        }
+      }
+    );
   }
 
   getForm() {
@@ -286,5 +295,6 @@ export class CreateSummaryFormComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    this.asset.setValue('');
   }
 }

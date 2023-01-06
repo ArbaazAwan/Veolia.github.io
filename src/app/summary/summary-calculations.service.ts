@@ -78,7 +78,7 @@ export class SummaryCalculationsService {
         } else {
           quantity = 1;
         }
-        let replacementCostYear = Math.ceil(Number(lifeMonths) / 12);
+        let replacementCostYear = Math.round(Number(lifeMonths) / 12);
 
         if (summary.summaryload) {
           load = summary.summaryload / 100;
@@ -121,13 +121,13 @@ export class SummaryCalculationsService {
         var occured = 0;
         for (let i = 0; i < events.length; i++) {
           // fetching stretch from every event
-          let stretch = events[i].evStretch;
+          let stretch = events[i].evStretch.toLowerCase();
           // initiating monthIndex to store every month cost
-          let monthIndex = 0;
+          let monthIndex = 1;
           // loop for months till 50 years
           for (let month = 1; month <= 600; month++) {
             // checking if the stretch is yes
-            if (stretch == 'Yes') {
+            if (stretch == 'yes') {
               // fetch calculated occured months
               occured = this.getOccurence(events[i].evOccurence, load, month);
               // we only need occurence till the end life of the asset so we are checkin if the occurence is less than equal to life months of asset
@@ -154,14 +154,13 @@ export class SummaryCalculationsService {
           }
         }
 
-        let ovMonthIndex = 0;
+        let ovMonthIndex = 1;
         var ovOccured = 0;
         for (let month = 1; month <= 600; month++) {
           let ovStretch = master.overhaul.ovStretch;
           if (ovStretch == 'Yes') {
             ovOccured = this.getOccurence(overhaulLife, load, month);
             if (ovOccured <= lifeMonths) {
-              console.log('ovOccured', ovOccured);
               const year = Math.ceil(ovOccured / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }
@@ -190,8 +189,6 @@ export class SummaryCalculationsService {
           startIndex = startYear;
         }
 
-        var ovOccured = 0;
-
         for (let y = startIndex; y < 50; y++) {
           //calculating yearly costs
           yearsArray[y].events.forEach((eventIndex: any) => {
@@ -206,8 +203,6 @@ export class SummaryCalculationsService {
           if (y % replacementCostYear === 0) {
             yearsCosts[x] += Number(replacementCost) * Number(quantity);
           }
-          //calculating totalYearsCosts
-          this.totalYearsCosts[x] += yearsCosts[x];
           // checking if year is equal to cyclic year plus 1 then we will repeat all the cost again
           if (y == replacementCostYear) {
             y = 0;
@@ -219,7 +214,7 @@ export class SummaryCalculationsService {
           }
         }
 
-        for (let y = 1; y <= 50; y++) {
+        for (let y = 1; y < 50; y++) {
           //check if the limits are applicable
           if (limit) {
             if (limit.upperLimit && limit.lowerLimit) {
@@ -237,8 +232,6 @@ export class SummaryCalculationsService {
               if (yearsCosts[y] < limit.lowerLimit) {
                 yearsCosts[y] = 0;
               }
-              //calculating totalYearsCosts
-              this.totalYearsCosts[y] += yearsCosts[y];
             }
           }
           //calculating totalYearsCosts
@@ -251,7 +244,9 @@ export class SummaryCalculationsService {
         for (let i = 0; i < Number(this.clientContractYears); i++) {
           totalCost += yearsCosts[i + 1];
         }
-        let averageCost = totalCost / Number(this.clientContractYears);
+        let averageCost = 0;
+        averageCost = Math.round(totalCost / Number(this.clientContractYears));
+
         yearsCosts[0] = summary.unit;
 
         return {
