@@ -8,6 +8,9 @@
         ID
       </th>
       <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Master Id
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
         Unit or Equipment Functional Description
       </th>
       <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
@@ -67,6 +70,16 @@
           </ng-template>
           <ng-template pTemplate="output">
             {{summary.summaryId}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.masterId}}
           </ng-template>
         </p-cellEditor>
       </td>
