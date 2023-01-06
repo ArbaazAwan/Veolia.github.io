@@ -1,36 +1,184 @@
-<!-- <p-table [value]="summaryData" dataKey="id" editMode="row">
+<p-table [value]="summaryData" dataKey="summaryId" editMode="row" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true">
   <ng-template pTemplate="header">
-      <tr>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Quantity</th>
-          <th style="width:8rem"></th>
-      </tr>
+    <tr>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        ID
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Unit
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        App Description
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Asset Type
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Style
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Size
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Duty/Application
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Quality
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Quantity
+      </th>
+
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Load%
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Life%
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Installation Date
+      </th>
+      <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+        Created Date
+      </th>
+      <th>
+
+      </th>
+    </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-      <tr [pEditableRow]="product">
-          <td pEditableColumn>
-              <p-cellEditor>
-                  <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="product.code">
-                  </ng-template>
-                  <ng-template pTemplate="output">
-                      {{product.code}}
-                  </ng-template>
-              </p-cellEditor>
-          </td>
-          <td pEditableColumn>
-              <p-cellEditor>
-                  <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="product.name" required>
-                  </ng-template>
-                  <ng-template pTemplate="output">
-                      {{product.name}}
-                  </ng-template>
-              </p-cellEditor>
-          </td>
-          <td pEditableColumn>
+  <ng-template pTemplate="body" let-summary let-editing="editing" let-ri="rowIndex">
+    <tr [pEditableRow]="summary">
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" disabled [(ngModel)]="summary.summaryId">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.summaryId}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.unit">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.unit}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.appDescription">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.appDescription}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.assetType">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.assetType}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.summaryStyle">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.summaryStyle}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.summarySize">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.summarySize}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.dutyApplication">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.dutyApplication}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.quality">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.quality}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.quantity">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.quantity}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.summaryload">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.summaryload}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="text" [(ngModel)]="summary.life">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.life}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText type="date" [(ngModel)]="summary.installmentDate">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.installmentDate | date}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText disabled type="text" [(ngModel)]="summary.dateCreated">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{summary.dateCreated | date}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <!-- <td>
               <p-cellEditor>
                   <ng-template pTemplate="input">
                       <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus" [style]="{'width':'100%'}"></p-dropdown>
@@ -39,22 +187,17 @@
                       {{product.inventoryStatus}}
                   </ng-template>
               </p-cellEditor>
-          </td>
-          <td pEditableColumn>
-              <p-cellEditor>
-                  <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="product.price">
-                  </ng-template>
-                  <ng-template pTemplate="output">
-                      {{product.price | currency: 'USD'}}
-                  </ng-template>
-              </p-cellEditor>
-          </td>
-          <td style="text-align:center">
-              <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-              <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-          </td>
-      </tr>
+          </td> -->
+      <td style="text-align:center">
+        <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+          (click)="onRowEditInit(summary)" class="p-button-rounded p-button-text"></button>
+        <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+          (click)="onRowEditSave(summary)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+          <button *ngIf="!editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-trash"
+          (click)="onRowDelete(summary)" class="p-button-rounded p-button-text p-button-danger p-mr-2"></button>
+        <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+          (click)="onRowEditCancel(summary, ri)" class="p-button-rounded p-button-text p-button-warning"></button>
+      </td>
+    </tr>
   </ng-template>
-</p-table> -->
+</p-table>

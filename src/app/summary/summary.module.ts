@@ -20,6 +20,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TestSummaryTableComponent } from './test-summary-table/test-summary-table.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
+
 
 
 
@@ -48,7 +51,9 @@ import { TableModule } from 'primeng/table';
     MatProgressSpinnerModule,
     NgxPaginationModule,
     DropdownModule,
-    TableModule
+    TableModule,
+    ButtonModule,
+    InputTextModule
   ],
 })
 export class SummaryModule { }
