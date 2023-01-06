@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SummaryService } from '../summary.service';
-import 'primeicons/primeicons.css';
-
 
 @Component({
   selector: 'app-test-summary-table',
