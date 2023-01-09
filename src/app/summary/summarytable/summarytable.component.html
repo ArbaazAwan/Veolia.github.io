@@ -74,7 +74,7 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-summary let-editing="editing" let-ri="rowIndex">
+            <ng-template pTemplate="body" let-summary let-ri="rowIndex">
               <tr [pEditableRow]="summary">
                 <td>
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
