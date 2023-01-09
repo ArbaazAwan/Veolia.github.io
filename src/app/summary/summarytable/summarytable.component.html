@@ -3,7 +3,7 @@
     <div class="card my-1">
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-          <p class="text-white text-capitalize text-bold ps-3">Record Table</p>
+          <p class="text-white text-capitalize text-bold ps-3">Summary Table</p>
         </div>
       </div>
       <!-- Summary table -->
@@ -19,186 +19,268 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <table *ngIf="!isLoading" class="table table-blocked table-hover mx-3 mb-0" matSort
-            (matSortChange)="sortRecords($event)">
-            <thead>
+          <p-table [value]="summaryData|searchFilter" dataKey="summaryId" editMode="row" [scrollable]="true"
+            scrollHeight="400px" [resizableColumns]="true">
+            <ng-template pTemplate="header">
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-3" *ngIf="siteStatus && clientStatus">
-                  &nbsp;Actions
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Actions
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryId">
-                  ID
+                <th *ngIf="editing" class="overflow-visible text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Search Unit/Functional Description
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="unit">
-                  Unit
+                <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="description">
-                  App Description
+                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Master Id <p-sortIcon field="masterId"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="assetType">
-                  Asset Type
+                <th pSortableColumn="unit"
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2 overflow-visible">
+                  Unit or Equipment Functional Description <p-sortIcon field="unit"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryStyle">
-                  Style
+                <th pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summarySize">
-                  Size
+                <th pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Style <p-sortIcon field="summaryStyle"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="dutyApplication">
-                  Duty/Application
+                <th pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quality">
-                  Quality
+                <th pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Duty/Application <p-sortIcon field="dutyApplication"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="quantity">
-                  Quantity
+                <th pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Quality <p-sortIcon field="quality"></p-sortIcon>
                 </th>
-
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="summaryload">
-                  Load%
+                <th pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Quantity <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="life">
-                  Life%
+                <th pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Load% <p-sortIcon field="summaryload"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2"
-                  mat-sort-header="installationtDate">
-                  Installation Date
+                <th pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Installation Date <p-sortIcon field="installmentDate"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="createdDate">
-                  Created Date
+                <th pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Life% <p-sortIcon field="life"></p-sortIcon>
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Unit Template Descripton
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  unit template application
+                </th>
+                <th pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Created Date <p-sortIcon field="dateCreated"></p-sortIcon>
                 </th>
               </tr>
-            </thead>
-            <tbody>
-              <tr
-                *ngFor="let summary of sortedSummary | searchFilter: searchText | paginate: { itemsPerPage: 50, currentPage: p }">
-                <td *ngIf="siteStatus && clientStatus">
-                  <div class="d-flex mx-2">
-                    <div class="d-flex flex-column">
-                      <div ngbDropdown container="body" class="fix-size">
-                        <button class="btn btn-sm bg-gradient-primary" id="gfg" ngbDropdownToggle
-                          *ngIf="siteStatus && clientStatus">
-                          Actions
-                        </button>
-                        <div ngbDropdownMenu="gfg" style="margin-top: 0 !important">
-                          <button ngbDropdownItem class="" data-bs-toggle="modal" data-bs-target="#modal-form"
-                            (click)="editSummary(summary.summaryId)">
-                            <i class="material-icons">edit</i>&nbsp;Edit
-                          </button>
+            </ng-template>
+            <ng-template pTemplate="body" let-summary let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="summary">
+                <td class="text-align-center">
+                  <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                    (click)="onRowEditInit(summary)" class="p-button-rounded p-button-text"></button>
+                  <button *ngIf="!editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-trash"
+                    (click)="onRowDelete(summary)"
+                    class="p-button-rounded p-button-text p-button-danger p-mr-2"></button>
+                  <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                    (click)="onRowEditSave(summary)"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                  <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                    (click)="onRowEditCancel(summary, ri)"
+                    class="p-button-rounded p-button-text p-button-warning"></button>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" disabled [(ngModel)]="summary.summaryId">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.summaryId}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.masterId">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.masterId}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td class="">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.eqpFunctionalDesc}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
 
-                          <button ngbDropdownItem class="text-danger" (click)="deleteSummary(summary.summaryId)">
-                            <i class="material-icons">delete</i>&nbsp; Delete
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <td *ngIf="editing" class="overflow-visible">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange(selectedMaster)"
+                        [(ngModel)]="selectedMaster" optionLabel="oldAssetType" [filter]="true"
+                        filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality"
+                        placeholder="Search unit or functional description">
+                        <ng-template pTemplate="selectedMaster">
+                          <div *ngIf="selectedMaster">
+                            <div>
+                              {{selectedMaster.oldAssetType}} - {{ selectedMaster.newAssetType }},
+                              {{selectedMaster.masterStyle}}, {{selectedMaster.masterSize}},
+                              {{selectedMaster.dutyApplication}}, {{selectedMaster.quality}}
+                            </div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-master pTemplate="master">
+                          <div>
+                            <div>
+                              {{master.oldAssetType}} - {{ master.newAssetType }},
+                              {{master.masterStyle}}, {{master.masterSize}},
+                              {{master.dutyApplication}}, {{master.quality}}
+                            </div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td *ngIf="!editing">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.assetType">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.assetType}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryId }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.summaryStyle">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.summaryStyle}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1" id="unit">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.unit }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.summarySize">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.summarySize}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.appDescription }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.dutyApplication">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.dutyApplication}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.assetType }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.quality">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.quality}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summaryStyle }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.quantity">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.quantity}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.summarySize }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.summaryload">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.summaryload}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.dutyApplication }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="date" [(ngModel)]="summary.installmentDate"
+                        (change)="onInstallmentChange(summary)">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.installmentDate | date}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.quality }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.life">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.life}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">{{ summary.quantity }}</p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input disabled pInputText type="text"
+                      [(ngModel)]="summary.assetType + ' - ' + summary.summaryStyle + ', ' +
+                      summary.summarySize + ', ' + summary.dutyApplication + ', ' +
+                      summary.quality">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.assetType + ' - ' + summary.summaryStyle + ', ' +
+                      summary.summarySize + ', ' + summary.dutyApplication + ', ' +
+                      summary.quality }}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.summaryload / 100 | percent }}
-                      </p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.appDescription">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.appDescription}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
                 <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.life / 100 | percent }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.installmentDate | date: "mediumDate" }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex py-1">
-                    <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm">
-                        {{ summary.dateCreated | date: "mediumDate" }}
-                      </p>
-                    </div>
-                  </div>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText disabled type="text" [(ngModel)]="summary.dateCreated">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.dateCreated | date}}
+                    </ng-template>
+                  </p-cellEditor>
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-12 pagination-div">
-          <pagination-controls class="user-pagination" (pageChange)="p = $event"></pagination-controls>
+            </ng-template>
+          </p-table>
         </div>
       </div>
     </div>
