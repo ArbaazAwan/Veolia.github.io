@@ -21,7 +21,7 @@ export class SummarytableComponent implements OnInit {
 
   @Output() summaryEmitter:any = new EventEmitter();
   @Input() isLoading: boolean = false;
-  
+
   selectedAssets: any[] = [];
   searchText: string = '';
   siteId:any = localStorage.getItem("siteId");
@@ -127,9 +127,6 @@ export class SummarytableComponent implements OnInit {
   getSummariesBySiteId(siteId:any){
     this.summaryService.getSummariesBySiteId(siteId).subscribe({
       next: (summaries)=>{
-
-        console.log("summaries", summaries);
-
         this.summaryData = summaries;
       },
       error:(_)=>{

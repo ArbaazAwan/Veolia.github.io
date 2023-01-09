@@ -13,12 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { CreateSummaryFormComponent } from './create-summary-form/create-summary-form.component';
 import { SummaryViewdetailsTableComponent } from './summary-viewdetails-table/summary-viewdetails-table.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ImportSummaryComponent } from './import-summary/import-summary.component';
-
+import { TestSummaryTableComponent } from './test-summary-table/test-summary-table.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ImportSummaryComponent } from './import-summary/import-summary.componen
     CreateSummaryFormComponent,
     SummaryViewdetailsTableComponent,
     ImportSummaryComponent,
+    TestSummaryTableComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,9 @@ import { ImportSummaryComponent } from './import-summary/import-summary.componen
     MatNativeDateModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DropdownModule,
+    TableModule,
   ],
 })
 export class SummaryModule {}
