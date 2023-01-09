@@ -59,7 +59,7 @@ export class SummarytableComponent implements OnInit {
   onAssetChange(master: any) {
 
     this.summary.masterId = master.masterId;
-    this.summary.unit = this.getUnit(master);
+    this.summary.eqpFunctionalDesc = this.getUnit(master);
     this.summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
     this.summary.summaryStyle = master.masterStyle;
     this.summary.summarySize = master.masterSize;
