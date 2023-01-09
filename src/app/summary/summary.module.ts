@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ImportSummaryComponent } from './import-summary/import-summary.component';
 import { TestSummaryTableComponent } from './test-summary-table/test-summary-table.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
@@ -32,6 +33,7 @@ import {InputTextModule} from 'primeng/inputtext';
     SummarytableComponent,
     CreateSummaryFormComponent,
     SummaryViewdetailsTableComponent,
+    ImportSummaryComponent,
     TestSummaryTableComponent,
   ],
   imports: [
@@ -56,4 +58,4 @@ import {InputTextModule} from 'primeng/inputtext';
     InputTextModule
   ],
 })
-export class SummaryModule { }
+export class SummaryModule {}
