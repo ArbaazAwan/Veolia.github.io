@@ -10,11 +10,9 @@
 <app-import-summary></app-import-summary>
 
 <div class="container-fluid py-4">
-  <app-summarytable [isLoading]="isLoading" (summaryEmitter)="getSummary($event)"></app-summarytable>
+  <app-summarytable (summaryEmitter)="getSummary($event)"></app-summarytable>
 </div>
 
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
   <app-create-summary-form></app-create-summary-form>
 </div>
-
-<app-test-summary-table></app-test-summary-table>
