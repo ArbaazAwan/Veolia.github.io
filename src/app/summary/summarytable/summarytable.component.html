@@ -102,7 +102,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.masterId">
+                      <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.masterId}}
