@@ -21,6 +21,11 @@ import { ImportSummaryComponent } from './import-summary/import-summary.componen
 import { TestSummaryTableComponent } from './test-summary-table/test-summary-table.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import {InputTextModule} from 'primeng/inputtext';
+
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +54,8 @@ import { TableModule } from 'primeng/table';
     NgxPaginationModule,
     DropdownModule,
     TableModule,
+    ButtonModule,
+    InputTextModule
   ],
 })
 export class SummaryModule {}
