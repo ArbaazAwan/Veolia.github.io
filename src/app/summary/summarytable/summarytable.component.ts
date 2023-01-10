@@ -26,12 +26,12 @@ export class SummarytableComponent implements OnInit {
   filteredMasters: any = [];
   asset: FormControl = new FormControl(null);
   masters: any = [];
-  selectedMaster:any;
-  summary:any;
-  isLoading:boolean = false;
-  searchText!:FormControl;
+  selectedMaster: any;
+  summary: any;
+  isLoading: boolean = false;
+  searchText!: FormControl;
 
-  form:FormGroup = this.fb.group({
+  form: FormGroup = this.fb.group({
     unit: '',
     masterId: [{ value: '', disabled: true }],
     assetType: '',
@@ -46,7 +46,7 @@ export class SummarytableComponent implements OnInit {
     installmentDate: [null, Validators.required],
   })
 
-  constructor(private summaryService: SummaryService, private masterService:MasterService, private fb:FormBuilder) { }
+  constructor(private summaryService: SummaryService, private masterService: MasterService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getSummaries();
@@ -70,7 +70,7 @@ export class SummarytableComponent implements OnInit {
 
   }
 
-  onInstallmentChange(summary:any) {
+  onInstallmentChange(summary: any) {
 
     let x = summary.installmentDate.split('-');
     let installmentDate = Number(x[0]);
@@ -149,7 +149,7 @@ export class SummarytableComponent implements OnInit {
     );
   }
 
-  getSummaries(){
+  getSummaries() {
     this.isLoading = true;
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
       next: (summaries: any) => {
@@ -164,7 +164,7 @@ export class SummarytableComponent implements OnInit {
     });
   }
 
-  onSearch(text:any){
+  onSearch(text: any) {
     const searchPipe = new SearchPipe();
     this.filteredSummaries = searchPipe.transform(this.summaries, text);
   }
@@ -172,6 +172,27 @@ export class SummarytableComponent implements OnInit {
   onRowEditInit(summary: any) {
     this.clonedSummaries[summary.summaryId] = { ...summary };
     this.summary = summary;
+  }
+
+  onRowDuplicate(summaryId: any) {
+
+    this.summaryService.getSummaryById(summaryId).subscribe((res: any) => {
+      let summary = res[0];
+      if (summary) {
+        this.summaryService.postSummary(summary).subscribe(
+          {
+            next: (result: any) => {
+              this.summaryService.openSnackBar('Duplicate Record is Created.', 'close')
+              this.getSummaries();
+            },
+            error:(_)=>{
+              this.summaryService.openSnackBar('Error occured during duplication!', 'close')
+            }
+          }
+        )
+      }
+    })
+
   }
 
   onRowEditSave(summary: any) {
@@ -196,27 +217,27 @@ export class SummarytableComponent implements OnInit {
     this.summaryService
       .updateSummary(updateSummaryPayload, summary.summaryId)
       .subscribe({
-        next:(_)=>{
+        next: (_) => {
           this.summaryService.openSnackBar('Record updated successfully!', 'close');
           delete this.clonedSummaries[summary.summaryId];
           this.getSummaries();
         },
-        error:(_)=>{
+        error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
         }
       });
   }
 
-  onRowDelete(summary:any){
+  onRowDelete(summary: any) {
     this.summaryService
       .deleteSummary(summary.summaryId)
       .subscribe({
-        next:(_)=>{
+        next: (_) => {
           delete this.clonedSummaries[summary.summaryId];
           this.summaryService.openSnackBar('Record deleted successfully!', 'close');
           this.getSummaries();
         },
-        error:(_)=>{
+        error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
         }
       });
