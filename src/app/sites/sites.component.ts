@@ -69,7 +69,7 @@ export class SitesComponent implements OnInit {
   getSites() {
     this.isLoading = true;
     this.siteService.getSites().subscribe((res: any) => {
-      this.sites = res;
+      this.sites = res.sites;
       this.isLoading = false;
     });
   }
@@ -77,7 +77,6 @@ export class SitesComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.form.controls['selectedClient'].enable();
-
   }
 
   onSubmit() {
