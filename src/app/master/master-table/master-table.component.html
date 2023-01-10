@@ -4,7 +4,7 @@
       <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">
-            Assets Table
+            Master Table
           </p>
         </div>
       </div>
@@ -82,8 +82,7 @@
                   <div class="d-flex mx-2">
                     <div class="d-flex flex-column">
                       <div ngbDropdown>
-                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle
-                          >
+                        <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
                           Actions
                         </button>
                         <div ngbDropdownMenu="gfg"
@@ -94,15 +93,16 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" *ngIf="role == 'admin'&& siteStatus && clientStatus">
+                            data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin' && siteStatus && clientStatus">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin'">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
-                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)" *ngIf="role == 'admin' && siteStatus && clientStatus">
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)"
+                            *ngIf="role == 'admin'">
                             <i class="material-icons">delete</i>&nbsp;
                             Delete
                           </button>
