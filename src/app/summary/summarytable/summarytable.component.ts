@@ -1,8 +1,7 @@
-import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { ClientService } from 'src/app/clients/client.service';
-import { SiteService } from 'src/app/sites/site.service';
+import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
 
 export interface Task {
@@ -19,132 +18,209 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
-  @Output() summaryEmitter:any = new EventEmitter();
-  @Input() isLoading: boolean = false;
-
-  selectedAssets: any[] = [];
-  searchText: string = '';
-  siteId:any = localStorage.getItem("siteId");
-  p: number = 1;
-  siteStatus:boolean=false;
-  clientId=localStorage.getItem('clientId');
-  clientStatus:boolean=false;
-  sortedSummary: any[] = [];
-  summary: any[] = [];
   summaryData: any = [];
+  siteId: any = localStorage.getItem('siteId');
+  clonedSummaries: { [s: string]: any; } = {};
+  filteredMasters: any = [];
+  asset: FormControl = new FormControl(null);
+  masters: any = [];
+  selectedMaster:any;
+  summary:any;
+  editing:boolean = false;
+  isLoading:boolean = false;
+  searchText:string = '';
 
-  selection = new SelectionModel(true,[]);
+  form:FormGroup = this.fb.group({
+    unit: '',
+    masterId: [{ value: '', disabled: true }],
+    assetType: '',
+    summarySize: '',
+    summaryStyle: '',
+    appDescription: '',
+    dutyApplication: '',
+    quality: '',
+    quantity: '1',
+    summaryload: '100',
+    life: [null, Validators.required],
+    installmentDate: [null, Validators.required],
+  })
 
-  constructor(private summaryService:SummaryService, private siteService:SiteService,  private clientService:ClientService) {}
+  constructor(private summaryService: SummaryService, private masterService:MasterService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
-    this.getSiteStatus();
-    this.getClientStatus();
-    this.getSummariesBySiteId(this.siteId);
-   
+    this.getSummaries();
+    this.asset.valueChanges.subscribe((value: any) => {
+      this.filterData(value);
+    });
+    this.getMasters();
+  }
+
+
+  onAssetChange(master: any) {
+
+    this.summary.masterId = master.masterId;
+    this.summary.eqpFunctionalDesc = this.getUnit(master);
+    this.summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
+    this.summary.summaryStyle = master.masterStyle;
+    this.summary.summarySize = master.masterSize;
+    this.summary.dutyApplication = master.dutyApplication;
+    this.summary.quality = master.quality;
 
   }
 
-  getSiteStatus(){
-    this.siteService.getSiteById(this.siteId).subscribe({
-      next:(site:any)=>{
-        this.siteStatus = site[0].siteStatus;
-      },
-      error:(err)=>{
-        console.log("error occured in getSiteStatus", err);
-      }
-    })
-  }
+  onInstallmentChange(summary:any) {
 
-  getClientStatus(){
-    this.clientService.getClientById(this.clientId).subscribe({
-      next:(client:any)=>{
-        this.clientStatus = client[0].clientStatus;
-      },
-      error:(err)=>{
-        console.log("error occured in getclientStatus", err);
-      }
-    })
-  }
+    let x = summary.installmentDate.split('-');
+    let installmentDate = Number(x[0]);
 
-  sortRecords(sort: any) {
-    const data = this.summaryData.slice();
-    if (!sort.active || sort.direction === '') {
-      return;
+    let currentYear = Number(new Date().getFullYear());
+    let installationYear = Number(installmentDate);
+    let yearsPassed = currentYear - installationYear;
+    let totalYears = 0;
+    if (this.selectedMaster?.lifeMonths) {
+      totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
+      let lifePerc = Math.round(
+        ((totalYears - yearsPassed) / totalYears) * 100
+      );
+      summary.life = lifePerc;
+    } else {
+      this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
+        let master = res[0];
+        totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+        let lifePerc = Math.round(
+          ((totalYears - yearsPassed) / totalYears) * 100
+        );
+        summary.life = lifePerc;
+      });
     }
+  }
 
-    this.sortedSummary = data.sort((a:any, b:any) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'summaryId':
-          return this.compare(a.summaryId, b.summaryId, isAsc);
-        case 'unit':
-          return this.compare(a.unit, b.unit, isAsc);
-        case 'description':
-          return this.compare(a.description, b.description, isAsc);
-        case 'assetType':
-          return this.compare(a.assetType, b.assetType, isAsc);
-        case 'summaryStyle':
-          return this.compare(a.summaryStyle, b.summaryStyle, isAsc);
-        case 'summarySize':
-          return this.compare(a.summarySize, b.summarySize, isAsc);
-        case 'dutyApplication':
-          return this.compare(a.dutyApplication, b.dutyApplication, isAsc);
-        case 'quality':
-          return this.compare(a.quality, b.quality, isAsc);
-        case 'quantity':
-          return this.compare(a.quantity, b.quantity, isAsc);
-        case 'summaryload':
-          return this.compare(a.summaryload, b.summaryload, isAsc);
-        case 'life':
-          return this.compare(a.life, b.life, isAsc);
-        case 'installationtDate':
-          return this.compare(a.installationtDate, b.installationtDate, isAsc);
-        case 'createdDate':
-          return this.compare(a.createdDate, b.createdDate, isAsc);
-        case 'summaryStatus':
-          return this.compare(a.summaryStatus, b.summaryStatus, isAsc);
-        default:
-          return 0;
+  getUnit(master: any) {
+    if (
+      master.oldAssetType ||
+      master.newAssetType ||
+      master.masterStyle ||
+      master.masterSize ||
+      master.dutyApplication ||
+      master.quality
+    ) {
+      return (
+        master?.oldAssetType +
+        ' - ' +
+        master?.newAssetType +
+        ', ' +
+        master?.masterStyle +
+        ', ' +
+        master?.masterSize +
+        ', ' +
+        master?.dutyApplication +
+        ', ' +
+        master?.quality
+      );
+    } else {
+      return '';
+    }
+  }
+
+  filterData(enteredData: any) {
+    enteredData = enteredData.toString().toLowerCase();
+    this.filteredMasters = this.masters.filter((master: any) => {
+      return (
+        master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
+      );
+    });
+  }
+
+  getMasters() {
+    this.masterService.getMasters().subscribe(
+      {
+        next: (res: any) => {
+          this.masters = res.masters;
+        },
+        error: (error) => {
+          this.masterService.openSnackBar('No record found in master table', 'close');
+        }
+      }
+    );
+  }
+
+  getSummaries(){
+    this.isLoading = true;
+    this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
+      next: (summaries: any) => {
+        this.summaryData = summaries.summary;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.summaryService.openSnackBar('no record found in summary table', 'close');
+        this.isLoading = false;
       }
     });
   }
-  compare(a: number | string, b: number | string, isAsc: boolean): any {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+
+  onRowEditInit(summary: any) {
+    this.clonedSummaries[summary.summaryId] = { ...summary };
+    this.summary = summary;
+    this.editing = true;
   }
 
+  onRowEditSave(summary: any) {
 
-  getSummariesBySiteId(siteId:any){
-    this.isLoading = true;
-    this.summaryService.getSummariesBySiteId(siteId).subscribe({
-      next: (summaries:any)=>{
-        this.summaryData = summaries.summary;
-        this.summaryEmitter.emit(this.summaryData);
-        this.sortRecords({ active: 'summaryId', direction: 'desc'});
-        this.isLoading = false;
-      },
-      error:(_)=>{
-        console.log("error occured in getSummariesBySiteId");
-        this.isLoading = false;
-      }
-    }
+    const updateSummaryPayload = {
+      siteId: summary.siteId,
+      masterId: summary.masterId,
+      unit: summary.unit,
+      assetType: summary.assetType,
+      summarySize: summary.summarySize,
+      summaryStatus: true,
+      dutyApplication: summary.dutyApplication,
+      appDescription: summary.appDescription,
+      quality: summary.quality,
+      summaryload: summary.summaryload,
+      summaryStyle: summary.summaryStyle,
+      life: summary.life,
+      quantity: summary.quantity,
+      installmentDate: summary.installmentDate,
+    };
 
-    )
+    this.summaryService
+      .updateSummary(updateSummaryPayload, summary.summaryId)
+      .subscribe({
+        next:(_)=>{
+          this.summaryService.openSnackBar('Record updated successfully!', 'close');
+          delete this.clonedSummaries[summary.summaryId];
+          this.getSummaries();
+        },
+        error:(_)=>{
+          this.summaryService.openSnackBar('Error occured during update.', 'close')
+        }
+      });
+      this.editing = false;
   }
 
-  deleteSummary(id: any) {
-    this.summaryService.deleteSummary(id).subscribe({
-      next:(res)=>{
-        window.location.reload();
-      },
-      error:()=>{
-        window.location.reload();
-      }
-    })
-    }
-
-  editSummary(id: any) {
-    this.summaryService.setSummaryId(id);
+  onRowDelete(summary:any){
+    this.summaryService
+      .deleteSummary(summary.summaryId)
+      .subscribe({
+        next:(_)=>{
+          delete this.clonedSummaries[summary.summaryId];
+          this.summaryService.openSnackBar('Record deleted successfully!', 'close');
+          this.getSummaries();
+        },
+        error:(_)=>{
+          this.summaryService.openSnackBar('Error occured during update.', 'close')
+        }
+      });
   }
+
+  onRowEditCancel(summary: any, index: any) {
+    this.summaryData[index] = this.clonedSummaries[summary.summaryId];
+    delete this.summaryData[summary.summaryId];
+    this.editing = false;
+  }
+
 }
 
