@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
+import { SearchPipe } from 'src/app/pipes/search.pipe';
 
 export interface Task {
   name: string;
@@ -18,7 +19,8 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
-  summaryData: any = [];
+  summaries: any = [];
+  filteredSummaries: any = [];
   siteId: any = localStorage.getItem('siteId');
   clonedSummaries: { [s: string]: any; } = {};
   filteredMasters: any = [];
@@ -26,9 +28,8 @@ export class SummarytableComponent implements OnInit {
   masters: any = [];
   selectedMaster:any;
   summary:any;
-  editing:boolean = false;
   isLoading:boolean = false;
-  searchText:string = '';
+  searchText!:FormControl;
 
   form:FormGroup = this.fb.group({
     unit: '',
@@ -53,6 +54,7 @@ export class SummarytableComponent implements OnInit {
       this.filterData(value);
     });
     this.getMasters();
+
   }
 
 
@@ -151,7 +153,8 @@ export class SummarytableComponent implements OnInit {
     this.isLoading = true;
     this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
       next: (summaries: any) => {
-        this.summaryData = summaries.summary;
+        this.summaries = summaries.summary;
+        this.filteredSummaries = this.summaries;
         this.isLoading = false;
       },
       error: (err) => {
@@ -161,10 +164,14 @@ export class SummarytableComponent implements OnInit {
     });
   }
 
+  onSearch(text:any){
+    const searchPipe = new SearchPipe();
+    this.filteredSummaries = searchPipe.transform(this.summaries, text);
+  }
+
   onRowEditInit(summary: any) {
     this.clonedSummaries[summary.summaryId] = { ...summary };
     this.summary = summary;
-    this.editing = true;
   }
 
   onRowEditSave(summary: any) {
@@ -198,7 +205,6 @@ export class SummarytableComponent implements OnInit {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
         }
       });
-      this.editing = false;
   }
 
   onRowDelete(summary:any){
@@ -217,9 +223,8 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditCancel(summary: any, index: any) {
-    this.summaryData[index] = this.clonedSummaries[summary.summaryId];
-    delete this.summaryData[summary.summaryId];
-    this.editing = false;
+    this.filteredSummaries[index] = this.clonedSummaries[summary.summaryId];
+    delete this.filteredSummaries[summary.summaryId];
   }
 
 }
