@@ -20,6 +20,7 @@ export class SummaryComponent implements OnInit {
   siteId = localStorage.getItem('siteId');
   clientId = localStorage.getItem('clientId');
   clientStatus: boolean = false;
+  showButton:boolean = false;
 
   constructor(
     private siteService: SiteService,
@@ -30,6 +31,9 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     this.getSiteStatus();
     this.getClientStatus();
+    setTimeout(()=>{
+      this.showButton = true;
+    },1500);
   }
 
   getSiteStatus() {
