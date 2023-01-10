@@ -228,14 +228,15 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
           this.totalAverageYearsCost += Math.round(averageCost);
 
-          summaryData[0] = summary.unit;
-          summaryData[1] = summary.summaryId;
-          summaryData[2] = summary.dateCreated;
-          summaryData[3] = summary.installmentDate;
-          summaryData[4] = summary.life;
-          summaryData[5] = summary.summaryload;
-          summaryData[6] = averageCost;
-          summaryData[7] = yearsCosts;
+          summaryData[0] = summary.eqpFunctionalDesc;
+          summaryData[1] = this.getUnitTemplate(master?.master);
+          summaryData[2] = summary.summaryId;
+          summaryData[3] = summary.dateCreated;
+          summaryData[4] = summary.installmentDate;
+          summaryData[5] = summary.life;
+          summaryData[6] = summary.summaryload;
+          summaryData[7] = averageCost;
+          summaryData[8] = yearsCosts;
 
           this.yearsCostsViewTable.push(summaryData);
 
@@ -254,14 +255,15 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
           this.totalAverageYearsCost =0;
 
-          summaryData[0] = summary.unit;
-          summaryData[1] = summary.summaryId;
-          summaryData[2] = summary.dateCreated;
-          summaryData[3] = summary.installmentDate;
-          summaryData[4] = summary.life;
-          summaryData[5] = summary.summaryload;
-          summaryData[6] = averageCost;
-          summaryData[7] = yearsCosts;
+          summaryData[0] = summary.eqpFunctionalDesc;
+          summaryData[1] = this.getUnitTemplate();
+          summaryData[2] = summary.summaryId;
+          summaryData[3] = summary.dateCreated;
+          summaryData[4] = summary.installmentDate;
+          summaryData[5] = summary.life;
+          summaryData[6] = summary.summaryload;
+          summaryData[7] = averageCost;
+          summaryData[8] = yearsCosts;
 
           this.yearsCostsViewTable.push(summaryData);
 
@@ -272,6 +274,33 @@ export class SummaryViewdetailsTableComponent implements OnInit {
           }
         },
       });
+  }
+
+  getUnitTemplate(master?: any) {
+    if (
+      master?.oldAssetType ||
+      master?.newAssetType ||
+      master?.masterStyle ||
+      master?.masterSize ||
+      master?.dutyApplication ||
+      master?.quality
+    ) {
+      return (
+        master?.oldAssetType +
+        ' - ' +
+        master?.newAssetType +
+        ', ' +
+        master?.masterStyle +
+        ', ' +
+        master?.masterSize +
+        ', ' +
+        master?.dutyApplication +
+        ', ' +
+        master?.quality
+      );
+    } else {
+      return '';
+    }
   }
 
   // function to return occurence
