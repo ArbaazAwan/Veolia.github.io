@@ -29,7 +29,7 @@ export class CreateSummaryFormComponent implements OnInit {
   selectedMaster: any;
   submitted: boolean = false;
   siteId: any = localStorage.getItem('siteId');
-  asset: FormControl = new FormControl(['', [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]]);
+  asset: FormControl = new FormControl(['']);
   masterId: any;
   lifeLoader: boolean = false;
 
