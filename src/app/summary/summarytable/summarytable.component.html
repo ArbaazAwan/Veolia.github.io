@@ -14,13 +14,13 @@
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Assets</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="onSearch($event)"/>
+            <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="onSearch($event)" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
           <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true"
-             [resizableColumns]="true">
+            [resizableColumns]="true">
             <ng-template pTemplate="header">
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
@@ -78,18 +78,23 @@
               <tr [pEditableRow]="summary">
                 <td>
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-                    (click)="onRowEditInit(summary)" class="p-button-rounded p-button-text"></button>
-                    <button *ngIf="!editing" pButton pRipple type="button"  icon="pi pi-clone"
-                    (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text"></button>
-                  <button *ngIf="!editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-trash"
-                    (click)="onRowDelete(summary)"
-                    class="p-button-rounded p-button-text p-button-danger p-mr-2"></button>
-                  <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                    (click)="onRowEditInit(summary)" title="edit" class="p-button-rounded p-button-text">
+                  </button>
+                  <button *ngIf="!editing" pButton title="duplicate" pRipple type="button" icon="pi pi-clone"
+                    (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text">
+                  </button>
+                  <button *ngIf="!editing" pButton title="delete" pRipple type="button" pSaveEditableRow
+                    icon="pi pi-trash" (click)="onRowDelete(summary)"
+                    class="p-button-rounded p-button-text p-button-danger p-mr-2">
+                  </button>
+                  <button *ngIf="editing" pButton title="save" pRipple type="button" pSaveEditableRow icon="pi pi-check"
                     (click)="onRowEditSave(summary)"
-                    class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                  <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                    (click)="onRowEditCancel(summary, ri)"
-                    class="p-button-rounded p-button-text p-button-warning"></button>
+                    class="p-button-rounded p-button-text p-button-success p-mr-2">
+                  </button>
+                  <button *ngIf="editing" pButton title="cancel" pRipple type="button" pCancelEditableRow
+                    icon="pi pi-times" (click)="onRowEditCancel(summary, ri)"
+                    class="p-button-rounded p-button-text p-button-warning">
+                  </button>
                 </td>
                 <td>
                   <p-cellEditor>
@@ -244,8 +249,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input disabled pInputText type="text"
-                      [(ngModel)]="summary.assetType + ' - ' + summary.summaryStyle + ', ' +
+                      <input disabled pInputText type="text" [(ngModel)]="summary.assetType + ' - ' + summary.summaryStyle + ', ' +
                       summary.summarySize + ', ' + summary.dutyApplication + ', ' +
                       summary.quality">
                     </ng-template>
@@ -287,6 +291,5 @@
 
 <!-- asset detail table modal -->
 <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
-  <app-summary-viewdetails-table *ngIf="summaries.length!=0"
-    [summaryArray]="summaries"></app-summary-viewdetails-table>
+  <app-summary-viewdetails-table *ngIf="summaries.length!=0" [summaryArray]="summaries"></app-summary-viewdetails-table>
 </div>
