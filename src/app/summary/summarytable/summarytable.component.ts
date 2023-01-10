@@ -39,19 +39,9 @@ export class SummarytableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSiteStatus();
-    // this.getSummariesBySiteId(this.siteId);
     this.getClientStatus();
-
-    this.summaryService.getSummariesBySiteId(this.siteId).subscribe({
-      next:(summaries:any)=>{
-        this.summaryData = summaries.summary;
-        this.summaryEmitter.emit(this.summaryData);
-        this.sortRecords({ active: 'summaryId', direction: 'desc'});
-      },
-      error:(err)=>{
-        console.log("error occured in getSummary");
-      }
-    })
+    this.getSummariesBySiteId(this.siteId);
+   
 
   }
 
@@ -125,12 +115,17 @@ export class SummarytableComponent implements OnInit {
 
 
   getSummariesBySiteId(siteId:any){
+    this.isLoading = true;
     this.summaryService.getSummariesBySiteId(siteId).subscribe({
-      next: (summaries)=>{
-        this.summaryData = summaries;
+      next: (summaries:any)=>{
+        this.summaryData = summaries.summary;
+        this.summaryEmitter.emit(this.summaryData);
+        this.sortRecords({ active: 'summaryId', direction: 'desc'});
+        this.isLoading = false;
       },
       error:(_)=>{
         console.log("error occured in getSummariesBySiteId");
+        this.isLoading = false;
       }
     }
 
