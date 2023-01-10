@@ -7,9 +7,10 @@
   *ngIf="summaryData.length > 0" data-bs-target="#detail-table">
   View More Info
 </button>
+<app-import-summary></app-import-summary>
 
 <div class="container-fluid py-4">
-  <app-summarytable [isLoading]="isLoading" (summaryEmitter)="getSummary($event)"></app-summarytable>
+  <app-summarytable (summaryEmitter)="getSummary($event)"></app-summarytable>
 </div>
 
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">

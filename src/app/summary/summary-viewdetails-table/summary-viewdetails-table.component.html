@@ -1,7 +1,10 @@
 <div class="modal-dialog modal-dialog-centered modal-fullscreen" role="document">
   <div class="modal-content">
     <div class="modal-body p-0">
-      <div class="card card-plain">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="spinner-border" *ngIf="isLoading"></div>
+      </div>
+      <div class="card card-plain" *ngIf="!isLoading">
         <div class="card-header pb-0 text-left">
           <h5 class="">
             Summary
