@@ -5,6 +5,9 @@ td,th{
     word-wrap: break-word;
 
   }
+  th{
+    width: 200px;
+  }
 .fix-size {
     max-height: 45px;
     max-width: 91.969px;
@@ -56,4 +59,14 @@ td,th{
 
   .custom-table {
     min-height: 400px;
+  }
+
+  .p-inputtext:enabled:focus{
+    border-color: rgb(221, 37, 103) !important;
+    box-shadow: 0 0 0 0.02rem rgb(221, 37, 103) !important;
+  }
+
+  .p-inputtext:hover{
+    border-color: rgb(0, 0, 0) !important;
+    box-shadow: 0 0 0 0.02rem rgb(0, 0, 0) !important;
   }

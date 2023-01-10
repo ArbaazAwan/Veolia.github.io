@@ -76,6 +76,8 @@ export class SitesComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    this.form.controls['selectedClient'].enable();
+
   }
 
   onSubmit() {

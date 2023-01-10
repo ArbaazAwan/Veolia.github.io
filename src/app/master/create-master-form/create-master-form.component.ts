@@ -30,7 +30,7 @@ export class CreateMasterFormComponent implements OnInit {
   initialForm() {
     return (this.form = this.fb.group({
       masterId: [{ value: '', disabled: true }],
-      oldAssetType: ['', Validators.required],
+      oldAssetType: [''],
       masterStyle: [''],
       newAssetType: [''],
       masterSize: [''],
@@ -248,9 +248,9 @@ export class CreateMasterFormComponent implements OnInit {
 
   newEvent(event?: any) {
     return this.fb.group({
-      evTitle: [event ? event.evTitle : '', Validators.required],
-      evOccurence: [event ? event.evOccurence : '', Validators.required],
-      evStretch: [event ? event.evStretch : '', Validators.required],
+      evTitle: [event ? event.evTitle : ''],
+      evOccurence: [event ? event.evOccurence : ''],
+      evStretch: [event ? event.evStretch : ''],
       eventMaintenance: this.fb.array([]),
       eventLabours: this.fb.array([]),
       eventContractors: this.fb.array([]),

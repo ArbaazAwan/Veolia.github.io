@@ -1,11 +1,5 @@
-<div class="upload"  *ngIf="siteStatus && clientStatus">
-  <input
-    class="form-control"
-    #fileUpload
-    type="file"
-    accept=".xlsx"
-    (change)="readExcel($event)"
-  />
+<div class="upload">
+  <input class="form-control" #fileUpload type="file" accept=".xlsx" (change)="readExcel($event)" />
 </div>
 <div class="upload">
   <div class="spinner-border" *ngIf="isLoading"></div>

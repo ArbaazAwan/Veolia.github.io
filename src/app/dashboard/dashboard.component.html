@@ -1,5 +1,6 @@
-<div class="container-fluid py-4">
-  <div class="row mb-4">
+<div class="container-fluid">
+  <!-- Input card row start here -->
+  <div class="row mb-4" >
     <div class="col-xl-3 col-sm-6 mb-xl-0">
       <div class="card">
         <div class="card-header p-3 pt-2">
@@ -8,14 +9,14 @@
             <i class="material-icons opacity-10">add</i>
           </div>
           <div class="text-end pt-1 pb-2">
-            <p class="text-sm mb-0 text-capitalize">Contigency</p>
+            <p class="text-sm mb-0 text-capitalize">Contingency</p>
             <h4 class="mb-0">{{contigency}}%</h4>
           </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer px-3 py-0">
           <mat-form-field class="text-xs mb-0 w-100 mt-3" appearance="outline">
-            <mat-label class="text-bold">Enter Contigency%</mat-label>
+            <mat-label class="text-bold">Enter Contingency%</mat-label>
             <input [(ngModel)]='contigency' min="0" max="100" oninput="validity.valid||(value='');" matInput type="number" id="1" (change)="onContigencyChange()" />
           </mat-form-field>
         </div>
@@ -29,18 +30,18 @@
             <i class="material-icons opacity-10">show_chart</i>
           </div>
           <div class="text-end  pb-2">
-            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years <span
+            <p class="text-sm mb-0 text-capitalize">Average Cost of {{averageYears}} Years <span
                 class="text-bold text-lg mb-0">{{average | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
           <div class="text-end">
-            <p class="text-sm mb-0 text-capitalize">Average of {{averageYears}} Years with Contigency <span
+            <p class="text-sm mb-0 text-capitalize">Average Cost of {{averageYears}} Years with Contingency <span
                 class="text-bold text-lg">{{averageC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
         <hr class="dark horizontal my-0">
         <div class="card-footer  px-3 py-0">
           <mat-form-field class="text-xs mb-0  mt-3 w-100" appearance="outline">
-            <mat-label class="text-bold" >Enter Average Years</mat-label>
+            <mat-label class="text-bold" >Enter Number of Years</mat-label>
             <input [(ngModel)]='averageYears' min="1" max="50" oninput="validity.valid||(value='');"  matInput type="number" (change)="onAverageYearsChange()" />
           </mat-form-field>
         </div>
@@ -93,6 +94,7 @@
       </div>
     </div>
   </div>
+<!-- Display data row start here -->
   <div class="row mb-6">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
@@ -107,7 +109,7 @@
             </p>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contigency <span
+            <p class="text-sm mb-0 text-capitalize">Max Year Cost with Contingency <span
                 class="text-bold text-lg">{{maxYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
@@ -129,7 +131,7 @@
                 {{minYearCost | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
           <div class="text-end pt-1">
-            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contigency<span class="text-bold text-lg">
+            <p class="text-sm mb-0 text-capitalize">Min Year Cost with Contingency <span class="text-bold text-lg">
                 {{minYearCostC | currency : "USD" : 'symbol' : '1.0-0'}}</span></p>
           </div>
         </div>
@@ -140,7 +142,11 @@
       </div>
     </div>
   </div>
-  <div class="row">
+</div>
+
+<!-- Data Chart starts here -->
+<div class="container-fluid">
+  <div class="row" sandbox>
     <div class="col-md-12">
       <div class="card z-index-2">
         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -151,7 +157,7 @@
         <div class="card-body py-2">
           <div class="row">
             <div class="col-md-9">
-              <h6 class="mb-0"> Cost-Year Chart</h6>
+              <h6 class="mb-0"> Yearly Cost Chart</h6>
               <p class="text-sm">Total Cost in Each Year</p>
             </div>
           </div>
@@ -159,6 +165,11 @@
       </div>
     </div>
   </div>
+</div>
+
+  <!-- Detail Card Start Here -->
+<div class="container-fluid pb-4">
+
   <div class="row mt-5">
     <div class="col-12">
       <div class="card my-1">
@@ -231,7 +242,7 @@
                   <td>
                     <div class="d-flex px-3 py-1">
                       <div class="d-flex flex-column">
-                        <p class="mb-0 text-bold text-xs font-weight-bolder Data-Wrap">Total with Contigency</p>
+                        <p class="mb-0 text-bold text-xs font-weight-bolder Data-Wrap">Total With Contingency </p>
                       </div>
                     </div>
                   </td>

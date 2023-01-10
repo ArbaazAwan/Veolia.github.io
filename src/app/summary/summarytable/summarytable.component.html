@@ -6,20 +6,20 @@
           <p class="text-white text-capitalize text-bold ps-3">Summary Table</p>
         </div>
       </div>
+      <div class="d-flex justify-content-center my-6" *ngIf="isLoading">
+        <div class="spinner-border"></div>
+      </div>
       <!-- Summary table -->
-      <div class="card-body px-0">
-        <div class="d-flex justify-content-center">
-          <div class="spinner-border mt-6" *ngIf="isLoading"></div>
-        </div>
+      <div class="card-body px-0 " *ngIf="!isLoading">
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">
           <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
             <mat-label>Search Assets</mat-label>
-            <input matInput type="text" [(ngModel)]="searchText" />
+            <input matInput type="text" [(ngModel)]="searchText" (ngModelChange)="onSearch($event)"/>
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="summaryData" dataKey="summaryId" editMode="row" [scrollable]="true"
+          <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true"
              [resizableColumns]="true">
             <ng-template pTemplate="header">
               <tr>
@@ -46,7 +46,7 @@
                   Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
                 <th pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Duty/Application <p-sortIcon field="dutyApplication"></p-sortIcon>
+                  Duty or Application <p-sortIcon field="dutyApplication"></p-sortIcon>
                 </th>
                 <th pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Quality <p-sortIcon field="quality"></p-sortIcon>
@@ -74,11 +74,13 @@
                 </th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-summary let-editing="editing" let-ri="rowIndex">
+            <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
               <tr [pEditableRow]="summary">
                 <td>
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                     (click)="onRowEditInit(summary)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="!editing" pButton pRipple type="button"  icon="pi pi-clone"
+                    (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text"></button>
                   <button *ngIf="!editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-trash"
                     (click)="onRowDelete(summary)"
                     class="p-button-rounded p-button-text p-button-danger p-mr-2"></button>
@@ -285,6 +287,6 @@
 
 <!-- asset detail table modal -->
 <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
-  <app-summary-viewdetails-table *ngIf="summaryData.length!=0"
-    [summaryArray]="summaryData"></app-summary-viewdetails-table>
+  <app-summary-viewdetails-table *ngIf="summaries.length!=0"
+    [summaryArray]="summaries"></app-summary-viewdetails-table>
 </div>
