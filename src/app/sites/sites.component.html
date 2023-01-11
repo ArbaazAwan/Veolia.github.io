@@ -66,6 +66,24 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Site contract Years</mat-label>
+                  <input formControlName="contractYears" matInput type="number" min="1" oninput="validity.valid||(value='');" [ngClass]="
+                      (form.controls['contractYears'].dirty ||
+                        form.controls['contractYears'].touched) &&
+                      form.hasError('required', 'contractYears') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['contractYears'].dirty ||
+                        form.controls['contractYears'].touched) &&
+                      form.hasError('required', 'contractYears')
+                    ">
+                    Site contract Years is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Status</mat-label>
                   <mat-select formControlName="siteStatus" [(value)]="siteStatus" placeholder="Mode">
                     <mat-option [value]='true' >Active</mat-option>
@@ -137,6 +155,24 @@
                       form.hasError('required', 'siteName')
                     ">
                     Site Name is required
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Site Contract Years</mat-label>
+                  <input formControlName="contractYears" matInput type="number" min="1" oninput="validity.valid||(value='');" [ngClass]="
+                      (form.controls['contractYears'].dirty ||
+                        form.controls['contractYears'].touched) &&
+                      form.hasError('required', 'contractYears') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                  <small class="text-danger float-end" *ngIf="
+                      (form.controls['contractYears'].dirty ||
+                        form.controls['contractYears'].touched) &&
+                      form.hasError('required', 'contractYears')
+                    ">
+                    Site Contract Years is required
                   </small>
                 </mat-form-field>
               </div>

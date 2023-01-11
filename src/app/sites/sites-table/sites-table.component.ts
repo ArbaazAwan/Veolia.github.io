@@ -46,6 +46,8 @@ export class SitesTableComponent implements OnInit {
           return this.compare(a.siteId, b.siteId, isAsc);
         case 'siteName':
           return this.compare(a.siteName, b.siteName, isAsc);
+          case 'contractYears':
+            return this.compare(a.contractYears, b.contractYears, isAsc);
         case 'clientName':
           return this.compare(a.clientName, b.clientName, isAsc);
         case 'siteStatus':

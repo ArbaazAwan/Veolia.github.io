@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
@@ -30,23 +30,9 @@ export class SummarytableComponent implements OnInit {
   summary: any;
   isLoading: boolean = false;
   searchText!: FormControl;
+  dateValid: boolean = true;
 
-  form: FormGroup = this.fb.group({
-    unit: '',
-    masterId: [{ value: '', disabled: true }],
-    assetType: '',
-    summarySize: '',
-    summaryStyle: '',
-    appDescription: '',
-    dutyApplication: '',
-    quality: '',
-    quantity: '1',
-    summaryload: '100',
-    life: [null, Validators.required],
-    installmentDate: [null, Validators.required],
-  })
-
-  constructor(private summaryService: SummaryService, private masterService: MasterService, private fb: FormBuilder) { }
+  constructor(private summaryService: SummaryService, private masterService: MasterService) { }
 
   ngOnInit(): void {
     this.getSummaries();
@@ -57,16 +43,15 @@ export class SummarytableComponent implements OnInit {
 
   }
 
+  onAssetChange(master: any,summary:any) {
 
-  onAssetChange(master: any) {
-
-    this.summary.masterId = master.masterId;
-    this.summary.eqpFunctionalDesc = this.getUnit(master);
-    this.summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
-    this.summary.summaryStyle = master.masterStyle;
-    this.summary.summarySize = master.masterSize;
-    this.summary.dutyApplication = master.dutyApplication;
-    this.summary.quality = master.quality;
+    summary.masterId = master.masterId;
+    summary.eqpFunctionalDesc = this.getUnitTemplate(master);
+    summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
+    summary.summaryStyle = master.masterStyle;
+    summary.summarySize = master.masterSize;
+    summary.dutyApplication = master.dutyApplication;
+    summary.quality = master.quality;
 
   }
 
@@ -84,7 +69,24 @@ export class SummarytableComponent implements OnInit {
       let lifePerc = Math.round(
         ((totalYears - yearsPassed) / totalYears) * 100
       );
+
+      //adding cap on lifePerc
+      if (lifePerc > 100) {
+        lifePerc = 100;
+      }
       summary.life = lifePerc;
+      summary.remainingLife = 100 -lifePerc;
+
+      if (lifePerc < 0) {
+        this.dateValid = false;
+        this.summaryService.openSnackBar(
+          'life percentage cannot be negative, please select a valid date', 'close'
+        );
+      }
+      else {
+        this.dateValid = true;
+      }
+
     } else {
       this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
         let master = res[0];
@@ -92,12 +94,27 @@ export class SummarytableComponent implements OnInit {
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
+        //adding cap on lifePerc
+        if (lifePerc > 100) {
+          lifePerc = 100;
+        }
         summary.life = lifePerc;
+        summary.remainingLife = 100 -lifePerc;
+        if (lifePerc < 0) {
+          this.dateValid = false;
+          this.summaryService.openSnackBar(
+            'life percentage cannot be negative, please select a valid date', 'close'
+          );
+        }
+        else {
+          this.dateValid = true;
+        }
       });
     }
+
   }
 
-  getUnit(master: any) {
+  getUnitTemplate(master: any) {
     if (
       master.oldAssetType ||
       master.newAssetType ||
@@ -171,7 +188,6 @@ export class SummarytableComponent implements OnInit {
 
   onRowEditInit(summary: any) {
     this.clonedSummaries[summary.summaryId] = { ...summary };
-    this.summary = summary;
   }
 
   onRowDuplicate(summaryId: any) {
@@ -185,7 +201,7 @@ export class SummarytableComponent implements OnInit {
               this.summaryService.openSnackBar('Duplicate Record is Created.', 'close')
               this.getSummaries();
             },
-            error:(_)=>{
+            error: (_) => {
               this.summaryService.openSnackBar('Error occured during duplication!', 'close')
             }
           }
@@ -201,6 +217,7 @@ export class SummarytableComponent implements OnInit {
       siteId: summary.siteId,
       masterId: summary.masterId,
       unit: summary.unit,
+      eqpFunctionalDesc:summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       summarySize: summary.summarySize,
       summaryStatus: true,
@@ -245,7 +262,8 @@ export class SummarytableComponent implements OnInit {
 
   onRowEditCancel(summary: any, index: any) {
     this.filteredSummaries[index] = this.clonedSummaries[summary.summaryId];
-    delete this.filteredSummaries[summary.summaryId];
+    delete this.clonedSummaries[summary.summaryId];
+    this.getSummaries();
   }
 
 }
