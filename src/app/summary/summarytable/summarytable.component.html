@@ -19,57 +19,56 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true"
-             [resizableColumns]="true">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true" [tableStyle]="{'min-width': '200rem'}">
             <ng-template pTemplate="header">
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Actions
+                <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
-                <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  ID <p-sortIcon field="summaryId"></p-sortIcon>
+                <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                  &nbsp;ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Master Id <p-sortIcon field="masterId"></p-sortIcon>
+                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                  &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
                 </th>
                 <th pSortableColumn="eqpFunctionalDesc"
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Unit or Equipment Functional Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Style <p-sortIcon field="summaryStyle"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
-                <th pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Duty or Application <p-sortIcon field="dutyApplication"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Quality <p-sortIcon field="quality"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Quantity <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Load% <p-sortIcon field="summaryload"></p-sortIcon>
                 </th>
-                <th pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Installation Date <p-sortIcon field="installmentDate"></p-sortIcon>
                 </th>
-                <th pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Life% <p-sortIcon field="life"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Unit Template Descripton
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   unit template application
                 </th>
-                <th pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Created Date <p-sortIcon field="dateCreated"></p-sortIcon>
                 </th>
               </tr>
@@ -116,7 +115,7 @@
                     <ng-template pTemplate="input">
                       <input pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
-                    <ng-template pTemplate="output">
+                    <ng-template pTemplate="output" ngstyle="width:300px">
                       {{summary.eqpFunctionalDesc}}
                     </ng-template>
                   </p-cellEditor>

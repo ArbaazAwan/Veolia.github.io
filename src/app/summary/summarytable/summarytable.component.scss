@@ -1,72 +1,73 @@
-td,th{
+th,td {
+  white-space: normal !important;
+  word-wrap: break-word;
+  text-align: justify;
+}
 
-    white-space: normal !important;
+// :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+//   position: -webkit-sticky;
+//   position: sticky;
+//   top: 5rem;
+// }
 
-    word-wrap: break-word;
+// .layout-news-active :host ::ng-deep .p-datatable tr > th {
+//   top: 7rem;
+// }
 
-  }
-  th{
-    width: 200px;
-  }
-.fix-size {
-    max-height: 45px;
-    max-width: 91.969px;
-  }
+.user-pagination ::ng-deep .ngx-pagination .current {
+  background: #ec407a;
+  font-family: "Roboto";
+  text-decoration: none !important;
+  color: white;
+}
 
+.user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+  font-family: "Roboto";
+  text-decoration: none !important;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .current {
-    background: #ec407a;
-    font-family: "Roboto";
-    text-decoration: none !important;
-    color:white;
-  }
+.user-pagination ::ng-deep .ngx-pagination .current {
+  background: #ec407a;
+  font-family: "Roboto";
+  text-decoration: none !important;
+  color: white;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
-    font-family: "Roboto";
-    text-decoration: none !important;
-  }
+.user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+  font-family: "Roboto";
+  text-decoration: none !important;
+}
 
-  #unit {
+.table-responsive {
+  height: 400px;
+}
 
-    white-space: normal !important;
+// thead tr:nth-child(1) th {
+//   background: white;
+//   position: sticky;
+//   top: 0;
+//   z-index: 10;
+// }
 
-    word-wrap: break-word;
+.card .card-body {
+  padding: 0 !important;
+}
 
-  }
-  .user-pagination ::ng-deep .ngx-pagination .current {
-    background: #ec407a;
-    font-family: "Roboto";
-    text-decoration: none !important;
-    color:white;
-  }
+.pagination-div {
+  display: flex;
+  padding-top: 2%;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
-    font-family: "Roboto";
-    text-decoration: none !important;
-  }
+.custom-table {
+  min-height: 400px;
+}
 
-  .table-responsive{height:400px;overflow:scroll;}
+.p-inputtext:enabled:focus {
+  border-color: rgb(221, 37, 103) !important;
+  box-shadow: 0 0 0 0.02rem rgb(221, 37, 103) !important;
+}
 
-  thead tr:nth-child(1) th{background: white; position: sticky;top: 0;z-index: 10;}
-
-  .card .card-body {
-    padding: 0 !important;
-  }
-
-  .pagination-div {
-    display:flex; padding-top: 2%;
-  }
-
-  .custom-table {
-    min-height: 400px;
-  }
-
-  .p-inputtext:enabled:focus{
-    border-color: rgb(221, 37, 103) !important;
-    box-shadow: 0 0 0 0.02rem rgb(221, 37, 103) !important;
-  }
-
-  .p-inputtext:hover{
-    border-color: rgb(0, 0, 0) !important;
-    box-shadow: 0 0 0 0.02rem rgb(0, 0, 0) !important;
-  }
+.p-inputtext:hover {
+  border-color: rgb(0, 0, 0) !important;
+  box-shadow: 0 0 0 0.02rem rgb(0, 0, 0) !important;
+}
