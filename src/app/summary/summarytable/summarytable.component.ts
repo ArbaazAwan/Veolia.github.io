@@ -46,7 +46,6 @@ export class SummarytableComponent implements OnInit {
   onAssetChange(master: any,summary:any) {
 
     summary.masterId = master.masterId;
-    summary.eqpFunctionalDesc = this.getUnitTemplate(master);
     summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
     summary.summaryStyle = master.masterStyle;
     summary.summarySize = master.masterSize;
