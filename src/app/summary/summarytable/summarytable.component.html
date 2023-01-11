@@ -255,7 +255,7 @@
                       <input pInputText type="text" [(ngModel)]="summary.remainingLife">
                     </ng-template>
                     <ng-template pTemplate="output">
-                      {{summary.remainingLife}}
+                      {{100 - summary.life}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
