@@ -67,7 +67,7 @@ export class PriceYearLineChartComponent implements OnInit{
           maxBarThickness: 6,
         },
         {
-          label: 'Cost with Contigency',
+          label: 'Cost with Contingency',
           data: pricesC,
           tension: 0.4,
           borderWidth: 0.8,
