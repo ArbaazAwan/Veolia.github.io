@@ -22,6 +22,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {InputTextModule} from 'primeng/inputtext';
     DropdownModule,
     TableModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    CalendarModule
   ],
 })
 export class SummaryModule {}

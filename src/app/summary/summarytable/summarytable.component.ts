@@ -46,7 +46,6 @@ export class SummarytableComponent implements OnInit {
   onAssetChange(master: any,summary:any) {
 
     summary.masterId = master.masterId;
-    summary.eqpFunctionalDesc = this.getUnitTemplate(master);
     summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
     summary.summaryStyle = master.masterStyle;
     summary.summarySize = master.masterSize;
@@ -57,11 +56,8 @@ export class SummarytableComponent implements OnInit {
 
   onInstallmentChange(summary: any) {
 
-    let x = summary.installmentDate.split('-');
-    let installmentDate = Number(x[0]);
-
     let currentYear = Number(new Date().getFullYear());
-    let installationYear = Number(installmentDate);
+    let installationYear = Number(summary.installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
     let totalYears = 0;
     if (this.selectedMaster?.lifeMonths) {
@@ -187,6 +183,8 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
+    let date = new Date (summary.installmentDate);
+    summary.installmentDate = date;
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
 
