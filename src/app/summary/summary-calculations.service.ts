@@ -66,7 +66,6 @@ export class SummaryCalculationsService {
       map((master: any) => {
         let events = master.events;
         let overhaul = master.overhaul;
-        console.log('master',master.master)
         let replacementCost = master.master?.replacementCost;
         let lifeMonths = master.master?.lifeMonths;
         let overhaulLife = Number(master.master?.overhaulLife);
