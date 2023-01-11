@@ -81,7 +81,7 @@
                     (click)="onRowEditInit(summary)" title="edit" class="p-button-rounded p-button-text">
                   </button>
                   <button *ngIf="!editing" pButton title="duplicate" pRipple type="button" icon="pi pi-clone"
-                    (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text">
+                    (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text p-button-warning">
                   </button>
                   <button *ngIf="!editing" pButton title="delete" pRipple type="button" pSaveEditableRow
                     icon="pi pi-trash" (click)="onRowDelete(summary)"
@@ -93,7 +93,7 @@
                   </button>
                   <button *ngIf="editing" pButton title="cancel" pRipple type="button" pCancelEditableRow
                     icon="pi pi-times" (click)="onRowEditCancel(summary, ri)"
-                    class="p-button-rounded p-button-text p-button-warning">
+                    class="p-button-rounded p-button-text p-button-danger">
                   </button>
                 </td>
                 <td>
