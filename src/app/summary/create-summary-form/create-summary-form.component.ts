@@ -53,6 +53,8 @@ export class CreateSummaryFormComponent implements OnInit {
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.quality?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.dutyApplication?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
       );
     });
