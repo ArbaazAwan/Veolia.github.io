@@ -57,10 +57,6 @@ export class SummarytableComponent implements OnInit {
 
   onInstallmentChange(summary: any) {
 
-    // let x = summary.installmentDate.split('-');
-    // let installmentDate = Number(x[0]);
-    console.log('installation year', summary.installmentDate.getFullYear())
-
     let currentYear = Number(new Date().getFullYear());
     let installationYear = Number(summary.installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;

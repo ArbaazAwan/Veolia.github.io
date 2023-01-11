@@ -233,8 +233,6 @@
                     <ng-template pTemplate="input">
                       <p-calendar appendTo="body" [(ngModel)]="summary.installmentDate" [showIcon]="true" inputId="icon"
                       (onSelect)="onInstallmentChange(summary)"></p-calendar>
-                      <!-- <input pInputText type="date" [(ngModel)]="summary.installmentDate"
-                        (change)="onInstallmentChange(summary)"> -->
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.installmentDate | date}}
