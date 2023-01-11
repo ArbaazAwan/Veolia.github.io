@@ -19,7 +19,8 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true" scrollHeight="400px" [resizableColumns]="true" [tableStyle]="{'min-width': '200rem'}">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true" scrollHeight="400px"
+           [resizableColumns]="true" [tableStyle]="{'min-width': '250rem'}">
             <ng-template pTemplate="header">
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -32,7 +33,7 @@
                   &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
                 </th>
                 <th pSortableColumn="eqpFunctionalDesc"
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                  class="text-uppercase text-bold text-xs font-weight-bolder ps-0" style="font-size: small;">
                   Unit or Equipment Functional Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
                 <th pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
@@ -103,27 +104,27 @@
                     <ng-template pTemplate="input">
                       <input pInputText type="text" disabled [(ngModel)]="summary.summaryId">
                     </ng-template>
-                    <ng-template pTemplate="output">
+                    <ng-template pTemplate="output" class="mb-0 text-sm">
                       {{summary.summaryId}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
                 <td>
                   <p-cellEditor>
-                    <ng-template pTemplate="input">
+                    <ng-template pTemplate="input" >
                       <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
                     </ng-template>
-                    <ng-template pTemplate="output">
+                    <ng-template pTemplate="output" class="mb-0 text-sm">
                       {{summary.masterId}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
-                <td>
+                <td style="font-family: Roboto;" >
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <input pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
-                    <ng-template pTemplate="output" ngstyle="width:300px">
+                    <ng-template pTemplate="output">
                       {{summary.eqpFunctionalDesc}}
                     </ng-template>
                   </p-cellEditor>
