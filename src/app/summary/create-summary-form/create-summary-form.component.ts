@@ -22,7 +22,7 @@ export class CreateSummaryFormComponent implements OnInit {
     this.getForm();
   }
   @ViewChild('modalClose') modalClose: ElementRef;
-  form!: FormGroup;
+  form: FormGroup = this.getForm();
   filteredMasters: any = [];
   masters: any = [];
   isLoading: boolean = false;
@@ -71,8 +71,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldAssetType
         ? master.oldAssetType
         : '' + ' - ' + master.newAssetType
-        ? master.newAssetType
-        : ''
+          ? master.newAssetType
+          : ''
     );
     c.size.setValue(master.masterSize);
     c.summaryStyle.setValue(master.masterStyle);
@@ -80,8 +80,8 @@ export class CreateSummaryFormComponent implements OnInit {
       master.oldDescription
         ? master.oldDescription
         : '' + ',' + master.newDescription
-        ? master.newDescription
-        : ''
+          ? master.newDescription
+          : ''
     );
     c.dutyApplication.setValue(master.dutyApplication);
     c.quality.setValue(master.quality);
@@ -90,7 +90,7 @@ export class CreateSummaryFormComponent implements OnInit {
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
 
-    let years = Math.ceil(Number(master.lifeMonths)/12);
+    let years = Math.ceil(Number(master.lifeMonths) / 12);
     c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
   }
 
@@ -140,6 +140,14 @@ export class CreateSummaryFormComponent implements OnInit {
         this.lifeLoader = false;
       });
     }
+  }
+  lifeChange() {
+    this.form.get('remainingLife')?.setValue(100 - this.form.value.life);
+  }
+
+  rLifeChange() {
+    this.form.get('life')?.setValue(100 - this.form.value.remainingLife);
+
   }
 
   getDisplayText(master: any) {
