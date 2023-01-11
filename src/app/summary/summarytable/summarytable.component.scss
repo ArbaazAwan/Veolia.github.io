@@ -1,72 +1,60 @@
-td,th{
+th,td {
+  white-space: normal !important;
+  word-wrap: break-word;
+  text-align: justify;
+}
 
-    white-space: normal !important;
+.user-pagination ::ng-deep .ngx-pagination .current {
+  background: #ec407a;
+  font-family: "Roboto";
+  text-decoration: none !important;
+  color: white;
+}
 
-    word-wrap: break-word;
+.user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+  font-family: "Roboto";
+  text-decoration: none !important;
+}
 
-  }
-  th{
-    width: 200px;
-  }
-.fix-size {
-    max-height: 45px;
-    max-width: 91.969px;
-  }
+.user-pagination ::ng-deep .ngx-pagination .current {
+  background: #ec407a;
+  font-family: "Roboto";
+  text-decoration: none !important;
+  color: white;
+}
 
+.user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
+  font-family: "Roboto";
+  text-decoration: none !important;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .current {
-    background: #ec407a;
-    font-family: "Roboto";
-    text-decoration: none !important;
-    color:white;
-  }
+.table-responsive {
+  height: 400px;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
-    font-family: "Roboto";
-    text-decoration: none !important;
-  }
+ tr:nth-child(2) th {
+  width:50px;
+}
 
-  #unit {
+.card .card-body {
+  padding: 0 !important;
+}
 
-    white-space: normal !important;
+.pagination-div {
+  display: flex;
+  padding-top: 2%;
+}
 
-    word-wrap: break-word;
+.custom-table {
+  min-height: 400px;
+}
 
-  }
-  .user-pagination ::ng-deep .ngx-pagination .current {
-    background: #ec407a;
-    font-family: "Roboto";
-    text-decoration: none !important;
-    color:white;
-  }
+.p-inputtext:enabled:focus {
+  border-color: rgb(221, 37, 103) !important;
+  box-shadow: 0 0 0 0.02rem rgb(221, 37, 103) !important;
+}
 
-  .user-pagination ::ng-deep .ngx-pagination .ng-star-inserted {
-    font-family: "Roboto";
-    text-decoration: none !important;
-  }
-
-  .table-responsive{height:400px;overflow:scroll;}
-
-  thead tr:nth-child(1) th{background: white; position: sticky;top: 0;z-index: 10;}
-
-  .card .card-body {
-    padding: 0 !important;
-  }
-
-  .pagination-div {
-    display:flex; padding-top: 2%;
-  }
-
-  .custom-table {
-    min-height: 400px;
-  }
-
-  .p-inputtext:enabled:focus{
-    border-color: rgb(221, 37, 103) !important;
-    box-shadow: 0 0 0 0.02rem rgb(221, 37, 103) !important;
-  }
-
-  .p-inputtext:hover{
-    border-color: rgb(0, 0, 0) !important;
-    box-shadow: 0 0 0 0.02rem rgb(0, 0, 0) !important;
-  }
+.p-inputtext:hover {
+  border-color: rgb(0, 0, 0) !important;
+  box-shadow: 0 0 0 0.02rem rgb(0, 0, 0) !important;
+}
