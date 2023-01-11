@@ -43,15 +43,15 @@ export class SummarytableComponent implements OnInit {
 
   }
 
-  onAssetChange(master: any) {
+  onAssetChange(master: any,summary:any) {
 
-    this.summary.masterId = master.masterId;
-    this.summary.eqpFunctionalDesc = this.getUnitTemplate(master);
-    this.summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
-    this.summary.summaryStyle = master.masterStyle;
-    this.summary.summarySize = master.masterSize;
-    this.summary.dutyApplication = master.dutyApplication;
-    this.summary.quality = master.quality;
+    summary.masterId = master.masterId;
+    summary.eqpFunctionalDesc = this.getUnitTemplate(master);
+    summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
+    summary.summaryStyle = master.masterStyle;
+    summary.summarySize = master.masterSize;
+    summary.dutyApplication = master.dutyApplication;
+    summary.quality = master.quality;
 
   }
 
@@ -69,7 +69,13 @@ export class SummarytableComponent implements OnInit {
       let lifePerc = Math.round(
         ((totalYears - yearsPassed) / totalYears) * 100
       );
+
+      //adding cap on lifePerc
+      if (lifePerc == 100) {
+        lifePerc = 99;
+      }
       summary.life = lifePerc;
+      summary.remainingLife = 100 -lifePerc;
 
       if (lifePerc < 0 || lifePerc > 100) {
         this.dateValid = false;
@@ -88,7 +94,12 @@ export class SummarytableComponent implements OnInit {
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
+        //adding cap on lifePerc
+        if (lifePerc == 100) {
+          lifePerc = 99;
+        }
         summary.life = lifePerc;
+        summary.remainingLife = 100 -lifePerc;
         if (lifePerc < 0 || lifePerc > 100) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
@@ -177,7 +188,6 @@ export class SummarytableComponent implements OnInit {
 
   onRowEditInit(summary: any) {
     this.clonedSummaries[summary.summaryId] = { ...summary };
-    this.summary = summary;
   }
 
   onRowDuplicate(summaryId: any) {
@@ -252,6 +262,7 @@ export class SummarytableComponent implements OnInit {
   onRowEditCancel(summary: any, index: any) {
     this.filteredSummaries[index] = this.clonedSummaries[summary.summaryId];
     delete this.clonedSummaries[summary.summaryId];
+    this.getSummaries();
   }
 
 }

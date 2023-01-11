@@ -63,6 +63,9 @@
                 <th pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Life% <p-sortIcon field="life"></p-sortIcon>
                 </th>
+                <th pSortableColumn="remainingLife" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                  Remaining Life% <p-sortIcon field="remainingLife"></p-sortIcon>
+                </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
                   Unit Template Descripton
                 </th>
@@ -129,7 +132,7 @@
                 <td *ngIf="editing">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange(selectedMaster)"
+                      <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange(selectedMaster,summary)"
                         [(ngModel)]="selectedMaster" optionLabel="oldAssetType" [filter]="true"
                         filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality"
                         placeholder="Search asset type">
@@ -243,6 +246,16 @@
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.life}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="summary.remainingLife">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.remainingLife}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
