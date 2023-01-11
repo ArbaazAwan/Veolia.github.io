@@ -187,7 +187,6 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
-    console.log('summary', summary)
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
 

@@ -194,6 +194,11 @@
                   </small>
                 </mat-form-field>
 
+                <mat-form-field class="text-sm" appearance="outline">
+                  <mat-label class="text-bold">Life Months/Years</mat-label>
+                  <input formControlName="lifeMonthsYears" matInput type="text">
+                </mat-form-field>
+
                 <mat-form-field appearance="outline" class="text-sm">
                   <mat-label>Installation Date</mat-label>
                   <input formControlName="installmentDate" matInput [matDatepicker]="picker"

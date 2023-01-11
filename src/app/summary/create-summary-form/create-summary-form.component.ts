@@ -89,6 +89,9 @@ export class CreateSummaryFormComponent implements OnInit {
     c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
+
+    let years = Math.ceil(Number(master.lifeMonths)/12);
+    c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
   }
 
   onInstallmentChange(installmentDate: Date) {
@@ -195,6 +198,7 @@ export class CreateSummaryFormComponent implements OnInit {
       life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       remainingLife: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
+      lifeMonthsYears: ['']
     }));
   }
 
