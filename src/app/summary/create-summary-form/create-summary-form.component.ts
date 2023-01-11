@@ -101,7 +101,14 @@ export class CreateSummaryFormComponent implements OnInit {
         ((totalYears - yearsPassed) / totalYears) * 100
       );
       this.form.get('life')?.setValue(lifePerc);
+      this.form.get('remainingLife')?.setValue( 100 - lifePerc );
       this.lifeLoader = false;
+      //date validation
+      if (lifePerc < 0 || lifePerc > 100) {
+        this.summaryService.openSnackBar(
+          'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+        );
+      }
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
@@ -110,6 +117,13 @@ export class CreateSummaryFormComponent implements OnInit {
           ((totalYears - yearsPassed) / totalYears) * 100
         );
         this.form.get('life')?.setValue(lifePerc);
+        this.form.get('remainingLife')?.setValue( 100 - lifePerc );
+        //date validation
+      if (lifePerc < 0 || lifePerc > 100) {
+        this.summaryService.openSnackBar(
+          'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+        );
+      }
         this.lifeLoader = false;
       });
     }
@@ -167,7 +181,8 @@ export class CreateSummaryFormComponent implements OnInit {
       quality: '',
       quantity: '1',
       load: '100',
-      life: [null, Validators.required],
+      life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      remainingLife:[null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
     }));
   }
