@@ -71,16 +71,16 @@ export class SummarytableComponent implements OnInit {
       );
 
       //adding cap on lifePerc
-      if (lifePerc == 100) {
-        lifePerc = 99;
+      if (lifePerc > 100) {
+        lifePerc = 100;
       }
       summary.life = lifePerc;
       summary.remainingLife = 100 -lifePerc;
 
-      if (lifePerc < 0 || lifePerc > 100) {
+      if (lifePerc < 0) {
         this.dateValid = false;
         this.summaryService.openSnackBar(
-          'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+          'life percentage cannot be negative, please select a valid date', 'close'
         );
       }
       else {
@@ -95,15 +95,15 @@ export class SummarytableComponent implements OnInit {
           ((totalYears - yearsPassed) / totalYears) * 100
         );
         //adding cap on lifePerc
-        if (lifePerc == 100) {
-          lifePerc = 99;
+        if (lifePerc > 100) {
+          lifePerc = 100;
         }
         summary.life = lifePerc;
         summary.remainingLife = 100 -lifePerc;
-        if (lifePerc < 0 || lifePerc > 100) {
+        if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
-            'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+            'life percentage cannot be negative, please select a valid date', 'close'
           );
         }
         else {
@@ -187,6 +187,7 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
+    console.log('summary', summary)
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
 
@@ -217,6 +218,7 @@ export class SummarytableComponent implements OnInit {
       siteId: summary.siteId,
       masterId: summary.masterId,
       unit: summary.unit,
+      eqpFunctionalDesc:summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       summarySize: summary.summarySize,
       summaryStatus: true,
