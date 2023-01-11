@@ -20,7 +20,7 @@
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
           <p-table [value]="filteredSummaries" dataKey="summaryId" editMode="row" [scrollable]="true"
-            [resizableColumns]="true">
+            [resizableColumns]="true" sortField="summaryId" [sortOrder]="-1">
             <ng-template pTemplate="header">
               <tr>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
