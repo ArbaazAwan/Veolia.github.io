@@ -57,11 +57,12 @@ export class SummarytableComponent implements OnInit {
 
   onInstallmentChange(summary: any) {
 
-    let x = summary.installmentDate.split('-');
-    let installmentDate = Number(x[0]);
+    // let x = summary.installmentDate.split('-');
+    // let installmentDate = Number(x[0]);
+    console.log('installation year', summary.installmentDate.getFullYear())
 
     let currentYear = Number(new Date().getFullYear());
-    let installationYear = Number(installmentDate);
+    let installationYear = Number(summary.installmentDate.getFullYear());
     let yearsPassed = currentYear - installationYear;
     let totalYears = 0;
     if (this.selectedMaster?.lifeMonths) {
@@ -187,6 +188,8 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
+    let date = new Date (summary.installmentDate);
+    summary.installmentDate = date;
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
 
