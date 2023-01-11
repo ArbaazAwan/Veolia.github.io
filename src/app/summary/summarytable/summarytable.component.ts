@@ -30,21 +30,22 @@ export class SummarytableComponent implements OnInit {
   summary: any;
   isLoading: boolean = false;
   searchText!: FormControl;
+  dateValid: boolean = true;
 
-  form: FormGroup = this.fb.group({
-    unit: '',
-    masterId: [{ value: '', disabled: true }],
-    assetType: '',
-    summarySize: '',
-    summaryStyle: '',
-    appDescription: '',
-    dutyApplication: '',
-    quality: '',
-    quantity: '1',
-    summaryload: '100',
-    life: [null, Validators.required],
-    installmentDate: [null, Validators.required],
-  })
+  // form: FormGroup = this.fb.group({
+  //   unit: '',
+  //   masterId: [{ value: '', disabled: true }],
+  //   assetType: '',
+  //   summarySize: '',
+  //   summaryStyle: '',
+  //   appDescription: '',
+  //   dutyApplication: '',
+  //   quality: '',
+  //   quantity: '1',
+  //   summaryload: '100',
+  //   life: [null, Validators.required],
+  //   installmentDate: [null, Validators.required],
+  // })
 
   constructor(private summaryService: SummaryService, private masterService: MasterService, private fb: FormBuilder) { }
 
@@ -84,6 +85,17 @@ export class SummarytableComponent implements OnInit {
         ((totalYears - yearsPassed) / totalYears) * 100
       );
       summary.life = lifePerc;
+
+      if (lifePerc < 0 || lifePerc > 100) {
+        this.dateValid = false;
+        this.summaryService.openSnackBar(
+          'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+        );
+      }
+      else {
+        this.dateValid = true;
+      }
+
     } else {
       this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
         let master = res[0];
@@ -92,8 +104,18 @@ export class SummarytableComponent implements OnInit {
           ((totalYears - yearsPassed) / totalYears) * 100
         );
         summary.life = lifePerc;
+        if (lifePerc < 0 || lifePerc > 100) {
+          this.dateValid = false;
+          this.summaryService.openSnackBar(
+            'life percentage cannot be less than 0 or greater than 100, please select a valid date', 'close'
+          );
+        }
+        else {
+          this.dateValid = true;
+        }
       });
     }
+
   }
 
   getUnitTemplate(master: any) {
@@ -184,7 +206,7 @@ export class SummarytableComponent implements OnInit {
               this.summaryService.openSnackBar('Duplicate Record is Created.', 'close')
               this.getSummaries();
             },
-            error:(_)=>{
+            error: (_) => {
               this.summaryService.openSnackBar('Error occured during duplication!', 'close')
             }
           }

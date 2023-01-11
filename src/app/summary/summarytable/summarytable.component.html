@@ -88,7 +88,7 @@
                     class="p-button-rounded p-button-text p-button-danger p-mr-2">
                   </button>
                   <button *ngIf="editing" pButton title="save" pRipple type="button" pSaveEditableRow icon="pi pi-check"
-                    (click)="onRowEditSave(summary)"
+                    (click)="onRowEditSave(summary)" [disabled]="!dateValid"
                     class="p-button-rounded p-button-text p-button-success p-mr-2">
                   </button>
                   <button *ngIf="editing" pButton title="cancel" pRipple type="button" pCancelEditableRow
