@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
@@ -32,22 +32,7 @@ export class SummarytableComponent implements OnInit {
   searchText!: FormControl;
   dateValid: boolean = true;
 
-  // form: FormGroup = this.fb.group({
-  //   unit: '',
-  //   masterId: [{ value: '', disabled: true }],
-  //   assetType: '',
-  //   summarySize: '',
-  //   summaryStyle: '',
-  //   appDescription: '',
-  //   dutyApplication: '',
-  //   quality: '',
-  //   quantity: '1',
-  //   summaryload: '100',
-  //   life: [null, Validators.required],
-  //   installmentDate: [null, Validators.required],
-  // })
-
-  constructor(private summaryService: SummaryService, private masterService: MasterService, private fb: FormBuilder) { }
+  constructor(private summaryService: SummaryService, private masterService: MasterService) { }
 
   ngOnInit(): void {
     this.getSummaries();
@@ -266,7 +251,7 @@ export class SummarytableComponent implements OnInit {
 
   onRowEditCancel(summary: any, index: any) {
     this.filteredSummaries[index] = this.clonedSummaries[summary.summaryId];
-    delete this.filteredSummaries[summary.summaryId];
+    delete this.clonedSummaries[summary.summaryId];
   }
 
 }
