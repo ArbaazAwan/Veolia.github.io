@@ -247,7 +247,7 @@ export class SummaryCalculationsService {
         let averageCost = 0;
         averageCost = Math.round(totalCost / Number(this.clientContractYears));
 
-        yearsCosts[0] = summary.unit;
+        yearsCosts[0] = summary.eqpFunctionalDesc
 
         return {
           totalYearsCosts: this.totalYearsCosts,
