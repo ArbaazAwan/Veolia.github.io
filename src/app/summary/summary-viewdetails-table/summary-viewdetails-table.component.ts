@@ -319,7 +319,7 @@ export class SummaryViewdetailsTableComponent implements OnInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'summaryId':
-          return this.compare(a.at(1), b.at(1), isAsc);
+          return this.compare(a.at(2), b.at(2), isAsc);
         case 'unit':
           return this.compare(a.at(0), b.at(0), isAsc);
         default:
