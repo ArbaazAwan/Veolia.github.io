@@ -25,10 +25,11 @@ export class SiteService {
       .pipe(tap((res: any) => {}));
   }
 
-  postSite(siteName: string, selectedClientId: any) {
+  postSite(siteName: string,contractYears:number, selectedClientId: any) {
     return this.http.post(this.SITE_URL, {
       clientId: selectedClientId,
       siteName: siteName,
+      contractYears:contractYears
     });
   }
 
@@ -36,6 +37,7 @@ export class SiteService {
     return this.http.put(this.SITE_URL + siteId, {
       siteName: data.siteName,
       siteStatus: data.siteStatus,
+      contractYears: data.contractYears
     });
   }
 

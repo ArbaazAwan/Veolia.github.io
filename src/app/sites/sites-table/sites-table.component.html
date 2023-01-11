@@ -32,6 +32,9 @@
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="siteName">
                     Site Name
                   </th>
+                  <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="contractYears">
+                    Contract Years
+                  </th>
                   <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="clientName">
                     Client Name
                   </th>
@@ -60,6 +63,13 @@
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column">
                         <p class="mb-0 text-sm">{{ site.siteName }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column">
+                        <p class="mb-0 text-sm">{{site.contractYears}}</p>
                       </div>
                     </div>
                   </td>
