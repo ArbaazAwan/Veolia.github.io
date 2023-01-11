@@ -4,6 +4,7 @@ th,td {
   text-align: justify;
 }
 
+
 // :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
 //   position: -webkit-sticky;
 //   position: sticky;
@@ -42,12 +43,9 @@ th,td {
   height: 400px;
 }
 
-// thead tr:nth-child(1) th {
-//   background: white;
-//   position: sticky;
-//   top: 0;
-//   z-index: 10;
-// }
+ tr:nth-child(2) th {
+  width:50px;
+}
 
 .card .card-body {
   padding: 0 !important;
