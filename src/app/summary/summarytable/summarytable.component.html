@@ -252,7 +252,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.remainingLife">
+                      <input pInputText type="text" [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{100 - summary.life}}
