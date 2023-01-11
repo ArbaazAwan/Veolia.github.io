@@ -21,6 +21,10 @@ export class SitesComponent implements OnInit {
       '',
       [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
     ],
+    contractYears: [
+      '',
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
     selectedClient: [
       '',
       [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
@@ -82,7 +86,7 @@ export class SitesComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
     const clientID = this.form.value.selectedClient;
-    this.siteService.postSite(this.form.value.siteName, clientID).subscribe({
+    this.siteService.postSite(this.form.value.siteName,this.form.value.contractYears, clientID).subscribe({
       next: (res) => {
         this.userService.openSnackBar(
           'New Site is Created Successfully!',
@@ -108,6 +112,7 @@ export class SitesComponent implements OnInit {
       this.currentSite = _site;
       let c = this.form.controls;
       c['siteName'].setValue(_site.siteName);
+      c['contractYears'].setValue(_site.contractYears);
       c['siteStatus'].setValue(_site.siteStatus);
       this.clientService.getClientById(_site.clientId).subscribe((res: any) => {
         c['selectedClient'].setValue(res[0].clientName);

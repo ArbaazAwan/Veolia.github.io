@@ -30,9 +30,14 @@
             <thead>
               <!-- header list  -->
               <tr class="bg-light">
-                <th class="px-2">
+                <th class="px-2 unit-col">
                   <label class="text-bold mt-2 Data-Wrap" mat-sort-header="unit">
                     Unit or Equipment Functional Description
+                  </label>
+                </th>
+                <th class="px-2">
+                  <label class="text-bold mt-2 Data-Wrap">
+                    Unit Template Descripton
                   </label>
                 </th>
                 <th class="px-2">
@@ -69,6 +74,7 @@
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
+                <td>-</td>
                 <td>
                   <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}
                   </p>
@@ -79,31 +85,33 @@
                 </td>
               </tr>
               <tr *ngFor="let summary of summaryArray let i = index;">
-                <td class="bg-light Data-Wrap">
+                <td class="bg-light Data-Wrap unit-col">
                   <label class="text-bold ">{{sortedYearsCostsViewTable[i]?.at(0)}}</label>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(1)}}</p>
+                  <p class="mb-0 text-sm Data-Wrap">{{sortedYearsCostsViewTable[i]?.at(1)}}</p>
                 </td>
-
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(2)| date:'mediumDate'}}</p>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(2)}}</p>
                 </td>
                 <td>
                   <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(3)| date:'mediumDate'}}</p>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(4)}}</p>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(4)| date:'mediumDate'}}</p>
                 </td>
                 <td>
                   <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(5)}}</p>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(6) | currency : "USD" : 'symbol' :
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(6)}}</p>
+                </td>
+                <td>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(7) | currency : "USD" : 'symbol' :
                     '1.0-0'}}</p>
                 </td>
-                <td *ngFor="let yearlyCost of sortedYearsCostsViewTable[i]?.at(7) let y = index">
-                  <p class="mb-0 text-sm">{{ sortedYearsCostsViewTable[i]?.at(7).at(y+1) | currency : "USD" : 'symbol' :
+                <td *ngFor="let yearlyCost of sortedYearsCostsViewTable[i]?.at(8) let y = index">
+                  <p class="mb-0 text-sm">{{ sortedYearsCostsViewTable[i]?.at(8).at(y+1) | currency : "USD" : 'symbol' :
                     '1.0-0'}}</p>
                 </td>
               </tr>

@@ -53,6 +53,8 @@ export class CreateSummaryFormComponent implements OnInit {
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.quality?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.dutyApplication?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
       );
     });
@@ -87,6 +89,9 @@ export class CreateSummaryFormComponent implements OnInit {
     c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
+
+    let years = Math.ceil(Number(master.lifeMonths)/12);
+    c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
   }
 
   onInstallmentChange(installmentDate: Date) {
@@ -100,8 +105,19 @@ export class CreateSummaryFormComponent implements OnInit {
       let lifePerc = Math.round(
         ((totalYears - yearsPassed) / totalYears) * 100
       );
+      //adding cap on lifePerc
+      if (lifePerc > 100) {
+        lifePerc = 100;
+      }
       this.form.get('life')?.setValue(lifePerc);
+      this.form.get('remainingLife')?.setValue(100 - lifePerc);
       this.lifeLoader = false;
+      //date validation
+      if (lifePerc < 0) {
+        this.summaryService.openSnackBar(
+          'life percentage cannot be negative, please select a valid date', 'close'
+        );
+      }
     } else {
       this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
         let master = res[0];
@@ -109,7 +125,18 @@ export class CreateSummaryFormComponent implements OnInit {
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
+        //adding cap on lifePerc
+        if (lifePerc > 100) {
+          lifePerc = 100;
+        }
         this.form.get('life')?.setValue(lifePerc);
+        this.form.get('remainingLife')?.setValue(100 - lifePerc);
+        //date validation
+        if (lifePerc < 0) {
+          this.summaryService.openSnackBar(
+            'life percentage cannot be negative, please select a valid date', 'close'
+          );
+        }
         this.lifeLoader = false;
       });
     }
@@ -159,6 +186,7 @@ export class CreateSummaryFormComponent implements OnInit {
   getForm() {
     return (this.form = this.fb.group({
       unit: '',
+      eqpFunctionalDesc: null,
       masterId: [{ value: '', disabled: true }],
       assetType: '',
       size: '',
@@ -168,8 +196,10 @@ export class CreateSummaryFormComponent implements OnInit {
       quality: '',
       quantity: '1',
       load: '100',
-      life: [null, Validators.required],
+      life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+      remainingLife: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
+      lifeMonthsYears: ['']
     }));
   }
 
@@ -187,6 +217,7 @@ export class CreateSummaryFormComponent implements OnInit {
     if (this.form.valid) {
       const {
         unit,
+        eqpFunctionalDesc,
         assetType,
         size,
         masterId,
@@ -205,7 +236,8 @@ export class CreateSummaryFormComponent implements OnInit {
           const updateSummaryPayload = {
             siteId: this.siteId,
             masterId: masterId,
-            eqpFunctionalDesc: unit,
+            unit: unit,
+            eqpFunctionalDesc: eqpFunctionalDesc,
             assetType: assetType,
             summarySize: size,
             summaryStatus: true,
@@ -230,7 +262,8 @@ export class CreateSummaryFormComponent implements OnInit {
           const createSummaryPayload = {
             siteId: this.siteId,
             masterId: masterId,
-            eqpFunctionalDesc: unit,
+            unit: unit,
+            eqpFunctionalDesc: eqpFunctionalDesc,
             assetType: assetType,
             summarySize: size,
             dutyApplication: dutyApplication,
@@ -262,6 +295,7 @@ export class CreateSummaryFormComponent implements OnInit {
       let summary = el[0];
       const {
         unit,
+        eqpFunctionalDesc,
         masterId,
         assetType,
         summaryload,
@@ -279,6 +313,7 @@ export class CreateSummaryFormComponent implements OnInit {
 
       let c = this.getForm().controls;
       c.unit.setValue(unit);
+      c.eqpFunctionalDesc.setValue(eqpFunctionalDesc);
       c.assetType.setValue(assetType);
       c.size.setValue(summarySize);
       c.summaryStyle.setValue(summaryStyle);

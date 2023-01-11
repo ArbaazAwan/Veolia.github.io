@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from '../clients/client.service';
 import { SummaryCalculationsService } from '../summary/summary-calculations.service';
 import * as XLSX from 'xlsx';
 import { SummaryService } from '../summary/summary.service';
 import { Observable } from 'rxjs';
 import { UserService } from '../users/user.service';
+import { SiteService } from '../sites/site.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,9 +15,8 @@ export class DashboardComponent implements OnInit {
   years: any = [];
   prices: any = [];
   pricesC: any = []; //prices with contigency
-  clientId: any;
   siteId: any;
-  clientContractYears: any = 0;
+  siteContractYears: any = 0;
   contigency: number = 0;
   averageYears!: number;
   averageC: number = 0;
@@ -40,7 +39,7 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(
-    private clientService: ClientService,
+    private siteService: SiteService,
     private summaryCalculationsService: SummaryCalculationsService,
     private summaryService: SummaryService,
     private userService: UserService
@@ -50,13 +49,13 @@ export class DashboardComponent implements OnInit {
     this.reloadCheck();
     this.onLimitChange();
     setTimeout(()=>{
-      window.scrollTo({ 
-            top: 0, 
-            left: 0, 
-            behavior: 'smooth' 
+      window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
      }),
      5000
-    }) 
+    })
   }
 
   getCalculationsBySummaries(limit?: any) {
@@ -103,17 +102,17 @@ export class DashboardComponent implements OnInit {
 
   getSummaryValues() {
     //getting clients contract years
-    if (this.clientId) {
-      this.clientService
-        .getClientById(this.clientId)
-        .subscribe((client: any) => {
-          this.clientContractYears = client[0]?.contractYears;
+    if (this.siteId) {
+      this.siteService
+        .getSiteById(this.siteId)
+        .subscribe((site: any) => {
+          this.siteContractYears = site[0]?.contractYears;
           this.pricesWithoutContigency();
           this.onAverageYearsChange();
           this.onContigencyChange(); //for first the time values
         });
     } else {
-      this.userService.openSnackBar('Please select Client.', 'Close');
+      this.userService.openSnackBar('Please select Client and Site.', 'Close');
     }
   }
 
@@ -127,14 +126,13 @@ export class DashboardComponent implements OnInit {
     } else {
       localStorage.setItem('firstReload', 'true');
     }
-    this.clientId = localStorage.getItem('clientId');
     this.siteId = localStorage.getItem('siteId');
   }
 
   pricesWithoutContigency() {
     this.prices = [];
     this.years = [];
-    for (let i = 1; i <= Number(this.clientContractYears); i++) {
+    for (let i = 1; i <= Number(this.siteContractYears); i++) {
       this.years.push('Year ' + i.toString());
       this.prices[i - 1] = this.totalYearsCosts[i];
     }
@@ -152,7 +150,7 @@ export class DashboardComponent implements OnInit {
   onContigencyChange() {
     this.pricesC = [];
     this.years = [];
-    for (let i = 1; i <= Number(this.clientContractYears); i++) {
+    for (let i = 1; i <= Number(this.siteContractYears); i++) {
       this.years.push('Year ' + i.toString());
       // displaycost = cost + contigency%
       this.pricesC[i - 1] = Math.floor(

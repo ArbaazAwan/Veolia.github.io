@@ -66,9 +66,9 @@ export class SummaryCalculationsService {
       map((master: any) => {
         let events = master.events;
         let overhaul = master.overhaul;
-        let replacementCost = master.master.replacementCost;
-        let lifeMonths = master.master.lifeMonths;
-        let overhaulLife = Number(master.master.overhaulLife);
+        let replacementCost = master.master?.replacementCost;
+        let lifeMonths = master.master?.lifeMonths;
+        let overhaulLife = Number(master.master?.overhaulLife);
         let load = 0;
 
         let lifePerc = summary.life / 100;
@@ -119,7 +119,7 @@ export class SummaryCalculationsService {
 
         // initiating occurence in case of stretch
         var occured = 0;
-        for (let i = 0; i < events.length; i++) {
+        for (let i = 0; i < events?.length; i++) {
           // fetching stretch from every event
           let stretch = events[i].evStretch.toLowerCase();
           // initiating monthIndex to store every month cost
@@ -157,7 +157,7 @@ export class SummaryCalculationsService {
         let ovMonthIndex = 1;
         var ovOccured = 0;
         for (let month = 1; month <= 600; month++) {
-          let ovStretch = master.overhaul.ovStretch;
+          let ovStretch = master.overhaul?.ovStretch;
           if (ovStretch == 'Yes') {
             ovOccured = this.getOccurence(overhaulLife, load, month);
             if (ovOccured <= lifeMonths) {
@@ -247,7 +247,7 @@ export class SummaryCalculationsService {
         let averageCost = 0;
         averageCost = Math.round(totalCost / Number(this.clientContractYears));
 
-        yearsCosts[0] = summary.unit;
+        yearsCosts[0] = summary.eqpFunctionalDesc
 
         return {
           totalYearsCosts: this.totalYearsCosts,
