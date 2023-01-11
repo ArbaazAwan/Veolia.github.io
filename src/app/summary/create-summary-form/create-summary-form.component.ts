@@ -115,7 +115,7 @@ export class CreateSummaryFormComponent implements OnInit {
       //date validation
       if (lifePerc < 0) {
         this.summaryService.openSnackBar(
-          'life percentage cannot be negative, please select a valid date', 'close'
+          'Life percentage cannot be negative, please select a valid date', 'Close'
         );
       }
     } else {
@@ -134,7 +134,7 @@ export class CreateSummaryFormComponent implements OnInit {
         //date validation
         if (lifePerc < 0) {
           this.summaryService.openSnackBar(
-            'life percentage cannot be negative, please select a valid date', 'close'
+            'Life percentage cannot be negative, please select a valid date', 'Close'
           );
         }
         this.lifeLoader = false;
