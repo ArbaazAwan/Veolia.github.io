@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
+import { NodeService } from '../view-master-table/node.service';
 
 @Component({
   selector: 'app-create-master-form',
@@ -10,7 +11,8 @@ import { MasterService } from '../master.service';
   styleUrls: ['./create-master-form.component.scss'],
 })
 export class CreateMasterFormComponent implements OnInit {
-  constructor(private fb: FormBuilder, private masterService: MasterService) {}
+  constructor(private fb: FormBuilder, private masterService: MasterService,
+    private nodeService:NodeService) {}
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -18,6 +20,8 @@ export class CreateMasterFormComponent implements OnInit {
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
   masterId: any;
+  files:any;
+  cols: any[] = [];
 
   ngOnInit(): void {
     this.masterService.currentMasterId.subscribe((masterId: any) => {
@@ -57,6 +61,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
       const _masterComplete = el;
+      this.files = this.nodeService.getFilesystem(_masterComplete);
 
       const _master = _masterComplete.master;
 
@@ -97,6 +102,16 @@ export class CreateMasterFormComponent implements OnInit {
       const _events = _masterComplete.events;
 
       if (_events) {
+        this.cols = [
+          { field: 'desc', header: '' },
+          { field: 'oh', header: 'Overhaul' },
+        ];
+
+        for (let i = 0; i < _events?.length; i++) {
+          let obj = { field: 'ev' + (i + 1), header: 'Event ' + (i + 1) };
+          this.cols.push(obj);
+        }
+
         _events.forEach((event: any) => {
           this.addEvent(event);
         });
