@@ -3,6 +3,17 @@
   max-width: 91.969px;
 }
 
+.descExpand{
+  width: 400px;
+}
+.colExpand{
+  width: 200px;
+}
+.sColSpan{
+  width: 80px;
+}
+
+
 .user-pagination ::ng-deep .ngx-pagination .current {
   background: #ec407a;
   font-family: "Roboto";
@@ -16,7 +27,7 @@
 }
 
 .custom-table {
-  min-height: 850px;
+  min-height: 530px;
 }
 
 td{
@@ -35,6 +46,6 @@ td{
   display:flex; padding-top: 2%;
 }
 
-.table-responsive{height:850px;overflow:scroll;} 
+.table-responsive{height:530px;overflow:scroll;} 
 
 thead tr:nth-child(1) th{background: white; position: sticky;top: 0;z-index: 10;}

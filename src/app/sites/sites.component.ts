@@ -4,6 +4,7 @@ import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 import { ClientService } from '../clients/client.service';
 import { Router } from '@angular/router';
+import { SortDirection } from 'aws-amplify';
 
 type SiteType = 'true' | 'false';
 
@@ -18,6 +19,10 @@ export class SitesComponent implements OnInit {
   sitesArray: any[] = [];
   form: FormGroup = this.fb.group({
     siteName: [
+      '',
+      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
+    clientContractYears: [
       '',
       [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
     ],
@@ -86,20 +91,26 @@ export class SitesComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
     const clientID = this.form.value.selectedClient;
-    this.siteService.postSite(this.form.value.siteName,this.form.value.contractYears, clientID).subscribe({
-      next: (res) => {
-        this.userService.openSnackBar(
-          'New Site is Created Successfully!',
-          'close'
-        );
-        this.getSites();
-      },
-      error: (e) => {
-        this.error = e.message;
-        this.userService.openSnackBar(this.error, 'close');
-        this.getSites();
-      },
-    });
+    this.siteService
+      .postSite(
+        this.form.value.siteName,
+        this.form.value.contractYears,
+        clientID
+      )
+      .subscribe({
+        next: (res) => {
+          this.userService.openSnackBar(
+            'New Site is Created Successfully!',
+            'close'
+          );
+          this.getSites();
+        },
+        error: (e) => {
+          this.error = e.message;
+          this.userService.openSnackBar(this.error, 'close');
+          this.getSites();
+        },
+      });
     this.resetForm();
   }
 
