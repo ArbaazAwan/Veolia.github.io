@@ -24,12 +24,10 @@ export class CreateMasterFormComponent implements OnInit {
   cols: any[] = [];
 
   ngOnInit(): void {
+    this.addEvent();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
         this.populateEditMasterForm(masterId);
-      }
-      else{
-        this.addEvent();
       }
     });
   }
@@ -146,6 +144,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.form.reset();
     this.form = this.initialForm();
     this.editMasterId = null;
+    this.addEvent();
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
