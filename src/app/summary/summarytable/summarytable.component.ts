@@ -76,7 +76,7 @@ export class SummarytableComponent implements OnInit {
       if (lifePerc < 0) {
         this.dateValid = false;
         this.summaryService.openSnackBar(
-          'life percentage cannot be negative, please select a valid date', 'close'
+          'Life percentage cannot be negative, please select a valid date', 'Close'
         );
       }
       else {
@@ -99,7 +99,7 @@ export class SummarytableComponent implements OnInit {
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
-            'life percentage cannot be negative, please select a valid date', 'close'
+            'Life percentage cannot be negative, please select a valid date', 'Close'
           );
         }
         else {

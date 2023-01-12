@@ -222,7 +222,7 @@
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
                   </mat-label>
-                  <input formControlName="life" matInput type="number" [ngClass]="
+                  <input formControlName="life" matInput type="number" (change)="lifeChange()" [ngClass]="
                         (form.controls['life'].dirty ||
                           form.controls['life'].touched) &&
                         form.hasError('required', 'life') == true
@@ -245,7 +245,7 @@
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
                   </mat-label>
-                  <input formControlName="remainingLife" matInput type="number" [ngClass]="
+                  <input formControlName="remainingLife" matInput type="number" (change)="rLifeChange()" [ngClass]="
                         (form.controls['remainingLife'].dirty ||
                           form.controls['remainingLife'].touched) &&
                         form.hasError('required', 'remainingLife') == true
