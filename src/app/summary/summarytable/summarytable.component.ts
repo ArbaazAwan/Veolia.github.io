@@ -189,6 +189,7 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowDuplicate(summaryId: any) {
+    this.isLoading = true;
 
     this.summaryService.getSummaryById(summaryId).subscribe((res: any) => {
       let summary = res[0];
