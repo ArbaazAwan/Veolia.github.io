@@ -141,6 +141,7 @@ export class CreateMasterFormComponent implements OnInit {
 
   resetForm() {
     this.form = this.initialForm();
+    this.editMasterId = null;
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -159,13 +160,10 @@ export class CreateMasterFormComponent implements OnInit {
       // this.resetForm();
       this.modalClose.nativeElement.click();
     }
-
-    else{
+    else
+    {
       this.validateAllFormFields(this.form);
-
     }
-
-
 
   }
 
