@@ -74,7 +74,7 @@
                   <mat-label class="text-bold">Unit Measurement</mat-label>
                   <input formControlName="unitMeasurement" matInput type="text">
                 </mat-form-field>
-                
+
               </div>
 
               <div class="col-md-6">
@@ -278,17 +278,6 @@
                   </div>
                 </mat-tab>
 
-                <mat-tab disabled>
-                  <ng-template mat-tab-label>
-                    <div>
-                      <a type="button" (click)="addEvent()" class="btn bg-gradient-light text-xs mb-0"><span
-                          class="material-icons">add_box</span>&nbsp;
-                        Create Event
-                      </a>
-                    </div>
-                  </ng-template>
-                </mat-tab>
-
                 <div formArrayName="events">
 
                   <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i"
@@ -428,6 +417,17 @@
                   </mat-tab>
 
                 </div>
+
+                <mat-tab disabled>
+                  <ng-template mat-tab-label>
+                    <div>
+                      <a type="button" (click)="addEvent()" class="btn bg-gradient-light text-xs mb-0"><span
+                          class="material-icons">add_box</span>&nbsp;
+                        Create Event
+                      </a>
+                    </div>
+                  </ng-template>
+                </mat-tab>
 
               </mat-tab-group>
 

@@ -28,6 +28,9 @@ export class CreateMasterFormComponent implements OnInit {
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
+      else{
+        this.addEvent();
+      }
     });
   }
 
@@ -140,6 +143,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   resetForm() {
+    this.form.reset();
     this.form = this.initialForm();
     this.editMasterId = null;
   }
