@@ -175,7 +175,7 @@
 
                   <div class="row mx-4">
                     <div class="col-md-4">
-                      <label class="text-bold ">Maintenance</label>
+                      <label class="text-bold ">Parts / Materials</label>
                       <div>
                         <a type="button" (click)="addOverhaulMaintenance()"
                           class="btn bg-gradient-dark text-xs mb-0"><span class="material-icons">add_box</span>&nbsp;
@@ -187,14 +187,14 @@
                             let iov = index
                           " [formGroupName]="iov">
                           <td>
-                            <label class="form-label">Maintenance</label>
+                            <label class="form-label">Parts / Materials</label>
                             <input class="form-control" type="text" formControlName="ohMaintenance"
-                              placeholder="enter maintenance" />
+                              placeholder="Enter Parts / Materials Description" />
                           </td>
                           <td>
                             <label class="form-label">Cost</label>
                             <input class="form-control" type="number" formControlName="ohCost"
-                              placeholder="enter cost" />
+                              placeholder="Enter cost" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulMaintenance(iov)"
@@ -234,7 +234,7 @@
                           <td>
                             <label class="form-label">Hours</label>
                             <input class="form-control" type="number" formControlName="ohHour"
-                              placeholder="enter hours" />
+                              placeholder="Enter hours" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulLabor(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
@@ -260,12 +260,12 @@
                           <td>
                             <label class="form-label">Overhaul Labour</label>
                             <input class="form-control" type="text" formControlName="ohLabour"
-                              placeholder="enter labour" />
+                              placeholder="Enter labour" />
                           </td>
                           <td>
                             <label class="form-label">Overhaul Hour</label>
                             <input class="form-control" type="number" formControlName="ohHour"
-                              placeholder="enter hours" />
+                              placeholder="Enter hours" />
                           </td>
                           <td>
                             <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
