@@ -40,7 +40,7 @@
                   ">
                     AssetType is required
                   </small>
-                </mat-form-field> 
+                </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Master Id</mat-label>
@@ -54,7 +54,7 @@
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
                   <mat-label class="text-bold">Style</mat-label>
-                  <input formControlName="masterStyle" matInput type="text" >
+                  <input formControlName="masterStyle" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs mx-4" appearance="outline">
@@ -74,7 +74,6 @@
                   <mat-label class="text-bold">Unit Measurement</mat-label>
                   <input formControlName="unitMeasurement" matInput type="text">
                 </mat-form-field>
-
 
               </div>
 
@@ -130,6 +129,29 @@
             <div class="card card-plain mx-4">
               <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3">
 
+                <!-- all tab -->
+                <mat-tab label="All" *ngIf="editMasterId">
+                  <div class="card">
+                    <p-treeTable [value]="files" id="treetable" [columns]="cols" class="table-responsive">
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" class="">
+                            {{ col.header }}
+                          </th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                        <tr>
+                          <td *ngFor="let col of columns; let i = index">
+                            <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                            <span [ngClass]="{ 'text-bold': i === 0 }">{{rowData[col.field]}}</span>
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </p-treeTable>
+                  </div>
+                </mat-tab>
+
                 <mat-tab label="Overhaul">
                   <table class="table">
                     <tr>
@@ -142,9 +164,9 @@
                       <td class="px-2">
                         <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                           <mat-label class="text-bold">Stretch</mat-label>
-                          <mat-select  matInput type="text" formControlName="ovStretch"  disableOptionCentering>
-                            <mat-option  value="Yes">Yes</mat-option>
-                            <mat-option  value="No">No</mat-option>
+                          <mat-select matInput type="text" formControlName="ovStretch" disableOptionCentering>
+                            <mat-option value="Yes">Yes</mat-option>
+                            <mat-option value="No">No</mat-option>
                           </mat-select>
                         </mat-form-field>
                       </td>
@@ -171,10 +193,12 @@
                           </td>
                           <td>
                             <label class="form-label">Cost</label>
-                            <input class="form-control" type="number" formControlName="ohCost" placeholder="enter cost" />
+                            <input class="form-control" type="number" formControlName="ohCost"
+                              placeholder="enter cost" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulMaintenance(iov)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                            <button (click)="removeOverhaulMaintenance(iov)"
+                              class="btn btn-sm bg-gradient-danger mx-2 mt-5">
                               Remove
                             </button>
                           </td>
@@ -194,16 +218,16 @@
                             let i = index" [formGroupName]="i">
                           <td>
                             <label class="form-label">Overhaul Labour</label>
-                              <span>
-                                <select  name="" id="labour" class="form-control form-select" formControlName="ohLabour">
-                                  <option value="Unskilled">Unskilled</option>
-                                  <option value="Basic Skilled">Basic Skilled</option>
-                                  <option value="Technical">Technical</option>
-                                  <option value="Specialized">Specialized</option>
-                                  <option value="Certified">Certified</option>
-                                  <option value="Supervisory">Supervisory</option>
+                            <span>
+                              <select name="" id="labour" class="form-control form-select" formControlName="ohLabour">
+                                <option value="Unskilled">Unskilled</option>
+                                <option value="Basic Skilled">Basic Skilled</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Specialized">Specialized</option>
+                                <option value="Certified">Certified</option>
+                                <option value="Supervisory">Supervisory</option>
                               </select>
-                              </span>
+                            </span>
 
                           </td>
                           &nbsp;
@@ -254,21 +278,12 @@
                   </div>
                 </mat-tab>
 
-                <mat-tab disabled>
-                  <ng-template mat-tab-label>
-                    <div>
-                      <a type="button" (click)="addEvent()" class="btn bg-gradient-light text-xs mb-0"><span
-                          class="material-icons">add_box</span>&nbsp;
-                        Create Event
-                      </a>
-                    </div>
-                  </ng-template>
-                </mat-tab>
-
                 <div formArrayName="events">
 
-                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i" label="{{'Event ' + (i+1)}}">
-                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end" (click)="removeEvent(i)">
+                  <mat-tab *ngFor=" let event of events().controls; let i = index" [formGroupName]="i"
+                    label="{{'Event ' + (i+1)}}">
+                    <button mat-raised-button class="btn btn-sm bg-gradient-danger m-2 float-end"
+                      (click)="removeEvent(i)">
                       Remove Event
                     </button>
                     <table class="table">
@@ -290,9 +305,9 @@
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                             <mat-label class="text-bold">Stretch</mat-label>
-                            <mat-select  matInput type="text" formControlName="evStretch"  disableOptionCentering>
-                              <mat-option  value="Yes">Yes</mat-option>
-                              <mat-option  value="No">No</mat-option>
+                            <mat-select matInput type="text" formControlName="evStretch" disableOptionCentering>
+                              <mat-option value="Yes">Yes</mat-option>
+                              <mat-option value="No">No</mat-option>
                             </mat-select>
                           </mat-form-field>
                         </td>
@@ -343,16 +358,16 @@
                           " [formGroupName]="il">
                             <td>
                               <label for="level" class="form-label">Labor</label>
-                                <span>
-                                  <select  name="" id="labour" class="form-control form-select" formControlName="evLabour">
-                                    <option value="Unskilled">Unskilled</option>
-                                    <option value="Basic Skilled">Basic Skilled</option>
-                                    <option value="Technical">Technical</option>
-                                    <option value="Specialized">Specialized</option>
-                                    <option value="Certified">Certified</option>
-                                    <option value="Supervisory">Supervisory</option>
+                              <span>
+                                <select name="" id="labour" class="form-control form-select" formControlName="evLabour">
+                                  <option value="Unskilled">Unskilled</option>
+                                  <option value="Basic Skilled">Basic Skilled</option>
+                                  <option value="Technical">Technical</option>
+                                  <option value="Specialized">Specialized</option>
+                                  <option value="Certified">Certified</option>
+                                  <option value="Supervisory">Supervisory</option>
                                 </select>
-                                </span>
+                              </span>
                             </td>
                             &nbsp;
                             <td>
@@ -403,11 +418,22 @@
 
                 </div>
 
+                <mat-tab disabled>
+                  <ng-template mat-tab-label>
+                    <div>
+                      <a type="button" (click)="addEvent()" class="btn bg-gradient-light text-xs mb-0"><span
+                          class="material-icons">add_box</span>&nbsp;
+                        Create Event
+                      </a>
+                    </div>
+                  </ng-template>
+                </mat-tab>
+
               </mat-tab-group>
 
             </div>
             <div class="text-center mb-4">
-              <button type="submit"  class="btn bg-gradient-primary m-2">
+              <button type="submit" class="btn bg-gradient-primary m-2">
                 Create
               </button>
               <button (click)="resetForm()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">

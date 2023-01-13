@@ -79,6 +79,7 @@ export class ImportExcelComponent implements OnInit {
             overhaulLife: data.OHLife,
             dutyApplication: data.DutyApplication,
             quality: data.Quality,
+            unitDesc: data.unitDesc
           };
           const events = this.createEventsArray(data);
           const overhaul = this.createOverhaulArray(data);

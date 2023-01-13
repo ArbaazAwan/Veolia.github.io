@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SummaryService } from 'src/app/summary/summary.service';
-import { UserService } from 'src/app/users/user.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MasterService } from '../master.service';
+import { NodeService } from '../view-master-table/node.service';
 
 @Component({
   selector: 'app-create-master-form',
@@ -10,7 +9,8 @@ import { MasterService } from '../master.service';
   styleUrls: ['./create-master-form.component.scss'],
 })
 export class CreateMasterFormComponent implements OnInit {
-  constructor(private fb: FormBuilder, private masterService: MasterService) {}
+  constructor(private fb: FormBuilder, private masterService: MasterService,
+    private nodeService: NodeService) { }
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -18,8 +18,11 @@ export class CreateMasterFormComponent implements OnInit {
   siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
   masterId: any;
+  files: any;
+  cols: any[] = [];
 
   ngOnInit(): void {
+    this.addEvent();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
         this.populateEditMasterForm(masterId);
@@ -45,6 +48,7 @@ export class CreateMasterFormComponent implements OnInit {
       overhaulLife: [''],
       ovTitle: [''],
       ovStretch: [''],
+      unitDesc: [''],
       events: this.fb.array([]),
       overhaulMaintenances: this.fb.array([]),
       overhaulLabors: this.fb.array([]),
@@ -57,6 +61,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
       const _masterComplete = el;
+      this.files = this.nodeService.getFilesystem(_masterComplete);
 
       const _master = _masterComplete.master;
 
@@ -85,6 +90,7 @@ export class CreateMasterFormComponent implements OnInit {
       c.replacementCost.setValue(
         _master.replacementCost ? _master.replacementCost : ''
       );
+      c.unitDesc.setValue( _master.unitDesc ? _master.unitDesc : '');
       c.lifeMonths.setValue(_master.lifeMonths ? _master.lifeMonths : '');
       c.overhaulLife.setValue(_master.overhaulLife ? _master.overhaulLife : '');
       c.ovTitle.setValue(
@@ -97,6 +103,16 @@ export class CreateMasterFormComponent implements OnInit {
       const _events = _masterComplete.events;
 
       if (_events) {
+        this.cols = [
+          { field: 'desc', header: '' },
+          { field: 'oh', header: 'Overhaul' },
+        ];
+
+        for (let i = 0; i < _events?.length; i++) {
+          let obj = { field: 'ev' + (i + 1), header: 'Event ' + (i + 1) };
+          this.cols.push(obj);
+        }
+
         _events.forEach((event: any) => {
           this.addEvent(event);
         });
@@ -125,7 +141,10 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   resetForm() {
+    this.form.reset();
     this.form = this.initialForm();
+    this.editMasterId = null;
+    this.addEvent();
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -142,16 +161,11 @@ export class CreateMasterFormComponent implements OnInit {
     this.form.get('rev')?.setValue(new Date());
     if(this.form.valid){
       this.postformMaster();
-      // this.resetForm();
       this.modalClose.nativeElement.click();
     }
-
-    else{
+    else {
       this.validateAllFormFields(this.form);
-
     }
-
-
 
   }
 
@@ -173,6 +187,9 @@ export class CreateMasterFormComponent implements OnInit {
       replacementCost: f.replacementCost,
       lifeMonths: f.lifeMonths,
       overhaulLife: f.overhaulLife,
+      unitDesc: f.oldAssetType + " - " + f.newAssetType
+        + ", " + f.masterStyle + ", " + f.masterSize
+        + ", " + f.dutyApplication + ", " + f.quality
     };
 
     let completeMaster = {
