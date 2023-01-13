@@ -187,9 +187,9 @@
                             let iov = index
                           " [formGroupName]="iov">
                           <td>
-                            <label class="form-label">Parts / Materials</label>
+                            <label class="form-label">Parts/Materials</label>
                             <input class="form-control" type="text" formControlName="ohMaintenance"
-                              placeholder="Enter Parts / Materials Description" />
+                              placeholder="Enter Parts/Materials Description" />
                           </td>
                           <td>
                             <label class="form-label">Cost</label>
@@ -258,17 +258,17 @@
                             let i = index
                           " [formGroupName]="i">
                           <td>
-                            <label class="form-label">Overhaul Labour</label>
+                            <label class="form-label">Contractor/Shop Description</label>
                             <input class="form-control" type="text" formControlName="ohLabour"
-                              placeholder="Enter labour" />
+                              placeholder="Contractor/Shop Description" />
                           </td>
                           <td>
-                            <label class="form-label">Overhaul Hour</label>
+                            <label class="form-label">Cost</label>
                             <input class="form-control" type="number" formControlName="ohHour"
-                              placeholder="Enter hours" />
+                              placeholder="Cost" />
                           </td>
                           <td>
-                            <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-5">
+                            <button (click)="removeOverhaulCont(i)" class="btn btn-sm bg-gradient-danger mx-2 mt-6">
                               Remove
                             </button>
                           </td>
@@ -297,7 +297,7 @@
                         </td>
                         <td class="px-2">
                           <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                            <mat-label class="text-bold">Event Occurence</mat-label>
+                            <mat-label class="text-bold">Event Occurence - Preform Every X Months</mat-label>
                             <input matInput type="number" formControlName="evOccurence" />
                           </mat-form-field>
 
