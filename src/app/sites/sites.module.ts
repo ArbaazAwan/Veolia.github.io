@@ -15,7 +15,6 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 
-
 @NgModule({
   declarations: [
     SitesListComponent,

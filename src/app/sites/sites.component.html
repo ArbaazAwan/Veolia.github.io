@@ -132,12 +132,17 @@
               <div class="row">
 
                 <mat-form-field class="text-xs my-1" appearance="outline">
-                  <mat-label>Select Clients</mat-label>
-                  <mat-select formControlName="selectedClient">
+                  <mat-label>Select Client</mat-label>
+                  <mat-select formControlName="selectedClient" (selectionChange)="onDropDownClientSelect($event.value)">
                     <mat-option *ngFor="let client of clients" [value]="client.clientId">
                       {{ client.clientName }}
                     </mat-option>
                   </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Client Contract Years</mat-label>
+                  <input matInput formControlName="clientContractYears" type="text" readonly/>
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">

@@ -158,7 +158,8 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    this.form.get('rev')?.setValue(new Date());
+    if(this.form.valid){
       this.postformMaster();
       this.modalClose.nativeElement.click();
     }
