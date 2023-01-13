@@ -139,6 +139,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.form.get('rev')?.setValue(new Date());
     if(this.form.valid){
       this.postformMaster();
       // this.resetForm();

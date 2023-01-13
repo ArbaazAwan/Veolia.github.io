@@ -24,7 +24,6 @@ export class SitesComponent implements OnInit {
     ],
     clientContractYears: [
       '',
-      [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
     ],
     contractYears: [
       '',
@@ -44,7 +43,9 @@ export class SitesComponent implements OnInit {
   selectedClientId: number = 1;
   isLoadingClient: boolean = false;
   selectedClient: any;
+  bindedClient:any;
   clients!: any[];
+  clientContractYears: any;
   siteStatus: SiteType;
 
   selectedsite: any = {
@@ -73,6 +74,17 @@ export class SitesComponent implements OnInit {
     this.checkUserRole();
     this.getSites();
     this.selectedClient = localStorage.getItem('clientId');
+
+  }
+
+  onDropDownClientSelect(clientId: any){
+    this.clientService.getClientById(clientId).subscribe(
+      {
+        next:(res:any)=>{
+          this.form.get('clientContractYears')?.setValue(res[0].contractYears);
+        }
+      }
+    )
   }
 
   getSites() {
