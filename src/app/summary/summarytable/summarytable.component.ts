@@ -4,6 +4,7 @@ import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
+import { SiteService } from 'src/app/sites/site.service';
 
 export interface Task {
   name: string;
@@ -31,16 +32,29 @@ export class SummarytableComponent implements OnInit {
   isLoading: boolean = false;
   searchText!: FormControl;
   dateValid: boolean = true;
+  siteStatus:boolean=false;
 
-  constructor(private summaryService: SummaryService, private masterService: MasterService) { }
+  constructor(private summaryService: SummaryService, private masterService: MasterService,private siteService:SiteService) { }
 
   ngOnInit(): void {
+    this.getSiteStatus();
     this.getSummaries();
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
     });
     this.getMasters();
 
+  }
+
+  getSiteStatus() {
+    this.siteService.getSiteById(this.siteId).subscribe({
+      next: (site: any) => {
+        this.siteStatus = site[0].siteStatus;
+      },
+      error: (err) => {
+        console.log("error occured in getSiteStatus", err);
+      }
+    })
   }
 
   onAssetChange(master: any,summary:any) {
