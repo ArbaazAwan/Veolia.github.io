@@ -1,12 +1,12 @@
-<aside class="sidenav z-index-2 navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+<aside class="sidenav z-index-2 navbar navbar-vertical shortNav navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
         id="sidenav-main" *ngIf="isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">
         <app-side-navbar></app-side-navbar>
 </aside>
-<aside class="sidenav z-index-2 navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+<aside class="sidenav z-index-2 navbar navbar-vertical shortNav navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
         id="sidenav-main" *ngIf="!isClientListRoute() && (role == 'admin' || role == 'power_user' || role == 'user')">
         <app-side-navbar></app-side-navbar>
 </aside>
-<aside class="sidenav z-index-2 navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+<aside class="sidenav z-index-2 navbar navbar-vertical shortNav navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
         id="sidenav-main" *ngIf="isClientListRoute() &&  role == 'user'">
         <app-side-navbar></app-side-navbar>
 </aside>
