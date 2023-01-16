@@ -29,9 +29,6 @@
                 <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   &nbsp;ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
-                  &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
-                </th>
                 <th pSortableColumn="eqpFunctionalDesc"
                   class="text-uppercase text-bold text-xs font-weight-bolder ps-0" style="font-size: small;">
                   Unit or Equipment Functional Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
@@ -75,6 +72,9 @@
                 <th pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
                   Created Date <p-sortIcon field="dateCreated"></p-sortIcon>
                 </th>
+                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                  &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
+                </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
@@ -106,16 +106,6 @@
                     </ng-template>
                     <ng-template pTemplate="output" class="mb-0 text-sm">
                       {{summary.summaryId}}
-                    </ng-template>
-                  </p-cellEditor>
-                </td>
-                <td>
-                  <p-cellEditor>
-                    <ng-template pTemplate="input" >
-                      <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
-                    </ng-template>
-                    <ng-template pTemplate="output" class="mb-0 text-sm">
-                      {{summary.masterId}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
@@ -290,6 +280,16 @@
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.dateCreated | date}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input" >
+                      <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
+                    </ng-template>
+                    <ng-template pTemplate="output" class="mb-0 text-sm">
+                      {{summary.masterId}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
