@@ -134,8 +134,8 @@
                 <mat-form-field class="text-xs my-1" appearance="outline">
                   <mat-label>Select Clients</mat-label>
                   <mat-select formControlName="selectedClient">
-                    <mat-option *ngFor="let client of clients" [value]="client.clientId">
-                      {{ client.clientName }}
+                    <mat-option *ngFor="let client of clients| asc: 'clientName'"  [value]="client.clientId">
+                      {{ client.clientName}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
