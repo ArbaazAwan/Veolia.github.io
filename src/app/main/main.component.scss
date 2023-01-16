@@ -16,3 +16,7 @@ footer {
     padding: 0;
     box-shadow: none;
 }
+
+.sidenav.fixed-start+.main-content {
+    margin-left: 15.125rem;
+}
