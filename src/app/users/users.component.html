@@ -127,7 +127,7 @@
             <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
               <div class="row">
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Username</mat-label>
+                  <mat-label class="text-bold">Username - First Name.Last Name</mat-label>
                   <input formControlName="username" matInput type="text" required [ngClass]="
                       (form.controls['username'].dirty ||
                         form.controls['username'].touched) &&

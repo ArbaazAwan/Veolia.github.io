@@ -55,7 +55,8 @@ export class CreateSummaryFormComponent implements OnInit {
         master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.quality?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.dutyApplication?.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.unitDesc?.toLowerCase().indexOf(enteredData) > -1
       );
     });
   }
@@ -207,7 +208,7 @@ export class CreateSummaryFormComponent implements OnInit {
       life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       remainingLife: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
-      lifeMonthsYears: ['']
+      lifeMonthsYears: [{value:'', disabled:true}]
     }));
   }
 

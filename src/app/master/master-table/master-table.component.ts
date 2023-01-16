@@ -122,7 +122,7 @@ export class MasterTableComponent implements OnInit {
       {
         next: (res: any) => {
           this.masters = res.masters;
-          this.sortAssets({ active: 'masterId', direction: 'desc' });
+          this.sortAssets({ active: 'oldAssetType', direction: 'asc' });
           this.isLoading = false;
 
         },

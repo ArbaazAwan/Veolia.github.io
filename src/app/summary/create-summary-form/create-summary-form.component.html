@@ -27,7 +27,7 @@
                   <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onAssetChange($event.option.value)'
                     [displayWith]="getDisplayText">
                     <mat-option *ngFor="let master of filteredMasters" [value]="master">
-                      {{master.oldAssetType}} - {{ master.newAssetType }} , {{master.masterStyle}} ,
+                      {{master.oldAssetType}} - {{ master.newAssetType }}, {{master.masterStyle}},
                       {{master.masterSize}}, {{master.quality}}, {{master.dutyApplication}}
                     </mat-option>
                   </mat-autocomplete>

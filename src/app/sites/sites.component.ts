@@ -4,6 +4,7 @@ import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 import { ClientService } from '../clients/client.service';
 import { Router } from '@angular/router';
+import { SortDirection } from 'aws-amplify';
 
 type SiteType = 'true' | 'false';
 
@@ -20,6 +21,9 @@ export class SitesComponent implements OnInit {
     siteName: [
       '',
       [Validators.required, Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+    ],
+    clientContractYears: [
+      '',
     ],
     contractYears: [
       '',
@@ -39,7 +43,9 @@ export class SitesComponent implements OnInit {
   selectedClientId: number = 1;
   isLoadingClient: boolean = false;
   selectedClient: any;
+  bindedClient:any;
   clients!: any[];
+  clientContractYears: any;
   siteStatus: SiteType;
 
   selectedsite: any = {
@@ -68,6 +74,17 @@ export class SitesComponent implements OnInit {
     this.checkUserRole();
     this.getSites();
     this.selectedClient = localStorage.getItem('clientId');
+
+  }
+
+  onDropDownClientSelect(clientId: any){
+    this.clientService.getClientById(clientId).subscribe(
+      {
+        next:(res:any)=>{
+          this.form.get('clientContractYears')?.setValue(res[0].contractYears);
+        }
+      }
+    )
   }
 
   getSites() {
@@ -86,20 +103,26 @@ export class SitesComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return alert('invalid form');
     const clientID = this.form.value.selectedClient;
-    this.siteService.postSite(this.form.value.siteName,this.form.value.contractYears, clientID).subscribe({
-      next: (res) => {
-        this.userService.openSnackBar(
-          'New Site is Created Successfully!',
-          'close'
-        );
-        this.getSites();
-      },
-      error: (e) => {
-        this.error = e.message;
-        this.userService.openSnackBar(this.error, 'close');
-        this.getSites();
-      },
-    });
+    this.siteService
+      .postSite(
+        this.form.value.siteName,
+        this.form.value.contractYears,
+        clientID
+      )
+      .subscribe({
+        next: (res) => {
+          this.userService.openSnackBar(
+            'New Site is Created Successfully!',
+            'close'
+          );
+          this.getSites();
+        },
+        error: (e) => {
+          this.error = e.message;
+          this.userService.openSnackBar(this.error, 'close');
+          this.getSites();
+        },
+      });
     this.resetForm();
   }
 
@@ -164,7 +187,7 @@ export class SitesComponent implements OnInit {
 
   checkUserRole() {
     var userRole = localStorage.getItem('role');
-    if (userRole != 'admin') {
+    if (userRole != 'admin' && userRole != 'power_user') {
       this.router.navigate(['/clientslist']);
     }
   }

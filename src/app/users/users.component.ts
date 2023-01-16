@@ -250,7 +250,7 @@ export class UsersComponent implements OnInit {
 
   checkUserRole() {
     var userRole = localStorage.getItem('role');
-    if (userRole != 'admin') {
+    if (userRole != 'admin' && userRole != 'power_user') {
       this.router.navigate(['/clientslist']);
     }
   }
