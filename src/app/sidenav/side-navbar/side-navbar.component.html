@@ -45,7 +45,36 @@
         </li>
       </div>
 
-      <div *ngIf="isClientListRoute() && this.role == 'admin' ">
+      <div *ngIf="isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " routerLink="/clients" [routerLinkActive]="['bg-gradient-primary']">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">people</i>
+            </div>
+            <span class="nav-link-text ms-1">Clients</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " routerLink="/sites" [routerLinkActive]="['bg-gradient-primary']">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">business</i>
+            </div>
+            <span class="nav-link-text ms-1">Sites</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " routerLink="/users" [routerLinkActive]="['bg-gradient-primary']">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">people_outline</i>
+            </div>
+            <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+      </div>
+      <div *ngIf="!isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin</h6>
         </li>
@@ -75,36 +104,7 @@
           </a>
         </li>
       </div>
-      <div *ngIf="!isClientListRoute() && this.role == 'admin' ">
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin</h6>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link text-white " routerLink="/clients" [routerLinkActive]="['bg-gradient-primary']">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">people</i>
-            </div>
-            <span class="nav-link-text ms-1">Clients</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " routerLink="/sites" [routerLinkActive]="['bg-gradient-primary']">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">business</i>
-            </div>
-            <span class="nav-link-text ms-1">Sites</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " routerLink="/users" [routerLinkActive]="['bg-gradient-primary']">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">people_outline</i>
-            </div>
-            <span class="nav-link-text ms-1">Users</span>
-          </a>
-        </li>
-      </div>
     </ul>
   </div>
 

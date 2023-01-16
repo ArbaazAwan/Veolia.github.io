@@ -20,6 +20,7 @@ export class CreateMasterFormComponent implements OnInit {
   masterId: any;
   files: any;
   cols: any[] = [];
+  tabIndex: number = 0;
 
   ngOnInit(): void {
     this.addEvent();
@@ -90,7 +91,7 @@ export class CreateMasterFormComponent implements OnInit {
       c.replacementCost.setValue(
         _master.replacementCost ? _master.replacementCost : ''
       );
-      c.unitDesc.setValue( _master.unitDesc ? _master.unitDesc : '');
+      c.unitDesc.setValue(_master.unitDesc ? _master.unitDesc : '');
       c.lifeMonths.setValue(_master.lifeMonths ? _master.lifeMonths : '');
       c.overhaulLife.setValue(_master.overhaulLife ? _master.overhaulLife : '');
       c.ovTitle.setValue(
@@ -116,6 +117,8 @@ export class CreateMasterFormComponent implements OnInit {
         _events.forEach((event: any) => {
           this.addEvent(event);
         });
+        let eventIndex = (<FormArray>this.form.get('events')).length - 1;
+        this.tabIndex = eventIndex + 2;
       }
 
       if (_overhaul) {
@@ -159,7 +162,7 @@ export class CreateMasterFormComponent implements OnInit {
 
   onSubmit() {
     this.form.get('rev')?.setValue(new Date());
-    if(this.form.valid){
+    if (this.form.valid) {
       this.postformMaster();
       this.modalClose.nativeElement.click();
     }
@@ -321,6 +324,8 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().push(this.newEvent(event));
     let eventIndex = (<FormArray>this.form.get('events')).length - 1;
 
+    this.tabIndex = eventIndex + 1;
+
     if (event) {
       if (!!event.eventMaintenance) {
         event.eventMaintenance.forEach((evMaintenance: any) => {
@@ -366,6 +371,7 @@ export class CreateMasterFormComponent implements OnInit {
 
   removeEvent(index: number) {
     this.events().removeAt(index);
+    this.tabIndex = index;
   }
 
   removeMaintenance(eventIndex: any, index: number) {

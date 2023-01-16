@@ -23,7 +23,7 @@
            [resizableColumns]="true" [tableStyle]="{'min-width': '250rem'}">
             <ng-template pTemplate="header">
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
                 <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
@@ -79,7 +79,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
               <tr [pEditableRow]="summary" >
-                <td>
+                <td *ngIf="siteStatus">
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                     (click)="onRowEditInit(summary)" title="Edit" class="p-button-rounded p-button-text">
                   </button>
