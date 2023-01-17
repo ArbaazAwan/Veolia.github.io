@@ -19,67 +19,66 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" [scrollable]="true" scrollHeight="400px"
-           [resizableColumns]="true" [tableStyle]="{'min-width': '250rem'}">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="400px">
             <ng-template pTemplate="header">
               <tr>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
+                <th  style="min-width: 170px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
-                <th pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 100px;" pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder">
                   &nbsp;ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="eqpFunctionalDesc"
-                  class="text-uppercase text-bold text-xs font-weight-bolder ps-0" style="font-size: small;">
+                <th pSortableColumn="eqpFunctionalDesc" 
+                  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Unit or Equipment Functional Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th  style="min-width: 150px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 100px;" pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Style <p-sortIcon field="summaryStyle"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 100px;" pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
-                <th pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 150px;" pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Duty or Application <p-sortIcon field="dutyApplication"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 130px;" pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Quality <p-sortIcon field="quality"></p-sortIcon>
                 </th>
-                <th pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 130px;" pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Quantity <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
-                  Load% <p-sortIcon field="summaryload"></p-sortIcon>
+                <th style="min-width: 130px;" pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Load % <p-sortIcon field="summaryload"></p-sortIcon>
                 </th>
-                <th pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 200px;" pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Installation Date <p-sortIcon field="installmentDate"></p-sortIcon>
                 </th>
-                <th pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
-                  Life% <p-sortIcon field="life"></p-sortIcon>
+                <th style="min-width: 120px;" pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Life % <p-sortIcon field="life"></p-sortIcon>
                 </th>
-                <th pSortableColumn="remainingLife" class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
-                  Remaining Life% <p-sortIcon field="remainingLife"></p-sortIcon>
+                <th style="min-width: 100px;" pSortableColumn="remainingLife" class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Remaining Life % <p-sortIcon field="remainingLife"></p-sortIcon>
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2">
+                <th style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder ">
                   Unit Template Descripton
                 </th>
-                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder">
                   unit template application
                 </th>
-                <th pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 150px;" pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Created Date <p-sortIcon field="dateCreated"></p-sortIcon>
                 </th>
-                <th pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder ps-0">
+                <th style="min-width: 150px;" pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder">
                   &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
                 </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
               <tr [pEditableRow]="summary" >
-                <td *ngIf="siteStatus">
+                <td *ngIf="siteStatus" style="min-width: 180px;">
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                     (click)="onRowEditInit(summary)" title="Edit" class="p-button-rounded p-button-text">
                   </button>
@@ -99,7 +98,7 @@
                     class="p-button-rounded p-button-text p-button-danger">
                   </button>
                 </td>
-                <td>
+                <td style="min-width: 70px;">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <input pInputText type="text" disabled [(ngModel)]="summary.summaryId">
@@ -112,7 +111,7 @@
                 <td style="font-family: Roboto;" >
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
+                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.eqpFunctionalDesc}}
@@ -201,7 +200,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.quantity">
+                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.quantity">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.quantity}}
@@ -211,7 +210,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.summaryload">
+                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.summaryload">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.summaryload}}
@@ -232,7 +231,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.life">
+                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.life}}
@@ -242,7 +241,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="100-summary.life">
+                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{100 - summary.life}}
