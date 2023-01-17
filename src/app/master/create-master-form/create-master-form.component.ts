@@ -146,7 +146,6 @@ export class CreateMasterFormComponent implements OnInit {
   resetForm() {
     this.form.reset();
     this.form = this.initialForm();
-    this.editMasterId = null;
     this.addEvent();
   }
 
