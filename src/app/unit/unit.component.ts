@@ -41,7 +41,8 @@ export class UnitComponent implements OnInit {
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.unitDesc?.toLowerCase().indexOf(enteredData) > -1
       );
     });
   }

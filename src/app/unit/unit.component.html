@@ -12,7 +12,8 @@
           />
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getSelectedMaster($event.option.value)' [displayWith]="getDisplayText">
             <mat-option *ngFor="let master of filteredMasters" [value]="master">
-              {{master.oldAssetType}}  - {{ master.newAssetType }} , {{master.masterStyle}} , {{master.masterSize}}
+              {{master.oldAssetType}}  - {{ master.newAssetType }}, {{master.masterStyle}},
+              {{master.masterSize}}, {{master.dutyApplication}}, {{master.quality}}
             </mat-option>
           </mat-autocomplete>
           <mat-icon matSuffix>search</mat-icon>
