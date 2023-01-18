@@ -19,7 +19,7 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="400px">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="450px">
             <ng-template pTemplate="header">
               <tr>
                 <th  style="min-width: 170px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
@@ -32,8 +32,8 @@
                   class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th  style="min-width: 150px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
-                  Asset Type <p-sortIcon field="assetType"></p-sortIcon>
+                <th  style="min-width: 250px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Master Template Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
                 <th style="min-width: 100px;" pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Style <p-sortIcon field="summaryStyle"></p-sortIcon>
@@ -124,7 +124,7 @@
                       <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange(selectedMaster,summary)"
                         [(ngModel)]="selectedMaster" optionLabel="oldAssetType" [filter]="true"
                         filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality"
-                        placeholder="Search asset type">
+                        placeholder="Search Master Template">
                         <ng-template pTemplate="selectedMaster">
                           <div *ngIf="selectedMaster">
                             <div>
