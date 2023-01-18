@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
 
   initializeForm() {
     this.form = this.formBuilder.group({
-      username: [null, Validators.required],
+      username: [null, [Validators.required, Validators.pattern(/^\S*$/)]],
       email: [null, [Validators.required, Validators.email]],
       password: [
         null,

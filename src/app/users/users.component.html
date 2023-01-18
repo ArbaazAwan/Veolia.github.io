@@ -116,7 +116,8 @@
             <h5 class="">
               User
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                <button data-bs-dismiss="modal" 
+                 (click)="formReset()" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -127,14 +128,15 @@
             <form [formGroup]="form" (ngSubmit)="submitForm()" role="form">
               <div class="row">
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
-                  <mat-label class="text-bold">Username - First Name.Last Name</mat-label>
-                  <input formControlName="username" matInput type="text" required [ngClass]="
+                  <mat-label class="text-bold">Username-First Name.Last Name</mat-label>
+                  <input formControlName="username" matInput type="text" [ngClass]="
                       (form.controls['username'].dirty ||
                         form.controls['username'].touched) &&
                       form.hasError('required', 'username') == true
                         ? 'border-danger'
                         : ''
-                    " />
+                    " 
+                    />
                   <small class="text-danger float-end" *ngIf="
                       (form.controls['username'].dirty ||
                         form.controls['username'].touched) &&
@@ -142,10 +144,13 @@
                     ">
                     Username is required
                   </small>
+                  <small *ngIf="form.controls['username'].hasError('pattern')">
+                    Field should not contain spaces
+                  </small>
                 </mat-form-field>
                 <mat-form-field class="example-form-field" appearance="outline" class="text-xs">
                   <mat-label class="text-bold">Email</mat-label>
-                  <input formControlName="email" matInput type="email" required [ngClass]="
+                  <input formControlName="email" matInput type="email" [ngClass]="
                       (form.controls['email'].dirty ||
                         form.controls['email'].touched) &&
                       form.hasError('required', 'email') == true
@@ -162,7 +167,7 @@
                 </mat-form-field>
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Password</mat-label>
-                  <input formControlName="password" matInput type="password" required minlength="8" [ngClass]="
+                  <input formControlName="password" matInput type="password" minlength="8" [ngClass]="
                       (form.controls['password'].dirty ||
                         form.controls['password'].touched) &&
                       form.hasError('required', 'password') == true

@@ -28,11 +28,11 @@ export class ClientstableComponent implements OnInit {
   @Output() editClientEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.sortAssets({ active: 'clientId', direction: 'desc' });
+    this.sortAssets({ active: 'clientName', direction: 'asc' });
   }
 
   ngOnChanges() {
-    this.sortAssets({ active: 'clientId', direction: 'desc' });
+    this.sortAssets({ active: 'clientName', direction: 'asc' });
   }
 
   editClient(id: any) {

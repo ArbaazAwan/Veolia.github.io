@@ -21,11 +21,11 @@ export class SitesTableComponent implements OnInit {
   @Output() editSiteEvent = new EventEmitter();
 
   ngOnChanges() {
-    this.sortAssets({ active: 'siteId', direction: 'desc' });
+    this.sortAssets({ active: 'siteName', direction: 'asc' });
   }
 
   ngOnInit(): void {
-    this.sortAssets({ active: 'siteId', direction: 'desc' });
+    this.sortAssets({ active: 'siteName', direction: 'asc' });
   }
 
   editSite(id: any) {
@@ -48,13 +48,21 @@ export class SitesTableComponent implements OnInit {
         case 'siteId':
           return this.compare(a.siteId, b.siteId, isAsc);
         case 'siteName':
-          return this.compare(a.siteName?.toLowerCase(), b.siteName?.toLowerCase(), isAsc);
-          case 'contractYears':
-            this.contractYearA = Number(a.contractYears);
-            this.contractYearB = Number(b.contractYears);
-            return this.compare(this.contractYearA, this.contractYearB, isAsc);
+          return this.compare(
+            a.siteName?.toLowerCase(),
+            b.siteName?.toLowerCase(),
+            isAsc
+          );
+        case 'contractYears':
+          this.contractYearA = Number(a.contractYears);
+          this.contractYearB = Number(b.contractYears);
+          return this.compare(this.contractYearA, this.contractYearB, isAsc);
         case 'clientName':
-          return this.compare(a.clientName?.toLowerCase(), b.clientName?.toLowerCase(), isAsc);
+          return this.compare(
+            a.clientName?.toLowerCase(),
+            b.clientName?.toLowerCase(),
+            isAsc
+          );
         case 'siteStatus':
           return this.compare(a.siteStatus, b.siteStatus, isAsc);
         default:
