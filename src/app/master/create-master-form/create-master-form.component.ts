@@ -21,9 +21,10 @@ export class CreateMasterFormComponent implements OnInit {
   files: any;
   cols: any[] = [];
   tabIndex: number = 0;
+  isEditForm: boolean = false;
 
   ngOnInit(): void {
-    this.addEvent();
+    this.resetForm();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
         this.populateEditMasterForm(masterId);
@@ -58,6 +59,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   populateEditMasterForm(masterId: any) {
+    this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
@@ -117,8 +119,8 @@ export class CreateMasterFormComponent implements OnInit {
         _events.forEach((event: any) => {
           this.addEvent(event);
         });
-        let eventIndex = (<FormArray>this.form.get('events')).length - 1;
-        this.tabIndex = eventIndex + 2;
+        //focus on first tab
+        this.tabIndex = 0;
       }
 
       if (_overhaul) {
@@ -144,9 +146,11 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   resetForm() {
+    this.isEditForm = false;
     this.form.reset();
     this.form = this.initialForm();
     this.addEvent();
+    this.tabIndex = 0;
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -323,7 +327,11 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().push(this.newEvent(event));
     let eventIndex = (<FormArray>this.form.get('events')).length - 1;
 
-    this.tabIndex = eventIndex + 1;
+    this.tabIndex = this.events().length;
+
+    if(this.isEditForm){
+      this.tabIndex++;
+    }
 
     if (event) {
       if (!!event.eventMaintenance) {
@@ -370,7 +378,11 @@ export class CreateMasterFormComponent implements OnInit {
 
   removeEvent(index: number) {
     this.events().removeAt(index);
-    this.tabIndex = index;
+    this.tabIndex = this.events().length;
+
+    if(this.isEditForm){
+      this.tabIndex++;
+    }
   }
 
   removeMaintenance(eventIndex: any, index: number) {
