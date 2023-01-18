@@ -139,6 +139,7 @@ export class SitesComponent implements OnInit {
       c['siteStatus'].setValue(_site.siteStatus);
       this.clientService.getClientById(_site.clientId).subscribe((res: any) => {
         c['selectedClient'].setValue(res[0].clientName);
+        c['clientContractYears'].setValue(res[0].contractYears);
         c['selectedClient'].disable();
         this.isEditFormLoading = false;
       });

@@ -48,6 +48,11 @@
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Client Contract Years</mat-label>
+                  <input matInput formControlName="clientContractYears" type="number" [value]="selectedClient.contractYears"  readonly/>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Site Name</mat-label>
                   <input formControlName="siteName" matInput type="text" [ngClass]="
                       (form.controls['siteName'].dirty ||
