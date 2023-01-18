@@ -4,3 +4,19 @@ footer {
     left: 25%;
     width: 75%;
 }
+
+.shortNav {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 13.625rem !important;
+    // overflow-y: auto;
+    padding: 0;
+    box-shadow: none;
+}
+
+.sidenav.fixed-start+.main-content {
+    margin-left: 15.125rem;
+}
