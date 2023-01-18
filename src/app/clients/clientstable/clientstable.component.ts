@@ -20,17 +20,19 @@ export class ClientstableComponent implements OnInit {
 
   searchText: string = '';
   sortedClients: any = [];
+  contractYearA: number;
+  contractYearB: number;
   @Input() clients: any = [];
   @Input() isLoading: boolean = false;
   @Output() deleteClientEvent = new EventEmitter();
   @Output() editClientEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.sortAssets({ active: 'clientId', direction: 'desc' });
+    this.sortAssets({ active: 'clientName', direction: 'asc' });
   }
 
   ngOnChanges() {
-    this.sortAssets({ active: 'clientId', direction: 'desc' });
+    this.sortAssets({ active: 'clientName', direction: 'asc' });
   }
 
   editClient(id: any) {
@@ -53,9 +55,11 @@ export class ClientstableComponent implements OnInit {
         case 'clientId':
           return this.compare(a.clientId, b.clientId, isAsc);
         case 'clientName':
-          return this.compare(a.clientName, b.clientName, isAsc);
+          return this.compare(a.clientName.toLowerCase(), b.clientName.toLowerCase(), isAsc);
         case 'contractYears':
-          return this.compare(a.contractYears, b.contractYears, isAsc);
+          this.contractYearA = Number(a.contractYears);
+          this.contractYearB = Number(b.contractYears);
+          return this.compare(this.contractYearA, this.contractYearB, isAsc);
         case 'clientCreated':
           return this.compare(a.clientCreated, b.clientCreated, isAsc);
         case 'clientStatus':

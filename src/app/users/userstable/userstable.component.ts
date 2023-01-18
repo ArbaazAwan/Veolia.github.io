@@ -105,9 +105,9 @@ export class UserstableComponent implements OnInit {
         case 'userId':
           return this.compare(a.userId, b.userId, isAsc);
         case 'userName':
-          return this.compare(a.userName, b.userName, isAsc);
+          return this.compare(a.userName.toLowerCase(), b.userName.toLowerCase(), isAsc);
         case 'userEmail':
-          return this.compare(a.userEmail, b.userEmail, isAsc);
+          return this.compare(a.userEmail.toLowerCase(), b.userEmail.toLowerCase(), isAsc);
         case 'role':
           return this.compare(a.role, b.role, isAsc);
         case 'userStatus':
