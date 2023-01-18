@@ -130,7 +130,7 @@
               <mat-tab-group mat-align-tabs="left" class="mt-3 mb-3" [selectedIndex]="tabIndex">
 
                 <!-- all tab -->
-                <mat-tab label="All" *ngIf="editMasterId">
+                <mat-tab label="All" *ngIf="isEditForm">
                   <div class="card">
                     <p-treeTable [value]="files" id="treetable" [columns]="cols" class="table-responsive">
                       <ng-template pTemplate="header" let-columns>
