@@ -19,6 +19,7 @@ export class SitesTableComponent implements OnInit {
 
   ngOnChanges() {
     this.sortAssets({ active: 'siteId', direction: 'desc' });
+    
   }
 
   ngOnInit(): void {
@@ -45,11 +46,11 @@ export class SitesTableComponent implements OnInit {
         case 'siteId':
           return this.compare(a.siteId, b.siteId, isAsc);
         case 'siteName':
-          return this.compare(a.siteName, b.siteName, isAsc);
+          return this.compare(a.siteName.toLowerCase(), b.siteName.toLowerCase(), isAsc);
           case 'contractYears':
             return this.compare(a.contractYears, b.contractYears, isAsc);
         case 'clientName':
-          return this.compare(a.clientName, b.clientName, isAsc);
+          return this.compare(a.clientName?.toLowerCase(), b.clientName?.toLowerCase(), isAsc);
         case 'siteStatus':
           return this.compare(a.siteStatus, b.siteStatus, isAsc);
         default:
