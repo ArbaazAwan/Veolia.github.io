@@ -14,7 +14,7 @@
           <mat-accordion>
             <div *ngIf="clients;">
 
-              <mat-expansion-panel class="py-1" *ngFor="let client of clients" (opened)="panelOpenState = true"
+              <mat-expansion-panel class="py-1" *ngFor="let client of clients | asc: 'clientName'" (opened)="panelOpenState = true"
                 (closed)="panelOpenState = false">
                 <mat-expansion-panel-header *ngIf="client.clientName != null">
                   <mat-panel-title>
