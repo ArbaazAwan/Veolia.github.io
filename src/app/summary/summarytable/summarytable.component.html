@@ -159,8 +159,8 @@
                 <td *ngIf="editing">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange(selectedMaster,summary)"
-                        [(ngModel)]="selectedMaster" optionLabel="oldAssetType" [filter]="true"
+                      <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange($event.value,summary)"
+                         optionLabel="oldAssetType" [filter]="true"
                         filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality"
                         placeholder="Search Master Template">
                         <ng-template pTemplate="selectedMaster">
