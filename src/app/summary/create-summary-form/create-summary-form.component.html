@@ -48,7 +48,7 @@
                 </mat-form-field>
 
                 <mat-form-field class="text-sm" appearance="outline">
-                  <mat-label class="text-bold">Asset Type</mat-label>
+                  <mat-label class="text-bold">Master Template Asset Type</mat-label>
                   <input formControlName="assetType" matInput type="text" [ngClass]="
                         (form.controls['assetType'].dirty ||
                           form.controls['assetType'].touched) &&
@@ -137,11 +137,6 @@
                   </small>
                 </mat-form-field>
 
-
-              </div>
-
-              <div class="col-md-6">
-
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Unit Application Description</mat-label>
                   <input formControlName="description" matInput type="text" [ngClass]="
@@ -160,6 +155,24 @@
                   </small>
                 </mat-form-field>
 
+                <mat-form-field class="text-sm" appearance="outline">
+                  <mat-label class="text-bold">Asset Id</mat-label>
+                  <input formControlName="assetId" matInput type="number"/>
+                </mat-form-field>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <mat-form-field class="text-sm" appearance="outline">
+                  <mat-label class="text-bold">Asset Type</mat-label>
+                  <input formControlName="importAssetType" matInput type="text"/>
+                </mat-form-field>
+
+                <mat-form-field class="text-sm" appearance="outline">
+                  <mat-label class="text-bold">Asset Hierarchy</mat-label>
+                  <input formControlName="assetHierarchy" matInput type="text"/>
+                </mat-form-field>
 
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Quantity</mat-label>
