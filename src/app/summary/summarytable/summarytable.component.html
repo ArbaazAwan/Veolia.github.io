@@ -31,13 +31,13 @@
                 <th pSortableColumn="eqpFunctionalDesc" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetId" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="assetId" style="min-width: 100px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Id <p-sortIcon field="assetId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="importAssetType" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="importAssetType" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Type <p-sortIcon field="importAssetType"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetHierarchy" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="assetHierarchy" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Hierarchy <p-sortIcon field="assetHierarchy"></p-sortIcon>
                 </th>
                 <th  style="min-width: 250px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -129,7 +129,7 @@
                 <td style="min-width: 70px;">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px;" disabled pInputText type="text" [(ngModel)]="summary.assetId">
+                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.assetId">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetId}}

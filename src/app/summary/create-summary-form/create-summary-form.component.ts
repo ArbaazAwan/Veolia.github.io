@@ -90,7 +90,6 @@ export class CreateSummaryFormComponent implements OnInit {
     c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
-    c.assetId.setValue(master.assetId);
 
     let years = Math.ceil(Number(master.lifeMonths) / 12);
     c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
@@ -198,7 +197,7 @@ export class CreateSummaryFormComponent implements OnInit {
       unit: '',
       eqpFunctionalDesc: null,
       masterId: [{ value: '', disabled: true }],
-      assetId: [{ value: '', disabled: true }],
+      assetId: null,
       importAssetType: '',
       assetHierarchy: '',
       assetType: '',
