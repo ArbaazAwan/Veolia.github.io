@@ -1,8 +1,8 @@
 <button type="button" class="btn bg-gradient-primary mx-4 text-right" data-bs-toggle="modal"
-  data-bs-target="#modal-form-create" *ngIf="role == 'admin'|| role === 'power_user'">
+  data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
   Add Master Template
 </button>
-<app-import-excel *ngIf="role == 'admin'|| role === 'power_user'"></app-import-excel>
+<app-import-excel *ngIf="role == 'admin'"></app-import-excel>
 <!-- table here -->
 <div class="container-fluid py-4">
   <app-master-table (viewMasterEvent)="onViewMaster($event)"></app-master-table>

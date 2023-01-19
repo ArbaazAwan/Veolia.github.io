@@ -95,16 +95,16 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" *ngIf="role == 'admin'|| role === 'power_user'">
+                            data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin'|| role === 'power_user'">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin'">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
                           <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)"
-                            *ngIf="role == 'admin'|| role === 'power_user'">
+                            *ngIf="role == 'admin'">
                             <i class="material-icons">delete</i>&nbsp;
                             Delete
                           </button>
