@@ -82,6 +82,9 @@ export class ImportSummaryComponent implements OnInit {
             quantity: null,
             installmentDate: null,
             eqpFunctionalDesc: summaryData[0],
+            assetId: summaryData[1],
+            importAssetType: summaryData[2],
+            assetHierarchy: summaryData[3],
           };
 
           this.summaryService.postSummary(summary).subscribe((res: any) => {
