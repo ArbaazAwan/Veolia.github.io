@@ -59,14 +59,13 @@ export class SummarytableComponent implements OnInit {
 
   onAssetChange(master: any,summary:any) {
 
+    this.selectedMaster = master;
     summary.masterId = master.masterId;
     summary.assetType = master.oldAssetType + ' - ' + master.newAssetType;
     summary.summaryStyle = master.masterStyle;
     summary.summarySize = master.masterSize;
     summary.dutyApplication = master.dutyApplication;
     summary.quality = master.quality;
-    summary.assetId = master.assetId;
-
   }
 
   onInstallmentChange(summary: any) {
