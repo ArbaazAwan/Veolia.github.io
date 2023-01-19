@@ -66,7 +66,7 @@ export class ImportSummaryComponent implements OnInit {
       console.log(this.excelData.length);
       if (this.excelData.length > 0) {
         for (let index = 0; index < this.excelData.length; index++) {
-          var summaryData = Object.values(this.excelData[index]);
+          const data = this.excelData[index];
           const summary = {
             siteId: localStorage.getItem('siteId'),
             masterId: 1,
@@ -81,10 +81,10 @@ export class ImportSummaryComponent implements OnInit {
             life: null,
             quantity: null,
             installmentDate: null,
-            eqpFunctionalDesc: summaryData[0],
-            assetId: summaryData[1],
-            importAssetType: summaryData[2],
-            assetHierarchy: summaryData[3],
+            eqpFunctionalDesc: data.AssetDescription,
+            assetId: data.AssetId,
+            importAssetType: data.AssetType,
+            assetHierarchy: data.AssetHierarchy,
           };
 
           this.summaryService.postSummary(summary).subscribe((res: any) => {
