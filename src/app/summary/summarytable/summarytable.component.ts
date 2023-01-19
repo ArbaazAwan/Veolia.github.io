@@ -65,8 +65,6 @@ export class SummarytableComponent implements OnInit {
     summary.summarySize = master.masterSize;
     summary.dutyApplication = master.dutyApplication;
     summary.quality = master.quality;
-    summary.assetId = master.assetId;
-
   }
 
   onInstallmentChange(summary: any) {
