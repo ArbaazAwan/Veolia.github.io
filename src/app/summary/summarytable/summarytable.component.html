@@ -28,9 +28,17 @@
                 <th style="min-width: 100px;" pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder">
                   &nbsp;ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="eqpFunctionalDesc" 
-                  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="eqpFunctionalDesc" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
+                </th>
+                <th pSortableColumn="assetId" style="min-width: 100px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                  Asset Id <p-sortIcon field="assetId"></p-sortIcon>
+                </th>
+                <th pSortableColumn="importAssetType" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                  Asset Type <p-sortIcon field="importAssetType"></p-sortIcon>
+                </th>
+                <th pSortableColumn="assetHierarchy" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                  Asset Hierarchy <p-sortIcon field="assetHierarchy"></p-sortIcon>
                 </th>
                 <th  style="min-width: 250px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Master Template Asset Type <p-sortIcon field="assetType"></p-sortIcon>
@@ -108,13 +116,43 @@
                     </ng-template>
                   </p-cellEditor>
                 </td>
-                <td style="font-family: Roboto;" >
+                <td style="font-family: Roboto;">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.eqpFunctionalDesc}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="min-width: 70px;">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.assetId">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.assetId}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="min-width: 70px;">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.importAssetType">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.importAssetType}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="min-width: 70px;">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.assetHierarchy">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.assetHierarchy}}
                     </ng-template>
                   </p-cellEditor>
                 </td>

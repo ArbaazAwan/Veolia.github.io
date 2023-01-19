@@ -65,6 +65,7 @@ export class SummarytableComponent implements OnInit {
     summary.summarySize = master.masterSize;
     summary.dutyApplication = master.dutyApplication;
     summary.quality = master.quality;
+    summary.assetId = master.assetId;
 
   }
 
@@ -158,7 +159,8 @@ export class SummarytableComponent implements OnInit {
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.oldAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
         master?.masterSize?.toLowerCase().indexOf(enteredData) > -1 ||
-        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1
+        master?.masterStyle?.toLowerCase().indexOf(enteredData) > -1 ||
+        master?.unitDesc?.toLowerCase().indexOf(enteredData) > -1
       );
     });
   }
@@ -232,6 +234,9 @@ export class SummarytableComponent implements OnInit {
       unit: summary.unit,
       eqpFunctionalDesc:summary.eqpFunctionalDesc,
       assetType: summary.assetType,
+      assetId: summary.assetId,
+      importAssetType: summary.importAssetType,
+      assetHierarchy: summary.assetHierarchy,
       summarySize: summary.summarySize,
       summaryStatus: true,
       dutyApplication: summary.dutyApplication,

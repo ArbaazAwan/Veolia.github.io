@@ -197,6 +197,9 @@ export class CreateSummaryFormComponent implements OnInit {
       unit: '',
       eqpFunctionalDesc: null,
       masterId: [{ value: '', disabled: true }],
+      assetId: null,
+      importAssetType: '',
+      assetHierarchy: '',
       assetType: '',
       size: '',
       summaryStyle: '',
@@ -228,6 +231,9 @@ export class CreateSummaryFormComponent implements OnInit {
         unit,
         eqpFunctionalDesc,
         assetType,
+        assetId,
+        importAssetType,
+        assetHierarchy,
         size,
         masterId,
         description,
@@ -248,6 +254,9 @@ export class CreateSummaryFormComponent implements OnInit {
             unit: unit,
             eqpFunctionalDesc: eqpFunctionalDesc,
             assetType: assetType,
+            assetId: assetId,
+            importAssetType: importAssetType,
+            assetHierarchy: assetHierarchy,
             summarySize: size,
             summaryStatus: true,
             dutyApplication: dutyApplication,
@@ -274,6 +283,9 @@ export class CreateSummaryFormComponent implements OnInit {
             unit: unit,
             eqpFunctionalDesc: eqpFunctionalDesc,
             assetType: assetType,
+            assetId: assetId,
+            importAssetType: importAssetType,
+            assetHierarchy: assetHierarchy,
             summarySize: size,
             dutyApplication: dutyApplication,
             appDescription: description,
@@ -307,6 +319,9 @@ export class CreateSummaryFormComponent implements OnInit {
         eqpFunctionalDesc,
         masterId,
         assetType,
+        assetId,
+        importAssetType,
+        assetHierarchy,
         summaryload,
         summarySize,
         appDescription,
@@ -324,6 +339,9 @@ export class CreateSummaryFormComponent implements OnInit {
       c.unit.setValue(unit);
       c.eqpFunctionalDesc.setValue(eqpFunctionalDesc);
       c.assetType.setValue(assetType);
+      c.assetId.setValue(assetId);
+      c.importAssetType.setValue(importAssetType);
+      c.assetHierarchy.setValue(assetHierarchy);
       c.size.setValue(summarySize);
       c.summaryStyle.setValue(summaryStyle);
       c.description.setValue(appDescription);
