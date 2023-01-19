@@ -31,22 +31,22 @@
                 <th pSortableColumn="eqpFunctionalDesc" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
                   Asset Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetId" style="min-width: 100px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="assetId"  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 150px;">
                   Asset Id <p-sortIcon field="assetId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="importAssetType" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="importAssetType"  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 250px;">
                   Asset Type <p-sortIcon field="importAssetType"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetHierarchy" style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="assetHierarchy" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 250px;">
                   Asset Hierarchy <p-sortIcon field="assetHierarchy"></p-sortIcon>
                 </th>
-                <th  style="min-width: 250px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th  style="min-width: 150px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Master Template Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
-                <th style="min-width: 100px;" pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Style <p-sortIcon field="summaryStyle"></p-sortIcon>
                 </th>
-                <th style="min-width: 100px;" pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
                 <th style="min-width: 150px;" pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -106,12 +106,12 @@
                     class="p-button-rounded p-button-text p-button-danger">
                   </button>
                 </td>
-                <td style="min-width: 70px;">
+                <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" disabled [(ngModel)]="summary.summaryId">
+                      <input pInputText type="text" style="min-width: 70px;" disabled [(ngModel)]="summary.summaryId">
                     </ng-template>
-                    <ng-template pTemplate="output" class="mb-0 text-sm">
+                    <ng-template pTemplate="output" style="min-width: 70px;" class="mb-0 text-sm">
                       {{summary.summaryId}}
                     </ng-template>
                   </p-cellEditor>
@@ -119,37 +119,37 @@
                 <td style="font-family: Roboto;">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.eqpFunctionalDesc">
+                      <input style="min-width: 300px; font-family: Roboto;" pInputText type="text" placeholder="Enter Asset Description" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
-                    <ng-template pTemplate="output">
+                    <ng-template pTemplate="output" style="font-family: Roboto;">
                       {{summary.eqpFunctionalDesc}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
-                <td style="min-width: 70px;">
+                <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.assetId">
+                      <input style="width: 110px;" pInputText type="text" placeholder="Enter Asset ID" [(ngModel)]="summary.assetId">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetId}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
-                <td style="min-width: 70px;">
+                <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.importAssetType">
+                      <input style="min-width: 150px;" pInputText type="text" placeholder="Enter Asset Type" [(ngModel)]="summary.importAssetType">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.importAssetType}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
-                <td style="min-width: 70px;">
+                <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px;" pInputText type="text" [(ngModel)]="summary.assetHierarchy">
+                      <input style="min-width: 200px;" pInputText type="text" placeholder="Enter Asset Hierarchy" [(ngModel)]="summary.assetHierarchy">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetHierarchy}}
@@ -188,7 +188,7 @@
                 <td *ngIf="!editing">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.assetType">
+                      <input pInputText type="text" placeholder=" Enter Master Template Asset Type" [(ngModel)]="summary.assetType">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetType}}
@@ -198,7 +198,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.summaryStyle">
+                      <input pInputText type="text" placeholder="Enter Style" [(ngModel)]="summary.summaryStyle">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.summaryStyle}}
@@ -208,7 +208,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.summarySize">
+                      <input pInputText type="text" placeholder="Enter Size" [(ngModel)]="summary.summarySize">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.summarySize}}
@@ -218,7 +218,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.dutyApplication">
+                      <input pInputText type="text" placeholder="Enter Duty / Application" [(ngModel)]="summary.dutyApplication">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.dutyApplication}}
@@ -228,7 +228,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.quality">
+                      <input pInputText type="text" placeholder="Enter Quality" [(ngModel)]="summary.quality">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.quality}}
@@ -238,7 +238,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.quantity">
+                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Quantity" [(ngModel)]="summary.quantity">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.quantity}}
@@ -248,7 +248,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.summaryload">
+                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Load %" [(ngModel)]="summary.summaryload">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.summaryload}}
@@ -269,7 +269,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="summary.life">
+                      <input style="width: 100px;" placeholder="Enter Life %" pInputText type="text" [(ngModel)]="summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.life}}
@@ -279,7 +279,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" [(ngModel)]="100-summary.life">
+                      <input style="width: 100px;" placeholder="Enter Remaining Life" pInputText type="text" [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{100 - summary.life}}
@@ -303,7 +303,7 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" [(ngModel)]="summary.appDescription">
+                      <input pInputText type="text" placeholder="Enter Unit Template Application" [(ngModel)]="summary.appDescription">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.appDescription}}
