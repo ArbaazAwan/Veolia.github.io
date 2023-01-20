@@ -33,7 +33,7 @@
                 disableOptionCentering
               >
                 <mat-option
-                  *ngFor="let client of clients"
+                  *ngFor="let client of clients | asc: 'clientName'"
                   value="{{ client.clientId }}"
                 >
                   {{ client.clientName }}
@@ -78,7 +78,7 @@
                 disableOptionCentering
               >
                 <mat-option
-                  *ngFor="let site of sites"
+                  *ngFor="let site of sites | asc: 'siteName'"
                   value="{{ site.siteId }}"
                 >
                   {{ site.siteName }}
