@@ -147,7 +147,7 @@ export class NodeService {
       mainIndex++
     ) {
       var objCC: any = {
-        desc: 'Labor',
+        desc: 'Contractor/ Shop',
       };
       var objCL: any = {
         desc: 'Cost',
