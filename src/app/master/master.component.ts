@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MasterService } from './master.service';
-import * as XLSX from 'xlsx';
 import { SiteService } from '../sites/site.service';
 import { ClientService } from '../clients/client.service';
 import { SummaryService } from '../summary/summary.service';
+import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
 
 @Component({
   selector: 'app-master',
@@ -11,6 +11,7 @@ import { SummaryService } from '../summary/summary.service';
   styleUrls: ['./master.component.scss'],
 })
 export class MasterComponent implements OnInit {
+  @ViewChild(CreateMasterFormComponent) createMasterComponent: CreateMasterFormComponent;
   eventEvalTableShow: boolean = false;
   siteId = localStorage.getItem('siteId');
   clientId: any = localStorage.getItem('clientId');
@@ -53,6 +54,10 @@ export class MasterComponent implements OnInit {
         console.log('error occured in getclientStatus', err);
       },
     });
+  }
+
+  onAddMaster(){
+    this.createMasterComponent.resetForm();
   }
 
   onViewMaster(masterId: any) {
