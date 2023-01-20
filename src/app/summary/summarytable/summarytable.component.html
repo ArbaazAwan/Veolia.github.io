@@ -19,9 +19,9 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="450px">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="600px">
             <ng-template pTemplate="header">
-              <tr>
+              <tr style="z-index: 50rem;">
                 <th  style="min-width: 170px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
@@ -86,7 +86,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
               <tr [pEditableRow]="summary" >
-                <td *ngIf="siteStatus" style="min-width: 180px;">
+                <td *ngIf="siteStatus" style="min-width: 180px;" >
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                     (click)="onRowEditInit(summary)" title="Edit" class="p-button-rounded p-button-text">
                   </button>
