@@ -124,16 +124,16 @@ export class SummaryCalculationsService {
           let stretch = events[i].evStretch.toLowerCase();
           // initiating monthIndex to store every month cost
           let monthIndex = 1;
+          // fetch calculated occured months
+          occured = this.getOccurence(events[i].evOccurence, load);
           // loop for months till 50 years
           for (let month = 1; month <= 600; month++) {
             // checking if the stretch is yes
             if (stretch == 'yes') {
-              // fetch calculated occured months
-              occured = this.getOccurence(events[i].evOccurence, load, month);
               // we only need occurence till the end life of the asset so we are checkin if the occurence is less than equal to life months of asset
-              if (occured <= lifeMonths) {
+              if (month % occured == 0) {
                 // taking ceil to store event cost in that particular year occurence
-                const year = Math.ceil(occured / 12);
+                const year = Math.ceil(monthIndex / 12);
                 yearsArray[year]?.events?.push(i);
               }
             } else {
@@ -143,25 +143,25 @@ export class SummaryCalculationsService {
                 const year = Math.ceil(monthIndex / 12);
                 yearsArray[year]?.events?.push(i);
               }
-              // checking if the month is equal to life month of asset to reset the months
-              if (month == lifeMonths) month = 1;
-              // we only need 50 years of forecast when index become 600 break the loop
-              monthIndex++;
-              if (monthIndex == 600) {
-                break;
-              }
+            }
+            // checking if the month is equal to life month of asset to reset the months
+            if (month == lifeMonths) month = 1;
+            // we only need 50 years of forecast when index become 600 break the loop
+            monthIndex++;
+            if (monthIndex == 600) {
+              break;
             }
           }
         }
 
         let ovMonthIndex = 1;
         var ovOccured = 0;
+        ovOccured = this.getOccurence(overhaulLife, load);
         for (let month = 1; month <= 600; month++) {
           let ovStretch = master.overhaul?.ovStretch;
           if (ovStretch == 'Yes') {
-            ovOccured = this.getOccurence(overhaulLife, load, month);
-            if (ovOccured <= lifeMonths) {
-              const year = Math.ceil(ovOccured / 12);
+            if (month % ovOccured == 0) {
+              const year = Math.ceil(ovMonthIndex / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }
           } else {
@@ -169,13 +169,13 @@ export class SummaryCalculationsService {
               const year = Math.ceil(ovMonthIndex / 12);
               ovYearsArray[year]?.overhaul?.push(0);
             }
-            // checking if the month is equal to life month of asset to reset the months
-            if (month == lifeMonths) month = 1;
-            ovMonthIndex++;
-            // we only need 50 years of forecast when index become 600 break the loop
-            if (ovMonthIndex == 600) {
-              break;
-            }
+          }
+          // checking if the month is equal to life month of asset to reset the months
+          if (month == lifeMonths) month = 1;
+          ovMonthIndex++;
+          // we only need 50 years of forecast when index become 600 break the loop
+          if (ovMonthIndex == 600) {
+            break;
           }
         }
 
@@ -247,7 +247,7 @@ export class SummaryCalculationsService {
         let averageCost = 0;
         averageCost = Math.round(totalCost / Number(this.clientContractYears));
 
-        yearsCosts[0] = summary.eqpFunctionalDesc
+        yearsCosts[0] = summary.eqpFunctionalDesc;
 
         return {
           totalYearsCosts: this.totalYearsCosts,
@@ -260,8 +260,8 @@ export class SummaryCalculationsService {
   }
 
   // function to return occurence
-  getOccurence(eventOccurence: any, load: any, month: any) {
-    let occured = Math.round((eventOccurence * month) / load);
+  getOccurence(eventOccurence: any, load: any) {
+    let occured = Math.ceil(eventOccurence / load);
     return occured;
   }
 
