@@ -33,12 +33,17 @@ export class SummarytableComponent implements OnInit {
   searchText!: FormControl;
   dateValid: boolean = true;
   siteStatus:boolean=false;
+  showButton:boolean = false;
+  public showForm = false;
 
   constructor(private summaryService: SummaryService, private masterService: MasterService,private siteService:SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
     this.getSummaries();
+    setTimeout(()=>{
+      this.showButton = true;
+    },1500);
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
     });
@@ -271,8 +276,8 @@ export class SummarytableComponent implements OnInit {
         next: (_) => {
           delete this.clonedSummaries[summary.summaryId];
           this.summaryService.openSnackBar('Record deleted successfully!', 'close');
-          // this.getSummaries();
-          window.location.reload();
+          this.getSummaries();
+          // window.location.reload();
         },
         error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
