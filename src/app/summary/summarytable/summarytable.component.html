@@ -1,7 +1,9 @@
-<button type="button" class="btn bg-gradient-primary text-right" data-bs-toggle="modal"
-*ngIf="showButton" data-bs-target="#detail-table" (click)="showForm = true" >
+
+<button type="button" class="btn bg-gradient-primary text-right" 
+*ngIf="showButton" (click)="toggleModal()" >
   View More Info
 </button>
+<button data-bs-toggle="modal" data-bs-target="#detail-table" #hiddenFormBtn  hidden>hidden</button>
 <div class="row mx-1">
   <div class="col-12">
     <div class="card my-1">
@@ -347,5 +349,5 @@
 <!-- asset detail table modal -->
 
 <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
-  <app-summary-viewdetails-table *ngIf="summaries.length!=0 && showForm" [summaryArray]="summaries"></app-summary-viewdetails-table>
+  <app-summary-viewdetails-table (closeModal)="toggleModal()" *ngIf="summaries.length!=0 && showForm" [summaryArray]="summaries" ></app-summary-viewdetails-table>
 </div>

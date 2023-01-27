@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
@@ -20,6 +20,7 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
+  @ViewChild('hiddenFormBtn') modal: ElementRef;
   summaries: any = [];
   filteredSummaries: any = [];
   siteId: any = localStorage.getItem('siteId');
@@ -32,22 +33,37 @@ export class SummarytableComponent implements OnInit {
   isLoading: boolean = false;
   searchText!: FormControl;
   dateValid: boolean = true;
-  siteStatus:boolean=false;
-  showButton:boolean = false;
+  siteStatus: boolean = false;
+  showButton: boolean = false;
   public showForm = false;
 
-  constructor(private summaryService: SummaryService, private masterService: MasterService,private siteService:SiteService) { }
+
+  constructor(private summaryService: SummaryService, private masterService: MasterService,
+     private siteService: SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
     this.getSummaries();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.showButton = true;
-    },1500);
+    }, 1500);
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
     });
     this.getMasters();
+
+  }
+
+  toggleModal() {
+    this.showForm = !this.showForm;
+
+    if (this.showForm) {
+      setTimeout(
+        () => {
+          this.modal.nativeElement.click();
+        }, 2000
+      )
+    }
 
   }
 
@@ -62,7 +78,7 @@ export class SummarytableComponent implements OnInit {
     })
   }
 
-  onAssetChange(master: any,summary:any) {
+  onAssetChange(master: any, summary: any) {
 
     this.selectedMaster = master;
     summary.masterId = master.masterId;
@@ -90,7 +106,7 @@ export class SummarytableComponent implements OnInit {
         lifePerc = 100;
       }
       summary.life = lifePerc;
-      summary.remainingLife = 100 -lifePerc;
+      summary.remainingLife = 100 - lifePerc;
 
       if (lifePerc < 0) {
         this.dateValid = false;
@@ -114,7 +130,7 @@ export class SummarytableComponent implements OnInit {
           lifePerc = 100;
         }
         summary.life = lifePerc;
-        summary.remainingLife = 100 -lifePerc;
+        summary.remainingLife = 100 - lifePerc;
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
@@ -203,7 +219,7 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
-    let date = new Date (summary.installmentDate);
+    let date = new Date(summary.installmentDate);
     summary.installmentDate = date;
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
@@ -237,7 +253,7 @@ export class SummarytableComponent implements OnInit {
       siteId: summary.siteId,
       masterId: summary.masterId,
       unit: summary.unit,
-      eqpFunctionalDesc:summary.eqpFunctionalDesc,
+      eqpFunctionalDesc: summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       assetId: summary.assetId,
       importAssetType: summary.importAssetType,
