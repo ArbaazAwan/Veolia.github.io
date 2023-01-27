@@ -22,7 +22,7 @@
           <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="600px">
             <ng-template pTemplate="header">
               <tr style="z-index: 50rem;">
-                <th  style="min-width: 170px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
+                <th  style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
                 <th style="min-width: 100px;" pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder">
@@ -97,6 +97,9 @@
                     icon="pi pi-trash" (click)="onRowDelete(summary)"
                     class="p-button-rounded p-button-text p-button-danger p-mr-2">
                   </button>
+                  <button *ngIf="!editing" pButton pRipple type="button" icon="pi pi-user-edit" data-bs-toggle="modal" data-bs-target="#modal-form-create"
+                  (click)="onRowEditInit(summary)" title="Edit Master" class="p-button-rounded p-button-text">
+                </button>
                   <button *ngIf="editing" pButton title="Save" pRipple type="button" pSaveEditableRow icon="pi pi-check"
                     (click)="onRowEditSave(summary)" [disabled]="!dateValid"
                     class="p-button-rounded p-button-text p-button-success p-mr-2">
