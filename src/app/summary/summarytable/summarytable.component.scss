@@ -38,6 +38,7 @@ th,td {
 
 .card .card-body {
   padding: 0 !important;
+  margin: 0 !important;
 }
 
 .pagination-div {
@@ -88,4 +89,11 @@ th,td {
   text-align: center;
   overflow: hidden;
   position: initial;
+}
+
+.btn {
+  top: -52px;
+  margin-left: 13.333333%;
+  // padding: 0 !important;
+  // margin-left: 50 ;
 }
