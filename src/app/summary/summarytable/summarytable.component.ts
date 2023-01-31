@@ -32,9 +32,9 @@ export class SummarytableComponent implements OnInit {
   isLoading: boolean = false;
   searchText!: FormControl;
   dateValid: boolean = true;
-  siteStatus:boolean=false;
+  siteStatus: boolean = false;
 
-  constructor(private summaryService: SummaryService, private masterService: MasterService,private siteService:SiteService) { }
+  constructor(private summaryService: SummaryService, private masterService: MasterService, private siteService: SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
@@ -57,7 +57,7 @@ export class SummarytableComponent implements OnInit {
     })
   }
 
-  onAssetChange(master: any,summary:any) {
+  onAssetChange(master: any, summary: any) {
 
     this.selectedMaster = master;
     summary.masterId = master.masterId;
@@ -84,8 +84,9 @@ export class SummarytableComponent implements OnInit {
       if (lifePerc > 100) {
         lifePerc = 100;
       }
+      summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
       summary.life = lifePerc;
-      summary.remainingLife = 100 -lifePerc;
+      summary.remainingLife = 100 - lifePerc;
 
       if (lifePerc < 0) {
         this.dateValid = false;
@@ -108,9 +109,9 @@ export class SummarytableComponent implements OnInit {
         if (lifePerc > 100) {
           lifePerc = 100;
         }
-        summary.serviceYears = Math.ceil((lifePerc/100)*totalYears);
+        summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
         summary.life = lifePerc;
-        summary.remainingLife = 100 -lifePerc;
+        summary.remainingLife = 100 - lifePerc;
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
@@ -199,9 +200,10 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
-    if(summary.installmentDate){
-      let date = new Date (summary.installmentDate);
+    if (summary.installmentDate) {
+      let date = new Date(summary.installmentDate);
       summary.installmentDate = date;
+      this.onInstallmentChange(summary);
     }
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
@@ -235,7 +237,7 @@ export class SummarytableComponent implements OnInit {
       siteId: summary.siteId,
       masterId: summary.masterId,
       unit: summary.unit,
-      eqpFunctionalDesc:summary.eqpFunctionalDesc,
+      eqpFunctionalDesc: summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       assetId: summary.assetId,
       importAssetType: summary.importAssetType,
@@ -250,6 +252,7 @@ export class SummarytableComponent implements OnInit {
       life: summary.life,
       quantity: summary.quantity,
       installmentDate: summary.installmentDate,
+      serviceYears: summary.serviceYears,
     };
 
     this.summaryService

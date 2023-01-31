@@ -112,7 +112,7 @@ export class CreateSummaryFormComponent implements OnInit {
         lifePerc = 100;
       }
 
-      this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc/100)*totalYears));
+      this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc / 100) * totalYears));
       this.form.get('life')?.setValue(lifePerc);
       this.form.get('remainingLife')?.setValue(100 - lifePerc);
       this.lifeLoader = false;
@@ -133,6 +133,7 @@ export class CreateSummaryFormComponent implements OnInit {
         if (lifePerc > 100) {
           lifePerc = 100;
         }
+        this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc / 100) * totalYears));
         this.form.get('life')?.setValue(lifePerc);
         this.form.get('remainingLife')?.setValue(100 - lifePerc);
         //date validation
@@ -214,8 +215,8 @@ export class CreateSummaryFormComponent implements OnInit {
       life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       remainingLife: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
-      lifeMonthsYears: [{value:'', disabled:true}],
-      serviceYears:null
+      lifeMonthsYears: [{ value: '', disabled: true }],
+      serviceYears: null,
     }));
   }
 
@@ -248,6 +249,7 @@ export class CreateSummaryFormComponent implements OnInit {
         life,
         summaryStyle,
         installmentDate,
+        serviceYears,
       } = this.form.getRawValue();
 
       this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
@@ -271,6 +273,7 @@ export class CreateSummaryFormComponent implements OnInit {
             life: life,
             quantity: quantity,
             installmentDate: installmentDate,
+            serviceYears: serviceYears,
           };
 
           this.asset.setValue(unit);
@@ -299,6 +302,7 @@ export class CreateSummaryFormComponent implements OnInit {
             life: life,
             quantity: quantity,
             installmentDate: installmentDate,
+            serviceYears: serviceYears,
           };
 
           this.summaryService
@@ -335,6 +339,7 @@ export class CreateSummaryFormComponent implements OnInit {
         life,
         quantity,
         installmentDate,
+        serviceYears,
       } = summary;
 
       this.masterId = masterId;
@@ -356,6 +361,7 @@ export class CreateSummaryFormComponent implements OnInit {
       c.life.setValue(life);
       c.installmentDate.setValue(installmentDate);
       c.masterId.setValue(masterId);
+      c.serviceYears.setValue(serviceYears);
       this.isLoading = false;
     });
   }
