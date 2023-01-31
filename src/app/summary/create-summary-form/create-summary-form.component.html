@@ -163,7 +163,7 @@
                 <fieldset class="cmms-outline px-3 pt-4 my-3">
                   <mat-form-field class="text-sm" appearance="outline">
                     <mat-label class="text-bold">Asset Id</mat-label>
-                    <input formControlName="assetId" matInput type="number" />
+                    <input formControlName="assetId" matInput type="text" />
                   </mat-form-field>
 
                   <mat-form-field class="text-sm" appearance="outline">
@@ -234,6 +234,22 @@
                       ">
                     date is required
                   </small>
+                </mat-form-field>
+
+                <mat-form-field class="text-sm" appearance="outline">
+                  <mat-label class="text-bold">Service Years</mat-label>
+                  <mat-label *ngIf="lifeLoader" class="float-end mx-2">
+                    <div class="select-placeholder-container">
+                      <mat-spinner class="spinner" diameter="20"></mat-spinner>
+                    </div>
+                  </mat-label>
+                  <input formControlName="serviceYears" matInput type="number" [ngClass]="
+                        (form.controls['serviceYears'].dirty ||
+                          form.controls['serviceYears'].touched) &&
+                        form.hasError('required', 'serviceYears') == true
+                          ? 'border-danger'
+                          : ''
+                      " />
                 </mat-form-field>
 
                 <mat-form-field class="text-sm" appearance="outline">
