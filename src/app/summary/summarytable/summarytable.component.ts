@@ -203,7 +203,6 @@ export class SummarytableComponent implements OnInit {
     if (summary.installmentDate) {
       let date = new Date(summary.installmentDate);
       summary.installmentDate = date;
-      this.onInstallmentChange(summary);
     }
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
