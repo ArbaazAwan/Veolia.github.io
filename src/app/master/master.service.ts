@@ -21,10 +21,14 @@ export class MasterService {
 
   setMasterId(masterId: any) {
     this.masterId.next(masterId);
-  } 
+  }
 
   getMasters() {
     return this.http.get(this.MASTER_URL);
+  }
+
+  getPendingMasters() {
+    return this.http.get(this.BASE_URL + 'pending-masters');
   }
 
   getMastersBySiteId(id: any) {
