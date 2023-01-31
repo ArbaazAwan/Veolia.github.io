@@ -108,6 +108,7 @@ export class SummarytableComponent implements OnInit {
         if (lifePerc > 100) {
           lifePerc = 100;
         }
+        summary.serviceYears = Math.ceil((lifePerc/100)*totalYears);
         summary.life = lifePerc;
         summary.remainingLife = 100 -lifePerc;
         if (lifePerc < 0) {
@@ -198,8 +199,10 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditInit(summary: any) {
-    let date = new Date (summary.installmentDate);
-    summary.installmentDate = date;
+    if(summary.installmentDate){
+      let date = new Date (summary.installmentDate);
+      summary.installmentDate = date;
+    }
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
 

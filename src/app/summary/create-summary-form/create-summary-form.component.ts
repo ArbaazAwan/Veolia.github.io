@@ -90,6 +90,7 @@ export class CreateSummaryFormComponent implements OnInit {
     c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
+    c.importAssetType.setValue(master.oldAssetType);
 
     let years = Math.ceil(Number(master.lifeMonths) / 12);
     c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
@@ -110,6 +111,8 @@ export class CreateSummaryFormComponent implements OnInit {
       if (lifePerc > 100) {
         lifePerc = 100;
       }
+
+      this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc/100)*totalYears));
       this.form.get('life')?.setValue(lifePerc);
       this.form.get('remainingLife')?.setValue(100 - lifePerc);
       this.lifeLoader = false;
@@ -199,7 +202,7 @@ export class CreateSummaryFormComponent implements OnInit {
       masterId: [{ value: '', disabled: true }],
       assetId: null,
       importAssetType: '',
-      assetHierarchy: '',
+      assetHierarchy: 'NA',
       assetType: '',
       size: '',
       summaryStyle: '',
@@ -211,7 +214,8 @@ export class CreateSummaryFormComponent implements OnInit {
       life: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       remainingLife: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
       installmentDate: [null, Validators.required],
-      lifeMonthsYears: [{value:'', disabled:true}]
+      lifeMonthsYears: [{value:'', disabled:true}],
+      serviceYears:null
     }));
   }
 
