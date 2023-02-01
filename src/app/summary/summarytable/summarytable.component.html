@@ -64,6 +64,9 @@
                 <th style="min-width: 200px;" pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Installation Date <p-sortIcon field="installmentDate"></p-sortIcon>
                 </th>
+                <th style="min-width: 200px;" pSortableColumn="serviceYears" class="text-uppercase text-bold text-xs font-weight-bolder">
+                  Service Years <p-sortIcon field="serviceYears"></p-sortIcon>
+                </th>
                 <th style="min-width: 120px;" pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder">
                   Life % <p-sortIcon field="life"></p-sortIcon>
                 </th>
@@ -266,6 +269,16 @@
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.installmentDate | date}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input style="width: 100px;" placeholder="Enter Service Years" pInputText type="text" [(ngModel)]="summary.serviceYears">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{summary.serviceYears}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
