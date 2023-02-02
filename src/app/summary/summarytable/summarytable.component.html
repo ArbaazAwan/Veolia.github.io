@@ -302,7 +302,7 @@
                       <input style="width: 100px;" placeholder="Enter Remaining Life" pInputText type="text" [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
-                      {{100 - summary.life}}
+                      {{ summary.life?100 - summary.life:null}}
                     </ng-template>
                   </p-cellEditor>
                 </td>

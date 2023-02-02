@@ -18,8 +18,7 @@ export interface Task {
   templateUrl: './summarytable.component.html',
   styleUrls: ['./summarytable.component.scss'],
 })
-export class SummarytableComponent implements OnInit
-{
+export class SummarytableComponent implements OnInit {
 
   @ViewChild('hiddenFormBtn') modal: ElementRef;
   summaries: any = [];
@@ -40,7 +39,7 @@ export class SummarytableComponent implements OnInit
 
 
   constructor(private summaryService: SummaryService, private masterService: MasterService,
-     private siteService: SiteService) { }
+    private siteService: SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
@@ -92,42 +91,17 @@ export class SummarytableComponent implements OnInit
 
   onInstallmentChange(summary: any) {
 
-    let currentYear = Number(new Date().getFullYear());
-    let installationYear = Number(summary.installmentDate?.getFullYear());
-    let yearsPassed = currentYear - installationYear;
-    let totalYears = 0;
-    if (this.selectedMaster?.lifeMonths) {
-      totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-      let lifePerc = Math.round(
-        ((totalYears - yearsPassed) / totalYears) * 100
-      );
-
-      //adding cap on lifePerc
-      if (lifePerc > 100) {
-        lifePerc = 100;
-      }
-      summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
-      summary.life = lifePerc;
-      summary.remainingLife = 100 - lifePerc;
-      summary.remainingLife = 100 - lifePerc;
-
-      if (lifePerc < 0) {
-        this.dateValid = false;
-        this.summaryService.openSnackBar(
-          'Life percentage cannot be negative, please select a valid date', 'Close'
-        );
-      }
-      else {
-        this.dateValid = true;
-      }
-
-    } else {
-      this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
-        let master = res[0];
-        totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+    if (summary.installmentDate) {
+      let currentYear = Number(new Date().getFullYear());
+      let installationYear = Number(summary.installmentDate?.getFullYear());
+      let yearsPassed = currentYear - installationYear;
+      let totalYears = 0;
+      if (this.selectedMaster?.lifeMonths) {
+        totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
+
         //adding cap on lifePerc
         if (lifePerc > 100) {
           lifePerc = 100;
@@ -136,6 +110,7 @@ export class SummarytableComponent implements OnInit
         summary.life = lifePerc;
         summary.remainingLife = 100 - lifePerc;
         summary.remainingLife = 100 - lifePerc;
+
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
@@ -145,7 +120,37 @@ export class SummarytableComponent implements OnInit
         else {
           this.dateValid = true;
         }
-      });
+
+      } else {
+        this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
+          let master = res[0];
+          totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+          let lifePerc = Math.round(
+            ((totalYears - yearsPassed) / totalYears) * 100
+          );
+          //adding cap on lifePerc
+          if (lifePerc > 100) {
+            lifePerc = 100;
+          }
+          summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
+          summary.life = lifePerc;
+          summary.remainingLife = 100 - lifePerc;
+          if (lifePerc < 0) {
+            this.dateValid = false;
+            this.summaryService.openSnackBar(
+              'Life percentage cannot be negative, please select a valid date', 'Close'
+            );
+          }
+          else {
+            this.dateValid = true;
+          }
+        });
+      }
+    }
+    else {
+      summary.serviceYears = null;
+      summary.life = null;
+      summary.remainingLife = null;
     }
 
   }
