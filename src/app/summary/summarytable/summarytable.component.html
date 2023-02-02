@@ -1,13 +1,13 @@
 
-<button type="button" class="btn bg-gradient-primary text-right" 
+<button type="button" class="btn bg-gradient-primary text-right"
 *ngIf="showButton" (click)="toggleModal()" >
   View More Info
 </button>
 <button data-bs-toggle="modal" data-bs-target="#detail-table" #hiddenFormBtn  hidden>hidden</button>
-<div class="row mx-1">
+<div class="row">
   <div class="col-12">
-    <div class="card my-1">
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+    <div class="card">
+      <div class="card-header p-0 position-relative mt-n5 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Summary Table</p>
         </div>
@@ -15,7 +15,7 @@
       <div class="d-flex justify-content-center my-6" *ngIf="isLoading">
         <div class="spinner-border"></div>
       </div>
-      
+
       <!-- Summary table -->
       <div class="card-body px-0 " *ngIf="!isLoading">
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">

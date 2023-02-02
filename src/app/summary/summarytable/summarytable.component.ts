@@ -18,7 +18,8 @@ export interface Task {
   templateUrl: './summarytable.component.html',
   styleUrls: ['./summarytable.component.scss'],
 })
-export class SummarytableComponent implements OnInit {
+export class SummarytableComponent implements OnInit
+{
 
   @ViewChild('hiddenFormBtn') modal: ElementRef;
   summaries: any = [];
@@ -78,7 +79,6 @@ export class SummarytableComponent implements OnInit {
     })
   }
 
-  onAssetChange(master: any, summary: any) {
   onAssetChange(master: any, summary: any) {
 
     this.selectedMaster = master;
@@ -260,7 +260,6 @@ export class SummarytableComponent implements OnInit {
       siteId: summary.siteId,
       masterId: summary.masterId,
       unit: summary.unit,
-      eqpFunctionalDesc: summary.eqpFunctionalDesc,
       eqpFunctionalDesc: summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       assetId: summary.assetId,

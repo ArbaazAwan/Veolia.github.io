@@ -1,8 +1,15 @@
 
-<button type="button" class="btn bg-gradient-primary text-right mx-4" data-bs-toggle="modal"
-  data-bs-target="#modal-form" [disabled]="!siteStatus || !clientStatus">
-  Add Asset
-</button>
+<div class="row justify-content-between">
+  <div class="col-2">
+    <button type="button" class="btn bg-gradient-primary text-right mx-4" data-bs-toggle="modal"
+    data-bs-target="#modal-form" [disabled]="!siteStatus || !clientStatus">
+    Add Asset
+  </button>
+  </div>
+  <div class="col-4">
+    <app-import-summary></app-import-summary>
+  </div>
+</div>
 
 
 <!-- <button type="button" class="btn bg-gradient-primary text-right" data-bs-toggle="modal"
@@ -10,11 +17,9 @@
   View More Info
 </button> -->
 
-<div class="">
-  <app-import-summary></app-import-summary>
-</div>
 
-<div class="container-fluid py-4">
+
+<div class="container-fluid">
   <app-summarytable (summaryEmitter)="getSummary($event)"></app-summarytable>
 </div>
 
