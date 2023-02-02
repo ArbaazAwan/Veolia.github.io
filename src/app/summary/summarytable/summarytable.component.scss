@@ -65,12 +65,12 @@ th,td {
   font-size: 1rem;
   font-weight: 400;
   font-size: small;
- 
+
  }
  :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
   position: -webkit-sticky;
   position: sticky;
-  top: 0px; 
+  top: 0px;
 }
 @media screen and (max-width: 64em) {
   :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
@@ -88,4 +88,9 @@ th,td {
   text-align: center;
   overflow: hidden;
   position: initial;
+}
+
+.btn {
+  top: -52px;
+  margin-left: 13.333333%;
 }
