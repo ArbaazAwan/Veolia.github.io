@@ -12,7 +12,7 @@ export class ApproveMasterTableComponent implements OnInit {
   masters: any = [];
   sortedMasters: any = [];
   assetSearchText: string = '';
-  displayedColumns: string[] = [];
+  displayedColumns: string[] = [ 'actions' ];
   dataSource:any = [];
   previousRow:any = {};
 
@@ -45,6 +45,10 @@ export class ApproveMasterTableComponent implements OnInit {
           master[key as keyof Object] = null;
         }
     });
+  }
+
+  actions(value:any){
+    console.log(value);
   }
 
   // isDifferent(currentRow:any, col:any){
