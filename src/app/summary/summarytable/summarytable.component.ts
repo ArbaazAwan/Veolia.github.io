@@ -241,8 +241,8 @@ export class SummarytableComponent implements OnInit
           {
             next: (result: any) => {
               this.summaryService.openSnackBar('Duplicate Record is Created.', 'close')
-              // this.getSummaries();
-              window.location.reload();
+              this.getSummaries();
+              // window.location.reload();
             },
             error: (_) => {
               this.summaryService.openSnackBar('Error occured during duplication!', 'close')
@@ -284,8 +284,8 @@ export class SummarytableComponent implements OnInit
         next: (_) => {
           this.summaryService.openSnackBar('Record updated successfully!', 'close');
           delete this.clonedSummaries[summary.summaryId];
-          // this.getSummaries();
-          window.location.reload();
+          this.getSummaries();
+          // window.location.reload();
         },
         error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
