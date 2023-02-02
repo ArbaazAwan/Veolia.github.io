@@ -71,7 +71,7 @@ export class SummarytableComponent implements OnInit {
   onInstallmentChange(summary: any) {
 
     let currentYear = Number(new Date().getFullYear());
-    let installationYear = Number(summary.installmentDate.getFullYear());
+    let installationYear = Number(summary.installmentDate?.getFullYear());
     let yearsPassed = currentYear - installationYear;
     let totalYears = 0;
     if (this.selectedMaster?.lifeMonths) {
