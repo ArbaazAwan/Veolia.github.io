@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
@@ -20,6 +20,7 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
+  @ViewChild('hiddenFormBtn') modal: ElementRef;
   summaries: any = [];
   filteredSummaries: any = [];
   siteId: any = localStorage.getItem('siteId');
@@ -33,16 +34,36 @@ export class SummarytableComponent implements OnInit {
   searchText!: FormControl;
   dateValid: boolean = true;
   siteStatus: boolean = false;
+  showButton: boolean = false;
+  public showForm = false;
 
-  constructor(private summaryService: SummaryService, private masterService: MasterService, private siteService: SiteService) { }
+
+  constructor(private summaryService: SummaryService, private masterService: MasterService,
+     private siteService: SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
     this.getSummaries();
+    setTimeout(() => {
+      this.showButton = true;
+    }, 1500);
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
     });
     this.getMasters();
+
+  }
+
+  toggleModal() {
+    this.showForm = !this.showForm;
+
+    if (this.showForm) {
+      setTimeout(
+        () => {
+          this.modal.nativeElement.click();
+        }, 2000
+      )
+    }
 
   }
 
@@ -57,6 +78,7 @@ export class SummarytableComponent implements OnInit {
     })
   }
 
+  onAssetChange(master: any, summary: any) {
   onAssetChange(master: any, summary: any) {
 
     this.selectedMaster = master;
@@ -87,6 +109,7 @@ export class SummarytableComponent implements OnInit {
       summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
       summary.life = lifePerc;
       summary.remainingLife = 100 - lifePerc;
+      summary.remainingLife = 100 - lifePerc;
 
       if (lifePerc < 0) {
         this.dateValid = false;
@@ -111,6 +134,7 @@ export class SummarytableComponent implements OnInit {
         }
         summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
         summary.life = lifePerc;
+        summary.remainingLife = 100 - lifePerc;
         summary.remainingLife = 100 - lifePerc;
         if (lifePerc < 0) {
           this.dateValid = false;
@@ -237,6 +261,7 @@ export class SummarytableComponent implements OnInit {
       masterId: summary.masterId,
       unit: summary.unit,
       eqpFunctionalDesc: summary.eqpFunctionalDesc,
+      eqpFunctionalDesc: summary.eqpFunctionalDesc,
       assetType: summary.assetType,
       assetId: summary.assetId,
       importAssetType: summary.importAssetType,
@@ -276,8 +301,8 @@ export class SummarytableComponent implements OnInit {
         next: (_) => {
           delete this.clonedSummaries[summary.summaryId];
           this.summaryService.openSnackBar('Record deleted successfully!', 'close');
-          // this.getSummaries();
-          window.location.reload();
+          this.getSummaries();
+          // window.location.reload();
         },
         error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
