@@ -214,7 +214,7 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm sColSpan">{{ master.rev | date}}</p>
+                      <p class="mb-0 text-sm sColSpan">{{ master.rev ? master.rev : null | date}}</p>
                     </div>
                   </div>
                 </td>
