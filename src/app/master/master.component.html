@@ -2,6 +2,11 @@
   data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
   Add Master Template
 </button>
+
+<!-- Approve Table Modal -->
+<app-approve-master-table></app-approve-master-table>
+<!-- ----- -->
+
 <app-import-excel *ngIf="role == 'admin'"></app-import-excel>
 <!-- table here -->
 <div class="container-fluid py-4">

@@ -22,8 +22,10 @@ export class CreateMasterFormComponent implements OnInit {
   cols: any[] = [];
   tabIndex: number = 0;
   isEditForm: boolean = false;
+  private role:any ;
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role');
     this.resetForm();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
@@ -195,7 +197,8 @@ export class CreateMasterFormComponent implements OnInit {
       overhaulLife: f.overhaulLife,
       unitDesc: f.oldAssetType + " - " + f.newAssetType
         + ", " + f.masterStyle + ", " + f.masterSize
-        + ", " + f.dutyApplication + ", " + f.quality
+        + ", " + f.dutyApplication + ", " + f.quality,
+      masterStatus: this.role == 'admin'?true:false
     };
 
     let completeMaster = {
