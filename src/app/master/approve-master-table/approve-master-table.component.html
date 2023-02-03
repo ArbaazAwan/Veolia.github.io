@@ -46,11 +46,32 @@
                             {{col}}
                           </th>
                           <td mat-cell *matCellDef="let element" class="ps-3">
-                            
+
                             <ng-container *ngIf="col=='actions'">
-                              <button mat-button (click)="actions(element)">
-                                Actions
-                              </button>
+                              <div class="d-flex mx-2">
+                                <div class="d-flex flex-column">
+                                  <div ngbDropdown>
+                                    <button class="btn btn-sm bg-gradient-primary mb-0" id="gfg" ngbDropdownToggle>
+                                      Actions
+                                    </button>
+                                    <div ngbDropdownMenu="gfg"
+                                      style="margin-top: 0 !important; position: absolute; z-index: 10000;">
+                                      <button ngbDropdownItem >
+                                        <i class="material-icons">visibility</i>&nbsp;
+                                        View
+                                      </button>
+                                      <button ngbDropdownItem class="text-success">
+                                        <i class="material-icons">check_circle</i>&nbsp;
+                                        Approve
+                                      </button>
+                                      <button ngbDropdownItem  class="text-danger">
+                                        <i class="material-icons">delete</i>&nbsp;
+                                        Reject
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </ng-container>
 
                             <ng-container *ngIf="col!='actions'">

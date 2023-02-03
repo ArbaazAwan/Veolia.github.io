@@ -65,6 +65,14 @@ export class MasterService {
     return this.http.put(this.MASTER_URL + id, {});
   }
 
+  setMasterCreatedBy(id:any, createdBy:string){
+    return this.http.put(this.MASTER_URL + id + '/created-by/', createdBy);
+  }
+
+  setMasterEditedBy(id:any, editedBy:string){
+    return this.http.put(this.MASTER_URL + id + '/edited-by/', editedBy);
+  }
+
   deleteMaster(id: any) {
     return this.http.delete(this.MASTER_URL + id);
   }

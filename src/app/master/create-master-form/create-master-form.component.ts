@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NodeService } from '../view-master-table/node.service';
 
@@ -10,7 +11,7 @@ import { NodeService } from '../view-master-table/node.service';
 })
 export class CreateMasterFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService) { }
+    private nodeService: NodeService, private userService: UserService) { }
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -22,16 +23,32 @@ export class CreateMasterFormComponent implements OnInit {
   cols: any[] = [];
   tabIndex: number = 0;
   isEditForm: boolean = false;
-  private role:any ;
+  private role: any;
+  private userName: string = '';
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
+    this.getUserName();
     this.resetForm();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
         this.populateEditMasterForm(masterId);
       }
     });
+  }
+
+  getUserName() {
+    let userEmail = localStorage.getItem('user_email');
+    this.userService.getUserByEmail(userEmail).subscribe(
+      {
+        next: (res:any) => {
+          this.userName = res[0].userName;
+        },
+        error:(response:any)=>{
+          this.masterService.openSnackBar(response.message, 'close');
+        }
+      }
+    )
   }
 
   initialForm() {
@@ -50,6 +67,7 @@ export class CreateMasterFormComponent implements OnInit {
       replacementCost: [''],
       lifeMonths: [''],
       overhaulLife: [''],
+      editedBy: [''],
       ovTitle: [''],
       ovStretch: [''],
       unitDesc: [''],
@@ -180,7 +198,7 @@ export class CreateMasterFormComponent implements OnInit {
   postformMaster() {
     let f = this.form.getRawValue();
 
-    const master = {
+    const master:any = {
       siteId: this.siteId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
@@ -198,8 +216,15 @@ export class CreateMasterFormComponent implements OnInit {
       unitDesc: f.oldAssetType + " - " + f.newAssetType
         + ", " + f.masterStyle + ", " + f.masterSize
         + ", " + f.dutyApplication + ", " + f.quality,
-      masterStatus: this.role == 'admin'?true:false
+      masterStatus: this.role == 'admin' ? true : false,
+      editedBy: this.isEditForm ? this.userName : null,
     };
+
+    // if(!this.isEditForm){
+    //   master['createdBy' as keyof Object] = this.userName;
+    // }
+
+    // console.log('master', master);
 
     let completeMaster = {
       master: master,
@@ -332,7 +357,7 @@ export class CreateMasterFormComponent implements OnInit {
 
     this.tabIndex = this.events().length;
 
-    if(this.isEditForm){
+    if (this.isEditForm) {
       this.tabIndex++;
     }
 
@@ -383,7 +408,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().removeAt(index);
     this.tabIndex = this.events().length;
 
-    if(this.isEditForm){
+    if (this.isEditForm) {
       this.tabIndex++;
     }
   }

@@ -51,15 +51,6 @@ export class ApproveMasterTableComponent implements OnInit {
     console.log(value);
   }
 
-  // isDifferent(currentRow:any, col:any){
-  //   if(currentRow[col] != this.previousRow[col]){
-  //     this.previousRow = currentRow;
-  //     return true;
-  //   }
-  //   this.previousRow = currentRow;
-  //   return false;
-  // }
-
   getPendingMasters() {
     this.isLoading = true;
     this.masterService.getPendingMasters().subscribe(
