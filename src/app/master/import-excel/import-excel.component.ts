@@ -74,7 +74,7 @@ export class ImportExcelComponent implements OnInit {
             oldDescription: data.AppDesc,
             newDescription: data.NewDescription,
             unitMeasurement: data.UnitMeas,
-            rev: data.Rev,
+            rev: new Date(),
             replacementCost: data.ReplCost,
             lifeMonths: data.Lifemos,
             overhaulLife: data.OHLife,
