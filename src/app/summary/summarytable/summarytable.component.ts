@@ -203,7 +203,7 @@ export class SummarytableComponent implements OnInit {
     if (summary.installmentDate) {
       let date = new Date(summary.installmentDate);
       summary.installmentDate = date;
-      this.onInstallmentChange(summary);
+      // this.onInstallmentChange(summary);
     }
     this.clonedSummaries[summary.summaryId] = { ...summary };
   }
@@ -232,6 +232,9 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditSave(summary: any) {
+
+    //date formatting
+    summary.installmentDate = summary.installmentDate.toString().split(' ').slice(0, 4).join(' ');
 
     const updateSummaryPayload = {
       siteId: summary.siteId,

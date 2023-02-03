@@ -164,7 +164,7 @@
                     <ng-template pTemplate="input">
                       <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange($event.value,summary)"
                          optionLabel="oldAssetType" [filter]="true"
-                        filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality"
+                        filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality,unitDesc"
                         placeholder="Search Master Template">
                         <ng-template pTemplate="selectedMaster">
                           <div *ngIf="selectedMaster">
