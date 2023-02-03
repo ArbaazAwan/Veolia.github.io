@@ -232,7 +232,7 @@ export class CreateSummaryFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const {
+      let {
         unit,
         eqpFunctionalDesc,
         assetType,
@@ -251,6 +251,9 @@ export class CreateSummaryFormComponent implements OnInit {
         installmentDate,
         serviceYears,
       } = this.form.getRawValue();
+
+      //fixing date format
+      installmentDate = installmentDate.toString().split(' ').slice(0, 4).join(' ');
 
       this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
         if (summaryId) {
