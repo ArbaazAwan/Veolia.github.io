@@ -43,7 +43,6 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
                   App Description
                 </th>
-
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
                   Style
                 </th>
@@ -73,6 +72,9 @@
                 </th>
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
                   New Asset Type Unit Description
+                </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="approvedBy">
+                  Approved By
                 </th>
               </tr>
             </thead>
@@ -148,8 +150,6 @@
                     </div>
                   </div>
                 </td>
-
-
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
@@ -221,6 +221,13 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm descExpand">{{ master.newDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm descExpand">{{ master.approvedBy }}</p>
                     </div>
                   </div>
                 </td>

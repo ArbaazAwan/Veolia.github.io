@@ -15,7 +15,7 @@ export class ApproveMasterTableComponent implements OnInit {
   assetSearchText: string = '';
   displayedColumns: string[] = ['actions'];
   dataSource: any = [];
- userName: string = '';
+  userName: string = '';
 
   constructor(
     private masterService: MasterService,
@@ -201,7 +201,7 @@ export class ApproveMasterTableComponent implements OnInit {
         },
         error: (_) => {
           this.isLoading = false;
-          this.masterService.openSnackBar('No pending record found in master table.', 'close');
+          // this.masterService.openSnackBar('No pending record found in master table.', 'close');
         },
       }
     );
