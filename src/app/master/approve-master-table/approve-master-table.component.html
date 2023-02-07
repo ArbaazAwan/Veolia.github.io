@@ -60,11 +60,11 @@
                                         <i class="material-icons">visibility</i>&nbsp;
                                         View
                                       </button>
-                                      <button ngbDropdownItem class="text-success">
+                                      <button ngbDropdownItem class="text-success" (click)="approveMaster(element)">
                                         <i class="material-icons">check_circle</i>&nbsp;
                                         Approve
                                       </button>
-                                      <button ngbDropdownItem  class="text-danger">
+                                      <button ngbDropdownItem  class="text-danger" (click)="rejectMaster(element)">
                                         <i class="material-icons">delete</i>&nbsp;
                                         Reject
                                       </button>

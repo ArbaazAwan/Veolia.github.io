@@ -68,6 +68,7 @@ export class CreateMasterFormComponent implements OnInit {
       lifeMonths: [''],
       overhaulLife: [''],
       editedBy: [''],
+      createdBy: [''],
       ovTitle: [''],
       ovStretch: [''],
       unitDesc: [''],
@@ -122,6 +123,7 @@ export class CreateMasterFormComponent implements OnInit {
       c.ovStretch.setValue(
         _overhaul ? (_overhaul.ovStretch ? _overhaul.ovStretch : '') : ''
       );
+      c.createdBy.setValue(_master.createdBy);
 
       const _events = _masterComplete.events;
 
@@ -217,14 +219,9 @@ export class CreateMasterFormComponent implements OnInit {
         + ", " + f.masterStyle + ", " + f.masterSize
         + ", " + f.dutyApplication + ", " + f.quality,
       masterStatus: this.role == 'admin' ? true : false,
+      createdBy: f.createdBy ? f.createdBy: this.userName,
       editedBy: this.isEditForm ? this.userName : null,
     };
-
-    // if(!this.isEditForm){
-    //   master['createdBy' as keyof Object] = this.userName;
-    // }
-
-    // console.log('master', master);
 
     let completeMaster = {
       master: master,

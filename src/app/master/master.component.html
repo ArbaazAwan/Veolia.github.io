@@ -4,7 +4,7 @@
 </button>
 
 <!-- Approve Table Modal -->
-<app-approve-master-table></app-approve-master-table>
+<app-approve-master-table *ngIf="role == 'admin'"></app-approve-master-table>
 <!-- ----- -->
 
 <app-import-excel></app-import-excel>

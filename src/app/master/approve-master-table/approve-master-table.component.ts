@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -12,13 +13,17 @@ export class ApproveMasterTableComponent implements OnInit {
   masters: any = [];
   sortedMasters: any = [];
   assetSearchText: string = '';
-  displayedColumns: string[] = [ 'actions' ];
-  dataSource:any = [];
-  previousRow:any = {};
+  displayedColumns: string[] = ['actions'];
+  dataSource: any = [];
+ userName: string = '';
 
-  constructor(private masterService: MasterService) { }
+  constructor(
+    private masterService: MasterService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+    this.getUserName();
     this.getPendingMasters();
   }
 
@@ -33,22 +38,53 @@ export class ApproveMasterTableComponent implements OnInit {
     }
   }
 
-  transformRows(){
+  transformRows() {
     this.masters?.forEach(
-      (master:any)=>{
+      (master: any) => {
         let masterKeys = Object.keys(master);
 
-        for (const key of this.displayedColumns){
-          if(masterKeys.includes(key)){
+        for (const key of this.displayedColumns) {
+          if (masterKeys.includes(key)) {
             continue;
           }
           master[key as keyof Object] = null;
         }
-    });
+      });
   }
 
-  actions(value:any){
-    console.log(value);
+  approveMaster(master: any) {
+    this.masterService.approveMaster(master.Id,this.userName).subscribe({
+      next: (_) => {
+        this.masterService.openSnackBar('master approved!', 'close');
+      },
+      error: (_) => {
+        this.masterService.openSnackBar('error occured during approval', 'close');
+      }
+    })
+  }
+
+  rejectMaster(master: any) {
+    this.masterService.rejectMasterById(master.Id).subscribe({
+      next: (_) => {
+        this.masterService.openSnackBar('record deleted!', 'close');
+      },
+      error: (_) => {
+        this.masterService.openSnackBar('error occured during deletion', 'close');
+      }
+    })
+  }
+
+  getUserName() {
+    let userEmail = localStorage.getItem('user_email');
+    this.userService.getUserByEmail(userEmail).subscribe({
+
+        next: (res: any) => {
+          this.userName = res[0].userName;
+        },
+        error: (response: any) => {
+          this.masterService.openSnackBar(response.message, 'close');
+        }
+      })
   }
 
   getPendingMasters() {
@@ -62,14 +98,15 @@ export class ApproveMasterTableComponent implements OnInit {
             this.masterService.getCompleteMasterById(master.masterId).subscribe({
               next: (master: any) => {
 
-                var completeMaster:any = {};
+                var completeMaster: any = {};
 
                 let cMaster = master.master;
                 let overhaul = master?.overhaul;
 
-
                 //adding master into completeMaster object
                 completeMaster['Id' as keyof Object] = cMaster.masterId;
+                completeMaster['Created By' as keyof Object] = cMaster.createdBy;
+                completeMaster['Edited By' as keyof Object] = cMaster.editedBy;
                 completeMaster['Unit Description' as keyof Object] = cMaster.unitDesc;
                 completeMaster['Asset Type' as keyof Object] = cMaster.oldAssetType;
                 completeMaster['New Asset Type' as keyof Object] = cMaster.newAssetType;
@@ -89,25 +126,25 @@ export class ApproveMasterTableComponent implements OnInit {
                 completeMaster['OH Title' as keyof Object] = overhaul.ovTitle;
                 completeMaster['OH Stretch' as keyof Object] = overhaul.ovStretch;
 
-                for(let m = 0; m < overhaul?.overhaulMaintenance?.length; m++){
+                for (let m = 0; m < overhaul?.overhaulMaintenance?.length; m++) {
                   let maintenances = overhaul?.overhaulMaintenance;
 
-                    completeMaster['OH' + 'M' + (m + 1) as keyof Object] = maintenances[m].ohMaintenance;
-                    completeMaster['OH' + 'M' + (m + 1) + 'Cst' as keyof Object] = maintenances[m].ohCost;
+                  completeMaster['OH' + 'M' + (m + 1) as keyof Object] = maintenances[m].ohMaintenance;
+                  completeMaster['OH' + 'M' + (m + 1) + 'Cst' as keyof Object] = maintenances[m].ohCost;
                 }
 
-                for(let l = 0; l < overhaul?.overhaulLabours?.length; l++){
+                for (let l = 0; l < overhaul?.overhaulLabours?.length; l++) {
                   let labours = overhaul.overhaulLabours;
 
-                    completeMaster['OH' + 'L' + (l + 1) as keyof Object] = labours[l].ohLabour;
-                    completeMaster['OH'+ 'L' + (l + 1) + 'Hrs' as keyof Object] = labours[l].ohHour;
+                  completeMaster['OH' + 'L' + (l + 1) as keyof Object] = labours[l].ohLabour;
+                  completeMaster['OH' + 'L' + (l + 1) + 'Hrs' as keyof Object] = labours[l].ohHour;
                 }
 
-                for(let c = 0; c < overhaul?.overhaulContractors?.length; c++){
+                for (let c = 0; c < overhaul?.overhaulContractors?.length; c++) {
                   let contractors = overhaul.overhaulContractors;
 
-                    completeMaster['OH' + 'C' + (c + 1) as keyof Object] = contractors[c].ohLabour;
-                    completeMaster['OH' + 'C' + (c + 1) + 'Cst' as keyof Object] = contractors[c].ohHour;
+                  completeMaster['OH' + 'C' + (c + 1) as keyof Object] = contractors[c].ohLabour;
+                  completeMaster['OH' + 'C' + (c + 1) + 'Cst' as keyof Object] = contractors[c].ohHour;
                 }
 
 
@@ -150,13 +187,10 @@ export class ApproveMasterTableComponent implements OnInit {
                 this.transformObjectToArray(completeMaster);
 
                 mi++;
-                if(mi == masters?.length)
-                {
+                if (mi == masters?.length) {
                   this.transformRows();
                   this.dataSource = this.masters;
                 }
-
-                // console.log('master', completeMaster);
               },
               error: (_) => {
                 this.masterService.openSnackBar('some error occured', 'close')

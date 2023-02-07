@@ -17,7 +17,7 @@ export class MasterService {
   private masterId = new BehaviorSubject(null);
   currentMasterId = this.masterId.asObservable();
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   setMasterId(masterId: any) {
     this.masterId.next(masterId);
@@ -65,12 +65,12 @@ export class MasterService {
     return this.http.put(this.MASTER_URL + id, {});
   }
 
-  setMasterCreatedBy(id:any, createdBy:string){
-    return this.http.put(this.MASTER_URL + id + '/created-by/', createdBy);
+  approveMaster(id: any, approvedBy: any) {
+    return this.http.put(this.MASTER_URL + id + '/approve/', { approvedBy: approvedBy });
   }
 
-  setMasterEditedBy(id:any, editedBy:string){
-    return this.http.put(this.MASTER_URL + id + '/edited-by/', editedBy);
+  rejectMasterById(id: any) {
+    return this.http.delete(this.MASTER_URL + id + '/reject/');
   }
 
   deleteMaster(id: any) {
