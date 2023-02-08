@@ -90,7 +90,7 @@ export class CreateSummaryFormComponent implements OnInit {
     c.load.setValue(defaultLoad);
     c.life.setValue(null);
     c.masterId.setValue(master.masterId);
-    c.importAssetType.setValue(master.oldAssetType);
+    c.importAssetType.setValue(master.oldAssetType + ' - ' + master.newAssetType);
 
     let years = Math.ceil(Number(master.lifeMonths) / 12);
     c.lifeMonthsYears.setValue(master.lifeMonths + '/' + years)
