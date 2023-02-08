@@ -9,8 +9,11 @@ import { NodeService } from '../view-master-table/node.service';
   styleUrls: ['./create-master-form.component.scss'],
 })
 export class CreateMasterFormComponent implements OnInit {
-  constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService) { }
+  constructor(
+    private fb: FormBuilder,
+    private masterService: MasterService,
+    private nodeService: NodeService
+  ) {}
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -168,11 +171,9 @@ export class CreateMasterFormComponent implements OnInit {
     if (this.form.valid) {
       this.postformMaster();
       this.modalClose.nativeElement.click();
-    }
-    else {
+    } else {
       this.validateAllFormFields(this.form);
     }
-
   }
 
   postformMaster() {
@@ -193,9 +194,18 @@ export class CreateMasterFormComponent implements OnInit {
       replacementCost: f.replacementCost,
       lifeMonths: f.lifeMonths,
       overhaulLife: f.overhaulLife,
-      unitDesc: f.oldAssetType + " - " + f.newAssetType
-        + ", " + f.masterStyle + ", " + f.masterSize
-        + ", " + f.dutyApplication + ", " + f.quality
+      unitDesc:
+        f.oldAssetType +
+        ' - ' +
+        f.newAssetType +
+        ', ' +
+        f.masterStyle +
+        ', ' +
+        f.masterSize +
+        ', ' +
+        f.dutyApplication +
+        ', ' +
+        f.quality,
     };
 
     let completeMaster = {
@@ -329,7 +339,7 @@ export class CreateMasterFormComponent implements OnInit {
 
     this.tabIndex = this.events().length;
 
-    if(this.isEditForm){
+    if (this.isEditForm) {
       this.tabIndex++;
     }
 
@@ -380,7 +390,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().removeAt(index);
     this.tabIndex = this.events().length;
 
-    if(this.isEditForm){
+    if (this.isEditForm) {
       this.tabIndex++;
     }
   }
