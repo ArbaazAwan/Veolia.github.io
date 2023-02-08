@@ -20,6 +20,7 @@ import { ApproveMasterTableComponent } from './approve-master-table/approve-mast
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { ViewApproveMasterComponent } from './approve-master-table/view-approve-master/view-approve-master.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
     CreateMasterFormComponent,
     ImportExcelComponent,
     ApproveMasterTableComponent,
+    ViewApproveMasterComponent,
   ],
   imports: [
     CommonModule,

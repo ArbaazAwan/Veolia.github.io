@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ViewApproveMasterComponent } from './view-approve-master/view-approve-master.component';
 
 @Component({
   selector: 'app-approve-master-table',
@@ -14,17 +16,25 @@ export class ApproveMasterTableComponent implements OnInit {
   sortedMasters: any = [];
   assetSearchText: string = '';
   displayedColumns: string[] = ['actions'];
-  dataSource: any = [];
+  dataSource: any[] = [];
   userName: string = '';
 
   constructor(
     private masterService: MasterService,
     private userService: UserService,
+    private _NgbModal: NgbModal,
   ) { }
 
   ngOnInit(): void {
     this.getUserName();
     this.getPendingMasters();
+  }
+
+  openModal(assetId:any) {
+    let modalRef = this._NgbModal.open( ViewApproveMasterComponent,
+      { fullscreen:true, backdrop: 'static' }
+    );
+    modalRef.componentInstance.assetId = assetId;
   }
 
   transformObjectToArray(obj: object) {
@@ -121,6 +131,7 @@ export class ApproveMasterTableComponent implements OnInit {
                 completeMaster['Life Months' as keyof Object] = cMaster.lifeMonths;
                 completeMaster['Overhaul Life' as keyof Object] = cMaster.overhaulLife;
                 completeMaster['Rev' as keyof Object] = cMaster.rev;
+                completeMaster['Asset Id' as keyof Object] = cMaster.assetId;
 
                 //adding overhaul into completeMaster object
                 completeMaster['OH Title' as keyof Object] = overhaul.ovTitle;
@@ -189,7 +200,13 @@ export class ApproveMasterTableComponent implements OnInit {
                 mi++;
                 if (mi == masters?.length) {
                   this.transformRows();
+                  this.masters = this.masters
+                  .sort((a:any, b:any) => {
+                    //descending sort
+                    return b['Id'] - a['Id'];
+                  });
                   this.dataSource = this.masters;
+
                 }
               },
               error: (_) => {

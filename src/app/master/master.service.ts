@@ -35,6 +35,10 @@ export class MasterService {
     return this.http.get(this.BASE_URL + 'master-site-id/' + id);
   }
 
+  getMastersByAssetId(assetId: any) {
+    return this.http.get(this.MASTER_URL + 'asset/' + assetId);
+  }
+
   getCompleteMasterById(id: any) {
     return this.http.get(this.BASE_URL + 'get-complete-master/' + id);
   }
@@ -81,7 +85,8 @@ export class MasterService {
     let snackBarRef = this.snackBar.open(message, action, { duration: 3000 });
 
     snackBarRef.afterDismissed().subscribe(() => {
-      window.location.reload();
+      //uncomment after changes
+      // window.location.reload();
     });
   }
 
