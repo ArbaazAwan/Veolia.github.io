@@ -238,7 +238,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.masterService
       .postCompleteMaster(completeMaster)
       .subscribe((res: any) => {
-        if (this.editMasterId) {
+        if (this.isEditForm) {
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           //getting all the summaries by masterId

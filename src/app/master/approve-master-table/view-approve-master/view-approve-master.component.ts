@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MasterService } from '../../master.service';
 
@@ -11,6 +11,8 @@ export class ViewApproveMasterComponent implements OnInit {
 
   @Input() assetId: any;
   @Input() displayedColumns: string[] = [];
+  @Output() approveEvent:EventEmitter<any> = new EventEmitter<any>();
+  @Output() rejectEvent:EventEmitter<any> = new EventEmitter<any>();
   isLoading: boolean = false;
   dataSource: any = [];
   masters: any = [];
@@ -22,6 +24,17 @@ export class ViewApproveMasterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMastersByAssetId(this.assetId);
+  }
+
+  approveMaster(){
+    let masterId = this.masters[this.masters.length-1]['Id'];
+    this.approveEvent.emit(masterId);
+    this.activeModal.close('Close click');
+  }
+
+  rejectMaster(){
+    let masterId = this.masters[this.masters.length-1]['Id'];
+    this.rejectEvent.emit(masterId);
   }
 
   transformObjectToArray(obj: object) {

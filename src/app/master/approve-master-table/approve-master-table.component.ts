@@ -35,6 +35,16 @@ export class ApproveMasterTableComponent implements OnInit {
       { fullscreen:true, backdrop: 'static' }
     );
     modalRef.componentInstance.assetId = assetId;
+    modalRef.componentInstance.approveEvent.subscribe(
+      (masterId:any)=>{
+        this.approveMaster(masterId);
+      }
+    );
+    modalRef.componentInstance.rejectEvent.subscribe(
+      (masterId:any)=>{
+        this.rejectMaster(masterId);
+      }
+    );
   }
 
   transformObjectToArray(obj: object) {
@@ -62,10 +72,11 @@ export class ApproveMasterTableComponent implements OnInit {
       });
   }
 
-  approveMaster(master: any) {
-    this.masterService.approveMaster(master.Id,this.userName).subscribe({
+  approveMaster(masterId: any) {
+    this.masterService.approveMaster(masterId,this.userName).subscribe({
       next: (_) => {
         this.masterService.openSnackBar('master approved!', 'close');
+        this.getPendingMasters();
       },
       error: (_) => {
         this.masterService.openSnackBar('error occured during approval', 'close');
@@ -73,10 +84,11 @@ export class ApproveMasterTableComponent implements OnInit {
     })
   }
 
-  rejectMaster(master: any) {
-    this.masterService.rejectMasterById(master.Id).subscribe({
+  rejectMaster(masterId: any) {
+    this.masterService.rejectMasterById(masterId).subscribe({
       next: (_) => {
         this.masterService.openSnackBar('record deleted!', 'close');
+        this.getPendingMasters();
       },
       error: (_) => {
         this.masterService.openSnackBar('error occured during deletion', 'close');

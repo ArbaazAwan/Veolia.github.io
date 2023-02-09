@@ -56,15 +56,18 @@
                                     </button>
                                     <div ngbDropdownMenu="gfg"
                                       style="margin-top: 0 !important; position: absolute; z-index: 10000;">
-                                      <button ngbDropdownItem (click)="openModal(element['Asset Id'])" *ngIf="element['Edited By']!== null" >
+                                      <button ngbDropdownItem class="text-info" (click)="openModal(element['Asset Id'])"
+                                        *ngIf="element['Edited By']">
                                         <i class="material-icons">visibility</i>&nbsp;
                                         View
                                       </button>
-                                      <button ngbDropdownItem class="text-success" (click)="approveMaster(element)">
+                                      <button ngbDropdownItem class="text-success" (click)="approveMaster(element['Id'])"
+                                        *ngIf="!element['Edited By']">
                                         <i class="material-icons">check_circle</i>&nbsp;
                                         Approve
                                       </button>
-                                      <button ngbDropdownItem  class="text-danger" (click)="rejectMaster(element)">
+                                      <button ngbDropdownItem class="text-danger" (click)="rejectMaster(element['Id'])"
+                                        *ngIf="!element['Edited By']">
                                         <i class="material-icons">delete</i>&nbsp;
                                         Reject
                                       </button>
