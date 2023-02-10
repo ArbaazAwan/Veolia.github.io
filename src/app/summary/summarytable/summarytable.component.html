@@ -1,9 +1,7 @@
-
-<button type="button" class="btn bg-gradient-primary text-right"
-*ngIf="showButton" (click)="toggleModal()" >
+<button type="button" class="btn bg-gradient-primary text-right" *ngIf="showButton" (click)="toggleModal()">
   View More Info
 </button>
-<button data-bs-toggle="modal" data-bs-target="#detail-table" #hiddenFormBtn  hidden>hidden</button>
+<button data-bs-toggle="modal" data-bs-target="#detail-table" #hiddenFormBtn hidden>hidden</button>
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -16,6 +14,12 @@
         <div class="spinner-border"></div>
       </div>
 
+      <!-- Create form here -->
+      <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+        aria-hidden="true">
+        <app-create-master-form></app-create-master-form>
+      </div>
+
       <!-- Summary table -->
       <div class="card-body px-0 " *ngIf="!isLoading">
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">
@@ -26,58 +30,76 @@
           </mat-form-field>
         </div>
         <div class="p-0 table-responsive custom-table" *ngIf="!isLoading">
-          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row" scrollHeight="600px">
+          <p-table [value]="filteredSummaries" dataKey="summaryId" sortField="summaryId" [sortOrder]="-1" editMode="row"
+            scrollHeight="600px">
             <ng-template pTemplate="header">
               <tr style="z-index: 50rem;">
-                <th  style="min-width: 170px;" class="text-uppercase text-bold text-xs font-weight-bolder" *ngIf="siteStatus">
+                <th style="min-width: 224px;" class="text-uppercase text-bold text-xs font-weight-bolder"
+                  *ngIf="siteStatus">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Actions
                 </th>
-                <th style="min-width: 100px;" pSortableColumn="summaryId" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 100px;" pSortableColumn="summaryId"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   &nbsp;ID <p-sortIcon field="summaryId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="eqpFunctionalDesc" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 350px;">
+                <th pSortableColumn="eqpFunctionalDesc" class="text-uppercase text-bold text-xs font-weight-bolder"
+                  style="font-size: small; min-width: 350px;">
                   Asset Description <p-sortIcon field="eqpFunctionalDesc"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetId"  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 150px;">
+                <th pSortableColumn="assetId" class="text-uppercase text-bold text-xs font-weight-bolder"
+                  style="font-size: small; min-width: 150px;">
                   Asset Id <p-sortIcon field="assetId"></p-sortIcon>
                 </th>
-                <th pSortableColumn="importAssetType"  class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 250px;">
+                <th pSortableColumn="importAssetType" class="text-uppercase text-bold text-xs font-weight-bolder"
+                  style="font-size: small; min-width: 250px;">
                   Asset Type <p-sortIcon field="importAssetType"></p-sortIcon>
                 </th>
-                <th pSortableColumn="assetHierarchy" class="text-uppercase text-bold text-xs font-weight-bolder" style="font-size: small; min-width: 250px;">
+                <th pSortableColumn="assetHierarchy" class="text-uppercase text-bold text-xs font-weight-bolder"
+                  style="font-size: small; min-width: 250px;">
                   Asset Hierarchy <p-sortIcon field="assetHierarchy"></p-sortIcon>
                 </th>
-                <th  style="min-width: 150px;" pSortableColumn="assetType" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="assetType"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Master Template Asset Type <p-sortIcon field="assetType"></p-sortIcon>
                 </th>
-                <th style="min-width: 150px;" pSortableColumn="summaryStyle" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="summaryStyle"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Style <p-sortIcon field="summaryStyle"></p-sortIcon>
                 </th>
-                <th style="min-width: 150px;" pSortableColumn="summarySize" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="summarySize"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Size <p-sortIcon field="summarySize"></p-sortIcon>
                 </th>
-                <th style="min-width: 150px;" pSortableColumn="dutyApplication" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="dutyApplication"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Duty or Application <p-sortIcon field="dutyApplication"></p-sortIcon>
                 </th>
-                <th style="min-width: 130px;" pSortableColumn="quality" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 130px;" pSortableColumn="quality"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Quality <p-sortIcon field="quality"></p-sortIcon>
                 </th>
-                <th style="min-width: 130px;" pSortableColumn="quantity" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 130px;" pSortableColumn="quantity"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Quantity <p-sortIcon field="quantity"></p-sortIcon>
                 </th>
-                <th style="min-width: 130px;" pSortableColumn="summaryload" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 130px;" pSortableColumn="summaryload"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Load % <p-sortIcon field="summaryload"></p-sortIcon>
                 </th>
-                <th style="min-width: 200px;" pSortableColumn="installmentDate" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 200px;" pSortableColumn="installmentDate"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Installation Date <p-sortIcon field="installmentDate"></p-sortIcon>
                 </th>
-                <th style="min-width: 200px;" pSortableColumn="serviceYears" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 200px;" pSortableColumn="serviceYears"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Remaining Useful Life <p-sortIcon field="serviceYears"></p-sortIcon>
                 </th>
-                <th style="min-width: 120px;" pSortableColumn="life" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 120px;" pSortableColumn="life"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Life % <p-sortIcon field="life"></p-sortIcon>
                 </th>
-                <th style="min-width: 100px;" pSortableColumn="remainingLife" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 100px;" pSortableColumn="remainingLife"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Remaining Life % <p-sortIcon field="remainingLife"></p-sortIcon>
                 </th>
                 <th style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder ">
@@ -86,17 +108,19 @@
                 <th style="min-width: 250px;" class="text-uppercase text-bold text-xs font-weight-bolder">
                   unit template application
                 </th>
-                <th style="min-width: 150px;" pSortableColumn="dateCreated" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="dateCreated"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   Created Date <p-sortIcon field="dateCreated"></p-sortIcon>
                 </th>
-                <th style="min-width: 150px;" pSortableColumn="masterId" class="text-uppercase text-bold text-xs font-weight-bolder">
+                <th style="min-width: 150px;" pSortableColumn="masterId"
+                  class="text-uppercase text-bold text-xs font-weight-bolder">
                   &nbsp;Master Id <p-sortIcon field="masterId"></p-sortIcon>
                 </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-editing="editing" let-summary let-ri="rowIndex">
-              <tr [pEditableRow]="summary" >
-                <td *ngIf="siteStatus" style="min-width: 180px;" >
+              <tr [pEditableRow]="summary">
+                <td *ngIf="siteStatus" style="min-width: 180px;">
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
                     (click)="onRowEditInit(summary)" title="Edit" class="p-button-rounded p-button-text">
                   </button>
@@ -106,6 +130,11 @@
                   <button *ngIf="!editing" pButton title="Delete" pRipple type="button" pSaveEditableRow
                     icon="pi pi-trash" (click)="onRowDelete(summary)"
                     class="p-button-rounded p-button-text p-button-danger p-mr-2">
+                  </button>
+                  <button *ngIf="!editing" pButton title="editMaster" pRipple type="button" pSaveEditableRow
+                    icon="pi pi-user-edit" data-bs-target="#modal-form-create" data-bs-toggle="modal"
+                    (click)="editMaster(summary.masterId)"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2">
                   </button>
                   <button *ngIf="editing" pButton title="Save" pRipple type="button" pSaveEditableRow icon="pi pi-check"
                     (click)="onRowEditSave(summary)" [disabled]="!dateValid"
@@ -129,7 +158,8 @@
                 <td style="font-family: Roboto;">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 300px; font-family: Roboto;" pInputText type="text" placeholder="Enter Asset Description" [(ngModel)]="summary.eqpFunctionalDesc">
+                      <input style="min-width: 300px; font-family: Roboto;" pInputText type="text"
+                        placeholder="Enter Asset Description" [(ngModel)]="summary.eqpFunctionalDesc">
                     </ng-template>
                     <ng-template pTemplate="output" style="font-family: Roboto;">
                       {{summary.eqpFunctionalDesc}}
@@ -139,7 +169,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 110px;" pInputText type="text" placeholder="Enter Asset ID" [(ngModel)]="summary.assetId">
+                      <input style="width: 110px;" pInputText type="text" placeholder="Enter Asset ID"
+                        [(ngModel)]="summary.assetId">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetId}}
@@ -149,7 +180,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 150px;" pInputText type="text" placeholder="Enter Asset Type" [(ngModel)]="summary.importAssetType">
+                      <input style="min-width: 150px;" pInputText type="text" placeholder="Enter Asset Type"
+                        [(ngModel)]="summary.importAssetType">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.importAssetType}}
@@ -159,7 +191,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="min-width: 200px;" pInputText type="text" placeholder="Enter Asset Hierarchy" [(ngModel)]="summary.assetHierarchy">
+                      <input style="min-width: 200px;" pInputText type="text" placeholder="Enter Asset Hierarchy"
+                        [(ngModel)]="summary.assetHierarchy">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetHierarchy}}
@@ -170,7 +203,7 @@
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <p-dropdown appendTo="body" [options]="masters" (onChange)="onAssetChange($event.value,summary)"
-                         optionLabel="oldAssetType" [filter]="true"
+                        optionLabel="oldAssetType" [filter]="true"
                         filterBy="oldAssetType,newAssetType,masterStyle,masterSize,dutyApplication,quality,unitDesc"
                         placeholder="Search Master Template">
                         <ng-template pTemplate="selectedMaster">
@@ -198,7 +231,8 @@
                 <td *ngIf="!editing">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" placeholder=" Enter Master Template Asset Type" [(ngModel)]="summary.assetType">
+                      <input pInputText type="text" placeholder=" Enter Master Template Asset Type"
+                        [(ngModel)]="summary.assetType">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.assetType}}
@@ -228,7 +262,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" placeholder="Enter Duty / Application" [(ngModel)]="summary.dutyApplication">
+                      <input pInputText type="text" placeholder="Enter Duty / Application"
+                        [(ngModel)]="summary.dutyApplication">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.dutyApplication}}
@@ -248,7 +283,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Quantity" [(ngModel)]="summary.quantity">
+                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Quantity"
+                        [(ngModel)]="summary.quantity">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.quantity}}
@@ -258,7 +294,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Load %" [(ngModel)]="summary.summaryload">
+                      <input style="width: 100px;" pInputText type="text" placeholder="Enter Load %"
+                        [(ngModel)]="summary.summaryload">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.summaryload}}
@@ -269,7 +306,7 @@
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <p-calendar appendTo="body" [(ngModel)]="summary.installmentDate" [showIcon]="true" inputId="icon"
-                      (ngModelChange)="onInstallmentChange(summary)"></p-calendar>
+                        (ngModelChange)="onInstallmentChange(summary)"></p-calendar>
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.installmentDate | date}}
@@ -279,7 +316,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" placeholder="Enter Useful Life" pInputText type="text" [(ngModel)]="summary.serviceYears">
+                      <input style="width: 100px;" placeholder="Enter Useful Life" pInputText type="text"
+                        [(ngModel)]="summary.serviceYears">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.serviceYears}}
@@ -289,7 +327,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" placeholder="Enter Life %" pInputText type="text" [(ngModel)]="summary.life">
+                      <input style="width: 100px;" placeholder="Enter Life %" pInputText type="text"
+                        [(ngModel)]="summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.life}}
@@ -299,7 +338,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" placeholder="Enter Remaining Life" pInputText type="text" [(ngModel)]="100-summary.life">
+                      <input style="width: 100px;" placeholder="Enter Remaining Life" pInputText type="text"
+                        [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{ summary.life?100 - summary.life:null}}
@@ -323,7 +363,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="text" placeholder="Enter Unit Template Application" [(ngModel)]="summary.appDescription">
+                      <input pInputText type="text" placeholder="Enter Unit Template Application"
+                        [(ngModel)]="summary.appDescription">
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.appDescription}}
@@ -342,7 +383,7 @@
                 </td>
                 <td>
                   <p-cellEditor>
-                    <ng-template pTemplate="input" >
+                    <ng-template pTemplate="input">
                       <input pInputText type="text" disabled [(ngModel)]="summary.masterId">
                     </ng-template>
                     <ng-template pTemplate="output" class="mb-0 text-sm">
@@ -362,5 +403,6 @@
 <!-- asset detail table modal -->
 
 <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
-  <app-summary-viewdetails-table (closeModal)="toggleModal()" *ngIf="summaries.length!=0 && showForm" [summaryArray]="summaries" ></app-summary-viewdetails-table>
+  <app-summary-viewdetails-table (closeModal)="toggleModal()" *ngIf="summaries.length!=0 && showForm"
+    [summaryArray]="summaries"></app-summary-viewdetails-table>
 </div>

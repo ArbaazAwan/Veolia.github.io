@@ -67,6 +67,16 @@ export class SummarytableComponent implements OnInit {
 
   }
 
+  editMaster(masterId: any) {
+    if(masterId)
+    {
+      this.masterService.setMasterId(masterId);
+    }
+    else{
+      this.masterService.openSnackBar('this summary does not contain the master', 'close');
+    }
+  }
+
   getSiteStatus() {
     this.siteService.getSiteById(this.siteId).subscribe({
       next: (site: any) => {
