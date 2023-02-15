@@ -174,14 +174,15 @@ export class ViewApproveMasterComponent implements OnInit {
                       })
                       .slice(-2); //get only last two elements
                     this.dataSource = this.masters;
+                    this.isLoading = false;
                   }
                 },
                 error: (_) => {
-                  this.masterService.openSnackBar('some error occured', 'close')
+                  this.masterService.openSnackBarWithoutReload('some error occured', 'close')
+                  this.isLoading = false;
                 }
               })
             })
-            this.isLoading = false;
           },
           error: (_) => {
             this.isLoading = false;

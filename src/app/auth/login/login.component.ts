@@ -40,22 +40,25 @@ export class LoginComponent implements OnInit {
     this.authService
       .userLogin(this.form.value.email, this.form.value.password)
       .subscribe(
-        (response: any) => {
-          localStorage.setItem('login_auth', response.token);
-          localStorage.setItem('user_email', this.form.value.email);
-          this.userService.getUserByEmail(this.form.value.email).subscribe({
-            next: (response: any) => {
-              localStorage.setItem('role', response[0].role.toLowerCase());
-              this.router.navigate(['/clientslist']);
-            },
-            error: (error) => {
-              console.log(error);
-            },
-          });
-        },
-        (error: any) => {
-          this.isLoading = false;
-          this.hasError = true;
+        {
+          next: (response: any) => {
+            localStorage.setItem('login_auth', response.token);
+            localStorage.setItem('user_email', this.form.value.email);
+            this.userService.getUserByEmail(this.form.value.email).subscribe({
+              next: (response: any) => {
+                localStorage.setItem('role', response[0].role.toLowerCase());
+                localStorage.setItem('user_name', response[0].userName.toLowerCase());
+                this.router.navigate(['/clientslist']);
+              },
+              error: (error) => {
+                console.log(error);
+              },
+            });
+          },
+          error:  (error: any) => {
+            this.isLoading = false;
+            this.hasError = true;
+          }
         }
       );
   }

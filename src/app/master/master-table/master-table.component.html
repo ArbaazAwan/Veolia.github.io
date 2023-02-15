@@ -105,7 +105,8 @@
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
-                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)">
+                          <button ngbDropdownItem class="text-danger" (click)="deleteMaster(master.masterId)"
+                            *ngIf="role == 'admin'">
                             <i class="material-icons">delete</i>&nbsp;
                             Delete
                           </button>

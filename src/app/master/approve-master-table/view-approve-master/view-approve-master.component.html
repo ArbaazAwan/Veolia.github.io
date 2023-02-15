@@ -28,7 +28,7 @@
 </div>
 <div class="modal-footer">
 
-  <div class="px-8"  *ngIf="!isLoading">
+  <div *ngIf="!isLoading">
     <button class="btn btn-outline-success text-success mx-2" (click)="approveMaster()">
       <i class="material-icons">check_circle</i>
       Approve
@@ -36,11 +36,6 @@
     <button class="btn btn-outline-danger text-danger mx-2" (click)="rejectMaster()">
       <i class="material-icons">delete</i>
       Reject
-    </button>
-  </div>
-  <div class="ps-1">
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
-      Close
     </button>
   </div>
 

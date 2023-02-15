@@ -24,11 +24,11 @@ export class CreateMasterFormComponent implements OnInit {
   tabIndex: number = 0;
   isEditForm: boolean = false;
   private role: any;
-  private userName: string = '';
+  private userName: any = '';
 
   ngOnInit(): void {
+    this.userName = localStorage.getItem('user_name');
     this.role = localStorage.getItem('role');
-    this.getUserName();
     this.resetForm();
     this.masterService.currentMasterId.subscribe((masterId: any) => {
       if (masterId) {
@@ -37,18 +37,8 @@ export class CreateMasterFormComponent implements OnInit {
     });
   }
 
-  getUserName() {
-    let userEmail = localStorage.getItem('user_email');
-    this.userService.getUserByEmail(userEmail).subscribe(
-      {
-        next: (res:any) => {
-          this.userName = res[0].userName;
-        },
-        error:(response:any)=>{
-          this.masterService.openSnackBar(response.message, 'close');
-        }
-      }
-    )
+  closeMasterModal(){
+    this.modalClose.nativeElement.click();
   }
 
   initialForm() {
@@ -189,7 +179,6 @@ export class CreateMasterFormComponent implements OnInit {
     this.form.get('rev')?.setValue(new Date());
     if (this.form.valid) {
       this.postformMaster();
-      this.modalClose.nativeElement.click();
     }
     else {
       this.validateAllFormFields(this.form);
@@ -198,6 +187,7 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   postformMaster() {
+    this.isLoading = true;
     let f = this.form.getRawValue();
 
     const master:any = {
@@ -251,18 +241,23 @@ export class CreateMasterFormComponent implements OnInit {
               this.masterService.updateAssetId(updateAssetIdData).subscribe({
                 next: (response: any) => {
                   this.masterService.openSnackBar(response.message, 'close');
+                  this.closeMasterModal();
+                  this.isLoading = false;
                 },
                 error: (err) => {
-                  this.masterService.openSnackBar(err.error.message, 'close');
+                  this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
+                  this.isLoading = false;
                 },
               });
             },
             error: (err) => {
-              this.masterService.openSnackBar(err.error.message, 'close');
+              this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
+              this.isLoading = false;
             },
           });
         } else {
           this.masterService.openSnackBar('Master Record is Created', 'close');
+          this.isLoading = false;
         }
       });
   }
