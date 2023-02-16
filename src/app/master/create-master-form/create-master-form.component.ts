@@ -176,7 +176,9 @@ export class CreateMasterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.form.get('rev')?.setValue(new Date());
+    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
+    this.form.get('rev')?.setValue(formattedDate);
+    
     if (this.form.valid) {
       this.postformMaster();
     }
