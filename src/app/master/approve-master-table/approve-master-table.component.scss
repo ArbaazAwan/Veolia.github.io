@@ -1,7 +1,19 @@
-.highlight-green{
+.highlight-green {
   background-color: rgba(0, 128, 0, 0.362);
 }
 
-.highlight-yellow{
+.highlight-yellow {
   background-color: rgba(255, 255, 0, 0.449);
 }
+
+.text-green {
+  color: rgba(0, 128, 0, 0.362);
+}
+
+.text-yellow {
+  color: rgba(255, 255, 0, 0.449);
+}
+
+.table-responsive{height:530px;overflow:scroll;}
+
+th{background: white; position: sticky;top: 0;z-index: 10;}
