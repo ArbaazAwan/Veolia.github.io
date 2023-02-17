@@ -88,6 +88,9 @@ export class SummarytableComponent implements OnInit {
     summary.dutyApplication = master.dutyApplication;
     summary.quality = master.quality;
     summary.importAssetType = master.oldAssetType + ' - ' + master.newAssetType;
+
+    if(summary.installmentDate)
+    this.onInstallmentChange(summary);
   }
 
   onInstallmentChange(summary: any) {
@@ -263,9 +266,6 @@ export class SummarytableComponent implements OnInit {
 
   onRowEditSave(summary: any) {
 
-    //date formatting
-    summary.installmentDate = summary.installmentDate.toString().split(' ').slice(0, 4).join(' ');
-
     const updateSummaryPayload = {
       siteId: summary.siteId,
       masterId: summary.masterId,
@@ -284,7 +284,7 @@ export class SummarytableComponent implements OnInit {
       summaryStyle: summary.summaryStyle,
       life: summary.life,
       quantity: summary.quantity,
-      installmentDate: summary.installmentDate,
+      installmentDate: summary.installmentDate.toString().split(' ').slice(0, 4).join(' '),
       serviceYears: summary.serviceYears,
     };
 
