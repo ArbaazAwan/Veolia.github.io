@@ -131,9 +131,9 @@
                     icon="pi pi-trash" (click)="onRowDelete(summary)"
                     class="p-button-rounded p-button-text p-button-danger p-mr-2">
                   </button>
-                  <button *ngIf="!editing" pButton title="editMaster" pRipple type="button" pSaveEditableRow
+                  <button *ngIf="!editing" pButton title="Edit Master" pRipple type="button" pSaveEditableRow
                     icon="pi pi-user-edit" data-bs-target="#modal-form-create" data-bs-toggle="modal"
-                    (click)="editMaster(summary.masterId)"
+                    (click)="editMaster(summary)"
                     class="p-button-rounded p-button-text p-button-success p-mr-2">
                   </button>
                   <button *ngIf="editing" pButton title="Save" pRipple type="button" pSaveEditableRow icon="pi pi-check"

@@ -67,7 +67,12 @@ export class SummarytableComponent implements OnInit {
 
   }
 
-  editMaster(masterId: any) {
+  editMaster(summary:any) {
+    let masterId = summary.masterId;
+    let summaryId = summary.summaryId;
+
+    this.summaryService.setSummaryId(summaryId);
+    this.summaryService.setEditFormSummary(true);
     if(masterId)
     {
       this.masterService.setMasterId(masterId);

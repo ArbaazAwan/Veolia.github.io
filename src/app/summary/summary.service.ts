@@ -23,6 +23,13 @@ export class SummaryService {
     this.summaryId.next(id);
   }
 
+  private isEditFormSummary = new BehaviorSubject<boolean>(false);
+  getIsEditFormSummary=this.isEditFormSummary.asObservable();
+  setEditFormSummary(value: boolean) {
+    this.isEditFormSummary.next(value);
+  }
+
+
   getMaster() {
     return this.http.get(this.URL_MASTER);
   }

@@ -1,17 +1,19 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NodeService } from '../view-master-table/node.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-master-form',
   templateUrl: './create-master-form.component.html',
   styleUrls: ['./create-master-form.component.scss'],
 })
-export class CreateMasterFormComponent implements OnInit {
+export class CreateMasterFormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService, private userService: UserService) { }
+    private nodeService: NodeService, private userService: UserService, private summaryService: SummaryService) { }
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -25,6 +27,9 @@ export class CreateMasterFormComponent implements OnInit {
   isEditForm: boolean = false;
   private role: any;
   private userName: string = '';
+  isEditFormSummary: boolean = false;
+  summaryId: any;
+
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
@@ -41,10 +46,10 @@ export class CreateMasterFormComponent implements OnInit {
     let userEmail = localStorage.getItem('user_email');
     this.userService.getUserByEmail(userEmail).subscribe(
       {
-        next: (res:any) => {
+        next: (res: any) => {
           this.userName = res[0].userName;
         },
-        error:(response:any)=>{
+        error: (response: any) => {
           this.masterService.openSnackBar(response.message, 'close');
         }
       }
@@ -83,7 +88,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
-    this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
+    let sub1 = this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
       const _masterComplete = el;
       this.files = this.nodeService.getFilesystem(_masterComplete);
 
@@ -165,6 +170,7 @@ export class CreateMasterFormComponent implements OnInit {
 
       this.isLoading = false;
     });
+
   }
 
   resetForm() {
@@ -173,6 +179,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.form = this.initialForm();
     this.addEvent();
     this.tabIndex = 0;
+    this.isEditFormSummary = false;
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -199,8 +206,16 @@ export class CreateMasterFormComponent implements OnInit {
 
   postformMaster() {
     let f = this.form.getRawValue();
+    this.summaryService.getIsEditFormSummary.subscribe((value) => {
+      this.isEditFormSummary = value;
+    });
+    this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
+      this.summaryId = summaryId;
+    });
 
-    const master:any = {
+    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
+
+    const master: any = {
       siteId: this.siteId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
@@ -219,8 +234,9 @@ export class CreateMasterFormComponent implements OnInit {
         + ", " + f.masterStyle + ", " + f.masterSize
         + ", " + f.dutyApplication + ", " + f.quality,
       masterStatus: this.role == 'admin' ? true : false,
-      createdBy: f.createdBy ? f.createdBy: this.userName,
+      createdBy: f.createdBy ? f.createdBy : this.userName,
       editedBy: this.isEditForm ? this.userName : null,
+      endDate: this.isEditFormSummary ? formattedDate : null,
     };
 
     let completeMaster = {
@@ -236,9 +252,9 @@ export class CreateMasterFormComponent implements OnInit {
     };
 
     this.masterService
-      .postCompleteMaster(completeMaster)
-      .subscribe((res: any) => {
+      .postCompleteMaster(completeMaster).subscribe((res: any) => {
         if (this.isEditForm) {
+          console.log('in the condition')
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           //getting all the summaries by masterId
@@ -263,8 +279,33 @@ export class CreateMasterFormComponent implements OnInit {
           });
         } else {
           this.masterService.openSnackBar('Master Record is Created', 'close');
+          let newMasterId = res.message;
+          let oldMasterId = this.editMasterId;
+          this.summaryService.updateSummaryMasterId(oldMasterId, newMasterId).subscribe((res: any) => {
+
+            // this.masterService.getMasterById(newMasterId).subscribe((el: any) => {
+            //   const updateSummaryPayload = {
+            //     siteId: el[0].siteId,
+            //     masterId: el[0].masterId,
+            //     importAssetType: el[0].oldAssetType + ' - ' + el[0].newAssetType,
+            //     assetType: el[0].oldAssetType + ' - ' + el[0].newAssetType,
+            //     assetId: el[0].assetId,
+            //     summaryStatus: true,
+            //     dutyApplication: el[0].dutyApplication,
+            //     appDescription: el[0].description,
+            //     quality: el[0].quality,
+            //     summaryload: el[0].load,
+            //     summaryStyle: el[0].masterStyle,
+            //     quantity: el[0].quantity
+            //   };
+            //   this.summaryService.updateSummary(updateSummaryPayload, this.summaryId).subscribe((res: any) => {
+            //     console.log("finall response", res)
+            //   })
+            // });
+          })
         }
       });
+
   }
 
   events(): FormArray {
@@ -432,5 +473,11 @@ export class CreateMasterFormComponent implements OnInit {
 
   removeOverhaulCont(i: number) {
     this.overhaulConts().removeAt(i);
+  }
+
+  ngOnDestroy() {
+
+    this.masterService.setMasterId(null);
+
   }
 }
