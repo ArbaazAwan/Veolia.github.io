@@ -13,12 +13,13 @@ export class AddHeaderInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
+    let token =  localStorage.getItem('login_auth');
     let jsonReq = request.clone({
       setHeaders: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': "'*'",
         'Access-Control-Allow-Headers': "'*'",
+        'Authorization': `${token}`
       }
     })
 
