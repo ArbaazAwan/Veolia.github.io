@@ -48,7 +48,7 @@ export class UnitComponent implements OnInit {
   }
 
   getMasters() {
-    this.masterService.getMasters().subscribe(
+    this.masterService.getUnitMasters().subscribe(
       {
         next:(res: any) => {
           this.masters = res.masters;
@@ -63,6 +63,7 @@ export class UnitComponent implements OnInit {
   getSelectedMaster(master: any) {
     this.masterId = master.masterId;
     this.masterService.setMasterId(master.masterId);
+    console.log('Master', master );
   }
 
   getDisplayText(master: any) {

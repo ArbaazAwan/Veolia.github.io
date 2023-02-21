@@ -30,6 +30,9 @@ export class MasterService {
   getPendingMasters() {
     return this.http.get(this.BASE_URL + 'pending-masters');
   }
+  getUnitMasters() {
+    return this.http.get(this.BASE_URL + 'unit-masters');
+  }
 
   getMastersBySiteId(id: any) {
     return this.http.get(this.BASE_URL + 'master-site-id/' + id);
