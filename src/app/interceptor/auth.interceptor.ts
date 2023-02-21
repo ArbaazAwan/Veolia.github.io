@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router){}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token =  localStorage.getItem('login_auth');
+    let token =  sessionStorage.getItem('login_auth');
 
   //   if (token) {
   //     // If we have a token, we set it to the header
