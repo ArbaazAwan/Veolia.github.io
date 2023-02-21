@@ -23,11 +23,13 @@ export class SitesListComponent implements OnInit {
   }
 
   setclient(event: any) {
+    this.isLoading = true;
     const siteId: string = event.target.id;
     this.siteService.getSiteById(siteId).subscribe((res: any) => {
       localStorage.setItem('clientId', res[0].clientId);
       localStorage.setItem('siteId', event.target.id);
       this.router.navigate(['/dashboard']);
+      this.isLoading = false;
     });
   }
 }
