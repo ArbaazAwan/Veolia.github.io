@@ -154,6 +154,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.form = this.initialForm();
     this.addEvent();
     this.tabIndex = 0;
+    this.editMasterId = null;
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
