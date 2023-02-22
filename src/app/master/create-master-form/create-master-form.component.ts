@@ -178,7 +178,7 @@ export class CreateMasterFormComponent implements OnInit {
   onSubmit() {
     let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
     this.form.get('rev')?.setValue(formattedDate);
-    
+
     if (this.form.valid) {
       this.postformMaster();
     }
@@ -234,7 +234,25 @@ export class CreateMasterFormComponent implements OnInit {
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           //getting all the summaries by masterId
-          this.masterService.updateMaster(this.editMasterId).subscribe({
+          if(this.role != 'admin'){
+            let updateAssetIdData = {
+              newMasterId: newMasterId,
+              oldMasterId: oldMasterId,
+            };
+            this.masterService.updateAssetId(updateAssetIdData).subscribe({
+              next: (response: any) => {
+                this.masterService.openSnackBar(response.message, 'close');
+                this.closeMasterModal();
+                this.isLoading = false;
+              },
+              error: (err) => {
+                this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
+                this.isLoading = false;
+              },
+            });
+          }
+          else{
+           this.masterService.updateMaster(this.editMasterId).subscribe({
             next: (res: any) => {
               let updateAssetIdData = {
                 newMasterId: newMasterId,
@@ -257,6 +275,8 @@ export class CreateMasterFormComponent implements OnInit {
               this.isLoading = false;
             },
           });
+          }
+
         } else {
           this.masterService.openSnackBar('Master Record is Created', 'close');
           this.isLoading = false;
