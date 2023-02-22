@@ -37,7 +37,7 @@ export class CreateMasterFormComponent implements OnInit {
     });
   }
 
-  closeMasterModal(){
+  closeMasterModal() {
     this.modalClose.nativeElement.click();
   }
 
@@ -191,7 +191,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.isLoading = true;
     let f = this.form.getRawValue();
 
-    const master:any = {
+    const master: any = {
       siteId: this.siteId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
@@ -210,7 +210,7 @@ export class CreateMasterFormComponent implements OnInit {
         + ", " + f.masterStyle + ", " + f.masterSize
         + ", " + f.dutyApplication + ", " + f.quality,
       masterStatus: this.role == 'admin' ? true : false,
-      createdBy: f.createdBy ? f.createdBy: this.userName,
+      createdBy: f.createdBy ? f.createdBy : this.userName,
       editedBy: this.isEditForm ? this.userName : null,
     };
 
@@ -233,7 +233,7 @@ export class CreateMasterFormComponent implements OnInit {
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           //getting all the summaries by masterId
-          if(this.role != 'admin'){
+          if (this.role != 'admin') {
             let updateAssetIdData = {
               newMasterId: newMasterId,
               oldMasterId: oldMasterId,
@@ -250,30 +250,30 @@ export class CreateMasterFormComponent implements OnInit {
               },
             });
           }
-          else{
-           this.masterService.updateMaster(this.editMasterId).subscribe({
-            next: (res: any) => {
-              let updateAssetIdData = {
-                newMasterId: newMasterId,
-                oldMasterId: oldMasterId,
-              };
-              this.masterService.updateAssetId(updateAssetIdData).subscribe({
-                next: (response: any) => {
-                  this.masterService.openSnackBar(response.message, 'close');
-                  this.closeMasterModal();
-                  this.isLoading = false;
-                },
-                error: (err) => {
-                  this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
-                  this.isLoading = false;
-                },
-              });
-            },
-            error: (err) => {
-              this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
-              this.isLoading = false;
-            },
-          });
+          else {
+            this.masterService.updateMaster(this.editMasterId).subscribe({
+              next: (res: any) => {
+                let updateAssetIdData = {
+                  newMasterId: newMasterId,
+                  oldMasterId: oldMasterId,
+                };
+                this.masterService.updateAssetId(updateAssetIdData).subscribe({
+                  next: (response: any) => {
+                    this.masterService.openSnackBar(response.message, 'close');
+                    this.closeMasterModal();
+                    this.isLoading = false;
+                  },
+                  error: (err) => {
+                    this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
+                    this.isLoading = false;
+                  },
+                });
+              },
+              error: (err) => {
+                this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
+                this.isLoading = false;
+              },
+            });
           }
 
         } else {
@@ -371,25 +371,26 @@ export class CreateMasterFormComponent implements OnInit {
     this.tabIndex = this.events().length;
 
     if (this.isEditForm) {
-    if (this.isEditForm) {
-      this.tabIndex++;
-    }
+      if (this.isEditForm) {
+        this.tabIndex++;
+      }
 
-    if (event) {
-      if (!!event.eventMaintenance) {
-        event.eventMaintenance.forEach((evMaintenance: any) => {
-          this.addMaintenance(eventIndex, evMaintenance);
-        });
-      }
-      if (event.eventLabours) {
-        event.eventLabours.forEach((evLabour: any) => {
-          this.addLabor(eventIndex, evLabour);
-        });
-      }
-      if (event.eventContractors) {
-        event.eventContractors.forEach((evContractor: any) => {
-          this.addCont(eventIndex, evContractor);
-        });
+      if (event) {
+        if (!!event.eventMaintenance) {
+          event.eventMaintenance.forEach((evMaintenance: any) => {
+            this.addMaintenance(eventIndex, evMaintenance);
+          });
+        }
+        if (event.eventLabours) {
+          event.eventLabours.forEach((evLabour: any) => {
+            this.addLabor(eventIndex, evLabour);
+          });
+        }
+        if (event.eventContractors) {
+          event.eventContractors.forEach((evContractor: any) => {
+            this.addCont(eventIndex, evContractor);
+          });
+        }
       }
     }
   }
@@ -422,7 +423,6 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().removeAt(index);
     this.tabIndex = this.events().length;
 
-    if (this.isEditForm) {
     if (this.isEditForm) {
       this.tabIndex++;
     }
