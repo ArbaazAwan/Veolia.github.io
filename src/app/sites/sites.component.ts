@@ -4,7 +4,6 @@ import { UserService } from '../users/user.service';
 import { SiteService } from './site.service';
 import { ClientService } from '../clients/client.service';
 import { Router } from '@angular/router';
-import { SortDirection } from 'aws-amplify';
 
 type SiteType = 'true' | 'false';
 
