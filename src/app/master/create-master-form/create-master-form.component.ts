@@ -181,11 +181,10 @@ export class CreateMasterFormComponent implements OnInit {
 
     if (this.form.valid) {
       this.postformMaster();
-    }
-    else {
+      this.modalClose.nativeElement.click();
+    } else {
       this.validateAllFormFields(this.form);
     }
-
   }
 
   postformMaster() {
@@ -372,6 +371,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.tabIndex = this.events().length;
 
     if (this.isEditForm) {
+    if (this.isEditForm) {
       this.tabIndex++;
     }
 
@@ -422,6 +422,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.events().removeAt(index);
     this.tabIndex = this.events().length;
 
+    if (this.isEditForm) {
     if (this.isEditForm) {
       this.tabIndex++;
     }

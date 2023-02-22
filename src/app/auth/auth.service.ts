@@ -4,18 +4,20 @@ import { tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../users/user.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private userService: UserService) {
-    const token = localStorage.getItem('login_auth');
+  constructor(private http: HttpClient, private userService: UserService, private router:Router) {
+    const token = sessionStorage.getItem('login_auth');
     this._isLoggedIn$.next(!!token);
   }
 
   email = localStorage.getItem('user_email');
   CLIENT_URL: string = environment.baseUrl + 'login';
+  checkTokenExpirationInterval: any;
 
   headers = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -48,18 +50,15 @@ export class AuthService {
     );
   }
 
-  // autoLogout(){
-  //   setTimeout(()=>{
-  //     this.logout();
-  //   },3000);
-  // }
-
   logout() {
     localStorage.removeItem('clientId');
     localStorage.removeItem('siteId');
     localStorage.removeItem('user_email');
-    localStorage.removeItem('login_auth');
+    sessionStorage.removeItem('login_auth');
     sessionStorage.clear();
     this._isAdmin$.next(false);
+
+    this.userService.openSnackBar('You are Successfully Logged Out.', 'close');
+    this.router.navigate(['/login']);
   }
 }
