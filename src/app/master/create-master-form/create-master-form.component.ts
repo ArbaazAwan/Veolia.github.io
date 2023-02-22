@@ -4,7 +4,6 @@ import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NodeService } from '../view-master-table/node.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-create-master-form',
@@ -88,7 +87,7 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
-    let sub1 = this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
+    this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
       const _masterComplete = el;
       this.files = this.nodeService.getFilesystem(_masterComplete);
 
@@ -179,7 +178,7 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.form = this.initialForm();
     this.addEvent();
     this.tabIndex = 0;
-    this.isEditFormSummary = false;
+    this.summaryService.setEditFormSummary(false);
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -254,7 +253,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.masterService
       .postCompleteMaster(completeMaster).subscribe((res: any) => {
         if (this.isEditForm) {
-          console.log('in the condition')
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           //getting all the summaries by masterId
@@ -281,27 +279,13 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
           this.masterService.openSnackBar('Master Record is Created', 'close');
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
-          this.summaryService.updateSummaryMasterId(oldMasterId, newMasterId).subscribe((res: any) => {
-
-            // this.masterService.getMasterById(newMasterId).subscribe((el: any) => {
-            //   const updateSummaryPayload = {
-            //     siteId: el[0].siteId,
-            //     masterId: el[0].masterId,
-            //     importAssetType: el[0].oldAssetType + ' - ' + el[0].newAssetType,
-            //     assetType: el[0].oldAssetType + ' - ' + el[0].newAssetType,
-            //     assetId: el[0].assetId,
-            //     summaryStatus: true,
-            //     dutyApplication: el[0].dutyApplication,
-            //     appDescription: el[0].description,
-            //     quality: el[0].quality,
-            //     summaryload: el[0].load,
-            //     summaryStyle: el[0].masterStyle,
-            //     quantity: el[0].quantity
-            //   };
-            //   this.summaryService.updateSummary(updateSummaryPayload, this.summaryId).subscribe((res: any) => {
-            //     console.log("finall response", res)
-            //   })
-            // });
+          this.summaryService.updateSummaryMasterId(oldMasterId, newMasterId).subscribe({
+            next:()=>{
+              this.summaryService.openSnackBar(`summary's masterId has been updated!`,'close');
+            },
+            error:()=>{
+              this.summaryService.openSnackBar(`failed to update summary's masterId`,'close');
+            }
           })
         }
       });

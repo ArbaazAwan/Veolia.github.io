@@ -78,7 +78,7 @@ export class SummarytableComponent implements OnInit {
       this.masterService.setMasterId(masterId);
     }
     else{
-      this.masterService.openSnackBar('this summary does not contain the master', 'close');
+      this.masterService.openSnackBar('This summary does not contain the master', 'Close');
     }
   }
 
