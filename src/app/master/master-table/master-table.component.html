@@ -43,7 +43,6 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="oldDescription">
                   App Description
                 </th>
-
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="masterStyle">
                   Style
                 </th>
@@ -74,6 +73,9 @@
                 <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="newDescription">
                   New Asset Type Unit Description
                 </th>
+                <th class="text-uppercase text-bold text-xs font-weight-bolder ps-2" mat-sort-header="approvedBy">
+                  Approved By
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -95,11 +97,11 @@
                             &nbsp;View
                           </button>
                           <button ngbDropdownItem (click)="editMaster(master.masterId)" data-bs-toggle="modal"
-                            data-bs-target="#modal-form-create" *ngIf="role == 'admin'">
+                            data-bs-target="#modal-form-create">
                             <i class="material-icons">edit</i>&nbsp;
                             Edit
                           </button>
-                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)" *ngIf="role == 'admin'">
+                          <button ngbDropdownItem (click)="onDuplicate(master.masterId)">
                             <i class="material-icons">copy</i>&nbsp;
                             Duplicate
                           </button>
@@ -149,8 +151,6 @@
                     </div>
                   </div>
                 </td>
-
-
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
@@ -214,7 +214,7 @@
                 <td>
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
-                      <p class="mb-0 text-sm sColSpan">{{ master.rev | date}}</p>
+                      <p class="mb-0 text-sm sColSpan">{{ master.rev ? master.rev : null | date}}</p>
                     </div>
                   </div>
                 </td>
@@ -222,6 +222,13 @@
                   <div class="d-flex py-1">
                     <div class="d-flex flex-column">
                       <p class="mb-0 text-sm descExpand">{{ master.newDescription }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex py-1">
+                    <div class="d-flex flex-column">
+                      <p class="mb-0 text-sm descExpand">{{ master.approvedBy }}</p>
                     </div>
                   </div>
                 </td>

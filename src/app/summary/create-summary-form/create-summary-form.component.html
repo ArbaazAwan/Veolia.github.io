@@ -238,11 +238,11 @@
 
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Remaining Useful Life</mat-label>
-                  <mat-label *ngIf="lifeLoader" class="float-end mx-2">
+                  <!-- <mat-label *ngIf="lifeLoader" class="float-end mx-2">
                     <div class="select-placeholder-container">
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
-                  </mat-label>
+                  </mat-label> -->
                   <input formControlName="serviceYears" matInput type="number" [ngClass]="
                         (form.controls['serviceYears'].dirty ||
                           form.controls['serviceYears'].touched) &&
@@ -254,11 +254,11 @@
 
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Calculated Percent of Life Used</mat-label>
-                  <mat-label *ngIf="lifeLoader" class="float-end mx-2">
+                  <!-- <mat-label *ngIf="lifeLoader" class="float-end mx-2">
                     <div class="select-placeholder-container">
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
-                  </mat-label>
+                  </mat-label> -->
                   <input formControlName="life" matInput type="number" (change)="lifeChange()" [ngClass]="
                         (form.controls['life'].dirty ||
                           form.controls['life'].touched) &&
@@ -277,11 +277,11 @@
 
                 <mat-form-field class="text-sm" appearance="outline">
                   <mat-label class="text-bold">Calculated Percent of Remaining Life</mat-label>
-                  <mat-label *ngIf="lifeLoader" class="float-end mx-2">
+                  <!-- <mat-label *ngIf="lifeLoader" class="float-end mx-2">
                     <div class="select-placeholder-container">
                       <mat-spinner class="spinner" diameter="20"></mat-spinner>
                     </div>
-                  </mat-label>
+                  </mat-label> -->
                   <input formControlName="remainingLife" matInput type="number" (change)="rLifeChange()" [ngClass]="
                         (form.controls['remainingLife'].dirty ||
                           form.controls['remainingLife'].touched) &&

@@ -60,7 +60,6 @@ export class ViewMasterTableComponent implements OnInit {
 
         this.completeMaster = el;
         this.files = this.nodeService.getFilesystem(this.completeMaster); //initializing nodes
-        this.files = this.nodeService.getFilesystem(this.completeMaster);
         // console.log('files:', this.files);
 
         if (this.completeMaster) {

@@ -22,6 +22,7 @@ export class MasterTableComponent implements OnInit {
   role: any = localStorage.getItem('role');
   clientId=localStorage.getItem('clientId');
   clientStatus:boolean=false;
+  userName:any = localStorage.getItem('user_name');
 
   @Output() viewMasterEvent = new EventEmitter();
 
@@ -37,7 +38,7 @@ export class MasterTableComponent implements OnInit {
         this.siteStatus = site[0].siteStatus;
       },
       error: (err) => {
-        console.log("error occured in getSiteStatus", err);
+        this.masterService.openSnackBarWithoutReload(`cannot get Site Status`, `close`);
       }
     })
   }
@@ -48,7 +49,7 @@ export class MasterTableComponent implements OnInit {
         this.clientStatus = client[0].clientStatus;
       },
       error:(err)=>{
-        console.log("error occured in getclientStatus", err);
+        this.masterService.openSnackBarWithoutReload(`cannot get Client Status`, `close`);
       }
     })
   }
@@ -128,7 +129,7 @@ export class MasterTableComponent implements OnInit {
         },
         error: (error) => {
           this.isLoading = false;
-          this.masterService.openSnackBar('No record found in master table.', 'close');
+          this.masterService.openSnackBarWithoutReload('No record found in master table.', 'close');
         },
       }
       );
@@ -139,16 +140,37 @@ export class MasterTableComponent implements OnInit {
   }
 
   deleteMaster(id: any) {
-    this.masterService.deleteMaster(id).subscribe((res: any) => {
-      this.masterService.openSnackBar('Selected Record is Deleted from Master.', 'close');
+    this.isLoading = true;
+    this.masterService.deleteMaster(id).subscribe({
+      next:() => {
+        this.masterService.openSnackBar('Selected Record is Deleted from Master.', 'close');
+        this.getMasters();
+        this.isLoading = false;
+      },
+      error:()=>{
+        this.masterService.openSnackBarWithoutReload('Error occured while deleting master.', 'close');
+        this.isLoading = false;
+      }
     });
   }
 
   onDuplicate(masterId: any) {
+    this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((res: any) => {
       if (res) {
-        this.masterService.postCompleteMaster(res).subscribe((result: any) => {
-          this.masterService.openSnackBar('Duplicate Record is Created.', 'close');
+        res.master.masterStatus = this.role == 'admin' ? true : false;
+        res.master.createdBy = res.master.createdBy ? res.master.createdBy: this.userName;
+        this.masterService.postCompleteMaster(res).subscribe({
+          next:() => {
+            this.masterService.openSnackBar('Duplicate Record is Created.', 'close');
+            this.getMasters();
+            this.masterService.getPendingMasters().subscribe();
+            this.isLoading = false;
+          },
+          error:() => {
+            this.masterService.openSnackBarWithoutReload('Error occured during Duplication.', 'close');
+            this.isLoading = false;
+          }
         });
       }
     });

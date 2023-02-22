@@ -122,28 +122,32 @@ export class CreateSummaryFormComponent implements OnInit {
           'Life percentage cannot be negative, please select a valid date', 'Close'
         );
       }
-    } else {
-      this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
-        let master = res[0];
-        totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
-        let lifePerc = Math.round(
-          ((totalYears - yearsPassed) / totalYears) * 100
-        );
-        //adding cap on lifePerc
-        if (lifePerc > 100) {
-          lifePerc = 100;
-        }
-        this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc / 100) * totalYears));
-        this.form.get('life')?.setValue(lifePerc);
-        this.form.get('remainingLife')?.setValue(100 - lifePerc);
-        //date validation
-        if (lifePerc < 0) {
-          this.summaryService.openSnackBar(
-            'Life percentage cannot be negative, please select a valid date', 'Close'
+    }
+    else {
+      if (this.masterId) {
+        this.masterService.getMasterById(this.masterId).subscribe((res: any) => {
+          let master = res[0];
+          totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+          let lifePerc = Math.round(
+            ((totalYears - yearsPassed) / totalYears) * 100
           );
-        }
-        this.lifeLoader = false;
-      });
+          //adding cap on lifePerc
+          if (lifePerc > 100) {
+            lifePerc = 100;
+          }
+          this.form.get('serviceYears')?.setValue(Math.ceil((lifePerc / 100) * totalYears));
+          this.form.get('life')?.setValue(lifePerc);
+          this.form.get('remainingLife')?.setValue(100 - lifePerc);
+          //date validation
+          if (lifePerc < 0) {
+            this.summaryService.openSnackBar(
+              'Life percentage cannot be negative, please select a valid date', 'Close'
+            );
+          }
+          this.lifeLoader = false;
+        });
+      }
+
     }
   }
   lifeChange() {

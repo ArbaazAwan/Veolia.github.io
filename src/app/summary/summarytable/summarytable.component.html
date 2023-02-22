@@ -1,7 +1,13 @@
-<div class="row mx-1">
+
+<button type="button" class="btn bg-gradient-primary text-right"
+*ngIf="showButton" (click)="toggleModal()" >
+  View More Info
+</button>
+<button data-bs-toggle="modal" data-bs-target="#detail-table" #hiddenFormBtn  hidden>hidden</button>
+<div class="row">
   <div class="col-12">
-    <div class="card my-1">
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+    <div class="card">
+      <div class="card-header p-0 position-relative mt-n5 mx-3 z-index-2">
         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
           <p class="text-white text-capitalize text-bold ps-3">Summary Table</p>
         </div>
@@ -9,6 +15,7 @@
       <div class="d-flex justify-content-center my-6" *ngIf="isLoading">
         <div class="spinner-border"></div>
       </div>
+
       <!-- Summary table -->
       <div class="card-body px-0 " *ngIf="!isLoading">
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">
@@ -262,7 +269,7 @@
                   <p-cellEditor>
                     <ng-template pTemplate="input">
                       <p-calendar appendTo="body" [(ngModel)]="summary.installmentDate" [showIcon]="true" inputId="icon"
-                      (onSelect)="onInstallmentChange(summary)"></p-calendar>
+                      (ngModelChange)="onInstallmentChange(summary)"></p-calendar>
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.installmentDate | date}}
@@ -295,7 +302,7 @@
                       <input style="width: 100px;" placeholder="Enter Remaining Life" pInputText type="text" [(ngModel)]="100-summary.life">
                     </ng-template>
                     <ng-template pTemplate="output">
-                      {{100 - summary.life}}
+                      {{ summary.life?100 - summary.life:null}}
                     </ng-template>
                   </p-cellEditor>
                 </td>
@@ -353,6 +360,7 @@
 </div>
 
 <!-- asset detail table modal -->
+
 <div class="modal fade" id="detail-table" tabindex="-1" role="dialog" aria-labelledby="detail-table" aria-hidden="true">
-  <app-summary-viewdetails-table *ngIf="summaries.length!=0" [summaryArray]="summaries"></app-summary-viewdetails-table>
+  <app-summary-viewdetails-table (closeModal)="toggleModal()" *ngIf="summaries.length!=0 && showForm" [summaryArray]="summaries" ></app-summary-viewdetails-table>
 </div>

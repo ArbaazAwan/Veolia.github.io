@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ClientService } from 'src/app/clients/client.service';
 import { MasterService } from 'src/app/master/master.service';
 import * as XLSX from 'xlsx';
@@ -11,6 +11,7 @@ import { UserService } from 'src/app/users/user.service';
 })
 export class SummaryViewdetailsTableComponent implements OnInit {
   @Input() summaryArray: any;
+  @Output() closeModal = new EventEmitter<boolean>();
   assetTableHeaders: string[] = [];
   submitted: boolean = false;
   yearsCostsViewTable: any[] = [];
@@ -38,6 +39,10 @@ export class SummaryViewdetailsTableComponent implements OnInit {
     this.summaryArray.forEach((summary: any) => {
       this.getMaster(summary.masterId, summary);
     });
+  }
+
+  onModalClose(){
+    this.closeModal.emit(false);
   }
 
   getMaster(masterId: any, summary: any) {

@@ -17,18 +17,26 @@ export class MasterService {
   private masterId = new BehaviorSubject(null);
   currentMasterId = this.masterId.asObservable();
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   setMasterId(masterId: any) {
     this.masterId.next(masterId);
-  } 
+  }
 
   getMasters() {
     return this.http.get(this.MASTER_URL);
   }
 
+  getPendingMasters() {
+    return this.http.get(this.BASE_URL + 'pending-masters');
+  }
+
   getMastersBySiteId(id: any) {
     return this.http.get(this.BASE_URL + 'master-site-id/' + id);
+  }
+
+  getMastersByAssetId(assetId: any) {
+    return this.http.get(this.MASTER_URL + 'asset/' + assetId);
   }
 
   getCompleteMasterById(id: any) {
@@ -61,6 +69,14 @@ export class MasterService {
     return this.http.put(this.MASTER_URL + id, {});
   }
 
+  approveMaster(id: any, approvedBy: any) {
+    return this.http.put(this.MASTER_URL + id + '/approve/', { approvedBy: approvedBy });
+  }
+
+  rejectMasterById(id: any) {
+    return this.http.delete(this.MASTER_URL + id + '/reject/');
+  }
+
   deleteMaster(id: any) {
     return this.http.delete(this.MASTER_URL + id);
   }
@@ -71,6 +87,10 @@ export class MasterService {
     snackBarRef.afterDismissed().subscribe(() => {
       window.location.reload();
     });
+  }
+
+  openSnackBarWithoutReload(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 3000 });
   }
 
   updateAssetId(data: any) {

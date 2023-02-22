@@ -74,7 +74,7 @@ export class ImportExcelComponent implements OnInit {
             oldDescription: data.AppDesc,
             newDescription: data.NewDescription,
             unitMeasurement: data.UnitMeas,
-            rev: new Date(),
+            rev: new Date().toString().split(' ').slice(0, 4).join(' '),
             replacementCost: data.ReplCost,
             lifeMonths: data.Lifemos,
             overhaulLife: data.OHLife,

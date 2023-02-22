@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MasterService } from 'src/app/master/master.service';
@@ -20,6 +20,7 @@ export interface Task {
 })
 export class SummarytableComponent implements OnInit {
 
+  @ViewChild('hiddenFormBtn') modal: ElementRef;
   summaries: any = [];
   filteredSummaries: any = [];
   siteId: any = localStorage.getItem('siteId');
@@ -33,16 +34,36 @@ export class SummarytableComponent implements OnInit {
   searchText!: FormControl;
   dateValid: boolean = true;
   siteStatus: boolean = false;
+  showButton: boolean = false;
+  public showForm = false;
 
-  constructor(private summaryService: SummaryService, private masterService: MasterService, private siteService: SiteService) { }
+
+  constructor(private summaryService: SummaryService, private masterService: MasterService,
+    private siteService: SiteService) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
     this.getSummaries();
+    setTimeout(() => {
+      this.showButton = true;
+    }, 1500);
     this.asset.valueChanges.subscribe((value: any) => {
       this.filterData(value);
     });
     this.getMasters();
+
+  }
+
+  toggleModal() {
+    this.showForm = !this.showForm;
+
+    if (this.showForm) {
+      setTimeout(
+        () => {
+          this.modal.nativeElement.click();
+        }, 2000
+      )
+    }
 
   }
 
@@ -67,45 +88,24 @@ export class SummarytableComponent implements OnInit {
     summary.dutyApplication = master.dutyApplication;
     summary.quality = master.quality;
     summary.importAssetType = master.oldAssetType + ' - ' + master.newAssetType;
+
+    if(summary.installmentDate)
+    this.onInstallmentChange(summary);
   }
 
   onInstallmentChange(summary: any) {
 
-    let currentYear = Number(new Date().getFullYear());
-    let installationYear = Number(summary.installmentDate.getFullYear());
-    let yearsPassed = currentYear - installationYear;
-    let totalYears = 0;
-    if (this.selectedMaster?.lifeMonths) {
-      totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
-      let lifePerc = Math.round(
-        ((totalYears - yearsPassed) / totalYears) * 100
-      );
-
-      //adding cap on lifePerc
-      if (lifePerc > 100) {
-        lifePerc = 100;
-      }
-      summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
-      summary.life = lifePerc;
-      summary.remainingLife = 100 - lifePerc;
-
-      if (lifePerc < 0) {
-        this.dateValid = false;
-        this.summaryService.openSnackBar(
-          'Life percentage cannot be negative, please select a valid date', 'Close'
-        );
-      }
-      else {
-        this.dateValid = true;
-      }
-
-    } else {
-      this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
-        let master = res[0];
-        totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+    if (summary.installmentDate) {
+      let currentYear = Number(new Date().getFullYear());
+      let installationYear = Number(summary.installmentDate?.getFullYear());
+      let yearsPassed = currentYear - installationYear;
+      let totalYears = 0;
+      if (this.selectedMaster?.lifeMonths) {
+        totalYears = Math.ceil(Number(this.selectedMaster?.lifeMonths) / 12);
         let lifePerc = Math.round(
           ((totalYears - yearsPassed) / totalYears) * 100
         );
+
         //adding cap on lifePerc
         if (lifePerc > 100) {
           lifePerc = 100;
@@ -113,6 +113,8 @@ export class SummarytableComponent implements OnInit {
         summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
         summary.life = lifePerc;
         summary.remainingLife = 100 - lifePerc;
+        summary.remainingLife = 100 - lifePerc;
+
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
@@ -122,7 +124,37 @@ export class SummarytableComponent implements OnInit {
         else {
           this.dateValid = true;
         }
-      });
+
+      } else {
+        this.masterService.getMasterById(summary.masterId).subscribe((res: any) => {
+          let master = res[0];
+          totalYears = Math.ceil(Number(master?.lifeMonths) / 12);
+          let lifePerc = Math.round(
+            ((totalYears - yearsPassed) / totalYears) * 100
+          );
+          //adding cap on lifePerc
+          if (lifePerc > 100) {
+            lifePerc = 100;
+          }
+          summary.serviceYears = Math.ceil((lifePerc / 100) * totalYears);
+          summary.life = lifePerc;
+          summary.remainingLife = 100 - lifePerc;
+          if (lifePerc < 0) {
+            this.dateValid = false;
+            this.summaryService.openSnackBar(
+              'Life percentage cannot be negative, please select a valid date', 'Close'
+            );
+          }
+          else {
+            this.dateValid = true;
+          }
+        });
+      }
+    }
+    else {
+      summary.serviceYears = null;
+      summary.life = null;
+      summary.remainingLife = null;
     }
 
   }
@@ -219,8 +251,8 @@ export class SummarytableComponent implements OnInit {
           {
             next: (result: any) => {
               this.summaryService.openSnackBar('Duplicate Record is Created.', 'close')
-              // this.getSummaries();
-              window.location.reload();
+              this.getSummaries();
+              // window.location.reload();
             },
             error: (_) => {
               this.summaryService.openSnackBar('Error occured during duplication!', 'close')
@@ -255,7 +287,7 @@ export class SummarytableComponent implements OnInit {
       summaryStyle: summary.summaryStyle,
       life: summary.life,
       quantity: summary.quantity,
-      installmentDate: summary.installmentDate,
+      installmentDate: summary.installmentDate.toString().split(' ').slice(0, 4).join(' '),
       serviceYears: summary.serviceYears,
     };
 
@@ -265,8 +297,8 @@ export class SummarytableComponent implements OnInit {
         next: (_) => {
           this.summaryService.openSnackBar('Record updated successfully!', 'close');
           delete this.clonedSummaries[summary.summaryId];
-          // this.getSummaries();
-          window.location.reload();
+          this.getSummaries();
+          // window.location.reload();
         },
         error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
@@ -281,8 +313,8 @@ export class SummarytableComponent implements OnInit {
         next: (_) => {
           delete this.clonedSummaries[summary.summaryId];
           this.summaryService.openSnackBar('Record deleted successfully!', 'close');
-          // this.getSummaries();
-          window.location.reload();
+          this.getSummaries();
+          // window.location.reload();
         },
         error: (_) => {
           this.summaryService.openSnackBar('Error occured during update.', 'close')
