@@ -76,6 +76,7 @@ export class ClientsComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+    this.currentClient = null;
   }
 
   getClients() {
@@ -88,7 +89,7 @@ export class ClientsComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      if (this.currentClient.clientId) {
+      if (this.currentClient?.clientId) {
         this.UpdateClient();
       } else {
         this.clientsArray.push(this.form.value);
