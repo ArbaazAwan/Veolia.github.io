@@ -27,9 +27,21 @@ export class ViewApproveMasterComponent implements OnInit {
   }
 
   approveMaster(){
+    this.isLoading = true;
     let masterId = this.masters[this.masters.length-1]['Id'];
-    this.approveEvent.emit(masterId);
-    this.activeModal.close('Close click');
+    let oldMasterId = this.masters[this.masters.length-2]['Id'];
+    this.masterService.updateMaster(oldMasterId).subscribe({
+      next:()=>{
+        this.approveEvent.emit(masterId);
+        this.activeModal.close('Close click');
+        this.isLoading = false;
+      },
+      error:()=>{
+        this.masterService.openSnackBarWithoutReload('Error occured while updating old master', 'close' );
+        this.isLoading = false;
+      }
+    });
+
   }
 
   rejectMaster(){
