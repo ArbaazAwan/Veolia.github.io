@@ -23,6 +23,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
+import {MasterModule} from '../master/master.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {CalendarModule} from 'primeng/calendar';
     ImportSummaryComponent,
   ],
   imports: [
+    MasterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -52,7 +54,7 @@ import {CalendarModule} from 'primeng/calendar';
     TableModule,
     ButtonModule,
     InputTextModule,
-    CalendarModule
+    CalendarModule,
   ],
 })
 export class SummaryModule {}

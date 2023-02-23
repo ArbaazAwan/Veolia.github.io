@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SummaryService } from 'src/app/summary/summary.service';
 import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NodeService } from '../view-master-table/node.service';
@@ -9,9 +10,9 @@ import { NodeService } from '../view-master-table/node.service';
   templateUrl: './create-master-form.component.html',
   styleUrls: ['./create-master-form.component.scss'],
 })
-export class CreateMasterFormComponent implements OnInit {
+export class CreateMasterFormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService, private userService: UserService) { }
+    private nodeService: NodeService, private userService: UserService, private summaryService: SummaryService) { }
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
@@ -25,6 +26,9 @@ export class CreateMasterFormComponent implements OnInit {
   isEditForm: boolean = false;
   private role: any;
   private userName: any = '';
+  isEditFormSummary: boolean = false;
+  summaryId: any;
+
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('user_name');
@@ -155,6 +159,7 @@ export class CreateMasterFormComponent implements OnInit {
 
       this.isLoading = false;
     });
+
   }
 
   resetForm() {
@@ -163,6 +168,7 @@ export class CreateMasterFormComponent implements OnInit {
     this.form = this.initialForm();
     this.addEvent();
     this.tabIndex = 0;
+    this.summaryService.setEditFormSummary(false);
     this.editMasterId = null;
   }
 
@@ -191,6 +197,14 @@ export class CreateMasterFormComponent implements OnInit {
   postformMaster() {
     this.isLoading = true;
     let f = this.form.getRawValue();
+    this.summaryService.getIsEditFormSummary.subscribe((value) => {
+      this.isEditFormSummary = value;
+    });
+    this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
+      this.summaryId = summaryId;
+    });
+
+    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
 
     const master: any = {
       siteId: this.siteId,
@@ -213,6 +227,7 @@ export class CreateMasterFormComponent implements OnInit {
       masterStatus: this.role == 'admin' ? true : false,
       createdBy: f.createdBy ? f.createdBy : this.userName,
       editedBy: this.isEditForm ? this.userName : null,
+      endDate: this.isEditFormSummary ? formattedDate : null,
     };
 
     let completeMaster = {
@@ -228,8 +243,7 @@ export class CreateMasterFormComponent implements OnInit {
     };
 
     this.masterService
-      .postCompleteMaster(completeMaster)
-      .subscribe((res: any) => {
+      .postCompleteMaster(completeMaster).subscribe((res: any) => {
         if (this.isEditForm) {
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
@@ -279,9 +293,22 @@ export class CreateMasterFormComponent implements OnInit {
 
         } else {
           this.masterService.openSnackBar('Master Record is Created', 'close');
+
+          let newMasterId = res.message;
+          let oldMasterId = this.editMasterId;
+          this.summaryService.updateSummaryMasterId(oldMasterId, newMasterId).subscribe({
+            next:()=>{
+              this.summaryService.openSnackBar(`summary's masterId has been updated!`,'close');
+              this.masterService.updateMaster(oldMasterId).subscribe();
+            },
+            error:()=>{
+              this.summaryService.openSnackBar(`failed to update summary's masterId`,'close');
+            }
+          });
           this.isLoading = false;
         }
       });
+
   }
 
   events(): FormArray {
@@ -451,5 +478,11 @@ export class CreateMasterFormComponent implements OnInit {
 
   removeOverhaulCont(i: number) {
     this.overhaulConts().removeAt(i);
+  }
+
+  ngOnDestroy() {
+
+    this.masterService.setMasterId(null);
+
   }
 }
