@@ -277,16 +277,18 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
           });
         } else {
           this.masterService.openSnackBar('Master Record is Created', 'close');
+
           let newMasterId = res.message;
           let oldMasterId = this.editMasterId;
           this.summaryService.updateSummaryMasterId(oldMasterId, newMasterId).subscribe({
             next:()=>{
               this.summaryService.openSnackBar(`summary's masterId has been updated!`,'close');
+              this.masterService.updateMaster(oldMasterId).subscribe();
             },
             error:()=>{
               this.summaryService.openSnackBar(`failed to update summary's masterId`,'close');
             }
-          })
+          });
         }
       });
 
