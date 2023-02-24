@@ -63,7 +63,6 @@ export class UnitComponent implements OnInit {
   getSelectedMaster(master: any) {
     this.masterId = master.masterId;
     this.masterService.setMasterId(master.masterId);
-    console.log('Master', master );
   }
 
   getDisplayText(master: any) {
