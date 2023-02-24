@@ -76,7 +76,7 @@ export class SummarytableComponent implements OnInit {
     if(masterId)
     {
       let modalRef = this._NgbModal.open(SummaryMasterComponent,
-        { fullscreen: true }
+        { fullscreen: true, backdrop: 'static'}
       );
       modalRef.componentInstance.summaryId = summaryId;
       modalRef.componentInstance.masterId = masterId;

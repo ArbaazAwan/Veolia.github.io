@@ -74,6 +74,7 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
   }
 
   populateEditMasterForm(masterId: any) {
+    console.log('in populate form')
     this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
@@ -168,7 +169,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.form = this.initialForm();
     this.addEvent();
     this.tabIndex = 0;
-    this.summaryService.setEditFormSummary(false);
     this.editMasterId = null;
   }
 
@@ -197,15 +197,10 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
   postformMaster() {
     this.isLoading = true;
     let f = this.form.getRawValue();
-    this.summaryService.getIsEditFormSummary.subscribe((value) => {
-      this.isEditFormSummary = value;
-    });
-    this.summaryService.currentSummaryId.subscribe((summaryId: any) => {
-      this.summaryId = summaryId;
-    });
 
     const master: any = {
       siteId: this.siteId,
+      masterId: f.masterId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
       newAssetType: f.newAssetType,
@@ -240,11 +235,12 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
       events: f.events, //events array
     };
 
+    const edit_master_id = master.masterId
     this.masterService
       .postCompleteMaster(completeMaster).subscribe((res: any) => {
-        if (this.isEditForm) {
+        if (edit_master_id) {
           let newMasterId = res.message;
-          let oldMasterId = this.editMasterId;
+          let oldMasterId = edit_master_id;
           if (this.role != 'admin') {
             let updateAssetIdData = {
               newMasterId: newMasterId,
@@ -263,7 +259,7 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
             });
           }
           else {
-            this.masterService.updateMaster(this.editMasterId).subscribe({
+            this.masterService.updateMaster(edit_master_id).subscribe({
               next: (res: any) => {
                 let updateAssetIdData = {
                   newMasterId: newMasterId,
@@ -287,9 +283,9 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
               },
             });
           }
-
-        } else {
-          this.masterService.openSnackBar('Master Record is Created', 'close');
+        }
+        else {
+          this.masterService.openSnackBarWithoutReload('Master Record is Created', 'close');
           this.isLoading = false;
         }
       });
