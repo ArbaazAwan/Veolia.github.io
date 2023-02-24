@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientService } from 'src/app/clients/client.service';
 import { SiteService } from 'src/app/sites/site.service';
 import * as XLSX from 'xlsx';
@@ -25,7 +24,7 @@ export class ImportSummaryComponent implements OnInit {
     private siteService: SiteService,
     private clientService: ClientService,
     private summaryService: SummaryService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
@@ -63,24 +62,23 @@ export class ImportSummaryComponent implements OnInit {
     fileReader.onload = (e) => {
       var workbook = XLSX.read(fileReader.result, { type: 'binary' });
       this.excelData = XLSX.utils.sheet_to_json(workbook.Sheets['summary']);
-      console.log(this.excelData.length);
       if (this.excelData.length > 0) {
         for (let index = 0; index < this.excelData.length; index++) {
           const data = this.excelData[index];
           const summary = {
             siteId: localStorage.getItem('siteId'),
-            masterId: 1,
+            masterId: 0,
             unit: null,
             assetType: null,
             summarySize: null,
             dutyApplication: null,
             appDescription: null,
             quality: null,
-            summaryload: null,
+            summaryload: data.Load,
             summaryStyle: null,
             life: null,
-            quantity: null,
-            installmentDate: null,
+            quantity: data.Quantity,
+            installmentDate: data.InstallationDate?data.InstallationDate:null,
             eqpFunctionalDesc: data.AssetDescription,
             assetId: data.AssetId,
             importAssetType: data.AssetType,

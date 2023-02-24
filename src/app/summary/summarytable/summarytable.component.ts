@@ -73,7 +73,7 @@ export class SummarytableComponent implements OnInit {
     let masterId = summary.masterId;
     let summaryId = summary.summaryId;
 
-    if(masterId)
+    if(masterId && masterId != 0)
     {
       let modalRef = this._NgbModal.open(SummaryMasterComponent,
         { fullscreen: true, backdrop: 'static'}
@@ -92,7 +92,7 @@ export class SummarytableComponent implements OnInit {
         this.siteStatus = site[0].siteStatus;
       },
       error: (err) => {
-        console.log("error occured in getSiteStatus", err);
+        this.summaryService.openSnackBar("error occured in getSiteStatus", 'Close');
       }
     })
   }
@@ -306,7 +306,7 @@ export class SummarytableComponent implements OnInit {
       summaryStyle: summary.summaryStyle,
       life: summary.life,
       quantity: summary.quantity,
-      installmentDate: summary.installmentDate.toString().split(' ').slice(0, 4).join(' '),
+      installmentDate: summary.installmentDate,
       serviceYears: summary.serviceYears,
     };
 
