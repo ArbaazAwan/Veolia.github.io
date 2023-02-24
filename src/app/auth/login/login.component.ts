@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserService } from 'src/app/users/user.service';
+import { MainService } from 'src/app/main.service';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +19,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private authService: AuthService,
-    private userService: UserService
-  ) {}
+    private userService: UserService,
+    private mainService: MainService,
+  ) { }
 
   form!: FormGroup;
   isLoading: boolean = false;
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         {
           next: (response: any) => {
-            localStorage.setItem('login_auth', response.token);
+            sessionStorage.setItem('login_auth', response.token);
+            this.mainService.setToken(response.token);
             localStorage.setItem('user_email', this.form.value.email);
             this.userService.getUserByEmail(this.form.value.email).subscribe({
               next: (response: any) => {
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
               },
             });
           },
-          error:  (error: any) => {
+          error: (error: any) => {
             this.isLoading = false;
             this.hasError = true;
           }

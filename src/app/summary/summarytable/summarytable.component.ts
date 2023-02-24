@@ -5,6 +5,8 @@ import { MasterService } from 'src/app/master/master.service';
 import { SummaryService } from '../summary.service';
 import { SearchPipe } from 'src/app/pipes/search.pipe';
 import { SiteService } from 'src/app/sites/site.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SummaryMasterComponent } from './summary-master/summary-master.component';
 
 export interface Task {
   name: string;
@@ -39,7 +41,7 @@ export class SummarytableComponent implements OnInit {
 
 
   constructor(private summaryService: SummaryService, private masterService: MasterService,
-    private siteService: SiteService) { }
+    private siteService: SiteService, private _NgbModal:NgbModal) { }
 
   ngOnInit(): void {
     this.getSiteStatus();
@@ -65,6 +67,23 @@ export class SummarytableComponent implements OnInit {
       )
     }
 
+  }
+
+  editMaster(summary:any) {
+    let masterId = summary.masterId;
+    let summaryId = summary.summaryId;
+
+    if(masterId)
+    {
+      let modalRef = this._NgbModal.open(SummaryMasterComponent,
+        { fullscreen: true }
+      );
+      modalRef.componentInstance.summaryId = summaryId;
+      modalRef.componentInstance.masterId = masterId;
+    }
+    else{
+      this.summaryService.openSnackBar('This summary does not contain a master', 'Close');
+    }
   }
 
   getSiteStatus() {
@@ -187,7 +206,7 @@ export class SummarytableComponent implements OnInit {
   }
 
   filterData(enteredData: any) {
-    enteredData = enteredData.toString().toLowerCase();
+    enteredData = enteredData?.toString().toLowerCase();
     this.filteredMasters = this.masters.filter((master: any) => {
       return (
         master?.newAssetType?.toLowerCase().indexOf(enteredData) > -1 ||
@@ -265,6 +284,9 @@ export class SummarytableComponent implements OnInit {
   }
 
   onRowEditSave(summary: any) {
+
+    //date formatting
+    summary.installmentDate = summary.installmentDate?.toString().split(' ').slice(0, 4).join(' ');
 
     const updateSummaryPayload = {
       siteId: summary.siteId,

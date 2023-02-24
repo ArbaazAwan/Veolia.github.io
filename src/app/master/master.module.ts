@@ -54,6 +54,7 @@ import { ViewApproveMasterComponent } from './approve-master-table/view-approve-
   exports: [
     MasterComponent,
     ViewMasterTableComponent,
+    CreateMasterFormComponent
   ]
 })
 export class MasterModule { }
