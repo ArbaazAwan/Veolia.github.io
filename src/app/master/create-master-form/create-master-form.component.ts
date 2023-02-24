@@ -285,7 +285,7 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
           }
         }
         else {
-          this.masterService.openSnackBarWithoutReload('Master Record is Created', 'close');
+          this.masterService.openSnackBar('Master Record is Created', 'close');
           this.isLoading = false;
         }
       });
