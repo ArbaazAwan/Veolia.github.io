@@ -48,7 +48,7 @@ export class UnitComponent implements OnInit {
   }
 
   getMasters() {
-    this.masterService.getMasters().subscribe(
+    this.masterService.getUnitMasters().subscribe(
       {
         next:(res: any) => {
           this.masters = res.masters;

@@ -1,0 +1,13 @@
+mat-form-field{
+  width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+input::placeholder {
+font: 12px/3 sans-serif;
+}

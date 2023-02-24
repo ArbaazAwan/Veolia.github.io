@@ -1,48 +1,37 @@
-import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SummaryService } from 'src/app/summary/summary.service';
-import { UserService } from 'src/app/users/user.service';
-import { MasterService } from '../master.service';
-import { NodeService } from '../view-master-table/node.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MasterService } from 'src/app/master/master.service';
+import { SummaryService } from '../../summary.service';
 
 @Component({
-  selector: 'app-create-master-form',
-  templateUrl: './create-master-form.component.html',
-  styleUrls: ['./create-master-form.component.scss'],
+  selector: 'app-summary-master',
+  templateUrl: './summary-master.component.html',
+  styleUrls: ['./summary-master.component.scss']
 })
-export class CreateMasterFormComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService, private userService: UserService, private summaryService: SummaryService) { }
+export class SummaryMasterComponent implements OnInit {
 
-  @ViewChild('modalClose') modalClose: ElementRef;
-  editMasterId: any;
-  form: FormGroup = this.initialForm();
-  siteId: any = localStorage.getItem('siteId');
+  @Input() summaryId: any;
+  @Input() masterId: any;
   isLoading: boolean = false;
-  masterId: any;
-  files: any;
-  cols: any[] = [];
+  form: FormGroup = this.initialForm();
   tabIndex: number = 0;
+  editMasterId: any;
   isEditForm: boolean = false;
-  private role: any;
-  private userName: any = '';
-  isEditFormSummary: boolean = false;
-  summaryId: any;
+  userName: any;
+  siteId: any;
 
+  constructor(
+    private _NgbActiveModal: NgbActiveModal,
+    private fb: FormBuilder,
+    private masterService: MasterService,
+    private summaryService: SummaryService,
+  ) { }
 
   ngOnInit(): void {
     this.userName = localStorage.getItem('user_name');
-    this.role = localStorage.getItem('role');
-    this.resetForm();
-    this.masterService.currentMasterId.subscribe((masterId: any) => {
-      if (masterId) {
-        this.populateEditMasterForm(masterId);
-      }
-    });
-  }
-
-  closeMasterModal() {
-    this.modalClose.nativeElement.click();
+    this.siteId = localStorage.getItem('siteId');
+    this.populateEditMasterForm(this.masterId);
   }
 
   initialForm() {
@@ -73,14 +62,21 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     }));
   }
 
+  resetForm() {
+    this.form.reset();
+    this.form = this.initialForm();
+    this.addEvent();
+    this.tabIndex = 0;
+    this.editMasterId = null;
+  }
+
+
   populateEditMasterForm(masterId: any) {
-    console.log('in populate form')
     this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
     this.masterService.getCompleteMasterById(masterId).subscribe((el: any) => {
       const _masterComplete = el;
-      this.files = this.nodeService.getFilesystem(_masterComplete);
 
       const _master = _masterComplete.master;
 
@@ -123,16 +119,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
       const _events = _masterComplete.events;
 
       if (_events) {
-        this.cols = [
-          { field: 'desc', header: '' },
-          { field: 'oh', header: 'Overhaul' },
-        ];
-
-        for (let i = 0; i < _events?.length; i++) {
-          let obj = { field: 'ev' + (i + 1), header: 'Event ' + (i + 1) };
-          this.cols.push(obj);
-        }
-
         _events.forEach((event: any) => {
           this.addEvent(event);
         });
@@ -163,44 +149,15 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
 
   }
 
-  resetForm() {
-    this.isEditForm = false;
-    this.form.reset();
-    this.form = this.initialForm();
-    this.addEvent();
-    this.tabIndex = 0;
-    this.editMasterId = null;
-  }
-
-  private validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((field) => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsDirty({ onlySelf: true });
-      } else if (control instanceof FormGroup)
-        this.validateAllFormFields(control);
-    });
-  }
-
-  onSubmit() {
-    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
-    this.form.get('rev')?.setValue(formattedDate);
-
-    if (this.form.valid) {
-      this.postformMaster();
-      this.modalClose.nativeElement.click();
-    } else {
-      this.validateAllFormFields(this.form);
-    }
-  }
 
   postformMaster() {
     this.isLoading = true;
     let f = this.form.getRawValue();
 
+    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
+
     const master: any = {
       siteId: this.siteId,
-      masterId: f.masterId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
       newAssetType: f.newAssetType,
@@ -217,10 +174,10 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
       unitDesc: f.oldAssetType + " - " + f.newAssetType
         + ", " + f.masterStyle + ", " + f.masterSize
         + ", " + f.dutyApplication + ", " + f.quality,
-      masterStatus: this.role == 'admin' ? true : false,
+      masterStatus: true,
       createdBy: f.createdBy ? f.createdBy : this.userName,
       editedBy: this.isEditForm ? this.userName : null,
-      endDate: null,
+      endDate: formattedDate,
     };
 
     let completeMaster = {
@@ -235,62 +192,50 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
       events: f.events, //events array
     };
 
-    const edit_master_id = master.masterId
     this.masterService
       .postCompleteMaster(completeMaster).subscribe((res: any) => {
-        if (edit_master_id) {
-          let newMasterId = res.message;
-          let oldMasterId = edit_master_id;
-          if (this.role != 'admin') {
-            let updateAssetIdData = {
-              newMasterId: newMasterId,
-              oldMasterId: oldMasterId,
-            };
-            this.masterService.updateAssetId(updateAssetIdData).subscribe({
-              next: (response: any) => {
-                this.masterService.openSnackBar(response.message, 'close');
-                this.closeMasterModal();
-                this.isLoading = false;
-              },
-              error: (err) => {
-                this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
-                this.isLoading = false;
-              },
-            });
+
+        let newMasterId = res.message;
+        this.summaryService.updateMasterIdByMasterId(newMasterId, this.summaryId).subscribe({
+          next: () => {
+            this.summaryService.openSnackBar(`New Master created and summary's masterId has been updated!`, 'Close');
+            this.activeModal.dismiss('Cross click')
+          },
+          error: () => {
+            this.summaryService.openSnackBar(`Failed to update summary's masterId`, 'Close');
           }
-          else {
-            this.masterService.updateMaster(edit_master_id).subscribe({
-              next: (res: any) => {
-                let updateAssetIdData = {
-                  newMasterId: newMasterId,
-                  oldMasterId: oldMasterId,
-                };
-                this.masterService.updateAssetId(updateAssetIdData).subscribe({
-                  next: (response: any) => {
-                    this.masterService.openSnackBar(response.message, 'close');
-                    this.closeMasterModal();
-                    this.isLoading = false;
-                  },
-                  error: (err) => {
-                    this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
-                    this.isLoading = false;
-                  },
-                });
-              },
-              error: (err) => {
-                this.masterService.openSnackBarWithoutReload(err.error.message, 'close');
-                this.isLoading = false;
-              },
-            });
-          }
-        }
-        else {
-          this.masterService.openSnackBarWithoutReload('Master Record is Created', 'close');
-          this.isLoading = false;
-        }
+        });
+        this.isLoading = false;
       });
 
   }
+
+  get activeModal() {
+    return this._NgbActiveModal;
+  }
+
+  onSubmit() {
+    let formattedDate = new Date().toString().split(' ').slice(0, 4).join(' ');
+    this.form.get('rev')?.setValue(formattedDate);
+
+    if (this.form.valid) {
+      this.postformMaster();
+
+    } else {
+      this.validateAllFormFields(this.form);
+    }
+  }
+
+  private validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsDirty({ onlySelf: true });
+      } else if (control instanceof FormGroup)
+        this.validateAllFormFields(control);
+    });
+  }
+
 
   events(): FormArray {
     return this.form.get('events') as FormArray;
@@ -380,9 +325,8 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.tabIndex = this.events().length;
 
     if (this.isEditForm) {
-      if (this.isEditForm) {
-        this.tabIndex++;
-      }
+
+      // this.tabIndex++;
 
       if (event) {
         if (!!event.eventMaintenance) {
@@ -432,9 +376,9 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.events().removeAt(index);
     this.tabIndex = this.events().length;
 
-    if (this.isEditForm) {
-      this.tabIndex++;
-    }
+    // if (this.isEditForm) {
+    //   this.tabIndex++;
+    // }
   }
 
   removeMaintenance(eventIndex: any, index: number) {
@@ -461,9 +405,4 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     this.overhaulConts().removeAt(i);
   }
 
-  ngOnDestroy() {
-
-    this.masterService.setMasterId(null);
-
-  }
 }
