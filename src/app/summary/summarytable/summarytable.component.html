@@ -13,13 +13,6 @@
       <div class="d-flex justify-content-center my-6" *ngIf="isLoading">
         <div class="spinner-border"></div>
       </div>
-
-      <!-- Create form here -->
-      <div class="modal fade" id="modal-form-create" tabindex="-1" role="dialog" aria-labelledby="modal-form"
-        aria-hidden="true">
-        <app-create-master-form></app-create-master-form>
-      </div>
-
       <!-- Summary table -->
       <div class="card-body px-0 " *ngIf="!isLoading">
         <div class="flex-end px-3 col-md-3 mt-3" *ngIf="!isLoading">

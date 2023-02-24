@@ -14,6 +14,8 @@ export class SummaryService {
   SUMMARY_BY_SITE_ID: string = environment.baseUrl + 'summary-site-id/';
   SUMMARY_MASTER_ID: string = environment.baseUrl + 'summary-master-id/';
   UPDATE_SUMMARY_MASTERID: string = environment.baseUrl + 'summary-masterid/';
+  UPDATE_MASTERID_BY_SUMMARYID: string = environment.baseUrl + 'master-id-by-summary-id/';
+
   URL_MASTER: string = environment.baseUrl + 'master/';
 
   private summaryId = new BehaviorSubject(null);
@@ -61,6 +63,12 @@ export class SummaryService {
   updateSummaryMasterId(oldMasterId: any, newMasterId: any) {
     return this.http.put(this.UPDATE_SUMMARY_MASTERID + oldMasterId, {
       masterId: newMasterId,
+    });
+  }
+
+  updateMasterIdByMasterId(masterId: any, summaryId: any) {
+    return this.http.put(this.UPDATE_MASTERID_BY_SUMMARYID + summaryId, {
+      masterId: masterId,
     });
   }
 

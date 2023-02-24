@@ -30,7 +30,6 @@ export class MainService {
   }
 
   checkTokenExpiration() {
-    console.log('checking token')
     const token = sessionStorage.getItem('login_auth');
     if (!token) {
       return;

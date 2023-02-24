@@ -23,7 +23,8 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
-import {MasterModule} from '../master/master.module';
+import { SummaryMasterComponent } from './summarytable/summary-master/summary-master.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,9 @@ import {MasterModule} from '../master/master.module';
     CreateSummaryFormComponent,
     SummaryViewdetailsTableComponent,
     ImportSummaryComponent,
+    SummaryMasterComponent,
   ],
   imports: [
-    MasterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -55,6 +56,7 @@ import {MasterModule} from '../master/master.module';
     ButtonModule,
     InputTextModule,
     CalendarModule,
+    MatTabsModule,
   ],
 })
 export class SummaryModule {}

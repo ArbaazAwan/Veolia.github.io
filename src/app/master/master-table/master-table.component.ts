@@ -143,7 +143,7 @@ export class MasterTableComponent implements OnInit {
     this.isLoading = true;
     this.masterService.deleteMaster(id).subscribe({
       next:() => {
-        this.masterService.openSnackBar('Selected Record is Deleted from Master.', 'close');
+        this.masterService.openSnackBarWithoutReload('Selected Record is Deleted from Master.', 'close');
         this.getMasters();
         this.isLoading = false;
       },
