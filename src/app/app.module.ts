@@ -26,14 +26,12 @@ import { IsAuthenticatedGuard } from './auth/is-authenticated.guard';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddHeaderInterceptor } from './interceptor/add-header.interceptor';
-import { MainService } from './main.service';
 
 @NgModule({
   declarations: [AppComponent, Error404Component],
   imports: [
     AuthModule,
     MainModule,
-
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -66,7 +64,6 @@ import { MainService } from './main.service';
 
   providers: [
     BnNgIdleService,
-    MainService,
     { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi:true },
   ],
   bootstrap: [AppComponent],

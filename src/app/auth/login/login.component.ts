@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UserService } from 'src/app/users/user.service';
-import { MainService } from 'src/app/main.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private userService: UserService,
-    private mainService: MainService,
   ) { }
 
   form!: FormGroup;
@@ -44,7 +42,6 @@ export class LoginComponent implements OnInit {
         {
           next: (response: any) => {
             sessionStorage.setItem('login_auth', response.token);
-            this.mainService.setToken(response.token);
             localStorage.setItem('user_email', this.form.value.email);
             this.userService.getUserByEmail(this.form.value.email).subscribe({
               next: (response: any) => {
