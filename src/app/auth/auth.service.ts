@@ -60,5 +60,6 @@ export class AuthService {
 
     this.userService.openSnackBar('You are Successfully Logged Out.', 'close');
     this.router.navigate(['/login']);
+    window.location.reload(); //to remove the backdrop of bootstrap modal
   }
 }
