@@ -65,6 +65,13 @@ export class ImportSummaryComponent implements OnInit {
       if (this.excelData.length > 0) {
         for (let index = 0; index < this.excelData.length; index++) {
           const data = this.excelData[index];
+          //formatting date
+          let dateString = null;
+          if (data.InstallationDate) {
+            const jsDate = new Date((data.InstallationDate - 25569) * 86400 * 1000);
+            const options: any = { day: 'numeric', month: 'long', year: 'numeric' };
+            dateString = jsDate.toLocaleDateString('en-US', options);
+          }
           const summary = {
             siteId: localStorage.getItem('siteId'),
             masterId: 0,
@@ -78,13 +85,12 @@ export class ImportSummaryComponent implements OnInit {
             summaryStyle: null,
             life: null,
             quantity: data.Quantity,
-            installmentDate: data.InstallationDate?data.InstallationDate:null,
+            installmentDate: dateString,
             eqpFunctionalDesc: data.AssetDescription,
             assetId: data.AssetId,
             importAssetType: data.AssetType,
             assetHierarchy: data.AssetHierarchy,
           };
-
           this.summaryService.postSummary(summary).subscribe((res: any) => {
             readIndex++;
             if (readIndex == this.excelData.length) {
