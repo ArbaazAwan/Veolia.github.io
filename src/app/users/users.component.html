@@ -1,7 +1,7 @@
 <div class="container-fluid py-1">
   <div class="float-start">
     <button type="button" class="btn bg-gradient-primary mb-4 text-right" data-bs-toggle="modal"
-      data-bs-target="#modal-form">
+      data-bs-target="#modal-form" (click)="initializeForm()">
       Add User
     </button>
   </div>
@@ -116,7 +116,7 @@
             <h5 class="">
               User
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal" 
+                <button data-bs-dismiss="modal"
                  (click)="formReset()" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
@@ -135,7 +135,7 @@
                       form.hasError('required', 'username') == true
                         ? 'border-danger'
                         : ''
-                    " 
+                    "
                     />
                   <small class="text-danger float-end" *ngIf="
                       (form.controls['username'].dirty ||
