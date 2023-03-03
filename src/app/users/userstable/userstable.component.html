@@ -210,7 +210,10 @@
             <p class="mb-0">Select clients to assign</p>
           </div>
           <div class="card-body">
-            <div class="row">
+            <div class="d-flex justify-content-center mt-4" *ngIf="isLoading">
+              <div class="spinner-border"></div>
+            </div>
+            <div class="row" *ngIf="!isLoading">
               <p-listbox
                 [options]="clients"
                 [(ngModel)]="selectedClients"
