@@ -80,6 +80,11 @@ export class SummarytableComponent implements OnInit {
       );
       modalRef.componentInstance.summaryId = summaryId;
       modalRef.componentInstance.masterId = masterId;
+      modalRef.componentInstance.formSubmit.subscribe(
+        ()=>{
+          this.getSummaries();
+        }
+      )
     }
     else{
       this.summaryService.openSnackBar('This summary does not contain a master', 'Close');
