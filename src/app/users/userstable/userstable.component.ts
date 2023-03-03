@@ -20,14 +20,16 @@ export class UserstableComponent implements OnInit {
   selectedClients: any = [];
   userId: any;
   sortedUsers: any = [];
+  isClientLoading:boolean = false;
 
   constructor(
     private userService: UserService,
     private clientService: ClientService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sortAssets({ active: 'userId', direction: 'desc' });
+    this.getClients();
   }
 
   ngOnChanges() {
@@ -70,7 +72,30 @@ export class UserstableComponent implements OnInit {
 
   onAssignClient(userId: any) {
     this.userId = userId;
+    this.isClientLoading = true;
+    this.userService.getClientsByUserId(userId)
+    .subscribe({
+      next: (res: any) => {
+        this.selectedClients = [];
+        res.userClients.forEach((uc: any) => {
+          let c = {
+            clientId: Number(uc.clientId),
+            clientName: uc.clientName,
+          };
+          this.selectedClients.push(c);
+        });
+        this.isClientLoading = false;
+      },
+      error: (err) => {
+        this.selectedClients = [];
+        this.isClientLoading = false;
+      }
+    });
 
+
+  }
+
+  getClients() {
     this.clientService.getClients().subscribe((clients: any) => {
       this.clients = [];
       clients.forEach((client: any) => {
@@ -81,18 +106,8 @@ export class UserstableComponent implements OnInit {
         this.clients.push(c);
       });
     });
-
-    this.userService.getClientsByUserId(userId).subscribe((res: any) => {
-      this.selectedClients = [];
-      res.userClients.forEach((uc: any) => {
-        let c = {
-          clientId: Number(uc.clientId),
-          clientName: uc.clientName,
-        };
-        this.selectedClients.push(c);
-      });
-    });
   }
+
   sortAssets(sort: any) {
     const data = this.users.slice();
     if (!sort.active || sort.direction === '') {

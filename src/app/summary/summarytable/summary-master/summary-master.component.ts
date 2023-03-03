@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MasterService } from 'src/app/master/master.service';
@@ -13,6 +13,7 @@ export class SummaryMasterComponent implements OnInit {
 
   @Input() summaryId: any;
   @Input() masterId: any;
+  @Output() formSubmit: EventEmitter<any> = new EventEmitter();
   isLoading: boolean = false;
   form: FormGroup = this.initialForm();
   tabIndex: number = 0;
@@ -199,13 +200,15 @@ export class SummaryMasterComponent implements OnInit {
         this.summaryService.updateMasterIdByMasterId(newMasterId, this.summaryId).subscribe({
           next: () => {
             this.summaryService.openSnackBar(`New Master created and summary's masterId has been updated!`, 'Close');
-            this.activeModal.dismiss('Cross click')
+            this.activeModal.dismiss('Cross click');
+            this.isLoading = false;
+            this.formSubmit.emit();
           },
           error: () => {
             this.summaryService.openSnackBar(`Failed to update summary's masterId`, 'Close');
+            this.isLoading = false;
           }
         });
-        this.isLoading = false;
       });
 
   }
