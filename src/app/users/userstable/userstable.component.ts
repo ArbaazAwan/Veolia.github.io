@@ -20,6 +20,7 @@ export class UserstableComponent implements OnInit {
   selectedClients: any = [];
   userId: any;
   sortedUsers: any = [];
+  isClientLoading:boolean = false;
 
   constructor(
     private userService: UserService,
@@ -71,7 +72,9 @@ export class UserstableComponent implements OnInit {
 
   onAssignClient(userId: any) {
     this.userId = userId;
-    this.userService.getClientsByUserId(userId).subscribe({
+    this.isClientLoading = true;
+    this.userService.getClientsByUserId(userId)
+    .subscribe({
       next: (res: any) => {
         this.selectedClients = [];
         res.userClients.forEach((uc: any) => {
@@ -81,9 +84,11 @@ export class UserstableComponent implements OnInit {
           };
           this.selectedClients.push(c);
         });
+        this.isClientLoading = false;
       },
       error: (err) => {
         this.selectedClients = [];
+        this.isClientLoading = false;
       }
     });
 
