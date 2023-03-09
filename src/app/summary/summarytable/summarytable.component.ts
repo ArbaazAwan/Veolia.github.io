@@ -142,7 +142,7 @@ export class SummarytableComponent implements OnInit {
         if (lifePerc < 0) {
           this.dateValid = false;
           this.summaryService.openSnackBar(
-            'Life percentage cannot be negative, please select a valid date', 'Close'
+            'Life Percentage cannot be Negative, Please select a valid date | Set Calculated Percent of Life Used to 99%', 'Close'
           );
         }
         else {
@@ -166,7 +166,7 @@ export class SummarytableComponent implements OnInit {
           if (lifePerc < 0) {
             this.dateValid = false;
             this.summaryService.openSnackBar(
-              'Life percentage cannot be negative, please select a valid date', 'Close'
+              'Life Percentage cannot be Negative, Please select a valid date | Set Calculated Percent of Life Used to 99%', 'Close'
             );
           }
           else {

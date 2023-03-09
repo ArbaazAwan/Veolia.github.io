@@ -74,7 +74,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
   }
 
   populateEditMasterForm(masterId: any) {
-    console.log('in populate form')
     this.isEditForm = true;
     this.editMasterId = masterId;
     this.isLoading = true;
