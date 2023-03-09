@@ -41,6 +41,9 @@
                   </label>
                 </th>
                 <th class="px-2">
+                  <label class="text-bold mt-2">Hierarchy</label>
+                </th>
+                <th class="px-2">
                   <label class="text-bold mt-2" mat-sort-header="summaryId">Summary ID</label>
                 </th>
                 <th class="px-2">
@@ -75,6 +78,7 @@
                 <td>-</td>
                 <td>-</td>
                 <td>-</td>
+                <td>-</td>
                 <td>
                   <p class="mb-0 text-sm text-bold">{{totalAverageYearsCost | currency : "USD" : 'symbol' : '1.0-0'}}
                   </p>
@@ -95,23 +99,26 @@
                   <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(2)}}</p>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(3)| date:'mediumDate'}}</p>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(3)}}</p>
                 </td>
                 <td>
                   <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(4)| date:'mediumDate'}}</p>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(5)}}</p>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(5)| date:'mediumDate'}}</p>
                 </td>
                 <td>
                   <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(6)}}</p>
                 </td>
                 <td>
-                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(7) | currency : "USD" : 'symbol' :
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(7)}}</p>
+                </td>
+                <td>
+                  <p class="mb-0 text-sm">{{sortedYearsCostsViewTable[i]?.at(8) | currency : "USD" : 'symbol' :
                     '1.0-0'}}</p>
                 </td>
-                <td *ngFor="let yearlyCost of sortedYearsCostsViewTable[i]?.at(8) let y = index">
-                  <p class="mb-0 text-sm">{{ sortedYearsCostsViewTable[i]?.at(8).at(y+1) | currency : "USD" : 'symbol' :
+                <td *ngFor="let yearlyCost of sortedYearsCostsViewTable[i]?.at(9) let y = index">
+                  <p class="mb-0 text-sm">{{ sortedYearsCostsViewTable[i]?.at(9).at(y+1) | currency : "USD" : 'symbol' :
                     '1.0-0'}}</p>
                 </td>
               </tr>

@@ -233,13 +233,14 @@ export class SummaryViewdetailsTableComponent implements OnInit {
 
         summaryData[0] = summary.eqpFunctionalDesc;
         summaryData[1] = this.getUnitTemplate(master?.master);
-        summaryData[2] = summary.summaryId;
-        summaryData[3] = summary.dateCreated;
-        summaryData[4] = summary.installmentDate;
-        summaryData[5] = summary.life;
-        summaryData[6] = summary.summaryload;
-        summaryData[7] = averageCost;
-        summaryData[8] = yearsCosts;
+        summaryData[2] = summary.assetHierarchy;
+        summaryData[3] = summary.summaryId;
+        summaryData[4] = summary.dateCreated;
+        summaryData[5] = summary.installmentDate;
+        summaryData[6] = summary.life;
+        summaryData[7] = summary.summaryload;
+        summaryData[8] = averageCost;
+        summaryData[9] = yearsCosts;
 
         this.yearsCostsViewTable.push(summaryData);
 
