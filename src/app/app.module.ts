@@ -10,7 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Error404Component } from './errors/404.component';
 import { ModelComponent } from './model/model.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
-import { UnitComponent } from './unit/unit.component';
+// import { UnitComponent } from './unit/unit.component';
 import { SummaryComponent } from './summary/summary.component';
 import { MasterComponent } from './master/master.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,7 +51,7 @@ import { AddHeaderInterceptor } from './interceptor/add-header.interceptor';
           { path: 'master', component: MasterComponent },
           { path: 'model', component: ModelComponent },
           { path: 'dropdown', component: DropdownComponent },
-          { path: 'unit', component: UnitComponent },
+          // { path: 'unit', component: UnitComponent },
           { path: 'summary', component: SummaryComponent },
           { path: 'clientslist', component: ClientsListComponent },
         ],
