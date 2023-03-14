@@ -115,7 +115,12 @@
               <tr [pEditableRow]="summary">
                 <td *ngIf="siteStatus" style="min-width: 180px;">
                   <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-                    (click)="onRowEditInit(summary)" title="Edit" class="p-button-rounded p-button-text">
+                    (click)="onRowEditInit(summary)" title="Edit Asset Details" class="p-button-rounded p-button-text">
+                  </button>
+                  <button *ngIf="!editing" pButton title="Edit Lifecycle Details" pRipple type="button" pSaveEditableRow
+                    icon="pi pi-user-edit" data-bs-target="#modal-form-create" data-bs-toggle="modal"
+                    (click)="editMaster(summary)"
+                    class="p-button-rounded p-button-text p-button-success p-mr-2">
                   </button>
                   <button *ngIf="!editing" pButton title="Duplicate" pRipple type="button" icon="pi pi-clone"
                     (click)="onRowDuplicate(summary.summaryId)" class="p-button-rounded p-button-text p-button-warning">
@@ -123,11 +128,6 @@
                   <button *ngIf="!editing" pButton title="Delete" pRipple type="button" pSaveEditableRow
                     icon="pi pi-trash" (click)="onRowDelete(summary)"
                     class="p-button-rounded p-button-text p-button-danger p-mr-2">
-                  </button>
-                  <button *ngIf="!editing" pButton title="Edit Master" pRipple type="button" pSaveEditableRow
-                    icon="pi pi-user-edit" data-bs-target="#modal-form-create" data-bs-toggle="modal"
-                    (click)="editMaster(summary)"
-                    class="p-button-rounded p-button-text p-button-success p-mr-2">
                   </button>
                   <button *ngIf="editing" pButton title="Save" pRipple type="button" pSaveEditableRow icon="pi pi-check"
                     (click)="onRowEditSave(summary)" [disabled]="!dateValid"
