@@ -15,7 +15,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
   form: FormGroup = this.initialForm();
-  siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
   masterId: any;
   files: any;
@@ -196,7 +195,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     let f = this.form.getRawValue();
 
     const master: any = {
-      // siteId: this.siteId,
       masterId: f.masterId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
