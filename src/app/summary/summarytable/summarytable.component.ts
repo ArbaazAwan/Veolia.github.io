@@ -8,13 +8,6 @@ import { SiteService } from 'src/app/sites/site.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SummaryMasterComponent } from './summary-master/summary-master.component';
 
-export interface Task {
-  name: string;
-  completed: boolean;
-  color: ThemePalette;
-  subtasks?: Task[];
-}
-
 @Component({
   selector: 'app-summarytable',
   templateUrl: './summarytable.component.html',

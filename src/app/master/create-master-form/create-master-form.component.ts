@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SummaryService } from 'src/app/summary/summary.service';
-import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NodeService } from '../view-master-table/node.service';
 
@@ -12,12 +10,11 @@ import { NodeService } from '../view-master-table/node.service';
 })
 export class CreateMasterFormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private masterService: MasterService,
-    private nodeService: NodeService, private userService: UserService, private summaryService: SummaryService) { }
+    private nodeService: NodeService) { }
 
   @ViewChild('modalClose') modalClose: ElementRef;
   editMasterId: any;
   form: FormGroup = this.initialForm();
-  siteId: any = localStorage.getItem('siteId');
   isLoading: boolean = false;
   masterId: any;
   files: any;
@@ -198,7 +195,6 @@ export class CreateMasterFormComponent implements OnInit, OnDestroy {
     let f = this.form.getRawValue();
 
     const master: any = {
-      siteId: this.siteId,
       masterId: f.masterId,
       oldAssetType: f.oldAssetType,
       masterStyle: f.masterStyle,
