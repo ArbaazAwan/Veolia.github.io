@@ -1,7 +1,19 @@
-.Data-Wrap{
+.Data-Wrap {
 
-    white-space: normal !important;
-    width:300px;
-    word-wrap: break-word;
-  
-  }
+  white-space: normal !important;
+  width: 300px;
+  word-wrap: break-word;
+
+}
+
+.custom-table {
+  min-height: 400px;
+}
+
+.table-responsive{height:530px;overflow:scroll;}
+
+thead tr:nth-child(1) th{background: rgb(223, 222, 222); position: sticky;top: 0;z-index: 10;}
+
+.total-row{
+  background: rgb(255, 255, 255); position: sticky;top: 48px;z-index: 10;
+}
