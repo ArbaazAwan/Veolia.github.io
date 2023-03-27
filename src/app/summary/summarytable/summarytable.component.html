@@ -320,8 +320,8 @@
                 <td>
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input style="width: 100px;" placeholder="Enter Life %" pInputText type="text"
-                        [(ngModel)]="summary.life">
+                      <input style="width: 100px;" (ngModelChange)="onLifeChange(summary)" placeholder="Enter Life %" pInputText type="text"
+                        [(ngModel)]="summary.life" >
                     </ng-template>
                     <ng-template pTemplate="output">
                       {{summary.life}}

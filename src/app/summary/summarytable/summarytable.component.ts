@@ -176,6 +176,15 @@ export class SummarytableComponent implements OnInit {
 
   }
 
+  onLifeChange(summary:any){
+    if(summary.life>0){
+      this.dateValid = true;
+    }
+    else{
+      this.dateValid = false;
+    }
+  }
+
   getUnitTemplate(master: any) {
     if (
       master.oldAssetType ||
