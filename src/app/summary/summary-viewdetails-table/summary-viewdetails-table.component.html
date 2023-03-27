@@ -22,14 +22,14 @@
           </div>
         </div>
 
-        <div class="card-body  table-responsive m-4">
+        <div class="card-body  table-responsive m-4 custom-table">
           <div class="d-flex justify-content-center mt-4">
             <div class="spinner-border" *ngIf="isLoading"></div>
           </div>
           <table class="table table-hover" id="summaryTable" matSort (matSortChange)="sortAssets($event)" *ngIf="!isLoading">
             <thead>
               <!-- header list  -->
-              <tr class="bg-light">
+              <tr class="bg-light" style="z-index: 50rem;">
                 <th class="px-2 unit-col">
                   <label class="text-bold mt-2 Data-Wrap" mat-sort-header="unit">
                     Asset Description
@@ -68,7 +68,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr class="total-row">
                 <td class="bg-light">
                   <label class="text-bold Data-Wrap">Total</label>
                 </td>
