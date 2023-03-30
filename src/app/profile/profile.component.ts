@@ -99,7 +99,6 @@ export class ProfileComponent implements OnInit {
 
   submitPassword() {
     let pf = this.pForm.value;
-    console.log('pf', pf)
     if (pf.password !== pf.confirmPassword) {
       this.userService.openSnackBar(
         'Password and confirm Password do not match.',
