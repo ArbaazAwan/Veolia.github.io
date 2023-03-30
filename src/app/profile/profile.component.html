@@ -45,8 +45,11 @@
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col-sm-12">
+                      <div class="col-sm-6">
                         <a class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modal-form">Edit</a>
+                      </div>
+                      <div class="col-sm-6">
+                        <a class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#modal-form-pass">Change Password</a>
                       </div>
                     </div>
                   </div>
@@ -132,6 +135,95 @@
                 <button type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-form-pass" tabindex="-1" role="dialog" aria-labelledby="modal-form-pass"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h5 class="">
+              Set Password
+              <span class="text-right float-end">
+                <button data-bs-dismiss="modal" (click)="resetForm()" #closeModal class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                  <i class="material-icons" style="font-size: 30px">close</i>
+                </button>
+              </span>
+            </h5>
+            <p class="mb-0">Enter User Password</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="pForm" (ngSubmit)="submitPassword()" role="form">
+              <div class="row">
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Password</mat-label>
+                  <input formControlName="password" matInput type="password" [type]="showPassword ? 'text' : 'password'" required minlength="8" [ngClass]="
+                      (pForm.controls['password'].dirty ||
+                        pForm.controls['password'].touched) &&
+                      pForm.hasError('required', 'password') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                      {{showPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+
+                  <small class="text-danger float-end" *ngIf="
+                      pForm.controls['password'].errors &&
+                      pForm.controls['password'].errors['invalidPassword']
+                    ">
+                    Password should have minimum 8 characters, at least 1
+                    uppercase letter, and 1 special character
+                  </small>
+                </mat-form-field>
+
+                <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
+                  <mat-label class="text-bold">Confirm Password</mat-label>
+                  <input formControlName="confirmPassword" matInput [type]="showConfirmPassword ? 'text' : 'password'" required minlength="8" [ngClass]="
+                      (pForm.controls['confirmPassword'].dirty ||
+                        pForm.controls['confirmPassword'].touched) &&
+                      pForm.hasError('required', 'confirmPassword') == true
+                        ? 'border-danger'
+                        : ''
+                    " />
+                    <mat-icon matSuffix (click)="toggleConfirmPasswordVisibility()">
+                      {{showConfirmPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
+                  <small class="text-danger float-end" *ngIf="
+                      pForm.controls['confirmPassword'].errors &&
+                      pForm.controls['confirmPassword'].errors[
+                        'invalidPassword'
+                      ]
+                    ">
+                    Password should have minimum 8 characters, at least 1
+                    uppercase letter, and 1 special character
+                  </small>
+
+                  <small class="text-danger float-end" *ngIf="pForm.controls['confirmPassword'].errors?.['matching']">
+                    Confirm Password does not match
+                  </small>
+                </mat-form-field>
+
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn bg-gradient-primary m-2"
+                    [disabled]="pForm.invalid">
+                    Save
+                  </button>
+                  <button (click)="this.resetForm()" type="button" data-bs-dismiss="modal"
+                    class="btn bg-gradient-dark m-2">
+                    Cancel
+                  </button>
+                </div>
               </div>
             </form>
           </div>
