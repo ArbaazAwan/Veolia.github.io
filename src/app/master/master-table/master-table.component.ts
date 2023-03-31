@@ -27,9 +27,9 @@ export class MasterTableComponent implements OnInit {
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.getSiteStatus();
+    // this.getSiteStatus();
     this.getMasters();
-    this.getClientStatus();
+    // this.getClientStatus();
   }
 
   getSiteStatus() {
