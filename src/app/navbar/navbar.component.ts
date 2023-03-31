@@ -100,4 +100,8 @@ export class NavbarComponent implements OnInit {
   isClientListRoute() {
     return this.router.url === '/clientslist';
   }
+
+  isMasterRoute() {
+    return this.router.url === '/master';
+  }
 }
