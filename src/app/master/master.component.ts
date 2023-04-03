@@ -30,8 +30,8 @@ export class MasterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSiteStatus();
-    this.getClientStatus();
+    // this.getSiteStatus();
+    // this.getClientStatus();
   }
 
   getSiteStatus() {
