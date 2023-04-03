@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormBuilder,
@@ -20,8 +20,25 @@ type UserType = 'admin' | 'user';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  form!: FormGroup;
-  pForm!: FormGroup;
+  @ViewChild('closePModal') closePModal: ElementRef;
+  form: FormGroup = this.formBuilder.group({
+    username: [null, [Validators.required, Validators.pattern(/^\S*$/)]],
+    email: [null, [Validators.required, Validators.email]],
+    password: [
+      null,
+      Validators.compose([Validators.required, this.patternValidator()]),
+    ],
+  });
+  pForm: FormGroup = this.formBuilder.group({
+    username: [
+      {
+        value: '',
+        disabled: true,
+      },
+    ],
+    password: [null, Validators.compose([Validators.required, this.patternValidator()]),],
+    confirmPassword: [null, Validators.compose([Validators.required, this.patternValidator()]),]
+  });
   clientsArray: any[] = [];
   allclientIdArr: any[] = [];
   preSelectedClients: any[] = [];
@@ -32,6 +49,9 @@ export class UsersComponent implements OnInit {
   clientIds: string = '';
   title: string = 'Clients';
   isLoading: boolean = false;
+  isLoadingPassword: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   users: any[] = [];
   error: any = {};
   currentUser: any = {};
@@ -44,7 +64,7 @@ export class UsersComponent implements OnInit {
     private userService: UserService,
     private primengConfig: PrimeNGConfig,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.checkUserRole();
@@ -103,6 +123,10 @@ export class UsersComponent implements OnInit {
     );
   }
 
+  get pf() {
+    return this.pForm.getRawValue();
+  }
+
   getUsers() {
     this.isLoading = true;
     this.userService.getUsers().subscribe((res: any) => {
@@ -111,14 +135,25 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  closePasswordModal() {
+    this.closePModal.nativeElement.click();
+  }
+
   submitPassword() {
-    if (!this.pForm.value.password == this.pForm.value.confirmPassword) {
+    if (this.pf.password !== this.pf.confirmPassword) {
+      this.userService.openSnackBar(
+        'Password and confirm Password do not match.',
+        'close'
+      );
+      this.validateAllFormFields(this.pForm);
       return;
     }
 
+    this.closePasswordModal();
+
     const PasswordPayload = {
       username: this.currentUser.userName,
-      password: this.pForm.value.password,
+      password: this.pf.password,
     };
 
     this.userService
@@ -161,20 +196,31 @@ export class UsersComponent implements OnInit {
     this.formReset();
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
   onChangePassword(id: any) {
+    this.isLoadingPassword = true;
     this.userService.getUserById(id).subscribe((el: any) => {
       const [_user] = el;
-
       this.currentUser = _user;
+      this.pForm.get('username')?.setValue(_user.userName);
+      this.isLoadingPassword = false;
+    });
+  }
 
-      this.pForm = this.formBuilder.group({
-        username: new FormControl({
-          value: _user.userName,
-          disabled: true,
-        }),
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-      });
+  private validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((field) => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsDirty({ onlySelf: true });
+      } else if (control instanceof FormGroup)
+        this.validateAllFormFields(control);
     });
   }
 
@@ -199,19 +245,12 @@ export class UsersComponent implements OnInit {
       const [_user] = el;
 
       this.currentUser = _user;
-
-      this.form = this.formBuilder.group({
-        username: new FormControl({
-          value: _user.userName,
-          disabled: true,
-        }),
-        email: [_user.userEmail, [Validators.required, Validators.email]],
-        role: [_user.role, [Validators.required]],
-        password: new FormControl({
-          value: _user.password,
-          disabled: true,
-        }),
-      });
+      this.form.get('username')?.setValue(_user.userName);
+      this.form.get('username')?.disable();
+      this.form.get('email')?.setValue(_user.userEmail);
+      this.form.get('role')?.setValue(_user.role);
+      this.form.get('password')?.setValue(_user.password);
+      this.form.get('password')?.disable();
 
       this.role = _user.role.toLowerCase();
 
