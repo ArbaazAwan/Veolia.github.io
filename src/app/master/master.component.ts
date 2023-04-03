@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MasterService } from './master.service';
 import { SiteService } from '../sites/site.service';
 import { ClientService } from '../clients/client.service';
-import { SummaryService } from '../summary/summary.service';
 import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
 
 @Component({
@@ -26,7 +25,6 @@ export class MasterComponent implements OnInit {
     private masterService: MasterService,
     private siteService: SiteService,
     private clientService: ClientService,
-    private summaryService: SummaryService
   ) {}
 
   ngOnInit(): void {
