@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ViewApproveMasterComponent } from './view-approve-master/view-approve-master.component';
@@ -17,16 +16,15 @@ export class ApproveMasterTableComponent implements OnInit {
   assetSearchText: string = '';
   displayedColumns: string[] = ['actions'];
   dataSource: any[] = [];
-  userName: string = '';
+  userName: string | null = '';
 
   constructor(
     private masterService: MasterService,
-    private userService: UserService,
     private _NgbModal: NgbModal,
   ) { }
 
   ngOnInit(): void {
-    this.getUserName();
+    this.userName = localStorage.getItem('user_name');
     this.getPendingMasters();
   }
 
@@ -231,19 +229,6 @@ export class ApproveMasterTableComponent implements OnInit {
       },
       error: (_) => {
         this.masterService.openSnackBarWithoutReload('error occured during deletion', 'close');
-      }
-    })
-  }
-
-  getUserName() {
-    let userEmail = localStorage.getItem('user_email');
-    this.userService.getUserByEmail(userEmail).subscribe({
-
-      next: (res: any) => {
-        this.userName = res[0].userName;
-      },
-      error: (response: any) => {
-        this.masterService.openSnackBarWithoutReload(response.message, 'close');
       }
     })
   }
