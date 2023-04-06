@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({

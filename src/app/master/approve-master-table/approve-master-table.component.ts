@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ViewApproveMasterComponent } from './view-approve-master/view-approve-master.component';
+import { BehaviorSubject } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-approve-master-table',
@@ -16,18 +17,21 @@ export class ApproveMasterTableComponent implements OnInit {
   sortedMasters: any = [];
   assetSearchText: string = '';
   displayedColumns: string[] = ['actions'];
-  dataSource: any[] = [];
-  userName: string = '';
+  masters$: BehaviorSubject<any> = new BehaviorSubject([]);
+  userName: string | null = '';
 
   constructor(
     private masterService: MasterService,
-    private userService: UserService,
     private _NgbModal: NgbModal,
   ) { }
 
   ngOnInit(): void {
-    this.getUserName();
+    this.userName = localStorage.getItem('user_name');
     this.getPendingMasters();
+  }
+
+  reload(){
+    window.location.reload();
   }
 
   createEventsKeys(keys: string[]) {
@@ -214,7 +218,7 @@ export class ApproveMasterTableComponent implements OnInit {
   approveMaster(masterId: any) {
     this.masterService.approveMaster(masterId, this.userName).subscribe({
       next: (_) => {
-        this.masterService.openSnackBar('master approved!', 'close');
+        this.masterService.openSnackBarWithoutReload('Master Approved!', 'close');
         this.getPendingMasters();
       },
       error: (_) => {
@@ -226,7 +230,7 @@ export class ApproveMasterTableComponent implements OnInit {
   rejectMaster(masterId: any) {
     this.masterService.rejectMasterById(masterId).subscribe({
       next: (_) => {
-        this.masterService.openSnackBar('record deleted!', 'close');
+        this.masterService.openSnackBarWithoutReload('Master Rejected!', 'close');
         this.getPendingMasters();
       },
       error: (_) => {
@@ -235,21 +239,9 @@ export class ApproveMasterTableComponent implements OnInit {
     })
   }
 
-  getUserName() {
-    let userEmail = localStorage.getItem('user_email');
-    this.userService.getUserByEmail(userEmail).subscribe({
-
-      next: (res: any) => {
-        this.userName = res[0].userName;
-      },
-      error: (response: any) => {
-        this.masterService.openSnackBarWithoutReload(response.message, 'close');
-      }
-    })
-  }
-
   getPendingMasters() {
     this.isLoading = true;
+    this.masters = [];
     this.masterService.getPendingMasters().subscribe(
       {
         next: (res: any) => {
@@ -354,7 +346,7 @@ export class ApproveMasterTableComponent implements OnInit {
                       //descending sort
                       return b['Id'] - a['Id'];
                     });
-                  this.dataSource = this.masters;
+                  this.masters$.next(new MatTableDataSource(this.masters));
                   this.isLoading = false;
                 }
               },

@@ -1,7 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ClientService } from 'src/app/clients/client.service';
-import { SiteService } from 'src/app/sites/site.service';
-import { UserService } from 'src/app/users/user.service';
 import { MasterService } from '../master.service';
 
 @Component({
@@ -10,7 +7,7 @@ import { MasterService } from '../master.service';
   styleUrls: ['./master-table.component.scss'],
 })
 export class MasterTableComponent implements OnInit {
-  constructor(private masterService: MasterService, private userService: UserService, private siteService: SiteService, private clientService:ClientService) { }
+  constructor(private masterService: MasterService) { }
   assetSearchText: string = '';
   sortedMasters: any[] = [];
   masters: any[] = [];
@@ -27,31 +24,7 @@ export class MasterTableComponent implements OnInit {
   @Output() viewMasterEvent = new EventEmitter();
 
   ngOnInit(): void {
-    this.getSiteStatus();
     this.getMasters();
-    this.getClientStatus();
-  }
-
-  getSiteStatus() {
-    this.siteService.getSiteById(this.siteId).subscribe({
-      next: (site: any) => {
-        this.siteStatus = site[0].siteStatus;
-      },
-      error: (err) => {
-        this.masterService.openSnackBarWithoutReload(`cannot get Site Status`, `close`);
-      }
-    })
-  }
-
-  getClientStatus(){
-    this.clientService.getClientById(this.clientId).subscribe({
-      next:(client:any)=>{
-        this.clientStatus = client[0].clientStatus;
-      },
-      error:(err)=>{
-        this.masterService.openSnackBarWithoutReload(`cannot get Client Status`, `close`);
-      }
-    })
   }
 
   getDisplayText(master: any) {

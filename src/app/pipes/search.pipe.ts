@@ -11,9 +11,10 @@ export class SearchPipe implements PipeTransform {
     if(!args)
     return value;
 
-    args = args.toLowerCase();
+    const searchTerms  = args.toLowerCase().split(' ');
     return value.filter((item:any)=>{
-      return JSON.stringify(item).toLowerCase().includes(args);
+      const itemString = JSON.stringify(item).toLowerCase();
+      return searchTerms.every((term:string) => itemString.includes(term));
     });
   }
 

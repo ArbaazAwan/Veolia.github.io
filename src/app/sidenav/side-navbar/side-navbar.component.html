@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
 
-      <div *ngIf="!isClientListRoute()">
+      <div>
         <li class="nav-item">
           <a class="nav-link text-white" routerLink="/dashboard" [routerLinkActive]="['bg-gradient-primary']">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -45,7 +45,7 @@
         </li>
       </div>
 
-      <div *ngIf="isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">>
+      <div *ngIf="(this.role === 'admin' || this.role === 'power_user')">
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin</h6>
         </li>
@@ -74,7 +74,7 @@
           </a>
         </li>
       </div>
-      <div *ngIf="!isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">>
+      <!-- <div *ngIf="!isClientListRoute() && (this.role === 'admin' || this.role === 'power_user')">>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Admin</h6>
         </li>
@@ -103,7 +103,7 @@
             <span class="nav-link-text ms-1">Users</span>
           </a>
         </li>
-      </div>
+      </div> -->
 
     </ul>
   </div>

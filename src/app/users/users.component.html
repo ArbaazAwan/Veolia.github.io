@@ -5,10 +5,10 @@
       Add User
     </button>
   </div>
-<!-- user table -->
-<div class="d-flex justify-content-center mt-10" *ngIf="isLoading">
-  <div class="spinner-border" ></div>
-</div>
+  <!-- user table -->
+  <div class="d-flex justify-content-center mt-10" *ngIf="isLoading">
+    <div class="spinner-border"></div>
+  </div>
   <div class="mt-6">
     <app-userstable [isLoading]="isLoading" *ngIf="users.length>0" [users]="users" [searchText]="searchText"
       (deleteUserEvent)="onDeleteUser($event)" (editUserEvent)="onEditUser($event)"
@@ -93,8 +93,7 @@
                   [disabled]="isEditFormLoading">
                   Update
                 </button>
-                <button (click)="formReset()" type="button" data-bs-dismiss="modal"
-                  class="btn bg-gradient-dark m-2">
+                <button (click)="formReset()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                   Cancel
                 </button>
               </div>
@@ -116,8 +115,8 @@
             <h5 class="">
               User
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal"
-                 (click)="formReset()" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                <button data-bs-dismiss="modal" (click)="formReset()"
+                  class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -230,7 +229,7 @@
             <h5 class="">
               Set Password
               <span class="text-right float-end">
-                <button data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                <button #closePModal data-bs-dismiss="modal" class="btn btn-link text-dark p-0 fixed-plugin-close-button">
                   <i class="material-icons" style="font-size: 30px">close</i>
                 </button>
               </span>
@@ -238,22 +237,28 @@
             <p class="mb-0">Enter User Password</p>
           </div>
           <div class="card-body">
-            <form [formGroup]="pForm" (ngSubmit)="submitPassword()" role="form">
+            <div class="d-flex justify-content-center mt-10" *ngIf="isLoadingPassword">
+              <div class="spinner-border" ></div>
+            </div>
+            <form [formGroup]="pForm" (ngSubmit)="submitPassword()" role="form"  *ngIf="!isLoadingPassword">
               <div class="row">
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Username</mat-label>
-                  <input formControlName="username" matInput type="text"/>
+                  <input formControlName="username" matInput type="text" />
                 </mat-form-field>
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Password</mat-label>
-                  <input formControlName="password" matInput type="password" required minlength="8" [ngClass]="
+                  <input formControlName="password" matInput [type]="showPassword ? 'text' : 'password'" required minlength="8" [ngClass]="
                       (pForm.controls['password'].dirty ||
                         pForm.controls['password'].touched) &&
                       pForm.hasError('required', 'password') == true
                         ? 'border-danger'
                         : ''
                     " />
+                    <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                      {{showPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
 
                   <small class="text-danger float-end" *ngIf="
                       pForm.controls['password'].errors &&
@@ -266,13 +271,16 @@
 
                 <mat-form-field class="example-form-field text-xs my-1" appearance="outline">
                   <mat-label class="text-bold">Confirm Password</mat-label>
-                  <input formControlName="confirmPassword" matInput type="password" required minlength="8" [ngClass]="
+                  <input formControlName="confirmPassword" matInput [type]="showConfirmPassword ? 'text' : 'password'" required minlength="8" [ngClass]="
                       (pForm.controls['confirmPassword'].dirty ||
                         pForm.controls['confirmPassword'].touched) &&
                       pForm.hasError('required', 'confirmPassword') == true
                         ? 'border-danger'
                         : ''
                     " />
+                    <mat-icon matSuffix (click)="toggleConfirmPasswordVisibility()">
+                      {{showConfirmPassword?'visibility_off':'visibility'}}
+                    </mat-icon>
                   <small class="text-danger float-end" *ngIf="
                       pForm.controls['confirmPassword'].errors &&
                       pForm.controls['confirmPassword'].errors[
@@ -289,12 +297,11 @@
                 </mat-form-field>
 
                 <div class="text-center mt-2">
-                  <button type="submit" data-bs-dismiss="modal" class="btn bg-gradient-primary m-2"
+                  <button type="submit" class="btn bg-gradient-primary m-2"
                     [disabled]="pForm.invalid">
                     Save
                   </button>
-                  <button (click)="formReset()" type="button" data-bs-dismiss="modal"
-                    class="btn bg-gradient-dark m-2">
+                  <button (click)="formReset()" type="button" data-bs-dismiss="modal" class="btn bg-gradient-dark m-2">
                     Cancel
                   </button>
                 </div>

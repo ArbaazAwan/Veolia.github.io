@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MasterService } from './master.service';
-import { SiteService } from '../sites/site.service';
-import { ClientService } from '../clients/client.service';
-import { SummaryService } from '../summary/summary.service';
 import { CreateMasterFormComponent } from './create-master-form/create-master-form.component';
 
 @Component({
@@ -22,39 +19,9 @@ export class MasterComponent implements OnInit {
   clientStatus: boolean = false;
   role: any = localStorage.getItem('role');
 
-  constructor(
-    private masterService: MasterService,
-    private siteService: SiteService,
-    private clientService: ClientService,
-    private summaryService: SummaryService
-  ) {}
+  constructor(private masterService: MasterService) {}
 
-  ngOnInit(): void {
-    this.getSiteStatus();
-    this.getClientStatus();
-  }
-
-  getSiteStatus() {
-    this.siteService.getSiteById(this.siteId).subscribe({
-      next: (site: any) => {
-        this.siteStatus = site[0].siteStatus;
-      },
-      error: (err) => {
-        console.log('error occured in getSiteStatus', err);
-      },
-    });
-  }
-
-  getClientStatus() {
-    this.clientService.getClientById(this.clientId).subscribe({
-      next: (client: any) => {
-        this.clientStatus = client[0].clientStatus;
-      },
-      error: (err) => {
-        console.log('error occured in getclientStatus', err);
-      },
-    });
-  }
+  ngOnInit(): void {}
 
   onAddMaster(){
     this.createMasterComponent.resetForm();
