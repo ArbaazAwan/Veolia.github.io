@@ -47,6 +47,7 @@ export class ViewApproveMasterComponent implements OnInit {
   rejectMaster(){
     let masterId = this.masters[this.masters.length-1]['Id'];
     this.rejectEvent.emit(masterId);
+    this.activeModal.dismiss('Cross click');
   }
 
   transformObjectToArray(obj: object) {
